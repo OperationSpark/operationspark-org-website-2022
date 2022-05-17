@@ -1,0 +1,202 @@
+{
+  "funders": [],
+  "partners": [
+    {
+      "name": "Sev1Tech",
+      "url": "https://sev1tech.com",
+      "logoLight": "/images/logos/supporters/sev1tech.png",
+      "logoDark": "/images/logos/supporters/sev1tech.png",
+      "width": 2
+    },
+    {
+      "name": "Lucid",
+      "url": "https://luc.id/",
+      "logoLight": "/images/logos/supporters/lucid-light.png",
+      "logoDark": "/images/logos/supporters/lucid-dark.png",
+      "width": 2
+    },
+    {
+      "name": "Jefferson Parish Clerk of Court",
+      "url": "https://www.jpclerkofcourt.us/",
+      "logoLight": "/images/logos/supporters/jefferson-perish-clerk-seal.png",
+      "logoDark": "/images/logos/supporters/jefferson-perish-clerk-seal.png",
+      "width": 1
+    },
+    {
+      "name": "365 Connect",
+      "url": "https://www.365connect.com",
+      "logoLight": "/images/logos/supporters/365Connect-light.png",
+      "logoDark": "/images/logos/supporters/365Connect-dark.png",
+      "width": 1
+    },
+
+    {
+      "name": "iSeatz",
+      "url": "https://www.iseatz.com/",
+      "logoLight": "/images/logos/supporters/iseatz.png",
+      "logoDark": "/images/logos/supporters/iseatz.png",
+      "width": 2
+    },
+    {
+      "name": "Revelry",
+      "url": "https://revelry.co/",
+      "logoLight": "/images/logos/supporters/revelry-light.png",
+      "logoDark": "/images/logos/supporters/revelry-dark.png",
+      "width": 2
+    },
+    {
+      "name": "General Electric",
+      "url": "https://www.ge.com/",
+      "logoLight": "/images/logos/supporters/general-electric.png",
+      "logoDark": "/images/logos/supporters/general-electric.png",
+      "width": 1
+    },
+    {
+      "name": "DXC Technology",
+      "url": "https://dxc.com/",
+      "logoLight": "/images/logos/supporters/dxc-technology-light.png",
+      "logoDark": "/images/logos/supporters/dxc-technology-dark.png",
+      "width": 1
+    },
+    {
+      "name": "Oschner Health",
+      "url": "https://www.ochsner.org/",
+      "logoLight": "/images/logos/supporters/oschner.png",
+      "logoDark": "/images/logos/supporters/oschner.png",
+      "width": 2
+    },
+    {
+      "name": "Koniag Government Services",
+      "url": "https://www.koniag-gs.com/",
+      "logoLight": "/images/logos/supporters/koniag.png",
+      "logoDark": "/images/logos/supporters/koniag.png",
+      "width": 2
+    },
+    {
+      "name": "Golfballs.com",
+      "url": "https://www.golfballs.com/",
+      "logoLight": "/images/logos/supporters/golfballs-com-light.png",
+      "logoDark": "/images/logos/supporters/golfballs-com-dark.png",
+      "width": 3
+    },
+    {
+      "name": "Human API",
+      "url": "https://www.humanapi.co/",
+      "logoLight": "/images/logos/supporters/humanapi-light.png",
+      "logoDark": "/images/logos/supporters/humanapi-dark.png",
+      "width": 2
+    },
+    {
+      "name": "Forbes",
+      "url": "https://www.forbes.com/",
+      "logoLight": "/images/logos/supporters/forbes-light.png",
+      "logoDark": "/images/logos/supporters/forbes-dark.png",
+      "width": 2
+    },
+    {
+      "name": "Nike",
+      "url": "https://www.nike.com/",
+      "logoLight": "/images/logos/supporters/nike-light.png",
+      "logoDark": "/images/logos/supporters/nike-dark.png",
+      "width": 2
+    },
+    {
+      "name": "LevelSet",
+      "url": "https://www.levelset.com/",
+      "logoLight": "/images/logos/supporters/levelset.png",
+      "logoDark": "/images/logos/supporters/levelset.png",
+      "width": 2
+    },
+    {
+      "name": "IBM",
+      "url": "https://www.ibm.com/",
+      "logoLight": "/images/logos/supporters/ibm.png",
+      "logoDark": "/images/logos/supporters/ibm.png",
+      "width": 2
+    },
+    {
+      "name": "Mumms Software",
+      "url": "https://mumms.com",
+      "logoLight": "/images/logos/supporters/mumms-software-light.png",
+      "logoDark": "/images/logos/supporters/mumms-software-dark.png",
+      "width": 2
+    },
+    {
+      "name": "Accruent",
+      "url": "https://www.accruent.com/",
+      "logoLight": "/images/logos/supporters/accruent-light.png",
+      "logoDark": "/images/logos/supporters/accruent-dark.png",
+      "width": 3
+    },
+    {
+      "name": "Deep Fried Design",
+      "url": "https://deepfried.com/",
+      "logoLight": "/images/logos/supporters/deep-fried.png",
+      "logoDark": "/images/logos/supporters/deep-fried.png",
+      "width": 2
+    },
+    {
+      "name": "Mindcreek",
+      "url": "https://www.mindcreek.com/",
+      "logoLight": "/images/logos/supporters/mindcreek.png",
+      "logoDark": "/images/logos/supporters/mindcreek.png",
+      "width": 2
+    },
+    {
+      "name": "Cisco",
+      "url": "https://www.cisco.com/",
+      "logoLight": "/images/logos/supporters/cisco.png",
+      "logoDark": "/images/logos/supporters/cisco.png",
+      "width": 2
+    },
+    {
+      "name": "Ubisoft",
+      "url": "https://www.ubisoft.com/",
+      "logoLight": "/images/logos/supporters/ubisoft-light.png",
+      "logoDark": "/images/logos/supporters/ubisoft-dark.png",
+      "width": 2
+    },
+    {
+      "name": "Content Bloom",
+      "url": "https://www.contentbloom.com/",
+      "logoLight": "/images/logos/supporters/content-bloom-light.png",
+      "logoDark": "/images/logos/supporters/content-bloom-dark.png",
+      "width": 2
+    },
+    {
+      "name": "University of New Orleans",
+      "url": "https://www.uno.edu/",
+      "logoLight": "/images/logos/supporters/uno-light.png",
+      "logoDark": "/images/logos/supporters/uno-dark.png",
+      "width": 2
+    },
+    {
+      "name": "Stone Clinical Labs",
+      "url": "https://www.stoneclinicallaboratories.com/",
+      "logoLight": "/images/logos/supporters/stone-clinical-labs-light.png",
+      "logoDark": "/images/logos/supporters/stone-clinical-labs-dark.png",
+      "width": 4
+    },
+    {
+      "name": "Leviton",
+      "url": "https://www.leviton.com",
+      "logoLight": "/images/logos/supporters/leviton-light.png",
+      "logoDark": "/images/logos/supporters/leviton-dark.png",
+      "width": 2
+    },
+    {
+      "name": "City of New Orleans",
+      "url": "https://www.nola.com/",
+      "logoLight": "/images/logos/supporters/city-of-nola-light.png",
+      "logoDark": "/images/logos/supporters/city-of-nola-dark.png",
+      "width": 2
+    },
+    {
+      "name": "Entergy",
+      "url": "https://www.entergy.com/",
+      "logoLight": "/images/logos/supporters/entergy-light.png",
+      "logoDark": "/images/logos/supporters/entergy-dark.png",
+      "width": 2
+    }
+  ]
+}

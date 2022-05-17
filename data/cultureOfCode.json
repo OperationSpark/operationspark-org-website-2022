@@ -1,0 +1,203 @@
+{
+  "header": {
+    "title": ["Culture of Code"],
+    "description": [
+      "At Operation Spark we have fun with the serious stuff, but hold ourselves, our students, staff and mentors, to high standards for behavior while learning and working together. We ask each of our participants to help us live up to these standards by actively working within a 'Culture of Code' that help guide us into awesomeness!"
+    ]
+  },
+  "ourDeal": {
+    "title": ["Here's our deal"],
+    "sections": [
+      {
+        "title": ["Your Mission"],
+        "description": [
+          "To learn the skills required to become a fantastic software developer and become the type of amazing person with whom others love to work."
+        ]
+      },
+      {
+        "title": ["Your Tools"],
+        "description": [
+          "Your fearless leaders, your close-knit team, a great attitude, and an openness to learn."
+        ]
+      },
+      {
+        "title": ["Your Future"],
+        "description": [
+          "Operation Spark is an opportunity for you to learn real-world skills and become an elite software developer. Through immersive experiences, you and your fellow teammates will learn the required skills to become the best programmer around."
+        ]
+      }
+    ],
+    "opSparkCommunity": "Operation Spark is built on the idea of community and supporting each other to get to the next level of achievement. Our Culture of Code is designed to help you develop into a programming machine while also developing into a fantastic member of the team.",
+    "principleIssues": {
+      "title": ["What if I'm having trouble with these principals?"],
+      "description": [
+        "These 10 values are meant to help guide you towards success. It's an agreement you must make with yourself and your Operation Spark team when you choose to participate in our program. Are you expected to do all of these things perfectly all the time? Absolutely not. But to help keep each of us accountable, when we witness behavior in our teammates that goes against the Operation Spark Culture of Code, simply ask them the question, “Is that an anti-pattern?” or “Are you for real?” so we can keep each other in check."
+      ]
+    }
+  },
+  "opSparkValues1": [
+    {
+      "title": ["1. Be Willing to Change"],
+      "image": "",
+      "description": [
+        "You will learn a lot over your time with Operation Spark. Some things will be easy, and some will be new, but above all, you've got to be willing to grow as you learn. So, commit to changing your mindset toward better learning, better productivity, better professional conduct, and better community."
+      ]
+    },
+    {
+      "title": ["2. Team Means Family"],
+      "image": "/images/hallebot-placeholder.png",
+      "description": [
+        "One of the first things you will learn in software development is that your team is everything. A final app is only as good as the team that built it. When you have a team that is open and care for each other, that is when great apps are built.",
+        "Your Operation Spark team is not only your team but also your family. Everyone is here to learn how to become a great software developer, so do your best to build each other up. Be willing to learn from your teammates, help them grow, and encourage their efforts. You will be amazed what you can accomplish with a laptop, Internet connection, and the support of a great team."
+      ]
+    },
+    {
+      "title": ["3. Fully Accept Others and Yourself"],
+      "image": "/images/hallebot-placeholder.png",
+      "description": [
+        "Because your Operation Spark team is your family, you must accept them for who they are. This group will be in the trenches with you and working towards becoming kick-ass software developers too. It is important to acknowledge and embrace each other's differences.",
+        "You are all equals, and you are no better than the person next to you. You must be conscientious that the people on either side of you are not one and the same - everyone is unique. Some people are uniquely geeky, some people are shy, some people are outgoing, some people are white, some people are black, and some people are gay. Accept them for who they are and embrace their differences.",
+        "Fully accepting others and yourself applies to intolerance as well. Any form of sexism or not treating people as equals will not be tolerated. Human society is diverse; there must be universal acceptance if we want to live in harmony. Ask yourself this: How can I expect people to accept me for who I am if I cannot accept others in their diversity? We have to include everyone if we want the best ideas and best teams, so Operation Spark reflects diversity to build quality."
+      ]
+    },
+    {
+      "title": ["4. Don't be a Jerk"],
+      "image": "/images/hallebot-placeholder.png",
+      "description": [
+        "At Operation Spark, we accept everyone for who they are. We encourage you to be your true self and become whatever you want to be, except a jerk. Here's why:",
+        "Being a jerk gets you nowhere. It stunts your growth, limits your maturity, and is poison for those around you. People stop respecting you when you're being a jerk, and no one wants to be around someone like that. As young adults, you are on the verge of having to make your way in the world, and if you can't show yourself to be mature, trustworthy, and capable, people will begin to move away from you, and eventually, you'll find yourself struggling - which will deeply affect your success and our mission is for you to succeed.",
+        "So don't be a jerk. Jerks ruin teams and friendships. Our aim at Operation Spark is to create a safe space founded on openness and acceptance. Be inclusive, not exclusive. All races, all religious beliefs, all ethnicities, all genders, all sexual orientations, all ages - everyone is welcome and equal at Operation Spark."
+      ]
+    },
+    {
+      "title": ["5. Nothing is Hard, Only New"],
+      "image": "/images/hallebot-placeholder.png",
+      "description": [
+        "The great Jon Clayton, world-class jazz bass player, composer, and arranger, instructs that nothing is hard, only new. Anything worth comprehending requires work, and although it may be difficult at first, that's only because it's unfamiliar. Try not to get frustrated. Just relax and let yourself enjoy the learning process.",
+        "Think of acquiring knowledge like walking into a dark room for the first time. You're not going to know where the furniture is positioned, you'll be bumping into things and banging around, dropping your belongings, but after a few times through the room, you'll know where the paths are and be able to see your way clearly in the dark.",
+        "The same goes for programming. You may struggle initially and will need to put in some work to get over the first major hump. But as with anything, you will get better with practice - constant, consistent, and concentrated practice. Ask any world-class musician, like Mr. Clayton, how it sounded the first time they picked up their instrument and attempted to play. They will grin from ear to ear, laughing at the memory of their younger self. Remember - nothing is hard; it's only new."
+      ]
+    },
+    {
+      "title": ["6. You can do it! Just Focus"],
+      "image": "/images/hallebot-placeholder.png",
+      "description": [
+        "To become a great programmer, you'll have to stay focused. Otherwise, you'll fall behind and will regret not taking advantage of this unique opportunity.",
+        "Focus is less of a mental exercise and more of a test of self-discipline. The best way to focus is to remove all distractions while in class, studying, or working on assignments at home. Turn off your smartphones, don't surf the 'net, don't watch YouTube or TV, don't Facebook, and you will be surprised at what you can accomplish. If you don't remove distractions from your work, you'll waste valuable opportunities and develop habits unconducive to better learning and productivity. Don't let these distractions drag you down. You want to give yourself and your team the best opportunity to succeed, so you must be willing to focus and buckle down.",
+        "We're not asking that you never surf the web or watch TV. We just ask you to spend part of your day focusing on what you're learning with Operation Spark. Whether it's 10 minutes or 2 hours, concentrated focus will greatly accelerate your development. Watch 'The First 20 Hours' and you'll see you can become reasonably proficient in any skill with just 20 hours of concentrated effort!"
+      ]
+    }
+  ],
+  "effectiveLearning": {
+    "title": ["Effective Learning"],
+    "description": [
+      "Make the best of your time, really! Josh Kaufman's book, 'The First 20 Hours', argues that reasonable proficiency in anything can be attained within 20 concentrated hours. To achieve this, you must:"
+    ],
+    "tips": [
+      {
+        "title": ["Practice intelligently"],
+        "description": [
+          "Deconstruct the skill by deciding what you want to be able to do, then break the skill down into smaller steps."
+        ]
+      },
+      {
+        "title": ["Learn enough to self-correct"],
+        "description": [
+          "Get good resources (StackOverflow, books, mentors, and meetups) and build something. Learn just enough to self-correct while creating something like an app, a command-line util, or a game."
+        ]
+      },
+      {
+        "title": ["Remove barriers to practicing"],
+        "description": [
+          "This includes your phone, internet, TV, food, and temporarily, even friends who might not understand your desire to learn effectively."
+        ]
+      },
+      {
+        "title": ["Practice undistracted for at least 20 hours"],
+        "description": [
+          "Stick with it through the first few hours of frustration - it's only 20 hours. Once you pass the first 4 hours, you will begin to improve dramatically."
+        ]
+      },
+      {
+        "title": ["Understand the largest barrier is emotional"],
+        "description": [
+          "The major barrier to skill acquisition is NOT intellectual - it's emotional. No one likes to feel stupid but, by wanting to avoid feeling awkward, people often rob themselves of self development! So, relax, don't panic, don't worry about feeling like a fish outta water - we got your back! Take it easy on yourself, and enjoy learning."
+        ]
+      },
+      {
+        "title": [
+          "So, get to know your stuff! You don't have to know everything (you'll learn as you go), but what you do know, know it well! Stay focused, stay on target...it's only 20 hours."
+        ],
+        "description": []
+      }
+    ]
+  },
+  "opSparkValues2": [
+    {
+      "title": ["7. Be Self-Sufficient, Accountable, Autodidactic"],
+      "description": [
+        "To be great at anything, you've got to have a passion for learning, and you must learn to learn. Become autodidactic - a self-directed learner. Along with kindness towards others, this skill will be the most important skill you can foster in yourself. Together, these two skills will carry you through new jobs, career changes, and many social situations.",
+        "At Operation Spark, we will push you to be your best. If you're unwilling to let us help you or not willing to approach this fearlessly, then maybe Operation Spark isn't for you. That's completely okay, and we understand. But at the same time, we know you can do it because we've seen others before you do it and do it well. We want you to have this amazing opportunity to learn new skills and improve future, but it must start with you. You must choose to join the team and work with us.",
+        "So what does this actually mean? To become a great software engineer, you must be a self-reliant problem-solver. Remember, everyone's time is valuable, and the answer is usually right at your fingertips. Before asking a question, use our Golden Rules of Self-Sufficiency - the answer is out there, and you can find it.",
+        "Many developers have come across the same problems you are trying to solve, and many other developers have helped solve those problems with well-documented solutions. Don't panic when you get stuck! Do some research on Google, and you will most likely find the solutions you're seeking. It is likely someone has asked and answered your exact question. Follow the Golden Rules and you'll get our highest mark of honor, the INFORMATION SURVIVALIST BADGE, in recognition of your self-reliance.",
+        "Most importantly, don't be afraid to share the answers to your questions when you find them! Your learning will increase your team's knowledge base and help someone who comes after you. Remember, the better everyone on your team becomes, the better you will become."
+      ],
+      "rules": {
+        "title": ["The Golden Rules of Self-Sufficiency"],
+        "list": [
+          {
+            "rule": "Google your question(s) first",
+            "subRules": [
+              "What is the domain you're working in?",
+              "What is the concept you're working with?",
+              "What is the action you wish to complete?"
+            ]
+          },
+          {
+            "rule": "Merge your above answers, to create a well directed Google search. Ex: JavaScript Array remove first element",
+            "subRules": []
+          },
+          {
+            "rule": "Make sure you cut out filler words like “how do I”.",
+            "subRules": []
+          },
+          {
+            "rule": "Check forums like Stack Overflow",
+            "subRules": []
+          },
+          {
+            "rule": "Check documentation on Mozilla Developer Network",
+            "subRules": []
+          }
+        ]
+      }
+    },
+    {
+      "title": ["8. Yours is not Better than Theirs"],
+      "image": "/images/hallebot-placeholder.png",
+      "description": [
+        "Competition is sometimes a great thing and can really push people to become better at something very quickly. We want you to push each other to be better software developers and people, but we want you to do it constructively.",
+        "If you understand a concept, that's great! But if you see that your teammate next to you is struggling, don't brag about how you get it. Help them!! Kudos to you if you're a fast learner, but remember that your team is only as strong as the weakest link. The faster you all learn, the better your team will be.",
+        "Recognize your strengths and weaknesses and lean on your teammates' strengths when you need them. You will excel at certain parts of computer programming, and struggle with others. Don't push others down to make yourself seem like “the best software programmer”. Again, software is built by great teams and it's counterproductive to make someone else feel inadequate and less-than. By bragging about yourself, you are damaging others' paths towards learning when you should be helping them surpass any barrier that's holding them back."
+      ]
+    },
+    {
+      "title": ["9. Listen First, Talk Second"],
+      "image": "/images/hallebot-placeholder.png",
+      "description": [
+        "One of the most important things to acknowledge in life is that you don't know everything. Embrace both 'I know what I don't know' and 'I don't know what I don't know'. Listen to knowledgeable people around you and always think before speaking. This is an invaluable skill and is what separates the great programmers from the good ones.",
+        "It is most probable that in any situation, you haven't thought of all the solutions. Given the nature of human beings, we have a limited perspective and therefore can't see all the sides of something at the same time. Just have a look at any object in front of you now: can you see the back of this object? Do you know if there's a monkey on the other side of your computer screen or a lizard clinging to the back of your iPhone right now? No, you don't, but with the help of someone on the other side of the object, you can.",
+        "The best programmers we've ever worked with have also been the most humble, generous, and giving people. They are hungry for knowledge, so they never miss an opportunity to listen, learn, and share. Try to be that person."
+      ]
+    },
+    {
+      "title": ["10. Be Mentored and Be a Mentor"],
+      "image": "/images/hallebot-placeholder.png",
+      "description": [
+        "Throughout your Operation Spark experience, there will be a variety of professionals that come and spend time with you. They will have years of experience and will seem ever so wise. This is your chance! If you really jive with someone, don't hesitate to ask them to be your mentor. The best way to accelerate your development is to learn from people who have done it before. They will save you several hours of time with just a couple minutes of advice - you just have to ask!",
+        "To create a great relationship with your mentor, it is also important to be a great mentee. These professionals are dedicating their time and effort to help you, so you must be appreciative and grateful for their help. Be accountable and follow through with your mentor, so they continue to invest in you and help guide you through your journey to becoming a super awesome software developer.",
+        "Remember: You chose to apply to Operation Spark, and we chose to accept you based on your desire to learn, your willingness to change, and your ability to play nice with others. But very soon, we want you to start thinking of us as your colleagues. We are not your school teachers or principals, and we are definitely not your bosses. The only rules you must respect are outlined in this document. On that note, it is also okay to mentor your mentors. Be open and honest and provide feedback when solicited. This is a great way for you to be a great mentee and help your mentor get better as well."
+      ]
+    }
+  ]
+}

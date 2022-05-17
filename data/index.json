@@ -1,0 +1,74 @@
+{
+  "igniteCareer": {
+    "title": ["IGNITE YOUR CAREER. LEARN TO CODE!"],
+    "description": [
+      "Get the skills you need to land a high-wage job in tech. Operation Spark's rapid training programs put you on track within 6 months!"
+    ]
+  },
+  "programsForAll": {
+    "title": ["PROGRAMS FOR", "ADULTS & TEENS"],
+    "description": [
+      "Software, and its adjacent industries, are at the heart of all future work. No matter the sector, every industry is being transformed by technology. And many employers now accept a bootcanp certification in lieu of a four-year degree. Operation Spark's accelerated training programs will prepare you to confidently land your first job in tech, without the time and cost of college."
+    ],
+    "programs": [
+      {
+        "icon": "briefcase",
+        "preTitle": "Ages 18+",
+        "title": "Adult Workforce",
+        "description": [
+          "Our adult workforce program prepares you for an in-demand, high-wage career in software development. Over the course of 6 months, students learn how to think like a software engineer and gain all of the relevant skills needed to enter into a career as a full-stack engineer.  Our progressive learning sequence takes you from computer user to a fully autonomous, full-stack developer in less than a year.  After graduation, we work with you and a network of employer partners to make sure you land a great job!"
+        ],
+        "buttonText": "View Adult Programs",
+        "buttonUrl": "/programs/workforce"
+      },
+      {
+        "icon": "student",
+        "preTitle": "Ages 15 - 17",
+        "title": "High School to High Wage",
+        "description": [
+          "Our High School to High Wage program provides an introduction to computer programming and is designed for students with little to no prior experience in coding. Our fundamental classes introduce students to how the most common software products are built. Advanced studies provide deep practice, offering students a solid path into software careers. Our teacher certification, in-school classes, and curriculum coaching program allow high schools to set their students on a path to high-wage employment within 6 months of graduation."
+        ],
+        "buttonText": "View Highschool Programs",
+        "buttonUrl": "/programs/highschool"
+      }
+    ]
+  },
+  "greatCompanies": {
+    "title": ["OUR GRADS WORK AT GREAT COMPANIES"],
+    "description": [
+      "OpSpark graduates work for over 100 companies world-wide. From local software shops to multi-national companies, our Career Transitions Team works with you to land your dream job within weeks of graduation."
+    ]
+  },
+  "teamEffort": {
+    "title": ["A Team Effort"],
+    "description": [
+      "Operation Spark is Louisiana's only non-profit software bootcamp. We're committed to growing diversity by making a career in tech accessible for everyone. Join us to make a difference in the lives of our students and their families."
+    ],
+    "cards": [
+      {
+        "title": "Education",
+        "description": "Operation Spark partners with public high schools to provide students with a functional understanding of software development. Our Teacher Academy offers professional development for educators to bring our programs to their classrooms. After graduation, our certifications are accepted for transfer credit at Tulane's SoPA as well as community and technical colleges throughout Louisiana.",
+        "linkText": "",
+        "linkUrl": ""
+      },
+      {
+        "title": "Employers",
+        "description": "Our employer and economic development partners not only hire our grads for great jobs, they also ensure our curriculum reflects current trends in the industry. Partners play an important role in our dev shop program, providing real-world projects and contract opportunities that allow our grads to build a portfolio of work that demonstrates the skills gained at Operation Spark.",
+        "linkText": "",
+        "linkUrl": ""
+      },
+      {
+        "title": "Community",
+        "description": "Partners like the United Way of Southeast Louisiana, the Urban League of Louisiana, the Louisiana Department of Child and Family Services, and local workforce development agencies provide funding, professional and life skills training, financial literacy education, and support programs that help students complete our high-skills training and confidently launch new careers.",
+        "linkText": "",
+        "linkUrl": ""
+      },
+      {
+        "title": "Funding",
+        "description": "As a non-profit, the majority of our operating revenue comes from philanthropic funds. State and local grants, as well as individual donations are important components of our annual budget, providing funds for student assistance and new program development. Our diverse portfolio of supporters ensures our program remains accessible to everyone with the desire to become a software engineer.",
+        "linkText": "",
+        "linkUrl": ""
+      }
+    ]
+  }
+}

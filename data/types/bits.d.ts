@@ -1,0 +1,42 @@
+export interface ICompanyLogo {
+  name: string;
+  url: string;
+  logoLight: string;
+  logoDark: string;
+  width: number;
+}
+
+export interface ITitleDescription {
+  title: string[];
+  description: string[];
+}
+
+export type TTextField = {
+  name: string;
+  label: string;
+  type: string;
+  value: string;
+  isErr: boolean;
+};
+export type TOption = {
+  name: string;
+  value: string;
+  additionalInfo?: string;
+  additionalInfoLabel?: string;
+};
+export type TSelectField = {
+  label: string;
+  options: TOption[];
+};
+
+export type SelectItem = {
+  additionalInfo: string;
+  value: string;
+};
+
+export interface IAlert {
+  message?: string;
+  url?: string;
+  start?: string;
+  end?: string;
+}

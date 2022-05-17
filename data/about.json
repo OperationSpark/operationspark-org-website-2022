@@ -1,0 +1,293 @@
+{
+  "mission": {
+    "description": [
+      "Operation Spark is a nonprofit software training center on a mission to provide opportunities for upward mobility through skills training and job placement in high-wage tech careers."
+    ],
+    "sections": [
+      {
+        "title": ["Who We Serve"],
+        "description": [
+          "80% of low-income students drop out of college strapped with debt, and in New Orleans, where a third of the city lives in poverty, that's left us with 20,000 young adults, ages 16 to 24, not in school, unemployed, and the impact of this on our communities is devastating.",
+
+          "Meanwhile, as of July 2015, 3000 positions in software development in the state of Louisiana remain unfilled.",
+
+          "Focusing on New Orleans, where generational poverty is an issue, we are concerned with developing and distributing effective learning tools and programs to help circumvent the costs of higher education and provide accelerated workforce development.",
+
+          "What does that mean concretely? We learn to write software using industrial tools, writing actual apps, working in an awesome team environment, while becoming self sufficient by taking an autodidactic approach to higher education and problem solving."
+        ]
+      },
+      {
+        "title": ["A Career for Everyone"],
+        "description": [
+          "The field of software development is quite wide. And so no matter your interests or apptitude, there's certainly a career for you in software development. You just need to build a few apps with an awesome team to start discovering all that software has to offer.",
+
+          "The skills involved in building mobile video games and apps are quite varied, including application design, game mechanics and user experience, visual and sound design, computer engineering of various sorts, quality assurance, project, product and cost management, content management and public relations of all kinds. And each of these skills lead to careers, careers with futures - for example, an entry level quality assurance analyst is a well paying position, and can lead to management or a career as a UX designer.",
+
+          "Working in teams, inherently a part of software development, also introduces youth to effective means of communication and conflict resolution.",
+
+          "The Operation Spark model is simple: By introducing young adults to this wide set of skills and helping them apply these skills in building simple projects, something as engaging to today's youth as a mobile video game or app, participants may just discover a very employable field about which they are passionate. And for youth, developing a passion is key to positive self development, encourages self learning and the pursuit of a path into college or the workforce!"
+        ]
+      }
+    ]
+  },
+  "history": [
+    "Operation Spark started in September 2013 as a pilot project, developed and conducted at youth community centers around New Orleans, teaching young adults how to build simple mobile video games and apps with the aim of igniting the pursuit of an employable passion.",
+
+    "Student participants learned to design, build and deploy simple mobile apps and games. Teachers and mentors inspired students in grasping skills necessary to complete project tasks.",
+
+    "In July of 2014, in partnership with 4.0 Schools and Positive Space, Operation Spark ran its first Summer Bootcamp, a 5 week 3 hour per day intensive program, piloted by John Fraboni and Sam Battan and supported by Mikey Muhanna, Saskia Leggett and the staff of 4.0 Schools.",
+
+    "During Summer Bootcamp, students were immersed in the fundamentals of HTML, CSS and JavaScript in the Node.js environment. Working in teams they were taught by professional developers to build simple command-line games and apps in Node.js, then fronted those games and apps in an HTML5 client.",
+
+    "Our Bootcampers also learned a great deal about themselves, gaining soft skills toward job readiness, and learned video screen casting with Andrew Larimer of FatHappy Media, studied the sweet stylings of CSS under Chris Boudy of Teens for Tech, and were addressed on life as a professional by guest speakers Brian Bordainick of Dinner Lab, Barrett Conrad of Cotingasoft, and Uchechi Kalu Jacobson and Peter Jacobson of Wedocracy.",
+
+    "As a participant in 4.0 Schools' 2014 Summer Launch program, Operation Spark received both the Judges' Prize and the Audience-Choice Award in New York on August 21st, 2014.",
+
+    "Operation Spark officially launched as a non-profit on August 5th, 2014.",
+
+    "Our objectives are aimed at providing access for all - literacy in software creation for all youth in Louisiana! Through our bootcamps, teacher training and Studio Spark Apprentice programs, we anticipate impacting 25,000 youth over the five years! You can help us acheive our goals by supporting Operation Spark."
+  ],
+  "team": {
+    "staff": [
+      {
+        "name": "John Fraboni",
+        "role": "Founder and CEO",
+        "image": "/images/people/staff/john-fraboni.jpg",
+        "contact": {
+          "email": "john@operationspark.org",
+          "phone": "504.534.8277"
+        },
+        "about": [
+          "John has earned 24 years of professional experience in software development, having worked for a diverse set of clients including Tabasco, Tulane University, Riley Foods, Oreck Vacuums, The Canadian Imperial Bank of Commerce, Microsoft, Ernst and Young, Disney, and Sony. Beginning in 2009, his work in the video game industry in Montreal contributed to some of the most successful games on social platforms.",
+
+          "Mr. Fraboni holds a Bachelor of Music from McGill University and a Master of Music degree from the Manhattan School of Music. He is also the recipient of performing arts awards from the Canada Council for the Arts, the Ontario Arts Council, the Manhattan School of Music, International House New York, as well as the Canadian Academy of Recording Arts and Sciences (a Juno award, the Canadian equivalent of Grammy).",
+
+          "He has lived in Montreal, New York, New Orleans and Toronto."
+        ]
+      },
+      {
+        "name": "Kim Farrell",
+        "role": "Director of Finance and Operations",
+        "image": "/images/people/staff/kim-farrell.png",
+        "about": [
+          "Born in Ohio and raised in New Orleans. Kim spent many years in the legal and law enforcement fields before transitioning to a career in finance. She loves giving back and supporting her community, which ultimately led to her Operation Spark.",
+
+          "Kim has a love for history and everything New Orleans. When she is not working, you can find her outside in her garden or painting and creating art. If you look closely, you can even find her dressed for the occasion and parading through the streets of New Orleans with the Krewe of the Rolling Elvi."
+        ]
+      },
+      {
+        "name": "Pam Stewart",
+        "role": "Director of Program Investments",
+        "image": "/images/people/staff/pam-stewart.png",
+        "about": [
+          "A native of New Orleans, Pam is a firm believer in the potential of our youth and the promise of our city. With a background in administration, fundraising, and marketing, Pam has served on the opening teams of 3 area charter schools, raised over $7M in support of local non-profits, and coached new school start-ups in six parishes.",
+
+          "She's found her forever home at Operation Spark, where she's honored to work with this amazing team to build new opportunities in NOLA."
+        ]
+      },
+      {
+        "name": "Mayukh Raychaudhuri",
+        "role": "Director of High School Programs",
+        "image": "/images/people/staff/mayukh-raychaudhuri.jpg",
+        "about": [
+          "Mayukh is passionate about empowering individuals and communities through access to innovative educational opportunities. He began his professional career as an attorney for multiple Philadelphia law firms working on large-scale class action litigations. After moving to New Orleans in 2013, he spent five years teaching English and Math for KIPP, Firstline, and Jefferson Parish Schools.",
+
+          "Mayukh holds a Bachelor's degree in English from the University of Michigan and a J.D. from Rutgers University. Outside of work, he enjoys spicy food, travel, and the films of Spike Lee, Richard Linklater, and Pedro Almodovar."
+        ]
+      },
+      {
+        "name": "Harvey Sanders",
+        "role": "Director of Adult Instruction",
+        "image": "/images/people/staff/harvey-sanders.jpg",
+        "about": [
+          "Harvey has a passion for learning, teaching and using technology. He focuses on producing exciting and effective web applications through Operation Spark's software development shop. Prior to creating software with Operation Spark, Harvey introduced underserved youth to web development through the Work & Learn Program at the Youth Empowerment Project. As Assistant Director of Work & Learn, Harvey also established two businesses with a goal of giving youth valuable job and life skills.",
+
+          "Harvey is a graduate of Operation Spark's Immersion program and holds a Bachelor's Degree in Marketing from Grand Valley State University in his hometown of Grand Rapids, Michigan."
+        ]
+      },
+      {
+        "name": "Justin Connor",
+        "role": "Instructor",
+        "image": "/images/people/staff/justin-connor.jpg",
+        "about": [
+          "Connor is originally from North Carolina, where he served six years in the North Carolina Army National Guard as an engineer. After moving to New Orleans in 2015, and working in hospitality, they heard about Operation Spark through their sister and graduated from the program November 2018. With 10+ years experience with service to the open public, Connor is dedicated to continue serving the community and the people that reside in the community.",
+
+          "Connor's hobbies includes, playing chess with the Down River Chess Club, playing pool, running 5k races and most table top games."
+        ]
+      },
+      {
+        "name": "Daniel Kogler",
+        "role": "Instructor",
+        "image": "/images/people/staff/daniel-kogler.jpg",
+        "about": [
+          "Daniel is a Baton Rouge local with over 20 years of programming experience. A graduate from Tulane University in Electrical Engineering, he went on to receive a Masters and PhD in Computer Science from Indiana University. A long time citizen of the world of academia, he has moved on from being simply a learner to also a teacher, as he believes that a strong education regarding technology is important in todays computer-driven society. Upon discovering Operation Spark, he knew that he'd found a place where he could reach youth who might otherwise not receive exposure to programming, and has since taken up a position as the main instructor in the Baton Rouge area."
+        ]
+      },
+      {
+        "name": "Johnnie James II",
+        "role": "Operations Coordinator",
+        "image": "/images/people/staff/johnnie-james-ii.png",
+        "about": [
+          "Johnnie is an entrepreneur with experience in non-profits, real estate, live event production and more. He has college and technical training from Florida A&M - Business, the University of New Mexico - Urban Planning, Tulane - Public Relations, and Operation Spark - software engineering.",
+
+          "He is an advocate for justice, a poet, a consultant, and an actor, to name a few things. He is also a former concert promoter, among many other diverse roles and responsibilities. Johnnie has volunteered for organizations such as School of Rock, PlayBuild NOLA, NOTEP, and Operation Spark, underscoring his personal commitment to STEAM education principles.",
+
+          "In his free time, Johnnie can often be found cooking, watching pro wrestling or mma or tending to one of him and his wife's five animals at home."
+        ]
+      },
+      {
+        "name": "Ashton Martin",
+        "role": "Instructor",
+        "image": "/images/people/staff/ashton-martin.jpg",
+        "about": [
+          "Ashton is a native of Gibson, La. She graduated from Louisiana State University in 2014 where she obtained her Bachelors in Nutritional Sciences. After working a few years in the medical and service industries post college, she took Operation Spark's coding bootcamp on a whim in her journey of self-exploration in previous interests in software. In doing so she learned that she had a joy reserved for learning how to code, and how to spread that knowledge to the community. Her personal motto is, “Take what you need, and leave what you don't” in regard to crafting each day to be amazing. In her spare time she enjoys advancing her yoga practice, traveling around the world trying new foods, or curled up on her couch with her cat and a (good) long book."
+        ]
+      },
+      {
+        "name": "Taylor Shephard",
+        "role": "Instructor",
+        "image": "/images/people/staff/taylor-shephard.jpg",
+        "about": [
+          "Taylor Shephard was born and raised in New Orleans, Louisiana. She graduated from St. Mary’s Academy High School in New Orleans East in 2014 and then headed to Southeastern Louisiana University to further her studies for a couple years. She attempted to teach herself html and css because she was always very interested in knowing what it takes to make websites. Soon after she found Operation Spark where Taylor gained her passion for coding. She completed Operation Spark's immersion program in July 2018.",
+
+          "Soon after completing the program, Taylor joined the Operation Spark team as an instructor. She really enjoys helping others learn to code, watching their skills grow, and witnessing them become awesome software engineers. Her interests include traveling, photography, fashion, coding, learning new things, and making a difference. "
+        ]
+      },
+      {
+        "name": "Greg Thompson",
+        "role": "Instructor/Engineer",
+        "image": "/images/people/staff/greg-thompson.jpg",
+        "about": [
+          "Greg is a New Orleans native who graduated from Ben Franklin High School and then headed across town to study education at Tulane. After finding a passion working with robotics, he spent five years teaching high school and middle school engineering, robotics, computer science, and math. He completed Operation Spark's immersion program in the fall of 2020 and is now part of the high school team at Operation Spark.",
+
+          "In his spare time, Greg enjoys running with past students at Youth Run NOLA events, playing board games and solving logic puzzles, and baking up a storm in the kitchen."
+        ]
+      },
+
+      {
+        "name": "Brianna Taylor",
+        "role": "Student Success Lead",
+        "image": "/images/people/staff/brianna-taylor.jpg",
+        "about": [
+          "Brianna is a New Orleans native who graduated from Warren Easton. She enjoys helping adults and young adults gain stability and opportunities to discover their passion. Brianna pursued a career in workforce program development and obtained her Bachelor of Science from Louisiana Tech University in Family and Child Studies.",
+
+          "Brianna started her journey with Operation Spark to skill up in software development and data. In 2020 she graduated from Operation Spark and joined the student success team the following year.",
+
+          "In her free time, Brianna enjoys traveling, watching anime, and tackling DIY projects."
+        ]
+      },
+      {
+        "name": "Jessalyn Daggs",
+        "role": "Student Success Coordinator",
+        "image": "/images/people/staff/jessalyn-daggs.jpg",
+        "about": [
+          "Jessalyn is from Thibodaux, LA and believes that the opportunity Operation Spark brings to New Orleanians can provide new possibilities for the entire Southeast region and beyond. After more than 10 years managing retail businesses she sought out an opportunity that would allow her to be mother to her newborn first while exploring her passion for design thinking and problem solving.",
+
+          "She graduated from Operation Spark in 2020 and accepted her dream opportunity as a part of the Opspark team aiding students in overcoming challenges and celebrating wins while navigating our program from beginning to hired in tech. She believes we can change the status quo when we inspire others to go beyond what's already been established. Her hope is that native black women and girls continue to explore the value that they bring to the technology landscape and dare to take up space."
+        ]
+      },
+      {
+        "name": "Amika Kali",
+        "role": "Outreach Coordinator",
+        "image": "/images/people/staff/amika-kali.jpg",
+        "about": [
+          "Amika is a California native with a heart of gold. Before joining us as the Outreach Coordinator here at Operation Spark, she spent twelve (12) years as a classroom teacher in both traditional and non-traditional classroom settings. Her love and passion for lifelong learning has carried over to OpSpark. She wants to ensure that our students have the resources and opportunities needed to make their learning journey successful.",
+
+          "When Amika is not out attending events or hosting Information Sessions, she can be found browsing Pinterest and crafting. "
+        ]
+      },
+      {
+        "name": "Jon Cosper",
+        "role": "Outcomes Lead",
+        "image": "/images/people/staff/jon-cosper.png",
+        "about": [
+          "Jon was born and raised in the 9th ward of New Orleans and is a graduate of Edna Karr High School. Jon joined the Operation Spark team in January of 2022. Jon began his professional career in education and most recently was the Director of Athletics and Career and Technical Education at a local charter school.",
+
+          "Jon earned his MBA from the University of New Orleans and his Bachelor’s degree in Business Management from Tulane University's A.B. Freeman School of Business. He is a part of the Beta Gamma Sigma International Honor Society. Though he stays busy as the Workforce Outcomes Lead, Jon relishes every free moment he gets. In those moments, he loves to spend time with his wife and 3 kids, is an avid gamer and sports fan."
+        ]
+      },
+      {
+        "name": "Alex Aaron",
+        "role": "Instructor",
+        "image": "/images/people/staff/alex-aaron.jpg",
+        "about": [
+          "A native of Baton Rouge, Louisiana, Alex has resided in New Orleans since 2006. He first encountered Operation Spark as a high school educator when he participated in Operation Spark's educator training. He then administered the organization's innovative high school curriculum to sophomores at Abramson Sci Academy. Unsurprisingly, Alex caught the coding bug himself and decided to pursue software development as a career. After graduating from Flatiron Software Development Bootcamp, Alex was hired by Operation Spark as the pre-qualifying bootcamp instructor. As bootcamp instructor, Alex works closely with students who are early in their software developmet journey, providing in-depth intermediate-to-advanced JavaScript instruction."
+        ]
+      },
+      {
+        "name": "Patrice Williams",
+        "role": "Instructor",
+        "image": "/images/people/staff/patrice-williams.jpg",
+        "about": [
+          "Patrice is a native of New Orleans, LA. She graduated from Xavier University of LA in 2012, where she received her Bachelor's in Biology. In 2015, she received a Master's in Public  Health from LSU Health Sciences Center specializing in Behavioral and Community Health.",
+
+          "After working as a Student Success Specialist at Xavier University of LA, then transitioning to the Mortgage industry, Patrice was ready to try something new. She graduated from Operation Spark in 2021 and now works there as a software developer and instructor.",
+
+          "Her hobbies include taking her kids on new adventures, playing with her dogs, coding, and watching movies. Patrice loves helping her students learn to code and watch as they blossom into amazing software engineers. "
+        ]
+      },
+      {
+        "name": "Peter Barnum",
+        "role": "Instruction Lead",
+        "image": "/images/people/staff/peter-barnum.jpg",
+        "about": []
+      },
+      {
+        "name": "Jessica Torres",
+        "role": "Instructor",
+        "image": "/images/people/staff/jessica-torres.jpg",
+        "about": []
+      },
+      {
+        "name": "Caity Opelka",
+        "role": "Instructor",
+        "image": "/images/people/staff/caity-opelka.jpg",
+        "about": []
+      }
+    ],
+    "directors": [
+      {
+        "name": "Max Gaudin, Chair",
+        "role": "Head of Growth, Soul Addict"
+      },
+      {
+        "name": "Brandon Davis",
+        "role": "Partner, Phelps Dunbar"
+      },
+      {
+        "name": "Chris LeBato, Director",
+        "role": "CEO, MC Bank New Orleans"
+      }
+    ]
+  },
+  "awards": [
+    {
+      "title": "WGNO News: New Orleans Camp for Computer Kids",
+      "url": "https://drive.google.com/file/d/1EMPS4lPRMt_wtmS6wi9Pt9HCa9Pw2e0r/view"
+    },
+    {
+      "title": "Entergy gives $1 million to support Louisiana workforce training",
+      "url": "http://www.nola.com/business/index.ssf/2016/11/entergy_gives_1_million_in_gra.html"
+    },
+    {
+      "title": "Could New Orleans Become the Silicon Valley of the South?",
+      "url": "http://nationswell.com/operation-spark-coding-boot-camps"
+    },
+    {
+      "title": "Three Ways Philanthropists Can Invest In Markets To Revive The American Dream",
+      "url": "http://www.forbes.com/sites/bridgespan/2016/06/08/three-ways-philanthropists-can-invest-in-markets-to-revive-the-american-dream/#23f23b392ba1"
+    },
+    {
+      "title": "New Orleans non-profit attends first White House Tech Meetup",
+      "url": "http://www.theadvocate.com/baton_rouge/news/politics/article_4309e250-4e61-51e8-974c-a50c5f0b92d3.html"
+    },
+    {
+      "title": "Operation Spark Wins Big for New Orleans Youth",
+      "url": "http://www.nola.com/business/index.ssf/2014/08/education_entrepreneurship_con.html"
+    },
+    {
+      "title": "Apprenticing, with Operation Spark and Silicon Bayou News",
+      "url": "http://siliconbayounews.com/2014/07/31/apprenticeship-program-for-software-development-stimulates-student-learning-in-new-orleans"
+    }
+  ]
+}

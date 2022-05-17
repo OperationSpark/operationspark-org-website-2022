@@ -1,0 +1,174 @@
+{
+  "adult": {
+    "header": {
+      "title": ["Develop a Career"],
+      "description": ["Adult Workforce Program"]
+    },
+    "overview": {
+      "title": ["Program Overview"],
+      "description": [
+        "The Operation Spark workforce program is approximately 6 months of escalated intensity learning geared toward getting each student a full time job in software engineering. Through each step of the program our students will learn more about software, how it is created and how it works.",
+        "Our students come from a diverse set of backgrounds in terms of age, gender, race, and education. Most were born in southeast Louisiana, over half have college degrees, and the majority have some form of professional experience in the workplace. All of our students are highly driven, passionate software engineers who enjoy creative problem solving and the endless pursuit of writing clean, concise code."
+      ]
+    },
+    "courses": [
+      {
+        "title": "Prep",
+        "length": "2 Weeks / 24 Hours",
+        "nextStartDate": "April 11, 2022",
+        "description": [
+          "Our Prep program is a 2-week introduction to coding. Over the two weeks you will encounter the basics of JavaScript and decide whether you believe software engineering is something you are interested in pursuing. There is no cost for the prep program so that everyone can at least try their hand at coding and see if it's for them."
+        ]
+      },
+      {
+        "title": "Bootcamp",
+        "length": "5 Weeks / 72 Hours",
+        "nextStartDate": "April 11, 2022",
+        "description": [
+          "Our 60-hour Introduction to Programming Bootcamp is a deep dive into JavaScript and functional programming. Bootcamp prepares students for entry into our three month Immersion program by prepping them with the fundamentals of JavaScript. Students will spend the first three weeks working on projects to practice manipulating data types and using various types of functions, such as higher order functions. The latter two weeks will be a review of higher level concepts that are touched on throughout the first three weeks, nurturing expanded knowledge on the strong foundation built by the first three weeks. One week after the final class there will be a final exam, which doubles as an entrance exam for Immersion.",
+          "Operation Spark's Bootcamp is not intended to prepare students to get jobs in the software industry, rather to give students a fundamental understanding of core JavaScript principles before entering immersion. Operation Spark does not promise employability upon graduation solely of our Bootcamp program."
+        ]
+      },
+      {
+        "title": "Precourse",
+        "length": "3 Weeks / 120 Hours",
+        "nextStartDate": "April 11, 2022",
+        "description": [
+          "Unlike our other courses, Immersion has a designated Precourse section. For the three weeks immediately prior to immersion students will come in from 9-5, Monday through Friday, to work individually on multiple JavaScript projects. This Precourse gives students an introduction to what immersion will really be like, and is a last chance to test whether this is really something you are ready for and interested in, as well as for teachers to decide whether this is right for you. Precourse ends with a culminating exam to determine one final time whether students are ready or not for the immersion program."
+        ]
+      },
+      {
+        "title": "Junior",
+        "length": "6 Weeks / 450 Hours",
+        "nextStartDate": "April 4, 2022",
+        "description": [
+          "The junior phase, taking place during the first six weeks, allows students to explore many new avenues of coding in short amounts of time. Every two days students will be given a new concept to conquer, leading them to develop the skills to jump into any project with any tech stack they may find themselves presented with. Students' days will be filled with daily toy problems, both live and video lectures, student presentations, practice speaking about the concepts they are learning, as well as plenty of time to hack away on their projects. The junior phase culminates in an all day summary assessment to ensure they have fully understood the previous six weeks of learning, followed by a week long “solo week,” where students are given a week long project they must complete as a group, however they are not required to work in-house."
+        ]
+      },
+      {
+        "title": "Senior",
+        "length": "7 Weeks / 500 Hours",
+        "nextStartDate": "April 4, 2022",
+        "description": [
+          "The senior phase, taking place during the final six weeks, consists of several student driven projects. Students will take the skills they have crafted during the junior phase to create full stack applications of their own choosing."
+        ]
+      },
+      {
+        "title": "Job Hunt",
+        "length": "2 - 12 Weeks",
+        "nextStartDate": "",
+        "description": [
+          "Operation Spark assists in the job search phase post-graduation from the Immersion program. You'll be spending your time at our offices applying for software engineering positions, treating applying for jobs as your full time job."
+        ]
+      }
+    ]
+  },
+  "highschool": {
+    "interestOnly": true,
+    "description": [
+      "The software industry is creating more jobs in the US than any other industry sector. In Louisiana alone, the demand rate for software engineers is 5.5 times over the state average, with upwards of 4,500 open and upcoming jobs between existing companies like GE Digital, IBM, and iSeatz, as well as recent newcomers DXC and Accruent.",
+
+      "Even better, software engineering jobs typically net higher salaries than other technology jobs. Standard hourly wages start from $26.66 and go up to $71.16, with a software engineer's salary averaging $99,530. The programming concepts behind web technology are considered a new business language. Coding has become the 21st Century's fundamental literacy benchmark. Even if a student doesn't become a software engineer, every young adult should at least touch the basics of these technologies early in their studies as software development is increasingly becoming a part of every industry.",
+
+      "In fact, roughly 40% of what happens to bring a software product to market is coding. Other complementary careers are at play: everything from user-experience and visual design, project and client management, financial, legal, and human resource services. These peripheral roles provide other, engaging job opportunities. A solid understanding of how software is built gives any job seeker an advantage in the software industry.",
+
+      "Given the range of high wage opportunities in the software industry, it is the mission of Operation Spark to see that young adults throughout Louisiana receive quality, industrial training and that Louisiana youth are netting these high wage jobs.",
+
+      "Our advanced studies provide deep practice, offering students a solid path into careers in the software industry. These classes include Advanced Javascript, Functional Programming, and Web Development Fundamentals of Video Game Programming, Advanced Video Game Programming, Internet of Things, and our half-day program, Professional Web and Mobile Development."
+    ],
+    "courses": [
+      {
+        "id": "fundamentals",
+        "title": ["Fundamentals of HTML, CSS, and JavaScript"],
+        "description": [
+          "Students learn the fundamentals of Web programming in JavaScript, HTML and CSS through designing and competing website, animation and video game projects.  Projects appear within a portfolio on the student's website project.",
+
+          "All curriculum and tools are Cloud based, allowing students to work from any computer with ease.  Students are provided multiple choice quizzes and code quizzes to help practice for the mid-term and the IBC exam; they may be taken multiple times to assist in sharpening skills.  All projects, quizzes, code quizzes and homework are delivered and graded via our LMS, Greenlight.  Schools receive a spreadsheet summary of student progress.",
+
+          "To write the IBC exam, all projects, quizzes and code quizzes must be complete and greenlit before the exam date at the end of the semester.",
+
+          "This course is an engaging and experiential introduction to the basics of web development and programming in general.  Students wishing to move forward to our Advanced Javascript, Functional Programming, and Web Development course must pass the IBC exam of this course, Fundamentals of HTML, CSS, and JavaScript."
+        ],
+        "preReq": "N/A",
+        "ibc": "Basic"
+      },
+      {
+        "id": "advanced",
+        "title": [
+          "Advanced Javascript, Functional Programming, and Web Development"
+        ],
+        "description": [
+          "Continuing from Fundamentals of HTML, CSS, and JavaScript, this course dives deeply into advanced programming concepts, including jQuery, functional programming, higher order functions.",
+
+          "Additional projects build out the student's website portfolio, including a study of widely used JavaScript functional programming libraries, basic data structures and video games.",
+
+          "All curriculum and tools are Cloud based, allowing students to work from any computer with ease.  Students are provided multiple choice quizzes and code quizzes to help practice for the mid-term and the IBC exam; they may be taken multiple times to assist in sharpening skills.  All projects, quizzes, code quizzes and homework are delivered and graded via our LMS, Greenlight.  Schools receive a spreadsheet summary of student progress.",
+
+          "To write the IBC exam, all projects, quizzes and code quizzes must be complete and greenlit before the exam date at the end of the semester.",
+
+          "This course covers advanced programming concepts widely utilized in the software industry.  Students wishing to move forward to any other Operation Spark courses must pass the IBC exam of this course, Advanced Javascript, Functional Programming, and Web Development."
+        ],
+        "preReq": "Fundamentals of HTML, CSS, and JavaScript (080523), Level 1 IBC",
+        "ibc": "Advanced"
+      },
+      {
+        "id": "web-mobile",
+        "title": ["Professional Web and Mobile Development"],
+        "description": [
+          "Beginning in September 2018, we're piloting a half day program, Professional Web and Mobile Development.  The pilot year is open to graduates of our Advanced Javascript, Functional Programming, and Web Development who earned their IBC.",
+
+          "Introduced in this course are server side and database programming, frameworks, testing software, version control, design and deployment.The curriculum covered in Professional Web and Mobile Development mirrors our adult workforce program, Immersion, but is mapped out daily over a school year, providing high schoolers a more gradual approach and more frequency of practice.  The curriculum is industrial grade, by which we mean students practice professional level software engineering, adopting the same techniques, tools and work methodology practiced within the software industry in designing, building and deploying software products.",
+
+          "Classes run 1pm to 4pm, Monday to Friday at our learning center in New Orleans. Busing is available."
+        ],
+        "preReq": "Advanced Javascript, Functional Programming, and Web Development (080526), Level 1 and 2 IBC",
+        "ibc": "TODO"
+      },
+      {
+        "id": "fundamentals-game",
+        "title": ["Fundamentals of Video Game Programming"],
+        "description": [
+          "Students learn the fundamentals of video game programming, explore new design patterns, learn the basics of Object Oriented programming, apply trigonometry to simulate simple physics engines, create code libraries to support game development, study classic Atari style 2D video games, and design and build additional video game levels. Introduced is the concept of game mechanics - the art of designing a compelling and captivating game."
+        ],
+        "preReq": "Advanced Javascript, Functional Programming, and Web Development (080526), Level 1 and 2 IBC",
+        "ibc": "TODO"
+      },
+      {
+        "id": "iot",
+        "title": ["Internet of Things"],
+        "description": [
+          "Smart Homes are the norm now, as controlling hardware devices across the Internet is providing new conveniences.  A hands-on course that will teach students how to design and implement scalable, flexible, and open IoT solutions using Web technologies. This course focuses on providing the right balance of theory, code, and practical examples to enable students to successfully connect all sorts of devices to the Web and to expose their services and data over REST APIs."
+        ],
+        "preReq": "Advanced Javascript, Functional Programming, and Web Development (080526), Level 1 and 2 IBC",
+        "ibc": "TODO"
+      }
+    ],
+    "schools": {
+      "orleans": [
+        { "name": "Collegiate Academies", "imageUrl": "" },
+        { "name": "Warren Easton Senior High School", "imageUrl": "" },
+        { "name": "Inspire NOLA Charter Schools", "imageUrl": "" },
+        { "name": "Benjamin Franklin High School", "imageUrl": "" },
+        { "name": "International High School of New Orleans", "imageUrl": "" },
+        { "name": "Renew Accelerated High School", "imageUrl": "" },
+        { "name": "The NET Charter School", "imageUrl": "" },
+        { "name": "KIPP New Orleans", "imageUrl": "" },
+        { "name": "The Rooted School", "imageUrl": "" },
+        { "name": "Cohen College Prep", "imageUrl": "" }
+      ],
+      "other": [
+        { "name": "Livingston Parish", "imageUrl": "" },
+        { "name": "Ascension Parish", "imageUrl": "" },
+        { "name": "St. Tammany Parish", "imageUrl": "" },
+        { "name": "St. Charles Parish", "imageUrl": "" },
+        { "name": "Plaquemines Parish", "imageUrl": "" },
+        { "name": "Tangipahoa Parish", "imageUrl": "" },
+        { "name": "Madison Parish", "imageUrl": "" },
+        { "name": "St. John Parish", "imageUrl": "" },
+        { "name": "St. Mary Parish", "imageUrl": "" },
+        { "name": "Lafayette Parish", "imageUrl": "" },
+        { "name": "St Bernard Parish", "imageUrl": "" }
+      ]
+    }
+  }
+}

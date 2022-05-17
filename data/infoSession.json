@@ -1,0 +1,29 @@
+{
+  "commonQuestions": [
+    {
+      "question": ["What is Operation Spark all about?"],
+      "answer": [
+        "Operation Spark is a New Orleans non-profit that teaches the fundamentals of software development (also known as coding or computer programming) to low-opportunity individuals by presenting the fastest route to a career in software development. All students are looking to begin a new career in the exciting field of software development. No past computer science experience is needed to get started in our programs."
+      ]
+    },
+    {
+      "question": ["How do I get started?"],
+      "answer": [
+        "Attend a free info session by signing up with the form above."
+      ]
+    },
+    {
+      "question": ["Do you offer student aid?"],
+      "answer": [
+        "Yes! We offer financing and need-based scholarships. Please attend an info session to find out more.",
+        "At 60 hours of instruction and the opportunity to work one-on-one outside of class with teachers our courses are very reasonably priced. The cost is less than what someone would pay per course hour at a local public university."
+      ]
+    },
+    {
+      "question": ["Who can attend? Is there an age limit?"],
+      "answer": [
+        "Our main courses are geared toward adults who are seeking full-time employment. If you're a junior or senior in high school check out our High School to High Wage program which runs on a semester schedule. There is no upper age limit. Anyone can learn to code whether they're 19 or 90 as long as they work hard."
+      ]
+    }
+  ]
+}

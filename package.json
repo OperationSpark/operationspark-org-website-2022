@@ -1,0 +1,49 @@
+{
+  "name": "opspark-website",
+  "private": true,
+  "scripts": {
+    "test": "cypress open",
+    "test:headless": "cypress run",
+    "dev": "rimraf ./.next && next dev",
+    "build": "rimraf ./.next && next build",
+    "start": "next start",
+    "lint": "next lint",
+    "rok": "ngrok start --config=ngrokrc.yml os",
+    "prettier:fix": "prettier --config .prettierrc --write \"src/**/{*.ts,*.tsx}\""
+  },
+  "dependencies": {
+    "@chakra-ui/react": "^1.8.5",
+    "@emotion/react": "^11.8.1",
+    "@emotion/styled": "^11.8.1",
+    "@googleapis/sheets": "^2.0.1",
+    "axios": "^0.26.0",
+    "framer-motion": "^6.2.7",
+    "google-auth-library": "^8.0.2",
+    "moment": "^2.29.1",
+    "moment-timezone": "^0.5.34",
+    "next": "^12.1.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-icons": "^4.3.1",
+    "sharp": "^0.30.1",
+    "styled-components": "^5.3.3",
+    "underscore": "^1.13.3",
+    "validator": "^13.7.0"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.19",
+    "@types/react": "^17.0.39",
+    "@types/styled-components": "^5.1.23",
+    "@types/underscore": "^1.11.4",
+    "@types/validator": "^13.7.1",
+    "@typescript-eslint/eslint-plugin": "^5.12.1",
+    "@typescript-eslint/parser": "^5.12.1",
+    "babel-plugin-styled-components": "^2.0.3",
+    "cli-color": "^2.0.2",
+    "cypress": "^9.5.0",
+    "eslint": "^8.9.0",
+    "eslint-config-next": "^12.1.0",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.5.5"
+  }
+}
