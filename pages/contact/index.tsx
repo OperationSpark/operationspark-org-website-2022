@@ -19,8 +19,6 @@ const Contact: NextPage<IContact> = ({
   phone,
   gMapUrl,
 }) => {
-  /** Set `false` or remove when ready to enable contact form */
-  const FEAT_HIDE_FORM = true;
   return (
     <Main>
       <ContactStyles>
@@ -51,7 +49,7 @@ const Contact: NextPage<IContact> = ({
               </p>
             </Section>
           </div>
-          {!FEAT_HIDE_FORM && <ContactForm />}
+          <ContactForm />
         </Content>
       </ContactStyles>
     </Main>
