@@ -20,6 +20,9 @@ module.exports = (phase, { defaultConfig }) => {
       'GOOGLE_SERVICE_ACCOUNT',
       'HIGHSCHOOL_FORM_RESPONSES_ID',
       'HIGHSCHOOL_FORM_RESPONSES_NAME',
+      'WUFOO_HOST',
+      'WUFOO_TOKEN',
+      'WUFOO_CONTACT_FORM_ID',
     ]);
     console.info(color.yellow('Validating credentials and data'));
     validateData();
