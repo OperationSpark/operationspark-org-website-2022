@@ -12,11 +12,13 @@ const MapStyles = styled.div`
       -webkit-user-drag: none;
       user-select: none;
     }
-    overflow: hidden;
+
     position: relative;
-    aspect-ratio: 1 / 1;
     width: 500px;
     height: 100%;
+    overflow: hidden;
+
+    aspect-ratio: 1 / 1;
     border-radius: 0.5rem;
     transition: box-shadow 125ms;
     box-shadow: 0 0.1rem 0.2rem
@@ -50,7 +52,10 @@ const Map = ({ href, address }: MapProps) => {
         >
           <Image
             src='/images/opspark-map.png'
-            layout='fill'
+            layout='responsive'
+            width='500px'
+            height='500px'
+            objectFit='contain'
             alt='Operation Spark map'
             quality={100}
             blurDataURL={rgbDataURL(134, 0, 241)}
