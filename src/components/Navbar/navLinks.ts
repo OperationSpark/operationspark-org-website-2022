@@ -37,11 +37,7 @@ export const navMenus: NavigationMenuLink[] = [
   //   ],
   // },
 
-  /*
-    "Get Involved" page still needs to be completed.
-    ** comment in when view ready for production **
-  */
-  // { title: 'Get Involved', href: '/getInvolved', subLinks: [] },
+  { title: 'Get Involved', href: '/getInvolved', subLinks: [] },
 
   /*
     Unsure if these links will be needed.
