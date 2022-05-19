@@ -19,7 +19,7 @@ const formatRouteTitle = (str: string) => {
     .join('');
 };
 
-const Meta = () => {
+const Meta = ({ hostname }: { hostname: string }) => {
   const { pathname } = useRouter();
   const route = formatRouteTitle(pathname);
   const metaData = meta[route.toLowerCase()] || {};
@@ -32,7 +32,7 @@ const Meta = () => {
   const title =
     metaData.title ?? `${route ? route + ' | ' : ''}${defaultMeta.title}`;
 
-  const imageUrl = metaData.imageUrl ?? defaultMeta.imageUrl;
+  const imageUrl = hostname + (metaData.imageUrl ?? defaultMeta.imageUrl);
 
   const favicon = metaData.favicon ?? defaultMeta.favicon ?? '/favicon.ico';
 
@@ -43,6 +43,24 @@ const Meta = () => {
       <meta property='og:title' content={title} />
       <meta property='og:description' content={description} />
       <meta property='og:image' content={imageUrl} />
+      <link rel='icon' href={favicon} />
+      <meta property='og:url' content={hostname} />
+      <meta property='twitter:url' content={hostname} />
+      <title> {title} </title>
+      <meta name='description' content={description} />
+
+      <meta property='og:description' content={description} />
+
+      <meta property='og:locale' content='en_US' />
+      <meta property='og:type' content='website' />
+      <meta property='og:title' content={title} />
+      <meta property='og:image' content={imageUrl} />
+
+      <meta property='twitter:card' content='summary_large_image' />
+
+      <meta property='twitter:title' content={title} />
+      <meta property='twitter:description' content={description} />
+      <meta property='twitter:image' content={imageUrl} />
       <link rel='icon' href={favicon} />
     </Head>
   );

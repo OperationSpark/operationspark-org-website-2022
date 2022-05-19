@@ -14,6 +14,8 @@ const Theme = dynamic(() => import('@this/src/theme/styled/Theme'));
 const Navbar = dynamic(() => import('@this/components/Navbar/Navbar'));
 const Footer = dynamic(() => import('@this/components/footer/footer'));
 
+const hostname = 'https://opspark-view.vercel.app';
+
 function App({ Component, pageProps }: AppProps) {
   const [logos, setLogos] = useState<ILogo[]>([]);
   const [alertInfo, setAlertInfo] = useState<IAlert>({ message: '', url: '' });
@@ -28,7 +30,7 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={theme}>
       <Theme theme={theme.colors.brand}>
-        <Meta />
+        <Meta hostname={hostname} />
         <Navbar alertInfo={alertInfo} />
         <MainContainer>
           <Component {...pageProps} />
