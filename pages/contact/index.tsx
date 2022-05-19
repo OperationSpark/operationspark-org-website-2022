@@ -5,9 +5,10 @@ import styled from 'styled-components';
 import { IContact } from '@this/data/types/contact';
 import { Section } from '@this/components/layout';
 
-import { getStaticAsset } from '../api/static/[asset]';
+import { getStaticAsset } from '@this/pages-api/static/[asset]';
 import Content from '@this/components/layout/Content';
 import Main from '@this/components/layout/Main';
+import Map from '@this/src/components/Elements/Map';
 
 const ContactForm = dynamic(() => import('@this/src/Forms/Form.Contact'));
 
@@ -50,6 +51,12 @@ const Contact: NextPage<IContact> = ({
             </Section>
           </div>
           <ContactForm />
+          <div className='map'>
+            <Map
+              href={gMapUrl}
+              address={`${address}, ${city}, ${state} ${zip}`}
+            />
+          </div>
         </Content>
       </ContactStyles>
     </Main>
@@ -84,6 +91,7 @@ const ContactStyles = styled.div`
       margin-bottom: 1rem;
     }
   }
+
   @media screen and (max-width: 768px) {
     .contact-top {
       display: flex;
