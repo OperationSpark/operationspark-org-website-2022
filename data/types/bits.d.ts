@@ -40,3 +40,10 @@ export interface IAlert {
   start?: string;
   end?: string;
 }
+
+export interface IMeta {
+  title?: string;
+  description?: string;
+  imageUrl?: string;
+  favicon?: string;
+}
