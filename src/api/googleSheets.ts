@@ -75,7 +75,9 @@ export const createSpreadsheetTab = async ({
 
     await addRow({ sheets, spreadsheetId, tabName, values });
   } catch (err) {
-    console.error(`Sheet "${tabName}" already exists.`);
+    console.error(
+      `Sheet "${tabName}" already exists.\n${__dirname} →  googleSheets.ts`,
+    );
   }
 };
 

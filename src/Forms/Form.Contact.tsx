@@ -81,6 +81,7 @@ const ContactForm = () => {
         style={{
           marginTop: '1rem',
           width: '300px',
+          maxWidth: '100%',
           margin: '1rem auto',
         }}
         disabled={isSubmitting}
