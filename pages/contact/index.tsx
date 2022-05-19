@@ -9,7 +9,7 @@ import { getStaticAsset } from '@this/pages-api/static/[asset]';
 import Content from '@this/components/layout/Content';
 import Main from '@this/components/layout/Main';
 import Map from '@this/src/components/Elements/Map';
-
+import { FiPhone, FiMapPin } from 'react-icons/fi';
 const ContactForm = dynamic(() => import('@this/src/Forms/Form.Contact'));
 
 const Contact: NextPage<IContact> = ({
@@ -27,18 +27,26 @@ const Contact: NextPage<IContact> = ({
           <div className='contact-top'>
             <h1 className='dynamic-h1'>Contact us</h1>
             <Section className='contact-info'>
-              <a
-                className='anchor'
-                href={gMapUrl}
-                target='_blank'
-                rel='noreferrer'
-              >
-                <p>{address}</p>
-                <p>
-                  {city}, {state} {zip}
-                </p>
-              </a>
               <p>
+                <div className='contact-icon'>
+                  <FiMapPin size={28} />
+                </div>
+                <a
+                  className='anchor'
+                  href={gMapUrl}
+                  target='_blank'
+                  rel='noreferrer'
+                >
+                  <p>{address}</p>
+                  <p>
+                    {city}, {state} {zip}
+                  </p>
+                </a>
+              </p>
+              <p>
+                <div className='contact-icon'>
+                  <FiPhone size={28} />
+                </div>
                 <a
                   className='anchor'
                   href={`tel:${phone}`}
@@ -78,17 +86,25 @@ const ContactStyles = styled.div`
     display: flex;
     flex-flow: column;
     align-items: center;
-    padding-bottom: 2rem;
   }
   .contact-info {
     display: flex;
-    flex-flow: column;
-    align-items: flex-end;
-    padding-bottom: 1rem;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    padding: 2rem 0;
     align-items: center;
+    width: 100%;
     a {
       text-align: center;
       margin-bottom: 1rem;
+    }
+    p {
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+    }
+    .contact-icon {
+      padding-bottom: 0.5rem;
     }
   }
 
