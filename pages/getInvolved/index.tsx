@@ -78,7 +78,7 @@ const GetInvolved: NextPage = () => {
                       className='dynamic-txt primary-secondary li'
                       key={`${amt}-${desc}-${i}`}
                     >
-                      <div className='amount'>${amt}</div>
+                      <span className='amount'>${amt}</span>
                       <BsArrowRightSquareFill className='icon' size={18} />{' '}
                       {desc}
                     </p>
@@ -107,7 +107,7 @@ const GetInvolved: NextPage = () => {
                   <span style={{ userSelect: 'none' }}>
                     Your donations are tax deductible. Our EIN is{' '}
                   </span>
-                  47-1514606
+                  <span title='EIN# 47-1514606'>47-1514606</span>
                 </p>
               </div>
             </div>
@@ -161,7 +161,7 @@ const GetInvolvedStyles = styled.div`
         right: 0.25rem;
         button {
           background: ${({ theme }) =>
-            theme.isLightMode ? 'rgba(255,255,255,1)' : 'rgba(29, 29, 29, 1)'};
+            theme.isLightMode ? 'rgba(251,251,251,1)' : 'rgba(29, 29, 29, 1)'};
           color: ${({ theme }) => theme.fg};
           :hover {
             box-shadow: none;
@@ -173,7 +173,9 @@ const GetInvolvedStyles = styled.div`
         user-select: none;
         max-width: 100%;
         filter: ${({ theme }) =>
-          theme.isLightMode ? 'invert(0)' : 'invert(0.9) grayscale(100%)'};
+          theme.isLightMode
+            ? 'invert(0) hue-rotate(-240deg)'
+            : 'invert(0.9) grayscale(100%)'};
       }
     }
   }
@@ -203,7 +205,8 @@ const GetInvolvedStyles = styled.div`
         padding: 0.25rem 0;
       }
       .tax-deduct {
-        color: ${({ theme }) => theme.grey[500]};
+        color: ${({ theme }) =>
+          theme.isLightMode ? theme.grey[700] : theme.grey[500]};
         font-size: 0.8rem;
         padding-top: 0.5rem;
       }
