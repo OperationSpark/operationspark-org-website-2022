@@ -28,25 +28,26 @@ const Contact: NextPage<IContact> = ({
             <h1 className='dynamic-h1'>Contact us</h1>
             <Section className='contact-info'>
               <p>
-                <div className='contact-icon'>
+                <span className='contact-icon'>
                   <FiMapPin size={28} />
-                </div>
+                </span>
                 <a
                   className='anchor'
                   href={gMapUrl}
                   target='_blank'
                   rel='noreferrer'
                 >
-                  <p>{address}</p>
-                  <p>
+                  <span>{address}</span>
+                  <br />
+                  <span>
                     {city}, {state} {zip}
-                  </p>
+                  </span>
                 </a>
               </p>
               <p>
-                <div className='contact-icon'>
+                <span className='contact-icon'>
                   <FiPhone size={28} />
-                </div>
+                </span>
                 <a
                   className='anchor'
                   href={`tel:${phone}`}
