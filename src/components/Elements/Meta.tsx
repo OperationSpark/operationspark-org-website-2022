@@ -2,7 +2,6 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import { IMeta } from '@this/data/types/bits';
-import { useEffect, useState } from 'react';
 
 const formatRouteTitle = (str: string) => {
   if (!str || str === '/') {
@@ -26,8 +25,6 @@ const Meta = ({ meta }: { meta: AllMeta }) => {
   const route = formatRouteTitle(pathname);
   const metaData: IMeta = meta[route.toLowerCase()] || {};
   const defaultMeta: IMeta = meta.defaultMeta || {};
-  const [host, setHost] = useState('');
-  const [href, setHref] = useState('');
 
   const description = metaData.description
     ? `${defaultMeta.description}\n\n${metaData.description}`
@@ -40,10 +37,6 @@ const Meta = ({ meta }: { meta: AllMeta }) => {
 
   const favicon = metaData.favicon ?? defaultMeta.favicon ?? '/favicon.ico';
 
-  useEffect(() => {
-    setHref(window.location.href);
-    setHost(window.location.origin);
-  }, [pathname]);
   return (
     <Head>
       <title> {title} </title>
