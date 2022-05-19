@@ -2,6 +2,9 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import { IMeta } from '@this/data/types/bits';
+import defaultMetaData from '@this/data/meta.json';
+
+const meta: { [key: string]: IMeta } = defaultMetaData;
 
 const formatRouteTitle = (str: string) => {
   if (!str || str === '/') {
@@ -16,15 +19,11 @@ const formatRouteTitle = (str: string) => {
     .join('');
 };
 
-type AllMeta = {
-  [key: string]: IMeta;
-};
-
-const Meta = ({ meta }: { meta: AllMeta }) => {
+const Meta = () => {
   const { pathname } = useRouter();
   const route = formatRouteTitle(pathname);
-  const metaData: IMeta = meta[route.toLowerCase()] || {};
-  const defaultMeta: IMeta = meta.defaultMeta || {};
+  const metaData = meta[route.toLowerCase()] || {};
+  const defaultMeta = meta.defaultMeta || {};
 
   const description = metaData.description
     ? `${defaultMeta.description}\n\n${metaData.description}`

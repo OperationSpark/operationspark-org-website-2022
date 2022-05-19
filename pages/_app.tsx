@@ -4,7 +4,7 @@ import type { AppProps } from 'next/app';
 import { ChakraProvider } from '@chakra-ui/react';
 
 import { getStaticAsset } from '@this/pages-api/static/[asset]';
-import { IAlert, IMeta } from '@this/data/types/bits';
+import { IAlert } from '@this/data/types/bits';
 import { MainContainer } from '@this/components/layout';
 import theme from '@this/src/theme';
 import { ILogo, ISupporterFunderLogos } from '../data/types/logos';
@@ -15,7 +15,6 @@ const Navbar = dynamic(() => import('@this/components/Navbar/Navbar'));
 const Footer = dynamic(() => import('@this/components/footer/footer'));
 
 function App({ Component, pageProps }: AppProps) {
-  const [meta, setMeta] = useState<{ [key: string]: IMeta }>({});
   const [logos, setLogos] = useState<ILogo[]>([]);
   const [alertInfo, setAlertInfo] = useState<IAlert>({ message: '', url: '' });
 
@@ -24,14 +23,12 @@ function App({ Component, pageProps }: AppProps) {
       setLogos(l.funders),
     );
     getStaticAsset('alert').then(setAlertInfo);
-    getStaticAsset('meta').then(setMeta);
   }, []);
 
   return (
     <ChakraProvider theme={theme}>
       <Theme theme={theme.colors.brand}>
-        <Meta meta={meta} />
-
+        <Meta />
         <Navbar alertInfo={alertInfo} />
         <MainContainer>
           <Component {...pageProps} />

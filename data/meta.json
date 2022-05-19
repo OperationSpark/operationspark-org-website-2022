@@ -5,6 +5,7 @@
     "imageUrl": "/images/opspark-banner.png"
   },
   "contact": {
-    "description": "514 Franklin Avenue\nNew Orleans, LA 70117\n504-534-8277"
+    "description": "514 Franklin Avenue\nNew Orleans, LA 70117\n504-534-8277",
+    "imageUrl": "/images/opspark-map.png"
   }
 }
