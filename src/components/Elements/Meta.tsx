@@ -25,9 +25,7 @@ const Meta = ({ hostname }: { hostname: string }) => {
   const metaData = meta[route.toLowerCase()] || {};
   const defaultMeta = meta.defaultMeta || {};
 
-  const description = metaData.description
-    ? `${defaultMeta.description}\n\n${metaData.description}`
-    : defaultMeta.description;
+  const description = metaData.description ?? defaultMeta.description;
 
   const title =
     metaData.title ?? `${route ? route + ' | ' : ''}${defaultMeta.title}`;
