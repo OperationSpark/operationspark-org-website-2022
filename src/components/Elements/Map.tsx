@@ -18,9 +18,9 @@ const MapStyles = styled.div`
     width: 500px;
     height: 100%;
     border-radius: 0.5rem;
-    box-shadow: 0 0.1rem 0.2rem;
     transition: box-shadow 125ms;
-    ${({ theme }) => theme.primary[theme.isLightMode ? 800 : 200]};
+    box-shadow: 0 0.1rem 0.2rem
+      ${({ theme }) => theme.primary[theme.isLightMode ? 800 : 200]};
     :hover {
       box-shadow: 0 0.1rem 0.5rem
         ${({ theme }) => theme.primary[theme.isLightMode ? 800 : 200]};
