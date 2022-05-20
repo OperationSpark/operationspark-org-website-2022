@@ -14,7 +14,7 @@ const Theme = dynamic(() => import('@this/src/theme/styled/Theme'));
 const Navbar = dynamic(() => import('@this/components/Navbar/Navbar'));
 const Footer = dynamic(() => import('@this/components/footer/footer'));
 
-const hostname = 'https://opspark-view.vercel.app';
+const hostname = 'https://staging.operationspark.org';
 
 function App({ Component, pageProps }: AppProps) {
   const [logos, setLogos] = useState<ILogo[]>([]);
