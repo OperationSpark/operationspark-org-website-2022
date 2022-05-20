@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { GetStaticProps, NextPage } from 'next';
 import Link from 'next/link';
 import styled, { useTheme } from 'styled-components';
@@ -9,7 +9,6 @@ import MacCard from '@this/components/Cards/MacCard';
 import MacContent from '@this/components/Cards/content/MacContent';
 import PlainCard from '@this/components/Cards/PlainCard';
 import { SlashDivider } from '@this/components/Elements/SlashDivider';
-import NavLink from '@this/components/Navbar/elements/NavLink';
 import { TwoColumns } from '@this/components/Elements/Columns';
 import { IQuote, ITitleDescription } from '@this/data/types/bits';
 import { ICourses } from '@this/data/types/programs';
@@ -42,7 +41,7 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
         } else {
           setQuoteIndex(0);
         }
-      }, 10000);
+      }, 20000);
     }
 
     return () => {
@@ -62,7 +61,7 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
     } else {
       setQuoteIndex(newIndex);
     }
-    setTimeout(() => setIsPaused(false), 10000);
+    setTimeout(() => setIsPaused(false), 20000);
   };
 
   return (
@@ -120,24 +119,34 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
                 </MacCard>
               }
               rightCol={
-                <Fragment>
-                  <p
-                    className='dynamic-txt right-col'
-                    style={{
-                      padding: '2rem 0',
-                      maxWidth: '90%',
-                      margin: '0 auto',
-                      color: 'rgba(25,25,25,1)',
-                    }}
-                  >
-                    <b>
-                      Does your company need developers? We foster employer
-                      partnerships in the community. Become a partner and gain
-                      valuable talent for your company.
-                    </b>
-                  </p>
-                  <NavLink href='/partners'>Employer Partnerships</NavLink>
-                </Fragment>
+                <div className='right-col-container'>
+                  <div className='right-col'>
+                    <p
+                      className='dynamic-txt'
+                      style={{
+                        paddingBottom: '1rem',
+                        maxWidth: '100%',
+
+                        color: 'rgba(25,25,25,1)',
+                      }}
+                    >
+                      <b>
+                        Does your company need developers? We foster employer
+                        partnerships in the community. Become a partner and gain
+                        valuable talent for your company.
+                      </b>
+                    </p>
+                    <Link href='/partners'>
+                      <a
+                        className='anchor right-arr-left'
+                        aria-label='Learn about job placement'
+                        title='Job Placement'
+                      >
+                        Learn more about employer partnerships
+                      </a>
+                    </Link>
+                  </div>
+                </div>
               }
             ></TwoColumns>
           </Content>
@@ -153,9 +162,11 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
                 key={title}
               >
                 <div className='program-card-body '>
-                  <h2 className='dynamic-h2 program-title'>{title}</h2>
+                  <h2 className='dynamic-h2 primary-secondary program-title'>
+                    {title}
+                  </h2>
                   <p className='dynamic-txt program-length'>
-                    <b>Length: {length}</b>
+                    <i>Length: {length}</i>
                   </p>
                   {description.map((desc) => (
                     <p key={desc} className='dynamic-txt program-desc'>
@@ -163,7 +174,7 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
                     </p>
                   ))}
                   {nextStartDate && (
-                    <p className='dynamic-txt program-next-start'>
+                    <p className='dynamic-txt primary-secondary program-next-start'>
                       <b>Next start date: {nextStartDate}</b>
                     </p>
                   )}
@@ -217,13 +228,30 @@ export const AdultProgramsStyles = styled.div`
   }
   .employer-love {
     background: ${({ theme }) => theme.secondary[500]};
+    min-height: 42rem;
+    display: flex;
+
     h1 {
       color: ${({ theme }) => theme.primary[700]};
     }
-    .right-col {
+    .right-col-container {
       display: flex;
-      height: 100%;
       align-items: center;
+      height: 100%;
+
+      .right-col {
+        display: flex;
+        align-items: center;
+        flex-flow: row wrap;
+
+        .anchor {
+          color: ${({ theme }) => theme.primary[700]};
+        }
+        .anchor:hover {
+          color: ${({ theme }) => theme.primary[900]};
+          box-shadow: 0 0 2px 0px ${({ theme }) => theme.primary[600]};
+        }
+      }
     }
   }
 
@@ -240,6 +268,11 @@ export const AdultProgramsStyles = styled.div`
       }
       .program-desc {
         padding: 1rem 0;
+      }
+      .program-length {
+        color: ${({ theme }) =>
+          theme.isLightMode ? theme.grey[600] : theme.grey[400]};
+        font-size: 1rem;
       }
     }
   }

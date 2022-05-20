@@ -19,9 +19,7 @@ export const MacContent = ({
   return (
     <MacContentStyles>
       <div className='mac-card-main'>
-        <motion.div transition={{ type: 'spring' }} className='mac-card-body'>
-          {body}
-        </motion.div>
+        <div className='mac-card-body dynamic-txt'>&ldquo;{body}&rdquo;</div>
         {imageUrl && (
           <div className='mac-card-image'>
             <Image objectFit='contain' layout='fill' src={imageUrl} alt='' />
@@ -60,15 +58,18 @@ const MacContentStyles = styled(motion.div)`
     user-select: none;
     -webkit-user-drag: none;
   }
-  transition: height 300ms;
 
+  height: 100%;
   .mac-card-main {
     display: flex;
+    height: 100%;
 
     .mac-card-body {
-      padding: 2rem;
-      font-weight: 600;
-      height: 18rem;
+      padding: 1rem;
+      font-weight: 400;
+      font-style: italic;
+      height: 100%;
+      min-height: 20rem;
       display: flex;
       align-items: center;
     }
@@ -91,12 +92,12 @@ const MacContentStyles = styled(motion.div)`
   .mac-card-about {
     display: flex;
     padding-bottom: 1rem;
-    height: 6rem;
+    min-height: 8rem;
     align-items: flex-end;
     .mac-card-about-body {
       display: flex;
       .mac-card-name {
-        font-weight: 500;
+        font-weight: 700;
       }
       .mac-card-role {
         font-weight: 300;

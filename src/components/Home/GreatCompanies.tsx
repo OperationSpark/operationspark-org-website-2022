@@ -35,7 +35,7 @@ const GreatCompanies = ({ title, description }: IHome['greatCompanies']) => {
                 name='Tim Blackmon'
                 role='CIO, Hired 6 grads at Mumms Software'
                 quote={
-                  '"Operation Spark is a true disruptor of the classical software engineering education domain. Their graduates posess real-world experience in todays modern technologies. For this reason, we have had great success hiring their grads."'
+                  'Operation Spark is a true disruptor of the classical software engineering education domain. Their graduates posess real-world experience in todays modern technologies. For this reason, we have had great success hiring their grads.'
                 }
                 logoSrc={`/images/logos/supporters/mumms-software-${theme.colorMode}.png`}
                 logoHref='https://mumms.com/'
