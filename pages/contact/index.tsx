@@ -10,6 +10,7 @@ import Content from '@this/components/layout/Content';
 import Main from '@this/components/layout/Main';
 import Map from '@this/src/components/Elements/Map';
 import { FiPhone, FiMapPin } from 'react-icons/fi';
+import { BgImg } from '@this/src/components/Elements';
 const ContactForm = dynamic(() => import('@this/src/Forms/Form.Contact'));
 
 const Contact: NextPage<IContact> = ({
@@ -21,11 +22,15 @@ const Contact: NextPage<IContact> = ({
   gMapUrl,
 }) => {
   return (
-    <Main>
+    <Main style={{ paddingTop: 0 }}>
       <ContactStyles>
+        <BgImg src='/images/display/contact.png' height='28rem'>
+          <div className='contact-top'>
+            <h1 className='dynamic-xl secondary'>Contact Us</h1>
+          </div>
+        </BgImg>
         <Content>
           <div className='contact-top'>
-            <h1 className='dynamic-h1 primary-secondary'>Contact us</h1>
             <Section className='contact-info'>
               <p>
                 <span className='contact-icon'>
@@ -87,6 +92,11 @@ const ContactStyles = styled.div`
     display: flex;
     flex-flow: column;
     align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    h1 {
+      padding: 1rem 0;
+    }
   }
   .contact-info {
     display: flex;

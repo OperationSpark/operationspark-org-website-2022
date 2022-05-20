@@ -9,6 +9,7 @@ import Main from '@this/components/layout/Main';
 import Content from '@this/components/layout/Content';
 import Section from '@this/components/layout/Section';
 import { getStaticAsset } from '@this/pages-api/static/[asset]';
+import { BgImg } from '@this/src/components/Elements';
 
 export interface CultureOfCodeProps extends ICultureOfCode {}
 
@@ -22,18 +23,23 @@ const CultureOfCode: NextPage<CultureOfCodeProps> = ({
   return (
     <Main>
       <CultureOfCodeStyles>
-        <Content style={{ paddingTop: 0 }}>
-          <h1 className='dynamic-xl'>{header.title}</h1>
-          <p className='dynamic-txt' style={{ padding: '2rem 0' }}>
-            {header.description}
-          </p>
-        </Content>
+        <BgImg src='/images/display/code-editor.png'>
+          <Content className='culture-of-code-header'>
+            <h1 className='dynamic-xl'>{header.title}</h1>
+            <p className='dynamic-txt'>{header.description}</p>
+          </Content>
+        </BgImg>
         <SlashDivider />
         <Content>
+          <h2
+            className='dynamic-h2 text-center'
+            style={{ paddingBottom: '2rem' }}
+          >
+            {ourDeal.title}
+          </h2>
           <p className='opspark-community dynamic-txt'>
             {ourDeal.opSparkCommunity}
           </p>
-          <h2 className='dynamic-h2'>{ourDeal.title}</h2>
           <div className='our-deal-sections'>
             {ourDeal.sections.map((section) => (
               <div key={section.title.join('')} className='our-deal-section'>
@@ -77,7 +83,8 @@ const CultureOfCode: NextPage<CultureOfCodeProps> = ({
                     src='/images/hallebot3d.png'
                     layout='fill'
                     objectFit='contain'
-                    alt=''
+                    alt='hallebot'
+                    aria-label='display'
                   />
                 </div>
               ) : null}
@@ -143,7 +150,8 @@ const CultureOfCode: NextPage<CultureOfCodeProps> = ({
                     src='/images/hallebot3d.png'
                     layout='fill'
                     objectFit='contain'
-                    alt=''
+                    alt='hallebot'
+                    aria-label='layout'
                   />
                 ) : rules ? (
                   <div className='card-rules-list'>
@@ -207,6 +215,18 @@ const CultureOfCodeStyles = styled.div`
     font-size: 1.25rem;
     font-weight: 600;
   }
+  .culture-of-code-header {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-end;
+    height: 100%;
+
+    p.dynamic-txt {
+      padding: 1.5rem;
+      background: ${({ theme }) => theme.alpha.bg};
+      border-radius: 0.5rem;
+    }
+  }
   .our-deal-sections {
     display: flex;
     flex-flow: row;
@@ -215,10 +235,16 @@ const CultureOfCodeStyles = styled.div`
     padding: 1rem;
     margin-top: 1rem;
     .our-deal-section {
-      width: 28%;
-      padding: 1rem;
-
+      width: 32%;
+      padding: 0 1rem;
       text-align: center;
+      :last-child {
+        text-align: right;
+      }
+      :first-child {
+        text-align: left;
+      }
+
       h4 {
         font-weight: 700;
         padding-bottom: 0.5rem;
@@ -257,7 +283,7 @@ const CultureOfCodeStyles = styled.div`
       flex-flow: row-reverse;
     }
     .opspark-value-card {
-      width: calc(60% - 0.5rem);
+      width: calc(56% - 0.5rem);
       padding: 0;
       .card-title {
         font-weight: 700;
@@ -274,11 +300,14 @@ const CultureOfCodeStyles = styled.div`
       border-radius: 0.25rem;
       overflow: hidden;
       position: relative;
-      user-select: none;
+      * > img {
+        user-select: none;
+        -webkit-user-drag: none;
+      }
 
       &.card-rules {
         filter: none;
-        width: calc(40% - 0.5rem);
+        width: calc(42% - 0.5rem);
         user-select: auto;
         display: flex;
         justify-content: center;
@@ -342,6 +371,7 @@ const CultureOfCodeStyles = styled.div`
 
     .opspark-value {
       flex-flow: column;
+      padding-bottom: 0;
       :nth-child(even) {
         flex-flow: column;
       }

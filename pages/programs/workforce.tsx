@@ -12,6 +12,7 @@ import { SlashDivider } from '@this/components/Elements/SlashDivider';
 import { TwoColumns } from '@this/components/Elements/Columns';
 import { IQuote, ITitleDescription } from '@this/data/types/bits';
 import { ICourses } from '@this/data/types/programs';
+import { BgImg } from '@this/src/components/Elements';
 
 export interface AdultProgramsProps {
   header: ITitleDescription;
@@ -65,14 +66,16 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
   };
 
   return (
-    <Main>
+    <Main style={{ paddingTop: 0 }}>
       <AdultProgramsStyles>
-        <Section className='programs-header'>
-          <Content className='programs-header-content'>
-            <h1 className='dynamic-xl'>{header.title}</h1>
-            <h2 className='dynamic-h3'>{header.description}</h2>
-          </Content>
-        </Section>
+        <BgImg src='/images/display/laptop-code.png' height='35rem'>
+          <Section className='programs-header'>
+            <Content className='programs-header-content'>
+              <h1 className='dynamic-xl secondary'>{header.title}</h1>
+              <h2 className='dynamic-h3'>{header.description}</h2>
+            </Content>
+          </Section>
+        </BgImg>
         <SlashDivider />
         <Section>
           <Content
@@ -203,20 +206,19 @@ export default AdultPrograms;
 export const AdultProgramsStyles = styled.div`
   .programs-header {
     height: 20rem;
+    height: 100%;
     .programs-header-content {
       height: 100%;
       display: flex;
       flex-flow: column;
-      justify-content: center;
-      h1 {
-        color: ${({ theme: { isLightMode, primary, secondary } }) =>
-          isLightMode ? primary[700] : secondary[500]};
-      }
+      justify-content: flex-end;
+
       h1.dynamic-xl {
         padding-bottom: 1rem;
       }
       h2.dynamic-h3 {
         font-weight: 700;
+        color: ${({ theme }) => theme.white};
       }
     }
   }
