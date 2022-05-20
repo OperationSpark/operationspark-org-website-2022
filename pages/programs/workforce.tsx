@@ -169,7 +169,7 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
                     {title}
                   </h2>
                   <p className='dynamic-txt program-length'>
-                    <i>Length: {length}</i>
+                    <i>{length}</i>
                   </p>
                   {description.map((desc) => (
                     <p key={desc} className='dynamic-txt program-desc'>
