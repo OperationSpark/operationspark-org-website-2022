@@ -5,13 +5,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { VStack, HStack, Text } from '@chakra-ui/react';
 import { useTheme } from 'styled-components';
-import {
-  FaFacebookSquare,
-  FaTwitter,
-  FaInstagram,
-  FaGithub,
-  FaLinkedin,
-} from 'react-icons/fa';
 
 import Subscribe from './subscribe';
 import { SlashDivider } from '@this/components/Elements/SlashDivider';
@@ -21,35 +14,11 @@ import {
   InfoSessionStyles,
   FooterStyles,
   SupportersStyles,
-  SocialStyles,
 } from './FooterStyles';
 
 import { ILogo } from '@this/data/types/logos';
 import rgbDataURL from '@this/src/helpers/rgbDataURL';
-
-const networkingIcons = [
-  {
-    name: 'Facebook',
-    url: 'https://www.facebook.com/opspark',
-    Icon: FaFacebookSquare,
-  },
-  {
-    name: 'Twitter',
-    url: 'https://twitter.com/OperationSpark',
-    Icon: FaTwitter,
-  },
-  {
-    name: 'Instagram',
-    url: 'https://www.instagram.com/operationspark/',
-    Icon: FaInstagram,
-  },
-  { name: 'Github', url: 'https://github.com/OperationSpark', Icon: FaGithub },
-  {
-    name: 'Linkedin',
-    url: 'https://www.linkedin.com/school/operation-spark/',
-    Icon: FaLinkedin,
-  },
-];
+import SocialNetworks from '@this/components/Elements/SocialNetworks';
 
 interface FooterProps {
   logos: ILogo[];
@@ -61,10 +30,6 @@ const Footer = ({ logos }: FooterProps) => {
 
   const isInfoSessionPage = pathname.includes('infoSession');
   const isHighschoolPage = pathname.includes('highschool');
-
-  const networkingIconColor = theme.isLightMode
-    ? theme.primary[700]
-    : theme.primary[300];
 
   const fadedGreyTextColor = theme.isLightMode
     ? theme.grey[600]
@@ -133,27 +98,10 @@ const Footer = ({ logos }: FooterProps) => {
             </HStack>
           </VStack>
         </SupportersStyles>
+        <Text className='dynamic-txt'>Follow Us!</Text>
+        <Text color={fadedGreyTextColor}>#OperationSpark</Text>
 
-        <SocialStyles justify='space-around' p='1rem'>
-          <Text className='dynamic-txt'>Follow Us!</Text>
-          <Text color={fadedGreyTextColor}>#OperationSpark</Text>
-
-          <HStack textAlign='center' justifyContent='center' w='100%'>
-            {networkingIcons.map(({ Icon, url, name }) => (
-              <a
-                key={url}
-                aria-label={name}
-                href={url}
-                rel='noreferrer'
-                target='_blank'
-                title={name}
-                className='anchor'
-              >
-                <Icon name={name} size={32} color={networkingIconColor} />
-              </a>
-            ))}
-          </HStack>
-        </SocialStyles>
+        <SocialNetworks />
       </VStack>
 
       <HStack justify='center' w='100%' padding='0 0.25rem' userSelect='none'>
