@@ -275,12 +275,9 @@ const AboutStyles = styled.div`
       box-shadow: ${({ theme }) => '0 0 0.25rem 0rem inset ' + theme.alpha.fg};
     }
 
-    h1 {
-    }
     p {
       font-weight: 300;
-      font-size: 1.6rem;
-      line-height: 1.1em;
+      font-size: 1.5rem;
       padding: 0.9rem 0;
       text-align: justify;
       text-justify: justify;
