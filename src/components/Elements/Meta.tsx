@@ -22,7 +22,7 @@ const formatRouteTitle = (str: string) => {
 const Meta = ({ hostname }: { hostname: string }) => {
   const { pathname } = useRouter();
   const route = formatRouteTitle(pathname);
-  const metaData = meta[route.toLowerCase()] || {};
+  const metaData = meta[route.toLowerCase().replaceAll(' ', '_')] || {};
   const defaultMeta = meta.defaultMeta || {};
 
   const description = metaData.description ?? defaultMeta.description;

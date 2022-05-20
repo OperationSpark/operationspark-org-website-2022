@@ -25,7 +25,7 @@ const Contact: NextPage<IContact> = ({
       <ContactStyles>
         <Content>
           <div className='contact-top'>
-            <h1 className='dynamic-h1'>Contact us</h1>
+            <h1 className='dynamic-h1 primary-secondary'>Contact us</h1>
             <Section className='contact-info'>
               <p>
                 <span className='contact-icon'>
