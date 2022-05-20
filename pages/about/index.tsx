@@ -159,12 +159,12 @@ const About: NextPage<IAbout> = ({ mission, team, history, awards }) => {
             </div>
           </Content>
           <Content className='about-awards _progress' id='News'>
-            <h1 className='dynamic-h1'>News</h1>
+            <h1 className='dynamic-h1 text-center'>News</h1>
             <div className='awards-list'>
               {awards.map(({ title, url }) => (
                 <a
                   key={title}
-                  className='anchor right-arr-left'
+                  className='anchor text-center'
                   target='_blank'
                   href={url}
                   rel='noreferrer'
@@ -304,6 +304,9 @@ const AboutStyles = styled.div`
   .awards-list {
     display: flex;
     flex-flow: column;
+    width: 100%;
+    height: 100%;
+    align-items: center;
     a {
       margin: 0.25rem 0;
       white-space: break-spaces;
