@@ -139,13 +139,15 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
                         valuable talent for your company.
                       </b>
                     </p>
-                    <Link href='/partners'>
+                    <Link href='/contact'>
                       <a
                         className='anchor right-arr-left'
-                        aria-label='Learn about job placement'
-                        title='Job Placement'
+                        aria-label='Contact to learn about employer partnerships'
+                        title='Contact to learn about employer partnerships'
                       >
-                        Learn more about employer partnerships
+                        Contact us to learn more about
+                        <br />
+                        employer partnerships
                       </a>
                     </Link>
                   </div>

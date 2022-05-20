@@ -8,7 +8,8 @@ import Content from '@this/components/layout/Content';
 
 const GreatCompanies = ({ title, description }: IHome['greatCompanies']) => {
   const theme = useTheme();
-
+  /** Remove once page is created */
+  const FEAT_STUDENT_OUTCOMES = false;
   return (
     <BgImg src='/images/grad-conference-table.webp' height='auto'>
       <GreatCompaniesStyles className='_progress' id='companies'>
@@ -26,9 +27,11 @@ const GreatCompanies = ({ title, description }: IHome['greatCompanies']) => {
                   {text}
                 </p>
               ))}
-              <NavLink href='#' className='info'>
-                See Student Outcomes
-              </NavLink>
+              {FEAT_STUDENT_OUTCOMES && (
+                <NavLink href='#' className='info'>
+                  See Student Outcomes
+                </NavLink>
+              )}
             </div>
             <div className='logo-card'>
               <LogoCard

@@ -6,6 +6,8 @@ import MacContent from '@this/components/Cards/content/MacContent';
 import Content from '@this/components/layout/Content';
 
 const AlumSpotlight = () => {
+  /** Remove once page is created */
+  const FEAT_GRAD_STORIES = false;
   return (
     <AlumSpotlightStyles className='_progress' id='alumni'>
       <Content>
@@ -33,11 +35,13 @@ const AlumSpotlight = () => {
               </i>
             </h2>
 
-            <Link href='/testimonials/graduates'>
-              <a className='anchor right-arr-left'>
-                Read more graduate stories
-              </a>
-            </Link>
+            {FEAT_GRAD_STORIES && (
+              <Link href='/testimonials/graduates'>
+                <a className='anchor right-arr-left'>
+                  Read more graduate stories
+                </a>
+              </Link>
+            )}
           </div>
         </div>
       </Content>
