@@ -1,14 +1,11 @@
 import Image from 'next/image';
 import styled from 'styled-components';
 import { Zap } from '@this/components/Elements/ZapIcon';
+import { IQuote } from '@this/data/types/bits';
+import { motion } from 'framer-motion';
 
-type MacContentProps = {
-  body: string;
-  name: string;
-  role: string;
-  imageUrl?: string;
-  logoUrl?: string;
-  logoImageUrl?: string;
+type MacContentProps = Omit<IQuote, 'logoSrcDark' | 'logoSrcLight'> & {
+  logoSrc?: string;
 };
 
 export const MacContent = ({
@@ -16,13 +13,15 @@ export const MacContent = ({
   name,
   role,
   imageUrl,
-  logoUrl,
-  logoImageUrl,
+  logoHref,
+  logoSrc,
 }: MacContentProps) => {
   return (
     <MacContentStyles>
       <div className='mac-card-main'>
-        <div className='mac-card-body'>{body}</div>
+        <motion.div transition={{ type: 'spring' }} className='mac-card-body'>
+          {body}
+        </motion.div>
         {imageUrl && (
           <div className='mac-card-image'>
             <Image objectFit='contain' layout='fill' src={imageUrl} alt='' />
@@ -37,20 +36,15 @@ export const MacContent = ({
             <div className='mac-card-role'>{role}</div>
           </div>
         </div>
-        {logoUrl && logoImageUrl && (
+        {logoHref && logoSrc && (
           <a
             className='anchor mac-card-logo'
-            href={logoUrl}
+            href={logoHref}
             target='_blank'
             rel='noreferrer'
             aria-label={name}
           >
-            <Image
-              objectFit='contain'
-              layout='fill'
-              src={logoImageUrl}
-              alt={name}
-            />
+            <Image objectFit='contain' layout='fill' src={logoSrc} alt={name} />
           </a>
         )}
       </div>
@@ -60,17 +54,23 @@ export const MacContent = ({
 
 export default MacContent;
 
-const MacContentStyles = styled.div`
+const MacContentStyles = styled(motion.div)`
   img,
   a {
     user-select: none;
     -webkit-user-drag: none;
   }
+  transition: height 300ms;
+
   .mac-card-main {
     display: flex;
+
     .mac-card-body {
-      padding: 1rem 0;
+      padding: 2rem;
       font-weight: 600;
+      height: 18rem;
+      display: flex;
+      align-items: center;
     }
     .mac-card-image {
       min-width: 175px;
@@ -91,6 +91,8 @@ const MacContentStyles = styled.div`
   .mac-card-about {
     display: flex;
     padding-bottom: 1rem;
+    height: 6rem;
+    align-items: flex-end;
     .mac-card-about-body {
       display: flex;
       .mac-card-name {

@@ -1,9 +1,8 @@
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { GetStaticProps, NextPage } from 'next';
 import Link from 'next/link';
 import styled, { useTheme } from 'styled-components';
 
-import { IAdultPrograms } from '@this/data/types/programs';
 import { Main, Section, Content } from '@this/components/layout';
 import { getStaticAsset } from '@this/pages-api/static/[asset]';
 import MacCard from '@this/components/Cards/MacCard';
@@ -12,13 +11,60 @@ import PlainCard from '@this/components/Cards/PlainCard';
 import { SlashDivider } from '@this/components/Elements/SlashDivider';
 import NavLink from '@this/components/Navbar/elements/NavLink';
 import { TwoColumns } from '@this/components/Elements/Columns';
+import { IQuote, ITitleDescription } from '@this/data/types/bits';
+import { ICourses } from '@this/data/types/programs';
 
-const AdultPrograms: NextPage<IAdultPrograms> = ({
+export interface AdultProgramsProps {
+  header: ITitleDescription;
+  overview: ITitleDescription;
+  courses: ICourses[];
+  companyQuotes: IQuote[];
+}
+
+const AdultPrograms: NextPage<AdultProgramsProps> = ({
   overview,
   courses,
   header,
+  companyQuotes,
 }) => {
   const theme = useTheme();
+  const [quoteIndex, setQuoteIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const quote = companyQuotes[quoteIndex];
+
+  useEffect(() => {
+    let interval: NodeJS.Timer;
+
+    if (!isPaused) {
+      interval = setInterval(() => {
+        if (quoteIndex + 1 < companyQuotes.length) {
+          setQuoteIndex(quoteIndex + 1);
+        } else {
+          setQuoteIndex(0);
+        }
+      }, 10000);
+    }
+
+    return () => {
+      interval && clearInterval(interval);
+    };
+  }, [companyQuotes.length, isPaused, quoteIndex]);
+
+  const handleShift = (n: number) => {
+    setIsPaused(true);
+
+    const newIndex = quoteIndex + n;
+
+    if (newIndex < 0) {
+      setQuoteIndex(companyQuotes.length - 1);
+    } else if (newIndex >= companyQuotes.length) {
+      setQuoteIndex(0);
+    } else {
+      setQuoteIndex(newIndex);
+    }
+    setTimeout(() => setIsPaused(false), 10000);
+  };
+
   return (
     <Main>
       <AdultProgramsStyles>
@@ -57,24 +103,26 @@ const AdultPrograms: NextPage<IAdultPrograms> = ({
               leftColStyle={{ width: '60%', paddingRight: '2rem' }}
               rightColStyle={{ width: '40%', paddingLeft: '2rem' }}
               leftCol={
-                <MacCard onNextClick={() => {}} onPrevClick={() => {}}>
+                <MacCard
+                  onNextClick={() => handleShift(1)}
+                  onPrevClick={() => handleShift(-1)}
+                >
                   <MacContent
-                    body={`“Operation Spark is a true disruptor of the classical software
-                  engineering education domain. Their graduates possess real-world
-                  experience in today's modern technologies. For this reason,
-                  we have had great success hiring their graduates.”`}
-                    imageUrl='/images/people/employers/tim-blackmon.jpg'
-                    name='Tim Blackmon'
-                    role='CIO, Hired 6 grads at Mumms Software'
-                    logoImageUrl={`/images/logos/supporters/mumms-software-${theme.colorMode}.png`}
-                    logoUrl='https://mumms.com/'
+                    body={quote.body}
+                    imageUrl={quote.imageUrl}
+                    name={quote.name}
+                    role={quote.role}
+                    logoSrc={
+                      theme.isLightMode ? quote.logoSrcLight : quote.logoSrcDark
+                    }
+                    logoHref='https://mumms.com/'
                   />
                 </MacCard>
               }
               rightCol={
                 <Fragment>
                   <p
-                    className='dynamic-txt'
+                    className='dynamic-txt right-col'
                     style={{
                       padding: '2rem 0',
                       maxWidth: '90%',
@@ -129,14 +177,13 @@ const AdultPrograms: NextPage<IAdultPrograms> = ({
   );
 };
 
-export const getStaticProps: GetStaticProps<IAdultPrograms> = async () => {
-  const { overview, courses, header }: IAdultPrograms = await getStaticAsset(
-    'programs',
-    'adult',
-  );
+export const getStaticProps: GetStaticProps<AdultProgramsProps> = async () => {
+  const { overview, courses, header }: AdultProgramsProps =
+    await getStaticAsset('programs', 'adult');
+  const companyQuotes: IQuote[] = await getStaticAsset('quotes', 'company');
 
   return {
-    props: { overview, courses, header },
+    props: { overview, courses, header, companyQuotes },
   };
 };
 
@@ -172,6 +219,11 @@ export const AdultProgramsStyles = styled.div`
     background: ${({ theme }) => theme.secondary[500]};
     h1 {
       color: ${({ theme }) => theme.primary[700]};
+    }
+    .right-col {
+      display: flex;
+      height: 100%;
+      align-items: center;
     }
   }
 
