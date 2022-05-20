@@ -21,7 +21,7 @@ const CultureOfCode: NextPage<CultureOfCodeProps> = ({
   effectiveLearning,
 }) => {
   return (
-    <Main>
+    <Main style={{ paddingTop: 0 }}>
       <CultureOfCodeStyles>
         <BgImg src='/images/display/code-editor.png'>
           <Content className='culture-of-code-header'>
