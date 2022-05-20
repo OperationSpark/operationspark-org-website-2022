@@ -22,6 +22,9 @@ const GlobalStyles = createGlobalStyle`
   .roboto {
     font-family: 'Roboto', sans-serif;
   }
+  .cursive {
+    font-family: 'Kalam', cursive;
+  }
   .source-code {
     font-family: 'Source Code Pro', monospace;
   }

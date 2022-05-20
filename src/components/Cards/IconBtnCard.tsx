@@ -99,7 +99,7 @@ const IconBtnCard = ({
               <Icon icon={icon} />
             </div>
           </div>
-          <p className='card-description'>{description}</p>
+          <p className='card-description dynamic-txt'>{description}</p>
           <NavLink href={buttonUrl} className='info' color='yellow'>
             {buttonText}
           </NavLink>

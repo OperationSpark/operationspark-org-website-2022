@@ -56,7 +56,7 @@ const HighSchool: NextPage<IHighschoolPrograms> = ({
         </AbsoluteBtnWindow>
 
         <Content className='hs-header'>
-          <h1 className='dynamic-h1'>High School</h1>
+          <h1 className='dynamic-xl primary-secondary'>High School</h1>
           <div className='hs-desc'>
             {description.map((desc) => (
               <p key={desc} className='dynamic-txt'>
@@ -69,7 +69,9 @@ const HighSchool: NextPage<IHighschoolPrograms> = ({
           </div>
         </Content>
         <Content className='courses'>
-          <h1 className='dynamic-h1 courses-header'>Courses</h1>
+          <h1 className='dynamic-h1 primary-secondary courses-header'>
+            Courses
+          </h1>
           {courses.map((course) => (
             <PlainCard
               key={course.title.join('')}
@@ -108,7 +110,7 @@ const HighSchool: NextPage<IHighschoolPrograms> = ({
               </ul>
             </div>
             <div className='district'>
-              <h3 className='dynamic-h3'>Other Districts</h3>
+              <h3 className='dynamic-h3'>Districts</h3>
               <ul>
                 {schools.other.map(({ name }) => (
                   <li key={name}>{name}</li>

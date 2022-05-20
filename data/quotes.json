@@ -1,0 +1,44 @@
+{
+  "company": [
+    {
+      "name": "Tim Blackmon",
+      "role": "CIO, Hired 6 grads at Mumms Software",
+      "body": "Operation Spark is a true disruptor of the classical software engineering education domain. Their graduates possess real-world experience in today's modern technologies. For this reason, we have had great success hiring their graduates.",
+      "imageUrl": "/images/people/employers/tim-blackmon.jpg",
+      "logoSrcLight": "/images/logos/supporters/mumms-software-light.png",
+      "logoSrcDark": "/images/logos/supporters/mumms-software-dark.png",
+      "logoHref": "https://mumms.com/"
+    },
+    {
+      "name": "Paul Williams",
+      "role": "Chief Architect, Koniag Government Services",
+      "body": "The coding and presentation skills of the Operation Spark grads are far more advanced than the typical junior developers that join our team. They have a demonstrated level of technical expertise, complemented with the dedication, maturity, and professionalism that proves they are ready to enter the workforce right out of the program."
+    },
+    {
+      "name": "Doug Poirrier",
+      "role": "Director of Software Engineering, GE",
+      "body": "Our Operation Spark graduates hit the ground running on day one. Their motivation, passion, and creativity are contagious. Their unique perspectives are welcome additions to our teams"
+    },
+    {
+      "name": "Jeff Serpas",
+      "role": "Commercial Business Relationship Manager, Intralox Former Director of Software Apprenticeship at GE Corporate",
+      "body": "Given our experience of working with an excellent Bootcamp program like Operation Spark, during my time at GE, we changed our hiring policy to accept graduates of qualified  Bootcamp programs."
+    },
+    {
+      "name": "Wes Withrow",
+      "role": "U.S. Public Sector, Verizon",
+      "body": "Operation Spark's alumni's skills are in advance of many junior developers we've recruited out of college...Their ability to solve problems, articulate technical questions, collaborate on teams, and rapidly escalate issues with recommendations for solutions far exceeds those of developers with more traditional computer science education. As developers, the Operation Spark crew also excels in creating well-thought-out presentations and producing consistent client-facing communications. I am always confident in their abilities to articulate a project's technical components clearly and succinctly in account meetings, translating client needs into well-working final products."
+    },
+    {
+      "name": "Randall Ramirez",
+      "role": "Director, Software Architecture / FISERV Costa Rica",
+      "body": "These (Operation Spark) graduates not only had an excellent understanding of the domain of modern technologies but also had skills in Agile development and DevOps best practices, which helped them to fit and produce in the kind of teams we were building."
+    },
+    {
+      "name": "Jim Wooldridge",
+      "role": "Chief Technology Officer, Demeter Logistics",
+      "body": "I'm about to make a job offer to my fourth Operation Spark Immersion Program graduate, with many more to follow…Although Demeter Logistics is a Louisville-based company, we're setting up a New Orleans development office to take advantage of your program graduates."
+    }
+  ],
+  "alumni": []
+}

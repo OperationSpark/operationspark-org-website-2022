@@ -17,10 +17,7 @@ const AlumSpotlight = () => {
           <div className='left-col'>
             <MacCard>
               <MacContent
-                body={`“Organizations like Operation Spark can literally change the
-                entire landscape and economy of places like New Orleans. I thank
-                Operation Spark every day because they really impacted and changed
-                my life.”`}
+                body='Organizations like Operation Spark can literally change the entire landscape and economy of places like New Orleans. I thank Operation Spark every day because they really impacted and changed my life.'
                 imageUrl='/images/people/grads/alon.png'
                 name='Alon Robinson'
                 role='Software Engineer at General Electric'
