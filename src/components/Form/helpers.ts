@@ -23,13 +23,13 @@ export const parsePhoneNumber = (value: string): string => {
   const nums = getNums(value);
 
   const hasDash = (i: number) => {
-    const dash = !((i + 1) % 3 === 0) || i > 6 || i === nums.length - 1;
-    return dash;
+    const noDash = !((i + 1) % 3 === 0) || i > 6;
+    return !noDash;
   };
   const parsedNumber =
     nums
       .split('')
-      .map((num, i) => (hasDash(i) ? num : `${num}-`))
+      .map((num, i) => (hasDash(i) ? `${num}-` : num))
       .join('') || '';
 
   return parsedNumber;
