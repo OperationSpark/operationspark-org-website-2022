@@ -225,6 +225,8 @@ const CultureOfCodeStyles = styled.div`
       padding: 1.5rem;
       background: ${({ theme }) => theme.alpha.bg};
       border-radius: 0.5rem;
+      backdrop-filter: blur(4px);
+      box-shadow: 0.25rem 0.25rem 1rem rgba(0, 0, 0, 0.8);
     }
   }
   .our-deal-sections {

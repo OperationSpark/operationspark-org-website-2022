@@ -89,6 +89,8 @@ const ShowcaseSignupStyles = styled.div`
         theme.isLightMode ? theme.alpha.fg : theme.alpha.bg};
       padding: 2rem;
       border-radius: 0.5rem;
+      backdrop-filter: blur(4px);
+      box-shadow: 0.25rem 0.25rem 1rem rgba(0, 0, 0, 0.8);
     }
   }
   .showcase-form {
