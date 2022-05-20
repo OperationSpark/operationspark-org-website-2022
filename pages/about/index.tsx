@@ -158,7 +158,7 @@ const About: NextPage<IAbout> = ({ mission, team, history, awards }) => {
               ))}
             </div>
           </Content>
-          <Content className='about-awards _progress' id='Awards'>
+          <Content className='about-awards _progress' id='News'>
             <h1 className='dynamic-h1'>News</h1>
             <div className='awards-list'>
               {awards.map(({ title, url }) => (
