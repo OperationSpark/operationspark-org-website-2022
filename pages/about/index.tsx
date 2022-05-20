@@ -275,12 +275,21 @@ const AboutStyles = styled.div`
       box-shadow: ${({ theme }) => '0 0 0.25rem 0rem inset ' + theme.alpha.fg};
     }
 
+    p,
+    h1 {
+      ::selection {
+        background: ${({ theme }) =>
+          theme.isLightMode ? theme.primary[700] : theme.secondary[500]};
+        color: ${({ theme }) => theme.bg};
+      }
+    }
     p {
       font-weight: 300;
       font-size: 1.5rem;
       padding: 0.9rem 0;
       text-align: justify;
       text-justify: justify;
+      line-height: 1.35em;
     }
   }
   .about-header {
