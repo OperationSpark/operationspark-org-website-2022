@@ -20,7 +20,7 @@ const GradShowcase: NextPage<IGradShowcase> = ({
   const [showcaseDate] = useState<Date | null>(toCentTime(startDateTime));
 
   return (
-    <Main>
+    <Main style={{ paddingTop: 0 }}>
       <ShowcaseSignupStyles>
         <BgImg
           src='/images/display/celebrate.png'
