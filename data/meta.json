@@ -7,5 +7,18 @@
   "contact": {
     "description": "514 Franklin Avenue | New Orleans, LA 70117 | 504-534-8277",
     "imageUrl": "/images/opspark-map.png"
+  },
+  "about": {
+    "description": "Operation Spark started in September 2013 as a pilot project, developed and conducted at youth community centers around New Orleans, teaching young adults how to build simple mobile video games and apps with the aim of igniting the pursuit of an employable passion.",
+    "imageUrl": "/images/display/staff-group.jpg"
+  },
+  "info_session": {
+    "description": "Want to learn more about Operation Spark? Sign up for a free info session to find out more! You will learn about our programs, what it takes to be successful at Operation Spark, how we support graduates in the job search, coding and career opportunities and much more!"
+  },
+  "register": {
+    "description": "Register here to come celebrate with our graduates as they show off their final project created here at Operation Spark!"
+  },
+  "highschool": {
+    "description": "Sign up to learn more about what high school programs we offer."
   }
 }
