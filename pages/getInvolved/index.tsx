@@ -11,54 +11,68 @@ import Main from '@this/components/layout/Main';
 import rgbDataURL from '@this/src/helpers/rgbDataURL';
 import Button from '@this/src/components/Elements/Button';
 import { cardShadow } from '@this/src/theme/styled/mixins/shadows';
+import { BgImg } from '@this/src/components/Elements';
+import Link from 'next/link';
+import SocialNetworks from '@this/src/components/Elements/SocialNetworks';
+import { TwoColumns } from '@this/src/components/Elements/Columns';
 
 const GetInvolved: NextPage = () => {
   const theme = useTheme();
   const [showDonate, setShowDonate] = useState(false);
 
   return (
-    <Main>
+    <Main style={{ paddingTop: 0 }}>
       <GetInvolvedStyles>
+        <BgImg src='/images/display/donate.png' height='24rem'>
+          <Content className='image-header'>
+            <h1 className='dynamic-xl secondary text-center'>
+              HELP OPEN THE DOOR TO PROSPERITY
+            </h1>
+          </Content>
+        </BgImg>
         <Content>
-          <h1 className='dynamic-xl primary-secondary text-center'>
-            HELP OPEN THE DOOR TO PROSPERITY
-          </h1>
-
+          <TwoColumns
+            leftColStyle={{ width: '48%' }}
+            rightColStyle={{ width: '48%' }}
+            leftCol={
+              <div style={{ padding: '1rem 0' }}>
+                <h2 className='dynamic-h2 primary-secondary text-center'>
+                  Volunteer
+                </h2>
+                <h3 className='dynamic-h3'>
+                  At Operation Spark, we love when software engineers come and
+                  present on a topic or technology being used in the industry.
+                  If you are interested,{' '}
+                  <Link href='/contact'>
+                    <a className='primary-secondary'>
+                      please get in touch here
+                    </a>
+                  </Link>
+                  .
+                </h3>
+              </div>
+            }
+            rightCol={
+              <div style={{ padding: '1rem 0' }}>
+                <h2 className='dynamic-h2 primary-secondary text-center'>
+                  Hire Our Grads
+                </h2>
+                <h3 className='dynamic-h3'>
+                  If you are interested in hiring our grads,{' '}
+                  <Link href='/contact'>
+                    <a className='primary-secondary'>
+                      please get in touch here
+                    </a>
+                  </Link>
+                  .
+                </h3>
+              </div>
+            }
+          />
+        </Content>
+        <Content>
+          <h2 className='dynamic-h2 primary-secondary text-center'>Give</h2>
           <div className='donation-methods'>
-            <div className='donate-box'>
-              <a
-                href='https://smile.amazon.com/ch/47-1514606'
-                target='_blank'
-                rel='noreferrer'
-                title='Amazon Smile'
-                className='donate-wrapper'
-              >
-                <p className='dynamic-txt'>
-                  Shop at Amazon Smile and 0.5% of eligible purchases will be
-                  donated to Operation Spark!
-                </p>
-
-                <div className='img'>
-                  <Image
-                    src={`/images/logos/etc/amazon-smile-halle-${theme.colorMode}.png`}
-                    layout='fill'
-                    objectFit='contain'
-                    alt='Amazon Smile | Operation Spark'
-                    quality={100}
-                    blurDataURL={rgbDataURL(134, 0, 241)}
-                    loading='eager'
-                    priority
-                  />
-                </div>
-
-                <button className='anchor'>
-                  Shop Now!{' '}
-                  <span className='icon'>
-                    <MdOpenInNew />
-                  </span>
-                </button>
-              </a>
-            </div>
             <div className='donate-box'>
               <div className='donate-wrapper' title='Donate to Operation Spark'>
                 <p className='dynamic-txt desc'>
@@ -111,6 +125,40 @@ const GetInvolved: NextPage = () => {
                 </p>
               </div>
             </div>
+            <div className='donate-box'>
+              <a
+                href='https://smile.amazon.com/ch/47-1514606'
+                target='_blank'
+                rel='noreferrer'
+                title='Amazon Smile'
+                className='donate-wrapper'
+              >
+                <p className='dynamic-txt'>
+                  Shop at Amazon Smile and 0.5% of eligible purchases will be
+                  donated to Operation Spark!
+                </p>
+
+                <div className='img'>
+                  <Image
+                    src={`/images/logos/etc/amazon-smile-halle-${theme.colorMode}.png`}
+                    layout='fill'
+                    objectFit='contain'
+                    alt='Amazon Smile | Operation Spark'
+                    quality={100}
+                    blurDataURL={rgbDataURL(134, 0, 241)}
+                    loading='eager'
+                    priority
+                  />
+                </div>
+
+                <button className='anchor'>
+                  Shop Now!{' '}
+                  <span className='icon'>
+                    <MdOpenInNew />
+                  </span>
+                </button>
+              </a>
+            </div>
           </div>
           {showDonate && (
             <div className='donate-modal' onClick={() => setShowDonate(false)}>
@@ -132,6 +180,12 @@ const GetInvolved: NextPage = () => {
             </div>
           )}
         </Content>
+        <div style={{ paddingBottom: '2rem' }}>
+          <h2 className='dynamic-h2 primary-secondary text-center'>
+            Spread the word
+          </h2>
+          <SocialNetworks />
+        </div>
       </GetInvolvedStyles>
     </Main>
   );
@@ -140,6 +194,11 @@ const GetInvolved: NextPage = () => {
 export default GetInvolved;
 
 const GetInvolvedStyles = styled.div`
+  .image-header {
+    display: flex;
+    align-items: flex-end;
+    height: 100%;
+  }
   .donate-modal {
     position: fixed;
     z-index: 1000;
@@ -184,10 +243,9 @@ const GetInvolvedStyles = styled.div`
     flex-flow: row wrap;
     justify-content: space-evenly;
     align-items: stretch;
-    padding: 2rem 0;
   }
   .donate-box {
-    width: 400px;
+    width: 500px;
     max-width: 100%;
 
     border-radius: 0.25rem;
