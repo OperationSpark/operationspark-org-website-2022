@@ -31,7 +31,7 @@ const HighSchool: NextPage<IHighschoolPrograms> = ({
       <HighschoolStyles>
         <AbsoluteBtnWindow
           text={interestOnly ? 'Get More Info' : 'Sign up!'}
-          title='Sign up for upcoming high school program'
+          title='Get information about our high school program'
           isOpen={isFormOpen}
           style={{ maxWidth: '500px' }}
           onClick={() => setIsFormOpen(!isFormOpen)}
