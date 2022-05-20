@@ -75,7 +75,7 @@ const About: NextPage<IAbout> = ({ mission, team, history, awards }) => {
           <Content>
             <h1 className='dynamic-h1'>History</h1>
             {history.map((desc) => (
-              <p key={desc} className='dynamic-txt cursive'>
+              <p key={desc} className='dynamic-txt'>
                 {desc}
               </p>
             ))}
@@ -260,6 +260,7 @@ const AboutStyles = styled.div`
   .about-history {
     position: relative;
     z-index: 1;
+
     ::before {
       content: '';
       position: absolute;
@@ -284,12 +285,12 @@ const AboutStyles = styled.div`
       }
     }
     p {
-      font-weight: 300;
-      font-size: 1.5rem;
-      padding: 0.9rem 0;
+      font-weight: 400;
+
+      font-style: italic;
+      padding: 1rem 0;
       text-align: justify;
       text-justify: justify;
-      line-height: 1.35em;
     }
   }
   .about-header {

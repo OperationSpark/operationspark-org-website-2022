@@ -28,11 +28,14 @@ const GradShowcase: NextPage<IGradShowcase> = ({
         >
           <Content className='showcase-header'>
             <div className='showcase-header-container'>
-              <h1 className='dynamic-h1 title secondary'>
+              <h1 className='dynamic-xl title secondary'>
                 Graduation Showcase
               </h1>
-              <h2 className='dynamic-h2 cohort-name secondary cursive'>
-                {cohortName}
+              <h2 className='dynamic-h2 cohort-name secondary'>
+                <br />
+                <span style={{ fontWeight: 900 }}>Cohort </span>
+                <br />
+                <span className='cursive'>{cohortName}</span>
               </h2>
             </div>
           </Content>
@@ -76,7 +79,6 @@ const ShowcaseSignupStyles = styled.div`
   }
   .cohort-name {
     font-weight: 600;
-    font-style: italic;
   }
   .showcase-header {
     display: flex;
