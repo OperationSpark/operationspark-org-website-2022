@@ -205,7 +205,7 @@ const AboutStyles = styled.div`
   .mission-section {
     border-radius: 0.25rem;
     margin: 1rem 0;
-    padding: 2rem;
+
     hr {
       margin: 2rem 0;
       border-color: ${({ theme }) =>
