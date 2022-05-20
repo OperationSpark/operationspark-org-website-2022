@@ -17,6 +17,7 @@
     "@emotion/styled": "^11.8.1",
     "@googleapis/sheets": "^2.0.1",
     "axios": "^0.26.0",
+    "color-tools": "file:lib/colorTools",
     "framer-motion": "^6.2.7",
     "google-auth-library": "^8.0.2",
     "moment": "^2.29.1",

@@ -1,7 +1,10 @@
 import { ReactNode, useState } from 'react';
-import { ThemeProvider } from 'styled-components';
+import { DefaultTheme, ThemeProvider } from 'styled-components';
 import { useColorMode } from '@chakra-ui/react';
 import GlobalStyles from './GlobalStyles';
+import ColorTools from 'color-tools';
+
+import customThemes from './themes';
 
 const colors = {
   dark: {
@@ -22,12 +25,27 @@ const colors = {
   },
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const Theme = ({ children, theme }: { children: ReactNode; theme: any }) => {
+type InitialTheme = Omit<
+  DefaultTheme,
+  'colorMode' | 'isLightMode' | 'navHeight' | 'setNavHeight' | 'fx'
+>;
+const Theme = ({
+  children,
+  theme,
+}: {
+  children: ReactNode;
+  theme: InitialTheme;
+}) => {
   const { colorMode } = useColorMode();
   const isLightMode = colorMode === 'light';
   const [navHeight, setNavHeight] = useState(0);
-
+  const fx = ColorTools({
+    mode: colorMode,
+    themes: {
+      light: customThemes.light,
+      dark: customThemes.dark,
+    },
+  });
   return (
     <ThemeProvider
       theme={{
@@ -35,6 +53,7 @@ const Theme = ({ children, theme }: { children: ReactNode; theme: any }) => {
         isLightMode,
         navHeight,
         setNavHeight,
+        fx,
         ...theme,
         ...colors[colorMode],
       }}

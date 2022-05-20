@@ -1,0 +1,28 @@
+{
+  "extends": [
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": "latest",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "ignorePatterns": [
+    ".eslint*",
+    "dist",
+    "node_modules"
+  ],
+  "rules": {
+    "@typescript-eslint/no-unused-vars": 2
+  }
+}
