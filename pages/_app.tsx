@@ -16,7 +16,7 @@ const Footer = dynamic(() => import('@this/components/footer/footer'));
 
 const hostname = 'https://staging.operationspark.org';
 
-function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps }: AppProps) {
   const [logos, setLogos] = useState<ILogo[]>([]);
   const [alertInfo, setAlertInfo] = useState<IAlert>({ message: '', url: '' });
 
@@ -41,5 +41,3 @@ function App({ Component, pageProps }: AppProps) {
     </ChakraProvider>
   );
 }
-
-export default App;

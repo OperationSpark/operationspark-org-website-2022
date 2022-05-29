@@ -66,7 +66,7 @@ const GlobalStyles = createGlobalStyle`
   }
   .dynamic-h3 {
     font-size: calc(0.6vw + 1.00rem);
-    font-weight: 600;
+    font-weight: 700;
   }
   .dynamic-h4 {
     font-size: calc(0.4vw + 0.8rem);
