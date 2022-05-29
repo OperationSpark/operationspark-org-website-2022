@@ -127,6 +127,10 @@ const MacContentStyles = styled(motion.div)`
     }
     .mac-card-about {
       flex-flow: column;
+      justify-content: flex-end;
+      .mac-card-about-body {
+        align-self: flex-start;
+      }
       a {
         margin: 0 auto;
       }
