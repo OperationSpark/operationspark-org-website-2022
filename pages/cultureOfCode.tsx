@@ -240,12 +240,6 @@ const CultureOfCodeStyles = styled.div`
       width: 32%;
       padding: 0 1rem;
       text-align: center;
-      :last-child {
-        text-align: right;
-      }
-      :first-child {
-        text-align: left;
-      }
 
       h4 {
         font-weight: 700;
@@ -253,8 +247,10 @@ const CultureOfCodeStyles = styled.div`
       }
       :first-child {
         padding-left: 0;
+        text-align: left;
       }
       :last-child {
+        text-align: right;
         padding-right: 0;
       }
     }
@@ -298,7 +294,9 @@ const CultureOfCodeStyles = styled.div`
       }
     }
     .opspark-value-img {
-      width: calc(36% - 0.5rem);
+      width: calc(34% - 0.5rem);
+      max-width: 60vw;
+      margin: 0 auto;
       border-radius: 0.25rem;
       overflow: hidden;
       position: relative;
@@ -366,8 +364,14 @@ const CultureOfCodeStyles = styled.div`
 
       .our-deal-section {
         width: 100%;
-        padding: 1rem;
-        padding-left: 0;
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 0 0 1rem 0;
+        :first-child,
+        :last-child {
+          padding: 0 0 1rem 0;
+          text-align: center;
+        }
       }
     }
 
