@@ -9,6 +9,7 @@ import { useTheme } from 'styled-components';
 import Subscribe from './subscribe';
 import { SlashDivider } from '@this/components/Elements/SlashDivider';
 import NavLink from '@this/components/Navbar/elements/NavLink';
+import VercelLogo from './VercelLogo';
 
 import {
   InfoSessionStyles,
@@ -117,6 +118,15 @@ const Footer = ({ logos }: FooterProps) => {
             }
           />
         </div>
+      </HStack>
+      <HStack justify='center' align='center' w='100%' padding='0.5rem 0'>
+        <a
+          href='https://vercel.com/?utm_source=operation-spark&utm_campaign=oss'
+          target='_blank'
+          rel='noreferrer'
+        >
+          <VercelLogo mode={theme.colorMode} />
+        </a>
       </HStack>
       <HStack justify='space-between' w='100%' padding='0 0.25rem'>
         <Text
