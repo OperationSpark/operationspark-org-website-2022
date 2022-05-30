@@ -17,6 +17,9 @@ const FormStyles = styled(motion.form)`
       padding-left: 0.5rem;
     }
   }
+  @media print {
+    display: none !important;
+  }
 `;
 
 interface FormProps {

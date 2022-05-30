@@ -140,6 +140,21 @@ const GlobalStyles = createGlobalStyle`
     .dynamic-h2 { font-size: 1.9rem; }
     .dynamic-h3 { font-size: 1.4rem; }
   }
+
+  @media print {
+    img, .img, .opspark-value-img, button, a {
+      display: none !important;
+    }
+    * {
+      box-shadow: none !important;
+      color: rgba(50,50,50,1) !important;
+      width: 100% !important;
+      flex-flow: column;
+      overflow: visible !important;
+    }
+    overflow: visible !important;
+
+  }
 `;
 
 export default GlobalStyles;

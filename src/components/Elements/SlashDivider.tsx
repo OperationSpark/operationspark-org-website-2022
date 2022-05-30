@@ -16,6 +16,10 @@ const SlashDividerStyles = styled.div`
     ${({ theme }) =>
       theme.isLightMode ? theme.primary[900] : theme.primary[700]};
   background-image: url(${({ theme }) => getImageUrl(theme)});
+
+  @media print {
+    display: none;
+  }
 `;
 
 export const SlashDivider = ({
