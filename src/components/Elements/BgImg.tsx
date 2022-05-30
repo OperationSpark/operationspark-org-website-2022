@@ -23,6 +23,9 @@ const BgImgStyles = styled.div<TImgOverlay>`
     z-index: 1;
     width: 100%;
   }
+  @media print {
+    height: fit-content !important;
+  }
 `;
 
 const ImgOverlay = styled.div<TImgOverlay>`

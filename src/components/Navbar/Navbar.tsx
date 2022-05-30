@@ -158,4 +158,7 @@ export const NavbarStyles = styled(motion.nav)`
       }
     }
   }
+  @media print {
+    display: none;
+  }
 `;

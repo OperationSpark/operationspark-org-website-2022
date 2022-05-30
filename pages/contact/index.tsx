@@ -5,10 +5,12 @@ import styled from 'styled-components';
 import { IContact } from '@this/data/types/contact';
 import { Section } from '@this/components/layout';
 
-import { getStaticAsset } from '../api/static/[asset]';
+import { getStaticAsset } from '@this/pages-api/static/[asset]';
 import Content from '@this/components/layout/Content';
 import Main from '@this/components/layout/Main';
-
+import Map from '@this/src/components/Elements/Map';
+import { FiPhone, FiMapPin } from 'react-icons/fi';
+import { BgImg } from '@this/src/components/Elements';
 const ContactForm = dynamic(() => import('@this/src/Forms/Form.Contact'));
 
 const Contact: NextPage<IContact> = ({
@@ -19,27 +21,38 @@ const Contact: NextPage<IContact> = ({
   phone,
   gMapUrl,
 }) => {
-  /** Set `false` or remove when ready to enable contact form */
-  const FEAT_HIDE_FORM = true;
   return (
-    <Main>
+    <Main style={{ paddingTop: 0 }}>
       <ContactStyles>
+        <BgImg src='/images/display/contact.png' height='28rem'>
+          <div className='contact-top'>
+            <h1 className='dynamic-xl secondary'>Contact Us</h1>
+          </div>
+        </BgImg>
         <Content>
           <div className='contact-top'>
-            <h1 className='dynamic-h1'>Contact us</h1>
             <Section className='contact-info'>
-              <a
-                className='anchor'
-                href={gMapUrl}
-                target='_blank'
-                rel='noreferrer'
-              >
-                <p>{address}</p>
-                <p>
-                  {city}, {state} {zip}
-                </p>
-              </a>
               <p>
+                <span className='contact-icon'>
+                  <FiMapPin size={28} />
+                </span>
+                <a
+                  className='anchor'
+                  href={gMapUrl}
+                  target='_blank'
+                  rel='noreferrer'
+                >
+                  <span>{address}</span>
+                  <br />
+                  <span>
+                    {city}, {state} {zip}
+                  </span>
+                </a>
+              </p>
+              <p>
+                <span className='contact-icon'>
+                  <FiPhone size={28} />
+                </span>
                 <a
                   className='anchor'
                   href={`tel:${phone}`}
@@ -51,7 +64,13 @@ const Contact: NextPage<IContact> = ({
               </p>
             </Section>
           </div>
-          {!FEAT_HIDE_FORM && <ContactForm />}
+          <ContactForm />
+          <div className='map'>
+            <Map
+              href={gMapUrl}
+              address={`${address}, ${city}, ${state} ${zip}`}
+            />
+          </div>
         </Content>
       </ContactStyles>
     </Main>
@@ -73,19 +92,33 @@ const ContactStyles = styled.div`
     display: flex;
     flex-flow: column;
     align-items: center;
-    padding-bottom: 2rem;
+    justify-content: flex-end;
+    height: 100%;
+    h1 {
+      padding: 1rem 0;
+    }
   }
   .contact-info {
     display: flex;
-    flex-flow: column;
-    align-items: flex-end;
-    padding-bottom: 1rem;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    padding: 2rem 0;
     align-items: center;
+    width: 100%;
     a {
       text-align: center;
       margin-bottom: 1rem;
     }
+    p {
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+    }
+    .contact-icon {
+      padding-bottom: 0.5rem;
+    }
   }
+
   @media screen and (max-width: 768px) {
     .contact-top {
       display: flex;

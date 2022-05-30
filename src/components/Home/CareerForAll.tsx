@@ -27,13 +27,13 @@ const CareersForAll = () => {
             WE HELP STUDENTS WITH THEIR FIRST STEP INTO SOFTWARE DEVELOPMENT.
           </p>
 
-          <Link href='#'>
+          <Link href='/contact'>
             <a
               className='anchor right-arr-left'
               aria-label='Learn about job placement'
               title='Job Placement'
             >
-              Learn more about job placement
+              Contact us to learn more about job placement
             </a>
           </Link>
         </div>

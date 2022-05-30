@@ -7,6 +7,8 @@ import Button from '@this/components/Elements/Button';
 import Content from '@this/components/layout/Content';
 
 const TopCard = () => {
+  /** Remove once page is created */
+  const FEAT_COLLEGE_CREDIT = false;
   return (
     <BgImg src='/images/classroom.webp'>
       <ImgCardStyles>
@@ -18,16 +20,18 @@ const TopCard = () => {
                 COMPUTER <br /> PROGRAMMING <br /> SKILLS
               </h1>
             </div>
-            <div className='college-credit'>
-              <div className='college-credit-box'>
-                <p className='dynamic-txt college-credit-desc'>
-                  Our certifications are eligible for college credit!
-                </p>
-                <Link href='/collegeCredit' passHref>
-                  <Button color='yellow'>Learn more</Button>
-                </Link>
+            {FEAT_COLLEGE_CREDIT && (
+              <div className='college-credit'>
+                <div className='college-credit-box'>
+                  <p className='dynamic-txt college-credit-desc'>
+                    Our certifications are eligible for college credit!
+                  </p>
+                  <Link href='/collegeCredit' passHref>
+                    <Button color='yellow'>Learn more</Button>
+                  </Link>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </Content>
       </ImgCardStyles>

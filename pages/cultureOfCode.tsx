@@ -9,9 +9,15 @@ import Main from '@this/components/layout/Main';
 import Content from '@this/components/layout/Content';
 import Section from '@this/components/layout/Section';
 import { getStaticAsset } from '@this/pages-api/static/[asset]';
-import { cardShadow } from '@this/src/theme/styled/mixins/shadows';
+import { BgImg } from '@this/src/components/Elements';
+import { useEffect, useState } from 'react';
 
 export interface CultureOfCodeProps extends ICultureOfCode {}
+
+type ColorHue = {
+  filter: string;
+  transform: string;
+};
 
 const CultureOfCode: NextPage<CultureOfCodeProps> = ({
   header,
@@ -20,53 +26,77 @@ const CultureOfCode: NextPage<CultureOfCodeProps> = ({
   opSparkValues2,
   effectiveLearning,
 }) => {
+  const [colorHues, setColorHues] = useState<ColorHue[]>([]);
+
+  useEffect(() => {
+    setColorHues(
+      new Array(10).fill(0).map((e, i) => ({
+        filter: `hue-rotate(${Math.floor(Math.random() * 180)}deg)`,
+        transform: `rotate(${Math.floor(
+          Math.random() * 45 * (!(i % 2) ? -1 : 1),
+        )}deg)`,
+      })),
+    );
+  }, []);
+
   return (
-    <Main>
+    <Main style={{ paddingTop: 0 }}>
       <CultureOfCodeStyles>
-        <Content style={{ paddingTop: 0 }}>
-          <h1 className='dynamic-xl'>{header.title}</h1>
-          <p className='dynamic-txt' style={{ padding: '2rem 0' }}>
-            {header.description}
-          </p>
-        </Content>
+        <BgImg src='/images/display/code-editor.png'>
+          <Content className='culture-of-code-header'>
+            <h1 className='dynamic-xl'>{header.title}</h1>
+            <p className='dynamic-txt'>{header.description}</p>
+          </Content>
+        </BgImg>
         <SlashDivider />
         <Content>
-          <h2 className='dynamic-h2'>{ourDeal.title}</h2>
+          <h2
+            className='dynamic-h2 text-center'
+            style={{ paddingBottom: '2rem' }}
+          >
+            {ourDeal.title}
+          </h2>
+          <p className='opspark-community dynamic-txt'>
+            {ourDeal.opSparkCommunity}
+          </p>
           <div className='our-deal-sections'>
             {ourDeal.sections.map((section) => (
               <div key={section.title.join('')} className='our-deal-section'>
                 <h4>{section.title}</h4>
-                <p>{section.description}</p>
+                <p className='dynamic-txt'>{section.description}</p>
               </div>
             ))}
           </div>
-          <p className='opspark-community dynamic-txt'>
-            {ourDeal.opSparkCommunity}
-          </p>
+
           <div className='opspark-principles'>
             <h4>
               <b>{ourDeal.principleIssues.title}</b>
             </h4>
-            <p>{ourDeal.principleIssues.description}</p>
+            <p className='dynamic-txt'>{ourDeal.principleIssues.description}</p>
           </div>
         </Content>
         <Content>
-          {opSparkValues1.map(({ title, description, image }) => (
+          <h2 className='dynamic-h2'>Operation Spark Values</h2>
+          {opSparkValues1.map(({ title, description, image }, i) => (
             <div className='opspark-value' key={title.join('')}>
               <PlainCard className='opspark-value-card'>
                 <h4 className='card-title'>{title}</h4>
 
                 {description.map((desc) => (
-                  <p key={desc}>{desc}</p>
+                  <p key={desc} className='dynamic-txt'>
+                    {desc}
+                  </p>
                 ))}
               </PlainCard>
               {image ? (
-                <div className='opspark-value-img'>
+                <div className='opspark-value-img' style={colorHues[i]}>
                   <Image
-                    src='/images/hallebot-placeholder.png'
+                    src='/images/hallebot3d.png'
                     layout='fill'
                     objectFit='contain'
-                    alt=''
+                    alt='hallebot'
+                    aria-label='display'
+                    priority
                   />
                 </div>
               ) : null}
@@ -86,7 +116,9 @@ const CultureOfCode: NextPage<CultureOfCodeProps> = ({
                   <h4 className='dynamic-h4'>
                     <b>{title}</b>
                   </h4>
-                  <p style={{ padding: '0.5rem 0' }}>{description}</p>
+                  <p style={{ padding: '0.5rem 0' }} className='dynamic-txt'>
+                    {description}
+                  </p>
                 </div>
               ))}
             </div>
@@ -94,29 +126,36 @@ const CultureOfCode: NextPage<CultureOfCodeProps> = ({
         </Section>
 
         <Content>
-          {opSparkValues2.map(({ title, description, image, rules }) => (
+          {opSparkValues2.map(({ title, description, image, rules }, i) => (
             <div className='opspark-value' key={title.join('')}>
               <PlainCard className='opspark-value-card two-col-card'>
                 <h4 className='card-title'>{title}</h4>
                 <div className={rules ? 'two-col' : ''}>
                   <div>
                     {description.map((desc) => (
-                      <p key={desc}>{desc}</p>
+                      <p key={desc} className='dynamic-txt'>
+                        {desc}
+                      </p>
                     ))}
                   </div>
                 </div>
               </PlainCard>
               <div
                 className={
-                  !rules ? 'opspark-value-img' : 'opspark-value-img card-rules'
+                  !rules
+                    ? 'opspark-value-img dynamic-txt'
+                    : 'opspark-value-img dynamic-txt card-rules'
                 }
+                style={!rules ? colorHues[i + 6] : {}}
               >
                 {image ? (
                   <Image
-                    src='/images/hallebot-placeholder.png'
+                    src='/images/hallebot3d.png'
                     layout='fill'
                     objectFit='contain'
-                    alt=''
+                    alt='hallebot'
+                    aria-label='layout'
+                    priority
                   />
                 ) : rules ? (
                   <div className='card-rules-list'>
@@ -180,8 +219,21 @@ const CultureOfCodeStyles = styled.div`
     font-size: 1.25rem;
     font-weight: 600;
   }
+  .culture-of-code-header {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-end;
+    height: 100%;
+
+    p.dynamic-txt {
+      padding: 1.5rem;
+      background: ${({ theme }) => theme.alpha.bg};
+      border-radius: 0.5rem;
+      backdrop-filter: blur(4px);
+      box-shadow: 0.25rem 0.25rem 1rem rgba(0, 0, 0, 0.8);
+    }
+  }
   .our-deal-sections {
-    ${cardShadow}
     display: flex;
     flex-flow: row;
     justify-content: space-between;
@@ -189,8 +241,9 @@ const CultureOfCodeStyles = styled.div`
     padding: 1rem;
     margin-top: 1rem;
     .our-deal-section {
-      width: 33.33%;
-      padding: 1rem;
+      width: 32%;
+      padding: 0 1rem;
+      text-align: center;
 
       h4 {
         font-weight: 700;
@@ -198,23 +251,27 @@ const CultureOfCodeStyles = styled.div`
       }
       :first-child {
         padding-left: 0;
+        text-align: left;
       }
       :last-child {
+        text-align: right;
         padding-right: 0;
       }
     }
   }
   .opspark-community {
-    margin: 2rem 0;
-    line-height: 1.75em;
-    width: 75%;
-    font-weight: 500;
+    margin: 0 auto 2rem auto;
+    max-width: 100%;
+    width: 60rem;
 
+    line-height: 1.75em;
+    font-weight: 500;
     border-radius: 0.25rem;
   }
   .opspark-principles {
-    padding: 1rem 0;
-    width: 65%;
+    margin: 0 auto 2rem auto;
+    max-width: 100%;
+    width: 60rem;
     h4 {
       padding: 0.5rem 0;
     }
@@ -223,12 +280,12 @@ const CultureOfCodeStyles = styled.div`
   .opspark-value {
     display: flex;
     justify-content: space-between;
-    padding: 1rem 0;
+    padding: 2rem 0;
     :nth-child(even) {
       flex-flow: row-reverse;
     }
     .opspark-value-card {
-      width: calc(60% - 0.5rem);
+      width: calc(56% - 0.5rem);
       padding: 0;
       .card-title {
         font-weight: 700;
@@ -237,23 +294,35 @@ const CultureOfCodeStyles = styled.div`
         padding: 0.5rem 0;
       }
       :only-child {
-        width: 80%;
+        width: 100%;
       }
     }
     .opspark-value-img {
-      width: calc(40% - 0.5rem);
+      width: calc(34% - 0.5rem);
+      max-width: 60vw;
+      margin: 0 auto;
       border-radius: 0.25rem;
       overflow: hidden;
       position: relative;
-      user-select: none;
+      * > img {
+        user-select: none;
+        -webkit-user-drag: none;
+      }
+
       &.card-rules {
+        filter: none;
+        width: calc(42% - 0.5rem);
         user-select: auto;
         display: flex;
         justify-content: center;
         align-items: center;
+        li::marker {
+          content: '🪙 ';
+          font-size: 0.9rem;
+        }
       }
       ul {
-        margin-left: 1.5rem;
+        margin-left: 1.75rem;
       }
     }
   }
@@ -265,7 +334,7 @@ const CultureOfCodeStyles = styled.div`
     }
     p,
     h4 {
-      color: rgba(0, 0, 0, 1);
+      color: ${({ theme }) => theme.black};
     }
     .desc {
       line-height: 1.75em;
@@ -299,16 +368,20 @@ const CultureOfCodeStyles = styled.div`
 
       .our-deal-section {
         width: 100%;
-        padding: 1rem;
-        padding-left: 0;
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 0 0 1rem 0;
+        :first-child,
+        :last-child {
+          padding: 0 0 1rem 0;
+          text-align: center;
+        }
       }
     }
-    .opspark-community,
-    .opspark-principles {
-      width: 100%;
-    }
+
     .opspark-value {
       flex-flow: column;
+      padding-bottom: 0;
       :nth-child(even) {
         flex-flow: column;
       }
@@ -319,6 +392,7 @@ const CultureOfCodeStyles = styled.div`
         :only-child {
           width: 100%;
         }
+
         p {
           padding: 0.5rem 0;
         }
@@ -332,6 +406,7 @@ const CultureOfCodeStyles = styled.div`
         position: relative;
         &.card-rules {
           height: fit-content;
+          width: 100%;
         }
       }
     }

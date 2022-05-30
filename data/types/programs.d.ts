@@ -1,16 +1,8 @@
-import { ITitleDescription } from './bits';
-
 export interface ICourses {
   title: string;
   length: string;
   nextStartDate: string;
   description: string[];
-}
-
-export interface IAdultPrograms {
-  header: ITitleDescription;
-  overview: ITitleDescription;
-  courses: ICourses[];
 }
 
 export interface IHighschoolPrograms {

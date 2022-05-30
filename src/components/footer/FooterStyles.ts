@@ -19,10 +19,3 @@ export const SupportersStyles = styled(VStack)`
     -webkit-user-drag: none;
   }
 `;
-export const SocialStyles = styled(VStack)`
-  img,
-  a {
-    user-select: none;
-    -webkit-user-drag: none;
-  }
-`;

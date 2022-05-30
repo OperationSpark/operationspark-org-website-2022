@@ -16,7 +16,6 @@ export const anchor = css`
     height: fit-content;
     position: relative;
 
-    white-space: pre;
     display: flex;
     left: -0.25rem;
     ::before {

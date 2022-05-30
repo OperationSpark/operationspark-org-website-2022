@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Heading, HStack } from '@chakra-ui/react';
 
 import { Input } from '@this/components/Form';
 import useSubscribe from '@this/hooks/useSubscribe';
 import Button from '@this/components/Elements/Button';
+import { Content } from '@this/components/layout';
+import FormErr from '../Form/elements/FormErr';
 
 const SubscribeStyles = styled.div`
   background: ${({ theme }) => theme.secondary[600]};
@@ -15,9 +16,20 @@ const SubscribeStyles = styled.div`
     align-items: center;
 
     color: rgba(25, 25, 25, 1);
+  }
+  h3 {
+    flex: 4;
+  }
+  .subscribe-inputs {
+    display: flex;
+    flex: 5;
+
     .subscribe-input {
-      color: ${({ theme }) =>
-        theme.isLightMode ? theme.primary[600] : theme.secondary[600]};
+      width: 100%;
+      position: relative;
+    }
+    button {
+      margin-left: 0.5rem;
     }
   }
 
@@ -33,21 +45,11 @@ const SubscribeStyles = styled.div`
       justify-content: space-between;
       align-items: center;
       width: 100%;
-    }
-    .subscribe-inputs {
-      flex-flow: column;
-      width: 100%;
-      > button {
-        margin-top: 1rem;
-        justify-content: center;
-      }
-    }
-
-    .info {
-      width: 50%;
-      max-width: 300px;
-      :focus-visible {
-        outline: 2px solid ${({ theme }) => theme.primary[800]} !important;
+      button {
+        margin-top: 1.5rem;
+        margin-left: 0;
+        width: 50%;
+        text-align: center;
       }
     }
   }
@@ -65,12 +67,10 @@ const Subscribe = () => {
   };
   return (
     <SubscribeStyles aria-label='Subscribe to newsletter'>
-      <div className='content subscribe-content'>
-        <Heading as='h3' m='1' ml='0' size='md' flex={3}>
-          See what all the buzz is about:
-        </Heading>
-        <HStack flex={4} className='subscribe-inputs' alignItems='center'>
-          <div className='subscribe-input' style={{ width: '100%' }}>
+      <Content className='content subscribe-content'>
+        <h3 className='dynamic-h3'>See what all the buzz is about:</h3>
+        <div className='subscribe-inputs'>
+          <div className='subscribe-input'>
             <Input.Email
               aria-label='Email for newsletter'
               label='Sign up for our newsletter!'
@@ -85,14 +85,17 @@ const Subscribe = () => {
               onEnter={() => subscribe(email)}
               testId='input-subscribe-email'
             />
+            {isErr && (
+              <FormErr
+                text='Valid email required'
+                style={{
+                  position: 'absolute',
+                  top: '100%',
+                }}
+              />
+            )}
           </div>
           <Button
-            style={{
-              padding: '0.75rem',
-              height: '100%',
-              display: 'flex',
-            }}
-            className='info'
             onClick={() => subscribe(email)}
             aria-label='Submit Email'
             title='Submit Email'
@@ -101,8 +104,8 @@ const Subscribe = () => {
           >
             Subscribe
           </Button>
-        </HStack>
-      </div>
+        </div>
+      </Content>
     </SubscribeStyles>
   );
 };
