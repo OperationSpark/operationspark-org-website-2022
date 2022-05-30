@@ -10,8 +10,14 @@ import Content from '@this/components/layout/Content';
 import Section from '@this/components/layout/Section';
 import { getStaticAsset } from '@this/pages-api/static/[asset]';
 import { BgImg } from '@this/src/components/Elements';
+import { useEffect, useState } from 'react';
 
 export interface CultureOfCodeProps extends ICultureOfCode {}
+
+type ColorHue = {
+  filter: string;
+  transform: string;
+};
 
 const CultureOfCode: NextPage<CultureOfCodeProps> = ({
   header,
@@ -20,6 +26,19 @@ const CultureOfCode: NextPage<CultureOfCodeProps> = ({
   opSparkValues2,
   effectiveLearning,
 }) => {
+  const [colorHues, setColorHues] = useState<ColorHue[]>([]);
+
+  useEffect(() => {
+    setColorHues(
+      new Array(10).fill(0).map((e, i) => ({
+        filter: `hue-rotate(${Math.floor(Math.random() * 180)}deg)`,
+        transform: `rotate(${Math.floor(
+          Math.random() * 45 * (!(i % 2) ? -1 : 1),
+        )}deg)`,
+      })),
+    );
+  }, []);
+
   return (
     <Main style={{ paddingTop: 0 }}>
       <CultureOfCodeStyles>
@@ -70,21 +89,14 @@ const CultureOfCode: NextPage<CultureOfCodeProps> = ({
                 ))}
               </PlainCard>
               {image ? (
-                <div
-                  className='opspark-value-img'
-                  style={{
-                    filter: `hue-rotate(${Math.floor(Math.random() * 180)}deg)`,
-                    transform: `rotate(${Math.floor(
-                      Math.random() * 45 * (!(i % 2) ? -1 : 1),
-                    )}deg)`,
-                  }}
-                >
+                <div className='opspark-value-img' style={colorHues[i]}>
                   <Image
                     src='/images/hallebot3d.png'
                     layout='fill'
                     objectFit='contain'
                     alt='hallebot'
                     aria-label='display'
+                    priority
                   />
                 </div>
               ) : null}
@@ -134,16 +146,7 @@ const CultureOfCode: NextPage<CultureOfCodeProps> = ({
                     ? 'opspark-value-img dynamic-txt'
                     : 'opspark-value-img dynamic-txt card-rules'
                 }
-                style={{
-                  filter: !rules
-                    ? `hue-rotate(${Math.floor(Math.random() * 180)}deg)`
-                    : 'none',
-                  transform: !rules
-                    ? `rotate(${Math.floor(
-                        Math.random() * 40 * (!(i % 2) ? -1 : 1),
-                      )}deg)`
-                    : '',
-                }}
+                style={!rules ? colorHues[i + 6] : {}}
               >
                 {image ? (
                   <Image
@@ -152,6 +155,7 @@ const CultureOfCode: NextPage<CultureOfCodeProps> = ({
                     objectFit='contain'
                     alt='hallebot'
                     aria-label='layout'
+                    priority
                   />
                 ) : rules ? (
                   <div className='card-rules-list'>
