@@ -32,9 +32,7 @@ const CultureOfCode: NextPage<CultureOfCodeProps> = ({
     setColorHues(
       new Array(10).fill(0).map((e, i) => ({
         filter: `hue-rotate(${Math.floor(Math.random() * 180)}deg)`,
-        transform: `rotate(${Math.floor(
-          Math.random() * 45 * (!(i % 2) ? -1 : 1),
-        )}deg)`,
+        transform: `rotate(${Math.floor(Math.random() * 45 * (!(i % 2) ? -1 : 1))}deg)`,
       })),
     );
   }, []);
@@ -50,15 +48,10 @@ const CultureOfCode: NextPage<CultureOfCodeProps> = ({
         </BgImg>
         <SlashDivider />
         <Content>
-          <h2
-            className='dynamic-h2 text-center'
-            style={{ paddingBottom: '2rem' }}
-          >
+          <h2 className='dynamic-h2 text-center' style={{ paddingBottom: '2rem' }}>
             {ourDeal.title}
           </h2>
-          <p className='opspark-community dynamic-txt'>
-            {ourDeal.opSparkCommunity}
-          </p>
+          <p className='opspark-community dynamic-txt'>{ourDeal.opSparkCommunity}</p>
           <div className='our-deal-sections'>
             {ourDeal.sections.map((section) => (
               <div key={section.title.join('')} className='our-deal-section'>
@@ -109,10 +102,7 @@ const CultureOfCode: NextPage<CultureOfCodeProps> = ({
             <p className='dynamic-txt desc'>{effectiveLearning.description}</p>
             <div className='tips'>
               {effectiveLearning.tips.map(({ title, description }) => (
-                <div
-                  key={title}
-                  className={!description.length ? 'tip center' : 'tip'}
-                >
+                <div key={title} className={!description.length ? 'tip center' : 'tip'}>
                   <h4 className='dynamic-h4'>
                     <b>{title}</b>
                   </h4>
@@ -186,13 +176,8 @@ const CultureOfCode: NextPage<CultureOfCodeProps> = ({
 };
 
 export const getStaticProps: GetStaticProps<CultureOfCodeProps> = async () => {
-  const {
-    header,
-    ourDeal,
-    opSparkValues1,
-    opSparkValues2,
-    effectiveLearning,
-  }: ICultureOfCode = await getStaticAsset('cultureOfCode');
+  const { header, ourDeal, opSparkValues1, opSparkValues2, effectiveLearning }: ICultureOfCode =
+    await getStaticAsset('cultureOfCode');
 
   return {
     props: {
@@ -407,6 +392,7 @@ const CultureOfCodeStyles = styled.div`
         &.card-rules {
           height: fit-content;
           width: 100%;
+          max-width: 400px;
         }
       }
     }
