@@ -1,5 +1,5 @@
 import 'styled-components';
-import { ColorToolsArgs } from 'color-tools/src/cTools';
+import { IColorTools } from 'color-tools/src/cTools';
 
 type ColorWeight =
   | '0'
@@ -38,7 +38,7 @@ declare module 'styled-components' {
     red: GradientRanges;
     green: GradientRanges;
     magenta: GradientRanges;
-    fx: ColorToolsArgs;
+    fx: IColorTools;
 
     purple: {
       [50]: string;

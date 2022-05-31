@@ -16,10 +16,10 @@ const colors = {
     },
   },
   light: {
-    bg: 'rgba(255, 255, 255, 1.00)',
+    bg: 'rgba(240, 244, 246, 1.00)',
     fg: 'rgba(37, 37, 37, 1.00)',
     alpha: {
-      bg: 'rgba(255, 255, 255, 0.75)',
+      bg: 'rgba(240, 244, 246, 0.75)',
       fg: 'rgba(37, 37, 37, 0.75)',
     },
   },
@@ -29,13 +29,7 @@ type InitialTheme = Omit<
   DefaultTheme,
   'colorMode' | 'isLightMode' | 'navHeight' | 'setNavHeight' | 'fx'
 >;
-const Theme = ({
-  children,
-  theme,
-}: {
-  children: ReactNode;
-  theme: InitialTheme;
-}) => {
+const Theme = ({ children, theme }: { children: ReactNode; theme: InitialTheme }) => {
   const { colorMode } = useColorMode();
   const isLightMode = colorMode === 'light';
   const [navHeight, setNavHeight] = useState(0);
