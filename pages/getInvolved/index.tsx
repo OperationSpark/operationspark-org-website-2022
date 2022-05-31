@@ -35,7 +35,7 @@ const GetInvolved: NextPage = () => {
             leftCol={
               <div style={{ padding: '1rem 0' }}>
                 <h2 className='dynamic-h2 primary-secondary text-center'>Volunteer</h2>
-                <h3 className='dynamic-h3'>
+                <h3 className='dynamic-h3' style={{ maxWidth: '600px', textAlign: 'center' }}>
                   At Operation Spark, we love when software engineers come and present on a topic or
                   technology being used in the industry. If you are interested,{' '}
                   <Link href='/contact'>
@@ -46,7 +46,7 @@ const GetInvolved: NextPage = () => {
               </div>
             }
             rightCol={
-              <div style={{ padding: '1rem 0' }}>
+              <div style={{ padding: '1rem 0', maxWidth: '600px', textAlign: 'center' }}>
                 <h2 className='dynamic-h2 primary-secondary text-center'>Hire Our Grads</h2>
                 <h3 className='dynamic-h3'>
                   If you are interested in hiring our grads,{' '}
@@ -231,6 +231,7 @@ const GetInvolvedStyles = styled.div`
       justify-content: center;
       height: 100%;
       padding: 1rem 2rem;
+
       p.desc {
         padding: 0.25rem 0;
       }
