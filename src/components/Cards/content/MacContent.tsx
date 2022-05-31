@@ -8,14 +8,7 @@ type MacContentProps = Omit<IQuote, 'logoSrcDark' | 'logoSrcLight'> & {
   logoSrc?: string;
 };
 
-export const MacContent = ({
-  body,
-  name,
-  role,
-  imageUrl,
-  logoHref,
-  logoSrc,
-}: MacContentProps) => {
+export const MacContent = ({ body, name, role, imageUrl, logoHref, logoSrc }: MacContentProps) => {
   return (
     <MacContentStyles>
       <div className='mac-card-main'>
@@ -69,9 +62,7 @@ const MacContentStyles = styled(motion.div)`
       font-weight: 400;
       font-style: italic;
       height: 100%;
-      min-height: 20rem;
       display: flex;
-      align-items: center;
     }
     .mac-card-image {
       min-width: 175px;
