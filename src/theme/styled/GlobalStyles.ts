@@ -22,6 +22,9 @@ const GlobalStyles = createGlobalStyle`
   .roboto {
     font-family: 'Roboto', sans-serif;
   }
+  .cursive {
+    font-family: 'Kalam', cursive;
+  }
   .source-code {
     font-family: 'Source Code Pro', monospace;
   }
@@ -63,7 +66,7 @@ const GlobalStyles = createGlobalStyle`
   }
   .dynamic-h3 {
     font-size: calc(0.6vw + 1.00rem);
-    font-weight: 600;
+    font-weight: 700;
   }
   .dynamic-h4 {
     font-size: calc(0.4vw + 0.8rem);
@@ -136,6 +139,21 @@ const GlobalStyles = createGlobalStyle`
     .dynamic-h1 { font-size: 3.2rem; }
     .dynamic-h2 { font-size: 1.9rem; }
     .dynamic-h3 { font-size: 1.4rem; }
+  }
+
+  @media print {
+    img, .img, .opspark-value-img, button, a {
+      display: none !important;
+    }
+    * {
+      box-shadow: none !important;
+      color: rgba(50,50,50,1) !important;
+      width: 100% !important;
+      flex-flow: column;
+      overflow: visible !important;
+    }
+    overflow: visible !important;
+
   }
 `;
 

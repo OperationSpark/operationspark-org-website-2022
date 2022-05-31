@@ -8,7 +8,8 @@ import Content from '@this/components/layout/Content';
 
 const GreatCompanies = ({ title, description }: IHome['greatCompanies']) => {
   const theme = useTheme();
-
+  /** Remove once page is created */
+  const FEAT_STUDENT_OUTCOMES = false;
   return (
     <BgImg src='/images/grad-conference-table.webp' height='auto'>
       <GreatCompaniesStyles className='_progress' id='companies'>
@@ -26,16 +27,18 @@ const GreatCompanies = ({ title, description }: IHome['greatCompanies']) => {
                   {text}
                 </p>
               ))}
-              <NavLink href='#' className='info'>
-                See Student Outcomes
-              </NavLink>
+              {FEAT_STUDENT_OUTCOMES && (
+                <NavLink href='#' className='info'>
+                  See Student Outcomes
+                </NavLink>
+              )}
             </div>
             <div className='logo-card'>
               <LogoCard
                 name='Tim Blackmon'
                 role='CIO, Hired 6 grads at Mumms Software'
                 quote={
-                  '"Operation Spark is a true disruptor of the classical software engineering education domain. Their graduates posess real-world experience in todays modern technologies. For this reason, we have had great success hiring their grads."'
+                  'Operation Spark is a true disruptor of the classical software engineering education domain. Their graduates posess real-world experience in todays modern technologies. For this reason, we have had great success hiring their grads.'
                 }
                 logoSrc={`/images/logos/supporters/mumms-software-${theme.colorMode}.png`}
                 logoHref='https://mumms.com/'
