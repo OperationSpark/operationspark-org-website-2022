@@ -70,7 +70,7 @@ const CultureOfCode: NextPage<CultureOfCodeProps> = ({
         </Content>
         <Content>
           <h2 className='dynamic-h2'>Operation Spark Values</h2>
-          {opSparkValues1.map(({ title, description, image }, i) => (
+          {opSparkValues1.map(({ title, description, image, effects }, i) => (
             <div className='opspark-value' key={title.join('')}>
               <PlainCard className='opspark-value-card'>
                 <h4 className='card-title'>{title}</h4>
@@ -82,9 +82,9 @@ const CultureOfCode: NextPage<CultureOfCodeProps> = ({
                 ))}
               </PlainCard>
               {image ? (
-                <div className='opspark-value-img' style={colorHues[i]}>
+                <div className='opspark-value-img' style={effects ? colorHues[i] : {}}>
                   <Image
-                    src='/images/hallebot3d.png'
+                    src={image}
                     layout='fill'
                     objectFit='contain'
                     alt='hallebot'
