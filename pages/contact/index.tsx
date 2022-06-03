@@ -24,7 +24,7 @@ const Contact: NextPage<IContact> = ({
   return (
     <Main style={{ paddingTop: 0 }}>
       <ContactStyles>
-        <BgImg src='/images/display/contact.png' height='28rem'>
+        <BgImg src='/images/display/contact.png' height='calc(20rem + 20vw)'>
           <div className='contact-top'>
             <h1 className='dynamic-xl secondary'>Contact Us</h1>
           </div>
