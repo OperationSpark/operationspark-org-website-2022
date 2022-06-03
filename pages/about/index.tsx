@@ -29,10 +29,7 @@ const About: NextPage<IAbout> = ({ mission, team, history, awards }) => {
     <Main style={{ paddingTop: 0 }}>
       <AboutStyles>
         <Section className='about-header' style={{ paddingTop: 0 }}>
-          <BgImg
-            height='calc(30rem + 20vw)'
-            src='/images/display/staff-group.jpg'
-          >
+          <BgImg height='calc(24rem + 30vw)' src='/images/display/staff-group.jpg'>
             <div
               style={{
                 display: 'flex',
@@ -89,19 +86,12 @@ const About: NextPage<IAbout> = ({ mission, team, history, awards }) => {
                 <div className='team-member'>
                   <div className='team-member-img-container'>
                     <div className='team-member-img'>
-                      <Image
-                        layout='fill'
-                        objectFit='cover'
-                        src={member.image}
-                        alt={member.name}
-                      />
+                      <Image layout='fill' objectFit='cover' src={member.image} alt={member.name} />
                     </div>
                   </div>
                   <div className='team-member-about'>
                     <div className='team-member-about-header'>
-                      <h2 className='dynamic-h2 team-member-name'>
-                        {member.name}
-                      </h2>
+                      <h2 className='dynamic-h2 team-member-name'>{member.name}</h2>
                       <p className='team-member-role'> {member.role}</p>
                       {member.contact && (
                         <Fragment>
@@ -183,9 +173,7 @@ const About: NextPage<IAbout> = ({ mission, team, history, awards }) => {
 export default About;
 
 export const getStaticProps: GetStaticProps<IAbout> = async () => {
-  const { mission, team, history, awards }: IAbout = await getStaticAsset(
-    'about',
-  );
+  const { mission, team, history, awards }: IAbout = await getStaticAsset('about');
 
   return {
     props: { mission, team, history, awards },
@@ -199,8 +187,7 @@ const AboutStyles = styled.div`
   h1,
   h2,
   h3 {
-    color: ${({ theme }) =>
-      theme.isLightMode ? theme.primary[700] : theme.secondary[500]};
+    color: ${({ theme }) => (theme.isLightMode ? theme.primary[700] : theme.secondary[500])};
   }
   .mission-section {
     border-radius: 0.25rem;
@@ -266,8 +253,7 @@ const AboutStyles = styled.div`
       position: absolute;
       z-index: -1;
       inset: 0;
-      background: ${({ theme }) =>
-        theme.isLightMode ? theme.secondary[200] : theme.primary[900]};
+      background: ${({ theme }) => (theme.isLightMode ? theme.secondary[200] : theme.primary[900])};
       background-image: ${({ theme }) =>
         theme.isLightMode
           ? 'url(images/textures/egg-shell.png)'
