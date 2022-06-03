@@ -8,25 +8,39 @@ import { Main, Content } from '@this/components/layout';
 import { toCentTime } from '@this/src/helpers/timeUtils';
 import { getStaticAsset } from '@this/pages-api/static/[asset]';
 import Button from '@this/components/Elements/Button';
+import { BgImg } from '@this/src/components/Elements';
 
 const Countdown = dynamic(() => import('@this/components/Elements/Countdown'));
 
-const GradShowcase: NextPage<IGradShowcase> = ({
-  startDateTime,
-  cohortName,
-  eventbriteUrl,
-}) => {
+const GradShowcase: NextPage<IGradShowcase> = ({ startDateTime, cohortName, eventbriteUrl }) => {
   const [showcaseDate] = useState<Date | null>(toCentTime(startDateTime));
 
   return (
-    <Main>
+    <Main style={{ paddingTop: 0 }}>
       <ShowcaseSignupStyles>
+        <BgImg src='/images/display/celebrate.png' overlay={{ bg: 'transparent' }}>
+          <Content className='showcase-header'>
+            <div className='showcase-header-container'>
+              <h1 className='dynamic-xl title secondary'>Graduation Showcase</h1>
+              <h2 className='dynamic-h2 cohort-name secondary'>
+                <br />
+                <span style={{ fontWeight: 900 }}>Cohort </span>
+                <br />
+                <span className='cursive'>{cohortName}</span>
+              </h2>
+            </div>
+          </Content>
+        </BgImg>
         <Content className='date-countdown'>
-          <h1 className='dynamic-h1 title'>Graduation Showcase</h1>
-          <h2 className='dynamic-h2 cohort-name'>Cohort: {cohortName}</h2>
           <Countdown endTime={showcaseDate} />
           <div className='register'>
             <div className='showcase-form'>
+              <div style={{ paddingBottom: '2rem' }}>
+                <h3 className='dynamic-h3 text-center'>
+                  Come celebrate with our grads as they show off their final project at Operation
+                  Spark!
+                </h3>
+              </div>
               <div className='sign-up-link'>
                 <a target='_blank' href={eventbriteUrl} rel='noreferrer'>
                   <Button color='yellow'>Sign up here</Button>
@@ -53,13 +67,23 @@ const ShowcaseSignupStyles = styled.div`
   .time-segments,
   .title {
     text-align: center;
-    color: ${({ theme: { isLightMode, primary, secondary } }) =>
-      isLightMode ? primary[700] : secondary[500]};
   }
   .cohort-name {
-    padding-bottom: 2rem;
-    color: ${({ theme }) => theme.fg};
-    font-weight: 200;
+    font-weight: 600;
+  }
+  .showcase-header {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    .showcase-header-container {
+      background: ${({ theme }) => (theme.isLightMode ? theme.alpha.fg : theme.alpha.bg)};
+      padding: 2rem;
+      border-radius: 0.5rem;
+      backdrop-filter: blur(4px);
+      box-shadow: 0.25rem 0.25rem 1rem rgba(0, 0, 0, 0.8);
+    }
   }
   .showcase-form {
     max-width: 500px;

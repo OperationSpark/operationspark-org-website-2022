@@ -40,3 +40,25 @@ export interface IAlert {
   start?: string;
   end?: string;
 }
+
+export interface IMeta {
+  title?: string;
+  description?: string;
+  imageUrl?: string;
+  favicon?: string;
+}
+
+export interface IQuote {
+  body: string;
+  name: string;
+  role: string;
+  imageUrl?: string;
+  logoHref?: string;
+  logoSrcLight?: string;
+  logoSrcDark?: string;
+}
+
+export interface IQuotes {
+  company: IQuote;
+  alumni: IQuote;
+}

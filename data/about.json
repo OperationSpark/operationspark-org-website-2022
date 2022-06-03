@@ -87,7 +87,7 @@
       },
       {
         "name": "Harvey Sanders",
-        "role": "Director of Adult Instruction",
+        "role": "Director of Adult Instruction / Software Engineer",
         "image": "/images/people/staff/harvey-sanders.jpg",
         "about": [
           "Harvey has a passion for learning, teaching and using technology. He focuses on producing exciting and effective web applications through Operation Spark's software development shop. Prior to creating software with Operation Spark, Harvey introduced underserved youth to web development through the Work & Learn Program at the Youth Empowerment Project. As Assistant Director of Work & Learn, Harvey also established two businesses with a goal of giving youth valuable job and life skills.",
@@ -97,7 +97,7 @@
       },
       {
         "name": "Justin Connor",
-        "role": "Instructor",
+        "role": "Instructor / Software Engineer",
         "image": "/images/people/staff/justin-connor.jpg",
         "about": [
           "Connor is originally from North Carolina, where he served six years in the North Carolina Army National Guard as an engineer. After moving to New Orleans in 2015, and working in hospitality, they heard about Operation Spark through their sister and graduated from the program November 2018. With 10+ years experience with service to the open public, Connor is dedicated to continue serving the community and the people that reside in the community.",
@@ -107,7 +107,7 @@
       },
       {
         "name": "Daniel Kogler",
-        "role": "Instructor",
+        "role": "Instructor / Software Engineer",
         "image": "/images/people/staff/daniel-kogler.jpg",
         "about": [
           "Daniel is a Baton Rouge local with over 20 years of programming experience. A graduate from Tulane University in Electrical Engineering, he went on to receive a Masters and PhD in Computer Science from Indiana University. A long time citizen of the world of academia, he has moved on from being simply a learner to also a teacher, as he believes that a strong education regarding technology is important in today's computer-driven society. Upon discovering Operation Spark, he knew that he'd found a place where he could reach youth who might otherwise not receive exposure to programming, and has since taken up a position as the lead instructor in the Baton Rouge area."
@@ -127,7 +127,7 @@
       },
       {
         "name": "Taylor Shephard",
-        "role": "Instructor",
+        "role": "Instructor / Software Engineer",
         "image": "/images/people/staff/taylor-shephard.jpg",
         "about": [
           "Taylor Shephard was born and raised in New Orleans, Louisiana. She graduated from St. Mary’s Academy High School in New Orleans East in 2014 and then headed to Southeastern Louisiana University to further her studies for a couple years. She attempted to teach herself html and css because she was always very interested in knowing what it takes to make websites. Soon after she found Operation Spark where Taylor gained her passion for coding. She completed Operation Spark's immersion program in July 2018.",
@@ -137,7 +137,7 @@
       },
       {
         "name": "Greg Thompson",
-        "role": "Instructor/Engineer",
+        "role": "Instructor / Software Engineer",
         "image": "/images/people/staff/greg-thompson.jpg",
         "about": [
           "Greg is a New Orleans native who graduated from Ben Franklin High School and then headed across town to study education at Tulane. After finding a passion working with robotics, he spent five years teaching high school and middle school engineering, robotics, computer science, and math. He completed Operation Spark's Immersion program in the fall of 2020 and is now part of the high school team at Operation Spark.",
@@ -148,7 +148,7 @@
 
       {
         "name": "Brianna Taylor",
-        "role": "Student Success Lead",
+        "role": "Student Success Lead / Software Engineer",
         "image": "/images/people/staff/brianna-taylor.jpg",
         "about": [
           "Brianna is a New Orleans native who graduated from Warren Easton. She enjoys helping adults and young adults gain stability and opportunities to discover their passion. Brianna pursued a career in workforce program development and obtained her Bachelor of Science from Louisiana Tech University in Family and Child Studies.",
@@ -160,7 +160,7 @@
       },
       {
         "name": "Jessalyn Daggs",
-        "role": "Student Success Coordinator",
+        "role": "Student Success Coordinator / Software Engineer",
         "image": "/images/people/staff/jessalyn-daggs.jpg",
         "about": [
           "Jessalyn is from Thibodaux, LA and believes that the opportunity Operation Spark brings to New Orleanians can provide new possibilities for the entire Southeast region and beyond. After more than 10 years managing retail businesses, she sought out a career that would allow her to be mother to her newborn first, while exploring her passion for design thinking and problem solving.",
@@ -190,7 +190,7 @@
       },
       {
         "name": "Alex Aaron",
-        "role": "Instructor",
+        "role": "Instructor / Software Engineer",
         "image": "/images/people/staff/alex-aaron.jpg",
         "about": [
           "A native of Baton Rouge, Louisiana, Alex has resided in New Orleans since 2006. He first encountered Operation Spark as a high school educator when he participated in Operation Spark's educator training. He then administered the organization's innovative high school curriculum to sophomores at Abramson Sci Academy. Unsurprisingly, Alex caught the coding bug himself and decided to pursue software development as a career. After graduating from Flatiron Software Development Bootcamp, Alex was hired by Operation Spark as the pre-qualifying bootcamp instructor. As bootcamp instructor, Alex works closely with students who are early in their software developmet journey, providing in-depth intermediate-to-advanced JavaScript instruction."
@@ -198,7 +198,7 @@
       },
       {
         "name": "Patrice Williams",
-        "role": "Instructor",
+        "role": "Instructor / Software Engineer",
         "image": "/images/people/staff/patrice-williams.jpg",
         "about": [
           "Patrice is a native of New Orleans, LA. She graduated from Xavier University of LA in 2012, where she received her Bachelor's in Biology. In 2015, she received a Master's in Public  Health from LSU Health Sciences Center specializing in Behavioral and Community Health.",
@@ -209,21 +209,23 @@
         ]
       },
       {
+        "name": "Caity Opelka",
+        "role": "Instructor / Software Engineer",
+        "image": "/images/people/staff/caity-opelka.jpg",
+        "about": [
+          "Caity grew up in New Orleans and was always drawn to the Arts. She studied Graphic Design and Photography at Savannah College of Art & Design and has a decade of experience designing and marketing in the Events and Food & Beverage industries. As she regularly worked alongside developers, she was intrigued by the coding aspect and decided to enroll in a bootcamp. After graduating from Operation Spark’s Immersion Program in 2021, Caity joined the team as a software engineer and instructor. She enjoys sharing in the excitement of students working together to build their first applications from scratch as a team as well as setting them up for success in preparation for their entry into the workforce."
+        ]
+      },
+      {
         "name": "Peter Barnum",
-        "role": "Instruction Lead",
+        "role": "Instruction Lead / Software Engineer",
         "image": "/images/people/staff/peter-barnum.jpg",
         "about": []
       },
       {
         "name": "Jessica Torres",
-        "role": "Instructor",
+        "role": "Instructor / Software Engineer",
         "image": "/images/people/staff/jessica-torres.jpg",
-        "about": []
-      },
-      {
-        "name": "Caity Opelka",
-        "role": "Instructor",
-        "image": "/images/people/staff/caity-opelka.jpg",
         "about": []
       }
     ],

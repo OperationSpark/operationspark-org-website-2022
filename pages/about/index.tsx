@@ -1,11 +1,10 @@
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { GetStaticProps, NextPage } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import styled from 'styled-components';
 import { shuffle } from 'underscore';
 
-import { cardShadow } from '@this/src/theme/styled/mixins/shadows';
 import { IAbout } from '@this/data/types/about';
 import Main from '@this/components/layout/Main';
 import Section from '@this/components/layout/Section';
@@ -15,11 +14,25 @@ import PlainCard from '@this/components/Cards/PlainCard';
 import BgImg from '@this/components/Elements/BgImg';
 
 const About: NextPage<IAbout> = ({ mission, team, history, awards }) => {
+  const [staffMembers, setStaffMembers] = useState<IAbout['team']['staff']>([]);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && !staffMembers.length) {
+      setStaffMembers(
+        shuffle(team.staff).sort((a, b) =>
+          !a.about.length ? 1 : a.about.length === b.about.length ? 0 : -1,
+        ),
+      );
+    }
+  }, [staffMembers, staffMembers.length, team.staff]);
   return (
     <Main style={{ paddingTop: 0 }}>
       <AboutStyles>
         <Section className='about-header' style={{ paddingTop: 0 }}>
-          <BgImg height='60rem' src='/images/display/staff-group.jpg'>
+          <BgImg
+            height='calc(30rem + 20vw)'
+            src='/images/display/staff-group.jpg'
+          >
             <div
               style={{
                 display: 'flex',
@@ -31,9 +44,6 @@ const About: NextPage<IAbout> = ({ mission, team, history, awards }) => {
               <Content>
                 <h1 className='dynamic-xl'>Our Mission</h1>
                 <h2 className='dynamic-h3'>{mission.description}</h2>
-                <Link href='/cultureOfCode'>
-                  <a className='anchor'>Our Culture of Code</a>
-                </Link>
               </Content>
             </div>
           </BgImg>
@@ -49,6 +59,12 @@ const About: NextPage<IAbout> = ({ mission, team, history, awards }) => {
                       {desc}
                     </p>
                   ))}
+
+                  {i < mission.sections.length - 1 && (
+                    <Link href='/cultureOfCode'>
+                      <a className='anchor'>Our Culture of Code</a>
+                    </Link>
+                  )}
                   {i < mission.sections.length - 1 && <hr />}
                 </div>
               ))}
@@ -68,74 +84,66 @@ const About: NextPage<IAbout> = ({ mission, team, history, awards }) => {
         <Section className='about-team _progress' id='team'>
           <Content>
             <h1 className='dynamic-h1'>Team</h1>
-            {shuffle(team.staff)
-              .sort((a, b) =>
-                !a.about.length
-                  ? 1
-                  : a.about.length === b.about.length
-                  ? 0
-                  : -1,
-              )
-              .map((member) => (
-                <PlainCard key={member.name} className='team-member-card'>
-                  <div className='team-member'>
-                    <div className='team-member-img-container'>
-                      <div className='team-member-img'>
-                        <Image
-                          layout='fill'
-                          objectFit='cover'
-                          src={member.image}
-                          alt={member.name}
-                        />
-                      </div>
-                    </div>
-                    <div className='team-member-about'>
-                      <div className='team-member-about-header'>
-                        <h2 className='dynamic-h2 team-member-name'>
-                          {member.name}
-                        </h2>
-                        <p className='team-member-role'> {member.role}</p>
-                        {member.contact && (
-                          <Fragment>
-                            <p>
-                              <a
-                                className='anchor'
-                                target='_blank'
-                                href={`mailto:${member.contact.email}`}
-                                rel='noreferrer'
-                              >
-                                {member.contact.email}
-                              </a>
-                            </p>
-                            <p>
-                              <a
-                                className='anchor'
-                                target='_blank'
-                                href={`tel:${member.contact.phone}`}
-                                rel='noreferrer'
-                              >
-                                {member.contact.phone}
-                              </a>
-                            </p>
-                          </Fragment>
-                        )}
-                      </div>
-
-                      <div style={{ padding: '1rem 0' }}>
-                        {member.about.map((about) => (
-                          <p
-                            key={about}
-                            style={{ padding: '0.5rem 0' }}
-                            className='dynamic-txt team-member-bio'
-                          >
-                            {about}
-                          </p>
-                        ))}
-                      </div>
+            {staffMembers.map((member) => (
+              <PlainCard key={member.name} className='team-member-card'>
+                <div className='team-member'>
+                  <div className='team-member-img-container'>
+                    <div className='team-member-img'>
+                      <Image
+                        layout='fill'
+                        objectFit='cover'
+                        src={member.image}
+                        alt={member.name}
+                      />
                     </div>
                   </div>
-                </PlainCard>
-              ))}
+                  <div className='team-member-about'>
+                    <div className='team-member-about-header'>
+                      <h2 className='dynamic-h2 team-member-name'>
+                        {member.name}
+                      </h2>
+                      <p className='team-member-role'> {member.role}</p>
+                      {member.contact && (
+                        <Fragment>
+                          <p>
+                            <a
+                              className='anchor'
+                              target='_blank'
+                              href={`mailto:${member.contact.email}`}
+                              rel='noreferrer'
+                            >
+                              {member.contact.email}
+                            </a>
+                          </p>
+                          <p>
+                            <a
+                              className='anchor'
+                              target='_blank'
+                              href={`tel:${member.contact.phone}`}
+                              rel='noreferrer'
+                            >
+                              {member.contact.phone}
+                            </a>
+                          </p>
+                        </Fragment>
+                      )}
+                    </div>
+
+                    <div style={{ padding: '1rem 0' }}>
+                      {member.about.map((about) => (
+                        <p
+                          key={about}
+                          style={{ padding: '0.5rem 0' }}
+                          className='dynamic-txt team-member-bio'
+                        >
+                          {about}
+                        </p>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </PlainCard>
+            ))}
           </Content>
           <Content className='team-board-members'>
             <div className='members'>
@@ -150,13 +158,13 @@ const About: NextPage<IAbout> = ({ mission, team, history, awards }) => {
               ))}
             </div>
           </Content>
-          <Content className='about-awards _progress' id='Awards'>
-            <h1 className='dynamic-h1'>News</h1>
+          <Content className='about-awards _progress' id='News'>
+            <h1 className='dynamic-h1 text-center'>News</h1>
             <div className='awards-list'>
               {awards.map(({ title, url }) => (
                 <a
                   key={title}
-                  className='anchor right-arr-left'
+                  className='anchor text-center'
                   target='_blank'
                   href={url}
                   rel='noreferrer'
@@ -195,10 +203,9 @@ const AboutStyles = styled.div`
       theme.isLightMode ? theme.primary[700] : theme.secondary[500]};
   }
   .mission-section {
-    ${cardShadow}
     border-radius: 0.25rem;
     margin: 1rem 0;
-    padding: 2rem;
+
     hr {
       margin: 2rem 0;
       border-color: ${({ theme }) =>
@@ -251,15 +258,39 @@ const AboutStyles = styled.div`
   }
 
   .about-history {
-    background: ${({ theme }) => theme.secondary[500]};
-    background-image: url('images/textures/egg-shell.png');
+    position: relative;
+    z-index: 1;
 
-    color: rgba(25, 25, 25, 1);
+    ::before {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      background: ${({ theme }) =>
+        theme.isLightMode ? theme.secondary[200] : theme.primary[900]};
+      background-image: ${({ theme }) =>
+        theme.isLightMode
+          ? 'url(images/textures/egg-shell.png)'
+          : 'url(images/textures/cream-paper.png)'};
+      opacity: ${({ theme }) => (theme.isLightMode ? 0.8 : 0.8)};
+      box-shadow: ${({ theme }) => '0 0 0.25rem 0rem inset ' + theme.alpha.fg};
+    }
+
+    p,
     h1 {
-      color: rgba(25, 25, 25, 1);
+      ::selection {
+        background: ${({ theme }) =>
+          theme.isLightMode ? theme.primary[700] : theme.secondary[500]};
+        color: ${({ theme }) => theme.bg};
+      }
     }
     p {
-      font-weight: 500;
+      font-weight: 400;
+
+      font-style: italic;
+      padding: 1rem 0;
+      text-align: justify;
+      text-justify: justify;
     }
   }
   .about-header {
@@ -274,6 +305,9 @@ const AboutStyles = styled.div`
   .awards-list {
     display: flex;
     flex-flow: column;
+    width: 100%;
+    height: 100%;
+    align-items: center;
     a {
       margin: 0.25rem 0;
       white-space: break-spaces;
@@ -284,20 +318,25 @@ const AboutStyles = styled.div`
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
+    h2 {
+      padding-bottom: 1.5rem;
+    }
     .members {
       display: flex;
       flex-flow: column;
       align-items: center;
+      text-align: center;
     }
     .board-member {
       padding-bottom: 1rem;
       .name {
         color: ${({ theme }) => theme.fg};
+        font-weight: 700;
       }
       .role {
         padding: 0;
         font-weight: 300;
-        padding-left: 1rem;
+        font-size: 0.9rem;
       }
     }
   }

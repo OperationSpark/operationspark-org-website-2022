@@ -22,8 +22,8 @@ export const MacCard = ({
       >
         <div className='mac-buttons'>
           <MacBtn fill='yellow' />
-          <MacBtn char={onPrevClick && '<'} />
-          <MacBtn char={onNextClick && '>'} />
+          <MacBtn char={onPrevClick && '<'} onClick={onPrevClick} />
+          <MacBtn char={onNextClick && '>'} onClick={onNextClick} />
         </div>
       </SlashDivider>
       <div className='card-content'>{children}</div>
@@ -36,9 +36,11 @@ export default MacCard;
 const MacBtn = ({
   fill,
   char,
+  onClick,
 }: {
   fill?: 'yellow';
   char?: '<' | '>' | undefined;
+  onClick?: () => void;
 }) => {
   const theme = useTheme();
 
@@ -50,6 +52,7 @@ const MacBtn = ({
           style={fill === 'yellow' ? { background: theme.yellow[400] } : {}}
           disabled={!char}
           aria-label={char === '<' ? 'Previous' : ' Next'}
+          onClick={() => onClick?.()}
         >
           {char === '<' ? (
             <FaArrowLeft size={10} />
