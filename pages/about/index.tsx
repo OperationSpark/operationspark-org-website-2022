@@ -253,13 +253,8 @@ const AboutStyles = styled.div`
       position: absolute;
       z-index: -1;
       inset: 0;
-      background: ${({ theme }) => (theme.isLightMode ? theme.secondary[200] : theme.primary[900])};
-      background-image: ${({ theme }) =>
-        theme.isLightMode
-          ? 'url(images/textures/egg-shell.png)'
-          : 'url(images/textures/cream-paper.png)'};
-      opacity: ${({ theme }) => (theme.isLightMode ? 0.8 : 0.8)};
-      box-shadow: ${({ theme }) => '0 0 0.25rem 0rem inset ' + theme.alpha.fg};
+      background: ${({ theme }) => (theme.isLightMode ? theme.secondary[400] : theme.primary[900])};
+      box-shadow: ${({ theme }) => '0 0 0.4rem 0rem inset ' + theme.fg};
     }
 
     p,
@@ -271,8 +266,7 @@ const AboutStyles = styled.div`
       }
     }
     p {
-      font-weight: 400;
-
+      font-weight: 300;
       font-style: italic;
       padding: 1rem 0;
       text-align: justify;
