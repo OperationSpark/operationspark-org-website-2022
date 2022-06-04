@@ -2,15 +2,12 @@ import dynamic from 'next/dynamic';
 import { GetStaticProps, NextPage } from 'next';
 import styled from 'styled-components';
 import axios from 'axios';
+import Image from 'next/image';
 
 import { IInfoSession } from '@this/data/types/infoSession';
 import { ILogo } from '@this/data/types/logos';
 
-import {
-  cardShadow,
-  cardShadowLtr,
-  cardShadowRtl,
-} from '@this/src/theme/styled/mixins/shadows';
+import { cardShadow, cardShadowLtr, cardShadowRtl } from '@this/src/theme/styled/mixins/shadows';
 import { getStaticAsset } from '@this/pages-api/static/[asset]';
 import { ISessionDates } from '@this/pages-api/infoSession/dates';
 import { Main, Section, Content } from '@this/components/layout';
@@ -24,16 +21,11 @@ interface InfoSessionProps extends IInfoSession {
   logos: ILogo[];
 }
 
-const InfoSession: NextPage<InfoSessionProps> = ({
-  commonQuestions,
-  logos,
-}) => {
+const InfoSession: NextPage<InfoSessionProps> = ({ commonQuestions, logos }) => {
   const [sessionDates, setSessionDates] = useState<ISessionDates[]>([]);
 
   useEffect(() => {
-    axios
-      .get('/api/infoSession/dates')
-      .then(({ data }) => setSessionDates(data));
+    axios.get('/api/infoSession/dates').then(({ data }) => setSessionDates(data));
   }, []);
   return (
     <Main>
@@ -42,20 +34,26 @@ const InfoSession: NextPage<InfoSessionProps> = ({
           <Content className='free-info-session'>
             <div className='info-session-left'>
               <div className='left-header'>
-                <h1 className='dynamic-h3'>
-                  Interested in our Adult Workforce Program?
-                </h1>
+                <h1 className='dynamic-h3'>Interested in our Adult Workforce Program?</h1>
                 <h1 className='dynamic-xl'>Attend a Free Info Session!</h1>
               </div>
               <div className='whats-to-learn'>
-                <h2 className='dynamic-h2'>
-                  IN THIS SESSION YOU&apos;LL LEARN
-                </h2>
+                <h2 className='dynamic-h2'>IN THIS SESSION YOU&apos;LL LEARN</h2>
                 <ul className='what-to-learn-list'>
                   <li>about coding and career opportunities</li>
                   <li>about our programs and job search support</li>
                   <li>what it takes to be successful in our program</li>
                 </ul>
+              </div>
+              <div className='halle-img'>
+                <Image
+                  src='/images/hallebot3d.png'
+                  layout='fill'
+                  objectFit='contain'
+                  alt='hallebot'
+                  aria-label='display'
+                  priority
+                />
               </div>
             </div>
             <div className='info-session-right'>
@@ -63,20 +61,14 @@ const InfoSession: NextPage<InfoSessionProps> = ({
                 <div className='info-highschool'>
                   <b>HIGH SCHOOL INFORMATION</b>
                   <br />
-                  Info sessions discuss{' '}
-                  <i style={{ fontWeight: 600 }}>adult workforce programs</i>.
+                  Info sessions discuss <i style={{ fontWeight: 600 }}>adult workforce programs</i>.
                   To sign up or get more information about our{' '}
-                  <i style={{ fontWeight: 600 }}>
-                    High School to High Wage program
-                  </i>
-                  ,{' '}
+                  <i style={{ fontWeight: 600 }}>High School to High Wage program</i>,{' '}
                   <Link href='/programs/highschool/signup'>
                     <a className='anchor'>please complete this form.</a>
                   </Link>
                 </div>
-                <h2 className='dynamic-h3'>
-                  Register for upcoming info session
-                </h2>
+                <h2 className='dynamic-h3'>Register for upcoming info session</h2>
                 <WorkforceForm sessionDates={sessionDates} />
               </div>
             </div>
@@ -130,15 +122,22 @@ const InfoSessionStyles = styled.div`
     grid-template-columns: 1fr 1fr;
     grid-gap: 2rem;
     justify-content: space-between;
-
+    .halle-img {
+      width: 100%;
+      height: 20vw;
+      max-height: 200px;
+      position: relative;
+      img {
+        transform: rotate(45deg);
+      }
+    }
     .dynamic-xl {
       line-height: 1em;
       padding: 1rem 0;
       height: 100%;
       display: flex;
       align-items: center;
-      color: ${({ theme }) =>
-        theme.isLightMode ? theme.primary[500] : theme.secondary[400]};
+      color: ${({ theme }) => (theme.isLightMode ? theme.primary[500] : theme.secondary[400])};
     }
     .dynamic-h3 {
       font-weight: 700;
@@ -219,8 +218,7 @@ const InfoSessionStyles = styled.div`
   }
   .great-companies {
     h1.dynamic-h1 {
-      color: ${({ theme }) =>
-        theme.isLightMode ? theme.primary[500] : theme.secondary[400]};
+      color: ${({ theme }) => (theme.isLightMode ? theme.primary[500] : theme.secondary[400])};
     }
   }
 
@@ -246,6 +244,9 @@ const InfoSessionStyles = styled.div`
     .free-info-session {
       grid-template-rows: 1fr auto;
       grid-template-columns: 1fr;
+      .halle-img {
+        display: none;
+      }
       .info-session-right {
         margin-top: 2rem;
         justify-content: center;

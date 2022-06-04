@@ -12,25 +12,16 @@ import { BgImg } from '@this/src/components/Elements';
 
 const Countdown = dynamic(() => import('@this/components/Elements/Countdown'));
 
-const GradShowcase: NextPage<IGradShowcase> = ({
-  startDateTime,
-  cohortName,
-  eventbriteUrl,
-}) => {
+const GradShowcase: NextPage<IGradShowcase> = ({ startDateTime, cohortName, eventbriteUrl }) => {
   const [showcaseDate] = useState<Date | null>(toCentTime(startDateTime));
 
   return (
     <Main style={{ paddingTop: 0 }}>
       <ShowcaseSignupStyles>
-        <BgImg
-          src='/images/display/celebrate.png'
-          overlay={{ bg: 'transparent' }}
-        >
+        <BgImg src='/images/display/celebrate.png' overlay={{ bg: 'transparent' }}>
           <Content className='showcase-header'>
             <div className='showcase-header-container'>
-              <h1 className='dynamic-xl title secondary'>
-                Graduation Showcase
-              </h1>
+              <h1 className='dynamic-xl title secondary'>Graduation Showcase</h1>
               <h2 className='dynamic-h2 cohort-name secondary'>
                 <br />
                 <span style={{ fontWeight: 900 }}>Cohort </span>
@@ -46,8 +37,8 @@ const GradShowcase: NextPage<IGradShowcase> = ({
             <div className='showcase-form'>
               <div style={{ paddingBottom: '2rem' }}>
                 <h3 className='dynamic-h3 text-center'>
-                  Come celebrate with our grads as they show off their final
-                  project at Operation Spark!
+                  Come celebrate with our grads as they show off their final project at Operation
+                  Spark!
                 </h3>
               </div>
               <div className='sign-up-link'>
@@ -87,8 +78,7 @@ const ShowcaseSignupStyles = styled.div`
     justify-content: flex-end;
     height: 100%;
     .showcase-header-container {
-      background: ${({ theme }) =>
-        theme.isLightMode ? theme.alpha.fg : theme.alpha.bg};
+      background: ${({ theme }) => (theme.isLightMode ? theme.alpha.fg : theme.alpha.bg)};
       padding: 2rem;
       border-radius: 0.5rem;
       backdrop-filter: blur(4px);

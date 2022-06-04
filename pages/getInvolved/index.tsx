@@ -23,11 +23,9 @@ const GetInvolved: NextPage = () => {
   return (
     <Main style={{ paddingTop: 0 }}>
       <GetInvolvedStyles>
-        <BgImg src='/images/display/donate.png' height='24rem'>
+        <BgImg src='/images/display/donate.png' height='24rem' overlay={{ blur: 3 }}>
           <Content className='image-header'>
-            <h1 className='dynamic-xl secondary text-center'>
-              HELP OPEN THE DOOR TO PROSPERITY
-            </h1>
+            <h1 className='dynamic-xl secondary text-center'>HELP OPEN THE DOOR TO PROSPERITY</h1>
           </Content>
         </BgImg>
         <Content>
@@ -36,33 +34,24 @@ const GetInvolved: NextPage = () => {
             rightColStyle={{ width: '48%' }}
             leftCol={
               <div style={{ padding: '1rem 0' }}>
-                <h2 className='dynamic-h2 primary-secondary text-center'>
-                  Volunteer
-                </h2>
-                <h3 className='dynamic-h3'>
-                  At Operation Spark, we love when software engineers come and
-                  present on a topic or technology being used in the industry.
-                  If you are interested,{' '}
+                <h2 className='dynamic-h2 primary-secondary text-center'>Volunteer</h2>
+                <h3 className='dynamic-h3' style={{ maxWidth: '600px', textAlign: 'center' }}>
+                  At Operation Spark, we love when software engineers come and present on a topic or
+                  technology being used in the industry. If you are interested,{' '}
                   <Link href='/contact'>
-                    <a className='primary-secondary'>
-                      please get in touch here
-                    </a>
+                    <a className='primary-secondary'>please get in touch here</a>
                   </Link>
                   .
                 </h3>
               </div>
             }
             rightCol={
-              <div style={{ padding: '1rem 0' }}>
-                <h2 className='dynamic-h2 primary-secondary text-center'>
-                  Hire Our Grads
-                </h2>
+              <div style={{ padding: '1rem 0', maxWidth: '600px', textAlign: 'center' }}>
+                <h2 className='dynamic-h2 primary-secondary text-center'>Hire Our Grads</h2>
                 <h3 className='dynamic-h3'>
                   If you are interested in hiring our grads,{' '}
                   <Link href='/contact'>
-                    <a className='primary-secondary'>
-                      please get in touch here
-                    </a>
+                    <a className='primary-secondary'>please get in touch here</a>
                   </Link>
                   .
                 </h3>
@@ -76,25 +65,18 @@ const GetInvolved: NextPage = () => {
             <div className='donate-box'>
               <div className='donate-wrapper' title='Donate to Operation Spark'>
                 <p className='dynamic-txt desc'>
-                  We depend on dedicated individuals and organizations to run
-                  our programs.
+                  We depend on dedicated individuals and organizations to run our programs.
                 </p>
-                <p className='dynamic-txt desc'>
-                  Your donation can make the following possible:
-                </p>
+                <p className='dynamic-txt desc'>Your donation can make the following possible:</p>
                 <div className='donation-list'>
                   {[
                     [25, 'Our hosting bill for a month'],
                     [250, 'Chromebook for a student'],
                     [825, 'Bootcamp for one student'],
                   ].map(([amt, desc], i) => (
-                    <p
-                      className='dynamic-txt primary-secondary li'
-                      key={`${amt}-${desc}-${i}`}
-                    >
+                    <p className='dynamic-txt primary-secondary li' key={`${amt}-${desc}-${i}`}>
                       <span className='amount'>${amt}</span>
-                      <BsArrowRightSquareFill className='icon' size={18} />{' '}
-                      {desc}
+                      <BsArrowRightSquareFill className='icon' size={18} /> {desc}
                     </p>
                   ))}
                 </div>
@@ -111,10 +93,7 @@ const GetInvolved: NextPage = () => {
                     priority
                   />
                 </div>
-                <Button
-                  color='yellow'
-                  onClick={() => setShowDonate(!showDonate)}
-                >
+                <Button color='yellow' onClick={() => setShowDonate(!showDonate)}>
                   Donate to Operation Spark!
                 </Button>
                 <p className='tax-deduct'>
@@ -134,8 +113,8 @@ const GetInvolved: NextPage = () => {
                 className='donate-wrapper'
               >
                 <p className='dynamic-txt'>
-                  Shop at Amazon Smile and 0.5% of eligible purchases will be
-                  donated to Operation Spark!
+                  Shop at Amazon Smile and 0.5% of eligible purchases will be donated to Operation
+                  Spark!
                 </p>
 
                 <div className='img'>
@@ -162,10 +141,7 @@ const GetInvolved: NextPage = () => {
           </div>
           {showDonate && (
             <div className='donate-modal' onClick={() => setShowDonate(false)}>
-              <div
-                className='iframe-wrapper'
-                onClick={(e) => e.stopPropagation()}
-              >
+              <div className='iframe-wrapper' onClick={(e) => e.stopPropagation()}>
                 <div className='overlay-btn'>
                   <Button onClick={() => setShowDonate(false)}>
                     <IoMdCloseCircle size={30} />
@@ -181,9 +157,7 @@ const GetInvolved: NextPage = () => {
           )}
         </Content>
         <div style={{ paddingBottom: '2rem' }}>
-          <h2 className='dynamic-h2 primary-secondary text-center'>
-            Spread the word
-          </h2>
+          <h2 className='dynamic-h2 primary-secondary text-center'>Spread the word</h2>
           <SocialNetworks />
         </div>
       </GetInvolvedStyles>
@@ -208,8 +182,8 @@ const GetInvolvedStyles = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background: ${({ theme }) => theme.alpha.bg};
-    backdrop-filter: blur(8px);
+
+    backdrop-filter: blur(3px);
     .iframe-wrapper {
       margin: 1rem;
       position: relative;
@@ -232,9 +206,7 @@ const GetInvolvedStyles = styled.div`
         user-select: none;
         max-width: 100%;
         filter: ${({ theme }) =>
-          theme.isLightMode
-            ? 'invert(0) hue-rotate(-240deg)'
-            : 'invert(0.9) grayscale(100%)'};
+          theme.isLightMode ? 'invert(0) hue-rotate(-240deg)' : 'invert(0.9) grayscale(100%)'};
       }
     }
   }
@@ -259,12 +231,12 @@ const GetInvolvedStyles = styled.div`
       justify-content: center;
       height: 100%;
       padding: 1rem 2rem;
+
       p.desc {
         padding: 0.25rem 0;
       }
       .tax-deduct {
-        color: ${({ theme }) =>
-          theme.isLightMode ? theme.grey[700] : theme.grey[500]};
+        color: ${({ theme }) => (theme.isLightMode ? theme.grey[700] : theme.grey[500])};
         font-size: 0.8rem;
         padding-top: 0.5rem;
       }

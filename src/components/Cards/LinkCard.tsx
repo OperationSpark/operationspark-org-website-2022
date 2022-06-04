@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { SlashDivider } from '@this/components/Elements/SlashDivider';
 import { cardShadow } from '@this/src/theme/styled/mixins/shadows';
 
-export const YellowCardStyles = styled.div`
+export const LinkCardStyles = styled.div`
   width: 25%;
   padding: 0.75rem;
 
@@ -28,8 +28,7 @@ export const YellowCardStyles = styled.div`
     padding: 1.5rem;
     h3,
     a {
-      color: ${({ theme }) =>
-        theme.isLightMode ? theme.primary[700] : theme.secondary[400]};
+      color: ${({ theme }) => (theme.isLightMode ? theme.primary[700] : theme.secondary[400])};
     }
 
     h3 {
@@ -40,6 +39,7 @@ export const YellowCardStyles = styled.div`
     p {
       font-size: 1rem;
       padding-bottom: 1.5rem;
+      height: 100%;
     }
   }
 
@@ -52,21 +52,16 @@ export const YellowCardStyles = styled.div`
   }
 `;
 
-export interface YellowCardProps {
+export interface LinkCardProps {
   title: string;
   description: string;
   linkText?: string;
   linkUrl?: string;
 }
 
-const YellowCard = ({
-  title,
-  description,
-  linkText,
-  linkUrl,
-}: YellowCardProps) => {
+const LinkCard = ({ title, description, linkText, linkUrl }: LinkCardProps) => {
   return (
-    <YellowCardStyles>
+    <LinkCardStyles>
       <div className='card'>
         <div className='card-main'>
           <h3 className='dynamic-h3'>{title}</h3>
@@ -74,11 +69,7 @@ const YellowCard = ({
 
           {linkUrl && linkText && (
             <Link href={linkUrl}>
-              <a
-                className='anchor right-arr-left'
-                title={linkText}
-                aria-label={linkText}
-              >
+              <a className='anchor right-arr-left' title={linkText} aria-label={linkText}>
                 {linkText}
               </a>
             </Link>
@@ -91,8 +82,8 @@ const YellowCard = ({
           }}
         />
       </div>
-    </YellowCardStyles>
+    </LinkCardStyles>
   );
 };
 
-export default YellowCard;
+export default LinkCard;

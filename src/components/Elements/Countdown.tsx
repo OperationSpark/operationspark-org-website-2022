@@ -23,16 +23,24 @@ const CountdownStyles = styled.div`
     box-shadow: var(--countdown-shadow);
     font-weight: 600;
     font-size: 1.25rem;
-    background: ${({ theme: { isLightMode, grey } }) =>
-      isLightMode ? grey[100] : grey[900]};
+    background: ${({ theme: { isLightMode, grey } }) => (isLightMode ? grey[100] : grey[900])};
 
     color: ${({ theme: { isLightMode, primary, secondary } }) =>
       isLightMode ? primary[700] : secondary[400]};
+
+    .time {
+      display: flex;
+      align-items: center;
+      .tz {
+        font-size: 0.8rem;
+        margin-left: 0.25rem;
+        font-weight: 300;
+      }
+    }
   }
 
   .countdown-clock {
-    color: ${({ theme: { isLightMode, green, red } }) =>
-      isLightMode ? red[500] : green[500]};
+    color: ${({ theme: { isLightMode, green, red } }) => (isLightMode ? red[500] : green[500])};
     display: flex;
     justify-content: space-evenly;
     text-align: center;
@@ -63,6 +71,9 @@ interface CountdownProps {
 
 const Countdown = ({ endTime }: CountdownProps) => {
   const [time, updateTime] = useState<TCountdownTime | null>(null);
+  const [timeZoneName] = useState<string>(
+    new Date().toLocaleDateString('en-US', { day: '2-digit', timeZoneName: 'short' }).slice(4),
+  );
 
   type timeStrings = 'days' | 'hours' | 'minutes' | 'seconds';
   const timeInc: timeStrings[] = ['days', 'hours', 'minutes', 'seconds'];
@@ -85,16 +96,16 @@ const Countdown = ({ endTime }: CountdownProps) => {
     <CountdownStyles>
       <div className='countdown-date-time'>
         <div className='date'>{time.m.format('MMM D, YYYY')}</div>
-        <div className='time'>{time.m.format('h:mm A')}</div>
+        <div className='time'>
+          {time.m.format('h:mm A')} <span className='tz'>({timeZoneName})</span>
+        </div>
       </div>
       <div className='countdown-clock'>
         {timeInc.map((inc, i) =>
           timeInc.slice(0, i + 1).every((val) => !time[val]) ? null : (
             <div className='time-segment' key={inc}>
               <h2 className='dynamic-h2 source-code'>{time[inc]}</h2>
-              <p className='dynamic-txt'>
-                {inc[0].toUpperCase() + inc.slice(1)}
-              </p>
+              <p className='dynamic-txt'>{inc[0].toUpperCase() + inc.slice(1)}</p>
             </div>
           ),
         )}

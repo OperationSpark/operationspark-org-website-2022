@@ -9,6 +9,7 @@ export interface OpSparkValues {
   title: string[];
   description: string[];
   image?: string;
+  effects?: boolean;
   rules?: {
     title: string;
     list: {
