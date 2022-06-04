@@ -55,8 +55,8 @@
     },
     {
       "title": ["3. Fully Accept Others and Yourself"],
-      "image": "/images/hallebot3d.png",
-      "effects": true,
+      "image": "/images/display/hallegrid-1800x.png",
+      "effects": false,
       "description": [
         "Because your Operation Spark team is your family, you must accept them for who they are. This group will be in the trenches with you and working towards becoming kick-ass software developers too. It is important to acknowledge and embrace each other's differences.",
         "You are all equals, and you are no better than the person next to you. You must be conscientious that the people on either side of you are not one and the same - everyone is unique. Some people are uniquely geeky, some people are shy, some people are outgoing, some people are white, some people are black, and some people are gay. Accept them for who they are and embrace their differences.",

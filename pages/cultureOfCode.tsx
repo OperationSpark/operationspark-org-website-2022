@@ -42,7 +42,7 @@ const CultureOfCode: NextPage<CultureOfCodeProps> = ({
       <CultureOfCodeStyles>
         <BgImg src='/images/display/code-editor.png'>
           <Content className='culture-of-code-header'>
-            <h1 className='dynamic-xl'>{header.title}</h1>
+            <h1 className='dynamic-xl text-center'>{header.title}</h1>
             <p className='dynamic-txt'>{header.description}</p>
           </Content>
         </BgImg>
@@ -208,9 +208,11 @@ const CultureOfCodeStyles = styled.div`
     display: flex;
     flex-flow: row wrap;
     align-items: flex-end;
+    justify-content: center;
     height: 100%;
 
-    p.dynamic-txt {
+    p.dynamic-txt,
+    h1 {
       padding: 1.5rem;
       background: ${({ theme }) => theme.alpha.bg};
       border-radius: 0.5rem;
@@ -265,7 +267,7 @@ const CultureOfCodeStyles = styled.div`
   .opspark-value {
     display: flex;
     justify-content: space-between;
-    padding: 2rem 0;
+    padding: 1rem 0;
     :nth-child(even) {
       flex-flow: row-reverse;
     }
@@ -365,10 +367,10 @@ const CultureOfCodeStyles = styled.div`
     }
 
     .opspark-value {
-      flex-flow: column;
+      flex-flow: column-reverse;
       padding-bottom: 0;
       :nth-child(even) {
-        flex-flow: column;
+        flex-flow: column-reverse;
       }
       .opspark-value-card {
         width: 100%;
@@ -385,6 +387,7 @@ const CultureOfCodeStyles = styled.div`
       .opspark-value-img {
         width: 100%;
         height: 200px;
+        margin-bottom: 1rem;
         border-radius: 0.25rem;
 
         overflow: hidden;

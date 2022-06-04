@@ -56,7 +56,7 @@ const HighSchool: NextPage<IHighschoolPrograms> = ({
         </AbsoluteBtnWindow>
         <BgImg src='/images/display/code-matrix.png' height='22rem'>
           <Content style={{ display: 'flex', height: '100%' }}>
-            <h1 className='dynamic-xl primary-secondary' style={{ alignSelf: 'flex-end' }}>
+            <h1 className='dynamic-xl secondary' style={{ alignSelf: 'flex-end' }}>
               High School
             </h1>
           </Content>
