@@ -3,7 +3,6 @@ import Image from 'next/image';
 import styled from 'styled-components';
 
 import { ICultureOfCode } from '@this/data/types/cultureOfCode';
-import PlainCard from '@this/components/Cards/PlainCard';
 import { SlashDivider } from '@this/components/Elements/SlashDivider';
 import Main from '@this/components/layout/Main';
 import Content from '@this/components/layout/Content';
@@ -72,7 +71,7 @@ const CultureOfCode: NextPage<CultureOfCodeProps> = ({
           <h2 className='dynamic-h2'>Operation Spark Values</h2>
           {opSparkValues1.map(({ title, description, image, effects }, i) => (
             <div className='opspark-value' key={title.join('')}>
-              <PlainCard className='opspark-value-card'>
+              <div className='opspark-value-card'>
                 <h4 className='card-title'>{title}</h4>
 
                 {description.map((desc) => (
@@ -80,7 +79,7 @@ const CultureOfCode: NextPage<CultureOfCodeProps> = ({
                     {desc}
                   </p>
                 ))}
-              </PlainCard>
+              </div>
               {image ? (
                 <div className='opspark-value-img' style={effects ? colorHues[i] : {}}>
                   <Image
@@ -118,7 +117,7 @@ const CultureOfCode: NextPage<CultureOfCodeProps> = ({
         <Content>
           {opSparkValues2.map(({ title, description, image, rules }, i) => (
             <div className='opspark-value' key={title.join('')}>
-              <PlainCard className='opspark-value-card two-col-card'>
+              <div className='opspark-value-card two-col-card'>
                 <h4 className='card-title'>{title}</h4>
                 <div className={rules ? 'two-col' : ''}>
                   <div>
@@ -129,7 +128,7 @@ const CultureOfCode: NextPage<CultureOfCodeProps> = ({
                     ))}
                   </div>
                 </div>
-              </PlainCard>
+              </div>
               <div
                 className={
                   !rules
@@ -270,10 +269,15 @@ const CultureOfCodeStyles = styled.div`
     padding: 1rem 0;
     :nth-child(even) {
       flex-flow: row-reverse;
+      .opspark-value-card {
+        padding-right: 0;
+      }
     }
     .opspark-value-card {
       width: calc(56% - 0.5rem);
       padding: 0;
+      padding-right: 1rem;
+
       .card-title {
         font-weight: 700;
       }
