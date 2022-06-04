@@ -91,7 +91,7 @@ const MacCardStyles = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    box-shadow: 0 0 0.1rem rgba(125, 125, 125, 0.5) inset;
+    box-shadow: 0.1rem 0 0.1rem rgba(125, 125, 125, 0.5) inset;
   }
 
   .card-content {
