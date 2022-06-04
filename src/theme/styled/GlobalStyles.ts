@@ -6,8 +6,7 @@ const GlobalStyles = createGlobalStyle`
     transition: background-color 125ms;
   }
   .primary-secondary {
-    color: ${({ theme }) =>
-      theme.isLightMode ? theme.primary[700] : theme.secondary[500]};
+    color: ${({ theme }) => (theme.isLightMode ? theme.primary[700] : theme.secondary[500])};
   }
   .primary {
     color: ${({ theme }) => theme.primary[700]};
