@@ -2,6 +2,13 @@
   "funders": [],
   "partners": [
     {
+      "name": "Demeter",
+      "url": "https://demeterlogistics.com/",
+      "logoLight": "/images/logos/supporters/demeter-light.png",
+      "logoDark": "/images/logos/supporters/demeter-dark.png",
+      "width": 2
+    },
+    {
       "name": "Sev1Tech",
       "url": "https://sev1tech.com",
       "logoLight": "/images/logos/supporters/sev1tech.png",

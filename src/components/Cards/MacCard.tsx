@@ -10,15 +10,16 @@ interface MacCardProps {
   children: ReactNode | ReactNode[] | undefined;
 }
 
-export const MacCard = ({
-  children,
-  onNextClick,
-  onPrevClick,
-}: MacCardProps) => {
+export const MacCard = ({ children, onNextClick, onPrevClick }: MacCardProps) => {
   return (
     <MacCardStyles>
       <SlashDivider
-        style={{ borderRadius: '0.25rem 0.25rem 0 0', borderTop: 'none' }}
+        style={{
+          borderRadius: '0.25rem 0.25rem 0 0',
+          borderTop: 'none',
+          borderBottom: 'none',
+          boxShadow: `0 0 0.1rem rgba(125, 125, 125, 0.5) inset`,
+        }}
       >
         <div className='mac-buttons'>
           <MacBtn fill='yellow' />
@@ -54,11 +55,7 @@ const MacBtn = ({
           aria-label={char === '<' ? 'Previous' : ' Next'}
           onClick={() => onClick?.()}
         >
-          {char === '<' ? (
-            <FaArrowLeft size={10} />
-          ) : (
-            <FaArrowRight size={10} />
-          )}
+          {char === '<' ? <FaArrowLeft size={10} /> : <FaArrowRight size={10} />}
         </button>
       ) : (
         <div
@@ -94,6 +91,7 @@ const MacCardStyles = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    box-shadow: 0.1rem 0 0.1rem rgba(125, 125, 125, 0.5) inset;
   }
 
   .card-content {
@@ -119,14 +117,12 @@ const MacBtnStyles = styled.div`
     border-radius: 50%;
 
     box-shadow: 0 0 1px 2px
-      ${({ theme }) =>
-        theme.isLightMode ? theme.primary[900] : theme.primary[300]};
+      ${({ theme }) => (theme.isLightMode ? theme.primary[900] : theme.primary[300])};
   }
   button {
     border-radius: 50%;
     box-shadow: 0 0 0px 3px
-      ${({ theme }) =>
-        theme.isLightMode ? theme.primary[900] : theme.primary[300]};
+      ${({ theme }) => (theme.isLightMode ? theme.primary[900] : theme.primary[300])};
     border: none;
     outline: none;
     width: 100%;

@@ -3,7 +3,6 @@ import Image from 'next/image';
 import styled from 'styled-components';
 
 import { ICultureOfCode } from '@this/data/types/cultureOfCode';
-import PlainCard from '@this/components/Cards/PlainCard';
 import { SlashDivider } from '@this/components/Elements/SlashDivider';
 import Main from '@this/components/layout/Main';
 import Content from '@this/components/layout/Content';
@@ -42,7 +41,7 @@ const CultureOfCode: NextPage<CultureOfCodeProps> = ({
       <CultureOfCodeStyles>
         <BgImg src='/images/display/code-editor.png'>
           <Content className='culture-of-code-header'>
-            <h1 className='dynamic-xl'>{header.title}</h1>
+            <h1 className='dynamic-xl text-center'>{header.title}</h1>
             <p className='dynamic-txt'>{header.description}</p>
           </Content>
         </BgImg>
@@ -70,9 +69,9 @@ const CultureOfCode: NextPage<CultureOfCodeProps> = ({
         </Content>
         <Content>
           <h2 className='dynamic-h2'>Operation Spark Values</h2>
-          {opSparkValues1.map(({ title, description, image }, i) => (
+          {opSparkValues1.map(({ title, description, image, effects }, i) => (
             <div className='opspark-value' key={title.join('')}>
-              <PlainCard className='opspark-value-card'>
+              <div className='opspark-value-card'>
                 <h4 className='card-title'>{title}</h4>
 
                 {description.map((desc) => (
@@ -80,11 +79,11 @@ const CultureOfCode: NextPage<CultureOfCodeProps> = ({
                     {desc}
                   </p>
                 ))}
-              </PlainCard>
+              </div>
               {image ? (
-                <div className='opspark-value-img' style={colorHues[i]}>
+                <div className='opspark-value-img' style={effects ? colorHues[i] : {}}>
                   <Image
-                    src='/images/hallebot3d.png'
+                    src={image}
                     layout='fill'
                     objectFit='contain'
                     alt='hallebot'
@@ -118,7 +117,7 @@ const CultureOfCode: NextPage<CultureOfCodeProps> = ({
         <Content>
           {opSparkValues2.map(({ title, description, image, rules }, i) => (
             <div className='opspark-value' key={title.join('')}>
-              <PlainCard className='opspark-value-card two-col-card'>
+              <div className='opspark-value-card two-col-card'>
                 <h4 className='card-title'>{title}</h4>
                 <div className={rules ? 'two-col' : ''}>
                   <div>
@@ -129,7 +128,7 @@ const CultureOfCode: NextPage<CultureOfCodeProps> = ({
                     ))}
                   </div>
                 </div>
-              </PlainCard>
+              </div>
               <div
                 className={
                   !rules
@@ -208,9 +207,11 @@ const CultureOfCodeStyles = styled.div`
     display: flex;
     flex-flow: row wrap;
     align-items: flex-end;
+    justify-content: center;
     height: 100%;
 
-    p.dynamic-txt {
+    p.dynamic-txt,
+    h1 {
       padding: 1.5rem;
       background: ${({ theme }) => theme.alpha.bg};
       border-radius: 0.5rem;
@@ -265,13 +266,18 @@ const CultureOfCodeStyles = styled.div`
   .opspark-value {
     display: flex;
     justify-content: space-between;
-    padding: 2rem 0;
+    padding: 1rem 0;
     :nth-child(even) {
       flex-flow: row-reverse;
+      .opspark-value-card {
+        padding-right: 0;
+      }
     }
     .opspark-value-card {
       width: calc(56% - 0.5rem);
       padding: 0;
+      padding-right: 1rem;
+
       .card-title {
         font-weight: 700;
       }
@@ -365,10 +371,10 @@ const CultureOfCodeStyles = styled.div`
     }
 
     .opspark-value {
-      flex-flow: column;
+      flex-flow: column-reverse;
       padding-bottom: 0;
       :nth-child(even) {
-        flex-flow: column;
+        flex-flow: column-reverse;
       }
       .opspark-value-card {
         width: 100%;
@@ -385,6 +391,7 @@ const CultureOfCodeStyles = styled.div`
       .opspark-value-img {
         width: 100%;
         height: 200px;
+        margin-bottom: 1rem;
         border-radius: 0.25rem;
 
         overflow: hidden;

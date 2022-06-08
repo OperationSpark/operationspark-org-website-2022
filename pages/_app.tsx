@@ -14,23 +14,19 @@ const Theme = dynamic(() => import('@this/src/theme/styled/Theme'));
 const Navbar = dynamic(() => import('@this/components/Navbar/Navbar'));
 const Footer = dynamic(() => import('@this/components/footer/footer'));
 
-const hostname = 'https://staging.operationspark.org';
-
 export default function App({ Component, pageProps }: AppProps) {
   const [logos, setLogos] = useState<ILogo[]>([]);
   const [alertInfo, setAlertInfo] = useState<IAlert>({ message: '', url: '' });
 
   useEffect(() => {
-    getStaticAsset('logos').then((l: ISupporterFunderLogos) =>
-      setLogos(l.funders),
-    );
+    getStaticAsset('logos').then((l: ISupporterFunderLogos) => setLogos(l.funders));
     getStaticAsset('alert').then(setAlertInfo);
   }, []);
 
   return (
     <ChakraProvider theme={theme}>
       <Theme theme={theme.colors.brand}>
-        <Meta hostname={hostname} />
+        <Meta />
         <Navbar alertInfo={alertInfo} />
         <MainContainer>
           <Component {...pageProps} />

@@ -10,11 +10,9 @@ const SlashDividerStyles = styled.div`
   height: 24px;
   position: relative;
   border-bottom: 1px solid
-    ${({ theme }) =>
-      theme.isLightMode ? theme.primary[900] : theme.primary[700]};
+    ${({ theme }) => (theme.isLightMode ? theme.primary[900] : theme.primary[700])};
   border-top: 1px solid
-    ${({ theme }) =>
-      theme.isLightMode ? theme.primary[900] : theme.primary[700]};
+    ${({ theme }) => (theme.isLightMode ? theme.primary[900] : theme.primary[700])};
   background-image: url(${({ theme }) => getImageUrl(theme)});
 
   @media print {

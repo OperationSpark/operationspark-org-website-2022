@@ -9,9 +9,9 @@ import Main from '@this/components/layout/Main';
 import { IHighschoolPrograms } from 'data/types/programs';
 import { getStaticAsset } from '@this/pages-api/static/[asset]';
 import PlainCard from '@this/components/Cards/PlainCard';
-import { cardShadow } from 'src/theme/styled/mixins/shadows';
 import HighschoolForm from 'src/Forms/Form.Highschool';
 import AbsoluteBtnWindow from '@this/components/Elements/AbsoluteBtnWindow';
+import { BgImg } from '@this/src/components/Elements';
 
 const HighSchool: NextPage<IHighschoolPrograms> = ({
   description,
@@ -27,7 +27,7 @@ const HighSchool: NextPage<IHighschoolPrograms> = ({
   };
 
   return (
-    <Main>
+    <Main style={{ paddingTop: 0 }}>
       <HighschoolStyles>
         <AbsoluteBtnWindow
           text={interestOnly ? 'Get More Info' : 'Sign up!'}
@@ -54,9 +54,14 @@ const HighSchool: NextPage<IHighschoolPrograms> = ({
             selectedCourse={selectedCourse}
           />
         </AbsoluteBtnWindow>
-
+        <BgImg src='/images/display/code-matrix.png' height='22rem'>
+          <Content style={{ display: 'flex', height: '100%' }}>
+            <h1 className='dynamic-xl secondary' style={{ alignSelf: 'flex-end' }}>
+              High School
+            </h1>
+          </Content>
+        </BgImg>
         <Content className='hs-header'>
-          <h1 className='dynamic-xl primary-secondary'>High School</h1>
           <div className='hs-desc'>
             {description.map((desc) => (
               <p key={desc} className='dynamic-txt'>
@@ -69,18 +74,10 @@ const HighSchool: NextPage<IHighschoolPrograms> = ({
           </div>
         </Content>
         <Content className='courses'>
-          <h1 className='dynamic-h1 primary-secondary courses-header'>
-            Courses
-          </h1>
+          <h1 className='dynamic-h1 primary-secondary courses-header'>Courses</h1>
           {courses.map((course) => (
-            <PlainCard
-              key={course.title.join('')}
-              className='course-card'
-              id={course.id}
-            >
-              <h2 className='dynamic-h2 course-title'>
-                {course.title.join('')}
-              </h2>
+            <PlainCard key={course.title.join('')} className='course-card' id={course.id}>
+              <h2 className='dynamic-h2 course-title'>{course.title.join('')}</h2>
               {course.description.map((desc) => (
                 <p key={desc} className='dynamic-txt'>
                   {desc}
@@ -90,10 +87,7 @@ const HighSchool: NextPage<IHighschoolPrograms> = ({
               <br />
               <b>IBC: {course.ibc} </b>
 
-              <a
-                className='anchor right-arr-left'
-                onClick={() => openPreFilledForm(course.id)}
-              >
+              <a className='anchor right-arr-left' onClick={() => openPreFilledForm(course.id)}>
                 Get more information about {course.title.join('')}
               </a>
             </PlainCard>
@@ -127,10 +121,7 @@ const HighSchool: NextPage<IHighschoolPrograms> = ({
 export default HighSchool;
 
 export const getStaticProps: GetStaticProps<IHighschoolPrograms> = async () => {
-  const props: IHighschoolPrograms = await getStaticAsset(
-    'programs',
-    'highschool',
-  );
+  const props: IHighschoolPrograms = await getStaticAsset('programs', 'highschool');
 
   return {
     props,
@@ -156,15 +147,8 @@ const HighschoolStyles = styled.div`
     }
     .course-title {
       font-weight: 700;
-      color: ${({ theme }) =>
-        theme.isLightMode ? theme.primary[700] : theme.secondary[500]};
+      color: ${({ theme }) => (theme.isLightMode ? theme.primary[700] : theme.secondary[500])};
     }
-  }
-  .hs-desc {
-    ${cardShadow}
-    padding: 1rem 1.5rem;
-    margin-top: 1rem;
-    border-radius: 0.25rem;
   }
 
   .schools {

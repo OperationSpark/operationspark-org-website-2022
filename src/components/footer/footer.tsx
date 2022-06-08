@@ -9,13 +9,8 @@ import { useTheme } from 'styled-components';
 import Subscribe from './subscribe';
 import { SlashDivider } from '@this/components/Elements/SlashDivider';
 import NavLink from '@this/components/Navbar/elements/NavLink';
-import VercelLogo from './VercelLogo';
 
-import {
-  InfoSessionStyles,
-  FooterStyles,
-  SupportersStyles,
-} from './FooterStyles';
+import { InfoSessionStyles, FooterStyles, SupportersStyles } from './FooterStyles';
 
 import { ILogo } from '@this/data/types/logos';
 import rgbDataURL from '@this/src/helpers/rgbDataURL';
@@ -32,20 +27,13 @@ const Footer = ({ logos }: FooterProps) => {
   const isInfoSessionPage = pathname.includes('infoSession');
   const isHighschoolPage = pathname.includes('highschool');
 
-  const fadedGreyTextColor = theme.isLightMode
-    ? theme.grey[600]
-    : theme.grey[500];
+  const fadedGreyTextColor = theme.isLightMode ? theme.grey[600] : theme.grey[500];
 
   return (
     <FooterStyles>
       {!isInfoSessionPage && !isHighschoolPage ? (
         <InfoSessionStyles justify='center'>
-          <Text
-            as='h2'
-            pb='1rem'
-            className='dynamic-h2'
-            color='brand.secondary.400'
-          >
+          <Text as='h2' pb='1rem' className='dynamic-h2' color='brand.secondary.400'>
             ATTEND A FREE INFO SESSION
           </Text>
           <NavLink className='info' href='/infoSession'>
@@ -59,15 +47,9 @@ const Footer = ({ logos }: FooterProps) => {
 
       <VStack w='100%' className='content' pb='0'>
         <SupportersStyles w='100%'>
-          <VStack
-            justify='space-between'
-            borderColor='brand.purple.900'
-            borderBottom='1px'
-          >
+          <VStack justify='space-between' borderColor='brand.purple.900' borderBottom='1px'>
             <h1 className='dynamic-h4'>Thanks to our Supporters!</h1>
-            <Text color={fadedGreyTextColor}>
-              Operation Spark is a 501(c)3 not-for-profit.
-            </Text>
+            <Text color={fadedGreyTextColor}>Operation Spark is a 501(c)3 not-for-profit.</Text>
             <HStack
               flexWrap='wrap'
               justifyContent='space-around'
@@ -111,11 +93,7 @@ const Footer = ({ logos }: FooterProps) => {
             alt=''
             layout='fill'
             objectFit='contain'
-            src={
-              theme.isLightMode
-                ? '/images/logo-mark.webp'
-                : '/images/logo-mark-dark.webp'
-            }
+            src={theme.isLightMode ? '/images/logo-mark.webp' : '/images/logo-mark-dark.webp'}
           />
         </div>
       </HStack>
@@ -125,7 +103,13 @@ const Footer = ({ logos }: FooterProps) => {
           target='_blank'
           rel='noreferrer'
         >
-          <VercelLogo mode={theme.colorMode} />
+          <Image
+            src='/images/logos/etc/vercel_banner.svg'
+            width={159}
+            height={33}
+            alt='Powered By Vercel'
+            style={{ filter: `invert(${theme.isLightMode ? 0 : 1})` }}
+          />
         </a>
       </HStack>
       <HStack justify='space-between' w='100%' padding='0 0.25rem'>

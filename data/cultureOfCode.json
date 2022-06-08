@@ -39,13 +39,15 @@
     {
       "title": ["1. Be Willing to Change"],
       "image": "",
+      "effects": false,
       "description": [
         "You will learn a lot over your time with Operation Spark. Some things will be easy, and some will be new, but above all, you've got to be willing to grow as you learn. So, commit to changing your mindset toward better learning, better productivity, better professional conduct, and better community."
       ]
     },
     {
       "title": ["2. Team Means Family"],
-      "image": "/images/hallebot-placeholder.png",
+      "image": "/images/display/team.png",
+      "effects": false,
       "description": [
         "One of the first things you will learn in software development is that your team is everything. A final app is only as good as the team that built it. When you have a team that is open and care for each other, that is when great apps are built.",
         "Your Operation Spark team is not only your team but also your family. Everyone is here to learn how to become a great software developer, so do your best to build each other up. Be willing to learn from your teammates, help them grow, and encourage their efforts. You will be amazed what you can accomplish with a laptop, Internet connection, and the support of a great team."
@@ -53,7 +55,8 @@
     },
     {
       "title": ["3. Fully Accept Others and Yourself"],
-      "image": "/images/hallebot-placeholder.png",
+      "image": "/images/display/hallegrid-1800x.png",
+      "effects": false,
       "description": [
         "Because your Operation Spark team is your family, you must accept them for who they are. This group will be in the trenches with you and working towards becoming kick-ass software developers too. It is important to acknowledge and embrace each other's differences.",
         "You are all equals, and you are no better than the person next to you. You must be conscientious that the people on either side of you are not one and the same - everyone is unique. Some people are uniquely geeky, some people are shy, some people are outgoing, some people are white, some people are black, and some people are gay. Accept them for who they are and embrace their differences.",
@@ -62,7 +65,8 @@
     },
     {
       "title": ["4. Don't be a Jerk"],
-      "image": "/images/hallebot-placeholder.png",
+      "image": "/images/hallebot3d.png",
+      "effects": true,
       "description": [
         "At Operation Spark, we accept everyone for who they are. We encourage you to be your true self and become whatever you want to be, except a jerk. Here's why:",
         "Being a jerk gets you nowhere. It stunts your growth, limits your maturity, and is poison for those around you. People stop respecting you when you're being a jerk, and no one wants to be around someone like that. As young adults, you are on the verge of having to make your way in the world, and if you can't show yourself to be mature, trustworthy, and capable, people will begin to move away from you, and eventually, you'll find yourself struggling - which will deeply affect your success and our mission is for you to succeed.",
@@ -71,7 +75,8 @@
     },
     {
       "title": ["5. Nothing is Hard, Only New"],
-      "image": "/images/hallebot-placeholder.png",
+      "image": "/images/hallebot3d.png",
+      "effects": true,
       "description": [
         "The great Jon Clayton, world-class jazz bass player, composer, and arranger, instructs that nothing is hard, only new. Anything worth comprehending requires work, and although it may be difficult at first, that's only because it's unfamiliar. Try not to get frustrated. Just relax and let yourself enjoy the learning process.",
         "Think of acquiring knowledge like walking into a dark room for the first time. You're not going to know where the furniture is positioned, you'll be bumping into things and banging around, dropping your belongings, but after a few times through the room, you'll know where the paths are and be able to see your way clearly in the dark.",
@@ -80,7 +85,8 @@
     },
     {
       "title": ["6. You can do it! Just Focus"],
-      "image": "/images/hallebot-placeholder.png",
+      "image": "/images/hallebot3d.png",
+      "effects": true,
       "description": [
         "To become a great programmer, you'll have to stay focused. Otherwise, you'll fall behind and will regret not taking advantage of this unique opportunity.",
         "Focus is less of a mental exercise and more of a test of self-discipline. The best way to focus is to remove all distractions while in class, studying, or working on assignments at home. Turn off your smartphones, don't surf the 'net, don't watch YouTube or TV, don't Facebook, and you will be surprised at what you can accomplish. If you don't remove distractions from your work, you'll waste valuable opportunities and develop habits unconducive to better learning and productivity. Don't let these distractions drag you down. You want to give yourself and your team the best opportunity to succeed, so you must be willing to focus and buckle down.",
@@ -174,7 +180,8 @@
     },
     {
       "title": ["8. Yours is not Better than Theirs"],
-      "image": "/images/hallebot-placeholder.png",
+      "image": "/images/hallebot3d.png",
+      "effects": true,
       "description": [
         "Competition is sometimes a great thing and can really push people to become better at something very quickly. We want you to push each other to be better software developers and people, but we want you to do it constructively.",
         "If you understand a concept, that's great! But if you see that your teammate next to you is struggling, don't brag about how you get it. Help them!! Kudos to you if you're a fast learner, but remember that your team is only as strong as the weakest link. The faster you all learn, the better your team will be.",
@@ -183,7 +190,8 @@
     },
     {
       "title": ["9. Listen First, Talk Second"],
-      "image": "/images/hallebot-placeholder.png",
+      "image": "/images/hallebot3d.png",
+      "effects": true,
       "description": [
         "One of the most important things to acknowledge in life is that you don't know everything. Embrace both 'I know what I don't know' and 'I don't know what I don't know'. Listen to knowledgeable people around you and always think before speaking. This is an invaluable skill and is what separates the great programmers from the good ones.",
         "It is most probable that in any situation, you haven't thought of all the solutions. Given the nature of human beings, we have a limited perspective and therefore can't see all the sides of something at the same time. Just have a look at any object in front of you now: can you see the back of this object? Do you know if there's a monkey on the other side of your computer screen or a lizard clinging to the back of your iPhone right now? No, you don't, but with the help of someone on the other side of the object, you can.",
@@ -192,7 +200,8 @@
     },
     {
       "title": ["10. Be Mentored and Be a Mentor"],
-      "image": "/images/hallebot-placeholder.png",
+      "image": "/images/hallebot3d.png",
+      "effects": true,
       "description": [
         "Throughout your Operation Spark experience, there will be a variety of professionals that come and spend time with you. They will have years of experience and will seem ever so wise. This is your chance! If you really jive with someone, don't hesitate to ask them to be your mentor. The best way to accelerate your development is to learn from people who have done it before. They will save you several hours of time with just a couple minutes of advice - you just have to ask!",
         "To create a great relationship with your mentor, it is also important to be a great mentee. These professionals are dedicating their time and effort to help you, so you must be appreciative and grateful for their help. Be accountable and follow through with your mentor, so they continue to invest in you and help guide you through your journey to becoming a super awesome software developer.",

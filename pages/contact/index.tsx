@@ -13,18 +13,11 @@ import { FiPhone, FiMapPin } from 'react-icons/fi';
 import { BgImg } from '@this/src/components/Elements';
 const ContactForm = dynamic(() => import('@this/src/Forms/Form.Contact'));
 
-const Contact: NextPage<IContact> = ({
-  address,
-  city,
-  state,
-  zip,
-  phone,
-  gMapUrl,
-}) => {
+const Contact: NextPage<IContact> = ({ address, city, state, zip, phone, gMapUrl }) => {
   return (
     <Main style={{ paddingTop: 0 }}>
       <ContactStyles>
-        <BgImg src='/images/display/contact.png' height='28rem'>
+        <BgImg src='/images/display/contact.png' height='calc(20rem + 20vw)'>
           <div className='contact-top'>
             <h1 className='dynamic-xl secondary'>Contact Us</h1>
           </div>
@@ -36,12 +29,7 @@ const Contact: NextPage<IContact> = ({
                 <span className='contact-icon'>
                   <FiMapPin size={28} />
                 </span>
-                <a
-                  className='anchor'
-                  href={gMapUrl}
-                  target='_blank'
-                  rel='noreferrer'
-                >
+                <a className='anchor' href={gMapUrl} target='_blank' rel='noreferrer'>
                   <span>{address}</span>
                   <br />
                   <span>
@@ -53,12 +41,7 @@ const Contact: NextPage<IContact> = ({
                 <span className='contact-icon'>
                   <FiPhone size={28} />
                 </span>
-                <a
-                  className='anchor'
-                  href={`tel:${phone}`}
-                  target='_blank'
-                  rel='noreferrer'
-                >
+                <a className='anchor' href={`tel:${phone}`} target='_blank' rel='noreferrer'>
                   {phone}
                 </a>
               </p>
@@ -66,10 +49,7 @@ const Contact: NextPage<IContact> = ({
           </div>
           <ContactForm />
           <div className='map'>
-            <Map
-              href={gMapUrl}
-              address={`${address}, ${city}, ${state} ${zip}`}
-            />
+            <Map href={gMapUrl} address={`${address}, ${city}, ${state} ${zip}`} />
           </div>
         </Content>
       </ContactStyles>

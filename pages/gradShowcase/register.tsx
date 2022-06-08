@@ -42,9 +42,13 @@ const GradShowcase: NextPage<IGradShowcase> = ({ startDateTime, cohortName, even
                 </h3>
               </div>
               <div className='sign-up-link'>
-                <a target='_blank' href={eventbriteUrl} rel='noreferrer'>
-                  <Button color='yellow'>Sign up here</Button>
-                </a>
+                {eventbriteUrl ? (
+                  <a target='_blank' href={eventbriteUrl} rel='noreferrer'>
+                    <Button color='yellow'>Sign up here</Button>
+                  </a>
+                ) : (
+                  <h4 className='dynamic-h4 primary-secondary'>Link will be available soon</h4>
+                )}
               </div>
             </div>
           </div>

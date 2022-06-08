@@ -13,25 +13,20 @@ const formatRouteTitle = (str: string) => {
   return (str || '')
     .slice(str.lastIndexOf('/') + 1, str.length)
     .split('')
-    .map((char, i) =>
-      i === 0 ? char.toUpperCase() : char.match(/[A-Z]/) ? ` ${char}` : char,
-    )
+    .map((char, i) => (i === 0 ? char.toUpperCase() : char.match(/[A-Z]/) ? ` ${char}` : char))
     .join('');
 };
 
-const Meta = ({ hostname }: { hostname: string }) => {
+const Meta = () => {
   const { pathname } = useRouter();
   const route = formatRouteTitle(pathname);
   const metaData = meta[route.toLowerCase().replaceAll(' ', '_')] || {};
   const defaultMeta = meta.defaultMeta || {};
 
+  const hostname = defaultMeta.host ?? 'https://operationspark.org';
   const description = metaData.description ?? defaultMeta.description;
-
-  const title =
-    metaData.title ?? `${route ? route + ' | ' : ''}${defaultMeta.title}`;
-
+  const title = metaData.title ?? `${route ? route + ' | ' : ''}${defaultMeta.title}`;
   const imageUrl = hostname + (metaData.imageUrl ?? defaultMeta.imageUrl);
-
   const favicon = metaData.favicon ?? defaultMeta.favicon ?? '/favicon.ico';
 
   return (
