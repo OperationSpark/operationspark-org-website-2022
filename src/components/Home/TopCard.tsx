@@ -10,7 +10,7 @@ const TopCard = () => {
   /** Remove once page is created */
   const FEAT_COLLEGE_CREDIT = false;
   return (
-    <BgImg src='/images/classroom.webp'>
+    <BgImg src='/images/display/classroom-2.png'>
       <ImgCardStyles>
         <Content className='top-card-content'>
           <div className='row-between'>
