@@ -79,7 +79,7 @@ const InfoSession: NextPage<InfoSessionProps> = ({ commonQuestions, logos }) => 
             <h1 className='dynamic-h1'>Our grads work at great companies!</h1>
             <div className='stats'>
               <h2 className='dynamic-h2'>100% Job Placement</h2>
-              <h2 className='dynamic-h2'>$60,000 average salary</h2>
+              <h2 className='dynamic-h2'>$60,000 avg starting salary</h2>
             </div>
             <Carousel logos={logos} style={{ marginTop: '3rem' }} />
           </Content>
