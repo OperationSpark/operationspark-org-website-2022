@@ -220,7 +220,11 @@
         "name": "Peter Barnum",
         "role": "Instruction Lead / Software Engineer",
         "image": "/images/people/staff/peter-barnum.jpg",
-        "about": []
+        "about": [
+          "Peter grew up in Denver, Colorado, and has always been passionate about technology, computer science, and teaching others these valuable skills. In his early years, Peter realized that the internet was a powerful resource for learning about technology and code. Teaching himself to code has provided a high level of autonomy and problem-solving, fundamental in software development and teaching others these valuable skills.",
+
+          "Peter loves problem-solving and coding, spending most of his free time working on one project or another. Whether creating services to automate tasks, building out new applications/websites, or exploring new technologies, he spends most of his time expanding his knowledge."
+        ]
       },
       {
         "name": "Jessica Torres",
