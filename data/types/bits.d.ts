@@ -42,6 +42,7 @@ export interface IAlert {
 }
 
 export interface IMeta {
+  host?: string;
   title?: string;
   description?: string;
   imageUrl?: string;
