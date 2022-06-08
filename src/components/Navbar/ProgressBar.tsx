@@ -53,7 +53,6 @@ const ProgressBar = ({ isTop, progressOnly = false }: ProgressBarProps) => {
           setCurrentNode(null);
         }
       } else {
-        console.log({ top, base });
         setPercent(Number(((Math.abs(top) / base) * 100).toFixed(2)));
       }
     };
@@ -94,7 +93,7 @@ const ProgressBar = ({ isTop, progressOnly = false }: ProgressBarProps) => {
       clearTimeout(timeout);
     };
   }, [router.pathname, theme.navHeight]);
-  console.log(percent);
+
   return (
     <ProgressBarStyles>
       {progressOnly || !nodes.length ? (

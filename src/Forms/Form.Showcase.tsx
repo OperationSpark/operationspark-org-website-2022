@@ -17,8 +17,7 @@ const ShowcaseForm = () => {
       newsletter: false,
       ...form.values(),
     };
-
-    console.log(values);
+    console.info('Submitting form with values:', values);
     setIsSubmitting(true);
 
     setTimeout(() => {
