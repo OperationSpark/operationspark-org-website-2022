@@ -17,9 +17,13 @@ const Contact: NextPage<IContact> = ({ address, city, state, zip, phone, gMapUrl
   return (
     <Main style={{ paddingTop: 0 }}>
       <ContactStyles>
-        <BgImg src='/images/display/contact.png' height='calc(20rem + 20vw)'>
+        <BgImg
+          src='/images/display/contact.png'
+          height='calc(20rem + 20vw)'
+          overlay={{ opacity: 0.1 }}
+        >
           <div className='contact-top'>
-            <h1 className='dynamic-xl secondary'>Contact Us</h1>
+            <h1 className='dynamic-xl primary-secondary'>Contact Us</h1>
           </div>
         </BgImg>
         <Content>
