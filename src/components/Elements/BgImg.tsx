@@ -9,40 +9,6 @@ type TImgOverlay = {
   opacity?: number;
   blur?: number;
 };
-const BgImgStyles = styled.div<TImgOverlay>`
-  position: relative;
-  display: flex;
-
-  img {
-    user-select: none;
-  }
-
-  .bg-img-content {
-    ${({ blur }) => (blur ? `backdrop-filter: blur(${blur}px)` : '')};
-    position: relative;
-    z-index: 1;
-    width: 100%;
-  }
-  @media print {
-    height: fit-content !important;
-  }
-`;
-
-const ImgOverlay = styled.div<TImgOverlay>`
-  ${({ theme, bg, opacity }) => `
-    background: ${bg ? bg : theme.isLightMode ? theme.primary[500] : theme.primary[900]};
-    opacity: ${opacity ? opacity : 0.5};
-  `}
-
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  -webkit-user-drag: none;
-  @media print {
-    display: none;
-  }
-`;
 
 interface BgImageProps {
   src?: string;
@@ -90,3 +56,38 @@ const BgImg = ({ src, height = '40rem', className, children, overlay }: BgImageP
 };
 
 export default BgImg;
+
+const BgImgStyles = styled.div<TImgOverlay>`
+  position: relative;
+  display: flex;
+
+  img {
+    user-select: none;
+  }
+
+  .bg-img-content {
+    ${({ blur }) => (blur ? `backdrop-filter: blur(${blur}px)` : '')};
+    position: relative;
+    z-index: 1;
+    width: 100%;
+  }
+  @media print {
+    height: fit-content !important;
+  }
+`;
+
+const ImgOverlay = styled.div<TImgOverlay>`
+  ${({ theme, bg, opacity }) => `
+    background: ${bg ? bg : theme.isLightMode ? theme.primary[500] : theme.primary[900]};
+    opacity: ${!isNaN(Number(opacity)) ? opacity : 0.5};
+  `}
+
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  -webkit-user-drag: none;
+  @media print {
+    display: none;
+  }
+`;
