@@ -188,14 +188,14 @@ const ProgressBarStyles = styled(motion.div)`
     left: 0;
     width: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     padding: 0 0.25rem;
     line-height: 1rem;
     font-size: 0.75rem;
     color: ${({ theme: { fg } }) => fg};
 
     .node-item {
-      max-width: 200px;
+      max-width: 250px;
       user-select: none;
       white-space: pre;
       font-weight: 600;
