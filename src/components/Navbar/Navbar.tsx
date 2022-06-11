@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic';
 import { useEffect, useRef } from 'react';
 import styled, { useTheme } from 'styled-components';
 import moment from 'moment-timezone';
-import { motion } from 'framer-motion';
+import { motion, Transition } from 'framer-motion';
 
 import { useScrollY } from '@this/hooks/useScrollY';
 import { useValidCss } from '@this/hooks/useCssCheck';
@@ -56,9 +56,7 @@ export default function Nav({ alertInfo }: NavProps) {
         ),
   );
 
-  const transparentBg = theme.isLightMode
-    ? 'rgba(255,255,255,0)'
-    : 'rgba(25,25,25,0)';
+  const transparentBg = theme.isLightMode ? 'rgba(255,255,255,0)' : 'rgba(25,25,25,0)';
   const bgColor = supportsBackdropFilter ? theme.alpha.bg : theme.bg;
 
   const navAnimation = {
@@ -68,10 +66,8 @@ export default function Nav({ alertInfo }: NavProps) {
     background: isTop ? transparentBg : bgColor,
   };
 
-  const navTransition = {
-    default: { duration: 0.3 },
-    background: { duration: 0.15 },
-    boxShadow: { duration: 0.15 },
+  const navTransition: Transition = {
+    duration: 0.2,
   };
 
   // Dynamically update nav height
@@ -90,19 +86,10 @@ export default function Nav({ alertInfo }: NavProps) {
   }, [theme, navRef, resizeObserverRef]);
 
   return (
-    <NavbarStyles
-      ref={navRef}
-      animate={{ ...navAnimation }}
-      transition={navTransition}
-    >
+    <NavbarStyles ref={navRef} animate={{ ...navAnimation }} transition={navTransition}>
       {showAlert && <AlertBar info={alertInfo} />}
       <div className='navbar'>
-        <LogoLink
-          src='/images/Operation Spark Logo_H.webp'
-          href='/'
-          alt='Operation Spark'
-          priority={true}
-        />
+        <LogoLink src='/images/os/logo-halle3d_140x50.webp' href='/' alt='Operation Spark' />
         <DesktopNav navMenus={navMenus} />
         <MobileNav navMenus={navMenus} />
       </div>
