@@ -1,7 +1,4 @@
-const {
-  PHASE_PRODUCTION_BUILD,
-  PHASE_DEVELOPMENT_SERVER,
-} = require('next/constants');
+const { PHASE_PRODUCTION_BUILD, PHASE_DEVELOPMENT_SERVER } = require('next/constants');
 const color = require('cli-color');
 
 const { validateData } = require('./data/validate');
@@ -36,6 +33,15 @@ module.exports = (phase, { defaultConfig }) => {
     reactStrictMode: true,
     compiler: {
       styledComponents: true,
+    },
+    async redirects() {
+      return [
+        {
+          source: '/info-session',
+          destination: '/infoSession',
+          permanent: true,
+        },
+      ];
     },
   };
 };
