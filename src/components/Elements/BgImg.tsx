@@ -30,9 +30,7 @@ const BgImgStyles = styled.div<TImgOverlay>`
 
 const ImgOverlay = styled.div<TImgOverlay>`
   ${({ theme, bg, opacity }) => `
-    background: ${
-      bg ? bg : theme.isLightMode ? theme.primary[500] : theme.primary[900]
-    };
+    background: ${bg ? bg : theme.isLightMode ? theme.primary[500] : theme.primary[900]};
     opacity: ${opacity ? opacity : 0.5};
   `}
 
@@ -54,13 +52,7 @@ interface BgImageProps {
   overlay?: TImgOverlay;
 }
 
-const BgImg = ({
-  src,
-  height = '40rem',
-  className,
-  children,
-  overlay,
-}: BgImageProps) => {
+const BgImg = ({ src, height = '40rem', className, children, overlay }: BgImageProps) => {
   const [inView, setInView] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -75,12 +67,7 @@ const BgImg = ({
   }, []);
 
   return (
-    <BgImgStyles
-      style={{ height }}
-      className={className}
-      ref={ref}
-      blur={overlay?.blur}
-    >
+    <BgImgStyles style={{ height }} className={className} ref={ref} blur={overlay?.blur}>
       {src && (
         <Image
           src={src}
@@ -92,7 +79,6 @@ const BgImg = ({
           loading={inView ? 'eager' : 'lazy'}
           alt=''
           priority={inView}
-          quality={100}
         />
       )}
 
