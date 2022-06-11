@@ -1,13 +1,10 @@
 import { ReactNode } from 'react';
 import styled from 'styled-components';
-import {
-  cardShadow,
-  cardShadowLtr,
-  cardShadowRtl,
-} from '@this/src/theme/styled/mixins/shadows';
+import { cardShadow, cardShadowLtr, cardShadowRtl } from '@this/src/theme/styled/mixins/shadows';
 import { SlashDivider } from '@this/components/Elements/SlashDivider';
 
 const PlainCardStyles = styled.div`
+  background: ${({ theme }) => theme.bg};
   border-radius: 0.25rem;
   overflow: hidden;
   .plain-card-body {
