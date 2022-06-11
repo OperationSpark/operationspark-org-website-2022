@@ -60,7 +60,7 @@ const GetInvolved: NextPage = () => {
           />
         </Content>
         <Content>
-          <h2 className='dynamic-h2 primary-secondary text-center'>Give</h2>
+          <h2 className='dynamic-h1 primary-secondary text-center'>Give</h2>
           <div className='donation-methods'>
             <div className='donate-box'>
               <div className='donate-wrapper' title='Donate to Operation Spark'>
@@ -105,13 +105,7 @@ const GetInvolved: NextPage = () => {
               </div>
             </div>
             <div className='donate-box'>
-              <a
-                href='https://smile.amazon.com/ch/47-1514606'
-                target='_blank'
-                rel='noreferrer'
-                title='Amazon Smile'
-                className='donate-wrapper'
-              >
+              <div className='donate-wrapper'>
                 <p className='dynamic-txt'>
                   Shop at Amazon Smile and 0.5% of eligible purchases will be donated to Operation
                   Spark!
@@ -130,13 +124,19 @@ const GetInvolved: NextPage = () => {
                   />
                 </div>
 
-                <button className='anchor'>
+                <a
+                  href='https://smile.amazon.com/ch/47-1514606'
+                  target='_blank'
+                  rel='noreferrer'
+                  title='Amazon Smile'
+                  className='anchor'
+                >
                   Shop Now!{' '}
                   <span className='icon'>
                     <MdOpenInNew />
                   </span>
-                </button>
-              </a>
+                </a>
+              </div>
             </div>
           </div>
           {showDonate && (
@@ -168,6 +168,9 @@ const GetInvolved: NextPage = () => {
 export default GetInvolved;
 
 const GetInvolvedStyles = styled.div`
+  a.primary-secondary:hover {
+    text-decoration: underline;
+  }
   .image-header {
     display: flex;
     align-items: flex-end;
@@ -221,6 +224,7 @@ const GetInvolvedStyles = styled.div`
     max-width: 100%;
 
     border-radius: 0.25rem;
+    background: ${({ theme }) => theme.bg};
     ${cardShadow};
 
     margin: 1rem;
@@ -240,11 +244,11 @@ const GetInvolvedStyles = styled.div`
         font-size: 0.8rem;
         padding-top: 0.5rem;
       }
-      button.anchor {
+      a.anchor {
         display: flex;
         align-items: center;
         .icon {
-          margin-left: 0.5rem;
+          margin-left: 0.25rem;
         }
       }
     }
