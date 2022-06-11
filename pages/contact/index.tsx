@@ -20,7 +20,7 @@ const Contact: NextPage<IContact> = ({ address, city, state, zip, phone, gMapUrl
         <BgImg
           src='/images/display/contact.webp'
           height='calc(20rem + 20vw)'
-          overlay={{ opacity: 0.1 }}
+          overlay={{ opacity: 0 }}
         >
           <div className='contact-top'>
             <h1 className='dynamic-xl primary-secondary'>Contact Us</h1>
