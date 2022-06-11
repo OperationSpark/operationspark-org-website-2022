@@ -29,7 +29,7 @@ const About: NextPage<IAbout> = ({ mission, team, history, awards }) => {
     <Main style={{ paddingTop: 0 }}>
       <AboutStyles>
         <Section className='about-header' style={{ paddingTop: 0 }}>
-          <BgImg height='calc(24rem + 30vw)' src='/images/display/staff-group.jpg'>
+          <BgImg height='calc(24rem + 30vw)' src='/images/display/staff-group.webp'>
             <div
               style={{
                 display: 'flex',
