@@ -39,7 +39,7 @@ const CultureOfCode: NextPage<CultureOfCodeProps> = ({
   return (
     <Main style={{ paddingTop: 0 }}>
       <CultureOfCodeStyles>
-        <BgImg src='/images/display/code-editor.png'>
+        <BgImg src='/images/display/code-editor.webp'>
           <Content className='culture-of-code-header'>
             <h1 className='dynamic-xl text-center'>{header.title}</h1>
             <p className='dynamic-txt'>{header.description}</p>

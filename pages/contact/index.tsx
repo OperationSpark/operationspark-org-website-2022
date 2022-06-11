@@ -18,7 +18,7 @@ const Contact: NextPage<IContact> = ({ address, city, state, zip, phone, gMapUrl
     <Main style={{ paddingTop: 0 }}>
       <ContactStyles>
         <BgImg
-          src='/images/display/contact.png'
+          src='/images/display/contact.webp'
           height='calc(20rem + 20vw)'
           overlay={{ opacity: 0.1 }}
         >

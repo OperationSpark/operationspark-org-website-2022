@@ -23,7 +23,7 @@ const GetInvolved: NextPage = () => {
   return (
     <Main style={{ paddingTop: 0 }}>
       <GetInvolvedStyles>
-        <BgImg src='/images/display/donate.png' height='24rem' overlay={{ blur: 3 }}>
+        <BgImg src='/images/display/donate.webp' height='24rem' overlay={{ blur: 3 }}>
           <Content className='image-header'>
             <h1 className='dynamic-xl secondary text-center'>HELP OPEN THE DOOR TO PROSPERITY</h1>
           </Content>

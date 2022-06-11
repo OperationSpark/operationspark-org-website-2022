@@ -18,7 +18,7 @@ const GradShowcase: NextPage<IGradShowcase> = ({ startDateTime, cohortName, even
   return (
     <Main style={{ paddingTop: 0 }}>
       <ShowcaseSignupStyles>
-        <BgImg src='/images/display/celebrate.png' overlay={{ bg: 'transparent' }}>
+        <BgImg src='/images/display/celebrate.webp' overlay={{ bg: 'transparent' }}>
           <Content className='showcase-header'>
             <div className='showcase-header-container'>
               <h1 className='dynamic-xl title secondary'>Graduation Showcase</h1>
