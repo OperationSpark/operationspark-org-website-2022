@@ -49,8 +49,7 @@ export const IconBtnCardStyles = styled.div`
     display: flex;
     justify-content: space-between;
     .card-pre-title {
-      color: ${({ theme }) =>
-        theme.isLightMode ? theme.primary[900] : theme.primary[200]};
+      color: ${({ theme }) => (theme.isLightMode ? theme.primary[900] : theme.primary[200])};
       font-weight: 300;
       font-style: italic;
     }

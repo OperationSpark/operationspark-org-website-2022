@@ -19,23 +19,15 @@ interface IconProps {
 
 const Icon = ({ icon, size = 75 }: IconProps) => {
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <Image
-        src={iconUrls[icon]}
-        alt={`${icon} icon`}
-        title={`${icon} icon`}
-        width={size}
-        height={size}
-        placeholder='blur'
-        blurDataURL={rgbDataURL(146, 12, 248)}
-      />
-    </div>
+    <Image
+      src={iconUrls[icon]}
+      alt={`${icon} icon`}
+      title={`${icon} icon`}
+      width={size}
+      height={size}
+      placeholder='blur'
+      blurDataURL={rgbDataURL(146, 12, 248)}
+    />
   );
 };
 

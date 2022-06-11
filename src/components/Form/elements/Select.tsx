@@ -38,11 +38,7 @@ export const Select = ({
   required,
   onChange,
 }: SelectProps) => {
-  const checkIsValid = (
-    opt: string,
-    info: string | undefined,
-    hasAdditionalInfo: boolean,
-  ) => {
+  const checkIsValid = (opt: string, info: string | undefined, hasAdditionalInfo: boolean) => {
     if (!required) {
       return true;
     }
@@ -79,32 +75,19 @@ export const Select = ({
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.2, delay: delay ?? undefined }}
       >
-        <SelectStyles
-          title={label}
-          className={isErr && !option.value ? '_input_err' : ''}
-        >
-          <label style={{ fontSize: !option.value ? '1rem' : '0.75rem' }}>
-            {label}
-          </label>
-          <select
-            onChange={(e) => handleOptionSelect(e.target.value)}
-            value={option?.value}
-          >
-            {[{ name: 'Please select an option', value: '' }, ...options].map(
-              ({ name, value }) => (
-                <Option value={value} name={name} key={value} />
-              ),
-            )}
+        <SelectStyles title={label} className={isErr && !option.value ? '_input_err' : ''}>
+          <label style={{ fontSize: !option.value ? '1rem' : '0.75rem' }}>{label}</label>
+          <select onChange={(e) => handleOptionSelect(e.target.value)} value={option?.value}>
+            {[{ name: 'Please select an option', value: '' }, ...options].map(({ name, value }) => (
+              <Option value={value} name={name} key={value} />
+            ))}
           </select>
           <div style={{ maxWidth: 'calc(100% - 2rem)' }}>
             {option?.name || 'Please select an option'}
           </div>
 
           {required && <RequiredStatus isValid={!!option.value} />}
-          <ClearButton
-            show={!!option.value}
-            onClick={() => handleOptionSelect('', '')}
-          />
+          <ClearButton show={!!option.value} onClick={() => handleOptionSelect('', '')} />
         </SelectStyles>
       </SelectContainer>
       {option.additionalInfoLabel ? (
@@ -139,10 +122,11 @@ export const Option = ({ value, name }: OptionProps) => {
 export default Select;
 
 const SelectContainer = styled(motion.div)`
+  background: ${({ theme }) => theme.bg};
   position: relative;
   margin-bottom: 0.75rem;
   width: 100%;
-  background: transparent;
+
   user-select: none;
   z-index: 1;
 `;
@@ -159,8 +143,7 @@ const OptionStyles = styled(motion.option)`
 const SelectStyles = styled(motion.div)`
   box-shadow: 0 0 2px ${({ theme }) => theme.alpha.fg};
   &._input_err {
-    box-shadow: 0 0 2px 1px
-      ${({ theme }) => (theme.isLightMode ? theme.red[600] : theme.red[400])};
+    box-shadow: 0 0 2px 1px ${({ theme }) => (theme.isLightMode ? theme.red[600] : theme.red[400])};
   }
 
   width: 100%;

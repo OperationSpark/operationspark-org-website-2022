@@ -9,6 +9,54 @@ type TImgOverlay = {
   opacity?: number;
   blur?: number;
 };
+
+interface BgImageProps {
+  src?: string;
+  height?: string;
+  className?: string;
+  children?: ReactNode | ReactNode[];
+  overlay?: TImgOverlay;
+}
+
+const BgImg = ({ src, height = '40rem', className, children, overlay }: BgImageProps) => {
+  const [inView, setInView] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!ref.current) {
+      return;
+    }
+    const height = window.innerHeight;
+    const { y } = ref.current.getBoundingClientRect();
+
+    setInView(y < height && y > 0);
+  }, []);
+
+  return (
+    <BgImgStyles style={{ height }} className={className} ref={ref} blur={overlay?.blur}>
+      {src && (
+        <Image
+          src={src}
+          layout='fill'
+          objectFit='cover'
+          objectPosition='top center'
+          placeholder='blur'
+          blurDataURL={rgbDataURL(134, 0, 241)}
+          loading={inView ? 'eager' : 'lazy'}
+          alt=''
+          priority={inView}
+        />
+      )}
+
+      <ImgOverlay {...overlay} />
+
+      <div className='bg-img-content'>{children && children}</div>
+    </BgImgStyles>
+  );
+};
+
+export default BgImg;
+
 const BgImgStyles = styled.div<TImgOverlay>`
   position: relative;
   display: flex;
@@ -30,10 +78,8 @@ const BgImgStyles = styled.div<TImgOverlay>`
 
 const ImgOverlay = styled.div<TImgOverlay>`
   ${({ theme, bg, opacity }) => `
-    background: ${
-      bg ? bg : theme.isLightMode ? theme.primary[500] : theme.primary[900]
-    };
-    opacity: ${opacity ? opacity : 0.5};
+    background: ${bg ? bg : theme.isLightMode ? theme.primary[500] : theme.primary[900]};
+    opacity: ${!isNaN(Number(opacity)) ? opacity : 0.5};
   `}
 
   position: absolute;
@@ -45,62 +91,3 @@ const ImgOverlay = styled.div<TImgOverlay>`
     display: none;
   }
 `;
-
-interface BgImageProps {
-  src?: string;
-  height?: string;
-  className?: string;
-  children?: ReactNode | ReactNode[];
-  overlay?: TImgOverlay;
-}
-
-const BgImg = ({
-  src,
-  height = '40rem',
-  className,
-  children,
-  overlay,
-}: BgImageProps) => {
-  const [inView, setInView] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!ref.current) {
-      return;
-    }
-    const height = window.innerHeight;
-    const { y } = ref.current.getBoundingClientRect();
-
-    setInView(y < height && y > 0);
-  }, []);
-
-  return (
-    <BgImgStyles
-      style={{ height }}
-      className={className}
-      ref={ref}
-      blur={overlay?.blur}
-    >
-      {src && (
-        <Image
-          src={src}
-          layout='fill'
-          objectFit='cover'
-          objectPosition='top center'
-          placeholder='blur'
-          blurDataURL={rgbDataURL(134, 0, 241)}
-          loading={inView ? 'eager' : 'lazy'}
-          alt=''
-          priority={inView}
-          quality={100}
-        />
-      )}
-
-      <ImgOverlay {...overlay} />
-
-      <div className='bg-img-content'>{children && children}</div>
-    </BgImgStyles>
-  );
-};
-
-export default BgImg;

@@ -54,7 +54,7 @@ const HighSchool: NextPage<IHighschoolPrograms> = ({
             selectedCourse={selectedCourse}
           />
         </AbsoluteBtnWindow>
-        <BgImg src='/images/display/code-matrix.png' height='22rem'>
+        <BgImg src='/images/display/code-matrix.webp' height='22rem'>
           <Content style={{ display: 'flex', height: '100%' }}>
             <h1 className='dynamic-xl secondary' style={{ alignSelf: 'flex-end' }}>
               High School

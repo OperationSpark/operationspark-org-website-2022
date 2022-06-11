@@ -68,7 +68,7 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
   return (
     <Main style={{ paddingTop: 0 }}>
       <AdultProgramsStyles>
-        <BgImg src='/images/display/laptop-code.png' height='35rem'>
+        <BgImg src='/images/display/laptop-code.webp' height='35rem'>
           <Section className='programs-header'>
             <Content className='programs-header-content'>
               <h1 className='dynamic-xl secondary'>{header.title}</h1>
@@ -84,11 +84,7 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
           >
             <h2 className='dynamic-h2'>{overview.title}</h2>
             {overview.description.map((desc) => (
-              <p
-                className='dynamic-txt'
-                key={desc}
-                style={{ padding: '1rem 0' }}
-              >
+              <p className='dynamic-txt' key={desc} style={{ padding: '1rem 0' }}>
                 {desc}
               </p>
             ))}
@@ -105,18 +101,13 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
               leftColStyle={{ width: '60%', paddingRight: '2rem' }}
               rightColStyle={{ width: '40%', paddingLeft: '2rem' }}
               leftCol={
-                <MacCard
-                  onNextClick={() => handleShift(1)}
-                  onPrevClick={() => handleShift(-1)}
-                >
+                <MacCard onNextClick={() => handleShift(1)} onPrevClick={() => handleShift(-1)}>
                   <MacContent
                     body={quote.body}
                     imageUrl={quote.imageUrl}
                     name={quote.name}
                     role={quote.role}
-                    logoSrc={
-                      theme.isLightMode ? quote.logoSrcLight : quote.logoSrcDark
-                    }
+                    logoSrc={theme.isLightMode ? quote.logoSrcLight : quote.logoSrcDark}
                     logoHref='https://mumms.com/'
                   />
                 </MacCard>
@@ -134,9 +125,8 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
                       }}
                     >
                       <b>
-                        Does your company need developers? We foster employer
-                        partnerships in the community. Become a partner and gain
-                        valuable talent for your company.
+                        Does your company need developers? We foster employer partnerships in the
+                        community. Become a partner and gain valuable talent for your company.
                       </b>
                     </p>
                     <Link href='/contact'>
@@ -167,9 +157,7 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
                 key={title}
               >
                 <div className='program-card-body '>
-                  <h2 className='dynamic-h2 primary-secondary program-title'>
-                    {title}
-                  </h2>
+                  <h2 className='dynamic-h2 primary-secondary program-title'>{title}</h2>
                   <p className='dynamic-txt program-length'>
                     <i>{length}</i>
                   </p>
@@ -194,8 +182,10 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
 };
 
 export const getStaticProps: GetStaticProps<AdultProgramsProps> = async () => {
-  const { overview, courses, header }: AdultProgramsProps =
-    await getStaticAsset('programs', 'adult');
+  const { overview, courses, header }: AdultProgramsProps = await getStaticAsset(
+    'programs',
+    'adult',
+  );
   const companyQuotes: IQuote[] = await getStaticAsset('quotes', 'company');
 
   return {
@@ -274,8 +264,7 @@ export const AdultProgramsStyles = styled.div`
         padding: 1rem 0;
       }
       .program-length {
-        color: ${({ theme }) =>
-          theme.isLightMode ? theme.grey[600] : theme.grey[400]};
+        color: ${({ theme }) => (theme.isLightMode ? theme.grey[600] : theme.grey[400])};
         font-size: 1rem;
       }
     }

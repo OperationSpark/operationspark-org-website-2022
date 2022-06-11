@@ -108,12 +108,12 @@ const ProgressBar = ({ isTop, progressOnly = false }: ProgressBarProps) => {
                   <motion.button
                     className={`node-item ${node.name === currentNode ? 'active' : ''}`}
                     onClick={() => handleClick(node)}
-                    initial={{ scale: 0, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
+                    initial={{ scale: 0, y: -25, opacity: 0 }}
+                    animate={{ scale: 1, y: 0, opacity: 1 }}
                     exit={{
                       scale: 0,
                       opacity: 0,
-                      y: -10,
+                      y: -25,
                       transition: { duration: 0.2 },
                     }}
                     transition={{ type: 'tween' }}
@@ -188,13 +188,14 @@ const ProgressBarStyles = styled(motion.div)`
     left: 0;
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     padding: 0 0.25rem;
     line-height: 1rem;
     font-size: 0.75rem;
     color: ${({ theme: { fg } }) => fg};
 
     .node-item {
+      max-width: 250px;
       user-select: none;
       white-space: pre;
       font-weight: 600;
