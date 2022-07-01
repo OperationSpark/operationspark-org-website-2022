@@ -180,7 +180,7 @@
       },
       {
         "name": "Jon Cosper",
-        "role": "Outcomes Lead",
+        "role": "Outcomes",
         "image": "/images/people/staff/jon-cosper.png",
         "about": [
           "Jon was born and raised in the 9th ward of New Orleans and is a graduate of Edna Karr High School. Jon joined the Operation Spark team in January of 2022. He began his professional career in education and most recently was the Director of Athletics and Career and Technical Education at a local charter school.",
@@ -230,7 +230,16 @@
         "name": "Jessica Torres",
         "role": "Instructor / Software Engineer",
         "image": "/images/people/staff/jessica-torres.jpg",
-        "about": []
+        "about": [
+          "Jessica is a Louisiana native whose pursuit of new and interesting things has taken her across many unrelated industries.",
+          "Before deciding to begin Operation Spark as a student herself, she had attended LSU for Biomedical Engineering, bartended at craft cocktail ___, worked as a medical assistant in orthopedic surgery, started a career as a train mechanic, and trained as a car photographer.",
+
+          "It only took the first days of the Prep phase, here, to make her realize that she had finally found a lasting home in programming.",
+
+          "The around the clock opportunities for innovative problem solving, continued learning, and infinite possibilities in the realm of creation combined the best parts of each past career (and if she takes her laptop to the backyard, she even gets to work outdoors again). Jessica applies experience from each previous discipline in her teaching of the Junior phase and works to identify and meet the way that each student learns best.",
+
+          "In her free time, she still enjoys welding+woodworking, cooking, and has been teaching herself 3D Development."
+        ]
       }
     ],
     "directors": [
@@ -250,16 +259,16 @@
   },
   "awards": [
     {
+      "title": "Cloud Academy: How Operation Spark leverages Cloud Academy to build tech talent in New Orleans",
+      "url": "https://cloudacademy.com/case-studies/operation-spark/"
+    },
+    {
       "title": "WGNO News: New Orleans Camp for Computer Kids",
       "url": "https://drive.google.com/file/d/1EMPS4lPRMt_wtmS6wi9Pt9HCa9Pw2e0r/view"
     },
     {
       "title": "Entergy gives $1 million to support Louisiana workforce training",
       "url": "http://www.nola.com/business/index.ssf/2016/11/entergy_gives_1_million_in_gra.html"
-    },
-    {
-      "title": "Could New Orleans Become the Silicon Valley of the South?",
-      "url": "http://nationswell.com/operation-spark-coding-boot-camps"
     },
     {
       "title": "Three Ways Philanthropists Can Invest In Markets To Revive The American Dream",
