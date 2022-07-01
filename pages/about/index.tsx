@@ -165,6 +165,19 @@ const About: NextPage<IAbout> = ({ mission, team, history, awards }) => {
             </div>
           </Content>
         </Section>
+        <Section className='about-press'>
+          <Content>
+            <div className='video-container'>
+              <video width='100%' height='auto' controls>
+                <source
+                  src='https://player.vimeo.com/progressive_redirect/playback/721476393/rendition/1080p/file.mp4?loc=external&signature=a21ad59e5f01881f352c50593562321d778b43fbda9f6577e4270e699706f46b'
+                  type='video/mp4'
+                />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </Content>
+        </Section>
       </AboutStyles>
     </Main>
   );
@@ -324,6 +337,14 @@ const AboutStyles = styled.div`
     font-weight: 300;
     font-style: italic;
     color: ${({ theme }) => theme.alpha.fg};
+  }
+
+  .video-container {
+    max-width: 800px;
+    margin: 0 auto;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    filter: drop-shadow(0 0 0.5rem rgba(0, 0, 0, 0.5));
   }
   @media screen and (max-width: 768px) {
     .team-member {
