@@ -148,12 +148,15 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
         </Section>
         <Section className='adult-courses'>
           <Content style={{ paddingTop: '2rem', paddingBottom: '2rem' }}>
-            <Link
+            <a
+              className='anchor right-arr-left'
               href='https://docs.google.com/spreadsheets/d/e/2PACX-1vSw9Cv2WDZUVM3MzFztGUFaqeyx_WVNGHg-BZy2Su8uL6E5A8kqoU1gJTRpritJtc2XgzBkyQVTO_6v/pubhtml?gid=208699637&single=true'
               target='_blank'
+              rel='noreferrer'
             >
-              <a className='anchor right-arr-left'>Our cohort schedule can be found here</a>
-            </Link>
+              Our cohort schedule can be found here
+            </a>
+
             <h1 className='dynamic-h1'>Courses</h1>
             {courses.map(({ title, length, description, nextStartDate }) => (
               <PlainCard
