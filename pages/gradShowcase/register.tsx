@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic';
 import { GetStaticProps, NextPage } from 'next';
+import Image from 'next/image';
 import { useState } from 'react';
 import styled from 'styled-components';
 
@@ -7,7 +8,6 @@ import { IGradShowcase } from '@this/data/types/gradShowcase';
 import { Main, Content } from '@this/components/layout';
 import { toCentTime } from '@this/src/helpers/timeUtils';
 import { getStaticAsset } from '@this/pages-api/static/[asset]';
-import Button from '@this/components/Elements/Button';
 import { BgImg } from '@this/src/components/Elements';
 
 const Countdown = dynamic(() => import('@this/components/Elements/Countdown'));
@@ -37,15 +37,24 @@ const GradShowcase: NextPage<IGradShowcase> = ({ startDateTime, cohortName, even
             <div className='showcase-form'>
               <div style={{ paddingBottom: '2rem' }}>
                 <h3 className='dynamic-h3 text-center'>
-                  Come celebrate with our grads as they show off their final project at Operation
-                  Spark!
+                  Come celebrate with our graduates from cohort{' '}
+                  <b className='primary-secondary'>{cohortName}</b> as they show off their final
+                  project created at Operation Spark!
                 </h3>
               </div>
               <div className='sign-up-link'>
                 {eventbriteUrl ? (
-                  <a target='_blank' href={eventbriteUrl} rel='noreferrer'>
-                    <Button color='yellow'>Sign up here</Button>
-                  </a>
+                  <div className='eventbrite-link'>
+                    <a href={eventbriteUrl} target='_blank' rel='noreferrer'>
+                      <span className='register-at'>Register at</span>
+                      <Image
+                        src='/images/logos/etc/eventbrite.png'
+                        width={125}
+                        height={25}
+                        alt='Eventbrite'
+                      />
+                    </a>
+                  </div>
                 ) : (
                   <h4 className='dynamic-h4 primary-secondary'>Link will be available soon</h4>
                 )}
@@ -107,5 +116,50 @@ const ShowcaseSignupStyles = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
+  }
+  .eventbrite-link {
+    display: flex;
+    justify-content: center;
+    padding-top: 1rem;
+    font-weight: 600;
+    .register-at {
+      line-height: 1em;
+      padding-bottom: 0.25rem;
+    }
+    a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: fit-content;
+      flex-flow: column;
+
+      font-weight: 600;
+      letter-spacing: -1px;
+      font-size: 1.25rem;
+      user-select: none;
+      -webkit-user-drag: none;
+      border-radius: 0.5rem;
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+
+      color: ${({ theme }) => theme.white};
+      background: rgba(209, 65, 12, 1);
+      box-shadow: 0px 0px 0px 1px ${({ theme }) => theme.alpha.fg};
+      transition: box-shadow 125ms, background-color 125ms;
+      :hover {
+        background: rgba(220, 75, 20, 1);
+        box-shadow: 0px 0px 4px 2px ${({ theme }) => theme.alpha.fg};
+      }
+      :active {
+        background: rgba(200, 60, 8, 1);
+
+        box-shadow: 0px 0px 3px 0px ${({ theme }) => theme.alpha.fg};
+      }
+    }
+    img {
+      user-select: none;
+      -webkit-user-drag: none;
+      margin-top: 0.25rem;
+    }
   }
 `;
