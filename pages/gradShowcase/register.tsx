@@ -44,23 +44,17 @@ const GradShowcase: NextPage<IGradShowcase> = ({ startDateTime, cohortName, even
               </div>
               <div className='sign-up-link'>
                 {eventbriteUrl ? (
-                  <a target='_blank' href={eventbriteUrl} rel='noreferrer'>
-                    <div className='eventbrite-link'>
-                      <a
-                        href='https://opsparkjuly2022.eventbrite.com/'
-                        target='_blank'
-                        rel='noreferrer'
-                      >
-                        <div>Register at</div>
-                        <Image
-                          src='/images/logos/etc/eventbrite.png'
-                          width={125}
-                          height={25}
-                          alt='Eventbrite'
-                        />
-                      </a>
-                    </div>
-                  </a>
+                  <div className='eventbrite-link'>
+                    <a href={eventbriteUrl} target='_blank' rel='noreferrer'>
+                      <span className='register-at'>Register at</span>
+                      <Image
+                        src='/images/logos/etc/eventbrite.png'
+                        width={125}
+                        height={25}
+                        alt='Eventbrite'
+                      />
+                    </a>
+                  </div>
                 ) : (
                   <h4 className='dynamic-h4 primary-secondary'>Link will be available soon</h4>
                 )}
@@ -128,6 +122,10 @@ const ShowcaseSignupStyles = styled.div`
     justify-content: center;
     padding-top: 1rem;
     font-weight: 600;
+    .register-at {
+      line-height: 1em;
+      padding-bottom: 0.25rem;
+    }
     a {
       display: flex;
       justify-content: space-between;
