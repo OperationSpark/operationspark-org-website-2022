@@ -1,7 +1,8 @@
 export interface ICourses {
   title: string;
   length: string;
-  nextStartDate: string;
+  nextStartDate?: string;
+  infoMessage?: string;
   description: string[];
 }
 
