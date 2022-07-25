@@ -98,19 +98,22 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
           <Content style={{ paddingTop: '2rem', paddingBottom: '2rem' }}>
             <h1 className='dynamic-h1'>Employers love our grads!</h1>
             <TwoColumns
+              style={{ height: '48rem' }}
               leftColStyle={{ width: '60%', paddingRight: '2rem' }}
               rightColStyle={{ width: '40%', paddingLeft: '2rem' }}
               leftCol={
-                <MacCard onNextClick={() => handleShift(1)} onPrevClick={() => handleShift(-1)}>
-                  <MacContent
-                    body={quote.body}
-                    imageUrl={quote.imageUrl}
-                    name={quote.name}
-                    role={quote.role}
-                    logoSrc={theme.isLightMode ? quote.logoSrcLight : quote.logoSrcDark}
-                    logoHref='https://mumms.com/'
-                  />
-                </MacCard>
+                <div className='left-col'>
+                  <MacCard onNextClick={() => handleShift(1)} onPrevClick={() => handleShift(-1)}>
+                    <MacContent
+                      body={quote.body}
+                      imageUrl={quote.imageUrl}
+                      name={quote.name}
+                      role={quote.role}
+                      logoSrc={theme.isLightMode ? quote.logoSrcLight : quote.logoSrcDark}
+                      logoHref='https://mumms.com/'
+                    />
+                  </MacCard>
+                </div>
               }
               rightCol={
                 <div className='right-col-container'>
@@ -231,11 +234,15 @@ export const AdultProgramsStyles = styled.div`
   }
   .employer-love {
     background: ${({ theme }) => theme.secondary[500]};
-    min-height: 42rem;
     display: flex;
 
     h1 {
       color: ${({ theme }) => theme.primary[700]};
+    }
+    .left-col {
+      display: flex;
+      align-items: center;
+      height: 100%;
     }
     .right-col-container {
       display: flex;

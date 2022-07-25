@@ -1,18 +1,38 @@
 import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
+
 import { Zap } from '@this/components/Elements/ZapIcon';
 import { IQuote } from '@this/data/types/bits';
-import { motion } from 'framer-motion';
 
 type MacContentProps = Omit<IQuote, 'logoSrcDark' | 'logoSrcLight'> & {
   logoSrc?: string;
 };
 
 export const MacContent = ({ body, name, role, imageUrl, logoHref, logoSrc }: MacContentProps) => {
+  const [overflowHeight, setOverflowHeight] = useState<number>(0);
+  const bodyRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    bodyRef.current && setOverflowHeight(bodyRef.current.scrollHeight);
+  }, [body]);
+
   return (
     <MacContentStyles>
       <div className='mac-card-main'>
-        <div className='mac-card-body dynamic-txt'>&ldquo;{body}&rdquo;</div>
+        <motion.div
+          className='mac-card-body dynamic-txt'
+          ref={bodyRef}
+          animate={{
+            maxHeight: `${overflowHeight}px`,
+            height: '100%',
+          }}
+          transition={{ duration: 0.2, type: 'tween' }}
+        >
+          &ldquo;{body}&rdquo;
+        </motion.div>
+
         {imageUrl && (
           <div className='mac-card-image'>
             <Image objectFit='contain' layout='fill' src={imageUrl} alt='' />
@@ -56,13 +76,14 @@ const MacContentStyles = styled(motion.div)`
   .mac-card-main {
     display: flex;
     height: 100%;
-
+    position: relative;
     .mac-card-body {
+      display: flex;
+      flex-flow: row wrap;
       padding: 1rem;
+      overflow: hidden;
       font-weight: 400;
       font-style: italic;
-      height: 100%;
-      display: flex;
     }
     .mac-card-image {
       min-width: 175px;
