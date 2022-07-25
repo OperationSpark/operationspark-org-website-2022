@@ -5,6 +5,7 @@ const TwoColumnsStyles = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;
+
   @media screen and (max-width: 1000px) {
     flex-flow: column;
     width: 100%;
@@ -33,6 +34,7 @@ interface TwoColumnsProps {
   rightCol: ReactNode;
   leftColStyle?: CSSProperties;
   rightColStyle?: CSSProperties;
+  style?: CSSProperties;
 }
 
 export const TwoColumns = ({
@@ -40,9 +42,10 @@ export const TwoColumns = ({
   rightCol,
   leftColStyle,
   rightColStyle,
+  style
 }: TwoColumnsProps) => {
   return (
-    <TwoColumnsStyles>
+    <TwoColumnsStyles style={style}>
       <Column style={leftColStyle}>{leftCol}</Column>
       <Column style={rightColStyle}>{rightCol}</Column>
     </TwoColumnsStyles>

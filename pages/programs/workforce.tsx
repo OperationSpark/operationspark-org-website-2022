@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { GetStaticProps, NextPage } from 'next';
 import Link from 'next/link';
 import styled, { useTheme } from 'styled-components';
+import moment from 'moment';
 
 import { Main, Section, Content } from '@this/components/layout';
 import { getStaticAsset } from '@this/pages-api/static/[asset]';
@@ -13,6 +14,7 @@ import { TwoColumns } from '@this/components/Elements/Columns';
 import { IQuote, ITitleDescription } from '@this/data/types/bits';
 import { ICourses } from '@this/data/types/programs';
 import { BgImg } from '@this/src/components/Elements';
+import useInfoSession from '@this/src/hooks/useInfoSession';
 
 export interface AdultProgramsProps {
   header: ITitleDescription;
@@ -31,6 +33,12 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
   const [quoteIndex, setQuoteIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const quote = companyQuotes[quoteIndex];
+
+  const nextInfoSession = useInfoSession(true);
+
+  const nextInfoSessionDate = !nextInfoSession
+    ? null
+    : moment(nextInfoSession.times.start.dateTime).format('dddd, MMMM Do @ h:mma');
 
   useEffect(() => {
     let interval: NodeJS.Timer;
@@ -98,19 +106,22 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
           <Content style={{ paddingTop: '2rem', paddingBottom: '2rem' }}>
             <h1 className='dynamic-h1'>Employers love our grads!</h1>
             <TwoColumns
+              style={{ height: '48rem' }}
               leftColStyle={{ width: '60%', paddingRight: '2rem' }}
               rightColStyle={{ width: '40%', paddingLeft: '2rem' }}
               leftCol={
-                <MacCard onNextClick={() => handleShift(1)} onPrevClick={() => handleShift(-1)}>
-                  <MacContent
-                    body={quote.body}
-                    imageUrl={quote.imageUrl}
-                    name={quote.name}
-                    role={quote.role}
-                    logoSrc={theme.isLightMode ? quote.logoSrcLight : quote.logoSrcDark}
-                    logoHref='https://mumms.com/'
-                  />
-                </MacCard>
+                <div className='left-col'>
+                  <MacCard onNextClick={() => handleShift(1)} onPrevClick={() => handleShift(-1)}>
+                    <MacContent
+                      body={quote.body}
+                      imageUrl={quote.imageUrl}
+                      name={quote.name}
+                      role={quote.role}
+                      logoSrc={theme.isLightMode ? quote.logoSrcLight : quote.logoSrcDark}
+                      logoHref='https://mumms.com/'
+                    />
+                  </MacCard>
+                </div>
               }
               rightCol={
                 <div className='right-col-container'>
@@ -158,7 +169,7 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
             </a>
 
             <h1 className='dynamic-h1'>Courses</h1>
-            {courses.map(({ title, length, description, nextStartDate }) => (
+            {courses.map(({ title, length, description, nextStartDate, infoMessage }) => (
               <PlainCard
                 className='program-card _progress'
                 id={title.toLowerCase().split(' ').join('-')}
@@ -175,6 +186,23 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
                       {desc}
                     </p>
                   ))}
+                  {infoMessage && (
+                    <div>
+                      <p className='dynamic-txt'>
+                        <b>{infoMessage}</b>
+                      </p>
+                      <div>
+                        <p className='dynamic-txt program-next-start primary-secondary'>
+                          <b>Next info session: {nextInfoSessionDate}</b>
+                        </p>
+                      </div>
+                      <p className='dynamic-txt program-next-start primary-secondary'>
+                        <Link href='/infoSession'>
+                          <a className='anchor right-arr-left'>Sign up here</a>
+                        </Link>
+                      </p>
+                    </div>
+                  )}
                   {nextStartDate && (
                     <p className='dynamic-txt primary-secondary program-next-start'>
                       <b>Next start date: {nextStartDate}</b>
@@ -231,11 +259,15 @@ export const AdultProgramsStyles = styled.div`
   }
   .employer-love {
     background: ${({ theme }) => theme.secondary[500]};
-    min-height: 42rem;
     display: flex;
 
     h1 {
       color: ${({ theme }) => theme.primary[700]};
+    }
+    .left-col {
+      display: flex;
+      align-items: center;
+      height: 100%;
     }
     .right-col-container {
       display: flex;
