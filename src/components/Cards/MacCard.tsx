@@ -9,7 +9,7 @@ interface MacCardProps {
   onNextClick?: () => void;
   onPrevClick?: () => void;
   onPauseClick?: () => void;
-  isPaused: boolean;
+  isPaused?: boolean;
   children: ReactNode | ReactNode[] | undefined;
 }
 
