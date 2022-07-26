@@ -105,56 +105,60 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
         <Section className='employer-love'>
           <Content style={{ paddingTop: '2rem', paddingBottom: '2rem' }}>
             <h1 className='dynamic-h1'>Employers love our grads!</h1>
-            <TwoColumns
-              style={{ height: '48rem' }}
-              leftColStyle={{ width: '60%', paddingRight: '2rem' }}
-              rightColStyle={{ width: '40%', paddingLeft: '2rem' }}
-              leftCol={
-                <div className='left-col'>
-                  <MacCard onNextClick={() => handleShift(1)} onPrevClick={() => handleShift(-1)}>
-                    <MacContent
-                      body={quote.body}
-                      imageUrl={quote.imageUrl}
-                      name={quote.name}
-                      role={quote.role}
-                      logoSrc={theme.isLightMode ? quote.logoSrcLight : quote.logoSrcDark}
-                      logoHref='https://mumms.com/'
-                    />
-                  </MacCard>
-                </div>
-              }
-              rightCol={
-                <div className='right-col-container'>
-                  <div className='right-col'>
-                    <p
-                      className='dynamic-txt'
-                      style={{
-                        paddingBottom: '1rem',
-                        maxWidth: '100%',
-
-                        color: 'rgba(25,25,25,1)',
-                      }}
+            <div className='employer-love-content'>
+              <TwoColumns
+                leftColStyle={{ width: '65%', paddingRight: '2rem' }}
+                rightColStyle={{ width: '35%', paddingLeft: '2rem' }}
+                leftCol={
+                  <div className='left-col'>
+                    <MacCard
+                      onNextClick={() => handleShift(1)}
+                      onPrevClick={() => handleShift(-1)}
+                      onPauseClick={() => setIsPaused(!isPaused)}
+                      isPaused={isPaused}
                     >
-                      <b>
-                        Does your company need developers? We foster employer partnerships in the
-                        community. Become a partner and gain valuable talent for your company.
-                      </b>
-                    </p>
-                    <Link href='/contact'>
-                      <a
-                        className='anchor right-arr-left'
-                        aria-label='Contact to learn about employer partnerships'
-                        title='Contact to learn about employer partnerships'
-                      >
-                        Contact us to learn more about
-                        <br />
-                        employer partnerships
-                      </a>
-                    </Link>
+                      <MacContent
+                        body={quote.body}
+                        imageUrl={quote.imageUrl}
+                        name={quote.name}
+                        role={quote.role}
+                        logoSrc={theme.isLightMode ? quote.logoSrcLight : quote.logoSrcDark}
+                        logoHref='https://mumms.com/'
+                      />
+                    </MacCard>
                   </div>
-                </div>
-              }
-            ></TwoColumns>
+                }
+                rightCol={
+                  <div className='right-col-container'>
+                    <div className='right-col'>
+                      <p
+                        className='dynamic-txt'
+                        style={{
+                          paddingBottom: '1rem',
+                          maxWidth: '100%',
+
+                          color: 'rgba(25,25,25,1)',
+                        }}
+                      >
+                        <b>
+                          Does your company need developers? We foster employer partnerships in the
+                          community. Become a partner and gain valuable talent for your company.
+                        </b>
+                      </p>
+                      <Link href='/contact'>
+                        <a
+                          className='anchor right-arr-left'
+                          aria-label='Contact to learn about employer partnerships'
+                          title='Contact to learn about employer partnerships'
+                        >
+                          Contact us to learn more about employer partnerships
+                        </a>
+                      </Link>
+                    </div>
+                  </div>
+                }
+              />
+            </div>
           </Content>
         </Section>
         <Section className='adult-courses'>
@@ -258,8 +262,14 @@ export const AdultProgramsStyles = styled.div`
     }
   }
   .employer-love {
+    min-height: 50rem;
+
+    .employer-love-content {
+    }
     background: ${({ theme }) => theme.secondary[500]};
     display: flex;
+    flex-flow: column;
+    justify-content: space-between;
 
     h1 {
       color: ${({ theme }) => theme.primary[700]};
@@ -313,9 +323,10 @@ export const AdultProgramsStyles = styled.div`
 
   @media screen and (max-width: 1000px) {
     .employer-love {
+      min-height: 60rem;
       .cols-2 {
         flex-flow: column;
-
+        justify-content: space-between;
         .left-col,
         .right-col {
           display: flex;
@@ -328,12 +339,15 @@ export const AdultProgramsStyles = styled.div`
         .right-col {
           flex-flow: column;
           align-items: center;
+
         }
       }
     }
   }
   @media screen and (max-width: 768px) {
     .employer-love {
+      align-items: center;
+      justify-content: center;
       .cols-2 {
         flex-flow: column;
         .left-col {

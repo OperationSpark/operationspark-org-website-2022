@@ -1,16 +1,26 @@
 import { ReactNode } from 'react';
 import styled, { useTheme } from 'styled-components';
-import { FaArrowRight, FaArrowLeft } from 'react-icons/fa';
+import { FaArrowRight as RightIcon, FaArrowLeft as LeftIcon } from 'react-icons/fa';
+import { IoMdPause as PauseIcon, IoMdPlay as PlayIcon } from 'react-icons/io';
 
 import { SlashDivider } from '@this/components/Elements/SlashDivider';
 
 interface MacCardProps {
   onNextClick?: () => void;
   onPrevClick?: () => void;
+  onPauseClick?: () => void;
+  isPaused: boolean;
   children: ReactNode | ReactNode[] | undefined;
 }
 
-export const MacCard = ({ children, onNextClick, onPrevClick }: MacCardProps) => {
+export const MacCard = ({
+  children,
+  onNextClick,
+  onPrevClick,
+  onPauseClick,
+  isPaused,
+}: MacCardProps) => {
+  const pauseOrPlay = isPaused ? 'play' : 'pause';
   return (
     <MacCardStyles>
       <SlashDivider
@@ -22,7 +32,7 @@ export const MacCard = ({ children, onNextClick, onPrevClick }: MacCardProps) =>
         }}
       >
         <div className='mac-buttons'>
-          <MacBtn fill='yellow' />
+          <MacBtn fill='yellow' char={onPauseClick && pauseOrPlay} onClick={onPauseClick} />
           <MacBtn char={onPrevClick && '<'} onClick={onPrevClick} />
           <MacBtn char={onNextClick && '>'} onClick={onNextClick} />
         </div>
@@ -40,28 +50,34 @@ const MacBtn = ({
   onClick,
 }: {
   fill?: 'yellow';
-  char?: '<' | '>' | undefined;
+  char?: '<' | '>' | 'pause' | 'play' | undefined;
   onClick?: () => void;
 }) => {
+  const icons = {
+    '<': LeftIcon,
+    '>': RightIcon,
+    pause: PauseIcon,
+    play: PlayIcon,
+  };
+  const BtnIcon = char ? icons[char] : null;
   const theme = useTheme();
 
   return (
     <MacBtnStyles>
-      {char ? (
+      {BtnIcon ? (
         <button
-          className='mac-button'
-          style={fill === 'yellow' ? { background: theme.yellow[400] } : {}}
-          disabled={!char}
+          className={`mac-button${fill === 'yellow' ? ' invert' : ''}`}
+          style={fill === 'yellow' ? { background: theme.yellow[400], color: theme.black } : {}}
           aria-label={char === '<' ? 'Previous' : ' Next'}
           onClick={() => onClick?.()}
         >
-          {char === '<' ? <FaArrowLeft size={10} /> : <FaArrowRight size={10} />}
+          <BtnIcon size={10} />
         </button>
       ) : (
         <div
           tabIndex={-1}
           className='mac-no-button'
-          style={fill === 'yellow' ? { background: theme.yellow[400] } : {}}
+          style={fill === 'yellow' ? { background: theme.yellow[400] } : undefined}
         ></div>
       )}
     </MacBtnStyles>
