@@ -264,19 +264,22 @@ export const AdultProgramsStyles = styled.div`
   .employer-love {
     min-height: 50rem;
 
-    .employer-love-content {
-    }
+
     background: ${({ theme }) => theme.secondary[500]};
     display: flex;
-    flex-flow: column;
-    justify-content: space-between;
 
+
+    .employer-love-content {
+      height: 90%;
+      align-items: space-between;
+      display: flex;
+    }
     h1 {
       color: ${({ theme }) => theme.primary[700]};
     }
     .left-col {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       height: 100%;
     }
     .right-col-container {
@@ -346,8 +349,7 @@ export const AdultProgramsStyles = styled.div`
   }
   @media screen and (max-width: 768px) {
     .employer-love {
-      align-items: center;
-      justify-content: center;
+
       .cols-2 {
         flex-flow: column;
         .left-col {
