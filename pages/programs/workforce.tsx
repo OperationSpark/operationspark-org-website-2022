@@ -123,7 +123,7 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
                         name={quote.name}
                         role={quote.role}
                         logoSrc={theme.isLightMode ? quote.logoSrcLight : quote.logoSrcDark}
-                        logoHref='https://mumms.com/'
+                        logoHref={quote.logoHref}
                       />
                     </MacCard>
                   </div>
