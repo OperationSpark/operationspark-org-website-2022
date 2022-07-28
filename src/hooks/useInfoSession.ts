@@ -14,7 +14,7 @@ function useInfoSession(nextOnly?: boolean) {
   }, []);
 
   if (nextOnly) {
-    return sessionDates[0] || null;
+    return sessionDates[0] ?? null;
   }
   return sessionDates;
 }
