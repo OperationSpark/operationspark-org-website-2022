@@ -7,38 +7,30 @@ import Form from '@this/components/Form/Form';
 import useForm from '@this/components/Form/useForm';
 import Button from '@this/components/Elements/Button';
 
-import { AiOutlineInfoCircle } from 'react-icons/ai';
+import { AiOutlineInfoCircle as InfoIcon } from 'react-icons/ai';
 
-const HighschoolFormStyles = styled.div`
+const HighschoolFormSignupStyles = styled.div`
   .form-section {
     padding-bottom: 1rem;
     .form-section-title {
       font-weight: 700;
-      color: ${({ theme }) =>
-        theme.isLightMode ? theme.magenta[700] : theme.magenta[100]};
+      color: ${({ theme }) => (theme.isLightMode ? theme.magenta[700] : theme.magenta[100])};
     }
   }
 `;
 
-interface HighschoolFormProps {
+interface HighschoolFormSignupProps {
   onSubmitComplete?: () => void;
-  interestOnly: boolean;
   selectedCourse?: string;
 }
 
-const HighschoolForm = ({
-  onSubmitComplete,
-  interestOnly,
-  selectedCourse,
-}: HighschoolFormProps) => {
+const HighschoolFormSignup = ({ onSubmitComplete, selectedCourse }: HighschoolFormSignupProps) => {
   const form = useForm();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const hasErrors = form.hasErrors();
   const year = new Date().getFullYear();
   const graduationYears = [
-    ...new Array(4)
-      .fill(0)
-      .map((e, i) => ({ name: `${year + i}`, value: `${year + i}` })),
+    ...new Array(4).fill(0).map((e, i) => ({ name: `${year + i}`, value: `${year + i}` })),
     { name: 'Other', value: 'other', additionalInfo: 'Please explain' },
   ];
   const handleSubmit = async () => {
@@ -62,13 +54,10 @@ const HighschoolForm = ({
 
   const equipmentData = form.getCheckboxes('equipment');
   const showEquipment =
-    (Object.keys(equipmentData).length < 5 && !equipmentData.none) ??
-    equipmentData.none;
+    (Object.keys(equipmentData).length < 5 && !equipmentData.none) ?? equipmentData.none;
   useEffect(() => {
     if (selectedCourse) {
-      const newSelectedOpt = courses.find(
-        ({ value }) => value === selectedCourse,
-      );
+      const newSelectedOpt = courses.find(({ value }) => value === selectedCourse);
       form.onSelectChange('course')({
         option: newSelectedOpt,
         isValid: true,
@@ -79,27 +68,22 @@ const HighschoolForm = ({
     // Ignore because I do not want to watch for changes on useForm
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCourse]);
+
   return (
-    <HighschoolFormStyles>
+    <HighschoolFormSignupStyles>
       <Form onSubmit={handleSubmit}>
-        <div className={!interestOnly ? 'form-section' : ''}>
-          {!interestOnly && (
-            <h3 className='dynamic-h3 form-section-title'>Student info</h3>
-          )}
-          {highschoolFormInputs.studentInfo.map(
-            (field) =>
-              interestOnly &&
-              field.name !== 'studentDOB' && (
-                <field.Element
-                  key={field.name}
-                  {...field}
-                  value={form.get(field.name)}
-                  onChange={form.onChange(field.name)}
-                  isValid={form.isValid(field.name)}
-                  isErr={form.isErr(field.name)}
-                />
-              ),
-          )}
+        <div className='form-section'>
+          <h3 className='dynamic-h3 form-section-title'>Student info</h3>
+          {highschoolFormSignupInputs.studentInfo.map((field) => (
+            <field.Element
+              key={field.name}
+              {...field}
+              value={form.get(field.name)}
+              onChange={form.onChange(field.name)}
+              isValid={form.isValid(field.name)}
+              isErr={form.isErr(field.name)}
+            />
+          ))}
 
           <Input.Select
             label='What year will you graduate'
@@ -112,42 +96,34 @@ const HighschoolForm = ({
             required
           />
 
-          {!interestOnly && (
-            <Input.CheckboxGroup
-              label='Race/Ethnicity'
-              checkboxes={ethnicities}
-              values={form.getCheckboxes('ethnicities')}
-              isValid={form.isValid('ethnicities')}
-              isErr={form.isErr('ethnicities')}
-              onChange={form.onCheckboxGroupChange('ethnicities')}
-              clearCheckboxes={form.clearCheckboxGroup('ethnicities')}
-              required
-            />
-          )}
+          <Input.CheckboxGroup
+            label='Race/Ethnicity'
+            checkboxes={ethnicities}
+            values={form.getCheckboxes('ethnicities')}
+            isValid={form.isValid('ethnicities')}
+            isErr={form.isErr('ethnicities')}
+            onChange={form.onCheckboxGroupChange('ethnicities')}
+            clearCheckboxes={form.clearCheckboxGroup('ethnicities')}
+            required
+          />
         </div>
-        {!interestOnly && (
-          <div className='form-section'>
-            <h3 className='dynamic-h3 form-section-title'>
-              Parent/Guardian Information
-            </h3>
-            {highschoolFormInputs.guardianInfo.map((field) => (
-              <field.Element
-                key={field.name}
-                {...field}
-                value={form.get(field.name)}
-                onChange={form.onChange(field.name)}
-                isValid={form.isValid(field.name)}
-                isErr={form.isErr(field.name)}
-              />
-            ))}
-          </div>
-        )}
-        <div className={!interestOnly ? 'form-section' : ''}>
-          {!interestOnly && (
-            <h3 className='dynamic-h3 form-section-title'>
-              Course Information
-            </h3>
-          )}
+
+        <div className='form-section'>
+          <h3 className='dynamic-h3 form-section-title'>Parent/Guardian Information</h3>
+          {highschoolFormSignupInputs.guardianInfo.map((field) => (
+            <field.Element
+              key={field.name}
+              {...field}
+              value={form.get(field.name)}
+              onChange={form.onChange(field.name)}
+              isValid={form.isValid(field.name)}
+              isErr={form.isErr(field.name)}
+            />
+          ))}
+        </div>
+
+        <div className='form-section'>
+          <h3 className='dynamic-h3 form-section-title'>Course Information</h3>
           <Input.Select
             label='Which class are you interested in?'
             name='course'
@@ -158,30 +134,28 @@ const HighschoolForm = ({
             onChange={form.onSelectChange('course')}
             required
           />
-          {!interestOnly && (
-            <Input.Select
-              label='What is your current level of interest in the program?'
-              name='interestLevel'
-              options={interestLevel}
-              option={form.getSelect('interestLevel')}
-              isErr={form.isErr('interestLevel')}
-              isValid={form.isValid('interestLevel')}
-              onChange={form.onSelectChange('interestLevel')}
-              required
-            />
-          )}
-          {!interestOnly && (
-            <Input.Select
-              label='Your availability'
-              name='availability'
-              options={availability}
-              option={form.getSelect('availability')}
-              isErr={form.isErr('availability')}
-              isValid={form.isValid('availability')}
-              onChange={form.onSelectChange('availability')}
-              required
-            />
-          )}
+
+          <Input.Select
+            label='What is your current level of interest in the program?'
+            name='interestLevel'
+            options={interestLevel}
+            option={form.getSelect('interestLevel')}
+            isErr={form.isErr('interestLevel')}
+            isValid={form.isValid('interestLevel')}
+            onChange={form.onSelectChange('interestLevel')}
+            required
+          />
+
+          <Input.Select
+            label='Your availability'
+            name='availability'
+            options={availability}
+            option={form.getSelect('availability')}
+            isErr={form.isErr('availability')}
+            isValid={form.isValid('availability')}
+            onChange={form.onSelectChange('availability')}
+            required
+          />
 
           <Input.Select
             label='How did you hear about us?'
@@ -193,32 +167,29 @@ const HighschoolForm = ({
             onChange={form.onSelectChange('referencedBy')}
             required
           />
-          {!interestOnly && (
-            <Input.CheckboxGroup
-              label='What equipment do you have (VIRTUAL ONLY)'
-              checkboxes={equipment}
-              values={form.getCheckboxes('equipment')}
-              isValid={form.isValid('equipment')}
-              isErr={form.isErr('equipment')}
-              onChange={form.onCheckboxGroupChange('equipment')}
-              clearCheckboxes={form.clearCheckboxGroup('equipment')}
-              required
-            />
-          )}
 
-          {!interestOnly && (
-            <div style={{ marginTop: '0.5rem' }}>
-              {showEquipment && (
-                <Input.TextArea
-                  label='What equipment do you need?'
-                  name='equipment-explanation'
-                  placeholder='...'
-                  value={form.get('equipmentExplanation')}
-                  onChange={form.onChange('equipmentExplanation')}
-                />
-              )}
-            </div>
-          )}
+          <Input.CheckboxGroup
+            label='What equipment do you have (VIRTUAL ONLY)'
+            checkboxes={equipment}
+            values={form.getCheckboxes('equipment')}
+            isValid={form.isValid('equipment')}
+            isErr={form.isErr('equipment')}
+            onChange={form.onCheckboxGroupChange('equipment')}
+            clearCheckboxes={form.clearCheckboxGroup('equipment')}
+            required
+          />
+
+          <div style={{ marginTop: '0.5rem' }}>
+            {showEquipment && (
+              <Input.TextArea
+                label='What equipment do you need?'
+                name='equipment-explanation'
+                placeholder='...'
+                value={form.get('equipmentExplanation')}
+                onChange={form.onChange('equipmentExplanation')}
+              />
+            )}
+          </div>
         </div>
         <div className='form-section'>
           <div style={{ width: '100%', height: '100%' }}>
@@ -233,7 +204,7 @@ const HighschoolForm = ({
         </div>
         {hasErrors && form.showErrors() && (
           <div className='form-error'>
-            <AiOutlineInfoCircle /> <p>Please complete required fields</p>
+            <InfoIcon /> <p>Please complete required fields</p>
           </div>
         )}
         <Button
@@ -245,13 +216,13 @@ const HighschoolForm = ({
           Sign up!
         </Button>
       </Form>
-    </HighschoolFormStyles>
+    </HighschoolFormSignupStyles>
   );
 };
 
-export default HighschoolForm;
+export default HighschoolFormSignup;
 
-const highschoolFormInputs = {
+const highschoolFormSignupInputs = {
   studentInfo: [
     {
       Element: Input.Text,
