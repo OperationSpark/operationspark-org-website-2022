@@ -1,18 +1,16 @@
-import dynamic from 'next/dynamic';
-import { GetStaticProps, NextPage } from 'next';
 import styled from 'styled-components';
-import axios from 'axios';
+import { GetStaticProps, NextPage } from 'next';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { IInfoSession } from '@this/data/types/infoSession';
 import { ILogo } from '@this/data/types/logos';
 
 import { cardShadow, cardShadowLtr, cardShadowRtl } from '@this/src/theme/styled/mixins/shadows';
 import { getStaticAsset } from '@this/pages-api/static/[asset]';
-import { ISessionDates } from '@this/pages-api/infoSession/dates';
 import { Main, Section, Content } from '@this/components/layout';
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
+import useInfoSession from '@this/src/hooks/useInfoSession';
 
 const WorkforceForm = dynamic(() => import('@this/src/Forms/Form.Workforce'));
 const Carousel = dynamic(() => import('@this/components/Elements/Carousel'));
@@ -22,11 +20,7 @@ interface InfoSessionProps extends IInfoSession {
 }
 
 const InfoSession: NextPage<InfoSessionProps> = ({ commonQuestions, logos }) => {
-  const [sessionDates, setSessionDates] = useState<ISessionDates[]>([]);
-
-  useEffect(() => {
-    axios.get('/api/infoSession/dates').then(({ data }) => setSessionDates(data));
-  }, []);
+  const sessionDates = useInfoSession();
   return (
     <Main>
       <InfoSessionStyles>

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { GetStaticProps, NextPage } from 'next';
 import Link from 'next/link';
 import styled, { useTheme } from 'styled-components';
+import moment from 'moment';
 
 import { Main, Section, Content } from '@this/components/layout';
 import { getStaticAsset } from '@this/pages-api/static/[asset]';
@@ -13,6 +14,7 @@ import { TwoColumns } from '@this/components/Elements/Columns';
 import { IQuote, ITitleDescription } from '@this/data/types/bits';
 import { ICourses } from '@this/data/types/programs';
 import { BgImg } from '@this/src/components/Elements';
+import useInfoSession from '@this/src/hooks/useInfoSession';
 
 export interface AdultProgramsProps {
   header: ITitleDescription;
@@ -31,6 +33,12 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
   const [quoteIndex, setQuoteIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const quote = companyQuotes[quoteIndex];
+
+  const nextInfoSession = useInfoSession(true);
+
+  const nextInfoSessionDate = !nextInfoSession
+    ? null
+    : moment(nextInfoSession.times.start.dateTime).format('dddd, MMMM Do @ h:mma');
 
   useEffect(() => {
     let interval: NodeJS.Timer;
@@ -97,53 +105,60 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
         <Section className='employer-love'>
           <Content style={{ paddingTop: '2rem', paddingBottom: '2rem' }}>
             <h1 className='dynamic-h1'>Employers love our grads!</h1>
-            <TwoColumns
-              leftColStyle={{ width: '60%', paddingRight: '2rem' }}
-              rightColStyle={{ width: '40%', paddingLeft: '2rem' }}
-              leftCol={
-                <MacCard onNextClick={() => handleShift(1)} onPrevClick={() => handleShift(-1)}>
-                  <MacContent
-                    body={quote.body}
-                    imageUrl={quote.imageUrl}
-                    name={quote.name}
-                    role={quote.role}
-                    logoSrc={theme.isLightMode ? quote.logoSrcLight : quote.logoSrcDark}
-                    logoHref='https://mumms.com/'
-                  />
-                </MacCard>
-              }
-              rightCol={
-                <div className='right-col-container'>
-                  <div className='right-col'>
-                    <p
-                      className='dynamic-txt'
-                      style={{
-                        paddingBottom: '1rem',
-                        maxWidth: '100%',
-
-                        color: 'rgba(25,25,25,1)',
-                      }}
+            <div className='employer-love-content'>
+              <TwoColumns
+                leftColStyle={{ width: '65%', paddingRight: '2rem' }}
+                rightColStyle={{ width: '35%', paddingLeft: '2rem' }}
+                leftCol={
+                  <div className='left-col'>
+                    <MacCard
+                      onNextClick={() => handleShift(1)}
+                      onPrevClick={() => handleShift(-1)}
+                      onPauseClick={() => setIsPaused(!isPaused)}
+                      isPaused={isPaused}
                     >
-                      <b>
-                        Does your company need developers? We foster employer partnerships in the
-                        community. Become a partner and gain valuable talent for your company.
-                      </b>
-                    </p>
-                    <Link href='/contact'>
-                      <a
-                        className='anchor right-arr-left'
-                        aria-label='Contact to learn about employer partnerships'
-                        title='Contact to learn about employer partnerships'
-                      >
-                        Contact us to learn more about
-                        <br />
-                        employer partnerships
-                      </a>
-                    </Link>
+                      <MacContent
+                        body={quote.body}
+                        imageUrl={quote.imageUrl}
+                        name={quote.name}
+                        role={quote.role}
+                        logoSrc={theme.isLightMode ? quote.logoSrcLight : quote.logoSrcDark}
+                        logoHref={quote.logoHref}
+                      />
+                    </MacCard>
                   </div>
-                </div>
-              }
-            ></TwoColumns>
+                }
+                rightCol={
+                  <div className='right-col-container'>
+                    <div className='right-col'>
+                      <p
+                        className='dynamic-txt'
+                        style={{
+                          paddingBottom: '1rem',
+                          maxWidth: '100%',
+
+                          color: 'rgba(25,25,25,1)',
+                        }}
+                      >
+                        <b>
+                          Does your company need developers? We foster employer partnerships in the
+                          community. Become a partner and gain valuable talent for your company.
+                        </b>
+                      </p>
+                      <Link href='/contact'>
+                        <a
+                          className='anchor right-arr-left'
+                          aria-label='Contact to learn about employer partnerships'
+                          title='Contact to learn about employer partnerships'
+                        >
+                          Contact us to learn more about employer partnerships
+                        </a>
+                      </Link>
+                    </div>
+                  </div>
+                }
+              />
+            </div>
           </Content>
         </Section>
         <Section className='adult-courses'>
@@ -158,7 +173,7 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
             </a>
 
             <h1 className='dynamic-h1'>Courses</h1>
-            {courses.map(({ title, length, description, nextStartDate }) => (
+            {courses.map(({ title, length, description, nextStartDate, infoMessage }) => (
               <PlainCard
                 className='program-card _progress'
                 id={title.toLowerCase().split(' ').join('-')}
@@ -175,6 +190,23 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
                       {desc}
                     </p>
                   ))}
+                  {infoMessage && (
+                    <div>
+                      <p className='dynamic-txt'>
+                        <b>{infoMessage}</b>
+                      </p>
+                      <div>
+                        <p className='dynamic-txt program-next-start primary-secondary'>
+                          <b>Next info session: {nextInfoSessionDate}</b>
+                        </p>
+                      </div>
+                      <p className='dynamic-txt program-next-start primary-secondary'>
+                        <Link href='/infoSession'>
+                          <a className='anchor right-arr-left'>Sign up here</a>
+                        </Link>
+                      </p>
+                    </div>
+                  )}
                   {nextStartDate && (
                     <p className='dynamic-txt primary-secondary program-next-start'>
                       <b>Next start date: {nextStartDate}</b>
@@ -230,12 +262,25 @@ export const AdultProgramsStyles = styled.div`
     }
   }
   .employer-love {
+    min-height: 50rem;
+
+
     background: ${({ theme }) => theme.secondary[500]};
-    min-height: 42rem;
     display: flex;
 
+
+    .employer-love-content {
+      height: 90%;
+      align-items: space-between;
+      display: flex;
+    }
     h1 {
       color: ${({ theme }) => theme.primary[700]};
+    }
+    .left-col {
+      display: flex;
+      align-items: flex-start;
+      height: 100%;
     }
     .right-col-container {
       display: flex;
@@ -281,9 +326,10 @@ export const AdultProgramsStyles = styled.div`
 
   @media screen and (max-width: 1000px) {
     .employer-love {
+      min-height: 60rem;
       .cols-2 {
         flex-flow: column;
-
+        justify-content: space-between;
         .left-col,
         .right-col {
           display: flex;
@@ -296,12 +342,14 @@ export const AdultProgramsStyles = styled.div`
         .right-col {
           flex-flow: column;
           align-items: center;
+
         }
       }
     }
   }
   @media screen and (max-width: 768px) {
     .employer-love {
+
       .cols-2 {
         flex-flow: column;
         .left-col {
