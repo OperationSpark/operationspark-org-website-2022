@@ -1,4 +1,4 @@
-import { GetStaticProps, NextPage } from 'next';
+import { NextPage } from 'next';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import styled from 'styled-components';
@@ -7,26 +7,23 @@ import { FiChevronLeft } from 'react-icons/fi';
 import Main from '@this/components/layout/Main';
 import Content from '@this/components/layout/Content';
 import { IHighschoolPrograms } from '@this/data/types/programs';
-import { getStaticAsset } from '@this/pages-api/static/[asset]';
 
-const HighschoolForm = dynamic(() => import('@this/src/Forms/Form.Highschool'));
 
-const HighschoolSignup: NextPage<IHighschoolPrograms> = ({ interestOnly }) => {
+const HighschoolInfoForm = dynamic(() => import('@this/src/Forms/Form.HighschoolInfo'));
+
+const HighschoolSignup: NextPage<IHighschoolPrograms> = () => {
   return (
     <Main>
       <HighschoolSignupStyles>
         <Content>
           <Link href='/programs/highschool' passHref>
-            <a
-              style={{ display: 'flex', alignItems: 'center' }}
-              className='anchor'
-            >
+            <a style={{ display: 'flex', alignItems: 'center' }} className='anchor'>
               <FiChevronLeft style={{ marginRight: '0.25rem' }} />
               High School Programs
             </a>
           </Link>
           <div className='hs-form'>
-            <HighschoolForm interestOnly={interestOnly} />
+            <HighschoolInfoForm />
           </div>
         </Content>
       </HighschoolSignupStyles>
@@ -35,17 +32,6 @@ const HighschoolSignup: NextPage<IHighschoolPrograms> = ({ interestOnly }) => {
 };
 
 export default HighschoolSignup;
-
-export const getStaticProps: GetStaticProps<IHighschoolPrograms> = async () => {
-  const props: IHighschoolPrograms = await getStaticAsset(
-    'programs',
-    'highschool',
-  );
-
-  return {
-    props,
-  };
-};
 
 const HighschoolSignupStyles = styled.div`
   .hs-form {
