@@ -1,7 +1,8 @@
 import dynamic from 'next/dynamic';
 import { GetStaticProps, NextPage } from 'next';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { IGradShowcase } from '@this/data/types/gradShowcase';
@@ -12,10 +13,22 @@ import { BgImg } from '@this/src/components/Elements';
 
 const Countdown = dynamic(() => import('@this/components/Elements/Countdown'));
 
-const GradShowcase: NextPage<IGradShowcase> = ({ startDateTime, cohortName, eventbriteUrl }) => {
+const GradShowcase: NextPage<IGradShowcase> = ({
+  startDateTime,
+  cohortName,
+  eventbriteUrl,
+  isActive,
+}) => {
   const [showcaseDate] = useState<Date | null>(toCentTime(startDateTime));
+  const router = useRouter();
 
-  return (
+  useEffect(() => {
+    !isActive && router.replace('/');
+  }, [isActive, router]);
+
+  return !isActive ? (
+    <Main />
+  ) : (
     <Main style={{ paddingTop: 0 }}>
       <ShowcaseSignupStyles>
         <BgImg src='/images/display/celebrate.webp' overlay={{ bg: 'transparent' }}>
