@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { GetStaticProps, NextPage } from 'next';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 
 import { IGradShowcase } from '@this/data/types/gradShowcase';
@@ -40,14 +41,18 @@ const GradShowcaseStyles = styled.div`
   }
 `;
 
-const GradShowcase: NextPage<IGradShowcase> = ({
-  startDateTime,
-  cohortName,
-}) => {
+const GradShowcase: NextPage<IGradShowcase> = ({ startDateTime, cohortName, isActive }) => {
   const [showcaseDate] = useState<Date | null>(toCentTime(startDateTime));
   const [vidLoaded, setVidLoaded] = useState<boolean>(false);
+  const router = useRouter();
 
-  return (
+  useEffect(() => {
+    !isActive && router.replace('/');
+  }, [router, isActive]);
+
+  return !startDateTime ? (
+    <Main />
+  ) : (
     <Main>
       <GradShowcaseStyles>
         <Content className='date-countdown'>

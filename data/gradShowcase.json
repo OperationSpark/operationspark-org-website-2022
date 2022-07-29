@@ -1,5 +1,6 @@
 {
   "startDateTime": "7/28/2022 18:00",
   "cohortName": "Victor 2022",
-  "eventbriteUrl": "https://opsparkjuly2022.eventbrite.com/"
+  "eventbriteUrl": "https://opsparkjuly2022.eventbrite.com/",
+  "isActive": false
 }
