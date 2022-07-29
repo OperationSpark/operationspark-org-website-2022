@@ -20,7 +20,7 @@ const DesktopNav = ({ navMenus = [] }: DesktopNavProps) => {
         />
       ))}
 
-      <NavLink href='/infoSession' className='info'>
+      <NavLink href='/programs/workforce/infoSession' className='info'>
         Free Info Session
       </NavLink>
       <ThemeButton />
