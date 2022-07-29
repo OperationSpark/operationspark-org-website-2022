@@ -9,10 +9,14 @@ import Button from '@this/components/Elements/Button';
 
 import { AiOutlineInfoCircle as InfoIcon } from 'react-icons/ai';
 import { hsApplication } from '@this/config/form';
+import { TOption } from '@this/data/types/bits';
 
 const HighschoolFormSignupStyles = styled.div`
   width: 100%;
 
+  .form-info {
+    color: ${({ theme }) => (theme.isLightMode ? theme.red[700] : theme.red[200])};
+  }
   .form-section-title {
     font-weight: 700;
     color: ${({ theme }) => (theme.isLightMode ? theme.magenta[700] : theme.magenta[100])};
@@ -20,15 +24,21 @@ const HighschoolFormSignupStyles = styled.div`
     grid-column: 1 / -1;
     padding-top: 1rem;
   }
-  .form-item-span {
+  .form-col-span {
     grid-column: 1 / -1;
   }
+
   .form-grid {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(2, minmax(300px, 1fr));
     grid-template-rows: auto;
     grid-gap: 0.25rem 1rem;
+    align-items: flex-end;
+  }
+  ul.form-info {
+    padding-left: 2rem;
+    margin-bottom: 0.5rem;
   }
 
   @media screen and (max-width: 768px) {
@@ -40,15 +50,27 @@ const HighschoolFormSignupStyles = styled.div`
   }
 `;
 
+const getSelectedCourseTimes = (selected: string): { options: TOption[]; note: string } | null => {
+  if (selected === 'fundamentals') {
+    return { options: courseTimes.fundamentals, note: courseTimes.notes.fundamentals };
+  }
+  if (selected === 'advanced') {
+    return { options: courseTimes.advanced, note: courseTimes.notes.advanced };
+  }
+  return null;
+};
+
 interface HighschoolFormSignupProps {
   onSubmitComplete?: () => void;
-  selectedCourse?: string;
 }
 
-const HighschoolFormSignup = ({ onSubmitComplete, selectedCourse }: HighschoolFormSignupProps) => {
+const HighschoolFormSignup = ({ onSubmitComplete }: HighschoolFormSignupProps) => {
   const form = useForm();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const hasErrors = form.hasErrors();
+
+  const courseTimeOptions = getSelectedCourseTimes(form.getSelect('course').value);
+
   const year = new Date().getFullYear();
   const graduationYears = [
     ...new Array(4).fill(0).map((e, i) => ({ name: `${year + i}`, value: `${year + i}` })),
@@ -63,6 +85,7 @@ const HighschoolFormSignup = ({ onSubmitComplete, selectedCourse }: HighschoolFo
 
     try {
       const { tabName } = hsApplication;
+
       await axios.post('/api/signup/highschool', {
         ...form.values(),
         tabName,
@@ -78,22 +101,15 @@ const HighschoolFormSignup = ({ onSubmitComplete, selectedCourse }: HighschoolFo
     }
   };
 
-  const equipmentData = form.getCheckboxes('equipment');
-  const showEquipment =
-    (Object.keys(equipmentData).length < 5 && !equipmentData.none) ?? equipmentData.none;
+  // const equipmentData = form.getCheckboxes('equipment');
+  // const showEquipment =
+  //   (Object.keys(equipmentData).length < 5 && !equipmentData.none) ?? equipmentData.none;
+
   useEffect(() => {
-    if (selectedCourse) {
-      const newSelectedOpt = courses.find(({ value }) => value === selectedCourse);
-      form.onSelectChange('course')({
-        option: newSelectedOpt,
-        isValid: true,
-        additionalInfoLabel: '',
-        additionalInfo: '',
-      });
-    }
-    // Ignore because I do not want to watch for changes on useForm
+    form.onSelectChange('courseTime')({ option: { name: '', value: '' }, isValid: true });
+    //! Do not want to watch form
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedCourse]);
+  }, [courseTimeOptions?.options]);
 
   return (
     <HighschoolFormSignupStyles>
@@ -111,7 +127,16 @@ const HighschoolFormSignup = ({ onSubmitComplete, selectedCourse }: HighschoolFo
               isErr={form.isErr(field.name)}
             />
           ))}
-
+          <Input.Select
+            label='Gender'
+            name='gender'
+            options={genderOptions}
+            option={form.getSelect('gender')}
+            isErr={form.isErr('gender')}
+            isValid={form.isValid('gender')}
+            onChange={form.onSelectChange('gender')}
+            required
+          />
           <Input.Select
             label='What year will you graduate'
             name='gradYear'
@@ -122,7 +147,8 @@ const HighschoolFormSignup = ({ onSubmitComplete, selectedCourse }: HighschoolFo
             onChange={form.onSelectChange('gradYear')}
             required
           />
-          <div className='form-item-span'>
+
+          <div className='form-col-span'>
             <Input.CheckboxGroup
               label='Race/Ethnicity'
               checkboxes={ethnicities}
@@ -149,17 +175,40 @@ const HighschoolFormSignup = ({ onSubmitComplete, selectedCourse }: HighschoolFo
           ))}
 
           <h3 className='dynamic-h3 form-section-title'>Course Information</h3>
-
-          <Input.Select
-            label='Which class are you interested in?'
-            name='course'
-            options={courses}
-            option={form.getSelect('course')}
-            isErr={form.isErr('course')}
-            isValid={form.isValid('course')}
-            onChange={form.onSelectChange('course')}
-            required
-          />
+          <div>
+            {courseTimeOptions && (
+              <p className='form-info'>
+                <b>{courseTimeOptions.note}</b>
+              </p>
+            )}
+            <Input.Select
+              label='Which class are you interested in?'
+              name='course'
+              options={courses}
+              option={form.getSelect('course')}
+              isErr={form.isErr('course')}
+              isValid={form.isValid('course')}
+              onChange={form.onSelectChange('course')}
+              required
+            />
+          </div>
+          {courseTimeOptions && (
+            <div>
+              <p className='form-info'>
+                <b>{`You must choose in person or virtual (No mixed option)`}</b>
+              </p>
+              <Input.Select
+                label=' What is your course preference?'
+                name='course'
+                options={courseTimeOptions.options}
+                option={form.getSelect('courseTime')}
+                isErr={form.isErr('courseTime')}
+                isValid={form.isValid('courseTime')}
+                onChange={form.onSelectChange('courseTime')}
+                required
+              />
+            </div>
+          )}
 
           <Input.Select
             label='What is your current level of interest in the program?'
@@ -172,7 +221,7 @@ const HighschoolFormSignup = ({ onSubmitComplete, selectedCourse }: HighschoolFo
             required
           />
 
-          <Input.Select
+          {/* <Input.Select
             label='Your availability'
             name='availability'
             options={availability}
@@ -181,7 +230,7 @@ const HighschoolFormSignup = ({ onSubmitComplete, selectedCourse }: HighschoolFo
             isValid={form.isValid('availability')}
             onChange={form.onSelectChange('availability')}
             required
-          />
+          /> */}
 
           <Input.Select
             label='How did you hear about us?'
@@ -194,7 +243,7 @@ const HighschoolFormSignup = ({ onSubmitComplete, selectedCourse }: HighschoolFo
             required
           />
 
-          <div className='form-item-span'>
+          {/* <div className='form-col-span'>
             <Input.CheckboxGroup
               label='What equipment do you have (VIRTUAL ONLY)'
               checkboxes={equipment}
@@ -208,7 +257,7 @@ const HighschoolFormSignup = ({ onSubmitComplete, selectedCourse }: HighschoolFo
           </div>
 
           {showEquipment && (
-            <div className='form-item-span'>
+            <div className='form-col-span'>
               <Input.TextArea
                 label='What equipment do you need?'
                 name='equipment-explanation'
@@ -217,9 +266,34 @@ const HighschoolFormSignup = ({ onSubmitComplete, selectedCourse }: HighschoolFo
                 onChange={form.onChange('equipmentExplanation')}
               />
             </div>
-          )}
+          )} */}
+          <h3 className='dynamic-h3 form-section-title'>Policy Agreement</h3>
+          <div className='form-col-span'>
+            <h3 className='form-info dynamic-h3'>{`I understand that:`}</h3>
+            <ul className='form-info dynamic-txt'>
+              <li>{`Attendance is mandatory for both in-person and virtual classes.`}</li>
+              <li>
+                {`If I miss more than two classes (in-person) or four classes (virtual), or fail to complete assignments in a timely manner, Operation Spark may drop me from the class and ask me to re-enroll at a later date.`}
+              </li>
+              <li>
+                <b>{`The first two class meetings are mandatory, with NO EXCEPTIONS.`}</b>
+              </li>
+            </ul>
 
-          <div className='form-item-span'>
+            <Input.Select
+              label='Policy Agreement'
+              name='policyAgreement'
+              options={policyAgreementOptions}
+              option={form.getSelect('policyAgreement')}
+              isErr={form.isErr('policyAgreement')}
+              isValid={form.isValid('policyAgreement')}
+              onChange={form.onSelectChange('policyAgreement')}
+              required
+            />
+          </div>
+
+          <h3 className='dynamic-h3 form-section-title'>Other</h3>
+          <div className='form-col-span'>
             <Input.TextArea
               label='Other questions/comments'
               name='questionsComments'
@@ -234,7 +308,7 @@ const HighschoolFormSignup = ({ onSubmitComplete, selectedCourse }: HighschoolFo
               <InfoIcon /> <p>Please complete required fields</p>
             </div>
           )}
-          <div className='form-item-span'>
+          <div className='form-col-span'>
             <Button
               className={form.hasErrors() ? 'info disabled' : 'info'}
               color='yellow'
@@ -334,6 +408,20 @@ const highschoolFormSignupInputs = {
   ],
 };
 
+const genderOptions = [
+  {
+    value: 'male',
+    name: 'Male',
+  },
+  {
+    value: 'female',
+    name: 'Female',
+  },
+  {
+    value: 'no-response',
+    name: 'Prefer not to respond',
+  },
+];
 const referencedByOptions = [
   {
     value: 'google',
@@ -377,52 +465,78 @@ const courses = [
     value: 'advanced',
     name: 'Advanced Javascript, Functional Programming and Web Development [Prerequisite: Fundamentals]',
   },
-  {
-    value: 'web-mobile',
-    name: 'Professional Web and Mobile Development [Prerequisite: Level 1 and 2 IBC]',
-  },
-  {
-    value: 'fundamentals-game',
-    name: 'Fundamentals of Video Game Programming [Prerequisite: Level 1 and 2 IBC]',
-  },
-  {
-    value: 'iot',
-    name: 'Internet of Things [Prerequisite: Level 1 and 2 IBC]',
-  },
+  // {
+  //   value: 'web-mobile',
+  //   name: 'Professional Web and Mobile Development [Prerequisite: Level 1 and 2 IBC]',
+  // },
+  // {
+  //   value: 'fundamentals-game',
+  //   name: 'Fundamentals of Video Game Programming [Prerequisite: Level 1 and 2 IBC]',
+  // },
+  // {
+  //   value: 'iot',
+  //   name: 'Internet of Things [Prerequisite: Level 1 and 2 IBC]',
+  // },
 ];
+const courseTimes = {
+  notes: {
+    fundamentals: 'This is your first class with Op Spark',
+    advanced: 'This is your second class with Op Spark, and you earned the level 1 credential',
+  },
+  fundamentals: [
+    {
+      value: 'onsite-tue-4-8',
+      name: 'In-person, Tuesdays, 4:30 - 8:00 PM',
+    },
+    {
+      value: 'virtual-tue-thurs-5-7',
+      name: 'Virtual, Tuesdays + Thursdays, 5:00 - 7:00 PM',
+    },
+  ],
+  advanced: [
+    {
+      value: 'onsite-thurs-4-8',
+      name: 'In-person, Thursdays, 4:30 - 8:00 PM',
+    },
+    {
+      value: 'virtual-mon-wed-5-7',
+      name: 'Virtual, Mondays + Wednesdays, 5:00-7:00 PM',
+    },
+  ],
+};
 
 const interestLevel = [
   {
     value: 'positive',
-    name: "I'm sure I want to take the class in June.",
-  },
-  {
-    value: 'exploring',
-    name: 'Just exploring my summer options for now.',
+    name: "I'm sure I want to take the class this fall",
   },
   {
     value: 'future',
-    name: "I want to take the class at some point but can't take it this next session",
+    name: 'I want to take the course but am not yet sure about my availability',
+  },
+  {
+    value: 'exploring',
+    name: 'Just exploring my options for now',
   },
 ];
-const availability = [
-  {
-    value: 'm-f_9-12',
-    name: 'Monday to Friday, 9:00 AM to 12:00 PM',
-  },
-  {
-    value: 'm-f_1-4',
-    name: 'Monday to Friday, 1:00 PM to 4:00 PM',
-  },
-  {
-    value: 'flexible',
-    name: "I'm flexible; either time works for me",
-  },
-  {
-    value: 'waitList',
-    name: 'Not available at those times, add me to the wait list for the next course',
-  },
-];
+// const availability = [
+//   {
+//     value: 'm-f_9-12',
+//     name: 'Monday to Friday, 9:00 AM to 12:00 PM',
+//   },
+//   {
+//     value: 'm-f_1-4',
+//     name: 'Monday to Friday, 1:00 PM to 4:00 PM',
+//   },
+//   {
+//     value: 'flexible',
+//     name: "I'm flexible; either time works for me",
+//   },
+//   {
+//     value: 'waitList',
+//     name: 'Not available at those times, add me to the wait list for the next course',
+//   },
+// ];
 
 const ethnicities = [
   {
@@ -432,6 +546,11 @@ const ethnicities = [
   },
   { name: 'asian', label: 'Asian', value: false },
   {
+    name: 'native-hawaiian-pacific-islander',
+    label: 'Native Hawaiian or Pacific Islander',
+    value: false,
+  },
+  {
     name: 'black-african-american',
     label: 'Black/African American',
     value: false,
@@ -439,23 +558,39 @@ const ethnicities = [
   { name: 'hispanic-latino', label: 'Hispanic/Latino', value: false },
   { name: 'white', label: 'White', value: false },
 ];
-const equipment = [
+// const equipment = [
+//   {
+//     name: 'desktop-laptop',
+//     label: 'Desktop/Laptop',
+//     value: false,
+//   },
+//   { name: 'chromebook', label: 'Chromebook', value: false },
+//   {
+//     name: 'internet-access',
+//     label: 'Reliable Internet Access',
+//     value: false,
+//   },
+//   {
+//     name: 'mic-headphones',
+//     label: 'Mic (Internal or in headset/earbuds)',
+//     value: false,
+//   },
+//   { name: 'webcam', label: 'Webcam (Recommended)', value: false },
+//   { name: 'none', label: 'None of the above', value: false },
+// ];
+
+const policyAgreementOptions = [
   {
-    name: 'desktop-laptop',
-    label: 'Desktop/Laptop',
-    value: false,
-  },
-  { name: 'chromebook', label: 'Chromebook', value: false },
-  {
-    name: 'internet-access',
-    label: 'Reliable Internet Access',
-    value: false,
+    value: 'agree',
+    name: 'I understand and agree to the policy above',
   },
   {
-    name: 'mic-headphones',
-    label: 'Mic (Internal or in headset/earbuds)',
-    value: false,
+    value: 'disagree',
+    name: 'I cannot make it work this semester, but would like to receive information for future semesters',
   },
-  { name: 'webcam', label: 'Webcam (Recommended)', value: false },
-  { name: 'none', label: 'None of the above', value: false },
+  {
+    value: 'other',
+    name: 'I am not sure yet whether I can make the commitment for this semester',
+    additionalInfo: 'Please explain why you are unsure',
+  },
 ];

@@ -28,6 +28,7 @@ export type THighschoolForm = {
   guardianPhone: string;
   gradYear: TFormOption;
   course: TFormOption;
+  courseTime: TFormOption;
   interestLevel: TFormOption;
   availability: TFormOption;
   referencedBy: TFormOption;
@@ -38,6 +39,7 @@ export type THighschoolForm = {
     [key: string]: boolean;
   };
   equipmentExplanation?: string;
+  policyAgreement?: TFormOption;
   message?: string;
 };
 
@@ -53,18 +55,21 @@ const formOutputOrder = [
   'studentPhone',
   'studentDOB',
   'schoolAttended',
+  'gender',
   'guardianFirstName',
   'guardianLastName',
   'guardianEmail',
   'guardianPhone',
   'gradYear',
   'course',
+  'courseTime',
   'interestLevel',
   'availability',
   'referencedBy',
   'ethnicities',
   'equipment',
   'equipmentExplanation',
+  'policyAgreement',
   'message',
 ];
 
@@ -98,11 +103,13 @@ const formatFormValues = (val: FormValueType) => {
 export default async function handleContactForm(req: ISignupReq, res: NextApiResponse) {
   const { tabName = 'NO TAB NAME', date } = req.body;
   const sheets = getSheets();
-  const formValues: THighschoolForm = { ...req.body, date: moment(new Date(date)).format('MM/DD/YYYY HH:mm:ss') };
+  const formValues: THighschoolForm = {
+    ...req.body,
+    date: moment(new Date(date)).format('MM/DD/YYYY HH:mm:ss'),
+  };
   const output = getOutputOrder(formValues);
   const spreadsheetId = HIGHSCHOOL_FORM_RESPONSES_ID ?? '';
 
-  console.log(output.values.map(formatFormValues));
   await createSpreadsheetTab({
     sheets,
     spreadsheetId,

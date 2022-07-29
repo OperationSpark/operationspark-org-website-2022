@@ -56,7 +56,7 @@ const AbsoluteBtnWindow = ({
               opacity: 0,
             }}
             animate={{
-              maxHeight: `calc(100vh - (${theme.navHeight}px + 3rem))`,
+              maxHeight: `calc(100vh - (${theme.navHeight}px + 3.5rem))`,
               width: style?.width || '500px',
               maxWidth: 'calc(100vw - 1rem)',
               opacity: 1,
