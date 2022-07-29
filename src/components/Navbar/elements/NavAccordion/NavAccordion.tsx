@@ -58,7 +58,7 @@ const NavAccordion = ({ closeMenu, children }: NavAccordionProps) => {
       }}
     >
       <div className='mobile-nav-header'>
-        <NavLink href='/infoSession' className='info' callback={closeMenu}>
+        <NavLink href='/programs/workforce/infoSession' className='info' callback={closeMenu}>
           Free Info Session
         </NavLink>
 

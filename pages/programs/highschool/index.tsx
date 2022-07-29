@@ -9,16 +9,11 @@ import Main from '@this/components/layout/Main';
 import { IHighschoolPrograms } from 'data/types/programs';
 import { getStaticAsset } from '@this/pages-api/static/[asset]';
 import PlainCard from '@this/components/Cards/PlainCard';
-import HighschoolForm from 'src/Forms/Form.Highschool';
+import HighschoolInfoForm from '@this/src/Forms/Form.HighschoolInfo';
 import AbsoluteBtnWindow from '@this/components/Elements/AbsoluteBtnWindow';
 import { BgImg } from '@this/src/components/Elements';
 
-const HighSchool: NextPage<IHighschoolPrograms> = ({
-  description,
-  courses,
-  schools,
-  interestOnly,
-}) => {
+const HighSchool: NextPage<IHighschoolPrograms> = ({ description, courses, schools }) => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState<string | undefined>();
   const openPreFilledForm = (value: string) => {
@@ -30,13 +25,13 @@ const HighSchool: NextPage<IHighschoolPrograms> = ({
     <Main style={{ paddingTop: 0 }}>
       <HighschoolStyles>
         <AbsoluteBtnWindow
-          text={interestOnly ? 'Get More Info' : 'Sign up!'}
+          text='Get More Info'
           title='Get information about our high school program'
           isOpen={isFormOpen}
           style={{ maxWidth: '500px' }}
           onClick={() => setIsFormOpen(!isFormOpen)}
         >
-          <Link href='/programs/highschool/signup'>
+          <Link href='/programs/highschool/requestInfo'>
             <a
               className='anchor'
               style={{
@@ -45,12 +40,11 @@ const HighSchool: NextPage<IHighschoolPrograms> = ({
                 alignItems: 'center',
               }}
             >
-              Open form <FiChevronRight />
+              Open form&nbsp;<FiChevronRight />
             </a>
           </Link>
-          <HighschoolForm
+          <HighschoolInfoForm
             onSubmitComplete={() => setIsFormOpen(false)}
-            interestOnly={interestOnly}
             selectedCourse={selectedCourse}
           />
         </AbsoluteBtnWindow>
