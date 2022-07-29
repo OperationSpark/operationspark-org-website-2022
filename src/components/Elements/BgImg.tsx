@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import styled from 'styled-components';
+import styled, { DefaultTheme } from 'styled-components';
 
 import rgbDataURL from '@this/src/helpers/rgbDataURL';
 
@@ -76,12 +76,18 @@ const BgImgStyles = styled.div<TImgOverlay>`
   }
 `;
 
-const ImgOverlay = styled.div<TImgOverlay>`
-  ${({ theme, bg, opacity }) => `
-    background: ${bg ? bg : theme.isLightMode ? theme.primary[500] : theme.primary[900]};
-    opacity: ${!isNaN(Number(opacity)) ? opacity : 0.5};
-  `}
+const getImageOverlayStyles = ({ theme, bg, opacity }: { theme: DefaultTheme } & TImgOverlay) => {
+  opacity = !isNaN(Number(opacity)) ? opacity : 0.45;
+  const { isLightMode, primary } = theme;
+  const background = bg ?? (isLightMode ? primary[500] : primary[900]);
+  return `
+    background: ${background};
+    opacity: ${opacity};
+  `;
+};
 
+const ImgOverlay = styled.div<TImgOverlay>`
+  ${getImageOverlayStyles}
   position: absolute;
   width: 100%;
   height: 100%;
