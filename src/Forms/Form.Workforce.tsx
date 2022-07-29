@@ -112,17 +112,22 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
           <AiOutlineInfoCircle /> <p>Please complete required fields</p>
         </div>
       )}
-      <Button
-        className={form.hasErrors() ? 'info disabled' : 'info'}
-        color='yellow'
-        style={{
-          marginTop: '1rem',
-          transition: 'background-color 250ms',
-        }}
-        disabled={isSubmitting}
-      >
-        Register!
-      </Button>
+
+        <Button
+          className={form.hasErrors() ? 'info disabled' : 'info'}
+          color='yellow'
+          style={{
+            marginTop: '1rem',
+            transition: 'background-color 250ms',
+            width: '100%',
+            position: 'relative',
+            zIndex: 1
+          }}
+          disabled={isSubmitting}
+        >
+          Register!
+        </Button>
+
     </Form>
   );
 };

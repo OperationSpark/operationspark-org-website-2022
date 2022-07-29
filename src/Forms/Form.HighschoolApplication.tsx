@@ -8,13 +8,34 @@ import useForm from '@this/components/Form/useForm';
 import Button from '@this/components/Elements/Button';
 
 import { AiOutlineInfoCircle as InfoIcon } from 'react-icons/ai';
+import { hsApplication } from '@this/config/form';
 
 const HighschoolFormSignupStyles = styled.div`
-  .form-section {
-    padding-bottom: 1rem;
-    .form-section-title {
-      font-weight: 700;
-      color: ${({ theme }) => (theme.isLightMode ? theme.magenta[700] : theme.magenta[100])};
+  width: 100%;
+
+  .form-section-title {
+    font-weight: 700;
+    color: ${({ theme }) => (theme.isLightMode ? theme.magenta[700] : theme.magenta[100])};
+    text-align: center;
+    grid-column: 1 / -1;
+    padding-top: 1rem;
+  }
+  .form-item-span {
+    grid-column: 1 / -1;
+  }
+  .form-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(300px, 1fr));
+    grid-template-rows: auto;
+    grid-gap: 0.25rem 1rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    .form-grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      grid-gap: 0.25rem 1rem;
     }
   }
 `;
@@ -41,7 +62,12 @@ const HighschoolFormSignup = ({ onSubmitComplete, selectedCourse }: HighschoolFo
     setIsSubmitting(true);
 
     try {
-      await axios.post('/api/signup/highschool', form.values());
+      const { tabName } = hsApplication;
+      await axios.post('/api/signup/highschool', {
+        ...form.values(),
+        tabName,
+        date: Date.now(),
+      });
       form.clear();
       form.notifySuccess();
       onSubmitComplete?.();
@@ -72,8 +98,9 @@ const HighschoolFormSignup = ({ onSubmitComplete, selectedCourse }: HighschoolFo
   return (
     <HighschoolFormSignupStyles>
       <Form onSubmit={handleSubmit}>
-        <div className='form-section'>
+        <div className='form-grid'>
           <h3 className='dynamic-h3 form-section-title'>Student info</h3>
+
           {highschoolFormSignupInputs.studentInfo.map((field) => (
             <field.Element
               key={field.name}
@@ -95,21 +122,21 @@ const HighschoolFormSignup = ({ onSubmitComplete, selectedCourse }: HighschoolFo
             onChange={form.onSelectChange('gradYear')}
             required
           />
+          <div className='form-item-span'>
+            <Input.CheckboxGroup
+              label='Race/Ethnicity'
+              checkboxes={ethnicities}
+              values={form.getCheckboxes('ethnicities')}
+              isValid={form.isValid('ethnicities')}
+              isErr={form.isErr('ethnicities')}
+              onChange={form.onCheckboxGroupChange('ethnicities')}
+              clearCheckboxes={form.clearCheckboxGroup('ethnicities')}
+              required
+            />
+          </div>
 
-          <Input.CheckboxGroup
-            label='Race/Ethnicity'
-            checkboxes={ethnicities}
-            values={form.getCheckboxes('ethnicities')}
-            isValid={form.isValid('ethnicities')}
-            isErr={form.isErr('ethnicities')}
-            onChange={form.onCheckboxGroupChange('ethnicities')}
-            clearCheckboxes={form.clearCheckboxGroup('ethnicities')}
-            required
-          />
-        </div>
-
-        <div className='form-section'>
           <h3 className='dynamic-h3 form-section-title'>Parent/Guardian Information</h3>
+
           {highschoolFormSignupInputs.guardianInfo.map((field) => (
             <field.Element
               key={field.name}
@@ -120,10 +147,9 @@ const HighschoolFormSignup = ({ onSubmitComplete, selectedCourse }: HighschoolFo
               isErr={form.isErr(field.name)}
             />
           ))}
-        </div>
 
-        <div className='form-section'>
           <h3 className='dynamic-h3 form-section-title'>Course Information</h3>
+
           <Input.Select
             label='Which class are you interested in?'
             name='course'
@@ -168,19 +194,21 @@ const HighschoolFormSignup = ({ onSubmitComplete, selectedCourse }: HighschoolFo
             required
           />
 
-          <Input.CheckboxGroup
-            label='What equipment do you have (VIRTUAL ONLY)'
-            checkboxes={equipment}
-            values={form.getCheckboxes('equipment')}
-            isValid={form.isValid('equipment')}
-            isErr={form.isErr('equipment')}
-            onChange={form.onCheckboxGroupChange('equipment')}
-            clearCheckboxes={form.clearCheckboxGroup('equipment')}
-            required
-          />
+          <div className='form-item-span'>
+            <Input.CheckboxGroup
+              label='What equipment do you have (VIRTUAL ONLY)'
+              checkboxes={equipment}
+              values={form.getCheckboxes('equipment')}
+              isValid={form.isValid('equipment')}
+              isErr={form.isErr('equipment')}
+              onChange={form.onCheckboxGroupChange('equipment')}
+              clearCheckboxes={form.clearCheckboxGroup('equipment')}
+              required
+            />
+          </div>
 
-          <div style={{ marginTop: '0.5rem' }}>
-            {showEquipment && (
+          {showEquipment && (
+            <div className='form-item-span'>
               <Input.TextArea
                 label='What equipment do you need?'
                 name='equipment-explanation'
@@ -188,11 +216,10 @@ const HighschoolFormSignup = ({ onSubmitComplete, selectedCourse }: HighschoolFo
                 value={form.get('equipmentExplanation')}
                 onChange={form.onChange('equipmentExplanation')}
               />
-            )}
-          </div>
-        </div>
-        <div className='form-section'>
-          <div style={{ width: '100%', height: '100%' }}>
+            </div>
+          )}
+
+          <div className='form-item-span'>
             <Input.TextArea
               label='Other questions/comments'
               name='questionsComments'
@@ -201,20 +228,23 @@ const HighschoolFormSignup = ({ onSubmitComplete, selectedCourse }: HighschoolFo
               onChange={form.onChange('message')}
             />
           </div>
-        </div>
-        {hasErrors && form.showErrors() && (
-          <div className='form-error'>
-            <InfoIcon /> <p>Please complete required fields</p>
+
+          {hasErrors && form.showErrors() && (
+            <div className='form-error'>
+              <InfoIcon /> <p>Please complete required fields</p>
+            </div>
+          )}
+          <div className='form-item-span'>
+            <Button
+              className={form.hasErrors() ? 'info disabled' : 'info'}
+              color='yellow'
+              style={{ width: '100%' }}
+              disabled={isSubmitting}
+            >
+              Sign up!
+            </Button>
           </div>
-        )}
-        <Button
-          className={form.hasErrors() ? 'info disabled' : 'info'}
-          color='yellow'
-          style={{ marginTop: '1rem' }}
-          disabled={isSubmitting}
-        >
-          Sign up!
-        </Button>
+        </div>
       </Form>
     </HighschoolFormSignupStyles>
   );

@@ -4,7 +4,7 @@ import { motion, MotionProps } from 'framer-motion';
 
 const FormStyles = styled(motion.form)`
   display: flex;
-  flex-flow: column;
+  flex-flow: row wrap;
   width: 100%;
   transition: 200ms;
   .form-error {

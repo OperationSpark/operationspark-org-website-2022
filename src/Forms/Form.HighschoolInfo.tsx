@@ -1,21 +1,18 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { AiOutlineInfoCircle as InfoIcon } from 'react-icons/ai';
 
 import { Input } from '@this/components/Form';
 import Form from '@this/components/Form/Form';
 import useForm from '@this/components/Form/useForm';
 import Button from '@this/components/Elements/Button';
 
-import { AiOutlineInfoCircle as InfoIcon } from 'react-icons/ai';
+import formConfig from '@this/config/form';
 
 const HighschoolFormInfoStyles = styled.div`
   .form-section {
-    padding-bottom: 1rem;
-    .form-section-title {
-      font-weight: 700;
-      color: ${({ theme }) => (theme.isLightMode ? theme.magenta[700] : theme.magenta[100])};
-    }
+    width: 100%;
   }
 `;
 
@@ -41,7 +38,12 @@ const HighschoolFormInfo = ({ onSubmitComplete, selectedCourse }: HighschoolForm
     setIsSubmitting(true);
 
     try {
-      await axios.post('/api/signup/highschool', form.values());
+      const { tabName } = formConfig.hsInfoRequest;
+      await axios.post('/api/signup/highschool', {
+        ...form.values(),
+        tabName,
+        date: new Date(),
+      });
       form.clear();
       form.notifySuccess();
       onSubmitComplete?.();
@@ -69,7 +71,7 @@ const HighschoolFormInfo = ({ onSubmitComplete, selectedCourse }: HighschoolForm
   return (
     <HighschoolFormInfoStyles>
       <Form onSubmit={handleSubmit}>
-        <div>
+        <div className='form-section'>
           {highschoolFormInfoInputs.studentInfo.map((field) => (
             <field.Element
               key={field.name}
@@ -93,7 +95,7 @@ const HighschoolFormInfo = ({ onSubmitComplete, selectedCourse }: HighschoolForm
           />
         </div>
 
-        <div>
+        <div className='form-section'>
           <Input.Select
             label='Which class are you interested in?'
             name='course'
@@ -132,14 +134,16 @@ const HighschoolFormInfo = ({ onSubmitComplete, selectedCourse }: HighschoolForm
             <InfoIcon /> <p>Please complete required fields</p>
           </div>
         )}
-        <Button
-          className={form.hasErrors() ? 'info disabled' : 'info'}
-          color='yellow'
-          style={{ marginTop: '1rem' }}
-          disabled={isSubmitting}
-        >
-          Sign up!
-        </Button>
+        <div className='form-section'>
+          <Button
+            className={form.hasErrors() ? 'info disabled' : 'info'}
+            color='yellow'
+            style={{ marginTop: '1rem', width: '100%' }}
+            disabled={isSubmitting}
+          >
+            Sign up!
+          </Button>
+        </div>
       </Form>
     </HighschoolFormInfoStyles>
   );
