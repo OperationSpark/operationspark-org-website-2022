@@ -16,21 +16,24 @@ const HighschoolApplicationForm = dynamic(
 const HighschoolSignup: NextPage<IHighschoolPrograms> = () => {
   return (
     <Main style={{ paddingTop: 0 }}>
-      <BgImg src='/images/display/code-matrix.webp' height='22rem'>
-        <Content style={{ display: 'flex', height: '100%' }}>
-          <h1 className='dynamic-xl secondary' style={{ alignSelf: 'flex-end' }}>
-            High School
-          </h1>
+      <BgImg src='/images/display/hs-class-working.webp' height='30rem'>
+        <Content
+          style={{ display: 'flex', height: '100%', alignItems: 'flex-end', flexFlow: 'row wrap' }}
+        >
+          <div className='secondary'>
+            <h1 className='dynamic-xl'>Fall 2022 High School</h1>
+            <h2 className='dynamic-h2'>After-School Application</h2>
+            <Link href='/programs/highschool' passHref>
+              <a style={{ display: 'flex', alignItems: 'center' }} className='anchor'>
+                <FiChevronLeft style={{ marginRight: '0.25rem' }} />
+                High School Programs
+              </a>
+            </Link>
+          </div>
         </Content>
       </BgImg>
       <HighschoolSignupStyles>
         <Content>
-          <Link href='/programs/highschool' passHref>
-            <a style={{ display: 'flex', alignItems: 'center' }} className='anchor'>
-              <FiChevronLeft style={{ marginRight: '0.25rem' }} />
-              High School Programs
-            </a>
-          </Link>
           <div className='hs-form'>
             <HighschoolApplicationForm />
           </div>
@@ -44,7 +47,6 @@ export default HighschoolSignup;
 
 const HighschoolSignupStyles = styled.div`
   .hs-form {
-    max-width: 500px;
-    margin: 0 auto;
+
   }
 `;
