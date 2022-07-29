@@ -135,7 +135,7 @@ export const NavbarStyles = styled(motion.nav)`
       }
     }
   }
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 850px) {
     .navbar {
       .nav-links {
         display: none;
