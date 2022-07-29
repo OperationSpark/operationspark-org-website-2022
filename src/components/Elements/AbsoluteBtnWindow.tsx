@@ -52,11 +52,13 @@ const AbsoluteBtnWindow = ({
             initial={{
               maxHeight: `0vh`,
               width: '100px',
+              maxWidth: 'calc(100vw - 1rem)',
               opacity: 0,
             }}
             animate={{
-              maxHeight: `calc(100vh - (${theme.navHeight}px + 1rem))`,
+              maxHeight: `calc(100vh - (${theme.navHeight}px + 3rem))`,
               width: style?.width || '500px',
+              maxWidth: 'calc(100vw - 1rem)',
               opacity: 1,
             }}
             exit={{ maxHeight: `0vh`, width: '100px', opacity: 1 }}
@@ -100,6 +102,7 @@ const AbsoluteBtnWindowStyles = styled.div`
     border-radius: 0.25rem;
     background: ${({ theme }) => theme.bg};
     padding: 1rem;
+
   }
   ._abs-win-scroll {
     width: 100%;
@@ -123,4 +126,5 @@ const AbsoluteBtnWindowStyles = styled.div`
     top: 0.5rem;
     z-index: 100;
   }
+
 `;
