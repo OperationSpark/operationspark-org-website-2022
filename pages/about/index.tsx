@@ -266,8 +266,8 @@ const AboutStyles = styled.div`
       position: absolute;
       z-index: -1;
       inset: 0;
-      background: ${({ theme }) => (theme.isLightMode ? theme.secondary[400] : theme.primary[900])};
-      box-shadow: ${({ theme }) => '0 0 0.4rem 0rem inset ' + theme.fg};
+      background: ${({ theme }) => (theme.isLightMode ? theme.secondary[400] : theme.border[900])};
+      box-shadow: ${({ theme }) => '0 0 0.5rem 0.1rem inset ' + (theme.isLightMode ? theme.secondary[800] : theme.border[500])};
     }
 
     p,
