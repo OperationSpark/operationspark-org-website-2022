@@ -23,8 +23,7 @@ export const NavLinkStyles = styled.div.attrs(({ color }: { color?: '' | 'yellow
     transition: box-shadow 125ms;
     white-space: pre;
     margin-bottom: 0.25rem;
-    box-shadow: 0 0 2px 0px ${({ theme }) => theme.alpha.fg} inset,
-      0 0 0px 0px ${({ theme }) => theme.alpha.fg};
+    box-shadow: 0 0 2px 0px ${({ theme }) => theme.alpha.fg} inset;
     margin-right: 0;
     background: ${({ theme }) => theme.bg};
     color: ${({ theme }) => theme.fg};
@@ -34,12 +33,11 @@ export const NavLinkStyles = styled.div.attrs(({ color }: { color?: '' | 'yellow
     }
     :hover,
     :focus {
-      box-shadow: 0 0 3px 0px ${({ theme }) => theme.purple[900]} inset;
-      background: ${({ theme }) => theme.bg};
+      background: ${({ theme }) => theme.bgHover};
       color: ${({ theme }) => theme.fg};
 
-      box-shadow: 0 0 0px 0px ${({ theme }) => theme.alpha.fg} inset,
-        0 0 3px 0px ${({ theme }) => theme.alpha.fg};
+      box-shadow: 0 0 3px 0px ${({ theme }) => theme.alpha.fg} inset;
+
       z-index: 1;
     }
     :focus-visible {
