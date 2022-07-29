@@ -11,6 +11,7 @@ import { cardShadow, cardShadowLtr, cardShadowRtl } from '@this/src/theme/styled
 import { getStaticAsset } from '@this/pages-api/static/[asset]';
 import { Main, Section, Content } from '@this/components/layout';
 import useInfoSession from '@this/src/hooks/useInfoSession';
+import NavLink from '@this/src/components/Navbar/elements/NavLink';
 
 const WorkforceForm = dynamic(() => import('@this/src/Forms/Form.Workforce'));
 const Carousel = dynamic(() => import('@this/components/Elements/Carousel'));
@@ -58,9 +59,16 @@ const InfoSession: NextPage<InfoSessionProps> = ({ commonQuestions, logos }) => 
                   Info sessions discuss <i style={{ fontWeight: 600 }}>adult workforce programs</i>.
                   To sign up or get more information about our{' '}
                   <i style={{ fontWeight: 600 }}>High School to High Wage program</i>,{' '}
-                  <Link href='/programs/highschool/signup'>
+                  <Link href='/programs/highschool/requestInfo'>
                     <a className='anchor'>please complete this form.</a>
                   </Link>
+                  <div style={{ paddingTop: '1rem' }}>
+                    <NavLink href='/programs/highschool/apply' className='info'>
+                      <div style={{ textAlign: 'center', padding: '0.5rem' }}>
+                        Apply to High School Program Here!
+                      </div>
+                    </NavLink>
+                  </div>
                 </div>
                 <h2 className='dynamic-h3'>Register for upcoming info session</h2>
                 <WorkforceForm sessionDates={sessionDates} />
