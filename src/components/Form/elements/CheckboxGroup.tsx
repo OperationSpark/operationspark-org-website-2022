@@ -50,7 +50,7 @@ const CheckboxGroup = ({
 export default CheckboxGroup;
 
 const CheckboxGroupStyles = styled.div`
-  box-shadow: 0 0 2px rgba(125, 125, 125, 1);
+  box-shadow: 0 0 2px ${({ theme }) => theme.alpha.fg};
   padding: 0.5rem;
   border-radius: 0.25rem;
   position: relative;
