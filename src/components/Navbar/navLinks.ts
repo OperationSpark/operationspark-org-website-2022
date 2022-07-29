@@ -50,4 +50,5 @@ export const navMenus: NavigationMenuLink[] = [
     subLinks: [],
   },
   { title: 'Contact', href: '/contact', subLinks: [] },
+  { title: 'HS Application', href: '/programs/highschool/apply', subLinks: [] },
 ];
