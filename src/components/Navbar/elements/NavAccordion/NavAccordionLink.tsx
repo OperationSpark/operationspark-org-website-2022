@@ -9,13 +9,22 @@ const NavAccordionLinkStyles = styled.div`
   border-top: 1px solid ${(p) => p.theme.border[700]};
   :hover,
   &.active {
-    background: ${({ theme }) => theme.primary[700]};
+    background: linear-gradient(
+      90deg,
+      ${({ theme }) => theme.primary[800]} 0%,
+      ${({ theme }) => theme.primary[600]} 4%,
+      ${({ theme }) => theme.primary[600]} 96%,
+      ${({ theme }) => theme.primary[800]} 100%
+    );
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.25) inset;
   }
   &.sub-link {
     padding-left: 2.5rem;
   }
 `;
+const checkActiveSubLink = (href1: string, href2: string): boolean => {
+  return href1 === href2 ? true : href1.split('/').pop() === href2.split('/').pop();
+};
 
 export const NavAccordionLink = ({
   children,
@@ -45,9 +54,7 @@ export const NavAccordionLink = ({
       onClick={handleClick}
     >
       <NavAccordionLinkStyles
-        className={`${pathname.includes(href) ? 'active' : ''} ${
-          className || ''
-        }`}
+        className={`${checkActiveSubLink(href, pathname) ? 'active' : ''} ${className || ''}`}
       >
         {children}
       </NavAccordionLinkStyles>

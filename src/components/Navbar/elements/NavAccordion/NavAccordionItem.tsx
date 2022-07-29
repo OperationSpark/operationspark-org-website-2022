@@ -13,7 +13,13 @@ const NavAccordionItemStyles = styled(motion.div)`
   &.open .accordion-item,
   &.active {
     transition: box-shadow 200ms;
-    background: ${({ theme }) => theme.primary[700]};
+    background: linear-gradient(
+      90deg,
+      ${({ theme }) => theme.primary[800]} 0%,
+      ${({ theme }) => theme.primary[600]} 4%,
+      ${({ theme }) => theme.primary[600]} 96%,
+      ${({ theme }) => theme.primary[800]} 100%
+    );
     box-shadow: 0 2px 4px ${(p) => p.theme.primary[700]};
   }
 
@@ -27,7 +33,13 @@ const NavAccordionItemStyles = styled(motion.div)`
     align-items: center;
 
     :hover {
-      background: ${({ theme }) => theme.primary[700]};
+      background: linear-gradient(
+        90deg,
+        ${({ theme }) => theme.primary[800]} 0%,
+        ${({ theme }) => theme.primary[600]} 4%,
+        ${({ theme }) => theme.primary[600]} 96%,
+        ${({ theme }) => theme.primary[800]} 100%
+      );
     }
   }
   .sub-links {
@@ -47,12 +59,7 @@ interface NavAccordionItemProps {
   link?: boolean;
 }
 
-export const NavAccordionItem = ({
-  title,
-  children,
-  href,
-  link,
-}: NavAccordionItemProps) => {
+export const NavAccordionItem = ({ title, children, href, link }: NavAccordionItemProps) => {
   const { pathname } = useRouter();
   const [isOpen, setIsOpen] = useState(pathname.includes(href));
 
@@ -68,9 +75,7 @@ export const NavAccordionItem = ({
   ) : (
     <NavAccordionItemStyles
       onClick={() => setIsOpen(!isOpen)}
-      className={
-        isOpen ? 'open' : !isOpen && pathname.includes(href) ? 'active' : ''
-      }
+      className={isOpen ? 'open' : !isOpen && pathname.includes(href) ? 'active' : ''}
       title={title}
       aria-label={title}
     >
