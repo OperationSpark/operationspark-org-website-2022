@@ -3,11 +3,12 @@
     "baseUrl": ".",
     "paths": {
       "@this/src/*": ["src/*"],
+      "@this/config/*": ["src/config/*"],
       "@this/data/*": ["data/*"],
       "@this/components/*": ["src/components/*"],
       "@this/hooks/*": ["src/hooks/*"],
       "@this/api/*": ["src/api/*"],
-      "@this/pages-api/*": ["pages/api/*"]
+      "@this/pages-api/*": ["pages/api/*"],
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
