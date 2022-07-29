@@ -37,7 +37,12 @@ module.exports = (phase, { defaultConfig }) => {
       return [
         {
           source: '/info-session',
-          destination: '/infoSession',
+          destination: '/programs/workforce/infoSession',
+          permanent: true,
+        },
+        {
+          source: '/infoSession',
+          destination: '/programs/workforce/infoSession',
           permanent: true,
         },
       ];
