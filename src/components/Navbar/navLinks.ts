@@ -10,18 +10,34 @@ export type NavigationMenuLink = {
 };
 
 export const navMenus: NavigationMenuLink[] = [
+  /* Unsure if these links will be needed.
+    - Can be deleted if we determine that all program info will live on the same page
+  */
+  // {
+  //   title: 'Our Programs',
+  //   href: '/programs',
+  //   subLinks: [
+  //     { title: 'Adult Workforce', href: '/workforce' },
+  //     { title: 'High School', href: '/highschool' },
+  //   ],
+  // },
   {
-    title: 'Our Programs',
-    href: '/programs',
+    title: 'Adult Workforce',
+    href: '/programs/workforce',
     subLinks: [
-      /* Unsure if these links will be needed.
-        - Can be deleted if we determine that all program info will live on the same page
-      */
-      { title: 'Adult Workforce', href: '/workforce' },
-      { title: 'High School', href: '/highschool' },
-      // { title: 'Student Success', href: '/studentSuccess' },
+      { title: 'Learn More', href: '' },
+      { title: 'Free Info Session', href: '/infoSession' },
     ],
   },
+  {
+    title: 'High School',
+    href: '/programs/highschool',
+    subLinks: [
+      { title: 'Learn More', href: '' },
+      { title: 'High School Application', href: '/apply' },
+    ],
+  },
+
   /*
     Unsure if these links will be needed.
       - Can be deleted if we determine that this page will no longer exist
@@ -50,5 +66,4 @@ export const navMenus: NavigationMenuLink[] = [
     subLinks: [],
   },
   { title: 'Contact', href: '/contact', subLinks: [] },
-  { title: 'HS Application', href: '/programs/highschool/apply', subLinks: [] },
 ];
