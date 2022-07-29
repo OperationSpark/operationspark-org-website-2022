@@ -1,9 +1,9 @@
 export const hsApplication = {
-  tabName: '__TEST__ Applications - <Spring|Summer|Winter|Fall> <YYYY>',
+  tabName: 'Applications - Fall 2022',
 };
 
 export const hsInfoRequest = {
-  tabName: `_TEST__ Information - <Spring|Summer|Winter|Fall> <YYYY>`,
+  tabName: `Information Request`,
 };
 
 const config = {
