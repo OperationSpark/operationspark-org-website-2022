@@ -1,11 +1,11 @@
-import { motion } from 'framer-motion';
+import { domAnimation, LazyMotion, m } from 'framer-motion';
 import Image from 'next/image';
 
 import styled from 'styled-components';
 
 const Loading = () => {
   return (
-    <main>
+    <LazyMotion features={domAnimation}>
       <LoadingStyles>
         <div className='loading-container'>
           <div>
@@ -27,7 +27,7 @@ const Loading = () => {
             />
           </div>
           <div className='loading-bar-container'>
-            <motion.div
+            <m.div
               className='loading-bar'
               initial={{ width: '0%' }}
               animate={{ width: '100%' }}
@@ -36,13 +36,13 @@ const Loading = () => {
           </div>
         </div>
       </LoadingStyles>
-    </main>
+    </LazyMotion>
   );
 };
 
 export default Loading;
 
-const LoadingStyles = styled(motion.div)`
+const LoadingStyles = styled(m.div)`
   display: flex;
   align-items: center;
   justify-content: center;
