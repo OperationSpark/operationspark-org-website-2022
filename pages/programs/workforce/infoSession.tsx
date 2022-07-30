@@ -65,7 +65,9 @@ const InfoSession: NextPage<InfoSessionProps> = ({ commonQuestions, logos }) => 
                   <div style={{ paddingTop: '1rem' }}>
                     <NavLink href='/programs/highschool/apply' className='info'>
                       <div style={{ textAlign: 'center', padding: '0.5rem' }}>
-                        Apply to High School Program Here!
+                        <span>Click Here to Apply For</span>
+                        <br />
+                        <span>The High School Program!</span>
                       </div>
                     </NavLink>
                   </div>
