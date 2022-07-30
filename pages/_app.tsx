@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import type { AppProps } from 'next/app';
 import { ChakraProvider } from '@chakra-ui/react';
@@ -9,30 +9,39 @@ import { MainContainer } from '@this/components/layout';
 import theme from '@this/src/theme';
 import { ILogo, ISupporterFunderLogos } from '../data/types/logos';
 import Meta from '@this/src/components/Elements/Meta';
+import Loading from '@this/src/components/layout/Loading';
 
 const Theme = dynamic(() => import('@this/src/theme/styled/Theme'));
 const Navbar = dynamic(() => import('@this/components/Navbar/Navbar'));
 const Footer = dynamic(() => import('@this/components/footer/footer'));
 
 export default function App({ Component, pageProps }: AppProps) {
+  const [isLoading, setLoading] = useState<boolean>(true);
   const [logos, setLogos] = useState<ILogo[]>([]);
   const [alertInfo, setAlertInfo] = useState<IAlert>({ message: '', url: '' });
 
   useEffect(() => {
     getStaticAsset('logos').then((l: ISupporterFunderLogos) => setLogos(l.funders));
     getStaticAsset('alert').then(setAlertInfo);
+    setTimeout(() => setLoading(false), 1000);
   }, []);
 
   return (
     <ChakraProvider theme={theme}>
       <Theme theme={theme.colors.brand}>
         <Meta />
-        <Navbar alertInfo={alertInfo} />
-        <MainContainer>
-          <Component {...pageProps} />
-        </MainContainer>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <Fragment>
+            <Navbar alertInfo={alertInfo} />
+            <MainContainer>
+              <Component {...pageProps} />
+            </MainContainer>
 
-        <Footer logos={logos} />
+            <Footer logos={logos} />
+          </Fragment>
+        )}
       </Theme>
     </ChakraProvider>
   );
