@@ -10,13 +10,11 @@ import theme from '@this/src/theme';
 import { ILogo, ISupporterFunderLogos } from '../data/types/logos';
 import Meta from '@this/src/components/Elements/Meta';
 
-const Loading = dynamic(() => import('@this/src/components/layout/Loading'));
 const Theme = dynamic(() => import('@this/src/theme/styled/Theme'));
 const Navbar = dynamic(() => import('@this/components/Navbar/Navbar'));
 const Footer = dynamic(() => import('@this/components/footer/footer'));
 
 export default function App({ Component, pageProps }: AppProps) {
-  const [isLoading, setLoading] = useState<boolean>(true);
   const [logos, setLogos] = useState<ILogo[]>([]);
   const [alertInfo, setAlertInfo] = useState<IAlert>({ message: '', url: '' });
 
@@ -25,25 +23,22 @@ export default function App({ Component, pageProps }: AppProps) {
       await getStaticAsset('logos').then((l: ISupporterFunderLogos) => setLogos(l.funders));
       await getStaticAsset('alert').then(setAlertInfo);
     };
-    fetchStaticAssets().then(() => setTimeout(() => setLoading(false), 1000));
+    fetchStaticAssets();
   }, []);
 
   return (
     <ChakraProvider theme={theme}>
       <Theme theme={theme.colors.brand}>
         <Meta />
-        {isLoading ? (
-          <Loading />
-        ) : (
-          <Fragment>
-            <Navbar alertInfo={alertInfo} />
-            <MainContainer>
-              <Component {...pageProps} />
-            </MainContainer>
 
-            <Footer logos={logos} />
-          </Fragment>
-        )}
+        <Fragment>
+          <Navbar alertInfo={alertInfo} />
+          <MainContainer>
+            <Component {...pageProps} />
+          </MainContainer>
+
+          <Footer logos={logos} />
+        </Fragment>
       </Theme>
     </ChakraProvider>
   );
