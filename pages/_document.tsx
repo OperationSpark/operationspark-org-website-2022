@@ -31,10 +31,6 @@ class MyDocument extends Document {
     return (
       <Html lang='en-US'>
         <Head>
-          <meta
-            name='viewport'
-            content='width=device-width, initial-scale=1.0, viewport-fit=cover'
-          />
           <meta name='theme-color' media='(prefers-color-scheme: light)' content='#920CF8' />
           <meta name='theme-color' media='(prefers-color-scheme: dark)' content='#320067' />
 
