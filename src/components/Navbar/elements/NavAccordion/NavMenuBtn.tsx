@@ -7,7 +7,7 @@ type NavMenuBtnProps = {
 
 export const NavMenuBtn = styled.button<NavMenuBtnProps>`
   box-shadow: 0 0 1px ${(p) => p.theme.purple[900]};
-  padding: 0.6rem 1rem;
+  padding: 0.5rem;
   background: ${({ theme }) => theme.primary[theme.isLightMode ? 700 : 500]};
   border-radius: ${(p) => (p.isOpen ? '0.5rem 0.5rem 0 0' : '0.25rem')};
   color: white;
@@ -49,12 +49,7 @@ type NavMenuIconProps = {
 };
 
 export const NavMenuIcon = ({ isOpen }: NavMenuIconProps) => (
-  <motion.svg
-    width='22'
-    height='20'
-    viewBox='0 0 22 20'
-    animate={isOpen ? 'open' : 'closed'}
-  >
+  <motion.svg width='22' height='20' viewBox='0 0 22 20' animate={isOpen ? 'open' : 'closed'}>
     <Path
       variants={{
         closed: { d: 'M 2 2.5 L 20 2.5' },

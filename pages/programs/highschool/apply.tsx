@@ -25,7 +25,7 @@ const HighschoolSignup: NextPage = () => {
               flexFlow: 'row wrap',
             }}
           >
-            <div className='program-header secondary'>
+            <div className='program-header primary-secondary'>
               <div className='header-card'>
                 <h1 className='dynamic-xl'>Fall 2022 High School</h1>
                 <h2 className='dynamic-h2'>After-School Application</h2>
@@ -81,6 +81,13 @@ export default HighschoolSignup;
 const HighschoolSignupStyles = styled.div`
   .program-header {
     margin: 0 auto;
+    .anchor {
+      color: ${({ theme }) => theme.secondary[0]};
+      :hover,
+      :focus-visible {
+        box-shadow: 0 0 3px ${({ theme }) => (theme.isLightMode ? theme.alpha.bg : theme.alpha.fg)};
+      }
+    }
   }
   .header-card {
     padding: 1.5rem;
