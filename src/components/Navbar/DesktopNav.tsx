@@ -1,6 +1,5 @@
 import type { NavigationMenuLink } from './navLinks';
 
-import NavLink from './elements/NavLink';
 import NavDropMenu from './elements/NavDropMenu';
 import ThemeButton from './elements/ThemeButton';
 
@@ -19,10 +18,6 @@ const DesktopNav = ({ navMenus = [] }: DesktopNavProps) => {
           subLinks={navMenu.subLinks}
         />
       ))}
-
-      <NavLink href='/programs/workforce/infoSession' className='info'>
-        Free Info Session
-      </NavLink>
       <ThemeButton />
     </div>
   );
