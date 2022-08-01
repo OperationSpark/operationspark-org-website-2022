@@ -1,10 +1,4 @@
-import Document, {
-  DocumentContext,
-  Html,
-  Head,
-  Main,
-  NextScript,
-} from 'next/document';
+import Document, { DocumentContext, Html, Head, Main, NextScript } from 'next/document';
 import React from 'react';
 import { ServerStyleSheet } from 'styled-components';
 
@@ -16,8 +10,7 @@ class MyDocument extends Document {
     try {
       ctx.renderPage = () =>
         originalRenderPage({
-          enhanceApp: (App) => (props) =>
-            sheet.collectStyles(<App {...props} />),
+          enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />),
         });
 
       const initialProps = await Document.getInitialProps(ctx);
@@ -39,15 +32,11 @@ class MyDocument extends Document {
       <Html lang='en-US'>
         <Head>
           <meta
-            name='theme-color'
-            media='(prefers-color-scheme: light)'
-            content='#920CF8'
+            name='viewport'
+            content='width=device-width, initial-scale=1.0, viewport-fit=cover'
           />
-          <meta
-            name='theme-color'
-            media='(prefers-color-scheme: dark)'
-            content='#320067'
-          />
+          <meta name='theme-color' media='(prefers-color-scheme: light)' content='#920CF8' />
+          <meta name='theme-color' media='(prefers-color-scheme: dark)' content='#320067' />
 
           <link
             href='https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Roboto:wght@100;300;400;500;700;900&family=Source+Code+Pro:wght@300;400;500;700;800;900&family=Kalam:wght@300;400;700&display=swap'
