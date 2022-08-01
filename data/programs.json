@@ -24,7 +24,7 @@
       {
         "title": "Bootcamp",
         "length": "6 Weeks / 72 Hours",
-        "nextStartDate": "August 1, 2022",
+        "nextStartDate": "September 26, 2022",
         "description": [
           "Our 72-hour Introduction to Programming Bootcamp is a deep dive into JavaScript and functional programming. Bootcamp prepares students for entry into our three month Immersion program by prepping them with the fundamentals of JavaScript. Students will spend the first three weeks working on projects to practice manipulating data types and using various types of functions, such as higher order functions. The latter two weeks will be a review of higher level concepts that are touched on throughout the first three weeks, nurturing expanded knowledge on the strong foundation built by the first three weeks. One week after the final class there will be a final exam, which doubles as an entrance exam for Immersion.",
           "Operation Spark's Bootcamp is not intended to prepare students to get jobs in the software industry, rather to give students a fundamental understanding of core JavaScript principles before entering immersion. Operation Spark does not promise employability upon graduation solely of our Bootcamp program."
@@ -33,7 +33,7 @@
       {
         "title": "Precourse",
         "length": "3 Weeks / 120 Hours",
-        "nextStartDate": "August 1, 2022",
+        "nextStartDate": "September 26, 2022",
         "description": [
           "Unlike our other courses, Immersion has a designated Precourse section. For the three weeks immediately prior to immersion students will come in from 9-5, Monday through Friday, to work individually on multiple JavaScript projects. This Precourse gives students an introduction to what immersion will really be like, and is a last chance to test whether this is really something you are ready for and interested in, as well as for teachers to decide whether this is right for you. Precourse ends with a culminating exam to determine one final time whether students are ready or not for the immersion program."
         ]
@@ -41,7 +41,7 @@
       {
         "title": "Junior",
         "length": "6 Weeks / 450 Hours",
-        "nextStartDate": "July 25, 2022",
+        "nextStartDate": "September 19, 2022",
         "description": [
           "The junior phase, taking place during the first six weeks, allows students to explore many new avenues of coding in short amounts of time. Every two days students will be given a new concept to conquer, leading them to develop the skills to jump into any project with any tech stack they may find themselves presented with. Students' days will be filled with daily toy problems, both live and video lectures, student presentations, practice speaking about the concepts they are learning, as well as plenty of time to hack away on their projects. The junior phase culminates in an all day summary assessment to ensure they have fully understood the previous six weeks of learning, followed by a week long “solo week,” where students are given a week long project they must complete as a group, however they are not required to work in-house."
         ]
@@ -49,7 +49,7 @@
       {
         "title": "Senior",
         "length": "7 Weeks / 500 Hours",
-        "nextStartDate": "July 11, 2022",
+        "nextStartDate": "September 12, 2022, 2022",
         "description": [
           "The senior phase, taking place during the final six weeks, consists of several student driven projects. Students will take the skills they have crafted during the junior phase to create full stack applications of their own choosing."
         ]
