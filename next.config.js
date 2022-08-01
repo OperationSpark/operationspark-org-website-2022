@@ -16,7 +16,6 @@ module.exports = (phase, { defaultConfig }) => {
       'SIGNUP_API_ENDPOINT',
       'GOOGLE_SERVICE_ACCOUNT',
       'HIGHSCHOOL_FORM_RESPONSES_ID',
-      'HIGHSCHOOL_FORM_RESPONSES_NAME',
       'WUFOO_HOST',
       'WUFOO_TOKEN',
       'WUFOO_CONTACT_FORM_ID',
@@ -38,7 +37,12 @@ module.exports = (phase, { defaultConfig }) => {
       return [
         {
           source: '/info-session',
-          destination: '/infoSession',
+          destination: '/programs/workforce/infoSession',
+          permanent: true,
+        },
+        {
+          source: '/infoSession',
+          destination: '/programs/workforce/infoSession',
           permanent: true,
         },
       ];

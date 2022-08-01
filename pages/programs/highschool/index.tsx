@@ -9,16 +9,12 @@ import Main from '@this/components/layout/Main';
 import { IHighschoolPrograms } from 'data/types/programs';
 import { getStaticAsset } from '@this/pages-api/static/[asset]';
 import PlainCard from '@this/components/Cards/PlainCard';
-import HighschoolForm from 'src/Forms/Form.Highschool';
+import HighschoolInfoForm from '@this/src/Forms/Form.HighschoolInfo';
 import AbsoluteBtnWindow from '@this/components/Elements/AbsoluteBtnWindow';
 import { BgImg } from '@this/src/components/Elements';
+import NavLink from '@this/src/components/Navbar/elements/NavLink';
 
-const HighSchool: NextPage<IHighschoolPrograms> = ({
-  description,
-  courses,
-  schools,
-  interestOnly,
-}) => {
+const HighSchool: NextPage<IHighschoolPrograms> = ({ description, courses, schools }) => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState<string | undefined>();
   const openPreFilledForm = (value: string) => {
@@ -30,13 +26,13 @@ const HighSchool: NextPage<IHighschoolPrograms> = ({
     <Main style={{ paddingTop: 0 }}>
       <HighschoolStyles>
         <AbsoluteBtnWindow
-          text={interestOnly ? 'Get More Info' : 'Sign up!'}
+          text='Get More Info'
           title='Get information about our high school program'
           isOpen={isFormOpen}
           style={{ maxWidth: '500px' }}
           onClick={() => setIsFormOpen(!isFormOpen)}
         >
-          <Link href='/programs/highschool/signup'>
+          <Link href='/programs/highschool/requestInfo'>
             <a
               className='anchor'
               style={{
@@ -45,20 +41,30 @@ const HighSchool: NextPage<IHighschoolPrograms> = ({
                 alignItems: 'center',
               }}
             >
-              Open form <FiChevronRight />
+              Open form&nbsp;
+              <FiChevronRight />
             </a>
           </Link>
-          <HighschoolForm
+          <HighschoolInfoForm
             onSubmitComplete={() => setIsFormOpen(false)}
-            interestOnly={interestOnly}
             selectedCourse={selectedCourse}
           />
         </AbsoluteBtnWindow>
         <BgImg src='/images/display/code-matrix.webp' height='22rem'>
-          <Content style={{ display: 'flex', height: '100%' }}>
-            <h1 className='dynamic-xl secondary' style={{ alignSelf: 'flex-end' }}>
-              High School
-            </h1>
+          <Content
+            style={{
+              display: 'flex',
+              height: '100%',
+            }}
+          >
+            <div className='hs-apply'>
+              <NavLink href='/programs/highschool/apply' className='info'>
+                Apply to High School Program Here!
+              </NavLink>
+              <h1 className='dynamic-xl secondary' style={{ alignSelf: 'flex-end' }}>
+                High School
+              </h1>
+            </div>
           </Content>
         </BgImg>
         <Content className='hs-header'>
@@ -129,6 +135,19 @@ export const getStaticProps: GetStaticProps<IHighschoolPrograms> = async () => {
 };
 
 const HighschoolStyles = styled.div`
+  .hs-apply {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    h1 {
+      width: 100%;
+    }
+    .info {
+      margin-right: 0;
+      margin-top: 10rem;
+    }
+  }
   .courses {
     a.anchor {
       margin-top: 1rem;

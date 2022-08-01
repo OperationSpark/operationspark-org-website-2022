@@ -21,6 +21,7 @@ declare module 'styled-components' {
     isLightMode: boolean;
     fg: string;
     bg: string;
+    bgHover: string;
     navHeight: number;
     setNavHeight: (n: number) => void;
     alpha: {

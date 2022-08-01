@@ -28,6 +28,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Theme theme={theme.colors.brand}>
         <Meta />
         <Navbar alertInfo={alertInfo} />
+
         <MainContainer>
           <Component {...pageProps} />
         </MainContainer>

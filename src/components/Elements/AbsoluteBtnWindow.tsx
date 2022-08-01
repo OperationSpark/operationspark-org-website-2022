@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { ReactNode, useEffect, useRef } from 'react';
-import styled, { CSSProperties } from 'styled-components';
+import styled, { CSSProperties, useTheme } from 'styled-components';
 import { IoMdClose } from 'react-icons/io';
 
 import { cardShadowLtr } from '@this/src/theme/styled/mixins/shadows';
@@ -23,6 +23,7 @@ const AbsoluteBtnWindow = ({
   onClick,
   children,
 }: AbsoluteBtnWindowProps) => {
+  const theme = useTheme();
   const winRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (isOpen) {
@@ -48,11 +49,21 @@ const AbsoluteBtnWindow = ({
           <motion.div
             className='_abs-win'
             ref={winRef}
-            initial={{ scale: 0, x: -25, y: 25 }}
-            animate={{ scale: 1, x: 0, y: 0 }}
-            exit={{ scale: 0, x: -25, y: 25 }}
-            transition={{ type: 'tween', duration: 0.2 }}
-            style={style}
+            initial={{
+              maxHeight: `0vh`,
+              width: '100px',
+              maxWidth: 'calc(100vw - 1rem)',
+              opacity: 0,
+            }}
+            animate={{
+              maxHeight: `calc(100vh - (${theme.navHeight}px + 3.5rem))`,
+              width: style?.width || '500px',
+              maxWidth: 'calc(100vw - 1rem)',
+              opacity: 1,
+            }}
+            exit={{ maxHeight: `0vh`, width: '100px', opacity: 1 }}
+            transition={{ type: 'tween', duration: 0.25 }}
+            style={{ ...style, overflowY: isOpen ? 'auto' : 'hidden' }}
           >
             <h3 className='dynamic-h3 _abs-win-title'>{title}</h3>
 
@@ -85,9 +96,20 @@ const AbsoluteBtnWindowStyles = styled.div`
     transform-origin: top right;
     position: absolute;
     top: 0;
+    overflow: hidden;
+    ${cardShadowLtr}
+    filter: drop-shadow(0 0 0.5rem rgba(0, 0, 0, 0.75));
+    border-radius: 0.25rem;
+    background: ${({ theme }) => theme.bg};
+    padding: 1rem;
 
-    max-height: calc(100vh - (${({ theme }) => theme.navHeight}px + 3rem));
-    overflow-y: auto;
+  }
+  ._abs-win-scroll {
+    width: 100%;
+    transform-origin: top right;
+    position: absolute;
+    top: 0;
+    inset: 0;
     overflow-x: hidden;
     ${cardShadowLtr}
     filter: drop-shadow(0 0 0.5rem rgba(0, 0, 0, 0.75));
@@ -104,4 +126,5 @@ const AbsoluteBtnWindowStyles = styled.div`
     top: 0.5rem;
     z-index: 100;
   }
+
 `;

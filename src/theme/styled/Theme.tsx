@@ -7,6 +7,8 @@ const colors = {
   dark: {
     bg: 'rgba(26, 32, 44, 1.00)',
     fg: 'rgba(255, 255, 255, 1.00)',
+    bgHover: 'rgba(37, 43, 55, 1.00)',
+
     alpha: {
       bg: 'rgba(26, 32, 44, 0.75)',
       fg: 'rgba(255, 255, 255, 0.75)',
@@ -15,6 +17,7 @@ const colors = {
   light: {
     bg: 'rgba(255, 255, 255, 1.00)',
     fg: 'rgba(37, 37, 37, 1.00)',
+    bgHover: 'rgba(232, 232, 232, 1.00)',
     alpha: {
       bg: 'rgba(255, 255, 255, 0.75)',
       fg: 'rgba(37, 37, 37, 0.75)',

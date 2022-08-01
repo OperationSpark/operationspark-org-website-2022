@@ -4,14 +4,14 @@ import styled from 'styled-components';
 import { TiArrowSortedDown as DownArrow } from 'react-icons/ti';
 
 import { useClickAway } from '@this/hooks/useClickAway';
+import { checkActiveSubLink } from '@this/src/helpers/navigation';
 import type { NavigationSubLink } from '../navLinks';
 import NavLink from './NavLink';
 
 export const NavMenuStyles = styled.div`
   filter: drop-shadow(
     0 0.2rem 0.32rem
-      ${({ theme }) =>
-        theme.isLightMode ? 'rgba(0, 0, 0, 0.3)' : 'rgba(0, 0, 0, 1)'}
+      ${({ theme }) => (theme.isLightMode ? 'rgba(0, 0, 0, 0.3)' : 'rgba(0, 0, 0, 1)')}
   );
   position: relative;
   z-index: 100;
@@ -62,10 +62,9 @@ interface NavDropMenuProps {
 const NavDropMenu = ({ title, href, subLinks }: NavDropMenuProps) => {
   const { pathname } = useRouter();
   const isActive = pathname.includes(href) ? 'active' : '';
+
   const [isClicked, setIsClicked] = useState(false);
-  const [menuRef, showMenu, setShowMenu] = useClickAway(() =>
-    setIsClicked(false),
-  );
+  const [menuRef, showMenu, setShowMenu] = useClickAway(() => setIsClicked(false));
 
   const handleClick = () => {
     if (showMenu && !isClicked) {
@@ -95,7 +94,7 @@ const NavDropMenu = ({ title, href, subLinks }: NavDropMenuProps) => {
         {title}
       </NavLink>
       {showMenu && (
-        <NavMenuStyles className={pathname === href ? 'active' : ''}>
+        <NavMenuStyles className={checkActiveSubLink(href, pathname) ? 'active' : ''}>
           <div className='menu-arrow'>
             <DownArrow size={30} />
           </div>
@@ -105,7 +104,11 @@ const NavDropMenu = ({ title, href, subLinks }: NavDropMenuProps) => {
               <NavLink
                 href={href + subLink.href}
                 key={href + subLink.href}
-                className='sub-nav'
+                className={
+                  checkActiveSubLink(href + subLink.href, pathname)
+                    ? 'sub-nav sub-nav-active'
+                    : 'sub-nav'
+                }
                 callback={() => setShowMenu(false)}
               >
                 {subLink.title}

@@ -1,14 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import {
-  addRow,
-  createSpreadsheetTab,
-  getSheets,
-} from '@this/api/googleSheets';
+import { addRow, createSpreadsheetTab, getSheets } from '@this/api/googleSheets';
+import moment from 'moment';
 
-const {
-  HIGHSCHOOL_FORM_RESPONSES_ID = '',
-  HIGHSCHOOL_FORM_RESPONSES_NAME = '',
-} = process.env;
+const { HIGHSCHOOL_FORM_RESPONSES_ID = '' } = process.env;
 
 export type TFormOption = {
   name: string;
@@ -16,14 +10,12 @@ export type TFormOption = {
   additionalInfo: string;
 };
 
-export type FormValueType =
-  | string
-  | TFormOption
-  | { [key: string]: boolean }
-  | undefined;
+export type FormValueType = string | TFormOption | { [key: string]: boolean } | undefined;
 
 export type THighschoolForm = {
   [key: string]: FormValueType;
+  date: string;
+  tabName: string;
   studentFirstName: string;
   studentLastName: string;
   studentEmail: string;
@@ -36,6 +28,7 @@ export type THighschoolForm = {
   guardianPhone: string;
   gradYear: TFormOption;
   course: TFormOption;
+  courseTime: TFormOption;
   interestLevel: TFormOption;
   availability: TFormOption;
   referencedBy: TFormOption;
@@ -46,6 +39,7 @@ export type THighschoolForm = {
     [key: string]: boolean;
   };
   equipmentExplanation?: string;
+  policyAgreement?: TFormOption;
   message?: string;
 };
 
@@ -54,24 +48,28 @@ interface ISignupReq extends NextApiRequest {
 }
 
 const formOutputOrder = [
+  'date',
   'studentFirstName',
   'studentLastName',
   'studentEmail',
   'studentPhone',
   'studentDOB',
   'schoolAttended',
+  'gender',
   'guardianFirstName',
   'guardianLastName',
   'guardianEmail',
   'guardianPhone',
   'gradYear',
   'course',
+  'courseTime',
   'interestLevel',
   'availability',
   'referencedBy',
   'ethnicities',
   'equipment',
   'equipmentExplanation',
+  'policyAgreement',
   'message',
 ];
 
@@ -97,20 +95,18 @@ const formatFormValues = (val: FormValueType) => {
     return val;
   }
   if (val.hasOwnProperty('additionalInfo')) {
-    return `${val.name}${
-      val.additionalInfo ? '\n\n' + val.additionalInfo : ''
-    }`;
+    return `${val.name}${val.additionalInfo ? '\n\n' + val.additionalInfo : ''}`;
   }
   return Object.keys(val).join('\n');
 };
 
-export default async function handleContactForm(
-  req: ISignupReq,
-  res: NextApiResponse,
-) {
-  const tabName = HIGHSCHOOL_FORM_RESPONSES_NAME ?? 'NO TAB NAME';
+export default async function handleContactForm(req: ISignupReq, res: NextApiResponse) {
+  const { tabName = 'NO TAB NAME', date } = req.body;
   const sheets = getSheets();
-  const formValues: THighschoolForm = req.body;
+  const formValues: THighschoolForm = {
+    ...req.body,
+    date: moment(new Date(date)).format('MM/DD/YYYY HH:mm:ss'),
+  };
   const output = getOutputOrder(formValues);
   const spreadsheetId = HIGHSCHOOL_FORM_RESPONSES_ID ?? '';
 

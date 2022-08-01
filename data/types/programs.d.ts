@@ -7,7 +7,6 @@ export interface ICourses {
 }
 
 export interface IHighschoolPrograms {
-  interestOnly: boolean;
   description: string[];
   courses: {
     id: string;

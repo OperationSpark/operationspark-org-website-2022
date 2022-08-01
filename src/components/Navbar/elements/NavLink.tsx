@@ -5,9 +5,9 @@ import Link from 'next/link';
 
 import { buttonCss, yellowBtn } from '@this/src/theme/styled/mixins/button';
 
-export const NavLinkStyles = styled.div.attrs(
-  ({ color }: { color?: '' | 'yellow' }) => ({ color }),
-)`
+export const NavLinkStyles = styled.div.attrs(({ color }: { color?: '' | 'yellow' }) => ({
+  color,
+}))`
   ${({ color }) => (color === 'yellow' ? yellowBtn : buttonCss)};
   z-index: 0;
   position: relative;
@@ -20,36 +20,45 @@ export const NavLinkStyles = styled.div.attrs(
     padding: 0.3rem 0.6rem;
   }
   &.sub-nav {
+    transition: box-shadow 125ms;
     white-space: pre;
     margin-bottom: 0.25rem;
-    box-shadow: 0 0 3px 0px ${(p) => p.theme.purple[900]} inset;
+    box-shadow: 0 0 2px 0px ${({ theme }) => theme.alpha.fg} inset;
     margin-right: 0;
+    background: ${({ theme }) => theme.bg};
+    color: ${({ theme }) => theme.fg};
+
     :last-child {
       margin-bottom: 0;
     }
     :hover,
     :focus {
-      box-shadow: 0 0 3px 0px ${(p) => p.theme.purple[900]} inset;
-      background: ${({ theme }) =>
-        theme.primary[theme.isLightMode ? 300 : 800]};
-      outline: none !important;
-      box-shadow: 0 0 3px 0px ${(p) => p.theme.purple[900]} inset;
+      background: ${({ theme }) => theme.bgHover};
+      color: ${({ theme }) => theme.fg};
+
+      box-shadow: 0 0 3px 0px ${({ theme }) => theme.alpha.fg} inset;
+
       z-index: 1;
     }
     :focus-visible {
       outline: 2px solid ${({ theme }) => theme.secondary[800]};
     }
   }
+  &.sub-nav.sub-nav-active {
+    cursor: default;
+    box-shadow: none;
+    background: ${({ theme }) => theme.primary[theme.isLightMode ? 100 : 800]} !important;
+  }
 
-  &.active {
-    box-shadow: 0 0 3px 0px ${(p) => p.theme.purple[900]} inset;
+  &.active:not(&.sub-nav) {
+    box-shadow: 0 0 3px 0px ${({ theme }) => theme.purple[900]} inset;
     background: ${({ theme }) => theme.primary[theme.isLightMode ? 300 : 800]};
     backdrop-filter: blur(8px);
     z-index: 0;
-    box-shadow: 0 0 3px 1px ${(p) => p.theme.fg} inset;
+    box-shadow: 0 0 3px 1px ${({ theme }) => theme.fg} inset;
 
     :hover {
-      box-shadow: 0 0 3px 1px ${(p) => p.theme.fg} inset;
+      box-shadow: 0 0 3px 1px ${({ theme }) => theme.fg} inset;
     }
   }
 `;
@@ -72,9 +81,7 @@ const NavLink = ({
 
   return (
     <NavLinkStyles
-      className={`${href && pathname.includes(href) ? 'active' : ''} ${
-        className || ''
-      }`}
+      className={`${href && pathname.includes(href) ? 'active' : ''} ${className || ''}`}
       color={color}
       onClick={callback}
     >
