@@ -12,7 +12,6 @@ import PlainCard from '@this/components/Cards/PlainCard';
 import HighschoolInfoForm from '@this/src/Forms/Form.HighschoolInfo';
 import AbsoluteBtnWindow from '@this/components/Elements/AbsoluteBtnWindow';
 import { BgImg } from '@this/src/components/Elements';
-import NavLink from '@this/src/components/Navbar/elements/NavLink';
 
 const HighSchool: NextPage<IHighschoolPrograms> = ({ description, courses, schools }) => {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -58,9 +57,6 @@ const HighSchool: NextPage<IHighschoolPrograms> = ({ description, courses, schoo
             }}
           >
             <div className='hs-apply'>
-              <NavLink href='/programs/highschool/apply' className='info'>
-                Apply to High School Program Here!
-              </NavLink>
               <h1 className='dynamic-xl secondary' style={{ alignSelf: 'flex-end' }}>
                 High School
               </h1>
