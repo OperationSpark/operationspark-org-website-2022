@@ -56,7 +56,7 @@ const AbsoluteBtnWindow = ({
               opacity: 0,
             }}
             animate={{
-              maxHeight: `calc(100vh - (${theme.navHeight}px + 3.5rem))`,
+              maxHeight: `calc(100vh - (${theme.navHeight}px + 5rem))`,
               width: style?.width || '500px',
               maxWidth: 'calc(100vw - 1rem)',
               opacity: 1,
@@ -84,7 +84,7 @@ const AbsoluteBtnWindowStyles = styled.div`
   align-items: flex-end;
   z-index: 100;
   top: calc(${({ theme }) => theme.navHeight}px + 0.5rem);
-  right: 0.5rem;
+  right: 0.75rem;
   width: calc(100% - 1rem);
 
   ._abs-win-title {
@@ -102,7 +102,6 @@ const AbsoluteBtnWindowStyles = styled.div`
     border-radius: 0.25rem;
     background: ${({ theme }) => theme.bg};
     padding: 1rem;
-
   }
   ._abs-win-scroll {
     width: 100%;
@@ -121,10 +120,10 @@ const AbsoluteBtnWindowStyles = styled.div`
 
   ._abs-win-btn {
     position: absolute;
-    margin-bottom: 0;
-    right: 1rem;
-    top: 0.5rem;
+
+    margin: 0;
+    right: 0;
+    top: 0;
     z-index: 100;
   }
-
 `;
