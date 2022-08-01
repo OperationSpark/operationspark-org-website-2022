@@ -8,6 +8,7 @@ import { useScrollY } from '@this/hooks/useScrollY';
 import { useValidCss } from '@this/hooks/useCssCheck';
 import { IAlert } from '@this/data/types/bits';
 import { navMenus } from './navLinks';
+import BonusBar from './BonusBar';
 
 const LogoLink = dynamic(() => import('@this/components/Elements/LogoLink'));
 const ProgressBar = dynamic(() => import('./ProgressBar'));
@@ -42,6 +43,8 @@ export default function Nav({ alertInfo }: NavProps) {
   const showAlert = alertInfo?.message && withinDateRange(alertInfo);
   const theme = useTheme();
 
+  const extraNavHeight = 40;
+
   const resizeObserverRef = useRef(
     typeof window === 'undefined'
       ? null
@@ -49,7 +52,7 @@ export default function Nav({ alertInfo }: NavProps) {
           requestAnimationFrame(() => {
             if (nav) {
               const { height } = nav.contentRect;
-              const newHeight = Math.ceil(height);
+              const newHeight = Math.ceil(height + extraNavHeight);
               theme.setNavHeight(newHeight);
             }
           }),
@@ -86,7 +89,7 @@ export default function Nav({ alertInfo }: NavProps) {
   }, [theme, navRef, resizeObserverRef]);
 
   return (
-    <NavbarStyles ref={navRef} animate={{ ...navAnimation }} transition={navTransition}>
+    <NavbarStyles ref={navRef} animate={navAnimation} transition={navTransition}>
       {showAlert && <AlertBar info={alertInfo} />}
       <div className='navbar'>
         <LogoLink src='/images/os/logo-halle3d_140x50.webp' href='/' alt='Operation Spark' />
@@ -94,6 +97,7 @@ export default function Nav({ alertInfo }: NavProps) {
         <MobileNav navMenus={navMenus} />
       </div>
       <ProgressBar isTop={isTop} />
+      <BonusBar />
     </NavbarStyles>
   );
 }
@@ -135,7 +139,7 @@ export const NavbarStyles = styled(motion.nav)`
       }
     }
   }
-  @media screen and (max-width: 850px) {
+  @media screen and (max-width: 700px) {
     .navbar {
       .nav-links {
         display: none;
