@@ -9,7 +9,7 @@ const BonusBar = ({ children }: { children?: ReactNode }) => {
   const isHs = router.pathname.includes('highschool');
 
   return (
-    <BonusBarStyles>
+    <BonusBarStyles className='bonus-bar'>
       {children ?? null}
       <NavLink href='/programs/highschool/apply' className='info'>
         High School Application
@@ -35,12 +35,24 @@ const BonusBarStyles = styled(motion.div)`
   padding: 0 0.5rem;
   justify-content: flex-end;
   @media screen and (max-width: 700px) {
-    justify-content: stretch;
+    justify-content: center;
     .info {
       flex: 1;
       display: flex;
       justify-content: center;
+      align-items: center;
       text-align: center;
+      margin-bottom: 0.25rem;
+      line-height: 1.1em;
+      a {
+        padding: 0.6rem;
+      }
+    }
+  }
+  @media screen and (max-width: 470px) {
+    justify-content: center;
+    .info a {
+      padding: 0.2rem 0.4rem;
     }
   }
 `;

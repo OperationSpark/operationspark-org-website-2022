@@ -8,10 +8,10 @@ import rgbDataURL from '@this/src/helpers/rgbDataURL';
 const LogoLinkStyles = styled.a`
   user-select: none;
   -webkit-user-drag: none;
-  width: 140px;
-  height: 50px;
-  position: relative;
-  padding: 0.5rem;
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  align-items: center;
   img {
     -webkit-user-drag: none;
   }
@@ -23,6 +23,9 @@ interface LogoLinkProps {
   alt: string;
   newTab?: boolean;
   priority?: boolean;
+  width?: number;
+  height?: number;
+  className?: string;
 }
 
 const LogoLink = ({
@@ -31,6 +34,9 @@ const LogoLink = ({
   alt,
   newTab,
   priority = false,
+  width,
+  height,
+  className,
 }: LogoLinkProps) => {
   const { push } = useRouter();
   const handleRoute = (e: MouseEvent) => {
@@ -38,11 +44,12 @@ const LogoLink = ({
     newTab ? window.open(href) : push(href);
   };
   return (
-    <LogoLinkStyles href={href} onClick={handleRoute} title={alt}>
+    <LogoLinkStyles href={href} onClick={handleRoute} title={alt} className={className}>
       <Image
         src={src}
         alt={alt}
-        layout='fill'
+        width={width ?? 140}
+        height={height ?? 50}
         objectFit='contain'
         placeholder='blur'
         blurDataURL={rgbDataURL()}

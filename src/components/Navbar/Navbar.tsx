@@ -4,13 +4,13 @@ import styled, { useTheme } from 'styled-components';
 import moment from 'moment-timezone';
 import { motion, Transition } from 'framer-motion';
 
+import { navMenus } from './navLinks';
+import { IAlert } from '@this/data/types/bits';
 import { useScrollY } from '@this/hooks/useScrollY';
 import { useValidCss } from '@this/hooks/useCssCheck';
-import { IAlert } from '@this/data/types/bits';
-import { navMenus } from './navLinks';
+import LogoLink from '@this/components/Elements/LogoLink';
 import BonusBar from './BonusBar';
 
-const LogoLink = dynamic(() => import('@this/components/Elements/LogoLink'));
 const ProgressBar = dynamic(() => import('./ProgressBar'));
 const AlertBar = dynamic(() => import('./AlertBar'));
 const DesktopNav = dynamic(() => import('./DesktopNav'));
@@ -92,12 +92,28 @@ export default function Nav({ alertInfo }: NavProps) {
     <NavbarStyles ref={navRef} animate={navAnimation} transition={navTransition}>
       {showAlert && <AlertBar info={alertInfo} />}
       <div className='navbar'>
-        <LogoLink src='/images/os/logo-halle3d_140x50.webp' href='/' alt='Operation Spark' />
+        <LogoLink
+          className='nav-logo-desktop'
+          src='/images/os/logo-halle3d_140x50.webp'
+          href='/'
+          alt='Operation Spark'
+          width={140}
+          height={50}
+        />
+        <LogoLink
+          className='nav-logo-mobile'
+          src='/images/os/hallebot-sm.webp'
+          href='/'
+          alt='Operation Spark'
+          width={50}
+        />
         <DesktopNav navMenus={navMenus} />
+
+        <BonusBar />
+
         <MobileNav navMenus={navMenus} />
       </div>
       <ProgressBar isTop={isTop} />
-      <BonusBar />
     </NavbarStyles>
   );
 }
@@ -138,6 +154,12 @@ export const NavbarStyles = styled(motion.nav)`
         align-items: center;
       }
     }
+    .nav-logo-mobile {
+      display: none;
+    }
+    .nav-logo-desktop {
+      display: block;
+    }
   }
   @media screen and (max-width: 700px) {
     .navbar {
@@ -146,6 +168,17 @@ export const NavbarStyles = styled(motion.nav)`
       }
       .mobile-nav {
         display: block;
+      }
+      .bonus-bar {
+        position: static;
+        flex-flow: row wrap;
+        width: calc(100% - 100px);
+      }
+      .nav-logo-mobile {
+        display: block;
+      }
+      .nav-logo-desktop {
+        display: none;
       }
     }
   }

@@ -6,11 +6,10 @@ import Link from 'next/link';
 import { IInfoSession } from '@this/data/types/infoSession';
 import { ILogo } from '@this/data/types/logos';
 
-import { cardShadow, cardShadowLtr } from '@this/src/theme/styled/mixins/shadows';
+import { cardShadow, cardShadowLtr, cardShadowRtl } from '@this/src/theme/styled/mixins/shadows';
 import { getStaticAsset } from '@this/pages-api/static/[asset]';
 import { Main, Section, Content } from '@this/components/layout';
 import useInfoSession from '@this/src/hooks/useInfoSession';
-import NavLink from '@this/src/components/Navbar/elements/NavLink';
 
 const WorkforceForm = dynamic(() => import('@this/src/Forms/Form.Workforce'));
 const Carousel = dynamic(() => import('@this/components/Elements/Carousel'));
@@ -51,32 +50,32 @@ const InfoSession: NextPage<InfoSessionProps> = ({ commonQuestions, logos }) => 
             </div>
             <div className='info-session-right'>
               <div className='info-session-form'>
+                <div className='info-highschool'>
+                  <b>HIGH SCHOOL INFORMATION</b>
+                  <br />
+                  Info sessions discuss <i style={{ fontWeight: 600 }}>adult workforce programs</i>.
+                  To sign up or get more information about our{' '}
+                  <i style={{ fontWeight: 600 }}>High School to High Wage program</i>,{' '}
+                  <Link href='/programs/highschool/requestInfo'>
+                    <a className='anchor'>please complete this form.</a>
+                  </Link>
+                </div>
                 <h3 className='dynamic-h3 form-title primary-secondary text-center'>
                   Register for upcoming adult workforce info session
                 </h3>
 
                 <WorkforceForm sessionDates={sessionDates} />
               </div>
-              <div className='info-highschool'>
-                <b>HIGH SCHOOL INFORMATION</b>
-                <br />
-                Info sessions discuss <i style={{ fontWeight: 600 }}>adult workforce programs</i>.
-                To sign up or get more information about our{' '}
-                <i style={{ fontWeight: 600 }}>High School to High Wage program</i>,{' '}
-                <Link href='/programs/highschool/requestInfo'>
-                  <a className='anchor'>please complete this form.</a>
-                </Link>
-                <div style={{ paddingTop: '1rem' }}>
-                  <NavLink href='/programs/highschool/apply' className='info'>
-                    <div style={{ textAlign: 'center', padding: '0.5rem' }}>
-                      <span>Click Here to Apply For</span>
-                      <br />
-                      <span>The High School Program!</span>
-                    </div>
-                  </NavLink>
-                </div>
-              </div>
             </div>
+          </Content>
+          <Content className='video-container mobile-video-container'>
+            <video width='100%' height='auto' controls>
+              <source
+                src='https://player.vimeo.com/progressive_redirect/playback/721476393/rendition/1080p/file.mp4?loc=external&signature=a21ad59e5f01881f352c50593562321d778b43fbda9f6577e4270e699706f46b'
+                type='video/mp4'
+              />
+              Your browser does not support the video tag.
+            </video>
           </Content>
         </Section>
         <Section>
@@ -145,7 +144,7 @@ const InfoSessionStyles = styled.div`
       color: ${({ theme }) => (theme.isLightMode ? theme.primary[500] : theme.secondary[400])};
     }
     .form-title {
-      margin: 0 0 1rem 0;
+      margin: 1.5rem 0 0.5rem 0;
     }
 
     .whats-to-learn {
@@ -183,19 +182,7 @@ const InfoSessionStyles = styled.div`
         }
       }
     }
-    .video-container {
-      display: flex;
-      align-items: center;
-      margin: 0;
-      border-radius: 0.5rem;
-      overflow: hidden;
-      filter: drop-shadow(
-        0 0 1rem ${({ theme }) => (theme.isLightMode ? 'rgba(0, 0, 0, 0.5)' : 'rgba(0, 0, 0, 1)')}
-      );
-      video {
-        border-radius: 0.25rem;
-      }
-    }
+
     .info-session-right {
       width: 100%;
       display: flex;
@@ -221,7 +208,24 @@ const InfoSessionStyles = styled.div`
       max-width: 100%;
       padding: 1rem;
       border-radius: 0.25rem;
+      ${cardShadowRtl}
     }
+  }
+  .video-container {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    filter: drop-shadow(
+      0 0 1rem ${({ theme }) => (theme.isLightMode ? 'rgba(0, 0, 0, 0.5)' : 'rgba(0, 0, 0, 1)')}
+    );
+    video {
+      border-radius: 0.25rem;
+    }
+  }
+  .video-container.mobile-video-container {
+    display: none;
   }
 
   .stats {
@@ -267,6 +271,12 @@ const InfoSessionStyles = styled.div`
       .halle-img {
         display: none;
       }
+      .info-session-left {
+        .video-container {
+          display: none;
+        }
+      }
+
       .info-session-right {
         margin-top: 2rem;
         justify-content: center;
@@ -277,9 +287,11 @@ const InfoSessionStyles = styled.div`
         }
       }
     }
+    .video-container.mobile-video-container {
+      margin-top: 2rem;
+      display: flex;
+    }
     .great-companies {
-      h1 {
-      }
       .stats {
         display: flex;
         flex-flow: column;
