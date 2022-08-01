@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { TiArrowSortedDown as DownArrow } from 'react-icons/ti';
 
 import { useClickAway } from '@this/hooks/useClickAway';
+import { checkActiveSubLink } from '@this/src/helpers/navigation';
 import type { NavigationSubLink } from '../navLinks';
 import NavLink from './NavLink';
 
@@ -52,15 +53,6 @@ export const NavMenuStyles = styled.div`
   }
 `;
 
-const checkActiveSubLink = (href1: string, href2: string): boolean => {
-  if (href1 === href2) {
-    return true;
-  }
-  const hrefArr1 = href1.split('/');
-  const hrefArr2 = href2.split('/');
-
-  return hrefArr1.pop() === hrefArr2.pop();
-};
 interface NavDropMenuProps {
   title: string;
   href: string;
@@ -113,7 +105,9 @@ const NavDropMenu = ({ title, href, subLinks }: NavDropMenuProps) => {
                 href={href + subLink.href}
                 key={href + subLink.href}
                 className={
-                  checkActiveSubLink(href + subLink.href, pathname) ? 'sub-nav sub-nav-active' : 'sub-nav'
+                  checkActiveSubLink(href + subLink.href, pathname)
+                    ? 'sub-nav sub-nav-active'
+                    : 'sub-nav'
                 }
                 callback={() => setShowMenu(false)}
               >

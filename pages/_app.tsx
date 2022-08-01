@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import type { AppProps } from 'next/app';
 import { ChakraProvider } from '@chakra-ui/react';
@@ -19,26 +19,21 @@ export default function App({ Component, pageProps }: AppProps) {
   const [alertInfo, setAlertInfo] = useState<IAlert>({ message: '', url: '' });
 
   useEffect(() => {
-    const fetchStaticAssets = async () => {
-      await getStaticAsset('logos').then((l: ISupporterFunderLogos) => setLogos(l.funders));
-      await getStaticAsset('alert').then(setAlertInfo);
-    };
-    fetchStaticAssets();
+    getStaticAsset('logos').then((l: ISupporterFunderLogos) => setLogos(l.funders));
+    getStaticAsset('alert').then(setAlertInfo);
   }, []);
 
   return (
     <ChakraProvider theme={theme}>
       <Theme theme={theme.colors.brand}>
         <Meta />
+        <Navbar alertInfo={alertInfo} />
 
-        <Fragment>
-          <Navbar alertInfo={alertInfo} />
-          <MainContainer>
-            <Component {...pageProps} />
-          </MainContainer>
+        <MainContainer>
+          <Component {...pageProps} />
+        </MainContainer>
 
-          <Footer logos={logos} />
-        </Fragment>
+        <Footer logos={logos} />
       </Theme>
     </ChakraProvider>
   );

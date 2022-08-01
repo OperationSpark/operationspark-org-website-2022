@@ -180,7 +180,7 @@ const highschoolFormInfoInputs = {
       Element: Input.Phone,
       label: 'Phone Number (Student)',
       name: 'studentPhone',
-      placeholder: '303-123-9876',
+      placeholder: '504-123-9876',
       required: true,
     },
 

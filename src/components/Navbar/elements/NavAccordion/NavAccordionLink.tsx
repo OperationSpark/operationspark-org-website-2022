@@ -2,6 +2,8 @@ import { useRouter } from 'next/router';
 import { MouseEvent, ReactNode } from 'react';
 import styled from 'styled-components';
 
+import { checkActiveSubLink } from '@this/src/helpers/navigation';
+
 const NavAccordionLinkStyles = styled.div`
   cursor: pointer;
   width: 100%;
@@ -22,9 +24,6 @@ const NavAccordionLinkStyles = styled.div`
     padding-left: 2.5rem;
   }
 `;
-const checkActiveSubLink = (href1: string, href2: string): boolean => {
-  return href1 === href2 ? true : href1.split('/').pop() === href2.split('/').pop();
-};
 
 export const NavAccordionLink = ({
   children,
