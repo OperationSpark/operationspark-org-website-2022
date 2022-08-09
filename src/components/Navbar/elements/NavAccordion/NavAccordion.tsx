@@ -18,7 +18,7 @@ const NavAccordionStyles = styled(motion.div)`
     ${({ theme }) => theme.primary[500]} 96%,
     ${({ theme }) => theme.primary[700]} 100%
   );
-  top: 100%;
+  top: calc(100% - 0.75rem);
   right: 0;
   width: 300px;
   max-width: calc(100vw - 0.5rem);

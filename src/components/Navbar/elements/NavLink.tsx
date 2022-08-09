@@ -56,7 +56,7 @@ export const NavLinkStyles = styled.div.attrs(({ color }: { color?: '' | 'yellow
     backdrop-filter: blur(8px);
     z-index: 0;
     box-shadow: 0 0 3px 1px ${({ theme }) => theme.fg} inset;
-
+    cursor: default;
     :hover {
       box-shadow: 0 0 3px 1px ${({ theme }) => theme.fg} inset;
     }

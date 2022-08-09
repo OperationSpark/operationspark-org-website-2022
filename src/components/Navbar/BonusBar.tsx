@@ -32,27 +32,42 @@ const BonusBarStyles = styled(motion.div)`
   width: 100%;
   display: flex;
   flex-flow: row nowrap;
-  padding: 0 0.5rem;
   justify-content: flex-end;
+  grid-gap: 0.25rem;
   @media screen and (max-width: 700px) {
-    justify-content: center;
+    justify-content: space-around;
+    flex-flow: row wrap;
+    padding-bottom: 0.75rem;
     .info {
       flex: 1;
+      margin: 0;
+      line-height: 1em;
+      width: fit-content;
+
       display: flex;
       justify-content: center;
       align-items: center;
       text-align: center;
-      margin-bottom: 0.25rem;
-      line-height: 1.1em;
       a {
-        padding: 0.6rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+        height: 100%;
+        padding: 0.25rem 0.3rem;
       }
     }
   }
-  @media screen and (max-width: 470px) {
-    justify-content: center;
-    .info a {
-      padding: 0.2rem 0.4rem;
+  @media screen and (max-width: 300px) {
+    grid-gap: 0.25rem;
+
+    .info {
+      flex: none;
+      width: 100%;
+      a {
+        padding: 0.2rem 0.2rem;
+      }
     }
   }
 `;

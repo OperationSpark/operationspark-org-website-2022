@@ -94,18 +94,19 @@ export default function Nav({ alertInfo }: NavProps) {
       <div className='navbar'>
         <LogoLink
           className='nav-logo-desktop'
-          src='/images/os/logo-halle3d_140x50.webp'
+          src='/images/os/logo-halle-banner.webp'
           href='/'
           alt='Operation Spark'
-          width={140}
-          height={50}
+          width={112}
+          height={40}
         />
         <LogoLink
           className='nav-logo-mobile'
-          src='/images/os/hallebot-sm.webp'
+          src='/images/os/logo-halle-no-banner.webp'
           href='/'
           alt='Operation Spark'
-          width={50}
+          width={40}
+          height={40}
         />
         <DesktopNav navMenus={navMenus} />
 
@@ -136,7 +137,8 @@ export const NavbarStyles = styled(motion.nav)`
     align-items: center;
     width: 100%;
 
-    padding: 0.5rem;
+    padding: 0.25rem;
+    padding-bottom: 0;
 
     .nav-links {
       display: flex;
@@ -161,8 +163,10 @@ export const NavbarStyles = styled(motion.nav)`
       display: block;
     }
   }
+
   @media screen and (max-width: 700px) {
     .navbar {
+      align-items: stretch;
       .nav-links {
         display: none;
       }

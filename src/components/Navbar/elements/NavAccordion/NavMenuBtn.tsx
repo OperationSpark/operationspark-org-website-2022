@@ -12,6 +12,7 @@ export const NavMenuBtn = styled.button<NavMenuBtnProps>`
   border-radius: ${(p) => (p.isOpen ? '0.5rem 0.5rem 0 0' : '0.25rem')};
   color: white;
   position: relative;
+  margin-left: 0.5rem;
   z-index: 1000;
   background: linear-gradient(
     90deg,

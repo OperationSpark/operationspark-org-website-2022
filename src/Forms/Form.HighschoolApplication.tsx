@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { AiOutlineInfoCircle as InfoIcon } from 'react-icons/ai';
 
 import { Input } from '@this/components/Form';
 import Form from '@this/components/Form/Form';
 import useForm from '@this/components/Form/useForm';
 import Button from '@this/components/Elements/Button';
-
-import { AiOutlineInfoCircle as InfoIcon } from 'react-icons/ai';
-import { hsApplication } from '@this/config/form';
 import { TOption } from '@this/data/types/bits';
 
 const HighschoolFormSignupStyles = styled.div`
@@ -34,11 +32,15 @@ const HighschoolFormSignupStyles = styled.div`
     grid-template-columns: repeat(2, minmax(300px, 1fr));
     grid-template-rows: auto;
     grid-gap: 0.25rem 1rem;
-    align-items: flex-end;
+    align-items: flex-start;
   }
-  ul.form-info {
+  ul {
     padding-left: 2rem;
     margin-bottom: 0.5rem;
+  }
+  li {
+    padding-bottom: 0.5rem;
+    line-height: 1.25em;
   }
 
   @media screen and (max-width: 768px) {
@@ -65,6 +67,7 @@ interface HighschoolFormSignupProps {
 }
 
 const HighschoolFormSignup = ({ onSubmitComplete }: HighschoolFormSignupProps) => {
+  const sheetsTabName = 'Applications - Fall 2022';
   const form = useForm();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const hasErrors = form.hasErrors();
@@ -76,6 +79,7 @@ const HighschoolFormSignup = ({ onSubmitComplete }: HighschoolFormSignupProps) =
     ...new Array(4).fill(0).map((e, i) => ({ name: `${year + i}`, value: `${year + i}` })),
     { name: 'Other', value: 'other', additionalInfo: 'Please explain' },
   ];
+
   const handleSubmit = async () => {
     if (hasErrors) {
       return form.toggleShowErrors();
@@ -84,11 +88,9 @@ const HighschoolFormSignup = ({ onSubmitComplete }: HighschoolFormSignupProps) =
     setIsSubmitting(true);
 
     try {
-      const { tabName } = hsApplication;
-
       await axios.post('/api/signup/highschool', {
         ...form.values(),
-        tabName,
+        tabName: sheetsTabName,
         date: Date.now(),
       });
       form.clear();
@@ -175,6 +177,25 @@ const HighschoolFormSignup = ({ onSubmitComplete }: HighschoolFormSignupProps) =
           ))}
 
           <h3 className='dynamic-h3 form-section-title'>Course Information</h3>
+          <div className='form-col-span dynamic-txt'>
+            <p>
+              This semester, we are offering both in-person and virtual classes.{' '}
+              <b>
+                <i>You can enroll in one or the other. (No hybrid option)</i>
+              </b>
+            </p>
+            <ul>
+              <li>
+                In-person classes meet once a week, 4:30-8:00 PM, at our learning center on Franklin
+                Avenue in the Marigny.
+              </li>
+              <li>
+                Virtual classes meet twice a week, 5:00-7:00 PM. The days of the week vary by course
+                and format, and will appear after selecting the appropriate course in the
+                application.
+              </li>
+            </ul>
+          </div>
           <div>
             {courseTimeOptions && (
               <p className='form-info'>
