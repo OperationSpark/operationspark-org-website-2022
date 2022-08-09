@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { AiOutlineInfoCircle as InfoIcon } from 'react-icons/ai';
 
 import { Input } from '@this/components/Form';
 import Form from '@this/components/Form/Form';
 import useForm from '@this/components/Form/useForm';
 import Button from '@this/components/Elements/Button';
-
-import { AiOutlineInfoCircle as InfoIcon } from 'react-icons/ai';
-import { hsApplication } from '@this/config/form';
 import { TOption } from '@this/data/types/bits';
 
 const HighschoolFormSignupStyles = styled.div`
@@ -69,6 +67,7 @@ interface HighschoolFormSignupProps {
 }
 
 const HighschoolFormSignup = ({ onSubmitComplete }: HighschoolFormSignupProps) => {
+  const sheetsTabName = 'Applications - Fall 2022';
   const form = useForm();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const hasErrors = form.hasErrors();
@@ -80,6 +79,7 @@ const HighschoolFormSignup = ({ onSubmitComplete }: HighschoolFormSignupProps) =
     ...new Array(4).fill(0).map((e, i) => ({ name: `${year + i}`, value: `${year + i}` })),
     { name: 'Other', value: 'other', additionalInfo: 'Please explain' },
   ];
+
   const handleSubmit = async () => {
     if (hasErrors) {
       return form.toggleShowErrors();
@@ -88,11 +88,9 @@ const HighschoolFormSignup = ({ onSubmitComplete }: HighschoolFormSignupProps) =
     setIsSubmitting(true);
 
     try {
-      const { tabName } = hsApplication;
-
       await axios.post('/api/signup/highschool', {
         ...form.values(),
-        tabName,
+        tabName: sheetsTabName,
         date: Date.now(),
       });
       form.clear();
