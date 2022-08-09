@@ -34,11 +34,15 @@ const HighschoolFormSignupStyles = styled.div`
     grid-template-columns: repeat(2, minmax(300px, 1fr));
     grid-template-rows: auto;
     grid-gap: 0.25rem 1rem;
-    align-items: flex-end;
+    align-items: flex-start;
   }
-  ul.form-info {
+  ul {
     padding-left: 2rem;
     margin-bottom: 0.5rem;
+  }
+  li {
+    padding-bottom: 0.5rem;
+    line-height: 1.25em;
   }
 
   @media screen and (max-width: 768px) {
@@ -175,6 +179,25 @@ const HighschoolFormSignup = ({ onSubmitComplete }: HighschoolFormSignupProps) =
           ))}
 
           <h3 className='dynamic-h3 form-section-title'>Course Information</h3>
+          <div className='form-col-span dynamic-txt'>
+            <p>
+              This semester, we are offering both in-person and virtual classes.{' '}
+              <b>
+                <i>You can enroll in one or the other (No hybrid option).</i>
+              </b>
+            </p>
+            <ul>
+              <li>
+                In-person classes meet once a week, 4:30-8:00 PM, at our learning center on Franklin
+                Avenue in the Marigny.
+              </li>
+              <li>
+                Virtual classes meet twice a week, 5:00-7:00 PM. The days of the week vary by course
+                and format, and will appear after selecting the appropriate course in the
+                application.
+              </li>
+            </ul>
+          </div>
           <div>
             {courseTimeOptions && (
               <p className='form-info'>
