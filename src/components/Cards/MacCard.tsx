@@ -85,12 +85,12 @@ const MacBtn = ({
 };
 
 const MacCardStyles = styled.div`
-  width: 600px;
-  max-width: 100%;
+  width: 100%;
+  max-width: 600px;
   margin: 3rem 0;
   background: ${({ theme }) => theme.bg};
   color: ${({ theme }) => theme.fg};
-  box-shadow: 0 0.5rem 1rem rgba(25, 25, 25, 0.5);
+  box-shadow: 0 0rem 0.25rem ${({ theme }) => theme.alpha.fg};
   border-radius: 0.25rem;
 
   .mac-buttons {
