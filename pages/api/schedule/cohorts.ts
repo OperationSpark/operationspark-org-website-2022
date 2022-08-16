@@ -4,7 +4,18 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import programsData from '@this/data/programs.json';
 import type { ISessionRow, ICourseInfo } from '@this/data/types/schedule';
 
+const courseData = programsData.adult.courses.reduce<{ [key: string]: ICourseInfo }>(
+  (courses, { title, length, cost, preReqs, days, hours }) => {
+    if (title && length && cost && preReqs && days && hours) {
+      courses[title] = { title, length, cost, preReqs, days, hours };
+    }
+    return courses;
+  },
+  {},
+);
+
 type ScheduleRequest = { query?: { cohort?: string; group?: string } } & NextApiRequest;
+
 export default async function getCohortScheduleReqHandler(
   req: ScheduleRequest,
   res: NextApiResponse,
@@ -28,7 +39,43 @@ const getCohortSchedule = async (filter?: string, group?: string) => {
   if (filter === 'next') {
     return filterNextSessions(cohortData);
   }
+  if (group === 'course') {
+    return groupCourse(cohortData);
+  }
   return cohortData;
+};
+
+const groupCourse = (data: ISessionRow[]) => {
+  const groupedCohorts = data.reduce<{
+    [key: string]: {
+      title: string;
+      course: ICourseInfo;
+      courses: ISessionRow[];
+    };
+  }>((sessions, session) => {
+    const courseKey = session.course.split(' ')[0];
+    if (!sessions.hasOwnProperty(courseKey)) {
+      sessions[courseKey] = {
+        title: courseKey,
+        course: courseData[courseKey],
+        courses: [session],
+      };
+    } else {
+      sessions[courseKey].courses.push(session);
+
+      if (!sessions[courseKey].title) {
+        sessions[courseKey].title = session.course;
+      }
+    }
+
+    return sessions;
+  }, {});
+  return Object.values(groupedCohorts)
+    .map((c) => ({
+      ...c,
+      courses: c.courses.sort(({ start: a }, { start: b }) => a.getTime() - b.getTime()),
+    }))
+    .sort(({ courses: a }, { courses: b }) => a[0]?.order - b[0]?.order);
 };
 const filterNextSessions = (data?: ISessionRow[]): { [key: string]: ISessionRow } => {
   if (!data || !data.length) {
