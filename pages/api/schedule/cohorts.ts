@@ -39,9 +39,19 @@ const getCohortSchedule = async (filter?: string, group?: string) => {
   if (filter === 'next') {
     return filterNextSessions(cohortData);
   }
+
+  if (group === 'cohort') {
+    return groupCohort(filter ? filterCohort(cohortData, filter) : cohortData);
+  }
+
   if (group === 'course') {
     return groupCourse(cohortData);
   }
+
+  if (filter) {
+    return filterCohort(cohortData, filter);
+  }
+
   return cohortData;
 };
 
@@ -77,6 +87,57 @@ const groupCourse = (data: ISessionRow[]) => {
     }))
     .sort(({ courses: a }, { courses: b }) => a[0]?.order - b[0]?.order);
 };
+
+const groupCohort = (data: ISessionRow[]) => {
+  const groupedCohorts = data.reduce<{
+    [key: string]: {
+      title: string;
+      courses: { [key: string]: ISessionRow | null };
+    };
+  }>((sessions, session) => {
+    const courseKey = session.course.split(' ')[0];
+    if (!sessions.hasOwnProperty(session.cohort)) {
+      sessions[session.cohort] = {
+        title: session.cohort,
+        courses: {
+          Prep: null,
+          Bootcamp: null,
+          Precourse: null,
+          Junior: null,
+          Senior: null,
+          [courseKey]: session,
+        },
+      };
+    } else {
+      const existingSession = sessions[session.cohort].courses[courseKey];
+      if (
+        !existingSession ||
+        (existingSession && session.start < existingSession.start && !!session.isPast)
+      ) {
+        sessions[session.cohort].courses[courseKey] = session;
+      }
+      if (!sessions[session.cohort].title) {
+        sessions[session.cohort].title = session.cohort;
+      }
+    }
+
+    return sessions;
+  }, {});
+  return Object.values(groupedCohorts)
+    .map((v) => ({
+      title: v.title,
+      courses: Object.values(v.courses),
+    }))
+    .sort(({ title: a }, { title: b }) => (a > b ? 1 : a < b ? -1 : 0));
+};
+
+const filterCohort = (data: ISessionRow[], filter: string) => {
+  const filterChar = filter[0].toLowerCase();
+  return data
+    ?.filter(({ char }) => char.toLowerCase() === filterChar)
+    .sort(({ order: a }, { order: b }) => a - b);
+};
+
 const filterNextSessions = (data?: ISessionRow[]): { [key: string]: ISessionRow } => {
   if (!data || !data.length) {
     return {};
