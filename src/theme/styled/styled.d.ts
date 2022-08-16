@@ -27,6 +27,8 @@ declare module 'styled-components' {
     alpha: {
       bg: string;
       fg: string;
+      bg50: string;
+      fg50: string;
     };
     black: string;
     white: string;
