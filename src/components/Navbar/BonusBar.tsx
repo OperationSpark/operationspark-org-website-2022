@@ -6,15 +6,21 @@ import NavLink from './elements/NavLink';
 
 const BonusBar = ({ children }: { children?: ReactNode }) => {
   const router = useRouter();
-  const isHs = router.pathname.includes('highschool');
+  const checkIsPath = (...paths: string[]) => {
+    return paths.reduce((isPath, path) => {
+      return isPath || router.pathname.includes(path);
+    }, false);
+  };
 
   return (
     <BonusBarStyles className='bonus-bar'>
-      {children ?? null}
-      <NavLink href='/programs/highschool/apply' className='info'>
-        High School Application
-      </NavLink>
-      {!isHs && (
+      {children}
+      {!checkIsPath('/programs/highschool/apply') && (
+        <NavLink href='/programs/highschool/apply' className='info'>
+          High School Application
+        </NavLink>
+      )}
+      {!checkIsPath('highschool', '/programs/workforce/infoSession') && (
         <NavLink href='/programs/workforce/infoSession' className='info'>
           Free Info Session
         </NavLink>
