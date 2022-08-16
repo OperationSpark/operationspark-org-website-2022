@@ -26,6 +26,7 @@ export const navMenus: NavigationMenuLink[] = [
     href: '/programs/workforce',
     subLinks: [
       { title: 'Learn More', href: '' },
+      { title: 'Session Schedule', href: '/schedule' },
       { title: 'Free Info Session', href: '/infoSession' },
     ],
   },
