@@ -104,7 +104,7 @@ const ShowcaseSignupStyles = styled.div`
     justify-content: flex-end;
     height: 100%;
     .showcase-header-container {
-      background: ${({ theme }) => (theme.isLightMode ? theme.alpha.fg : theme.alpha.bg)};
+      background: ${({ theme }) => (theme.isLightMode ? theme.alpha.fg50 : theme.alpha.bg50)};
       padding: 2rem;
       border-radius: 0.5rem;
       backdrop-filter: blur(4px);
