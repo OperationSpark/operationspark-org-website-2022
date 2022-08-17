@@ -3,7 +3,6 @@ import { NextPage } from 'next';
 import styled from 'styled-components';
 import { AnimatePresence, motion } from 'framer-motion';
 import axios from 'axios';
-import moment from 'moment';
 import { AiOutlineInfoCircle as InfoIcon } from 'react-icons/ai';
 import { IoMdCloseCircle as CloseIcon } from 'react-icons/io';
 
@@ -114,10 +113,17 @@ const CohortSchedule: NextPage = () => {
                               <p>
                                 Start:{' '}
                                 <b className={s.isNext ? 'primary-secondary' : ''}>
-                                  {moment(s.start).format('MMM d, YYYY')}
+                                  {new Date(s.start).toLocaleDateString('en-us', {
+                                    dateStyle: 'medium',
+                                  })}
                                 </b>
                               </p>
-                              <p>End: {moment(s.end).format('MMM d, YYYY')}</p>
+                              <p>
+                                End:{' '}
+                                {new Date(s.end).toLocaleDateString('en-us', {
+                                  dateStyle: 'medium',
+                                })}
+                              </p>
                               {s.isNext && <span className='schedule-block-next'>Up Next</span>}
                             </div>
                           </motion.div>
