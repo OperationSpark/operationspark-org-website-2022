@@ -4,7 +4,6 @@
       "name": "Tim Blackmon",
       "role": "CIO, Hired 6 grads at Mumms Software",
       "body": "Operation Spark is a true disruptor of the classical software engineering education domain. Their graduates possess real-world experience in today's modern technologies. For this reason, we have had great success hiring their graduates.",
-      "imageUrl": "/images/people/employers/tim-blackmon.jpg",
       "logoSrcLight": "/images/logos/supporters/mumms-software-light.png",
       "logoSrcDark": "/images/logos/supporters/mumms-software-dark.png",
       "logoHref": "https://mumms.com/"
@@ -12,12 +11,18 @@
     {
       "name": "Paul Williams",
       "role": "Chief Architect, Koniag Government Services",
-      "body": "The coding and presentation skills of the Operation Spark grads are far more advanced than the typical junior developers that join our team. They have a demonstrated level of technical expertise, complemented with the dedication, maturity, and professionalism that proves they are ready to enter the workforce right out of the program."
+      "body": "The coding and presentation skills of the Operation Spark grads are far more advanced than the typical junior developers that join our team. They have a demonstrated level of technical expertise, complemented with the dedication, maturity, and professionalism that proves they are ready to enter the workforce right out of the program.",
+      "logoSrcLight": "/images/logos/supporters/koniag.png",
+      "logoSrcDark": "/images/logos/supporters/koniag.png",
+      "logoHref": "https://www.koniag-gs.com/"
     },
     {
       "name": "Doug Poirrier",
       "role": "Director of Software Engineering, GE",
-      "body": "Our Operation Spark graduates hit the ground running on day one. Their motivation, passion, and creativity are contagious. Their unique perspectives are welcome additions to our teams"
+      "body": "Our Operation Spark graduates hit the ground running on day one. Their motivation, passion, and creativity are contagious. Their unique perspectives are welcome additions to our teams",
+      "logoSrcLight": "/images/logos/supporters/general-electric.png",
+      "logoSrcDark": "/images/logos/supporters/general-electric.png",
+      "logoHref": "https://www.ge.com/"
     },
     {
       "name": "Jeff Serpas",

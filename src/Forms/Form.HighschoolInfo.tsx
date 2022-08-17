@@ -8,8 +8,6 @@ import Form from '@this/components/Form/Form';
 import useForm from '@this/components/Form/useForm';
 import Button from '@this/components/Elements/Button';
 
-import formConfig from '@this/config/form';
-
 const HighschoolFormInfoStyles = styled.div`
   .form-section {
     width: 100%;
@@ -22,6 +20,7 @@ interface HighschoolFormInfoProps {
 }
 
 const HighschoolFormInfo = ({ onSubmitComplete, selectedCourse }: HighschoolFormInfoProps) => {
+  const sheetsTabName = 'Information Request';
   const form = useForm();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const hasErrors = form.hasErrors();
@@ -38,10 +37,9 @@ const HighschoolFormInfo = ({ onSubmitComplete, selectedCourse }: HighschoolForm
     setIsSubmitting(true);
 
     try {
-      const { tabName } = formConfig.hsInfoRequest;
       await axios.post('/api/signup/highschool', {
         ...form.values(),
-        tabName,
+        tabName: sheetsTabName,
         date: new Date(),
       });
       form.clear();

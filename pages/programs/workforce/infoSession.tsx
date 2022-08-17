@@ -53,7 +53,7 @@ const InfoSession: NextPage<InfoSessionProps> = ({ commonQuestions, logos }) => 
                 <div className='info-highschool'>
                   <b>HIGH SCHOOL INFORMATION</b>
                   <br />
-                  Info sessions discuss <i style={{ fontWeight: 600 }}>adult workforce programs</i>.
+                  Info sessions discuss <i style={{ fontWeight: 600 }}>Adult Workforce programs</i>.
                   To sign up or get more information about our{' '}
                   <i style={{ fontWeight: 600 }}>High School to High Wage program</i>,{' '}
                   <Link href='/programs/highschool/requestInfo'>

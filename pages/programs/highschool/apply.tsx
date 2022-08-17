@@ -25,16 +25,18 @@ const HighschoolSignup: NextPage = () => {
               flexFlow: 'row wrap',
             }}
           >
-            <div className='program-header primary-secondary'>
+            <div className='program-header'>
               <div className='header-card'>
-                <h1 className='dynamic-xl'>Fall 2022 High School</h1>
-                <h2 className='dynamic-h2'>After-School Application</h2>
+                <h1 className='dynamic-xl secondary'>Fall 2022 High School</h1>
+                <h2 className='dynamic-h2 secondary'>After-School Application</h2>
                 <p className='dynamic-txt'>
                   Are you currently enrolled in a high school in the Greater New Orleans area and
                   interested in our after-school classes? Apply here!
                 </p>
                 <p className='dynamic-txt'>
-                  <b>Fall after-school classes start the week of August 29.</b>
+                  <b className='secondary'>
+                    Fall after-school classes start the week of August 29.
+                  </b>
                 </p>
               </div>
               <Link href='/programs/highschool' passHref>
@@ -81,6 +83,8 @@ export default HighschoolSignup;
 const HighschoolSignupStyles = styled.div`
   .program-header {
     margin: 0 auto;
+    color: ${({ theme }) => theme.white};
+
     .anchor {
       color: ${({ theme }) => theme.secondary[0]};
       :hover,
@@ -91,13 +95,17 @@ const HighschoolSignupStyles = styled.div`
   }
   .header-card {
     padding: 1.5rem;
-    background: ${({ theme }) => theme.alpha.bg};
+    background: ${({ theme }) => (theme.isLightMode ? theme.alpha.fg50 : theme.alpha.bg50)};
     border-radius: 0.5rem;
     backdrop-filter: blur(4px);
     box-shadow: 0.25rem 0.25rem 1rem rgba(0, 0, 0, 0.8);
     margin-bottom: 1rem;
+    max-width: 800px;
     p {
       margin: 1rem 0;
+      :last-of-type {
+        margin-bottom: 0;
+      }
     }
   }
   .hs-application-description {
