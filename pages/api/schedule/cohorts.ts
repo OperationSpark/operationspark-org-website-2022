@@ -4,6 +4,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import programsData from '@this/data/programs.json';
 import type { ISessionRow, ICourseInfo } from '@this/data/types/schedule';
 import { toCentTime } from '@this/src/helpers/timeUtils';
+import { sheets_v4 } from '@googleapis/sheets';
 
 const courseData = programsData.adult.courses.reduce<{ [key: string]: ICourseInfo }>(
   (courses, { title, length, cost, preReqs, days, hours }) => {
@@ -30,12 +31,20 @@ const getCohortSchedule = async (filter?: string, group?: string) => {
   const sheets = getSheets();
   const spreadsheetId = '1qsAEaPn9FvwRxZBwzKkMuvIXvN0-mQ3ClS2zjvYmHwA';
 
-  const range = await sheets.spreadsheets.values.get({
-    spreadsheetId,
-    range: '[OUTPUT] Cohort Dashboard',
-  });
+  const getRange = async (retry?: boolean): Promise<sheets_v4.Schema$ValueRange> => {
+    const { data } = await sheets.spreadsheets.values.get({
+      spreadsheetId,
+      range: '[OUTPUT] Cohort Dashboard',
+    });
 
-  const cohortData = parseCohortData(range.data.values?.slice(2));
+    if (retry) {
+      return await getRange(false);
+    }
+    return data;
+  };
+  const range = await getRange(true);
+
+  const cohortData = parseCohortData(range.values?.slice(2));
 
   if (filter === 'next') {
     return filterNextSessions(cohortData);
