@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import programsData from '@this/data/programs.json';
 import type { ISessionRow, ICourseInfo } from '@this/data/types/schedule';
+import { toCentTime } from '@this/src/helpers/timeUtils';
 
 const courseData = programsData.adult.courses.reduce<{ [key: string]: ICourseInfo }>(
   (courses, { title, length, cost, preReqs, days, hours }) => {
@@ -162,9 +163,11 @@ const parseCohortData = (cohortData?: string[][]): ISessionRow[] => {
     return [];
   }
   const today = new Date();
+
   return cohortData.map(([course, cohort, year, start, end, char, isNext, order, bg, fg]) => {
-    const startDate = new Date(new Date(start).getTime() + 1000 * 60 * 60 * 9);
-    const endDate = new Date(new Date(end).getTime() + 1000 * 60 * 60 * 9);
+    const startDate = toCentTime(`${start} 9:00`);
+    const endDate = toCentTime(`${end} 9:00`);
+
     return {
       course,
       cohort,
