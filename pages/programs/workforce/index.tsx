@@ -159,14 +159,6 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
             <Link href='/programs/workforce/schedule'>
               <a className='anchor right-arr-left'>Schedule</a>
             </Link>
-            {/* <a
-              className='anchor right-arr-left'
-              href='https://docs.google.com/spreadsheets/d/e/2PACX-1vSw9Cv2WDZUVM3MzFztGUFaqeyx_WVNGHg-BZy2Su8uL6E5A8kqoU1gJTRpritJtc2XgzBkyQVTO_6v/pubhtml?gid=208699637&single=true'
-              target='_blank'
-              rel='noreferrer'
-            >
-              Our cohort schedule can be found here
-            </a> */}
 
             <h1 className='dynamic-h1'>Courses</h1>
             {courses.map(({ title, length, cost, description, infoMessage, preReqs }) => (
@@ -291,11 +283,19 @@ export const AdultProgramsStyles = styled.div`
     }
   }
   .employer-love {
-    background: ${({ theme }) => theme.secondary[500]};
+    background: ${({ theme }) => `
+      linear-gradient(180deg,
+        ${theme.secondary[500]} 0%,
+        ${theme.secondary[500]} 70%,
+        ${theme.bg} 70%,
+        ${theme.bg} 100%
+      )
+
+    `};
+
     display: flex;
     position: relative;
-    margin-bottom: 15rem;
-    padding-bottom: 20rem;
+
     .need-developers {
       p {
         color: ${({ theme }) => theme.black};
@@ -311,9 +311,8 @@ export const AdultProgramsStyles = styled.div`
       }
     }
     .company-quotes {
-      position: absolute;
       left: 0;
-      padding: 0 2rem;
+
       display: flex;
       width: 100%;
       justify-content: center;
