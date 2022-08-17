@@ -28,9 +28,13 @@ export const MacContent = ({ body, name, role, imageUrl, logoHref, logoSrc }: Ma
           ref={bodyRef}
           style={{ paddingBottom: 0 }}
         >
-          &ldquo;
-          {showMore ? currentBody : currentBody.slice(0, currentBody.indexOf(' ', showMoreLength))}
-          {!showMore ? '...' : '”'}
+          <p>
+            &ldquo;
+            {showMore
+              ? currentBody
+              : currentBody.slice(0, currentBody.indexOf(' ', showMoreLength))}
+            {!showMore ? '...' : '”'}
+          </p>
           {!showMore && (
             <div className='read-more'>
               <button className='primary-secondary' onClick={() => setShowMore(true)}>
@@ -77,6 +81,7 @@ const MacContentStyles = styled(motion.div)`
   display: flex;
   flex-flow: row wrap;
   grid-gap: 1rem;
+
   img,
   a {
     user-select: none;
@@ -100,6 +105,9 @@ const MacContentStyles = styled(motion.div)`
     text-align: justify;
     position: relative;
     margin-bottom: 1rem;
+    p {
+      font-size: 1.2em;
+    }
     .read-more {
       position: absolute;
       top: 100%;
@@ -118,22 +126,23 @@ const MacContentStyles = styled(motion.div)`
       width: 100%;
       height: 100%;
     }
-
-    .mac-card-image {
-      min-width: 175px;
-      min-height: 175px;
-      width: fit-content;
-      height: fit-content;
-      position: relative;
-      border-radius: 0.25rem;
-      left: 50px;
-      top: -75px;
-      background: ${({ theme }) => theme.alpha.bg};
-      backdrop-filter: blur(8px);
-      box-shadow: 0px 0px 0.5rem rgba(25, 25, 25, 1);
-      border-radius: 0.5rem;
-      overflow: hidden;
-    }
+  }
+  .mac-card-image {
+    min-width: 175px;
+    min-height: 175px;
+    width: 175px;
+    height: 175px;
+    width: fit-content;
+    height: fit-content;
+    position: relative;
+    border-radius: 0.25rem;
+    left: 50px;
+    top: -75px;
+    background: ${({ theme }) => theme.alpha.bg};
+    backdrop-filter: blur(8px);
+    box-shadow: 0px 0px 0.5rem rgba(25, 25, 25, 1);
+    border-radius: 0.5rem;
+    overflow: hidden;
   }
   .mac-card-about {
     display: flex;
@@ -174,7 +183,7 @@ const MacContentStyles = styled(motion.div)`
     }
     .mac-card-about {
       flex-flow: column;
-
+      justify-content: flex-end;
       .mac-card-about-body {
         align-self: flex-start;
       }

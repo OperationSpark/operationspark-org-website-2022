@@ -17,7 +17,7 @@ const AlumSpotlight = () => {
         <div className='zap'></div>
         <div className='alum-content'>
           <div className='left-col'>
-            <MacCard style={{ width: '600px' }}>
+            <MacCard style={{ width: '600px', maxWidth: '100%' }}>
               <MacContent
                 body='Organizations like Operation Spark can literally change the entire landscape and economy of places like New Orleans. I thank Operation Spark every day because they really impacted and changed my life.'
                 imageUrl='/images/people/grads/alon.png'

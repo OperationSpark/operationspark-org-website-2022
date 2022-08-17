@@ -24,7 +24,7 @@ export const MacCard = ({
 }: MacCardProps) => {
   const pauseOrPlay = isPaused ? 'play' : 'pause';
   return (
-    <MacCardStyles style={style}>
+    <MacCardStyles style={{ ...style, maxWidth: '100%' }}>
       <SlashDivider
         style={{
           borderRadius: '0.25rem 0.25rem 0 0',
@@ -88,7 +88,7 @@ const MacBtn = ({
 
 const MacCardStyles = styled.div`
   width: 100%;
-  max-width: 900px;
+  max-width: 100%;
   height: 100%;
   margin: 3rem 0;
   background: ${({ theme }) => theme.bg};
@@ -119,7 +119,7 @@ const MacCardStyles = styled.div`
   }
 
   @media screen and (max-width: 768px) {
-    width: 100%;
+    width: 100% !important;
   }
 `;
 
