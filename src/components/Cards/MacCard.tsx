@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import styled, { useTheme } from 'styled-components';
+import styled, { CSSProperties, useTheme } from 'styled-components';
 import { FaArrowRight as RightIcon, FaArrowLeft as LeftIcon } from 'react-icons/fa';
 import { IoMdPause as PauseIcon, IoMdPlay as PlayIcon } from 'react-icons/io';
 
@@ -10,6 +10,7 @@ interface MacCardProps {
   onPrevClick?: () => void;
   onPauseClick?: () => void;
   isPaused?: boolean;
+  style?: CSSProperties;
   children: ReactNode | ReactNode[] | undefined;
 }
 
@@ -19,10 +20,11 @@ export const MacCard = ({
   onPrevClick,
   onPauseClick,
   isPaused,
+  style,
 }: MacCardProps) => {
   const pauseOrPlay = isPaused ? 'play' : 'pause';
   return (
-    <MacCardStyles>
+    <MacCardStyles style={style}>
       <SlashDivider
         style={{
           borderRadius: '0.25rem 0.25rem 0 0',
@@ -86,7 +88,8 @@ const MacBtn = ({
 
 const MacCardStyles = styled.div`
   width: 100%;
-  max-width: 600px;
+  max-width: 900px;
+  height: 100%;
   margin: 3rem 0;
   background: ${({ theme }) => theme.bg};
   color: ${({ theme }) => theme.fg};
@@ -112,7 +115,7 @@ const MacCardStyles = styled.div`
 
   .card-content {
     font-family: 'Ubuntu', sans-serif;
-    padding: 1rem;
+    padding: 0.5rem;
   }
 
   @media screen and (max-width: 768px) {
