@@ -162,17 +162,21 @@ const parseCohortData = (cohortData?: string[][]): ISessionRow[] => {
     return [];
   }
   const today = new Date();
-  return cohortData.map(([course, cohort, year, start, end, char, isNext, order, bg, fg]) => ({
-    course,
-    cohort,
-    year: Number(year),
-    start: new Date(start),
-    end: new Date(end),
-    char,
-    isNext: isNext === 'TRUE',
-    isPast: today > new Date(start),
-    order: Number(order),
-    bg,
-    fg,
-  }));
+  return cohortData.map(([course, cohort, year, start, end, char, isNext, order, bg, fg]) => {
+    const startDate = new Date(new Date(start).getTime() + 1000 * 60 * 60 * 9);
+    const endDate = new Date(new Date(end).getTime() + 1000 * 60 * 60 * 9);
+    return {
+      course,
+      cohort,
+      year: Number(year),
+      start: startDate,
+      end: endDate,
+      char,
+      isNext: isNext === 'TRUE',
+      isPast: today > startDate,
+      order: Number(order),
+      bg,
+      fg,
+    };
+  });
 };
