@@ -20,17 +20,19 @@ type CohortState = {
 
 const CohortSchedule: NextPage = () => {
   const [groupBy, setGroupBy] = useState<string>('course');
+  const [filter, setFilter] = useState<string>('');
   const [isLoading, setLoading] = useState<boolean>(true);
   const [sessionDates, setSessionDates] = useState<CohortState[]>([]);
 
   useEffect(() => {
-    const q = `?group=${groupBy}`;
     setLoading(true);
-    axios.get<CohortState[]>(`/api/schedule/cohorts${q}`).then(({ data }) => {
-      setSessionDates(data);
-      setLoading(false);
-    });
-  }, [groupBy]);
+    axios
+      .get<CohortState[]>(`/api/schedule/${groupBy}/${filter ? `/${filter}` : ''}`)
+      .then(({ data }) => {
+        setSessionDates(data);
+        setLoading(false);
+      });
+  }, [groupBy, filter]);
 
   return (
     <Main style={{ paddingTop: 0 }}>
@@ -51,6 +53,15 @@ const CohortSchedule: NextPage = () => {
             </option>
           ))}
         </select>
+        {groupBy === 'cohort' && (
+          <select onChange={(e) => setFilter(e.target.value)} value={filter}>
+            {['Filter By', 'X', 'Y', 'Z', 'A', 'B', 'C'].map((id, i) => (
+              <option key={id} value={i === 0 ? '' : id} disabled={i === 0}>
+                {id[0].toUpperCase() + id.slice(1)}
+              </option>
+            ))}
+          </select>
+        )}
 
         {isLoading && <Spinner size={6} />}
         <div className='schedule-container'>
