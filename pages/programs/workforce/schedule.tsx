@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { GetServerSideProps, GetStaticProps, NextPage } from 'next';
+import { NextPage } from 'next';
 import styled from 'styled-components';
 import { AnimatePresence, motion } from 'framer-motion';
 import axios from 'axios';
@@ -11,7 +11,6 @@ import { BgImg } from '@this/src/components/Elements';
 import { ICourseInfo, ISessionRow } from '@this/data/types/schedule';
 import Spinner from '@this/src/components/Elements/Spinner';
 import { useClickAway } from '@this/src/hooks/useClickAway';
-import { getCohortSchedule } from '@this/pages-api/schedule/[...sessions]';
 
 type CohortState = {
   title: string;
