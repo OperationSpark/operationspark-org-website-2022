@@ -16,13 +16,24 @@ const courseData = programsData.adult.courses.reduce<{ [key: string]: ICourseInf
   {},
 );
 
-type ScheduleRequest = { query?: { cohort?: string; group?: string } } & NextApiRequest;
+type ScheduleRequest = {
+  query: {
+    /**
+     * `GET /api/schedule/<cohort|course>`
+     *
+     * `GET /api/schedule/<cohort|course>/<filter>`
+     *
+     * `['cohort', 'X']`
+     */
+    sessions: ['cohort' | 'course', string];
+  };
+} & NextApiRequest;
 
 export default async function getCohortScheduleReqHandler(
   req: ScheduleRequest,
   res: NextApiResponse,
 ) {
-  const { cohort, group } = req.query;
+  const [group, cohort] = req.query.sessions;
   const schedule = await getCohortSchedule(cohort, group);
   res.status(200).send(schedule);
 }

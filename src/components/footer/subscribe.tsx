@@ -53,6 +53,9 @@ const SubscribeStyles = styled.div`
       }
     }
   }
+  @media print {
+    display: none;
+  }
 `;
 
 const Subscribe = () => {

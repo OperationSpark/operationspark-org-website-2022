@@ -507,7 +507,7 @@ const courseTimes = {
   fundamentals: [
     {
       value: 'onsite-tue-4-8',
-      name: 'In-person, Tuesdays, 4:30 - 8:00 PM',
+      name: 'In-person, Wednesdays, 4:30 - 8:00 PM',
     },
     {
       value: 'virtual-tue-thurs-5-7',

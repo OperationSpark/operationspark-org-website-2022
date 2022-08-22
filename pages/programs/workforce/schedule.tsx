@@ -20,17 +20,19 @@ type CohortState = {
 
 const CohortSchedule: NextPage = () => {
   const [groupBy, setGroupBy] = useState<string>('course');
+  const [filter, setFilter] = useState<string>('');
   const [isLoading, setLoading] = useState<boolean>(true);
   const [sessionDates, setSessionDates] = useState<CohortState[]>([]);
 
   useEffect(() => {
-    const q = `?group=${groupBy}`;
     setLoading(true);
-    axios.get<CohortState[]>(`/api/schedule/cohorts${q}`).then(({ data }) => {
-      setSessionDates(data);
-      setLoading(false);
-    });
-  }, [groupBy]);
+    axios
+      .get<CohortState[]>(`/api/schedule/${groupBy}/${filter ? `/${filter}` : ''}`)
+      .then(({ data }) => {
+        setSessionDates(data);
+        setLoading(false);
+      });
+  }, [groupBy, filter]);
 
   return (
     <Main style={{ paddingTop: 0 }}>
@@ -51,6 +53,15 @@ const CohortSchedule: NextPage = () => {
             </option>
           ))}
         </select>
+        {groupBy === 'cohort' && (
+          <select onChange={(e) => setFilter(e.target.value)} value={filter}>
+            {['Filter By', 'X', 'Y', 'Z', 'A', 'B', 'C'].map((id, i) => (
+              <option key={id} value={i === 0 ? '' : id} disabled={i === 0}>
+                {id[0].toUpperCase() + id.slice(1)}
+              </option>
+            ))}
+          </select>
+        )}
 
         {isLoading && <Spinner size={6} />}
         <div className='schedule-container'>
@@ -248,12 +259,50 @@ export const CohortScheduleStyles = styled.div`
     font-weight: bold;
   }
   .schedule-block-inner {
-    background-color: ${({ theme }) => theme.bg};
+    background: ${({ theme }) => theme.bg};
     position: relative;
     padding: 0.2rem 0.4rem;
     border-radius: 0.25rem;
   }
   .schedule-header {
+  }
+  @media print {
+    .schedule-container {
+      display: flex;
+      flex-flow: column;
+    }
+    .schedule-cohort-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    grid-column: span 4;
+    .schedule-block-next,
+    .schedule-block-course {
+      position: static;
+      padding: 0;
+      font-weight: 900;
+      background: transparent !important;
+      -webkit-print-color-adjust: economy;
+    }
+    .schedule-block-header {
+      grid-column: span 4;
+      page-break-before: auto;
+      background: inherit;
+    }
+    .schedule-block {
+      width: fit-content;
+      -webkit-print-color-adjust: exact;
+      background: rgba(255, 255, 255, 0);
+    }
+    .schedule-block-inner {
+      background: rgba(255, 255, 255, 0);
+    }
+    .schedule-block.next-session {
+      background: rgba(50, 175, 100, 1);
+      .schedule-block-inner {
+        background: rgba(255, 255, 255, 1);
+      }
+    }
   }
 `;
 
