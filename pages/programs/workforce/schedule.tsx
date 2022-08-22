@@ -259,12 +259,50 @@ export const CohortScheduleStyles = styled.div`
     font-weight: bold;
   }
   .schedule-block-inner {
-    background-color: ${({ theme }) => theme.bg};
+    background: ${({ theme }) => theme.bg};
     position: relative;
     padding: 0.2rem 0.4rem;
     border-radius: 0.25rem;
   }
   .schedule-header {
+  }
+  @media print {
+    .schedule-container {
+      display: flex;
+      flex-flow: column;
+    }
+    .schedule-cohort-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    grid-column: span 4;
+    .schedule-block-next,
+    .schedule-block-course {
+      position: static;
+      padding: 0;
+      font-weight: 900;
+      background: transparent !important;
+      -webkit-print-color-adjust: economy;
+    }
+    .schedule-block-header {
+      grid-column: span 4;
+      page-break-before: auto;
+      background: inherit;
+    }
+    .schedule-block {
+      width: fit-content;
+      -webkit-print-color-adjust: exact;
+      background: rgba(255, 255, 255, 0);
+    }
+    .schedule-block-inner {
+      background: rgba(255, 255, 255, 0);
+    }
+    .schedule-block.next-session {
+      background: rgba(50, 175, 100, 1);
+      .schedule-block-inner {
+        background: rgba(255, 255, 255, 1);
+      }
+    }
   }
 `;
 
