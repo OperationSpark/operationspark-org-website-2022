@@ -34,11 +34,11 @@ export default async function getCohortScheduleReqHandler(
   res: NextApiResponse,
 ) {
   const [group, cohort] = req.query.sessions;
-  const schedule = await getCohortSchedule(cohort, group);
+  const schedule = await getCohortSchedule(group, cohort);
   res.status(200).send(schedule);
 }
 
-const getCohortSchedule = async (filter?: string, group?: string) => {
+export const getCohortSchedule = async (group: string, filter?: string) => {
   const sheets = getSheets();
   const spreadsheetId = '1qsAEaPn9FvwRxZBwzKkMuvIXvN0-mQ3ClS2zjvYmHwA';
 

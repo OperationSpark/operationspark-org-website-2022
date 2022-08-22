@@ -112,7 +112,7 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
         </Section>
 
         <Section className='employer-love'>
-          <Content style={{ paddingTop: '2rem', paddingBottom: '2rem' }}>
+          <Content style={{ paddingTop: '2rem', paddingBottom: '0' }}>
             <h1 className='dynamic-h1 primary'>Employers love our grads!</h1>
             <div className='need-developers'>
               <p className='dynamic-txt'>
@@ -155,12 +155,33 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
           </Content>
         </Section>
         <Section className='adult-courses'>
-          <Content style={{ paddingTop: '2rem', paddingBottom: '2rem' }}>
-            <Link href='/programs/workforce/schedule'>
-              <a className='anchor right-arr-left'>Schedule</a>
-            </Link>
-
+          <Content style={{ paddingTop: '0', paddingBottom: '2rem' }}>
             <h1 className='dynamic-h1'>Courses</h1>
+            <div className='course-resources'>
+              <h3 className='dynamic-h3 primary-secondary'>Resource Links</h3>
+              <div className='course-links'>
+                <Link href='/programs/workforce/schedule'>
+                  <a className='anchor right-arr-left'>Schedule</a>
+                </Link>
+
+                <a
+                  className='anchor right-arr-left'
+                  href='https://drive.google.com/uc?export=download&id=1EGrNIXw4DiaRPM0OM6BVVROLVQFZpoLf'
+                  target='_blank'
+                  rel='noreferrer'
+                >
+                  Student Handbook
+                </a>
+                <a
+                  className='anchor right-arr-left'
+                  href='https://drive.google.com/uc?export=download&id=11YBNYIzM-K7ciown_BMMu0cRVzh2hhW0'
+                  target='_blank'
+                  rel='noreferrer'
+                >
+                  Course Catalog
+                </a>
+              </div>
+            </div>
             {courses.map(({ title, length, cost, description, infoMessage, preReqs }) => (
               <PlainCard
                 className='program-card _progress'
@@ -292,7 +313,7 @@ export const AdultProgramsStyles = styled.div`
       )
 
     `};
-
+    padding-bottom: 0;
     display: flex;
     position: relative;
 
@@ -321,9 +342,18 @@ export const AdultProgramsStyles = styled.div`
 
   .adult-courses {
     h1 {
-      padding-bottom: 2rem;
       color: ${({ theme }, { isLightMode, primary, secondary } = theme) =>
         isLightMode ? primary[700] : secondary[500]};
+    }
+    .course-resources {
+      padding: 1rem 0;
+    }
+    .course-links {
+      padding-left: 0.5rem;
+      padding-top: 0.5rem;
+      display: flex;
+      flex-flow: column;
+      grid-gap: 0.5rem;
     }
     .program-info-row {
       padding-bottom: 0.5rem;
@@ -414,9 +444,10 @@ export const AdultProgramsStyles = styled.div`
         display: flex;
         flex-flow: row wrap;
         justify-content: space-between;
-        grid-gap: 1rem;
-        p {
-          min-width: 150px;
+        grid-gap: 0.5rem;
+        .program-info {
+          width: 100%;
+          padding: 0;
         }
       }
       .program-card-body {

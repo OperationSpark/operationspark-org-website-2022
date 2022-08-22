@@ -15,12 +15,13 @@ import { useClickAway } from '@this/src/hooks/useClickAway';
 type CohortState = {
   title: string;
   course?: ICourseInfo;
-  courses: ISessionRow[];
+  courses: (ISessionRow | null)[];
 };
 
 const CohortSchedule: NextPage = () => {
   const [groupBy, setGroupBy] = useState<string>('course');
   const [filter, setFilter] = useState<string>('');
+  const [filterOptions, setFilterOptions] = useState<string[]>([]);
   const [isLoading, setLoading] = useState<boolean>(true);
   const [sessionDates, setSessionDates] = useState<CohortState[]>([]);
 
@@ -33,6 +34,13 @@ const CohortSchedule: NextPage = () => {
         setLoading(false);
       });
   }, [groupBy, filter]);
+
+  // Set cohort letters once with all existing cohorts
+  useEffect(() => {
+    axios.get<CohortState[]>('/api/schedule/cohort').then(({ data }) => {
+      setFilterOptions(['Filter By', ...data.map(({ title }) => title)]);
+    });
+  }, []);
 
   return (
     <Main style={{ paddingTop: 0 }}>
@@ -55,7 +63,7 @@ const CohortSchedule: NextPage = () => {
         </select>
         {groupBy === 'cohort' && (
           <select onChange={(e) => setFilter(e.target.value)} value={filter}>
-            {['Filter By', 'X', 'Y', 'Z', 'A', 'B', 'C'].map((id, i) => (
+            {filterOptions.map((id, i) => (
               <option key={id} value={i === 0 ? '' : id} disabled={i === 0}>
                 {id[0].toUpperCase() + id.slice(1)}
               </option>
