@@ -1,8 +1,8 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 import { GetStaticProps, NextPage } from 'next';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-
 import { IInfoSession } from '@this/data/types/infoSession';
 import { ILogo } from '@this/data/types/logos';
 
@@ -20,6 +20,7 @@ interface InfoSessionProps extends IInfoSession {
 
 const InfoSession: NextPage<InfoSessionProps> = ({ commonQuestions, logos }) => {
   const sessionDates = useInfoSession();
+
   return (
     <Main>
       <InfoSessionStyles>
@@ -38,7 +39,13 @@ const InfoSession: NextPage<InfoSessionProps> = ({ commonQuestions, logos }) => 
                   <li>what it takes to be successful in our program</li>
                 </ul>
               </div>
-              <div className='video-container'>
+
+              <motion.div
+                className='video-container'
+                initial={{ opacity: 0, x: 0, y: -400, rotate: 90 }}
+                animate={{ opacity: 1, x: 0, y: 0, rotate: 0 }}
+                transition={{ type: 'spring', duration: 0.8, stiffness: 100 }}
+              >
                 <video width='100%' height='auto' controls>
                   <source
                     src='https://player.vimeo.com/progressive_redirect/playback/721476393/rendition/1080p/file.mp4?loc=external&signature=a21ad59e5f01881f352c50593562321d778b43fbda9f6577e4270e699706f46b'
@@ -46,7 +53,7 @@ const InfoSession: NextPage<InfoSessionProps> = ({ commonQuestions, logos }) => 
                   />
                   Your browser does not support the video tag.
                 </video>
-              </div>
+              </motion.div>
             </div>
             <div className='info-session-right'>
               <div className='info-session-form'>
@@ -68,6 +75,7 @@ const InfoSession: NextPage<InfoSessionProps> = ({ commonQuestions, logos }) => 
               </div>
             </div>
           </Content>
+
           <Content className='video-container mobile-video-container'>
             <video width='100%' height='auto' controls>
               <source
@@ -213,10 +221,12 @@ const InfoSessionStyles = styled.div`
   }
   .video-container {
     display: flex;
+    width: 100%;
     align-items: center;
     margin: 0;
     border-radius: 0.5rem;
     overflow: hidden;
+    aspect-ratio: 16 / 9;
     filter: drop-shadow(
       0 0 1rem ${({ theme }) => (theme.isLightMode ? 'rgba(0, 0, 0, 0.5)' : 'rgba(0, 0, 0, 1)')}
     );
