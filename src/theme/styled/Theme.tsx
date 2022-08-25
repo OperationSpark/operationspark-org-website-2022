@@ -1,7 +1,79 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
-import { useColorMode } from '@chakra-ui/react';
 import GlobalStyles from './GlobalStyles';
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function Theme({ children, theme }: { children: ReactNode; theme: any }) {
+  const { themeMode, isSystemMode, setThemeMode } = useThemeMode();
+  const isLightMode = themeMode === 'light';
+  const [navHeight, setNavHeight] = useState(0);
+
+  return (
+    <ThemeProvider
+      theme={{
+        colorMode: themeMode,
+        setColorMode: setThemeMode,
+        isLightMode,
+        isSystemMode,
+        navHeight,
+        setNavHeight,
+        ...theme,
+        ...colors[themeMode],
+      }}
+    >
+      <GlobalStyles />
+      {children}
+    </ThemeProvider>
+  );
+}
+
+export const useThemeMode = () => {
+  const [themeMode, setTheme] = useState<'dark' | 'light'>('dark');
+  const [isSystemMode, setSystemMode] = useState<boolean>(false);
+
+  const getSystemThemeDark = (): {
+    systemThemeDark: MediaQueryList;
+    systemTheme: 'light' | 'dark';
+  } => {
+    const systemThemeDark = window.matchMedia('(prefers-color-scheme: dark)');
+    return {
+      systemThemeDark,
+      systemTheme: systemThemeDark.matches ? 'dark' : 'light',
+    };
+  };
+
+  const setThemeMode = (newTheme: 'light' | 'dark' | 'system') => {
+    if (newTheme === 'system') {
+      setTheme(getSystemThemeDark().systemTheme);
+      setSystemMode(true);
+    } else {
+      setTheme(newTheme);
+      setSystemMode(false);
+    }
+    window.localStorage.setItem('theme', newTheme);
+  };
+
+  useEffect(() => {
+    const { systemThemeDark, systemTheme } = getSystemThemeDark();
+    const savedTheme = window.localStorage.getItem('theme');
+
+    systemThemeDark.onchange = (e) => setTheme(e.matches ? 'dark' : 'light');
+
+    const currentTheme = savedTheme ? savedTheme : systemTheme ? systemTheme : 'dark';
+
+    if (currentTheme === 'dark' || currentTheme === 'light' || currentTheme === 'system') {
+      window.localStorage.setItem('theme', currentTheme);
+      if (currentTheme === 'system') {
+        setTheme(systemTheme);
+        setSystemMode(true);
+      } else {
+        setTheme(currentTheme);
+      }
+    }
+  }, []);
+
+  return { themeMode, isSystemMode, setThemeMode };
+};
 
 const colors = {
   dark: {
@@ -28,28 +100,3 @@ const colors = {
     },
   },
 };
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const Theme = ({ children, theme }: { children: ReactNode; theme: any }) => {
-  const { colorMode } = useColorMode();
-  const isLightMode = colorMode === 'light';
-  const [navHeight, setNavHeight] = useState(0);
-
-  return (
-    <ThemeProvider
-      theme={{
-        colorMode,
-        isLightMode,
-        navHeight,
-        setNavHeight,
-        ...theme,
-        ...colors[colorMode],
-      }}
-    >
-      <GlobalStyles />
-      {children}
-    </ThemeProvider>
-  );
-};
-
-export default Theme;

@@ -1,24 +1,174 @@
-import { useColorMode } from '@chakra-ui/react';
+import styled, { useTheme } from 'styled-components';
+import Image from 'next/image';
 
-import Toggle from '@this/components/Elements/Toggle';
+import { useClickAway } from '@this/src/hooks/useClickAway';
+
+const ThemeButtonStyles = styled.menu`
+  all: unset;
+  position: relative;
+  #theme-nav-button {
+    height: 3rem;
+    color: ${({ theme }) => theme.primary[0]};
+    position: relative;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    .theme-image {
+      position: absolute;
+      width: 100%;
+      z-index: -1;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      .icon {
+        display: inline-flex;
+        margin-right: 0.25rem;
+        vertical-align: middle;
+      }
+    }
+    .theme-text {
+      font-size: 1rem;
+
+      width: 100%;
+      padding: 0.1rem 0.25rem;
+      line-height: 1em;
+      display: flex;
+
+      background: ${({ theme }) => `
+      linear-gradient(0deg,
+        transparent -10%,
+        ${theme.alpha.bg50} 20%,
+        ${theme.alpha.bg} 35%,
+        ${theme.bg} 50%,
+        ${theme.alpha.bg} 65%,
+        ${theme.alpha.bg50} 80%,
+        transparent 110%
+      )
+      `};
+      border-radius: 0.5rem;
+    }
+  }
+`;
+const ThemeDropdown = styled.div`
+  all: unset;
+  position: absolute;
+  z-index: 1000;
+  right: 0;
+  top: 100%;
+  width: 125px;
+  background: ${({ theme }) => theme.bg};
+  border-radius: 0.25rem 0.75rem 0.25rem 0.75rem;
+
+  button {
+    color: ${({ theme }) => theme.fg};
+    background: ${({ theme }) => theme.bg};
+    border-radius: 0.25rem;
+    width: 100%;
+    padding: 0.5rem;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    grid-gap: 0.5rem;
+
+    .theme-image {
+      display: flex;
+    }
+    :first-child {
+      border-top-right-radius: 0.75rem;
+    }
+    :last-child {
+      border-bottom-left-radius: 0.75rem;
+    }
+    :hover {
+      background: ${({ theme }) => theme.bgHover};
+    }
+  }
+  button.selected {
+    background: ${({ theme }) => theme.bgHover};
+    box-shadow: 0 0 3px 1px ${({ theme }) => theme.magenta[500]} inset;
+  }
+`;
+
+const ThemeDropdownButton = ({
+  onClick,
+  imageSrc,
+  title,
+  children,
+  selected,
+}: {
+  onClick: () => void;
+  imageSrc: string;
+  title: string;
+  children: string;
+  selected: boolean;
+}) => {
+  return (
+    <button
+      onClick={onClick}
+      title={title}
+      className={`theme-dropdown-button${selected ? ' selected' : ''}`}
+    >
+      <span className='theme-image'>
+        <Image src={imageSrc} width={24} height={24} alt={title} />
+      </span>
+      <span className='theme-name'>{children}</span>
+    </button>
+  );
+};
+
+type ThemeModes = 'light' | 'dark' | 'system';
 
 const ThemeButton = () => {
-  const { colorMode, toggleColorMode } = useColorMode();
+  const { colorMode, isSystemMode, setColorMode } = useTheme();
+  const [menuRef, isOpen, setOpen] = useClickAway();
 
-  const isDarkMode = colorMode === 'dark';
-  const sliderImg = isDarkMode
-    ? '/images/icons/moon.svg'
-    : '/images/icons/sun.svg';
+  const themeModes: ThemeModes[] = ['light', 'dark', 'system'];
 
-  const titleText = `Toggle ${isDarkMode ? 'light' : 'dark'} theme`;
+  const getThemeImgSrc = (mode: ThemeModes) => {
+    const imgName = mode === 'system' ? 'system' : mode === 'dark' ? 'moon' : 'sun';
+    return `/images/icons/${imgName}.svg`;
+  };
+
+  const checkIsThemeMode = (mode: ThemeModes) => {
+    if (mode === 'system' && isSystemMode) {
+      return true;
+    }
+    return mode === colorMode && !isSystemMode;
+  };
+
   return (
-    <Toggle
-      onClick={() => toggleColorMode()}
-      value={colorMode === 'dark'}
-      sliderImg={sliderImg}
-      label={titleText}
-      title={titleText}
-    />
+    <ThemeButtonStyles ref={menuRef} onClick={() => setOpen(!isOpen)}>
+      <button id='theme-nav-button'>
+        <span className='theme-image'>
+          <span className='icon'>
+            <Image
+              src={getThemeImgSrc(isSystemMode ? 'system' : colorMode)}
+              width={50}
+              height={50}
+              alt={colorMode}
+            />
+          </span>
+        </span>
+        <span className='theme-text primary-secondary'>Theme</span>
+      </button>
+      {isOpen && (
+        <ThemeDropdown>
+          {themeModes.map((mode) => (
+            <ThemeDropdownButton
+              key={mode}
+              onClick={() => setColorMode(mode)}
+              imageSrc={getThemeImgSrc(mode)}
+              title={`${mode} mode`}
+              selected={checkIsThemeMode(mode)}
+            >
+              {mode[0].toUpperCase() + mode.slice(1)}
+            </ThemeDropdownButton>
+          ))}
+        </ThemeDropdown>
+      )}
+    </ThemeButtonStyles>
   );
 };
 
