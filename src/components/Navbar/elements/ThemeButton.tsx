@@ -2,6 +2,7 @@ import styled, { useTheme } from 'styled-components';
 import Image from 'next/image';
 
 import { useClickAway } from '@this/src/hooks/useClickAway';
+import { AnimatePresence, motion } from 'framer-motion';
 
 type ThemeModes = 'light' | 'dark' | 'system';
 
@@ -36,23 +37,26 @@ const ThemeButton = () => {
             />
           </span>
         </span>
-        <span className='theme-text primary-secondary'>Theme</span>
+        <span className='theme-text'>Theme</span>
       </button>
-      {isOpen && (
-        <ThemeDropdown>
-          {themeModes.map((mode) => (
-            <ThemeDropdownButton
-              key={mode}
-              onClick={() => setColorMode(mode)}
-              imageSrc={getThemeImgSrc(mode)}
-              title={`${mode} theme`}
-              selected={checkIsThemeMode(mode)}
-            >
-              {mode === 'system' ? 'OS Default' : mode[0].toUpperCase() + mode.slice(1)}
-            </ThemeDropdownButton>
-          ))}
-        </ThemeDropdown>
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <ThemeDropdown>
+            {themeModes.map((mode, i) => (
+              <ThemeDropdownButton
+                key={mode}
+                onClick={() => setColorMode(mode)}
+                imageSrc={getThemeImgSrc(mode)}
+                title={`${mode} theme`}
+                selected={checkIsThemeMode(mode)}
+                delay={i * 0.075}
+              >
+                {mode === 'system' ? 'OS Default' : mode[0].toUpperCase() + mode.slice(1)}
+              </ThemeDropdownButton>
+            ))}
+          </ThemeDropdown>
+        )}
+      </AnimatePresence>
     </ThemeButtonStyles>
   );
 };
@@ -65,24 +69,32 @@ const ThemeDropdownButton = ({
   title,
   children,
   selected,
+  delay,
 }: {
   onClick: () => void;
   imageSrc: string;
   title: string;
   children: string;
   selected: boolean;
+  delay?: number;
 }) => {
   return (
-    <button
+    <motion.button
       onClick={onClick}
       title={title}
       className={`theme-dropdown-button${selected ? ' selected' : ''}`}
+      initial={{ x: '100%', opacity: 0 }}
+      animate={{ x: 0, opacity: 1, transition: { delay: delay || 0 } }}
+      exit={{ x: '100%', opacity: 0, transition: { delay: delay || 0 } }}
+      transition={{ type: 'tween', duration: 0.2 }}
+      whileHover={{ x: '-4%', transition: { delay: 0, duration: 0.1 } }}
+      whileTap={{ x: '2%', transition: { delay: 0 } }}
     >
       <span className='theme-image'>
         <Image src={imageSrc} width={24} height={24} alt={title} />
       </span>
       <span className='theme-name'>{children}</span>
-    </button>
+    </motion.button>
   );
 };
 
@@ -134,20 +146,21 @@ const ThemeButtonStyles = styled.menu`
       display: flex;
       border-radius: 0.5rem;
       background: ${({ theme }) => theme.alpha.bg50};
+      color: ${({ theme }) => (theme.isLightMode ? theme.primary[700] : theme.secondary[400])};
     }
   }
 `;
-const ThemeDropdown = styled.div`
+const ThemeDropdown = styled(motion.div)`
   all: unset;
   position: absolute;
   z-index: 1000;
   right: 0;
   top: calc(100% + 0.25rem);
   width: 125px;
-  /* background: ${({ theme }) => theme.alpha.fg}; */
+
   display: flex;
   flex-flow: column;
-  grid-gap: 0.1rem;
+  grid-gap: 0.2rem;
   border-radius: 0.75rem 0.25rem 0.75rem 0.25rem;
   filter: drop-shadow(0 2px 2px ${({ theme }) => theme.alpha.fg50});
   button {
@@ -163,6 +176,9 @@ const ThemeDropdown = styled.div`
 
     .theme-image {
       display: flex;
+      filter: drop-shadow(
+        0 0 2px ${({ theme }) => (theme.isLightMode ? theme.alpha.fg : theme.black)}
+      );
     }
     :first-child {
       border-top-left-radius: 0.75rem;
@@ -179,8 +195,9 @@ const ThemeDropdown = styled.div`
     }
   }
   button.selected {
-    background: ${({ theme }) => theme.bgHover};
-    box-shadow: 0 0 3px 1px ${({ theme }) => theme.magenta[500]} inset;
+    background: ${({ theme }) => theme.bg};
+    box-shadow: 0 0 3px 2px
+      ${({ theme }) => (theme.isLightMode ? theme.magenta[300] : theme.magenta[300])} inset;
     outline: none;
     :focus-visible {
       box-shadow: 0 0 4px 2px ${({ theme }) => theme.magenta[500]} inset;
