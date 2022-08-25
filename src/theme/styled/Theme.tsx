@@ -29,22 +29,13 @@ export default function Theme({ children, theme }: { children: ReactNode; theme:
 
 export const useThemeMode = () => {
   const [themeMode, setTheme] = useState<'dark' | 'light'>('dark');
+  const [systemThemeMode, setSystemThemeMode] = useState<'dark' | 'light'>('dark');
   const [isSystemMode, setSystemMode] = useState<boolean>(false);
 
-  const getSystemThemeDark = (): {
-    systemThemeDark: MediaQueryList;
-    systemTheme: 'light' | 'dark';
-  } => {
-    const systemThemeDark = window.matchMedia('(prefers-color-scheme: dark)');
-    return {
-      systemThemeDark,
-      systemTheme: systemThemeDark.matches ? 'dark' : 'light',
-    };
-  };
-
+  // Change current theme
   const setThemeMode = (newTheme: 'light' | 'dark' | 'system') => {
     if (newTheme === 'system') {
-      setTheme(getSystemThemeDark().systemTheme);
+      setTheme(systemThemeMode);
       setSystemMode(true);
     } else {
       setTheme(newTheme);
@@ -53,23 +44,33 @@ export const useThemeMode = () => {
     window.localStorage.setItem('theme', newTheme);
   };
 
+  // Handle initial theme
   useEffect(() => {
-    const { systemThemeDark, systemTheme } = getSystemThemeDark();
     const savedTheme = window.localStorage.getItem('theme');
-
-    systemThemeDark.onchange = (e) => setTheme(e.matches ? 'dark' : 'light');
-
-    const currentTheme = savedTheme ? savedTheme : systemTheme ? systemTheme : 'dark';
+    const currentTheme = savedTheme ? savedTheme : systemThemeMode ? systemThemeMode : 'dark';
 
     if (currentTheme === 'dark' || currentTheme === 'light' || currentTheme === 'system') {
       window.localStorage.setItem('theme', currentTheme);
       if (currentTheme === 'system') {
-        setTheme(systemTheme);
+        setTheme(systemThemeMode);
         setSystemMode(true);
       } else {
         setTheme(currentTheme);
+        setSystemMode(false);
       }
     }
+  }, [systemThemeMode]);
+
+  // Handle system theme change
+  useEffect(() => {
+    const systemThemeDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleSystemThemeChange = (e: MediaQueryListEvent) => {
+      setSystemThemeMode(e.matches ? 'dark' : 'light');
+    };
+    systemThemeDark.addEventListener('change', handleSystemThemeChange);
+    return () => {
+      systemThemeDark.removeEventListener('change', handleSystemThemeChange);
+    };
   }, []);
 
   return { themeMode, isSystemMode, setThemeMode };
