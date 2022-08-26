@@ -1,13 +1,7 @@
 import { HStack, VStack } from '@chakra-ui/react';
 import styled from 'styled-components';
 import { useTheme } from 'styled-components';
-import {
-  FaFacebookSquare,
-  FaTwitter,
-  FaInstagram,
-  FaGithub,
-  FaLinkedin,
-} from 'react-icons/fa';
+import { FaFacebookSquare, FaTwitter, FaInstagram, FaGithub, FaLinkedin } from 'react-icons/fa';
 
 const networkingIcons = [
   {
@@ -35,9 +29,7 @@ const networkingIcons = [
 
 const SocialNetworks = () => {
   const theme = useTheme();
-  const networkingIconColor = theme.isLightMode
-    ? theme.primary[700]
-    : theme.primary[300];
+  const networkingIconColor = theme.isLightMode ? theme.primary[700] : theme.primary[300];
 
   return (
     <SocialStyles justify='space-around' p='1rem'>

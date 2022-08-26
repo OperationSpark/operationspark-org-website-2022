@@ -109,11 +109,7 @@ const AlertBar = ({ info }: { info: IAlert }) => {
         >
           <div className='alert-message'>
             <Zap size={0.9} />
-            {info.url ? (
-              <Link href={info.url}>{info.message}</Link>
-            ) : (
-              info.message
-            )}
+            {info.url ? <Link href={info.url}>{info.message}</Link> : info.message}
           </div>
           <motion.button
             className='alert-close-btn'

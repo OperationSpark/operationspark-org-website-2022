@@ -26,8 +26,7 @@ export default IgniteCareer;
 const IgniteCareerStyles = styled.div`
   padding: 2rem 0;
   h1 {
-    color: ${({ theme }) =>
-      theme.isLightMode ? theme.primary[0] : theme.secondary[0]};
+    color: ${({ theme }) => (theme.isLightMode ? theme.primary[0] : theme.secondary[0])};
     margin-bottom: 2rem;
   }
   h2 {

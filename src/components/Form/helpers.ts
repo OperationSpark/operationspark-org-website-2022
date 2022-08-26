@@ -1,6 +1,5 @@
 /** Extracts only numbers from string */
-export const getNumsOnly = (value: string) =>
-  value.match(/\d+/g)?.join('') || '';
+export const getNumsOnly = (value: string) => value.match(/\d+/g)?.join('') || '';
 
 /**
  * 1. Extracts only numbers from string

@@ -39,10 +39,7 @@ export interface ISessionSignup {
   token: string;
 }
 
-export default async function handleInfoSessionForm(
-  req: ISessionUser,
-  res: NextApiResponse,
-) {
+export default async function handleInfoSessionForm(req: ISessionUser, res: NextApiResponse) {
   try {
     const payload: ISessionSignup = formatPayload(req.body);
     await runCloudFunction({

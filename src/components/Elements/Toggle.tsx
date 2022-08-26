@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
-const ToggleStyles = styled.label.attrs(
-  ({ sliderImg }: { sliderImg?: string }) => ({ sliderImg }),
-)`
+const ToggleStyles = styled.label.attrs(({ sliderImg }: { sliderImg?: string }) => ({ sliderImg }))`
   position: relative;
 
   width: 56px;
@@ -67,11 +65,7 @@ const Toggle = ({
   label?: string;
 }) => {
   return (
-    <ToggleStyles
-      sliderImg={sliderImg || 'none'}
-      aria-label={label ?? ''}
-      title={title || ''}
-    >
+    <ToggleStyles sliderImg={sliderImg || 'none'} aria-label={label ?? ''} title={title || ''}>
       <input
         type='checkbox'
         checked={value}

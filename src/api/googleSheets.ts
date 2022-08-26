@@ -1,8 +1,4 @@
-import {
-  sheets as googleSheets,
-  auth as Auth,
-  sheets_v4,
-} from '@googleapis/sheets';
+import { sheets as googleSheets, auth as Auth, sheets_v4 } from '@googleapis/sheets';
 
 const credentials = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT || '{}');
 
@@ -48,12 +44,7 @@ type TabArgs = {
   header: string[];
 };
 
-export const createSpreadsheetTab = async ({
-  sheets,
-  spreadsheetId,
-  tabName,
-  header,
-}: TabArgs) => {
+export const createSpreadsheetTab = async ({ sheets, spreadsheetId, tabName, header }: TabArgs) => {
   try {
     await sheets.spreadsheets.batchUpdate({
       spreadsheetId,
@@ -75,9 +66,7 @@ export const createSpreadsheetTab = async ({
 
     await addRow({ sheets, spreadsheetId, tabName, values });
   } catch (err) {
-    console.error(
-      `Sheet "${tabName}" already exists.\n${__dirname} →  googleSheets.ts`,
-    );
+    console.error(`Sheet "${tabName}" already exists.\n${__dirname} →  googleSheets.ts`);
   }
 };
 
@@ -91,12 +80,7 @@ type AddRowArgs = {
   /** Array of strings represents a row appended to spreadsheet */
   values: string[];
 };
-export const addRow = async ({
-  sheets,
-  spreadsheetId,
-  tabName,
-  values,
-}: AddRowArgs) => {
+export const addRow = async ({ sheets, spreadsheetId, tabName, values }: AddRowArgs) => {
   try {
     const result = await sheets.spreadsheets.values.append({
       spreadsheetId,

@@ -8,12 +8,7 @@ const The404: NextPage = () => {
   return (
     <Main>
       <The404Styles>
-        <Image
-          src='/images/hallebot3d.png'
-          width={600}
-          height={600}
-          alt='Hallebot'
-        />
+        <Image src='/images/hallebot3d.png' width={600} height={600} alt='Hallebot' />
         <h1>404</h1>
         <h2>Not Found</h2>
       </The404Styles>

@@ -8,7 +8,6 @@ import Main from '@this/components/layout/Main';
 import Content from '@this/components/layout/Content';
 import { IHighschoolPrograms } from '@this/data/types/programs';
 
-
 const HighschoolInfoForm = dynamic(() => import('@this/src/Forms/Form.HighschoolInfo'));
 
 const HighschoolSignup: NextPage<IHighschoolPrograms> = () => {
