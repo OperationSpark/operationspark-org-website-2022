@@ -10,34 +10,32 @@ const TopCard = () => {
   /** Remove once page is created */
   const FEAT_COLLEGE_CREDIT = false;
   return (
-    <div style={{ marginBottom: '4rem' }}>
-      <BgImg src='/images/display/classroom-2.webp' height='32rem'>
-        <ImgCardStyles>
-          <Content className='top-card-content'>
-            <div className='row-between'>
-              <div className='secondary'>
-                <h2 className='dynamic-h2'>WE ARE CHANGING LIVES WITH</h2>
-                <h1 className='dynamic-xl'>
-                  COMPUTER <br /> PROGRAMMING <br /> SKILLS
-                </h1>
-              </div>
-              {FEAT_COLLEGE_CREDIT && (
-                <div className='college-credit'>
-                  <div className='college-credit-box  blurry-box'>
-                    <p className='dynamic-txt college-credit-desc'>
-                      Our certifications are eligible for college credit!
-                    </p>
-                    <Link href='/collegeCredit' passHref>
-                      <Button color='yellow'>Learn more</Button>
-                    </Link>
-                  </div>
-                </div>
-              )}
+    <BgImg src='/images/display/classroom-2.webp'>
+      <ImgCardStyles>
+        <Content className='top-card-content'>
+          <div className='row-between'>
+            <div className='secondary'>
+              <h2 className='dynamic-h2'>WE ARE CHANGING LIVES WITH</h2>
+              <h1 className='dynamic-xl'>
+                COMPUTER <br /> PROGRAMMING <br /> SKILLS
+              </h1>
             </div>
-          </Content>
-        </ImgCardStyles>
-      </BgImg>
-    </div>
+            {FEAT_COLLEGE_CREDIT && (
+              <div className='college-credit'>
+                <div className='college-credit-box  blurry-box'>
+                  <p className='dynamic-txt college-credit-desc'>
+                    Our certifications are eligible for college credit!
+                  </p>
+                  <Link href='/collegeCredit' passHref>
+                    <Button color='yellow'>Learn more</Button>
+                  </Link>
+                </div>
+              </div>
+            )}
+          </div>
+        </Content>
+      </ImgCardStyles>
+    </BgImg>
   );
 };
 
