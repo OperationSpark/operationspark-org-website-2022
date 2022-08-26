@@ -11,7 +11,10 @@ const COEBox = () => {
   const [coeInfoRef, showCoeInfo, setShowCoeInfo] = useClickAway();
 
   return (
-    <COEBoxStyles>
+    <COEBoxStyles
+      animate={{ paddingBottom: showCoeInfo ? '18rem' : '1rem' }}
+      transition={{ type: 'tween', duration: 0.1 }}
+    >
       <Content className='coe-box-content'>
         <div className='overflow-box'>
           <div className='overflow-content'>
@@ -95,8 +98,7 @@ const COEBox = () => {
 
 export default COEBox;
 
-export const COEBoxStyles = styled.div`
-
+export const COEBoxStyles = styled(motion.div)`
   .coe-box-content {
     font-family: 'Ubuntu', sans-serif;
     position: relative;
@@ -105,6 +107,8 @@ export const COEBoxStyles = styled.div`
     display: flex;
     flex-flow: column;
     justify-content: flex-end;
+    padding: 1rem;
+    padding-bottom: 4rem;
 
     h1 {
       line-height: 1.25em;
@@ -167,20 +171,6 @@ export const COEBoxStyles = styled.div`
           background: ${({ theme }) => theme.alpha.bg};
           padding: 0.5rem;
           padding-right: 1.5rem;
-        }
-      }
-    }
-  }
-  margin-bottom: 3rem;
-  @media screen and (max-width: 768px) {
-    .top-card-content {
-      .college-credit {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        .college-credit-box {
-          background: rgba(0, 0, 0, 0);
-          width: 100%;
         }
       }
     }

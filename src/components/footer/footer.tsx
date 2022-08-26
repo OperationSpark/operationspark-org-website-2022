@@ -31,6 +31,7 @@ const Footer = ({ logos }: FooterProps) => {
 
   return (
     <FooterStyles>
+      <COEBox />
       {!isInfoSessionPage && !isHighschoolPage ? (
         <InfoSessionStyles justify='center'>
           <Text as='h2' pb='1rem' className='dynamic-h2' color='brand.secondary.400'>
@@ -44,7 +45,6 @@ const Footer = ({ logos }: FooterProps) => {
       <SlashDivider />
 
       <Subscribe />
-      <COEBox />
       <VStack w='100%' className='content' pb='0'>
         <SupportersStyles w='100%'>
           <VStack justify='space-between' borderColor='brand.purple.900' borderBottom='1px'>
