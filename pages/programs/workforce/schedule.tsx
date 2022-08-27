@@ -38,7 +38,7 @@ const CohortSchedule: NextPage = () => {
   // Set cohort letters once with all existing cohorts
   useEffect(() => {
     axios.get<CohortState[]>('/api/schedule/cohort').then(({ data }) => {
-      setFilterOptions(['Filter By', ...data.map(({ title }) => title)]);
+      setFilterOptions(data.map(({ title }) => title));
     });
   }, []);
 
@@ -63,8 +63,13 @@ const CohortSchedule: NextPage = () => {
         </select>
         {groupBy === 'cohort' && (
           <select onChange={(e) => setFilter(e.target.value)} value={filter}>
+            {
+              <option value='' disabled={!filter} className={filter ? 'reset-option' : ''}>
+                {filter ? 'Reset' : 'Filter By'}
+              </option>
+            }
             {filterOptions.map((id, i) => (
-              <option key={id} value={i === 0 ? '' : id} disabled={i === 0}>
+              <option key={id + i} value={id}>
                 {id[0].toUpperCase() + id.slice(1)}
               </option>
             ))}
@@ -173,6 +178,16 @@ export const CohortScheduleStyles = styled.div`
     :focus {
       outline: 2px solid ${({ theme }) => theme.secondary[800]};
     }
+    option {
+      :disabled {
+        background: ${({ theme }) => theme.grey[500]};
+        color: ${({ theme }) => theme.white};
+      }
+    }
+    option.reset-option {
+      background: ${({ theme }) => theme.red[0]};
+      color: ${({ theme }) => theme.white};
+    }
   }
   .programs-header {
     height: 20rem;
@@ -193,11 +208,11 @@ export const CohortScheduleStyles = styled.div`
 
   .schedule-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(18rem, auto));
     grid-template-rows: auto;
 
     padding: 1rem;
-    grid-gap: 1rem;
+    grid-gap: 1.5rem;
     margin: 0 auto;
   }
   .schedule-cohort {
@@ -208,7 +223,6 @@ export const CohortScheduleStyles = styled.div`
     display: flex;
     flex-flow: column;
     grid-gap: 0.5rem;
-    padding: 0.5rem;
 
     border-radius: 0.25rem;
     background: ${({ theme }) => theme.bg};
@@ -223,6 +237,9 @@ export const CohortScheduleStyles = styled.div`
     background: ${({ theme }) => theme.bg};
     box-shadow: 0 0 2px ${({ theme }) => theme.alpha.fg};
     border-radius: 0.25rem;
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
 
     :first-child {
       box-shadow: none;
@@ -383,7 +400,7 @@ const CourseInfoStyles = styled.div`
       color: ${({ theme }) => (theme.isLightMode ? theme.grey[600] : theme.grey[300])};
     }
     &.open {
-      color: ${({ theme }) => (theme.isLightMode ? theme.magenta[500] : theme.magenta[200])};
+      color: ${({ theme }) => (theme.isLightMode ? theme.red[300] : theme.red[300])};
       :hover {
         color: ${({ theme }) => (theme.isLightMode ? theme.red[500] : theme.red[400])};
       }
@@ -402,7 +419,7 @@ const CourseInfoStyles = styled.div`
     background: ${({ theme }) => theme.bg};
 
     backdrop-filter: blur(8px);
-    box-shadow: 0 0 4px inset ${({ theme }) => theme.alpha.fg50};
+    box-shadow: 0 0 0.25rem ${({ theme }) => theme.alpha.fg50};
     border-radius: 0.25rem;
     padding: 0.5rem 0;
     .dim {
