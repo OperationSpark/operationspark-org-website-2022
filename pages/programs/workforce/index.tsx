@@ -2,19 +2,22 @@ import { useEffect, useState } from 'react';
 import { GetStaticProps, NextPage } from 'next';
 import Link from 'next/link';
 import styled, { useTheme } from 'styled-components';
+import axios from 'axios';
 import moment from 'moment';
+import { AiOutlineCloudDownload as DownloadIcon } from 'react-icons/ai';
+import { MdOpenInNew as NewTabIcon } from 'react-icons/md';
 
 import { Main, Section, Content } from '@this/components/layout';
 import { getStaticAsset } from '@this/pages-api/static/[asset]';
 import MacCard from '@this/components/Cards/MacCard';
 import MacContent from '@this/components/Cards/content/MacContent';
-import PlainCard from '@this/components/Cards/PlainCard';
 import { SlashDivider } from '@this/components/Elements/SlashDivider';
-import { TwoColumns } from '@this/components/Elements/Columns';
 import { IQuote, ITitleDescription } from '@this/data/types/bits';
 import { ICourses } from '@this/data/types/programs';
 import { BgImg } from '@this/src/components/Elements';
 import useInfoSession from '@this/src/hooks/useInfoSession';
+import { ISessionRow } from '@this/data/types/schedule';
+import ProgramInfoCard from '@this/src/components/Cards/ProgramInfoCard';
 
 export interface AdultProgramsProps {
   header: ITitleDescription;
@@ -32,13 +35,30 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
   const theme = useTheme();
   const [quoteIndex, setQuoteIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [nextSessionDates, setNextSessionDates] = useState<{ [key: string]: ISessionRow }>({});
+
   const quote = companyQuotes[quoteIndex];
 
   const nextInfoSession = useInfoSession(true);
 
   const nextInfoSessionDate = !nextInfoSession
     ? null
-    : moment(nextInfoSession.times.start.dateTime).format('dddd, MMMM Do @ h:mma');
+    : moment(nextInfoSession.times.start.dateTime).format('dddd, MMMM Do h:mma');
+
+  const handleShift = (n: number) => {
+    setIsPaused(true);
+
+    const newIndex = quoteIndex + n;
+
+    if (newIndex < 0) {
+      setQuoteIndex(companyQuotes.length - 1);
+    } else if (newIndex >= companyQuotes.length) {
+      setQuoteIndex(0);
+    } else {
+      setQuoteIndex(newIndex);
+    }
+    setTimeout(() => setIsPaused(false), 20000);
+  };
 
   useEffect(() => {
     let interval: NodeJS.Timer;
@@ -58,20 +78,11 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
     };
   }, [companyQuotes.length, isPaused, quoteIndex]);
 
-  const handleShift = (n: number) => {
-    setIsPaused(true);
-
-    const newIndex = quoteIndex + n;
-
-    if (newIndex < 0) {
-      setQuoteIndex(companyQuotes.length - 1);
-    } else if (newIndex >= companyQuotes.length) {
-      setQuoteIndex(0);
-    } else {
-      setQuoteIndex(newIndex);
-    }
-    setTimeout(() => setIsPaused(false), 20000);
-  };
+  useEffect(() => {
+    axios
+      .get<{ [key: string]: ISessionRow }>('/api/schedule/cohorts/next')
+      .then(({ data }) => setNextSessionDates(data));
+  }, []);
 
   return (
     <Main style={{ paddingTop: 0 }}>
@@ -103,117 +114,80 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
         </Section>
 
         <Section className='employer-love'>
-          <Content style={{ paddingTop: '2rem', paddingBottom: '2rem' }}>
-            <h1 className='dynamic-h1'>Employers love our grads!</h1>
-            <div className='employer-love-content'>
-              <TwoColumns
-                leftColStyle={{ width: '65%', paddingRight: '2rem' }}
-                rightColStyle={{ width: '35%', paddingLeft: '2rem' }}
-                leftCol={
-                  <div className='left-col'>
-                    <MacCard
-                      onNextClick={() => handleShift(1)}
-                      onPrevClick={() => handleShift(-1)}
-                      onPauseClick={() => setIsPaused(!isPaused)}
-                      isPaused={isPaused}
-                    >
-                      <MacContent
-                        body={quote.body}
-                        imageUrl={quote.imageUrl}
-                        name={quote.name}
-                        role={quote.role}
-                        logoSrc={theme.isLightMode ? quote.logoSrcLight : quote.logoSrcDark}
-                        logoHref={quote.logoHref}
-                      />
-                    </MacCard>
-                  </div>
-                }
-                rightCol={
-                  <div className='right-col-container'>
-                    <div className='right-col'>
-                      <p
-                        className='dynamic-txt'
-                        style={{
-                          paddingBottom: '1rem',
-                          maxWidth: '100%',
+          <Content style={{ paddingTop: '2rem', paddingBottom: '0' }}>
+            <h1 className='dynamic-h1 primary'>Employers love our grads!</h1>
+            <div className='need-developers'>
+              <p className='dynamic-txt'>
+                <b>Does your company need developers?</b>
+              </p>
+              <p className='dynamic-txt'>
+                <b>
+                  We foster employer partnerships in the community. Become a partner and gain
+                  valuable talent for your company.
+                </b>
+              </p>
+              <Link href='/contact'>
+                <a
+                  className='anchor right-arr-left '
+                  aria-label='Contact to learn about employer partnerships'
+                  title='Contact to learn about employer partnerships'
+                >
+                  Contact us to learn more about employer partnerships
+                </a>
+              </Link>
+            </div>
 
-                          color: 'rgba(25,25,25,1)',
-                        }}
-                      >
-                        <b>
-                          Does your company need developers? We foster employer partnerships in the
-                          community. Become a partner and gain valuable talent for your company.
-                        </b>
-                      </p>
-                      <Link href='/contact'>
-                        <a
-                          className='anchor right-arr-left'
-                          aria-label='Contact to learn about employer partnerships'
-                          title='Contact to learn about employer partnerships'
-                        >
-                          Contact us to learn more about employer partnerships
-                        </a>
-                      </Link>
-                    </div>
-                  </div>
-                }
-              />
+            <div className='company-quotes'>
+              <MacCard
+                onNextClick={() => handleShift(1)}
+                onPrevClick={() => handleShift(-1)}
+                onPauseClick={() => setIsPaused(!isPaused)}
+                isPaused={isPaused}
+              >
+                <MacContent
+                  body={quote.body}
+                  imageUrl={quote.imageUrl}
+                  name={quote.name}
+                  role={quote.role}
+                  logoSrc={theme.isLightMode ? quote.logoSrcLight : quote.logoSrcDark}
+                  logoHref={quote.logoHref}
+                />
+              </MacCard>
             </div>
           </Content>
         </Section>
         <Section className='adult-courses'>
-          <Content style={{ paddingTop: '2rem', paddingBottom: '2rem' }}>
-            <a
-              className='anchor right-arr-left'
-              href='https://docs.google.com/spreadsheets/d/e/2PACX-1vSw9Cv2WDZUVM3MzFztGUFaqeyx_WVNGHg-BZy2Su8uL6E5A8kqoU1gJTRpritJtc2XgzBkyQVTO_6v/pubhtml?gid=208699637&single=true'
-              target='_blank'
-              rel='noreferrer'
-            >
-              Our cohort schedule can be found here
-            </a>
-
+          <Content style={{ paddingTop: '0', paddingBottom: '2rem' }}>
             <h1 className='dynamic-h1'>Courses</h1>
-            {courses.map(({ title, length, description, nextStartDate, infoMessage }) => (
-              <PlainCard
-                className='program-card _progress'
-                id={title.toLowerCase().split(' ').join('-')}
-                shadow='alternate'
-                key={title}
+            <div className='course-resources'>
+              <Link href='/programs/workforce/schedule'>
+                <a className='anchor resource-link'>Schedule</a>
+              </Link>
+
+              <a
+                className='anchor resource-link'
+                href='https://drive.google.com/uc?export=download&id=1EGrNIXw4DiaRPM0OM6BVVROLVQFZpoLf'
+                target='_blank'
+                rel='noreferrer'
               >
-                <div className='program-card-body '>
-                  <h2 className='dynamic-h2 primary-secondary program-title'>{title}</h2>
-                  <p className='dynamic-txt program-length'>
-                    <i>{length}</i>
-                  </p>
-                  {description.map((desc) => (
-                    <p key={desc} className='dynamic-txt program-desc'>
-                      {desc}
-                    </p>
-                  ))}
-                  {infoMessage && (
-                    <div>
-                      <p className='dynamic-txt'>
-                        <b>{infoMessage}</b>
-                      </p>
-                      <div>
-                        <p className='dynamic-txt program-next-start primary-secondary'>
-                          <b>Next info session: {nextInfoSessionDate}</b>
-                        </p>
-                      </div>
-                      <p className='dynamic-txt program-next-start primary-secondary'>
-                        <Link href='/infoSession'>
-                          <a className='anchor right-arr-left'>Sign up here</a>
-                        </Link>
-                      </p>
-                    </div>
-                  )}
-                  {nextStartDate && (
-                    <p className='dynamic-txt primary-secondary program-next-start'>
-                      <b>Next start date: {nextStartDate}</b>
-                    </p>
-                  )}
-                </div>
-              </PlainCard>
+                Student Handbook <NewTabIcon size={15} /> <DownloadIcon size={18} />
+              </a>
+              <a
+                className='anchor resource-link'
+                href='https://drive.google.com/uc?export=download&id=11YBNYIzM-K7ciown_BMMu0cRVzh2hhW0'
+                target='_blank'
+                rel='noreferrer'
+              >
+                Course Catalog <NewTabIcon size={15} /> <DownloadIcon size={18} />
+              </a>
+            </div>
+            {courses.map((course) => (
+              <ProgramInfoCard
+                key={course.title + course.nextStartDate}
+                {...course}
+                nextInfoSessionDate={nextInfoSessionDate}
+                nextSessionDates={nextSessionDates}
+              />
             ))}
           </Content>
         </Section>
@@ -237,6 +211,9 @@ export const getStaticProps: GetStaticProps<AdultProgramsProps> = async () => {
 export default AdultPrograms;
 
 export const AdultProgramsStyles = styled.div`
+  b.dim {
+    color: ${({ theme }) => (theme.isLightMode ? theme.grey[600] : theme.grey[400])};
+  }
   .programs-header {
     height: 20rem;
     height: 100%;
@@ -262,109 +239,72 @@ export const AdultProgramsStyles = styled.div`
     }
   }
   .employer-love {
-    min-height: 50rem;
+    background: ${({ theme }) => `
+      linear-gradient(180deg,
+        ${theme.secondary[500]} 0%,
+        ${theme.secondary[500]} 70%,
+        ${theme.bg} 70%,
+        ${theme.bg} 100%
+      )
 
-
-    background: ${({ theme }) => theme.secondary[500]};
+    `};
+    padding-bottom: 0;
     display: flex;
+    position: relative;
 
-
-    .employer-love-content {
-      height: 90%;
-      align-items: space-between;
-      display: flex;
-    }
-    h1 {
-      color: ${({ theme }) => theme.primary[700]};
-    }
-    .left-col {
-      display: flex;
-      align-items: flex-start;
-      height: 100%;
-    }
-    .right-col-container {
-      display: flex;
-      align-items: center;
-      height: 100%;
-
-      .right-col {
-        display: flex;
-        align-items: center;
-        flex-flow: row wrap;
-
-        .anchor {
-          color: ${({ theme }) => theme.primary[700]};
-        }
-        .anchor:hover {
-          color: ${({ theme }) => theme.primary[900]};
-          box-shadow: 0 0 2px 0px ${({ theme }) => theme.primary[600]};
-        }
+    .need-developers {
+      p {
+        color: ${({ theme }) => theme.black};
+        padding: 1rem 0;
+        max-width: 800px;
       }
+      .anchor {
+        color: ${({ theme }) => theme.primary[700]};
+      }
+      .anchor:hover {
+        color: ${({ theme }) => theme.primary[900]};
+        box-shadow: 0 0 2px 0px ${({ theme }) => theme.primary[600]};
+      }
+    }
+    .company-quotes {
+      left: 0;
+
+      display: flex;
+      width: 100%;
+      justify-content: center;
     }
   }
 
   .adult-courses {
     h1 {
-      padding-bottom: 2rem;
       color: ${({ theme }, { isLightMode, primary, secondary } = theme) =>
         isLightMode ? primary[700] : secondary[500]};
     }
-    .program-card {
-      margin-bottom: 2rem;
-      .program-title {
-        padding-bottom: 1rem;
-      }
-      .program-desc {
-        padding: 1rem 0;
-      }
-      .program-length {
-        color: ${({ theme }) => (theme.isLightMode ? theme.grey[600] : theme.grey[400])};
-        font-size: 1rem;
-      }
+    .course-resources {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+      grid-gap: 0.5rem;
+      padding-bottom: 1rem;
     }
-  }
 
-  @media screen and (max-width: 1000px) {
-    .employer-love {
-      min-height: 60rem;
-      .cols-2 {
-        flex-flow: column;
-        justify-content: space-between;
-        .left-col,
-        .right-col {
-          display: flex;
-          justify-content: center;
-          width: 100%;
-        }
-        .left-col {
-          padding-right: 0;
-        }
-        .right-col {
-          flex-flow: column;
-          align-items: center;
+    .resource-link {
+      width: 100%;
+      padding: 0.2rem 0.5rem;
+      box-shadow: 0 0 1px ${({ theme }) => theme.alpha.fg50};
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      grid-gap: 0.5rem;
 
-        }
+      :hover {
+        box-shadow: 0 0 2px ${({ theme }) => theme.alpha.fg50};
+        background: ${({ theme }) => theme.bgHover};
       }
     }
   }
   @media screen and (max-width: 768px) {
-    .employer-love {
-
-      .cols-2 {
-        flex-flow: column;
-        .left-col {
-          width: 100%;
-          padding-right: 0;
-        }
-        .right-col {
-          width: 100%;
-        }
-      }
-    }
-    .adult-courses {
-      .program-card {
-        width: 100%;
-      }
+    .adult-courses .course-resources {
+      grid-template-columns: 1fr;
     }
   }
 `;

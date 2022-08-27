@@ -23,9 +23,7 @@ const CareersForAll = () => {
           </div>
         </div>
         <div className='bottom-text'>
-          <p>
-            WE HELP STUDENTS WITH THEIR FIRST STEP INTO SOFTWARE DEVELOPMENT.
-          </p>
+          <p>WE HELP STUDENTS WITH THEIR FIRST STEP INTO SOFTWARE DEVELOPMENT.</p>
 
           <Link href='/contact'>
             <a
@@ -39,12 +37,7 @@ const CareersForAll = () => {
         </div>
       </div>
       <div className='halle-img'>
-        <Image
-          src='/images/hallebot-filled.webp'
-          alt='hallebot'
-          width={240}
-          height={295}
-        />
+        <Image src='/images/hallebot-filled.webp' alt='hallebot' width={240} height={295} />
       </div>
     </CareerForAllStyles>
   );
@@ -66,8 +59,7 @@ const CareerForAllStyles = styled.div`
       font-weight: bold;
       font-size: 0.9rem;
       a {
-        color: ${({ theme }) =>
-          theme.isLightMode ? theme.primary[700] : theme.primary[200]};
+        color: ${({ theme }) => (theme.isLightMode ? theme.primary[700] : theme.primary[200])};
       }
     }
   }

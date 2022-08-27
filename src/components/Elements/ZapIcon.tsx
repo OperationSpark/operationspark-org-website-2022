@@ -26,12 +26,7 @@ export const Zap = ({ size = 1 }) => {
         height: `${width}px`,
       }}
     >
-      <Image
-        layout='fill'
-        objectFit='contain'
-        src='/images/zap.webp'
-        alt='zap'
-      />
+      <Image layout='fill' objectFit='contain' src='/images/zap.webp' alt='zap' />
     </ZapStyles>
   );
 };

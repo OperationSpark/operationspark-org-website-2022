@@ -18,3 +18,9 @@ export const cardShadowRtl = css`
     -1px -1px 3px ${theme.secondary[300]}
   `};
 `;
+export const cardShadowSub1 = css`
+  box-shadow: ${({ theme }) => `
+    1px 1px 3px ${theme.primary[200]},
+    -1px -1px 3px ${theme.secondary[300]}
+  `};
+`;

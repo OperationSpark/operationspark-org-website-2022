@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import styled from 'styled-components';
-import { cardShadow } from '@this/src/theme/styled/mixins/shadows';
 
+import { cardShadow } from '@this/src/theme/styled/mixins/shadows';
 import BgImg from '@this/components/Elements/BgImg';
 import Button from '@this/components/Elements/Button';
 import Content from '@this/components/layout/Content';
@@ -14,7 +14,7 @@ const TopCard = () => {
       <ImgCardStyles>
         <Content className='top-card-content'>
           <div className='row-between'>
-            <div>
+            <div className='secondary'>
               <h2 className='dynamic-h2'>WE ARE CHANGING LIVES WITH</h2>
               <h1 className='dynamic-xl'>
                 COMPUTER <br /> PROGRAMMING <br /> SKILLS
@@ -22,7 +22,7 @@ const TopCard = () => {
             </div>
             {FEAT_COLLEGE_CREDIT && (
               <div className='college-credit'>
-                <div className='college-credit-box'>
+                <div className='college-credit-box  blurry-box'>
                   <p className='dynamic-txt college-credit-desc'>
                     Our certifications are eligible for college credit!
                   </p>
@@ -60,13 +60,17 @@ export const ImgCardStyles = styled.div`
     justify-content: flex-end;
 
     h1 {
-      color: white;
       line-height: 1.25em;
     }
 
     h2 {
-      color: ${(p) => p.theme.secondary[400]};
       padding-bottom: 1rem;
+    }
+    .blurry-box {
+      ${cardShadow};
+      padding: 0.75rem 0.5rem;
+      backdrop-filter: blur(8px);
+      border-radius: 0.25rem;
     }
     .college-credit {
       height: 100%;
@@ -79,10 +83,7 @@ export const ImgCardStyles = styled.div`
         width: 240px;
         max-width: 100%;
         margin-top: 1rem;
-        ${cardShadow};
-        padding: 0.75rem 0.5rem;
-        backdrop-filter: blur(8px);
-        border-radius: 0.25rem;
+
         .college-credit-desc {
           padding-bottom: 1rem;
           color: ${({ theme }) => theme.white};
@@ -90,6 +91,7 @@ export const ImgCardStyles = styled.div`
       }
     }
   }
+
   @media screen and (max-width: 768px) {
     .top-card-content {
       .college-credit {

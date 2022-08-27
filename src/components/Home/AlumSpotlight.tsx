@@ -17,7 +17,7 @@ const AlumSpotlight = () => {
         <div className='zap'></div>
         <div className='alum-content'>
           <div className='left-col'>
-            <MacCard>
+            <MacCard style={{ width: '600px', maxWidth: '100%' }}>
               <MacContent
                 body='Organizations like Operation Spark can literally change the entire landscape and economy of places like New Orleans. I thank Operation Spark every day because they really impacted and changed my life.'
                 imageUrl='/images/people/grads/alon.png'
@@ -30,16 +30,14 @@ const AlumSpotlight = () => {
           <div className='right-col'>
             <h2 className='dynamic-h2'>
               <i>
-                &ldquo;I thank Operation Spark every day because they really
-                impacted and changed my life.&rdquo;
+                &ldquo;I thank Operation Spark every day because they really impacted and changed my
+                life.&rdquo;
               </i>
             </h2>
 
             {FEAT_GRAD_STORIES && (
               <Link href='/testimonials/graduates'>
-                <a className='anchor right-arr-left'>
-                  Read more graduate stories
-                </a>
+                <a className='anchor right-arr-left'>Read more graduate stories</a>
               </Link>
             )}
           </div>
@@ -55,8 +53,7 @@ export const AlumSpotlightStyles = styled.div`
   width: 100%;
   position: relative;
   padding: 1rem 0;
-  background: ${({ theme }) =>
-    theme.isLightMode ? theme.secondary[500] : theme.secondary[500]};
+  background: ${({ theme }) => (theme.isLightMode ? theme.secondary[500] : theme.secondary[500])};
   background: ${({ theme }) => theme.secondary[500]};
   ${({ theme }) => `
     --secondary: ${theme.secondary[500]};

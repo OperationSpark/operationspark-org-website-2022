@@ -6,15 +6,15 @@ import { useRouter } from 'next/router';
 import { VStack, HStack, Text } from '@chakra-ui/react';
 import { useTheme } from 'styled-components';
 
-import Subscribe from './subscribe';
 import { SlashDivider } from '@this/components/Elements/SlashDivider';
 import NavLink from '@this/components/Navbar/elements/NavLink';
-
-import { InfoSessionStyles, FooterStyles, SupportersStyles } from './FooterStyles';
-
 import { ILogo } from '@this/data/types/logos';
 import rgbDataURL from '@this/src/helpers/rgbDataURL';
 import SocialNetworks from '@this/components/Elements/SocialNetworks';
+
+import { InfoSessionStyles, FooterStyles, SupportersStyles } from './FooterStyles';
+import Subscribe from './subscribe';
+import COEBox from './COEBox';
 
 interface FooterProps {
   logos: ILogo[];
@@ -31,6 +31,7 @@ const Footer = ({ logos }: FooterProps) => {
 
   return (
     <FooterStyles>
+      <COEBox />
       {!isInfoSessionPage && !isHighschoolPage ? (
         <InfoSessionStyles justify='center'>
           <Text as='h2' pb='1rem' className='dynamic-h2' color='brand.secondary.400'>
@@ -44,7 +45,6 @@ const Footer = ({ logos }: FooterProps) => {
       <SlashDivider />
 
       <Subscribe />
-
       <VStack w='100%' className='content' pb='0'>
         <SupportersStyles w='100%'>
           <VStack justify='space-between' borderColor='brand.purple.900' borderBottom='1px'>

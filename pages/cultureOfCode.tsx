@@ -209,14 +209,18 @@ const CultureOfCodeStyles = styled.div`
     align-items: flex-end;
     justify-content: center;
     height: 100%;
+    color: ${({ theme }) => theme.white};
 
     p.dynamic-txt,
     h1 {
       padding: 1.5rem;
-      background: ${({ theme }) => theme.alpha.bg};
+      background: ${({ theme }) => (theme.isLightMode ? theme.alpha.fg50 : theme.alpha.bg50)};
       border-radius: 0.5rem;
       backdrop-filter: blur(4px);
-      box-shadow: 0.25rem 0.25rem 1rem rgba(0, 0, 0, 0.8);
+      box-shadow: 0.25rem 0.25rem 1rem ${({ theme }) => theme.black};
+    }
+    h1 {
+      color: ${({ theme }) => theme.secondary[0]};
     }
   }
   .our-deal-sections {

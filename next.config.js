@@ -4,11 +4,11 @@ const color = require('cli-color');
 const { validateData } = require('./data/validate');
 
 module.exports = (phase, { defaultConfig }) => {
+  console.info(color.magentaBright.bold('\nValidating... '))
   if (
     !process.env.GITHUB_ACTION &&
     [PHASE_PRODUCTION_BUILD, PHASE_DEVELOPMENT_SERVER].includes(phase)
   ) {
-    console.info(color.yellow('Validating environment variables'));
     checkEnvVars([
       'MAILCHIMP_API_KEY',
       'MAILCHIMP_AUDIENCE_ID',
@@ -20,10 +20,11 @@ module.exports = (phase, { defaultConfig }) => {
       'WUFOO_TOKEN',
       'WUFOO_CONTACT_FORM_ID',
     ]);
-    console.info(color.yellow('Validating credentials and data'));
     validateData();
   }
-
+  if (PHASE_DEVELOPMENT_SERVER === phase) {
+    console.info(color.blueBright.bold('\nhttp://localhost:3000\n'))
+  }
   /**
    * @type {import('next').NextConfig}
    */
@@ -55,6 +56,6 @@ function checkEnvVars(requiredVars) {
     if (!process.env[requiredVar]) {
       throw new Error(`"${requiredVar}" environment variable not found.`);
     }
-    console.info(`${color.green('  ✓')} ${requiredVar}`);
   }
+  console.info(color.green('  ✓'), 'Validating credentials and data');
 }

@@ -36,8 +36,7 @@ const useForm = <T extends Record<keyof T, T[keyof T]>>() => {
   const toast = useToast();
   const [values, setValues] = useState<IValues<T>>({} as T);
   const [selectValues, setSelectValues] = useState<ISelectValues<T>>({} as T);
-  const [checkboxGroupValues, setCheckboxGroupValues] =
-    useState<TCheckboxGroup>({} as T);
+  const [checkboxGroupValues, setCheckboxGroupValues] = useState<TCheckboxGroup>({} as T);
   const [checkboxValues, setCheckboxValues] = useState<TCheckboxes>({} as T);
   const [validation, setValidation] = useState<IValidation>({});
   const [showErrors, setShowErrors] = useState<boolean>(false);
@@ -54,15 +53,13 @@ const useForm = <T extends Record<keyof T, T[keyof T]>>() => {
       },
 
     /** Fetches values for provided `checkboxes` property (key) */
-    getCheckboxes: (name: string): TCheckboxes =>
-      checkboxGroupValues[name] || {},
+    getCheckboxes: (name: string): TCheckboxes => checkboxGroupValues[name] || {},
 
     /** Fetches values for provided `checkbox` property (key) */
     getCheckbox: (name: string): boolean => checkboxValues[name] || false,
 
     /** Set value for provided input property */
-    set: (name: string, value: string) =>
-      setValues({ ...values, [name]: value }),
+    set: (name: string, value: string) => setValues({ ...values, [name]: value }),
 
     /** Check if given property is valid */
     isValid: (name: string) => {
@@ -87,12 +84,7 @@ const useForm = <T extends Record<keyof T, T[keyof T]>>() => {
     /** Select field change handler */
     onSelectChange:
       (name: string) =>
-      ({
-        option,
-        additionalInfo,
-        additionalInfoLabel,
-        isValid,
-      }: OnSelectChangeProps) => {
+      ({ option, additionalInfo, additionalInfoLabel, isValid }: OnSelectChangeProps) => {
         setSelectValues({
           ...selectValues,
           [name]: { ...option, additionalInfo, additionalInfoLabel },
@@ -105,23 +97,22 @@ const useForm = <T extends Record<keyof T, T[keyof T]>>() => {
       setCheckboxValues({ ...checkboxValues, [field]: value });
     },
     /** Checkbox group change handler */
-    onCheckboxGroupChange:
-      (field: string) => (name: string, value: boolean) => {
-        const checkboxesField = checkboxGroupValues[field] || {};
-        const checkboxField: TCheckboxes = {
-          ...checkboxesField,
-          [name]: value,
-        };
-        if (!value) {
-          delete checkboxField[name];
-        }
-        const isValid = Object.values(checkboxField).some((val) => !!val);
-        setCheckboxGroupValues({
-          ...checkboxGroupValues,
-          [field]: { ...checkboxField },
-        });
-        setValidation({ ...validation, [field]: isValid });
-      },
+    onCheckboxGroupChange: (field: string) => (name: string, value: boolean) => {
+      const checkboxesField = checkboxGroupValues[field] || {};
+      const checkboxField: TCheckboxes = {
+        ...checkboxesField,
+        [name]: value,
+      };
+      if (!value) {
+        delete checkboxField[name];
+      }
+      const isValid = Object.values(checkboxField).some((val) => !!val);
+      setCheckboxGroupValues({
+        ...checkboxGroupValues,
+        [field]: { ...checkboxField },
+      });
+      setValidation({ ...validation, [field]: isValid });
+    },
 
     /** Check if errors exist in form */
     hasErrors: () => {

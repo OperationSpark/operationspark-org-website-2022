@@ -1,9 +1,13 @@
 export interface ICourses {
   title: string;
   length: string;
+  description: string[];
+  cost?: string;
+  days?: string[];
+  hours?: string[];
+  preReqs?: string;
   nextStartDate?: string;
   infoMessage?: string;
-  description: string[];
 }
 
 export interface IHighschoolPrograms {

@@ -91,8 +91,7 @@ const ProgramsForAllStyles = styled.div`
     position: relative;
     top: -4rem;
     .dynamic-h1 {
-      color: ${({ theme }) =>
-        theme.isLightMode ? theme.primary[0] : theme.secondary[0]};
+      color: ${({ theme }) => (theme.isLightMode ? theme.primary[0] : theme.secondary[0])};
     }
   }
 

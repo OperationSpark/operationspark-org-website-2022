@@ -1,10 +1,4 @@
-import {
-  ChangeEvent,
-  CSSProperties,
-  KeyboardEvent,
-  useRef,
-  useState,
-} from 'react';
+import { ChangeEvent, CSSProperties, KeyboardEvent, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { motion, MotionProps } from 'framer-motion';
 import RequiredStatus from './RequiredStatus';
@@ -60,11 +54,7 @@ const TextArea = ({
   };
 
   return (
-    <TextInputStyles
-      className={isErr ? '_input_err' : ''}
-      style={style}
-      {...animation}
-    >
+    <TextInputStyles className={isErr ? '_input_err' : ''} style={style} {...animation}>
       {required && <RequiredStatus isValid={!!isValid} />}
       <ClearButton show={!!isValid} onClick={() => onChange('', false)} />
       <Label
@@ -111,8 +101,7 @@ const TextInputStyles = styled(motion.div)`
     line-height: 1rem;
     user-select: none;
     pointer-events: none;
-    color: ${({ theme }) =>
-      theme.isLightMode ? theme.grey[600] : theme.grey[400]};
+    color: ${({ theme }) => (theme.isLightMode ? theme.grey[600] : theme.grey[400])};
   }
 `;
 const Input = styled(motion.textarea)`
@@ -133,8 +122,7 @@ const Input = styled(motion.textarea)`
   outline: 2px solid rgba(0, 0, 0, 0);
 
   &._input_err {
-    box-shadow: 0 0 2px 1px
-      ${({ theme }) => (theme.isLightMode ? theme.red[600] : theme.red[400])};
+    box-shadow: 0 0 2px 1px ${({ theme }) => (theme.isLightMode ? theme.red[600] : theme.red[400])};
   }
   :hover {
     outline: 1px solid ${({ theme }) => theme.secondary[800]};
@@ -151,8 +139,7 @@ const Input = styled(motion.textarea)`
 
   ::placeholder {
     font-weight: 300;
-    color: ${({ theme }) =>
-      theme.isLightMode ? theme.grey[300] : theme.grey[600]};
+    color: ${({ theme }) => (theme.isLightMode ? theme.grey[300] : theme.grey[600])};
     transition: color 200ms;
     user-select: none;
     font-size: 0.9rem;

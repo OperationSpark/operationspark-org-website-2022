@@ -18,7 +18,9 @@ type ColorRanges = Record<ColorWeight, string>;
 declare module 'styled-components' {
   export interface DefaultTheme {
     colorMode: 'light' | 'dark';
+    setColorMode: (newTheme: 'light' | 'dark' | 'system') => void;
     isLightMode: boolean;
+    isSystemMode: boolean;
     fg: string;
     bg: string;
     bgHover: string;
@@ -27,6 +29,8 @@ declare module 'styled-components' {
     alpha: {
       bg: string;
       fg: string;
+      bg50: string;
+      fg50: string;
     };
     black: string;
     white: string;

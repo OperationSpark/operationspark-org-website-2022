@@ -97,7 +97,14 @@ const ProgressBar = ({ isTop, progressOnly = false }: ProgressBarProps) => {
   return (
     <ProgressBarStyles>
       {progressOnly || !nodes.length ? (
-        isLoaded && <div className='progress-bar' style={{ width: `${percent}%` }}></div>
+        isLoaded && (
+          <div className='progress-bar'>
+            <div
+              className='progress'
+              style={{ width: `${percent}%`, display: isTop ? 'none' : 'flex' }}
+            ></div>
+          </div>
+        )
       ) : (
         <Fragment>
           <div className='progress-padding' style={{ width: `${100 - percent}%` }}></div>
@@ -172,6 +179,9 @@ const ProgressBarStyles = styled(motion.div)`
   position: relative;
   pointer-events: none;
   .progress-bar {
+    width: 100%;
+  }
+  .progress {
     height: 0.5rem;
     margin-top: 0.5rem;
     background: ${({ theme: { isLightMode, primary } }) => `linear-gradient(

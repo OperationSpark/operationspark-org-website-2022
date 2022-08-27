@@ -21,16 +21,13 @@ const MapStyles = styled.div`
     aspect-ratio: 1 / 1;
     border-radius: 0.5rem;
     transition: box-shadow 125ms;
-    box-shadow: 0 0.1rem 0.2rem
-      ${({ theme }) => theme.primary[theme.isLightMode ? 800 : 200]};
+    box-shadow: 0 0.1rem 0.2rem ${({ theme }) => theme.primary[theme.isLightMode ? 800 : 200]};
     :hover {
-      box-shadow: 0 0.1rem 0.5rem
-        ${({ theme }) => theme.primary[theme.isLightMode ? 800 : 200]};
+      box-shadow: 0 0.1rem 0.5rem ${({ theme }) => theme.primary[theme.isLightMode ? 800 : 200]};
     }
     :active {
       transition: box-shadow 75ms;
-      box-shadow: 0 0.1rem 0.1rem
-        ${({ theme }) => theme.primary[theme.isLightMode ? 800 : 200]};
+      box-shadow: 0 0.1rem 0.1rem ${({ theme }) => theme.primary[theme.isLightMode ? 800 : 200]};
     }
   }
 `;
@@ -44,12 +41,7 @@ const Map = ({ href, address }: MapProps) => {
   return (
     <MapStyles>
       <div className='img'>
-        <a
-          href={href}
-          target='_blank'
-          rel='noreferrer'
-          title={`${address}\n\nOpen in google maps`}
-        >
+        <a href={href} target='_blank' rel='noreferrer' title={`${address}\n\nOpen in google maps`}>
           <Image
             src='/images/opspark-map.png'
             layout='responsive'

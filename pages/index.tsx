@@ -41,8 +41,9 @@ const Home: NextPage<HomeProps> = ({
 };
 
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
-  const { greatCompanies, programsForAll, igniteCareer, teamEffort }: IHome =
-    await getStaticAsset('index');
+  const { greatCompanies, programsForAll, igniteCareer, teamEffort }: IHome = await getStaticAsset(
+    'index',
+  );
   const logos: ILogo[] = await getStaticAsset('logos', 'partners');
 
   return {

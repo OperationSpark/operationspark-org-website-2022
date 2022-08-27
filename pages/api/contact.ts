@@ -14,12 +14,7 @@ interface IContactFormRequest extends NextApiRequest {
   body: IContactForm;
 }
 
-const formatPayload = ({
-  firstName,
-  lastName,
-  email,
-  message,
-}: IContactForm): string => {
+const formatPayload = ({ firstName, lastName, email, message }: IContactForm): string => {
   return Object.entries({
     Field1: firstName,
     Field2: lastName,
@@ -30,10 +25,7 @@ const formatPayload = ({
     .join('&');
 };
 
-export default async function handleContactForm(
-  req: IContactFormRequest,
-  res: NextApiResponse,
-) {
+export default async function handleContactForm(req: IContactFormRequest, res: NextApiResponse) {
   try {
     const formUrl = `https://${WUFOO_HOST}.wufoo.com/api/v3/forms/${WUFOO_CONTACT_FORM_ID}/entries.json`;
     const headers = { Authorization: `Basic ${WUFOO_TOKEN}` };
