@@ -38,7 +38,7 @@ export default async function getCohortScheduleReqHandler(
   res.status(200).send(schedule);
 }
 
-export const getCohortSchedule = async (group: string, filter?: string) => {
+export const getCohortSchedule = async (group: 'cohort' | 'course', filter?: string) => {
   const sheets = getSheets();
   const spreadsheetId = '1qsAEaPn9FvwRxZBwzKkMuvIXvN0-mQ3ClS2zjvYmHwA';
 
