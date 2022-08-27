@@ -344,9 +344,9 @@ const CourseInfo = ({ course }: { course: ICourseInfo }) => {
             </div>
             <div className='course-info-section'>
               <p className='dim bold'>{dayRange}</p>
-              {hours.map((hours) => (
-                <p className='dim' key={hours}>
-                  {hours}
+              {hours.map((hour) => (
+                <p className='dim' key={hour}>
+                  {hour}
                 </p>
               ))}
             </div>
