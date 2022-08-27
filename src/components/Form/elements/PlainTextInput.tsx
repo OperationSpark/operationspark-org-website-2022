@@ -5,11 +5,7 @@ export interface PlainTextInputProps extends TextInputProps {
   autoCapitalize?: boolean;
 }
 
-const PlainTextInput = ({
-  onChange,
-  autoCapitalize = false,
-  ...props
-}: PlainTextInputProps) => {
+const PlainTextInput = ({ onChange, autoCapitalize = false, ...props }: PlainTextInputProps) => {
   return (
     <Input
       {...props}

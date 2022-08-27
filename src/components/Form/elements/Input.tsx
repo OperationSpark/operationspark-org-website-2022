@@ -79,11 +79,7 @@ const TextInput = ({
   }, [caretPos, restoreCursor]);
 
   return (
-    <TextInputStyles
-      className={isErr ? '_input_err' : ''}
-      style={style}
-      {...animation}
-    >
+    <TextInputStyles className={isErr ? '_input_err' : ''} style={style} {...animation}>
       {required && <RequiredStatus isValid={!!isValid} />}
 
       <Label
@@ -145,8 +141,7 @@ const Input = styled(motion.input)`
   outline: 2px solid rgba(0, 0, 0, 0);
 
   &._input_err {
-    box-shadow: 0 0 2px 1px
-        ${({ theme }) => (theme.isLightMode ? theme.red[600] : theme.red[400])},
+    box-shadow: 0 0 2px 1px ${({ theme }) => (theme.isLightMode ? theme.red[600] : theme.red[400])},
       0 0 0px 1000px ${({ theme }) => theme.bg} inset;
   }
   :hover {
@@ -164,8 +159,7 @@ const Input = styled(motion.input)`
 
   ::placeholder {
     font-weight: 300;
-    color: ${({ theme }) =>
-      theme.isLightMode ? theme.grey[400] : theme.grey[500]};
+    color: ${({ theme }) => (theme.isLightMode ? theme.grey[400] : theme.grey[500])};
     transition: color 200ms;
     user-select: none;
     font-size: 0.9rem;

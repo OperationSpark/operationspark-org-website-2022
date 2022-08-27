@@ -13,8 +13,7 @@ const ReqStatusStyles = styled(motion.div)`
   pointer-events: none;
   font-weight: 400;
   font-size: 0.6rem;
-  color: ${({ theme }) =>
-    theme.isLightMode ? theme.red[600] : theme.red[400]};
+  color: ${({ theme }) => (theme.isLightMode ? theme.red[600] : theme.red[400])};
 `;
 
 interface RequiredStatusProps {

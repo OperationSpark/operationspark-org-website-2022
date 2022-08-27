@@ -1,8 +1,7 @@
 import { css } from 'styled-components';
 
 export const anchor = css`
-  color: ${({ theme }) =>
-    theme.isLightMode ? theme.primary[600] : theme.secondary[400]};
+  color: ${({ theme }) => (theme.isLightMode ? theme.primary[600] : theme.secondary[400])};
   font-size: 0.9rem;
   font-weight: 600;
   padding: 3px;
@@ -50,7 +49,6 @@ export const anchor = css`
   }
   :hover {
     box-shadow: 0 0 2px 0px ${({ theme }) => theme.alpha.fg};
-    color: ${({ theme }) =>
-      theme.isLightMode ? theme.primary[900] : theme.secondary[700]};
+    color: ${({ theme }) => (theme.isLightMode ? theme.primary[900] : theme.secondary[700])};
   }
 `;

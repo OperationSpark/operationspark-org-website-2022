@@ -42,7 +42,7 @@ export const TwoColumns = ({
   rightCol,
   leftColStyle,
   rightColStyle,
-  style
+  style,
 }: TwoColumnsProps) => {
   return (
     <TwoColumnsStyles style={style}>

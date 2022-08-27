@@ -2,8 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import axios from 'axios';
 import { config } from './config';
 
-const { MAILCHIMP_API_KEY: API_KEY = '', MAILCHIMP_AUDIENCE_ID: AUDIENCE_ID } =
-  config;
+const { MAILCHIMP_API_KEY: API_KEY = '', MAILCHIMP_AUDIENCE_ID: AUDIENCE_ID } = config;
 
 const subscribe = async (req: NextApiRequest, res: NextApiResponse) => {
   const { email } = req.body;

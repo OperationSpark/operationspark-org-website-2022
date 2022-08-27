@@ -11,8 +11,7 @@ const FormStyles = styled(motion.form)`
     display: flex;
     align-items: center;
     user-select: none;
-    color: ${({ theme }) =>
-      theme.isLightMode ? theme.red[600] : theme.red[300]};
+    color: ${({ theme }) => (theme.isLightMode ? theme.red[600] : theme.red[300])};
     p {
       padding-left: 0.5rem;
     }

@@ -4,6 +4,8 @@ import Link from 'next/link';
 import styled, { useTheme } from 'styled-components';
 import axios from 'axios';
 import moment from 'moment';
+import { AiOutlineCloudDownload as DownloadIcon } from 'react-icons/ai';
+import { MdOpenInNew as NewTabIcon } from 'react-icons/md';
 
 import { Main, Section, Content } from '@this/components/layout';
 import { getStaticAsset } from '@this/pages-api/static/[asset]';
@@ -158,29 +160,26 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
           <Content style={{ paddingTop: '0', paddingBottom: '2rem' }}>
             <h1 className='dynamic-h1'>Courses</h1>
             <div className='course-resources'>
-              <h3 className='dynamic-h3 primary-secondary'>Resource Links</h3>
-              <div className='course-links'>
-                <Link href='/programs/workforce/schedule'>
-                  <a className='anchor right-arr-left'>Schedule</a>
-                </Link>
+              <Link href='/programs/workforce/schedule'>
+                <a className='anchor resource-link'>Schedule</a>
+              </Link>
 
-                <a
-                  className='anchor right-arr-left'
-                  href='https://drive.google.com/uc?export=download&id=1EGrNIXw4DiaRPM0OM6BVVROLVQFZpoLf'
-                  target='_blank'
-                  rel='noreferrer'
-                >
-                  Student Handbook
-                </a>
-                <a
-                  className='anchor right-arr-left'
-                  href='https://drive.google.com/uc?export=download&id=11YBNYIzM-K7ciown_BMMu0cRVzh2hhW0'
-                  target='_blank'
-                  rel='noreferrer'
-                >
-                  Course Catalog
-                </a>
-              </div>
+              <a
+                className='anchor resource-link'
+                href='https://drive.google.com/uc?export=download&id=1EGrNIXw4DiaRPM0OM6BVVROLVQFZpoLf'
+                target='_blank'
+                rel='noreferrer'
+              >
+                Student Handbook <NewTabIcon size={15} /> <DownloadIcon size={18} />
+              </a>
+              <a
+                className='anchor resource-link'
+                href='https://drive.google.com/uc?export=download&id=11YBNYIzM-K7ciown_BMMu0cRVzh2hhW0'
+                target='_blank'
+                rel='noreferrer'
+              >
+                Course Catalog <NewTabIcon size={15} /> <DownloadIcon size={18} />
+              </a>
             </div>
             {courses.map((course) => (
               <ProgramInfoCard
@@ -282,14 +281,30 @@ export const AdultProgramsStyles = styled.div`
         isLightMode ? primary[700] : secondary[500]};
     }
     .course-resources {
-      padding: 1rem 0;
-    }
-    .course-links {
-      padding-left: 0.5rem;
-      padding-top: 0.5rem;
-      display: flex;
-      flex-flow: column;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
       grid-gap: 0.5rem;
+      padding-bottom: 1rem;
+    }
+
+    .resource-link {
+      width: 100%;
+      padding: 0.2rem 0.5rem;
+      box-shadow: 0 0 1px ${({ theme }) => theme.alpha.fg50};
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      grid-gap: 0.5rem;
+
+      :hover {
+        box-shadow: 0 0 2px ${({ theme }) => theme.alpha.fg50};
+        background: ${({ theme }) => theme.bgHover};
+      }
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .adult-courses .course-resources {
+      grid-template-columns: 1fr;
     }
   }
 `;

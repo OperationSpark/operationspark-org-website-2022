@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
 
 export const useScrollY = () => {
-  const [scrollY, setScrollY] = useState(
-    typeof window !== 'undefined' ? window.scrollY : null,
-  );
+  const [scrollY, setScrollY] = useState(typeof window !== 'undefined' ? window.scrollY : null);
 
   useEffect(() => {
     if (scrollY === null) {
