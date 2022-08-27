@@ -9,13 +9,13 @@ import { Main, Section, Content } from '@this/components/layout';
 import { getStaticAsset } from '@this/pages-api/static/[asset]';
 import MacCard from '@this/components/Cards/MacCard';
 import MacContent from '@this/components/Cards/content/MacContent';
-import PlainCard from '@this/components/Cards/PlainCard';
 import { SlashDivider } from '@this/components/Elements/SlashDivider';
 import { IQuote, ITitleDescription } from '@this/data/types/bits';
 import { ICourses } from '@this/data/types/programs';
 import { BgImg } from '@this/src/components/Elements';
 import useInfoSession from '@this/src/hooks/useInfoSession';
 import { ISessionRow } from '@this/data/types/schedule';
+import ProgramInfoCard from '@this/src/components/Cards/ProgramInfoCard';
 
 export interface AdultProgramsProps {
   header: ITitleDescription;
@@ -78,7 +78,7 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
 
   useEffect(() => {
     axios
-      .get<{ [key: string]: ISessionRow }>('/api/schedule/cohorts?cohort=next')
+      .get<{ [key: string]: ISessionRow }>('/api/schedule/cohorts/next')
       .then(({ data }) => setNextSessionDates(data));
   }, []);
 
@@ -182,77 +182,13 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
                 </a>
               </div>
             </div>
-            {courses.map(({ title, length, cost, description, infoMessage, preReqs }) => (
-              <PlainCard
-                className='program-card _progress'
-                id={title.toLowerCase().split(' ').join('-')}
-                shadow='alternate'
-                key={title}
-              >
-                <div className='program-card-body'>
-                  <div className='program-card-body-left'>
-                    <h2 className='dynamic-h2 primary-secondary program-title'>{title}</h2>
-                    <div className='program-info-row'>
-                      {cost && (
-                        <p className='dynamic-txt program-info'>
-                          <i>{cost}</i>
-                        </p>
-                      )}
-                      <p className='dynamic-txt program-info'>
-                        <i>{length}</i>
-                      </p>
-                      {preReqs && (
-                        <p className='dynamic-txt program-info' style={{ paddingBottom: '0.5rem' }}>
-                          <b>Prerequisites: </b> <br />
-                          <i>{preReqs}</i>
-                        </p>
-                      )}
-                    </div>
-                    {nextSessionDates[title] && !infoMessage && (
-                      <div>
-                        <p className='dynamic-txt primary-secondary program-next-start program-info'>
-                          <b className='dim'>Next start date:</b>
-                        </p>
-                        <p className='dynamic-txt primary-secondary program-next-start'>
-                          <b>{moment(nextSessionDates[title].start).format('MMMM DD, yyyy')}</b>
-                        </p>
-                      </div>
-                    )}
-                    {infoMessage && (
-                      <div>
-                        <div>
-                          <p className='dynamic-txt'>
-                            <b className='dim'>Next info session:</b>
-                          </p>
-                          <p className='dynamic-txt primary-secondary indent'>
-                            <b>{nextInfoSessionDate}</b>
-                          </p>
-                        </div>
-                        <p
-                          className='dynamic-txt program-next-start primary-secondary'
-                          style={{ paddingTop: '0.5rem' }}
-                        >
-                          <Link href='/infoSession'>
-                            <a className='anchor right-arr-left'>Sign up here</a>
-                          </Link>
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                  <div className='program-card-body-right'>
-                    {description.map((desc) => (
-                      <p key={desc} className='dynamic-txt program-desc'>
-                        {desc}
-                      </p>
-                    ))}
-                    {infoMessage && (
-                      <p className='dynamic-txt info-message'>
-                        <b>{infoMessage}</b>
-                      </p>
-                    )}
-                  </div>
-                </div>
-              </PlainCard>
+            {courses.map((course) => (
+              <ProgramInfoCard
+                key={course.title + course.nextStartDate}
+                {...course}
+                nextInfoSessionDate={nextInfoSessionDate}
+                nextSessionDates={nextSessionDates}
+              />
             ))}
           </Content>
         </Section>
@@ -354,109 +290,6 @@ export const AdultProgramsStyles = styled.div`
       display: flex;
       flex-flow: column;
       grid-gap: 0.5rem;
-    }
-    .program-info-row {
-      padding-bottom: 0.5rem;
-      p {
-        padding: 0.5rem 0;
-      }
-    }
-
-    .program-card-body {
-      display: flex;
-      grid-gap: 1rem;
-      .program-card-body-left {
-        width: 25%;
-        display: flex;
-        flex-flow: column;
-      }
-      .program-card-body-right {
-        display: flex;
-        flex-flow: column;
-        justify-content: center;
-        width: 75%;
-      }
-      .info-message {
-        color: ${({ theme }) => (theme.isLightMode ? theme.magenta[400] : theme.magenta[200])};
-      }
-    }
-    .program-card {
-      margin-bottom: 2rem;
-      .program-title {
-        padding-bottom: 0rem;
-      }
-      .program-desc {
-        padding: 1rem 0;
-        :first-of-type {
-          padding-top: 0;
-        }
-        :last-of-type {
-          padding-bottom: 0;
-        }
-      }
-      .program-info {
-        color: ${({ theme }) => (theme.isLightMode ? theme.grey[600] : theme.grey[400])};
-        font-size: 1rem;
-      }
-    }
-  }
-
-  @media screen and (max-width: 1000px) {
-    .employer-love {
-      .cols-2 {
-        flex-flow: column;
-        justify-content: space-between;
-        .left-col,
-        .right-col {
-          display: flex;
-          justify-content: center;
-          width: 100%;
-        }
-        .left-col {
-          height: 100%;
-          padding-right: 0;
-        }
-        .right-col {
-          flex-flow: column;
-          align-items: flex-end;
-        }
-      }
-    }
-  }
-  @media screen and (max-width: 768px) {
-    .employer-love {
-      .cols-2 {
-        flex-flow: column;
-        .left-col {
-          width: 100%;
-          padding-right: 0;
-        }
-        .right-col {
-          width: 100%;
-        }
-      }
-    }
-    .adult-courses {
-      .program-card {
-        width: 100%;
-      }
-      .program-info-row {
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: space-between;
-        grid-gap: 0.5rem;
-        .program-info {
-          width: 100%;
-          padding: 0;
-        }
-      }
-      .program-card-body {
-        flex-flow: column;
-        .program-card-body-left,
-        .program-card-body-right {
-          width: 100%;
-        }
-      }
     }
   }
 `;
