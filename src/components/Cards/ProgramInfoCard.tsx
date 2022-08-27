@@ -138,7 +138,6 @@ export const ProgramInfoCardStyles = styled.div`
       }
     }
     .info-message {
-
       color: ${({ theme }) => (theme.isLightMode ? theme.magenta[400] : theme.magenta[200])};
     }
   }

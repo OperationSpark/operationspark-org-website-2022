@@ -1,6 +1,11 @@
 import { ReactNode } from 'react';
 import styled from 'styled-components';
-import { cardShadow, cardShadowLtr, cardShadowRtl, cardShadowSub1 } from '@this/src/theme/styled/mixins/shadows';
+import {
+  cardShadow,
+  cardShadowLtr,
+  cardShadowRtl,
+  cardShadowSub1,
+} from '@this/src/theme/styled/mixins/shadows';
 import { SlashDivider } from '@this/components/Elements/SlashDivider';
 
 const PlainCardStyles = styled.div`
