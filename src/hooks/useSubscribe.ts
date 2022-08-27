@@ -2,11 +2,7 @@ import { useToast, UseToastOptions } from '@chakra-ui/react';
 import { useState } from 'react';
 import axios from 'axios';
 
-type UseSubscribeReturn = [
-  (email: string) => void,
-  boolean,
-  (status: boolean) => void,
-];
+type UseSubscribeReturn = [(email: string) => void, boolean, (status: boolean) => void];
 const useSubscribe = (callback: () => void): UseSubscribeReturn => {
   const toast = useToast();
   const [isErr, setIsErr] = useState(false);
@@ -37,9 +33,7 @@ const useSubscribe = (callback: () => void): UseSubscribeReturn => {
       handleToast(data);
     } catch (err) {
       setIsErr(true);
-      handleToast(
-        axios.isAxiosError(err) ? err.response?.data || { email } : { email },
-      );
+      handleToast(axios.isAxiosError(err) ? err.response?.data || { email } : { email });
     }
   };
 

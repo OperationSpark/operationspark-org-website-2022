@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "next lint",
     "rok": "ngrok start --config=ngrokrc.yml os",
-    "prettier:fix": "prettier --config .prettierrc --write \"src/**/{*.ts,*.tsx}\""
+    "prettier:fix": "prettier --config .prettierrc --write \"src/**/{*.ts,*.tsx}\"",
+    "lint:fix": "eslint . --ext ts,tsx --fix"
   },
   "dependencies": {
     "@chakra-ui/react": "^1.8.5",

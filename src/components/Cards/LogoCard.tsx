@@ -50,15 +50,7 @@ interface LogoCardProps {
   newTab?: boolean;
 }
 
-const LogoCard = ({
-  quote,
-  name,
-  role,
-  logoHref,
-  logoSrc,
-  logoAlt,
-  newTab,
-}: LogoCardProps) => {
+const LogoCard = ({ quote, name, role, logoHref, logoSrc, logoAlt, newTab }: LogoCardProps) => {
   return (
     <LogoCardStyles>
       <div className='card'>

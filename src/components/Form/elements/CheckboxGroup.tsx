@@ -63,15 +63,13 @@ const CheckboxGroupStyles = styled.div`
   }
 
   &._input_err {
-    box-shadow: 0 0 2px 1px
-        ${({ theme }) => (theme.isLightMode ? theme.red[600] : theme.red[400])},
+    box-shadow: 0 0 2px 1px ${({ theme }) => (theme.isLightMode ? theme.red[600] : theme.red[400])},
       0 0 0px 1000px ${({ theme }) => theme.bg} inset;
     ._err_label {
       display: block;
     }
     ._required {
-      color: ${({ theme }) =>
-        theme.isLightMode ? theme.red[600] : theme.red[400]};
+      color: ${({ theme }) => (theme.isLightMode ? theme.red[600] : theme.red[400])};
       font-size: 0.8rem;
     }
   }
@@ -79,7 +77,6 @@ const CheckboxGroupStyles = styled.div`
     display: none;
     font-weight: 300;
     padding: 0.5rem;
-    color: ${({ theme }) =>
-      theme.isLightMode ? theme.red[600] : theme.red[400]};
+    color: ${({ theme }) => (theme.isLightMode ? theme.red[600] : theme.red[400])};
   }
 `;

@@ -26,11 +26,7 @@ const MobileNav = ({ navMenus = [] }: { navMenus: NavigationMenuLink[] }) => {
           <NavAccordion closeMenu={() => setShowMenu(false)}>
             {navMenus.map((navMenu) =>
               navMenu.subLinks.length ? (
-                <NavAccordionItem
-                  key={navMenu.href}
-                  title={navMenu.title}
-                  href={navMenu.href}
-                >
+                <NavAccordionItem key={navMenu.href} title={navMenu.title} href={navMenu.href}>
                   {navMenu.subLinks.map((subLink) => (
                     <NavAccordionLink
                       key={navMenu.href + subLink.href}

@@ -1,11 +1,6 @@
 import Image from 'next/image';
 import styled, { DefaultTheme, useTheme } from 'styled-components';
-import {
-  AnimatePresence,
-  HTMLMotionProps,
-  motion,
-  MotionProps,
-} from 'framer-motion';
+import { AnimatePresence, HTMLMotionProps, motion, MotionProps } from 'framer-motion';
 import { CSSProperties, useEffect, useRef, useState } from 'react';
 import { IoMdArrowRoundBack, IoMdArrowRoundForward } from 'react-icons/io';
 
@@ -111,11 +106,7 @@ interface CarouselButtonProps extends HTMLMotionProps<'button'> {
   size?: number;
 }
 
-const CarouselButton = ({
-  size = 20,
-  direction,
-  ...props
-}: CarouselButtonProps) => {
+const CarouselButton = ({ size = 20, direction, ...props }: CarouselButtonProps) => {
   const theme = useTheme();
   const isLeft = direction === 'left';
   const ArrowIcon = isLeft ? IoMdArrowRoundBack : IoMdArrowRoundForward;
@@ -156,13 +147,7 @@ const CarouselButton = ({
   );
 };
 
-const Carousel = ({
-  logos,
-  style,
-}: {
-  logos: ILogo[];
-  style?: CSSProperties;
-}) => {
+const Carousel = ({ logos, style }: { logos: ILogo[]; style?: CSSProperties }) => {
   const xWidth = 60;
   const xPadding = 20;
   const theme = useTheme();
@@ -219,10 +204,7 @@ const Carousel = ({
     if (!userDrag) {
       interval = setInterval(() => shiftRight(), 4000);
     } else {
-      setTimeout(
-        () => Date.now() - idleStart > 10000 && setUserDrag(false),
-        10000,
-      );
+      setTimeout(() => Date.now() - idleStart > 10000 && setUserDrag(false), 10000);
     }
 
     return () => {

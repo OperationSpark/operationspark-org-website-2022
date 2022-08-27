@@ -14,9 +14,7 @@ export type TCountdownTime = {
   seconds: number;
   isComplete: boolean;
 };
-export const getCountdownTime = (
-  endTime: Date = new Date(),
-): TCountdownTime => {
+export const getCountdownTime = (endTime: Date = new Date()): TCountdownTime => {
   const total = endTime.getTime() - new Date().getTime();
 
   const seconds = Math.floor((total / 1000) % 60);

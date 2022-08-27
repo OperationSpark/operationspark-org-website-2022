@@ -1,11 +1,4 @@
-import {
-  useState,
-  useRef,
-  useEffect,
-  RefObject,
-  Dispatch,
-  SetStateAction,
-} from 'react';
+import { useState, useRef, useEffect, RefObject, Dispatch, SetStateAction } from 'react';
 
 export const useClickAway = (
   callback?: () => void,
