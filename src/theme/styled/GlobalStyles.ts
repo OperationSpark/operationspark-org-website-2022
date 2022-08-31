@@ -5,10 +5,16 @@ const GlobalStyles = createGlobalStyle`
   * {
     transition: background-color 125ms;
   }
+  :root {
+    font-family: 'Roboto', sans-serif;
+  }
   html, body {
     background: ${({ theme }) => theme.bg} !important;
     color: ${({ theme }) => theme.fg} !important;
   }
+  p {
+     font-family: 'Roboto', sans-serif;
+   }
   .primary-secondary {
     color: ${({ theme }) => (theme.isLightMode ? theme.primary[700] : theme.secondary[500])};
   }
