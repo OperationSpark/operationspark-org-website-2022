@@ -53,12 +53,19 @@ const COEBox = () => {
                       objectFit='contain'
                       alt='Operation Spark Banner | operationspark.org'
                     />
-                    <Image
-                      src='/images/logos/etc/council-org-logo.svg'
-                      width={100}
-                      height={100}
-                      alt='COE | council.org'
-                    />
+                    <a
+                      href='https://council.org/'
+                      target='_blank'
+                      rel='noreferrer'
+                      className='img-link'
+                    >
+                      <Image
+                        src='/images/logos/etc/council-org-logo.svg'
+                        width={100}
+                        height={100}
+                        alt='COE | council.org'
+                      />
+                    </a>
                   </div>
                   <p className='dynamic-txt primary-secondary'>
                     <b>Persons wishing to make comments should either</b>
@@ -135,6 +142,14 @@ export const COEBoxStyles = styled(motion.div)`
     display: flex;
     justify-content: space-evenly;
     margin-bottom: 1rem;
+    a {
+      transition: 200ms;
+      filter: drop-shadow(0 0 0rem ${({ theme }) => theme.alpha.fg});
+    }
+    a:hover {
+      filter: drop-shadow(0 0.2rem 0.2rem ${({ theme }) => theme.alpha.fg});
+      transform: translateY(-0.2rem);
+    }
     * {
       user-select: none;
       -webkit-user-drag: none;
