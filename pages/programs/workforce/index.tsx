@@ -5,7 +5,6 @@ import styled, { useTheme } from 'styled-components';
 import axios from 'axios';
 import moment from 'moment';
 import { AiOutlineCloudDownload as DownloadIcon } from 'react-icons/ai';
-import { MdOpenInNew as NewTabIcon } from 'react-icons/md';
 
 import { Main, Section, Content } from '@this/components/layout';
 import { getStaticAsset } from '@this/pages-api/static/[asset]';
@@ -167,18 +166,16 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
               <a
                 className='anchor resource-link'
                 href='https://drive.google.com/uc?export=download&id=1EGrNIXw4DiaRPM0OM6BVVROLVQFZpoLf'
-                target='_blank'
-                rel='noreferrer'
+                download
               >
-                Student Handbook <NewTabIcon size={15} /> <DownloadIcon size={18} />
+                Student Handbook <DownloadIcon size={18} />
               </a>
               <a
                 className='anchor resource-link'
                 href='https://drive.google.com/uc?export=download&id=11YBNYIzM-K7ciown_BMMu0cRVzh2hhW0'
-                target='_blank'
-                rel='noreferrer'
+                download
               >
-                Course Catalog <NewTabIcon size={15} /> <DownloadIcon size={18} />
+                Course Catalog <DownloadIcon size={18} />
               </a>
             </div>
             {courses.map((course) => (
