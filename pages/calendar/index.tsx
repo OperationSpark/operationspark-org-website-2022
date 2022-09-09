@@ -1,33 +1,37 @@
-import { NextPage } from 'next';
-import { useState, useEffect } from 'react';
+import { GetServerSideProps, NextPage } from 'next';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
+
 import moment from 'moment';
 import { Content, Main } from '@this/src/components/layout';
-import { cardShadowRtl } from '@this/src/theme/styled/mixins/shadows';
+import { getCalendarEvents, CalendarEventItem } from '@this/pages-api/calendar/events';
 
-interface CalendarEventItem {
-  id: string;
-  startTime: string;
-  endTime: string;
-  description: string;
-  title: string;
-  location: string;
-}
+type CalendarEventProps = {
+  calEvents: CalendarEventItem[];
+};
 
-const CalendarEvents: NextPage = () => {
-  const [calEvents, setCalEvents] = useState<CalendarEventItem[]>([]);
-
+const Description = ({ text }: { text: string }) => {
+  console.log(text);
+  const [parsedText, setParsedText] = useState<string[]>([]);
   useEffect(() => {
-    axios
-      .get('/api/calendar/events')
-      .then(({ data }) => {
-        console.log(data);
-        setCalEvents(data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+    const el = document.createElement('div');
+    el.style.whiteSpace = 'pre';
+    el.innerHTML = text || '';
+    const newText = el.innerText.split('\n');
 
+    setParsedText(newText);
+  }, [text]);
+
+  return (
+    <div className='event-description'>
+      {parsedText.map((p, i) => (
+        <p key={`${p}-${i}`}>{p}</p>
+      ))}
+    </div>
+  );
+};
+
+const CalendarEvents: NextPage<CalendarEventProps> = ({ calEvents }) => {
   return (
     <Main>
       <CalendarEventsStyles>
@@ -48,24 +52,11 @@ const CalendarEvents: NextPage = () => {
                       {moment(calItem.endTime).format('h:mma')}
                     </div>
                   </div>
-                  {calItem.description && (
-                    <div className='event-description'>
-                      {calItem.description.split('\n').map((p, i) => (
-                        <p key={`${p}-${i}`}>{p}</p>
-                      ))}
-                    </div>
-                  )}
+                  {calItem.description && <Description text={calItem.description} />}
                   {calItem.location && (
                     <a
                       className='event-location anchor'
-                      href={
-                        calItem.location.includes('http')
-                          ? calItem.location
-                          : `https://maps.google.com?q=${calItem.location
-                              .split(/\W/g)
-                              .filter((v) => !!v)
-                              .join('+')}`
-                      }
+                      href={calItem.location}
                       target='_blank'
                       rel='noreferrer'
                     >
@@ -84,6 +75,16 @@ const CalendarEvents: NextPage = () => {
 
 export default CalendarEvents;
 
+export const getServerSideProps: GetServerSideProps<CalendarEventProps> = async () => {
+  try {
+    const calEvents = await getCalendarEvents();
+    return { props: { calEvents } };
+  } catch (err) {
+    console.error(err);
+    return { props: { calEvents: [] } };
+  }
+};
+
 const CalendarEventsStyles = styled.div`
   .calendar-events {
     display: flex;
@@ -91,15 +92,27 @@ const CalendarEventsStyles = styled.div`
     flex-flow: column wrap;
     gap: 2rem;
     margin-top: 2rem;
+
+    border-radius: 0.5rem;
   }
   .calendar-event {
-    ${cardShadowRtl}
+    box-shadow: 0 0 2px ${({ theme }) => theme.alpha.fg50};
     text-align: center;
-    width: 500px;
+    width: 700px;
     max-width: 100%;
     border-radius: 0.5rem;
     padding: 1rem;
+    backdrop-filter: blur(2px);
+    background: ${({ theme }) => `
+      linear-gradient(135deg,
+        ${theme.alpha.fg25} -50%,
+        ${theme.alpha.bg25} 25%,
+        ${theme.alpha.bg25} 75%,
+        ${theme.alpha.fg25} 150%
+      )
+    `};
   }
+
   .event-title {
     line-height: 1em;
   }

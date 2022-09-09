@@ -3,7 +3,24 @@ import moment from 'moment';
 
 import { GoogleCalendar } from '@this/src/api/googleCalendar';
 
-const getCalendarEvents = async (req: NextApiRequest, res: NextApiResponse) => {
+export type CalendarEventItem = {
+  id?: string | null;
+  startTime?: string | null;
+  endTime?: string | null;
+  description?: string | null;
+  title?: string | null;
+  location?: string | null;
+};
+
+const getCalendarEventsHandler = async (
+  req: NextApiRequest,
+  res: NextApiResponse<CalendarEventItem[]>,
+) => {
+  const events = await getCalendarEvents();
+  res.json(events);
+};
+
+export const getCalendarEvents = async (): Promise<CalendarEventItem[]> => {
   const { GOOGLE_EVENTS_CALENDAR_ID: calendarId } = process.env;
   const calendar = GoogleCalendar();
   const timeMin = moment(new Date());
@@ -20,20 +37,27 @@ const getCalendarEvents = async (req: NextApiRequest, res: NextApiResponse) => {
   const items = data.items?.flatMap(({ start, end, description, summary, location, id }) => {
     const eventStart = start?.dateTime && moment(new Date(start?.dateTime));
     // const isPast = start?.dateTime && now.isBefore();
-    if (!eventStart || eventStart.isBefore(timeMin)) {
+    if (!eventStart || eventStart.isBefore(timeMin) || !start?.dateTime || !end?.dateTime) {
       return [];
     }
-
+    const resolvedLocation = !location
+      ? null
+      : location?.includes('http')
+      ? location
+      : `https://maps.google.com?q=${location
+          .split(/\W/g)
+          .filter((v) => !!v)
+          .join('+')}`;
     return {
       id,
       startTime: start?.dateTime,
       endTime: end?.dateTime,
       description,
       title: summary,
-      location,
+      location: resolvedLocation,
     };
   });
-  res.json(items);
+  return items ?? [];
 };
 
-export default getCalendarEvents;
+export default getCalendarEventsHandler;
