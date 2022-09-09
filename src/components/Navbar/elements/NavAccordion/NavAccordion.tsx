@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { ReactNode } from 'react';
-import { FcCalendar as CalendarIcon } from 'react-icons/fc';
 
 import NavLink from '../NavLink';
 import ThemeButton from '../ThemeButton';
@@ -62,9 +61,7 @@ const NavAccordion = ({ closeMenu, children }: NavAccordionProps) => {
         <NavLink href='/programs/workforce/infoSession' className='info' callback={closeMenu}>
           Free Info Session
         </NavLink>
-        <NavLink href='/calendar' title='Event Calendar'>
-          <CalendarIcon size={36} />
-        </NavLink>
+
         <ThemeButton />
       </div>
       <div className='nav-link-container'>{children}</div>
