@@ -49,7 +49,7 @@ const CohortSchedule: NextPage = () => {
           <Section className='programs-header'>
             <Content className='programs-header-content'>
               <h1 className='dynamic-xl secondary'>Workforce Calendar</h1>
-              <h3 className='dynamic-h3'>View schedule for upcoming sessions</h3>
+              <h3 className='dynamic-h3 text-center'>Current schedule for upcoming cohorts</h3>
             </Content>
           </Section>
         </BgImg>
@@ -65,7 +65,7 @@ const CohortSchedule: NextPage = () => {
           <select onChange={(e) => setFilter(e.target.value)} value={filter}>
             {
               <option value='' disabled={!filter} className={filter ? 'reset-option' : ''}>
-                {filter ? 'Reset' : 'Filter By'}
+                {filter ? 'Reset' : 'Filter By Cohort'}
               </option>
             }
             {filterOptions.map((id, i) => (
@@ -158,6 +158,20 @@ const CohortSchedule: NextPage = () => {
               ),
           )}
         </div>
+        <Content>
+          <p className='schedule-disclaimer dynamic-txt'>
+            The program includes 6-7 months and consist of escalated, intense instruction geared
+            towards a career in software engineering. With breaks and schedule holidays, full
+            completion can take less than a year. Please see the schedule below for more details.
+          </p>
+          <p className='schedule-disclaimer dynamic-txt'>
+            Dates subject to change, email
+            <a href='mailto:admissions@operationspark.org' className='anchor'>
+              admissions@operationspark.org
+            </a>
+            to confirm.
+          </p>
+        </Content>
       </CohortScheduleStyles>
     </Main>
   );
@@ -166,6 +180,17 @@ const CohortSchedule: NextPage = () => {
 export default CohortSchedule;
 
 export const CohortScheduleStyles = styled.div`
+  .schedule-disclaimer {
+    padding: 0.5rem 0;
+    a {
+      font-family: 'Roboto', sans-serif;
+      font-size: 1em;
+      line-height: 1em;
+      font-weight: 400;
+      padding: 0 0.25rem;
+      margin: 0 0.25rem;
+    }
+  }
   select {
     color: ${({ theme }) => theme.fg};
     background: ${({ theme }) => theme.bg};
@@ -404,6 +429,9 @@ const CourseInfoStyles = styled.div`
       :hover {
         color: ${({ theme }) => (theme.isLightMode ? theme.red[500] : theme.red[400])};
       }
+    }
+    :focus-visible {
+      outline: 2px solid ${({ theme }) => theme.secondary[800]};
     }
   }
   .course-info {
