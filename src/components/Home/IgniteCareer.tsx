@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { IHome } from '@this/data/types/home';
 import Content from '@this/components/layout/Content';
-import Asterisk from '../Elements/Asterisk';
 
 const IgniteCareer = ({ title, description }: IHome['igniteCareer']) => {
   return (
@@ -13,14 +12,11 @@ const IgniteCareer = ({ title, description }: IHome['igniteCareer']) => {
           </h1>
         ))}
 
-        <h2 className='dynamic-h3'>
-          <Asterisk
-            matcher='6 months!'
-            infoMessage='6 months of course time. Actual program length may very depending on length between phases'
-          >
-            {description.join(' ')}
-          </Asterisk>
-        </h2>
+        {description.map((text) => (
+          <h2 key={text} className='dynamic-h3'>
+            {description}
+          </h2>
+        ))}
       </Content>
     </IgniteCareerStyles>
   );
