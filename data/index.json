@@ -2,13 +2,13 @@
   "igniteCareer": {
     "title": ["IGNITE YOUR CAREER. LEARN TO CODE!"],
     "description": [
-      "Get the skills you need to land a high-wage job in tech. Operation Spark's rapid training programs put you on track within 6 months!"
+      "Get the skills you need to land a high-wage job in tech. Operation Spark's rapid training programs put you on track within a year!"
     ]
   },
   "programsForAll": {
     "title": ["PROGRAMS FOR", "ADULTS & TEENS"],
     "description": [
-      "Software, and its adjacent industries, are at the heart of all future work. No matter the sector, every industry is being transformed by technology. And many employers now accept a bootcanp certification in lieu of a four-year degree. Operation Spark's accelerated training programs will prepare you to confidently land your first job in tech, without the time and cost of college."
+      "Software, and its adjacent industries, are at the heart of all future work. No matter the sector, every industry is being transformed by technology. And many employers now accept a bootcamp certification in lieu of a four-year degree. Operation Spark's accelerated training programs will prepare you to confidently land your first job in tech, without the time and cost of college."
     ],
     "programs": [
       {
@@ -16,7 +16,7 @@
         "preTitle": "Ages 18+",
         "title": "Adult Workforce",
         "description": [
-          "Our adult workforce program prepares you for an in-demand, high-wage career in software development. Over the course of 6 months, students learn how to think like a software engineer and gain all of the relevant skills needed to enter into a career as a full-stack engineer.  Our progressive learning sequence takes you from computer user to a fully autonomous, full-stack developer in less than a year.  After graduation, we work with you and a network of employer partners to make sure you land a great job!"
+          "Our adult workforce program prepares you for an in-demand, high-wage career in software development. Within a year, students learn how to think like a software engineer and gain all of the relevant skills needed to enter into a career as a full-stack engineer. Our progressive learning sequence takes you from computer user to a fully autonomous, full-stack developer in less than a year.  After graduation, we work with you and a network of employer partners to make sure you land a great job!"
         ],
         "buttonText": "View Adult Programs",
         "buttonUrl": "/programs/workforce"
