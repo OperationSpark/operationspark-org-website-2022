@@ -68,5 +68,5 @@ export const navMenus: NavigationMenuLink[] = [
     subLinks: [],
   },
   { title: 'Contact', href: '/contact', subLinks: [] },
-  { title: 'Events', href: '/calendar', subLinks: [] },
+  { title: 'Events', href: '/events', subLinks: [] },
 ];

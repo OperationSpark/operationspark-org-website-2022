@@ -11,7 +11,6 @@ type CalendarEventProps = {
 };
 
 const Description = ({ text }: { text: string }) => {
-  console.log(text);
   const [parsedText, setParsedText] = useState<string[]>([]);
   useEffect(() => {
     const el = document.createElement('div');
@@ -37,36 +36,43 @@ const CalendarEvents: NextPage<CalendarEventProps> = ({ calEvents }) => {
       <CalendarEventsStyles>
         <Content>
           <h1 className='dynamic-h1 primary-secondary text-center'>Upcoming Events</h1>
-          <div className='calendar-events'>
-            {calEvents.map((calItem) => (
-              <div key={calItem.id} className='calendar-event'>
-                <h2 className='dynamic-h2 primary-secondary event-title'>{calItem.title}</h2>
+          {!calEvents.length ? (
+            <div className='text-center no-events-message'>
+              <h2 className='dynamic-h2'>No upcoming events at this time</h2>
+              <h3 className='dynamic-h3'>Please check back soon</h3>
+            </div>
+          ) : (
+            <div className='calendar-events'>
+              {calEvents.map((calItem) => (
+                <div key={calItem.id} className='calendar-event'>
+                  <h2 className='dynamic-h2 primary-secondary event-title'>{calItem.title}</h2>
 
-                <div className='event-details'>
-                  <div className='date-time'>
-                    <h3 className='calendar-date'>
-                      {moment(calItem.startTime).format('MM/DD/YYYY')}
-                    </h3>
-                    <div className='calendar-time'>
-                      {moment(calItem.startTime).format('h:mma')} -{' '}
-                      {moment(calItem.endTime).format('h:mma')}
+                  <div className='event-details'>
+                    <div className='date-time'>
+                      <h3 className='calendar-date'>
+                        {moment(calItem.startTime).format('MM/DD/YYYY')}
+                      </h3>
+                      <div className='calendar-time'>
+                        {moment(calItem.startTime).format('h:mma')} -{' '}
+                        {moment(calItem.endTime).format('h:mma')}
+                      </div>
                     </div>
+                    {calItem.description && <Description text={calItem.description} />}
+                    {calItem.location && (
+                      <a
+                        className='event-location anchor'
+                        href={calItem.location}
+                        target='_blank'
+                        rel='noreferrer'
+                      >
+                        Join {calItem.title} event
+                      </a>
+                    )}
                   </div>
-                  {calItem.description && <Description text={calItem.description} />}
-                  {calItem.location && (
-                    <a
-                      className='event-location anchor'
-                      href={calItem.location}
-                      target='_blank'
-                      rel='noreferrer'
-                    >
-                      Join {calItem.title} event
-                    </a>
-                  )}
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </Content>
       </CalendarEventsStyles>
     </Main>
@@ -86,6 +92,9 @@ export const getServerSideProps: GetServerSideProps<CalendarEventProps> = async 
 };
 
 const CalendarEventsStyles = styled.div`
+  .no-events-message {
+    padding: 1rem 0;
+  }
   .calendar-events {
     display: flex;
     align-content: center;
