@@ -36,7 +36,7 @@ export const getCalendarEvents = async (): Promise<CalendarEventItem[]> => {
 
   const items = data.items?.flatMap(({ start, end, description, summary, location, id }) => {
     const eventStart = start?.dateTime && moment(new Date(start?.dateTime));
-    // const isPast = start?.dateTime && now.isBefore();
+
     if (!eventStart || eventStart.isBefore(timeMin) || !start?.dateTime || !end?.dateTime) {
       return [];
     }
@@ -50,10 +50,10 @@ export const getCalendarEvents = async (): Promise<CalendarEventItem[]> => {
           .join('+')}`;
     return {
       id,
-      startTime: start?.dateTime,
-      endTime: end?.dateTime,
-      description,
-      title: summary,
+      startTime: start?.dateTime ?? null,
+      endTime: end?.dateTime ?? null,
+      description: description ?? null,
+      title: summary ?? null,
       location: resolvedLocation,
     };
   });
