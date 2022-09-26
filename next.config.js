@@ -19,6 +19,7 @@ module.exports = (phase, { defaultConfig }) => {
       'WUFOO_HOST',
       'WUFOO_TOKEN',
       'WUFOO_CONTACT_FORM_ID',
+      'GOOGLE_EVENTS_CALENDAR_ID',
     ]);
     validateData();
   }

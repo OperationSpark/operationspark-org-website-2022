@@ -42,6 +42,7 @@ const BonusBarStyles = styled(motion.div)`
   flex-flow: row nowrap;
   justify-content: flex-end;
   grid-gap: 0.25rem;
+  padding: 0 0.25rem;
   @media screen and (max-width: 700px) {
     justify-content: space-around;
     flex-flow: row wrap;
