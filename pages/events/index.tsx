@@ -39,7 +39,7 @@ const CalendarEvents: NextPage<CalendarEventProps> = ({ calEvents }) => {
           {!calEvents.length ? (
             <div className='text-center no-events-message'>
               <h2 className='dynamic-h2'>No upcoming events at this time</h2>
-              <h3 className='dynamic-h3'>Please check back soon</h3>
+              <h3 className='dynamic-h3'>Please check back soon!</h3>
             </div>
           ) : (
             <div className='calendar-events'>
