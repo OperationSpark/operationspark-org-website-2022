@@ -20,6 +20,21 @@ const getCalendarEventsHandler = async (
   res.json(events);
 };
 
+const parseEventLocation = (location?: string | null) => {
+  if (!location) {
+    return null;
+  }
+  if (location?.includes('http')) {
+    return location;
+  }
+  const mapsUrl = `https://maps.google.com?q=${location
+    .split(/\W/g)
+    .filter((v) => !!v)
+    .join('+')}`;
+
+  return mapsUrl;
+};
+
 export const getCalendarEvents = async (): Promise<CalendarEventItem[]> => {
   const { GOOGLE_EVENTS_CALENDAR_ID: calendarId } = process.env;
   const calendar = GoogleCalendar();
@@ -40,14 +55,7 @@ export const getCalendarEvents = async (): Promise<CalendarEventItem[]> => {
     if (!eventStart || eventStart.isBefore(timeMin) || !start?.dateTime || !end?.dateTime) {
       return [];
     }
-    const resolvedLocation = !location
-      ? null
-      : location?.includes('http')
-      ? location
-      : `https://maps.google.com?q=${location
-          .split(/\W/g)
-          .filter((v) => !!v)
-          .join('+')}`;
+    const resolvedLocation = parseEventLocation(location);
     return {
       id,
       startTime: start?.dateTime ?? null,
