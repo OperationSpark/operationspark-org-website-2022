@@ -61,6 +61,22 @@ const CohortSchedule: NextPage = () => {
             </option>
           ))}
         </select>
+        <Content>
+          <p className='schedule-disclaimer dynamic-txt'>
+            Operation Spark includes 6 - 7 months of escalated, intense instruction geared towards a
+            career in software engineering. With breaks and schedule holidays, full completion can
+            take less than a year. Please see the schedule below for more details.
+          </p>
+          <p className='schedule-disclaimer dynamic-txt text-center'>
+            <i>
+              Dates subject to change, email
+              <a href='mailto:admissions@operationspark.org' className='anchor'>
+                admissions@operationspark.org
+              </a>
+              to confirm.
+            </i>
+          </p>
+        </Content>
         {groupBy === 'cohort' && (
           <select onChange={(e) => setFilter(e.target.value)} value={filter}>
             {
@@ -158,20 +174,6 @@ const CohortSchedule: NextPage = () => {
               ),
           )}
         </div>
-        <Content>
-          <p className='schedule-disclaimer dynamic-txt'>
-            The program includes 6-7 months and consist of escalated, intense instruction geared
-            towards a career in software engineering. With breaks and schedule holidays, full
-            completion can take less than a year. Please see the schedule below for more details.
-          </p>
-          <p className='schedule-disclaimer dynamic-txt'>
-            Dates subject to change, email
-            <a href='mailto:admissions@operationspark.org' className='anchor'>
-              admissions@operationspark.org
-            </a>
-            to confirm.
-          </p>
-        </Content>
       </CohortScheduleStyles>
     </Main>
   );
