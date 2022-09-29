@@ -1,5 +1,4 @@
 import { GetServerSideProps, NextPage } from 'next';
-import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import moment from 'moment';
@@ -8,26 +7,6 @@ import { getCalendarEvents, CalendarEventItem } from '@this/pages-api/calendar/e
 
 type CalendarEventProps = {
   calEvents: CalendarEventItem[];
-};
-
-const Description = ({ text }: { text: string }) => {
-  const [parsedText, setParsedText] = useState<string[]>([]);
-  useEffect(() => {
-    const el = document.createElement('div');
-    el.style.whiteSpace = 'pre';
-    el.innerHTML = text || '';
-    const newText = el.innerText.split('\n');
-
-    setParsedText(newText);
-  }, [text]);
-
-  return (
-    <div className='event-description'>
-      {parsedText.map((p, i) => (
-        <p key={`${p}-${i}`}>{p}</p>
-      ))}
-    </div>
-  );
 };
 
 const CalendarEvents: NextPage<CalendarEventProps> = ({ calEvents }) => {
@@ -57,7 +36,12 @@ const CalendarEvents: NextPage<CalendarEventProps> = ({ calEvents }) => {
                         {moment(calItem.endTime).format('h:mma')}
                       </div>
                     </div>
-                    {calItem.description && <Description text={calItem.description} />}
+                    {calItem.description && (
+                      <div
+                        className='event-description'
+                        dangerouslySetInnerHTML={{ __html: calItem.description }}
+                      />
+                    )}
                     {calItem.location && (
                       <a
                         className='event-location anchor'
@@ -141,5 +125,14 @@ const CalendarEventsStyles = styled.div`
   }
   .event-description {
     padding-bottom: 1rem;
+    text-align: left;
+    p {
+      padding: 0.5rem 0;
+    }
+
+    ol,
+    ul {
+      padding-left: 2rem;
+    }
   }
 `;
