@@ -3,7 +3,7 @@ import { anchor } from './mixins/anchor';
 
 const GlobalStyles = createGlobalStyle`
   * {
-    transition: background-color 125ms;
+    transition: background-color 125ms, font-size 125ms;
   }
   :root {
     font-family: 'Roboto', sans-serif;
