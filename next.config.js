@@ -53,6 +53,11 @@ module.exports = (phase, { defaultConfig }) => {
           destination: '/programs/highschool',
           permanent: false,
         },
+        {
+          source: '/privacy',
+          destination: '/privacyPolicy',
+          permanent: true,
+        },
       ];
     },
   };
