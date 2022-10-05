@@ -6,6 +6,8 @@ import NavLink from './elements/NavLink';
 
 const BonusBar = ({ children }: { children?: ReactNode }) => {
   const router = useRouter();
+  const SHOW_HS_APPLICATION = false;
+
   const checkIsPath = (...paths: string[]) => {
     return paths.reduce((isPath, path) => {
       return isPath || router.pathname.includes(path);
@@ -15,7 +17,7 @@ const BonusBar = ({ children }: { children?: ReactNode }) => {
   return (
     <BonusBarStyles className='bonus-bar'>
       {children}
-      {!checkIsPath('/programs/highschool/apply') && (
+      {!checkIsPath('/programs/highschool/apply') && SHOW_HS_APPLICATION && (
         <NavLink href='/programs/highschool/apply' className='info'>
           High School Application
         </NavLink>
@@ -40,7 +42,8 @@ const BonusBarStyles = styled(motion.div)`
   flex-flow: row nowrap;
   justify-content: flex-end;
   grid-gap: 0.25rem;
-  @media screen and (max-width: 700px) {
+  padding: 0 0.25rem;
+  @media screen and (max-width: 768px) {
     justify-content: space-around;
     flex-flow: row wrap;
     padding-bottom: 0.75rem;

@@ -34,8 +34,9 @@ export const navMenus: NavigationMenuLink[] = [
     title: 'High School',
     href: '/programs/highschool',
     subLinks: [
-      { title: 'Programs', href: '' },
-      { title: 'High School Application', href: '/apply' },
+      //! Uncomment to show high school application
+      // { title: 'Programs', href: '' },
+      // { title: 'High School Application', href: '/apply' },
     ],
   },
 
@@ -67,4 +68,5 @@ export const navMenus: NavigationMenuLink[] = [
     subLinks: [],
   },
   { title: 'Contact', href: '/contact', subLinks: [] },
+  { title: 'Events', href: '/events', subLinks: [] },
 ];

@@ -184,9 +184,13 @@ const parseCohortData = (cohortData?: string[][]): ISessionRow[] => {
   }
   const today = new Date();
 
-  return cohortData.map(([course, cohort, year, start, end, char, isNext, order, bg, fg]) => {
+  return cohortData.flatMap(([course, cohort, year, start, end, char, isNext, order, bg, fg]) => {
     const startDate = toCentTime(`${start} 9:00`);
     const endDate = toCentTime(`${end} 9:00`);
+
+    if (today > startDate) {
+      return [];
+    }
 
     return {
       course,

@@ -7,10 +7,11 @@ const IgniteCareer = ({ title, description }: IHome['igniteCareer']) => {
     <IgniteCareerStyles>
       <Content>
         {title.map((text) => (
-          <h1 key={text} className='dynamic-h1'>
+          <h1 key={text} className='dynamic-h1 primary-secondary'>
             {text}
           </h1>
         ))}
+
         {description.map((text) => (
           <h2 key={text} className='dynamic-h3'>
             {description}
@@ -26,13 +27,12 @@ export default IgniteCareer;
 const IgniteCareerStyles = styled.div`
   padding: 2rem 0;
   h1 {
-    color: ${({ theme }) => (theme.isLightMode ? theme.primary[0] : theme.secondary[0])};
     margin-bottom: 2rem;
   }
   h2 {
     color: ${({ theme }) => theme.fg};
     font-weight: 700;
-    width: 80%;
+    width: 100%;
   }
 
   @media screen and (max-width: 768px) {

@@ -4,7 +4,7 @@ const color = require('cli-color');
 const { validateData } = require('./data/validate');
 
 module.exports = (phase, { defaultConfig }) => {
-  console.info(color.magentaBright.bold('\nValidating... '))
+  console.info(color.magentaBright.bold('\nValidating... '));
   if (
     !process.env.GITHUB_ACTION &&
     [PHASE_PRODUCTION_BUILD, PHASE_DEVELOPMENT_SERVER].includes(phase)
@@ -19,11 +19,12 @@ module.exports = (phase, { defaultConfig }) => {
       'WUFOO_HOST',
       'WUFOO_TOKEN',
       'WUFOO_CONTACT_FORM_ID',
+      'GOOGLE_EVENTS_CALENDAR_ID',
     ]);
     validateData();
   }
   if (PHASE_DEVELOPMENT_SERVER === phase) {
-    console.info(color.blueBright.bold('\nhttp://localhost:3000\n'))
+    console.info(color.blueBright.bold('\nhttp://localhost:3000\n'));
   }
   /**
    * @type {import('next').NextConfig}
@@ -44,6 +45,17 @@ module.exports = (phase, { defaultConfig }) => {
         {
           source: '/infoSession',
           destination: '/programs/workforce/infoSession',
+          permanent: true,
+        },
+        // Remove to add high school application
+        {
+          source: '/programs/highschool/apply',
+          destination: '/programs/highschool',
+          permanent: false,
+        },
+        {
+          source: '/privacy',
+          destination: '/privacyPolicy',
           permanent: true,
         },
       ];

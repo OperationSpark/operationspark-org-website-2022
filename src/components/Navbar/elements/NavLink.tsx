@@ -69,12 +69,14 @@ const NavLink = ({
   className,
   callback,
   color = '',
+  title,
 }: {
   children: ReactNode | ReactNode[];
   href?: string;
   className?: string;
   callback?: () => void;
   color?: '' | 'yellow';
+  title?: string;
 }) => {
   const linkTitle = typeof children === 'string' ? children : '';
   const { pathname } = useRouter();
@@ -84,9 +86,10 @@ const NavLink = ({
       className={`${href && pathname.includes(href) ? 'active' : ''} ${className || ''}`}
       color={color}
       onClick={callback}
+      title={title ?? linkTitle}
     >
       {href ? (
-        <Link href={href} aria-label={linkTitle}>
+        <Link href={href} aria-label={title ?? linkTitle}>
           {children}
         </Link>
       ) : (
