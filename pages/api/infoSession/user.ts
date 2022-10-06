@@ -45,6 +45,9 @@ export default async function handleInfoSessionForm(req: ISessionUser, res: Next
     await runCloudFunction({
       url: SIGNUP_API_ENDPOINT,
       body: payload,
+      headers: {
+        'X-Greenlight-Signup-Api-Key': GREENLIGHT_API_TOKEN,
+      },
     });
     res.status(200).end();
   } catch (error) {
