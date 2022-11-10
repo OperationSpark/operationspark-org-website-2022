@@ -195,8 +195,9 @@ export const COEBoxStyles = styled(motion.div)`
     }
     .overflow-info-box {
       ${cardShadow};
-      border-radius: 0.25rem;
+      border-radius: 0.5rem;
       position: relative;
+      overflow: hidden;
       ul {
         list-style: none;
         padding-left: 0 !important;
