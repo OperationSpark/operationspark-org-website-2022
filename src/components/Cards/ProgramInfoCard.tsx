@@ -7,6 +7,8 @@ import { ICourses } from '@this/data/types/programs';
 import PlainCard from './PlainCard';
 import { cardShadowLtr } from '@this/src/theme/styled/mixins/shadows';
 
+import { BsInfo as InfoIcon } from 'react-icons/bs';
+
 type ProgramInfoCardProps = {
   nextSessionDates: { [key: string]: ISessionRow };
   nextInfoSessionDate: string | null;
@@ -14,6 +16,7 @@ type ProgramInfoCardProps = {
 
 const ProgramInfoCard = ({
   title,
+  subtitle,
   length,
   cost,
   description,
@@ -32,29 +35,38 @@ const ProgramInfoCard = ({
         <div className='program-card-body'>
           <div className='program-card-body-left'>
             <h2 className='dynamic-h2 primary-secondary program-title'>{title}</h2>
+            {!subtitle ? null : (
+              <p className='primary-secondary program-title'>
+                <b>{subtitle}</b>
+              </p>
+            )}
             <div className='program-info-row'>
-              {cost && (
+              <div className='program-info-row-top'>
+                {cost && (
+                  <div className='program-info'>
+                    <p>
+                      <b>Cost</b>
+                      <i>{cost}</i>
+                    </p>
+                  </div>
+                )}
                 <div className='program-info'>
                   <p>
-                    <b>Cost</b>
-                    <i>{cost}</i>
+                    <b>Length</b>
+                    <i>{length}</i>
                   </p>
                 </div>
-              )}
-              <div className='program-info'>
-                <p>
-                  <b>Length</b>
-                  <i>{length}</i>
-                </p>
+                {preReqs && (
+                  <div className='program-info'>
+                    <p>
+                      <b>Prerequisites</b>
+                      <i>{preReqs}</i>
+                    </p>
+                  </div>
+                )}
               </div>
-              {preReqs && (
-                <div className='program-info'>
-                  <p>
-                    <b>Prerequisites</b>
-                    <i>{preReqs}</i>
-                  </p>
-                </div>
-              )}
+            </div>
+            <div className='program-info-row-bottom'>
               {infoMessage && (
                 <div className='program-info next-session'>
                   <p>
@@ -75,8 +87,16 @@ const ProgramInfoCard = ({
           </div>
           <div className='program-card-body-right'>
             {description.map((desc) => (
-              <p key={desc} className='dynamic-txt program-desc'>
-                {desc}
+              <p
+                key={desc}
+                className={`dynamic-txt program-desc${desc.startsWith('*') ? ' disclaimer' : ''}`}
+              >
+                {desc.startsWith('*') ? (
+                  <span>
+                    <InfoIcon size={24} className='primary-secondary' />
+                  </span>
+                ) : null}
+                {desc.startsWith('*') ? <i>{desc.slice(desc.indexOf('*') + 1).trim()}</i> : desc}
               </p>
             ))}
             {infoMessage && (
@@ -130,11 +150,16 @@ export const ProgramInfoCardStyles = styled.div`
 
     .program-desc {
       padding: 1rem 0;
+      display: flex;
       :first-of-type {
         padding-top: 0;
       }
       :last-of-type {
         padding-bottom: 0;
+      }
+      &.disclaimer {
+        font-size: 0.9em;
+        font-weight: 300;
       }
     }
     .info-message {
@@ -144,7 +169,13 @@ export const ProgramInfoCardStyles = styled.div`
   .program-info-row {
     display: flex;
     flex-flow: column;
-    grid-gap: 0.75rem;
+    justify-content: space-between;
+    height: 100%;
+  }
+  .program-info-row-top {
+    display: flex;
+    flex-flow: column;
+    gap: 0.75rem;
   }
   .program-info {
     color: ${({ theme }) => (theme.isLightMode ? theme.grey[600] : theme.grey[400])};
@@ -166,8 +197,9 @@ export const ProgramInfoCardStyles = styled.div`
   }
   .program-info.next-session {
     p {
-      width: fit-content;
+      width: 100%;
       border-radius: 0.25rem;
+      text-align: center;
       padding: 0.75rem;
       margin-left: -0.75rem;
       margin-bottom: -0.75rem;

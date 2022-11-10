@@ -139,14 +139,15 @@ const ThemeButtonStyles = styled.menu`
     }
     .theme-text {
       font-size: 0.8rem;
-      font-weight: 900;
+      font-weight: 500;
       width: 100%;
       padding: 0.1rem 0.25rem;
       line-height: 1em;
       display: flex;
-      border-radius: 0.5rem;
-      background: ${({ theme }) => theme.alpha.bg50};
-      color: ${({ theme }) => (theme.isLightMode ? theme.primary[700] : theme.secondary[400])};
+      border-radius: 0.25rem;
+      background: ${({ theme }) => theme.alpha.bg};
+      backdrop-filter: blur(5px);
+      color: ${({ theme }) => (theme.isLightMode ? theme.magenta[500] : theme.green[500])};
     }
   }
 `;

@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
@@ -109,7 +108,17 @@ const AlertBar = ({ info }: { info: IAlert }) => {
         >
           <div className='alert-message'>
             <Zap size={0.9} />
-            {info.url ? <Link href={info.url}>{info.message}</Link> : info.message}
+            {info.url ? (
+              <a
+                href={info.url}
+                target={info.url.startsWith('http') ? '_blank' : undefined}
+                rel='noreferrer'
+              >
+                {info.message}
+              </a>
+            ) : (
+              info.message
+            )}
           </div>
           <motion.button
             className='alert-close-btn'
