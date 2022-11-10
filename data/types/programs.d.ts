@@ -1,5 +1,6 @@
 export interface ICourses {
   title: string;
+  subtitle?: string;
   length: string;
   description: string[];
   cost?: string;
@@ -32,6 +33,6 @@ export interface IHighschoolPrograms {
   };
 }
 export interface IPrograms {
-  adult: IAdultPrograms;
+  adult: ICourses[];
   highschool: IHighschoolPrograms;
 }

@@ -2,7 +2,7 @@
   "adult": {
     "header": {
       "title": ["Develop a Career"],
-      "description": ["Adult Workforce Program"]
+      "description": ["Adult Workforce Immersion Program"]
     },
     "overview": {
       "title": ["Program Overview"],
@@ -21,11 +21,13 @@
         "infoMessage": "Attending info session and orientation is required prior to starting prep",
         "preReqs": "None",
         "description": [
-          "Our Prep program is a 3 week introduction to coding. Over the three weeks you will encounter the basics of JavaScript and decide whether you believe software engineering is something you are interested in pursuing. There is no cost for the prep program so that everyone can at least try their hand at coding and see if it's for them."
+          "Our Prep program is a 3 week introduction to coding. Over the three weeks you will encounter the basics of JavaScript and decide whether you believe software engineering is something you are interested in pursuing. There is no cost for the prep program so that everyone can at least try their hand at coding and see if it's for them.",
+          "* Prep is not intended to prepare students for jobs in the software industry, but rather to ensure students have a fundamental understanding of computing principles before continuing into the tuition-based phases of the program. Operation Spark does not promise employability upon completion of Prep."
         ]
       },
       {
         "title": "Bootcamp",
+        "subtitle": "Introduction to Programming Bootcamp",
         "length": "6 Weeks / 72 Hours",
         "cost": "$825.00",
         "days": ["Monday", "Tuesday", "Wednesday", "Thursday"],
@@ -34,7 +36,8 @@
         "preReqs": "Prep",
         "description": [
           "Our 72-hour Introduction to Programming Bootcamp is a deep dive into JavaScript and functional programming. Bootcamp prepares students for entry into our three month Immersion program by prepping them with the fundamentals of JavaScript. Students will spend the first three weeks working on projects to practice manipulating data types and using various types of functions, such as higher order functions. The latter two weeks will be a review of higher level concepts that are touched on throughout the first three weeks, nurturing expanded knowledge on the strong foundation built by the first three weeks. One week after the final class there will be a final exam, which doubles as an entrance exam for Immersion.",
-          "Operation Spark's Bootcamp is not intended to prepare students to get jobs in the software industry, rather to give students a fundamental understanding of core JavaScript principles before entering immersion. Operation Spark does not promise employability upon graduation solely of our Bootcamp program."
+
+          "* Bootcamp is not intended to prepare students to get jobs in the software industry, rather to give students a fundamental understanding of core JavaScript principles before entering immersion. Operation Spark does not promise employability upon graduation solely of our Bootcamp program."
         ]
       },
       {
