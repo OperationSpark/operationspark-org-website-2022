@@ -10,17 +10,6 @@ export type NavigationMenuLink = {
 };
 
 export const navMenus: NavigationMenuLink[] = [
-  /* Unsure if these links will be needed.
-    - Can be deleted if we determine that all program info will live on the same page
-  */
-  // {
-  //   title: 'Our Programs',
-  //   href: '/programs',
-  //   subLinks: [
-  //     { title: 'Adult Workforce', href: '/workforce' },
-  //     { title: 'High School', href: '/highschool' },
-  //   ],
-  // },
   {
     title: 'Adult Workforce',
     href: '/programs/workforce',
