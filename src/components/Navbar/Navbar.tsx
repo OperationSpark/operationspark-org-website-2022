@@ -17,7 +17,7 @@ const AlertBar = dynamic(() => import('./AlertBar'));
 const DesktopNav = dynamic(() => import('./DesktopNav'));
 const MobileNav = dynamic(() => import('./MobileNav'));
 
-const { NODE_ENV } = process.env;
+const { OVERRIDE_NODE_ENV } = process.env;
 
 interface NavProps {
   alertInfo: IAlert;
@@ -93,7 +93,7 @@ export default function Nav({ alertInfo }: NavProps) {
 
   return (
     <NavbarStyles ref={navRef} animate={navAnimation} transition={navTransition}>
-      {NODE_ENV !== 'test' ? null : (
+      {OVERRIDE_NODE_ENV !== 'testing' ? null : (
         <div className='test-mode'>
           <TestIcon /> &nbsp;TEST MODE&nbsp; <TestIcon />
         </div>
