@@ -15,7 +15,6 @@ export const runCloudFunction = async ({ url, body, headers = {} }: RunCloudFunc
 
   const auth = new GoogleAuth({ credentials });
   const client = await auth.getIdTokenClient(url);
-
   await client.request({
     url,
     method: 'POST',

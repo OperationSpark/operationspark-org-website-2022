@@ -13,7 +13,23 @@ interface ISession {
   cohort: string;
   startDateTime: string;
   programId: string;
+  locationType: LocationType;
+  googlePlace: GooglePlace;
 }
+
+export type LocationType = 'HYBRID' | 'IN_PERSON' | 'VIRTUAL';
+
+export type GooglePlace = {
+  placesId: string;
+  name: string;
+  address: string;
+  phone: string;
+  website: string;
+  geometry: {
+    lat: number;
+    lng: number;
+  };
+};
 
 export type FormDataSignup = {
   session?: ISession;
@@ -70,6 +86,7 @@ function formatPayload(form: FormDataSignup): ISessionSignup {
     cohort: session?.cohort ?? '',
     referrerResponse: referencedBy.additionalInfo,
     referrer: referencedBy?.value,
+    locationType: session?.locationType,
     token: GREENLIGHT_API_TOKEN ?? '',
   };
 }
