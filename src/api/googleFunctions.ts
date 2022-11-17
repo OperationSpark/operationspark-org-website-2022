@@ -1,12 +1,12 @@
 import { GoogleAuth } from 'google-auth-library';
 
-export type RunCloudFunctionArgs = {
+export type RunCloudFunctionArgs<T> = {
   url: string;
-  body: { [key: string]: string | undefined };
+  body: T;
   headers?: { [key: string]: string | undefined };
 };
 
-export const runCloudFunction = async ({ url, body, headers = {} }: RunCloudFunctionArgs) => {
+export async function runCloudFunction<T>({ url, body, headers = {} }: RunCloudFunctionArgs<T>) {
   const { GOOGLE_SERVICE_ACCOUNT } = process.env;
   const credentials = GOOGLE_SERVICE_ACCOUNT && JSON.parse(GOOGLE_SERVICE_ACCOUNT);
   if (!credentials) {
@@ -24,4 +24,4 @@ export const runCloudFunction = async ({ url, body, headers = {} }: RunCloudFunc
     },
     body: JSON.stringify(body),
   });
-};
+}

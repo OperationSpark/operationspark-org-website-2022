@@ -14,7 +14,7 @@ interface ISession {
   startDateTime: string;
   programId: string;
   locationType: LocationType;
-  googlePlace: GooglePlace;
+  googlePlace?: GooglePlace;
 }
 
 export type LocationType = 'HYBRID' | 'IN_PERSON' | 'VIRTUAL';
@@ -41,7 +41,6 @@ export type FormDataSignup = {
 };
 
 export interface ISessionSignup {
-  [key: string]: string | undefined;
   programId: string;
   nameFirst: string;
   nameLast: string;
@@ -51,6 +50,8 @@ export interface ISessionSignup {
   referrerResponse: string;
   startDateTime?: string;
   cohort: string;
+  googlePlace?: GooglePlace;
+  locationType?: LocationType;
   sessionId: string;
   token: string;
 }
@@ -65,6 +66,7 @@ export default async function handleInfoSessionForm(req: ISessionUser, res: Next
         'X-Greenlight-Signup-Api-Key': GREENLIGHT_API_TOKEN,
       },
     });
+
     res.status(200).end();
   } catch (error) {
     console.error('Could not POST to signup service', error);
@@ -74,6 +76,11 @@ export default async function handleInfoSessionForm(req: ISessionUser, res: Next
 
 function formatPayload(form: FormDataSignup): ISessionSignup {
   const { session, email, firstName, lastName, phone, referencedBy } = form;
+
+  // Sometimes greenlight returns an empty string rather than a google place object
+  if (typeof session?.googlePlace === 'string') {
+    session.googlePlace = undefined;
+  }
 
   return {
     nameFirst: firstName,
@@ -87,6 +94,7 @@ function formatPayload(form: FormDataSignup): ISessionSignup {
     referrerResponse: referencedBy.additionalInfo,
     referrer: referencedBy?.value,
     locationType: session?.locationType,
+    googlePlace: session?.googlePlace,
     token: GREENLIGHT_API_TOKEN ?? '',
   };
 }

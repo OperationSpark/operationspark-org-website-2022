@@ -28,7 +28,7 @@ export default async function infoSession(
   res: NextApiResponse<ISessionDates[]>,
 ) {
   const sessionDates = await getInfoSessionDates();
-  if (!sessionDates.length) {
+  if (!sessionDates?.length) {
     return res.status(404).end();
   }
   return res.status(200).json(sessionDates);
