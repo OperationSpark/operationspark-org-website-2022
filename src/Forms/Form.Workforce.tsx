@@ -25,7 +25,6 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
     const { sessionDate, ...values } = form.values();
 
     const session = sessionDates.find((s) => s._id === sessionDate.value);
-
     const body: FormDataSignup = {
       ...values,
       ...(session && {
@@ -34,6 +33,8 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
           cohort: session.cohort,
           programId: session.programId,
           startDateTime: session.times.start.dateTime,
+          googlePlace: session.googlePlace,
+          locationType: session.locationType,
         },
       }),
     };

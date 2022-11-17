@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import axios from 'axios';
 import { config } from '../config';
+import { GooglePlace, LocationType } from './user';
 
 const { GREENLIGHT_API_ENDPOINT } = config;
 export interface ISessionDates {
@@ -18,6 +19,8 @@ export interface ISessionDates {
     };
     until: string;
   };
+  googlePlace: GooglePlace;
+  locationType: LocationType;
 }
 
 export default async function infoSession(
@@ -25,7 +28,7 @@ export default async function infoSession(
   res: NextApiResponse<ISessionDates[]>,
 ) {
   const sessionDates = await getInfoSessionDates();
-  if (!sessionDates.length) {
+  if (!sessionDates?.length) {
     return res.status(404).end();
   }
   return res.status(200).json(sessionDates);
