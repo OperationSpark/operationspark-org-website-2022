@@ -3,6 +3,8 @@ const color = require('cli-color');
 
 const { validateData } = require('./data/validate');
 
+const { OVERRIDE_NODE_ENV = '' } = process.env;
+
 module.exports = (phase, { defaultConfig }) => {
   console.info(color.magentaBright.bold('\nValidating... '));
   if (
@@ -34,6 +36,9 @@ module.exports = (phase, { defaultConfig }) => {
     reactStrictMode: true,
     compiler: {
       styledComponents: true,
+    },
+    env: {
+      OVERRIDE_NODE_ENV,
     },
     async redirects() {
       return [
