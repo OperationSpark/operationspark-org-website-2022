@@ -56,9 +56,9 @@ const AbsoluteBtnWindow = ({
               opacity: 0,
             }}
             animate={{
-              maxHeight: `calc(100vh - (${theme.navHeight}px + 5rem))`,
+              maxHeight: `calc(100vh - (${theme.navHeight}px + 3rem))`,
               width: style?.width || '500px',
-              maxWidth: 'calc(100vw - 1rem)',
+              maxWidth: 'calc(100vw - 2rem)',
               opacity: 1,
             }}
             exit={{ maxHeight: `0vh`, width: '100px', opacity: 1 }}
@@ -120,10 +120,13 @@ const AbsoluteBtnWindowStyles = styled.div`
 
   ._abs-win-btn {
     position: absolute;
-
     margin: 0;
     right: 0;
     top: 0;
     z-index: 100;
+  }
+
+  @media screen and (max-width: 768px) {
+    top: calc(${({ theme }) => theme.navHeight}px - 2rem);
   }
 `;
