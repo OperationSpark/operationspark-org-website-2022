@@ -52,7 +52,7 @@ module.exports = (phase, { defaultConfig }) => {
           destination: '/programs/workforce/infoSession',
           permanent: true,
         },
-        // Remove to add high school application
+        // Uncomment to remove high school application route
         // {
         //   source: '/programs/highschool/apply',
         //   destination: '/programs/highschool',
