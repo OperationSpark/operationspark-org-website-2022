@@ -215,7 +215,7 @@ const SpringApplication = ({ onSubmitComplete }: SpringApplicationProps) => {
                   PM
                 </li>
                 <li>
-                  <b className='primary-secondary'>IN PERSON: </b> Wednesdays, 4:45 - 8:00 PM
+                  <b className='primary-secondary'>IN PERSON: </b> Thursdays, 4:45 - 8:00 PM
                 </li>
               </ul>
               <p>
@@ -504,18 +504,18 @@ const courseTimes = {
       name: 'In-person, Wednesdays, 4:45 - 8:00 PM',
     },
     {
-      value: 'virtual-tue-thurs-5-7',
+      value: 'virtual-tues-thurs-5-7',
       name: 'Virtual, Tuesdays + Thursdays, 5:00 - 7:00 PM',
     },
   ],
   advanced: [
     {
       value: 'onsite-thurs-4-8',
-      name: 'In-person, Wednesdays, 4:30 - 8:00 PM',
+      name: 'In-person, Thursdays, 4:45 - 8:00 PM',
     },
     {
-      value: 'virtual-mon-wed-5-7',
-      name: 'Virtual, Mondays + Wednesdays, 5:00-7:00 PM',
+      value: 'virtual-tues-thurs-5-7',
+      name: 'Virtual, Tuesdays + Thursdays, 5:00-7:00 PM',
     },
   ],
 };
