@@ -6,7 +6,7 @@ import NavLink from './elements/NavLink';
 
 const BonusBar = ({ children }: { children?: ReactNode }) => {
   const router = useRouter();
-  const SHOW_HS_APPLICATION = false;
+  const SHOW_HS_APPLICATION = true;
 
   const checkIsPath = (...paths: string[]) => {
     return paths.reduce((isPath, path) => {

@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import dynamic from 'next/dynamic';
+
 import Link from 'next/link';
 import styled from 'styled-components';
 import { FiChevronLeft } from 'react-icons/fi';
@@ -7,10 +7,9 @@ import { FiChevronLeft } from 'react-icons/fi';
 import Main from '@this/components/layout/Main';
 import Content from '@this/components/layout/Content';
 import { BgImg } from '@this/src/components/Elements';
-
-const HighschoolApplicationForm = dynamic(
-  () => import('@this/src/Forms/Form.HighschoolApplication'),
-);
+import Map from '@this/src/components/Elements/Map';
+import HighschoolApplicationForm from '@this/src/Forms/Form.HighschoolApplication';
+import PlainCard from '@this/src/components/Cards/PlainCard';
 
 const HighschoolSignup: NextPage = () => {
   return (
@@ -27,7 +26,7 @@ const HighschoolSignup: NextPage = () => {
           >
             <div className='program-header'>
               <div className='header-card'>
-                <h1 className='dynamic-xl secondary'>Fall 2022 High School</h1>
+                <h1 className='dynamic-xl secondary'>Spring 2023 High School</h1>
                 <h2 className='dynamic-h2 secondary'>After-School Application</h2>
                 <p className='dynamic-txt'>
                   Are you currently enrolled in a high school in the Greater New Orleans area and
@@ -35,7 +34,7 @@ const HighschoolSignup: NextPage = () => {
                 </p>
                 <p className='dynamic-txt'>
                   <b className='secondary'>
-                    Fall after-school classes start the week of August 29.
+                    Spring classes start the week of January 16 and end the week of May 22.
                   </b>
                 </p>
               </div>
@@ -49,26 +48,88 @@ const HighschoolSignup: NextPage = () => {
           </Content>
         </BgImg>
         <Content>
-          <div className='hs-application-description dynamic-txt'>
-            <p>
-              This semester, we are offering both in-person and virtual classes. You can enroll in
-              one or the other (No hybrid option).
-            </p>
-            <div className='reqs-list'>
-              For virtual classes, you will need:
-              <ul>
-                <li>laptop/desktop computer (Mac, Windows, or Chromebook)</li>
-                <li>webcam and mic </li>
-                <li>reliable internet connection </li>
-                <li>quiet place to work</li>
-              </ul>
+          <PlainCard className='hs-application-description dynamic-txt'>
+            <div className='desc-columns'>
+              <div className='left-col'>
+                <p>
+                  This semester, we are offering both in-person and virtual classes. You can enroll
+                  in one or the other (No hybrid option).
+                </p>
+                <br />
+                <p>
+                  <b>Available Courses:</b>
+                </p>
+                <p>
+                  <b className='primary-secondary'>Fundamentals of HTML, CSS, and Javascript</b>
+                </p>
+
+                <p>
+                  <b>No Prerequisite</b>
+                </p>
+                <ul>
+                  <li>
+                    <b className='primary-secondary'>Virtual: </b> Tuesdays + Thursdays, 5:00 - 7:00
+                    PM
+                  </li>
+                  <li>
+                    <b className='primary-secondary'>In Person: </b> Wednesdays, 4:45 - 8:00 PM
+                  </li>
+                </ul>
+                <br />
+                <p className='primary-secondary'>
+                  <b>Advanced Javascript, Functional Programming and Web Development</b>
+                </p>
+                <p>
+                  <b>Prerequisite: </b>Fundamentals of HTML, CSS, and Javascript
+                </p>
+                <ul>
+                  <li>
+                    <b className='primary-secondary'>Virtual: </b> Tuesdays + Thursdays, 5:00 - 7:00
+                    PM
+                  </li>
+                  <li>
+                    <b className='primary-secondary'>In Person: </b> Thursdays, 4:45 - 8:00 PM
+                  </li>
+                </ul>
+                <div className='reqs-list'>
+                  <b>For virtual classes, you will need:</b>
+                  <ul>
+                    <li>laptop/desktop computer (Mac, Windows, or Chromebook)</li>
+                    <li>webcam and mic </li>
+                    <li>reliable internet connection </li>
+                    <li>quiet place to work</li>
+                  </ul>
+                </div>
+              </div>
+              <div className='right-col'>
+                <PlainCard noDivider={true} shadow='none'>
+                  <p>
+                    <b>In person classes </b>
+                    will be held at the Operation Spark Technical Learning Center
+                  </p>
+                  <br />
+                  <p className='primary-secondary text-center'>514 Franklin Avenue, New Orleans</p>
+                  <div className='opspark-map'>
+                    <Map
+                      href='https://goo.gl/maps/X6eQ54sWbbH2RbVd8'
+                      address='514 Franklin Avenue, New Orleans, LA 70117'
+                    />
+                  </div>
+                </PlainCard>
+              </div>
             </div>
-            Once you complete this form, you will receive more detailed information about the course
-            and next steps to finalize enrollment. Our courses are open to students in grades 10-12.
-            We partner with many public schools in the Greater New Orleans area- tuition is
-            generally covered for students attending our partner schools. For students who attend
-            non-partner schools, discounted tuition rates are available.
-          </div>
+            <p>
+              Within 3 business days of completing this form, you will receive more detailed
+              information about the course and next steps to finalize enrollment.
+            </p>
+            &nbsp;
+            <p>
+              Our courses are open to students in grades 10-12. The course is free for students
+              attending public, parochial, or home school in New Orleans. If you do not fit that
+              description, we may be able to partner with your school district to cover the cost,
+              and if not, we offer discounted tuition to families paying privately.
+            </p>
+          </PlainCard>
           <div className='hs-form'>
             <HighschoolApplicationForm />
           </div>
@@ -109,10 +170,43 @@ const HighschoolSignupStyles = styled.div`
     }
   }
   .hs-application-description {
+    ul {
+      padding-left: 2rem;
+    }
     .reqs-list {
       margin: 1rem 0;
-      ul {
-        padding-left: 2rem;
+    }
+    .desc-columns {
+      display: flex;
+      flex-flow: row wrap;
+      gap: 1rem;
+      .left-col {
+        flex: 1;
+      }
+      .right-col {
+        display: flex;
+        flex-flow: column;
+        max-width: 350px;
+        margin: 0 auto;
+        .opspark-map {
+          max-width: 325px;
+          margin: 0 auto;
+          > div {
+            margin: 0 0;
+          }
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .hs-application-description {
+      .desc-columns {
+        flex-flow: column;
+        .right-col {
+          .opspark-map {
+            max-width: 250px;
+          }
+        }
       }
     }
   }

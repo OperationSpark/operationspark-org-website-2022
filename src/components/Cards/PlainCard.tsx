@@ -38,14 +38,15 @@ interface PlainCardProps {
   children: ReactNode | ReactNode[];
   className?: string;
   shadow?: 'alternate' | 'subtle' | 'none';
+  noDivider?: boolean;
   id?: string;
 }
 
-const PlainCard = ({ children, className, shadow, id }: PlainCardProps) => {
+const PlainCard = ({ children, className, shadow, id, noDivider }: PlainCardProps) => {
   return (
     <PlainCardStyles className={`${className} ${shadow || 'default'}`} id={id}>
       <div className='plain-card-body'>{children}</div>
-      <SlashDivider style={{ borderBottom: 'none' }} />
+      {!noDivider ? <SlashDivider style={{ borderBottom: 'none' }} /> : null}
     </PlainCardStyles>
   );
 };
