@@ -169,12 +169,14 @@ export const ProgramInfoCardStyles = styled.div`
   .program-info-row {
     display: flex;
     flex-flow: column;
-    justify-content: space-between;
     height: 100%;
+    justify-content: space-between;
   }
   .program-info-row-top {
     display: flex;
+    justify-content: space-evenly;
     flex-flow: column;
+    height: 100%;
     gap: 0.75rem;
   }
   .program-info {
@@ -228,26 +230,27 @@ export const ProgramInfoCardStyles = styled.div`
         display: flex;
       }
     }
+    .program-info-row-top {
+      flex-flow: row wrap;
+      width: 100%;
+    }
     .program-info-row {
       display: flex;
       flex-flow: row wrap;
-      grid-gap: 0.5rem;
-      justify-content: space-around;
+      gap: 0.5rem;
+      width: 100%;
     }
     .program-info {
-      flex: 140px;
       display: flex;
       justify-content: center;
-      width: 100%;
-      min-width: fit-content;
+      align-items: center;
+      flex: 2;
       border-radius: 0.25rem;
       line-height: 1.25em;
       padding: 0.25rem;
       min-width: 6rem;
       box-shadow: 0 0 1px ${({ theme }) => theme.alpha.fg50} inset;
-      :last-child {
-        flex: 100%;
-      }
+
       p {
         text-align: center;
         justify-content: space-between;
