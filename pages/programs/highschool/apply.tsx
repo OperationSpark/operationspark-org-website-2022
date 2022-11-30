@@ -7,7 +7,7 @@ import { FiChevronLeft } from 'react-icons/fi';
 import Main from '@this/components/layout/Main';
 import Content from '@this/components/layout/Content';
 import { BgImg } from '@this/src/components/Elements';
-
+import Map from '@this/src/components/Elements/Map';
 import HighschoolApplicationForm from '@this/src/Forms/Form.HighschoolApplication';
 import PlainCard from '@this/src/components/Cards/PlainCard';
 
@@ -49,49 +49,74 @@ const HighschoolSignup: NextPage = () => {
         </BgImg>
         <Content>
           <PlainCard className='hs-application-description dynamic-txt'>
-            <p>
-              This semester, we are offering both in-person and virtual classes. You can enroll in
-              one or the other (No hybrid option).
-            </p>
-            <br />
-            <p>
-              <b>Available Courses:</b>
-            </p>
-            <p>
-              <b className='primary-secondary'>Fundamentals of HTML, CSS, and Javascript</b>
-            </p>
-            <p> [ No Prerequisite ]</p>
-            <ul>
-              <li>
-                <b className='primary-secondary'>Virtual: </b> Tuesdays + Thursdays, 5:00 - 7:00 PM
-              </li>
-              <li>
-                <b className='primary-secondary'>IN PERSON: </b> Wednesdays, 4:45 - 8:00 PM
-              </li>
-            </ul>
-            <br />
-            <p className='primary-secondary'>
-              <b>Advanced Javascript, Functional Programming and Web Development</b>
-            </p>
-            <p>
-              <b>[ Prerequisite: Fundamentals of HTML, CSS, and Javascript ]</b>
-            </p>
-            <ul>
-              <li>
-                <b className='primary-secondary'>Virtual: </b> Tuesdays + Thursdays, 5:00 - 7:00 PM
-              </li>
-              <li>
-                <b className='primary-secondary'>IN PERSON: </b> Thursdays, 4:45 - 8:00 PM
-              </li>
-            </ul>
-            <div className='reqs-list'>
-              <b>For virtual classes, you will need:</b>
-              <ul>
-                <li>laptop/desktop computer (Mac, Windows, or Chromebook)</li>
-                <li>webcam and mic </li>
-                <li>reliable internet connection </li>
-                <li>quiet place to work</li>
-              </ul>
+            <div className='desc-columns'>
+              <div className='left-col'>
+                <p>
+                  This semester, we are offering both in-person and virtual classes. You can enroll
+                  in one or the other (No hybrid option).
+                </p>
+                <br />
+                <p>
+                  <b>Available Courses:</b>
+                </p>
+                <p>
+                  <b className='primary-secondary'>Fundamentals of HTML, CSS, and Javascript</b>
+                </p>
+
+                <p>
+                  <b>No Prerequisite</b>
+                </p>
+                <ul>
+                  <li>
+                    <b className='primary-secondary'>Virtual: </b> Tuesdays + Thursdays, 5:00 - 7:00
+                    PM
+                  </li>
+                  <li>
+                    <b className='primary-secondary'>In Person: </b> Wednesdays, 4:45 - 8:00 PM
+                  </li>
+                </ul>
+                <br />
+                <p className='primary-secondary'>
+                  <b>Advanced Javascript, Functional Programming and Web Development</b>
+                </p>
+                <p>
+                  <b>Prerequisite: </b>Fundamentals of HTML, CSS, and Javascript
+                </p>
+                <ul>
+                  <li>
+                    <b className='primary-secondary'>Virtual: </b> Tuesdays + Thursdays, 5:00 - 7:00
+                    PM
+                  </li>
+                  <li>
+                    <b className='primary-secondary'>In Person: </b> Thursdays, 4:45 - 8:00 PM
+                  </li>
+                </ul>
+                <div className='reqs-list'>
+                  <b>For virtual classes, you will need:</b>
+                  <ul>
+                    <li>laptop/desktop computer (Mac, Windows, or Chromebook)</li>
+                    <li>webcam and mic </li>
+                    <li>reliable internet connection </li>
+                    <li>quiet place to work</li>
+                  </ul>
+                </div>
+              </div>
+              <div className='right-col'>
+                <PlainCard noDivider={true} shadow='none'>
+                  <p>
+                    <b>In person classes </b>
+                    will be held at the Operation Spark Technical Learning Center
+                  </p>
+                  <br />
+                  <p className='primary-secondary text-center'>514 Franklin Avenue, New Orleans</p>
+                  <div className='opspark-map'>
+                    <Map
+                      href='https://goo.gl/maps/X6eQ54sWbbH2RbVd8'
+                      address='514 Franklin Avenue, New Orleans, LA 70117'
+                    />
+                  </div>
+                </PlainCard>
+              </div>
             </div>
             <p>
               Within 3 business days of completing this form, you will receive more detailed
@@ -150,6 +175,39 @@ const HighschoolSignupStyles = styled.div`
     }
     .reqs-list {
       margin: 1rem 0;
+    }
+    .desc-columns {
+      display: flex;
+      flex-flow: row wrap;
+      gap: 1rem;
+      .left-col {
+        flex: 1;
+      }
+      .right-col {
+        display: flex;
+        flex-flow: column;
+        max-width: 350px;
+        margin: 0 auto;
+        .opspark-map {
+          max-width: 325px;
+          margin: 0 auto;
+          > div {
+            margin: 0 0;
+          }
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .hs-application-description {
+      .desc-columns {
+        flex-flow: column;
+        .right-col {
+          .opspark-map {
+            max-width: 250px;
+          }
+        }
+      }
     }
   }
 `;
