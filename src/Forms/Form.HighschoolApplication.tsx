@@ -183,7 +183,7 @@ const SpringApplication = ({ onSubmitComplete }: SpringApplicationProps) => {
               <p>
                 This semester, we are offering both in-person and virtual classes.{' '}
                 <b>
-                  <i>You can enroll in one or the other. (No hybrid option)</i>
+                  <i>You can enroll in one or the other (No hybrid option).</i>
                 </b>
               </p>
               &nbsp;
