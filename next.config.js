@@ -53,11 +53,11 @@ module.exports = (phase, { defaultConfig }) => {
           permanent: true,
         },
         // Remove to add high school application
-        {
-          source: '/programs/highschool/apply',
-          destination: '/programs/highschool',
-          permanent: false,
-        },
+        // {
+        //   source: '/programs/highschool/apply',
+        //   destination: '/programs/highschool',
+        //   permanent: false,
+        // },
         {
           source: '/privacy',
           destination: '/privacyPolicy',

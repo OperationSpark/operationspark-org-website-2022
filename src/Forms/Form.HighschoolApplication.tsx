@@ -8,8 +8,9 @@ import Form from '@this/components/Form/Form';
 import useForm from '@this/components/Form/useForm';
 import Button from '@this/components/Elements/Button';
 import { TOption } from '@this/data/types/bits';
+import PlainCard from '@this/src/components/Cards/PlainCard';
 
-const HighschoolFormSignupStyles = styled.div`
+const SpringApplicationStyles = styled.div`
   width: 100%;
 
   .form-info {
@@ -62,12 +63,12 @@ const getSelectedCourseTimes = (selected: string): { options: TOption[]; note: s
   return null;
 };
 
-interface HighschoolFormSignupProps {
+interface SpringApplicationProps {
   onSubmitComplete?: () => void;
 }
 
-const HighschoolFormSignup = ({ onSubmitComplete }: HighschoolFormSignupProps) => {
-  const sheetsTabName = 'Applications - Fall 2022';
+const SpringApplication = ({ onSubmitComplete }: SpringApplicationProps) => {
+  const sheetsTabName = 'Applications - Spring 2023';
   const form = useForm();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const hasErrors = form.hasErrors();
@@ -114,12 +115,12 @@ const HighschoolFormSignup = ({ onSubmitComplete }: HighschoolFormSignupProps) =
   }, [courseTimeOptions?.options]);
 
   return (
-    <HighschoolFormSignupStyles>
+    <SpringApplicationStyles>
       <Form onSubmit={handleSubmit}>
         <div className='form-grid'>
           <h3 className='dynamic-h3 form-section-title'>Student info</h3>
 
-          {highschoolFormSignupInputs.studentInfo.map((field) => (
+          {SpringApplicationInputs.studentInfo.map((field) => (
             <field.Element
               key={field.name}
               {...field}
@@ -165,7 +166,7 @@ const HighschoolFormSignup = ({ onSubmitComplete }: HighschoolFormSignupProps) =
 
           <h3 className='dynamic-h3 form-section-title'>Parent/Guardian Information</h3>
 
-          {highschoolFormSignupInputs.guardianInfo.map((field) => (
+          {SpringApplicationInputs.guardianInfo.map((field) => (
             <field.Element
               key={field.name}
               {...field}
@@ -177,119 +178,112 @@ const HighschoolFormSignup = ({ onSubmitComplete }: HighschoolFormSignupProps) =
           ))}
 
           <h3 className='dynamic-h3 form-section-title'>Course Information</h3>
-          <div className='form-col-span dynamic-txt'>
-            <p>
-              This semester, we are offering both in-person and virtual classes.{' '}
-              <b>
-                <i>You can enroll in one or the other. (No hybrid option)</i>
-              </b>
-            </p>
-            <ul>
-              <li>
-                In-person classes meet once a week, 4:30-8:00 PM, at our learning center on Franklin
-                Avenue in the Marigny.
-              </li>
-              <li>
-                Virtual classes meet twice a week, 5:00-7:00 PM. The days of the week vary by course
-                and format, and will appear after selecting the appropriate course in the
-                application.
-              </li>
-            </ul>
-          </div>
-          <div>
-            {courseTimeOptions && (
-              <p className='form-info'>
-                <b>{courseTimeOptions.note}</b>
+          <div className='form-col-span dynamic-txt' style={{ marginBottom: '1rem' }}>
+            <PlainCard noDivider={true}>
+              <p>
+                This semester, we are offering both in-person and virtual classes.{' '}
+                <b>
+                  <i>You can enroll in one or the other. (No hybrid option)</i>
+                </b>
               </p>
-            )}
-            <Input.Select
-              label='Which class are you interested in?'
-              name='course'
-              options={courses}
-              option={form.getSelect('course')}
-              isErr={form.isErr('course')}
-              isValid={form.isValid('course')}
-              onChange={form.onSelectChange('course')}
-              required
-            />
-          </div>
-          {courseTimeOptions && (
-            <div>
-              <p className='form-info'>
-                <b>{`You must choose in person or virtual (No mixed option)`}</b>
+              &nbsp;
+              <p>
+                <b className='primary-secondary'>Available Courses:</b>
               </p>
+              <p>
+                <b className='primary-secondary'>Fundamentals of HTML, CSS, and Javascript</b>
+              </p>
+              <p> [ No Prerequisite ]</p>
+              <ul>
+                <li>
+                  <b className='primary-secondary'>Virtual: </b> Tuesdays + Thursdays, 5:00 - 7:00
+                  PM
+                </li>
+                <li>
+                  <b className='primary-secondary'>IN PERSON: </b> Wednesdays, 4:45 - 8:00 PM
+                </li>
+              </ul>
+              <p className='primary-secondary'>
+                <b>Advanced Javascript, Functional Programming and Web Development</b>
+              </p>
+              <p>
+                <b>[ Prerequisite: Fundamentals of HTML, CSS, and Javascript ]</b>
+              </p>
+              <ul>
+                <li>
+                  <b className='primary-secondary'>Virtual: </b> Tuesdays + Thursdays, 5:00 - 7:00
+                  PM
+                </li>
+                <li>
+                  <b className='primary-secondary'>IN PERSON: </b> Wednesdays, 4:45 - 8:00 PM
+                </li>
+              </ul>
+              <p>
+                <b>
+                  Days of the week vary by course and format, and will appear after selecting the
+                  appropriate course in the application.
+                </b>
+              </p>
+              <div>
+                {courseTimeOptions && (
+                  <p className='form-info'>
+                    <b>{courseTimeOptions.note}</b>
+                  </p>
+                )}
+                <Input.Select
+                  label='Which class are you interested in?'
+                  name='course'
+                  options={courses}
+                  option={form.getSelect('course')}
+                  isErr={form.isErr('course')}
+                  isValid={form.isValid('course')}
+                  onChange={form.onSelectChange('course')}
+                  required
+                />
+              </div>
+              {courseTimeOptions && (
+                <div>
+                  <p className='form-info'>
+                    <b>{`You must choose in person or virtual (No hybrid option)`}</b>
+                  </p>
+                  <Input.Select
+                    label=' What is your course preference?'
+                    name='course'
+                    options={courseTimeOptions.options}
+                    option={form.getSelect('courseTime')}
+                    isErr={form.isErr('courseTime')}
+                    isValid={form.isValid('courseTime')}
+                    onChange={form.onSelectChange('courseTime')}
+                    required
+                  />
+                </div>
+              )}
               <Input.Select
-                label=' What is your course preference?'
-                name='course'
-                options={courseTimeOptions.options}
-                option={form.getSelect('courseTime')}
-                isErr={form.isErr('courseTime')}
-                isValid={form.isValid('courseTime')}
-                onChange={form.onSelectChange('courseTime')}
+                label='What is your current level of interest in the program?'
+                name='interestLevel'
+                options={interestLevel}
+                option={form.getSelect('interestLevel')}
+                isErr={form.isErr('interestLevel')}
+                isValid={form.isValid('interestLevel')}
+                onChange={form.onSelectChange('interestLevel')}
                 required
               />
-            </div>
-          )}
-
-          <Input.Select
-            label='What is your current level of interest in the program?'
-            name='interestLevel'
-            options={interestLevel}
-            option={form.getSelect('interestLevel')}
-            isErr={form.isErr('interestLevel')}
-            isValid={form.isValid('interestLevel')}
-            onChange={form.onSelectChange('interestLevel')}
-            required
-          />
-
-          {/* <Input.Select
-            label='Your availability'
-            name='availability'
-            options={availability}
-            option={form.getSelect('availability')}
-            isErr={form.isErr('availability')}
-            isValid={form.isValid('availability')}
-            onChange={form.onSelectChange('availability')}
-            required
-          /> */}
-
-          <Input.Select
-            label='How did you hear about us?'
-            name='referencedBy'
-            options={referencedByOptions}
-            option={form.getSelect('referencedBy')}
-            isErr={form.isErr('referencedBy')}
-            isValid={form.isValid('referencedBy')}
-            onChange={form.onSelectChange('referencedBy')}
-            required
-          />
-
-          {/* <div className='form-col-span'>
-            <Input.CheckboxGroup
-              label='What equipment do you have (VIRTUAL ONLY)'
-              checkboxes={equipment}
-              values={form.getCheckboxes('equipment')}
-              isValid={form.isValid('equipment')}
-              isErr={form.isErr('equipment')}
-              onChange={form.onCheckboxGroupChange('equipment')}
-              clearCheckboxes={form.clearCheckboxGroup('equipment')}
-              required
-            />
+              <Input.Select
+                label='How did you hear about us?'
+                name='referencedBy'
+                options={referencedByOptions}
+                option={form.getSelect('referencedBy')}
+                isErr={form.isErr('referencedBy')}
+                isValid={form.isValid('referencedBy')}
+                onChange={form.onSelectChange('referencedBy')}
+                required
+              />
+            </PlainCard>
           </div>
 
-          {showEquipment && (
-            <div className='form-col-span'>
-              <Input.TextArea
-                label='What equipment do you need?'
-                name='equipment-explanation'
-                placeholder='...'
-                value={form.get('equipmentExplanation')}
-                onChange={form.onChange('equipmentExplanation')}
-              />
-            </div>
-          )} */}
           <h3 className='dynamic-h3 form-section-title'>Policy Agreement</h3>
-          <div className='form-col-span'>
+
+          <PlainCard noDivider={true} className='form-col-span'>
             <h3 className='form-info dynamic-h3'>{`I understand that:`}</h3>
             <ul className='form-info dynamic-txt'>
               <li>{`Attendance is mandatory for both in-person and virtual classes.`}</li>
@@ -311,7 +305,7 @@ const HighschoolFormSignup = ({ onSubmitComplete }: HighschoolFormSignupProps) =
               onChange={form.onSelectChange('policyAgreement')}
               required
             />
-          </div>
+          </PlainCard>
 
           <h3 className='dynamic-h3 form-section-title'>Other</h3>
           <div className='form-col-span'>
@@ -341,13 +335,13 @@ const HighschoolFormSignup = ({ onSubmitComplete }: HighschoolFormSignupProps) =
           </div>
         </div>
       </Form>
-    </HighschoolFormSignupStyles>
+    </SpringApplicationStyles>
   );
 };
 
-export default HighschoolFormSignup;
+export default SpringApplication;
 
-const highschoolFormSignupInputs = {
+const SpringApplicationInputs = {
   studentInfo: [
     {
       Element: Input.Text,
@@ -506,8 +500,8 @@ const courseTimes = {
   },
   fundamentals: [
     {
-      value: 'onsite-tue-4-8',
-      name: 'In-person, Wednesdays, 4:30 - 8:00 PM',
+      value: 'onsite-thurs-4-8',
+      name: 'In-person, Wednesdays, 4:45 - 8:00 PM',
     },
     {
       value: 'virtual-tue-thurs-5-7',
@@ -517,7 +511,7 @@ const courseTimes = {
   advanced: [
     {
       value: 'onsite-thurs-4-8',
-      name: 'In-person, Thursdays, 4:30 - 8:00 PM',
+      name: 'In-person, Wednesdays, 4:30 - 8:00 PM',
     },
     {
       value: 'virtual-mon-wed-5-7',
@@ -529,7 +523,7 @@ const courseTimes = {
 const interestLevel = [
   {
     value: 'positive',
-    name: "I'm sure I want to take the class this fall",
+    name: "I'm sure I want to take the class this spring",
   },
   {
     value: 'future',
@@ -540,24 +534,6 @@ const interestLevel = [
     name: 'Just exploring my options for now',
   },
 ];
-// const availability = [
-//   {
-//     value: 'm-f_9-12',
-//     name: 'Monday to Friday, 9:00 AM to 12:00 PM',
-//   },
-//   {
-//     value: 'm-f_1-4',
-//     name: 'Monday to Friday, 1:00 PM to 4:00 PM',
-//   },
-//   {
-//     value: 'flexible',
-//     name: "I'm flexible; either time works for me",
-//   },
-//   {
-//     value: 'waitList',
-//     name: 'Not available at those times, add me to the wait list for the next course',
-//   },
-// ];
 
 const ethnicities = [
   {
@@ -579,26 +555,6 @@ const ethnicities = [
   { name: 'hispanic-latino', label: 'Hispanic/Latino', value: false },
   { name: 'white', label: 'White', value: false },
 ];
-// const equipment = [
-//   {
-//     name: 'desktop-laptop',
-//     label: 'Desktop/Laptop',
-//     value: false,
-//   },
-//   { name: 'chromebook', label: 'Chromebook', value: false },
-//   {
-//     name: 'internet-access',
-//     label: 'Reliable Internet Access',
-//     value: false,
-//   },
-//   {
-//     name: 'mic-headphones',
-//     label: 'Mic (Internal or in headset/earbuds)',
-//     value: false,
-//   },
-//   { name: 'webcam', label: 'Webcam (Recommended)', value: false },
-//   { name: 'none', label: 'None of the above', value: false },
-// ];
 
 const policyAgreementOptions = [
   {
