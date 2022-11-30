@@ -53,8 +53,39 @@ const HighschoolSignup: NextPage = () => {
               This semester, we are offering both in-person and virtual classes. You can enroll in
               one or the other (No hybrid option).
             </p>
+            <br />
+            <p>
+              <b>Available Courses:</b>
+            </p>
+            <p>
+              <b className='primary-secondary'>Fundamentals of HTML, CSS, and Javascript</b>
+            </p>
+            <p> [ No Prerequisite ]</p>
+            <ul>
+              <li>
+                <b className='primary-secondary'>Virtual: </b> Tuesdays + Thursdays, 5:00 - 7:00 PM
+              </li>
+              <li>
+                <b className='primary-secondary'>IN PERSON: </b> Wednesdays, 4:45 - 8:00 PM
+              </li>
+            </ul>
+            <br />
+            <p className='primary-secondary'>
+              <b>Advanced Javascript, Functional Programming and Web Development</b>
+            </p>
+            <p>
+              <b>[ Prerequisite: Fundamentals of HTML, CSS, and Javascript ]</b>
+            </p>
+            <ul>
+              <li>
+                <b className='primary-secondary'>Virtual: </b> Tuesdays + Thursdays, 5:00 - 7:00 PM
+              </li>
+              <li>
+                <b className='primary-secondary'>IN PERSON: </b> Thursdays, 4:45 - 8:00 PM
+              </li>
+            </ul>
             <div className='reqs-list'>
-              For virtual classes, you will need:
+              <b>For virtual classes, you will need:</b>
               <ul>
                 <li>laptop/desktop computer (Mac, Windows, or Chromebook)</li>
                 <li>webcam and mic </li>
@@ -69,7 +100,7 @@ const HighschoolSignup: NextPage = () => {
             &nbsp;
             <p>
               Our courses are open to students in grades 10-12. The course is free for students
-              attending public, parochial, or home school in New Orleans. If you don not fit that
+              attending public, parochial, or home school in New Orleans. If you do not fit that
               description, we may be able to partner with your school district to cover the cost,
               and if not, we offer discounted tuition to families paying privately.
             </p>
@@ -114,11 +145,11 @@ const HighschoolSignupStyles = styled.div`
     }
   }
   .hs-application-description {
+    ul {
+      padding-left: 2rem;
+    }
     .reqs-list {
       margin: 1rem 0;
-      ul {
-        padding-left: 2rem;
-      }
     }
   }
 `;

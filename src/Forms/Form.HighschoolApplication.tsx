@@ -77,7 +77,7 @@ const SpringApplication = ({ onSubmitComplete }: SpringApplicationProps) => {
 
   const year = new Date().getFullYear();
   const graduationYears = [
-    ...new Array(4).fill(0).map((e, i) => ({ name: `${year + i}`, value: `${year + i}` })),
+    ...[2023, 2024, 2025].map((e, i) => ({ name: `${year + i}`, value: `${year + i}` })),
     { name: 'Other', value: 'other', additionalInfo: 'Please explain' },
   ];
 
@@ -153,7 +153,7 @@ const SpringApplication = ({ onSubmitComplete }: SpringApplicationProps) => {
 
           <div className='form-col-span'>
             <Input.CheckboxGroup
-              label='Race/Ethnicity'
+              label='Race/Ethnicity (select one or more)'
               checkboxes={ethnicities}
               values={form.getCheckboxes('ethnicities')}
               isValid={form.isValid('ethnicities')}
@@ -186,44 +186,14 @@ const SpringApplication = ({ onSubmitComplete }: SpringApplicationProps) => {
                   <i>You can enroll in one or the other (No hybrid option).</i>
                 </b>
               </p>
-              &nbsp;
-              <p>
-                <b className='primary-secondary'>Available Courses:</b>
-              </p>
-              <p>
-                <b className='primary-secondary'>Fundamentals of HTML, CSS, and Javascript</b>
-              </p>
-              <p> [ No Prerequisite ]</p>
-              <ul>
-                <li>
-                  <b className='primary-secondary'>Virtual: </b> Tuesdays + Thursdays, 5:00 - 7:00
-                  PM
-                </li>
-                <li>
-                  <b className='primary-secondary'>IN PERSON: </b> Wednesdays, 4:45 - 8:00 PM
-                </li>
-              </ul>
-              <p className='primary-secondary'>
-                <b>Advanced Javascript, Functional Programming and Web Development</b>
-              </p>
-              <p>
-                <b>[ Prerequisite: Fundamentals of HTML, CSS, and Javascript ]</b>
-              </p>
-              <ul>
-                <li>
-                  <b className='primary-secondary'>Virtual: </b> Tuesdays + Thursdays, 5:00 - 7:00
-                  PM
-                </li>
-                <li>
-                  <b className='primary-secondary'>IN PERSON: </b> Thursdays, 4:45 - 8:00 PM
-                </li>
-              </ul>
+
               <p>
                 <b>
                   Days of the week vary by course and format, and will appear after selecting the
                   appropriate course in the application.
                 </b>
               </p>
+              <br />
               <div>
                 {courseTimeOptions && (
                   <p className='form-info'>
