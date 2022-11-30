@@ -425,19 +425,24 @@ const referencedByOptions = [
     name: 'Flyer',
   },
   {
+    value: 'faculty',
+    name: 'High School Faculty',
+    additionalInfo: 'Name of reference',
+  },
+  {
     value: 'verbal',
     name: 'Word of mouth',
-    additionalInfo: 'Who told you about us',
+    additionalInfo: 'Who told you about us?',
   },
   {
     value: 'event',
     name: 'Community Event',
-    additionalInfo: 'Which event',
+    additionalInfo: 'Which event?',
   },
   {
     value: 'organization',
     name: 'Community Organization',
-    additionalInfo: 'Which organization',
+    additionalInfo: 'Which organization?',
   },
 ];
 
