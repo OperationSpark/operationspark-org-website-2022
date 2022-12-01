@@ -37,6 +37,7 @@ export type FormDataSignup = {
   firstName: string;
   lastName: string;
   phone: string;
+  userLocation: string;
   referencedBy: SelectItem;
 };
 
