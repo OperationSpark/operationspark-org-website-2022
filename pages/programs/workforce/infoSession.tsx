@@ -29,10 +29,11 @@ const InfoSession: NextPage<InfoSessionProps> = ({ commonQuestions, logos }) => 
             <div className='info-session-left'>
               <div className='left-header'>
                 <h1 className='dynamic-h3'>Interested in our Adult Workforce Program?</h1>
-                <h1 className='dynamic-xl'>Attend a Free Info Session!</h1>
+                <h1 className='dynamic-xl primary-secondary'>Attend a Free</h1>
+                <h1 className='dynamic-xl primary-secondary'>Info Session!</h1>
               </div>
               <div className='whats-to-learn'>
-                <h2 className='dynamic-h2'>IN THIS SESSION YOU&apos;LL LEARN</h2>
+                <h2 className='dynamic-h2 '>{`IN THIS SESSION YOU'LL LEARN`}</h2>
                 <ul className='what-to-learn-list'>
                   <li>about coding and career opportunities</li>
                   <li>about our programs and job search support</li>
@@ -88,14 +89,14 @@ const InfoSession: NextPage<InfoSessionProps> = ({ commonQuestions, logos }) => 
         </Section>
         <Section>
           <Content className='great-companies'>
-            <h1 className='dynamic-h1'>Our grads work at great companies!</h1>
+            <h1 className='dynamic-h1 primary-secondary'>Our grads work at great companies!</h1>
             <div className='stats'>
               <h2 className='dynamic-h2'>100% Job Placement</h2>
-              <h2 className='dynamic-h2'>$60,000 avg starting salary</h2>
+              <h2 className='dynamic-h2'>$62,000 avg starting salary</h2>
             </div>
-            <Carousel logos={logos} style={{ marginTop: '3rem' }} />
           </Content>
         </Section>
+        <Carousel logos={logos} style={{ marginTop: '3rem' }} />
         <Section>
           <Content className='common-questions'>
             {commonQuestions.map(({ question, answer }) => (
@@ -132,7 +133,7 @@ const InfoSessionStyles = styled.div`
     display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 2rem;
+    grid-gap: 1rem;
     justify-content: space-between;
     .halle-img {
       width: 100%;
@@ -143,19 +144,15 @@ const InfoSessionStyles = styled.div`
         transform: rotate(45deg);
       }
     }
-    .dynamic-xl {
-      line-height: 1em;
-      padding: 1rem 0;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      color: ${({ theme }) => (theme.isLightMode ? theme.primary[500] : theme.secondary[400])};
-    }
+
     .form-title {
       margin: 1.5rem 0 0.5rem 0;
     }
 
     .whats-to-learn {
+      margin: 0 auto;
+      display: flex;
+      flex-flow: column;
       .dynamic-h2 {
         font-weight: 900;
         margin: 0;
@@ -168,8 +165,11 @@ const InfoSessionStyles = styled.div`
       display: flex;
       flex-flow: row wrap;
       justify-content: space-between;
-      grid-gap: 1rem;
-
+      grid-gap: 1.5rem;
+      .left-header {
+        width: 100%;
+        text-align: center;
+      }
       ul {
         list-style: none;
 
@@ -248,11 +248,6 @@ const InfoSessionStyles = styled.div`
           content: '| ';
         }
       }
-    }
-  }
-  .great-companies {
-    h1.dynamic-h1 {
-      color: ${({ theme }) => (theme.isLightMode ? theme.primary[500] : theme.secondary[400])};
     }
   }
 
