@@ -8,6 +8,7 @@ import { ISessionDates } from '@this/pages-api/infoSession/dates';
 import { FormDataSignup } from '@this/pages-api/infoSession/user';
 import { Form, Input, useForm } from '@this/components/Form';
 import Button from '@this/components/Elements/Button';
+import unitedStates from './formData/unitedStates.json';
 
 interface WorkforceFormProps {
   sessionDates: ISessionDates[];
@@ -80,11 +81,22 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
           animation={{
             initial: { x: 100, opacity: 0 },
             animate: { x: 0, opacity: 1 },
-            transition: { duration: 0.2, delay: 0.15 * i },
+            transition: { duration: 0.2, delay: 0.25 * i },
           }}
         />
       ))}
 
+      <Input.Select
+        label='Where are you located?'
+        name='userLocation'
+        options={userLocationOptions}
+        option={form.getSelect('userLocation')}
+        isErr={form.isErr('userLocation')}
+        isValid={form.isValid('userLocation')}
+        onChange={form.onSelectChange('userLocation')}
+        required
+        delay={workforceFormInputs.length * 0.15}
+      />
       <Input.Select
         label='How did you hear about us?'
         name='referencedBy'
@@ -94,7 +106,7 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
         isValid={form.isValid('referencedBy')}
         onChange={form.onSelectChange('referencedBy')}
         required
-        delay={workforceFormInputs.length * 0.15}
+        delay={workforceFormInputs.length * 0.25}
       />
 
       <Input.Select
@@ -105,7 +117,7 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
         isErr={form.isErr('sessionDate')}
         isValid={form.isValid('sessionDate')}
         options={sessionDateOptions}
-        delay={(workforceFormInputs.length + 1) * 0.15}
+        delay={(workforceFormInputs.length + 1) * 0.25}
         required
       />
       {form.showErrors() && form.hasErrors() && (
@@ -199,4 +211,16 @@ const referencedByOptions = [
     name: 'Community Organization',
     additionalInfo: 'Which organization',
   },
+];
+
+const userLocationOptions = [
+  {
+    value: 'other',
+    name: 'Outside United States',
+    additionalInfo: 'What state do you live in?',
+  },
+  ...Object.entries(unitedStates).map(([abbr, state]) => ({
+    value: abbr,
+    name: state,
+  })),
 ];
