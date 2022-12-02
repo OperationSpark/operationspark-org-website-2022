@@ -31,20 +31,13 @@ export type GooglePlace = {
   };
 };
 
-type UserLocation = {
-  additionalInfo: string;
-  additionalInfoLabel?: string;
-  name: string;
-  value: string;
-};
-
 export type FormDataSignup = {
   session?: ISession;
   email: string;
   firstName: string;
   lastName: string;
   phone: string;
-  userLocation: UserLocation;
+  userLocation: SelectItem;
   referencedBy: SelectItem;
 };
 

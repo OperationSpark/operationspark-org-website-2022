@@ -27,5 +27,5 @@ export interface IInfoSessionFormValues {
   phone: string;
   referencedBy: SelectItem;
   sessionDate: SelectItem;
-  userLocation: string;
+  userLocation: SelectItem;
 }
