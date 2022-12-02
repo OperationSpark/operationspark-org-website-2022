@@ -217,7 +217,7 @@ const userLocationOptions = [
   {
     value: 'other',
     name: 'Outside United States',
-    additionalInfo: 'What state do you live in?',
+    additionalInfo: 'What country do you live in?',
   },
   ...Object.entries(unitedStates).map(([abbr, state]) => ({
     value: abbr,
