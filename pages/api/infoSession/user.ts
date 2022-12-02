@@ -37,6 +37,7 @@ export type FormDataSignup = {
   firstName: string;
   lastName: string;
   phone: string;
+  userLocation: SelectItem;
   referencedBy: SelectItem;
 };
 
@@ -54,6 +55,7 @@ export interface ISessionSignup {
   locationType?: LocationType;
   sessionId: string;
   token: string;
+  userLocation: string;
 }
 
 export default async function handleInfoSessionForm(req: ISessionUser, res: NextApiResponse) {
@@ -75,7 +77,7 @@ export default async function handleInfoSessionForm(req: ISessionUser, res: Next
 }
 
 function formatPayload(form: FormDataSignup): ISessionSignup {
-  const { session, email, firstName, lastName, phone, referencedBy } = form;
+  const { session, email, firstName, lastName, phone, referencedBy, userLocation: location } = form;
 
   // Sometimes greenlight returns an empty string rather than a google place object
   if (typeof session?.googlePlace === 'string') {
@@ -96,5 +98,6 @@ function formatPayload(form: FormDataSignup): ISessionSignup {
     locationType: session?.locationType,
     googlePlace: session?.googlePlace,
     token: GREENLIGHT_API_TOKEN ?? '',
+    userLocation: location.additionalInfo || location.value,
   };
 }

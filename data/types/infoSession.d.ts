@@ -11,16 +11,12 @@ export interface IInfoSession {
     textFields: {
       [key: string]: TTextField;
     } & Record<
-      keyof Pick<
-        IInfoSessionForm<'firstName' | 'lastName' | 'email' | 'phone'>
-      >,
+      keyof Pick<IInfoSessionForm<'firstName' | 'lastName' | 'email' | 'phone'>>,
       TTextField
     >;
     selectFields: {
       [key: string]: TSelectField;
-    } & Record<
-      keyof Pick<IInfoSessionForm<'referencedBy' | 'sessionDate'>, TSelectField>
-    >;
+    } & Record<keyof Pick<IInfoSessionForm<'referencedBy' | 'sessionDate'>, TSelectField>>;
   };
 }
 
@@ -31,4 +27,5 @@ export interface IInfoSessionFormValues {
   phone: string;
   referencedBy: SelectItem;
   sessionDate: SelectItem;
+  userLocation: SelectItem;
 }
