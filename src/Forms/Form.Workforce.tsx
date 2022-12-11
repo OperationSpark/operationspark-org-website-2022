@@ -39,6 +39,7 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
         },
       }),
     };
+
     setIsSubmitting(true);
     axios
       .post('/api/infoSession/user', body)
@@ -120,6 +121,19 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
         delay={(workforceFormInputs.length + 1) * 0.25}
         required
       />
+      <Input.RadioGroup
+        label='Are you attending in person or virtually?'
+        options={[
+          { name: 'in-person', label: 'In Person' },
+          { name: 'virtual', label: 'Virtually' },
+        ]}
+        value={form.get('attendingLocation')}
+        isValid={form.isValid('attendingLocation')}
+        isErr={form.isErr('attendingLocation')}
+        onChange={form.onChange('attendingLocation')}
+        required
+      />
+
       {form.showErrors() && form.hasErrors() && (
         <div className='form-error'>
           <AiOutlineInfoCircle /> <p>Please complete required fields</p>
