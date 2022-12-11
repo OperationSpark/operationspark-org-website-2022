@@ -124,8 +124,8 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
       <Input.RadioGroup
         label='Are you attending in person or virtually?'
         options={[
-          { name: 'in-person', label: 'In Person' },
-          { name: 'virtual', label: 'Virtually' },
+          { name: 'in-person', label: 'In Person (514 Franklin Avenue)' },
+          { name: 'virtual', label: 'Virtually (via Zoom)' },
         ]}
         value={form.get('attendingLocation')}
         isValid={form.isValid('attendingLocation')}

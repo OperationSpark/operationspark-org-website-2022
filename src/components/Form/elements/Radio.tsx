@@ -88,7 +88,7 @@ const RadioStyles = styled.div`
       background-color: ${({ theme: { isLightMode, primary, secondary } }) =>
         isLightMode ? primary[500] : secondary[500]};
       color: ${({ theme: { bg } }) => bg};
-      box-shadow: 0 0 0.25rem ${({ theme }) => theme.fg};
+
       ::after {
         display: flex;
       }
