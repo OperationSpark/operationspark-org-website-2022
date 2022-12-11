@@ -8,6 +8,8 @@ const aSelect = dynamic(() => import('./Select'));
 const aTextArea = dynamic(() => import('./TextArea'));
 const aCheckbox = dynamic(() => import('./Checkbox'));
 const aCheckboxGroup = dynamic(() => import('./CheckboxGroup'));
+const aRadio = dynamic(() => import('./Radio'));
+const aRadioGroup = dynamic(() => import('./RadioGroup'));
 
 export const Text = aText;
 export const Phone = aPhone;
@@ -17,6 +19,8 @@ export const Select = aSelect;
 export const TextArea = aTextArea;
 export const Checkbox = aCheckbox;
 export const CheckboxGroup = aCheckboxGroup;
+export const Radio = aRadio;
+export const RadioGroup = aRadioGroup;
 
 const Input = {
   Text: aText,
@@ -27,6 +31,8 @@ const Input = {
   TextArea: aTextArea,
   Checkbox: aCheckbox,
   CheckboxGroup: aCheckboxGroup,
+  Radio: aRadio,
+  RadioGroup: aRadioGroup,
 };
 
 export default Input;
