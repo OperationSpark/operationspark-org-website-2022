@@ -63,14 +63,17 @@ const RadioStyles = styled.div`
       ::after {
         display: none;
         position: absolute;
-        content: '●';
-        font-size: 1.25em;
-        font-weight: 900;
-        line-height: 1em;
-        background: ${({ theme }) => (theme.isLightMode ? 'secondary' : 'primary')};
 
-        width: 100%;
-        height: 100%;
+        content: '➜';
+
+        color: ${({ theme }) => (theme.isLightMode ? theme.secondary[0] : theme.primary[0])};
+        font-weight: 900;
+
+        border-radius: 50%;
+        width: 1.4rem;
+        height: 1.5rem;
+        top: 0;
+        left: 0;
 
         justify-content: center;
         align-items: center;
@@ -85,7 +88,7 @@ const RadioStyles = styled.div`
       background-color: ${({ theme: { isLightMode, primary, secondary } }) =>
         isLightMode ? primary[500] : secondary[500]};
       color: ${({ theme: { bg } }) => bg};
-
+      box-shadow: 0 0 0.25rem ${({ theme }) => theme.fg};
       ::after {
         display: flex;
       }
