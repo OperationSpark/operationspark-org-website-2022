@@ -28,4 +28,5 @@ export interface IInfoSessionFormValues {
   referencedBy: SelectItem;
   sessionDate: SelectItem;
   userLocation: SelectItem;
+  attendingLocation: string;
 }
