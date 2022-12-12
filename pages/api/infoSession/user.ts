@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { SelectItem } from '@this/data/types/bits';
 import { runCloudFunction } from '@this/api/googleFunctions';
 import { config } from '../config';
+import { AttendingLocation } from '@this/data/types/infoSession';
 
 const { SIGNUP_API_ENDPOINT, GREENLIGHT_API_TOKEN = '' } = config;
 
@@ -39,7 +40,7 @@ export type FormDataSignup = {
   phone: string;
   userLocation: SelectItem;
   referencedBy: SelectItem;
-  attendingLocation: string;
+  attendingLocation: AttendingLocation;
 };
 
 export interface ISessionSignup {
@@ -57,7 +58,7 @@ export interface ISessionSignup {
   sessionId: string;
   token: string;
   userLocation: string;
-  attendingLocation: string;
+  attendingLocation: AttendingLocation;
 }
 
 export default async function handleInfoSessionForm(req: ISessionUser, res: NextApiResponse) {
