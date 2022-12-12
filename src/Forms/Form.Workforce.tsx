@@ -23,11 +23,12 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
     if (hasErrors) {
       return form.toggleShowErrors();
     }
-    const { sessionDate, ...values } = form.values();
-
+    const { sessionDate, userLocation, ...values } = form.values();
+    userLocation.value = userLocation.name;
     const session = sessionDates.find((s) => s._id === sessionDate.value);
     const body: FormDataSignup = {
       ...values,
+      userLocation,
       ...(session && {
         session: {
           id: session._id,
