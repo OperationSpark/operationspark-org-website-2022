@@ -32,6 +32,7 @@ export type TSelectField = {
 export type SelectItem = {
   additionalInfo: string;
   value: string;
+  name: string;
 };
 
 export interface IAlert {

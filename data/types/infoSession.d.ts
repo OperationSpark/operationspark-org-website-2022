@@ -5,6 +5,8 @@ export type CommonQuestions = {
   answer: string[];
 };
 
+type AttendingLocation = 'IN_PERSON' | 'VIRTUAL';
+
 export interface IInfoSession {
   commonQuestions: CommonQuestions[];
   infoSessionForm: {
@@ -28,4 +30,5 @@ export interface IInfoSessionFormValues {
   referencedBy: SelectItem;
   sessionDate: SelectItem;
   userLocation: SelectItem;
+  attendingLocation: AttendingLocation;
 }
