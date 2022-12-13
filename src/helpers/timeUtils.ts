@@ -37,3 +37,16 @@ export const checkDaysEqual = (date1: Date, date2 = new Date()) =>
   date1.getDate() === date2.getDate() &&
   date1.getMonth() === date2.getMonth() &&
   date1.getFullYear() === date2.getFullYear();
+
+export const getFormattedDateTime = (dateTime?: string | Date | null) => {
+  if (!dateTime) {
+    return null;
+  }
+  const d = new Date(dateTime);
+
+  return {
+    date: d.toLocaleDateString('en-US', { dateStyle: 'long' }),
+    time: d.toLocaleTimeString('en-US', { timeStyle: 'short' }),
+    tz: d.toLocaleString('en-US', { timeZoneName: 'short' }).split(' ').pop(),
+  };
+};
