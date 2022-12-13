@@ -129,7 +129,7 @@ const CohortSchedule: NextPage = () => {
 
                       {course && groupBy === 'course' && <CourseInfo course={course} />}
                     </div>
-                    {courses?.slice(0, 4)?.map(
+                    {(groupBy === 'course' ? courses?.slice(0, 5) : courses)?.map(
                       (s) =>
                         s &&
                         !s.isPast && (
