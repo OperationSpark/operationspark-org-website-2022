@@ -9,6 +9,7 @@ import { FormDataSignup } from '@this/pages-api/infoSession/user';
 import { Form, Input, useForm } from '@this/components/Form';
 import Button from '@this/components/Elements/Button';
 import unitedStates from './formData/unitedStates.json';
+import Spinner from '../components/Elements/Spinner';
 
 interface WorkforceFormProps {
   sessionDates: ISessionDates[];
@@ -42,6 +43,9 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
     };
 
     setIsSubmitting(true);
+    setTimeout(() => setIsSubmitting(false), 10000);
+
+    return;
     axios
       .post('/api/infoSession/user', body)
       .then(() => {
@@ -72,6 +76,23 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
 
   return (
     <Form onSubmit={handleSubmit}>
+      {isSubmitting ? (
+        <div
+          className='form-overlay'
+          style={{
+            position: 'absolute',
+            inset: 0,
+            zIndex: 10,
+            backdropFilter: 'blur(1.5px)',
+            background: 'rgba(125,125,125,0.2)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Spinner text='Submitting' />
+        </div>
+      ) : null}
       {workforceFormInputs.map((field, i) => (
         <field.Element
           key={field.name}
