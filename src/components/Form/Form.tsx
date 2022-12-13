@@ -1,4 +1,4 @@
-import { FormEvent, FormEventHandler, ReactNode } from 'react';
+import { CSSProperties, FormEvent, FormEventHandler, ReactNode } from 'react';
 import styled from 'styled-components';
 import { motion, MotionProps } from 'framer-motion';
 
@@ -24,11 +24,12 @@ const FormStyles = styled(motion.form)`
 interface FormProps {
   children?: ReactNode | ReactNode[];
   onSubmit?: (e: FormEvent<HTMLFormElement>) => void;
-  formProps?: MotionProps;
+  motionProps?: MotionProps;
   className?: string;
+  style?: CSSProperties;
 }
 
-const Form = ({ children, onSubmit, formProps, className }: FormProps) => {
+const Form = ({ children, onSubmit, style, motionProps, className }: FormProps) => {
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     onSubmit && onSubmit(e);
@@ -38,7 +39,8 @@ const Form = ({ children, onSubmit, formProps, className }: FormProps) => {
       autoComplete='off'
       className={className}
       onSubmit={handleSubmit}
-      {...(formProps || {})}
+      style={style}
+      {...motionProps}
     >
       {children}
     </FormStyles>

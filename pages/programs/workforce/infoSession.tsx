@@ -10,6 +10,7 @@ import { cardShadow, cardShadowLtr, cardShadowRtl } from '@this/src/theme/styled
 import { getStaticAsset } from '@this/pages-api/static/[asset]';
 import { Main, Section, Content } from '@this/components/layout';
 import useInfoSession from '@this/src/hooks/useInfoSession';
+import { getFormattedDateTime } from '@this/src/helpers/timeUtils';
 
 const WorkforceForm = dynamic(() => import('@this/src/Forms/Form.Workforce'));
 const Carousel = dynamic(() => import('@this/components/Elements/Carousel'));
@@ -21,6 +22,8 @@ interface InfoSessionProps extends IInfoSession {
 const InfoSession: NextPage<InfoSessionProps> = ({ commonQuestions, logos }) => {
   const sessionDates = useInfoSession();
 
+  const nextSession = getFormattedDateTime(sessionDates?.[0]?.times?.start?.dateTime);
+
   return (
     <Main>
       <InfoSessionStyles>
@@ -28,9 +31,15 @@ const InfoSession: NextPage<InfoSessionProps> = ({ commonQuestions, logos }) => 
           <Content className='free-info-session'>
             <div className='info-session-left'>
               <div className='left-header'>
-                <h1 className='dynamic-h3'>Interested in our Adult Workforce Program?</h1>
-                <h1 className='dynamic-xl primary-secondary'>Attend a Free</h1>
-                <h1 className='dynamic-xl primary-secondary'>Info Session!</h1>
+                <h1 className='dynamic-h2'>
+                  Interested in our <br />
+                  Adult Workforce Program?
+                </h1>
+                <h1 className='dynamic-xl primary-secondary'>
+                  Attend a Free
+                  <br />
+                  Info Session!
+                </h1>
               </div>
               <div className='whats-to-learn'>
                 <h2 className='dynamic-h2 '>{`IN THIS SESSION YOU'LL LEARN`}</h2>
@@ -68,9 +77,20 @@ const InfoSession: NextPage<InfoSessionProps> = ({ commonQuestions, logos }) => 
                     <a className='anchor'>please complete this form.</a>
                   </Link>
                 </div>
-                <h3 className='dynamic-h3 form-title primary-secondary text-center'>
-                  Register for upcoming adult workforce info session
-                </h3>
+
+                <div>
+                  <h3 className='dynamic-h3 form-title primary-secondary text-center'>
+                    Next information session:
+                  </h3>
+                  {!nextSession ? null : (
+                    <h4 className='dynamic-h4 form-title date-time text-center source-code'>
+                      {nextSession.date} <br /> {nextSession.time} ({nextSession.tz})
+                    </h4>
+                  )}
+                </div>
+                <h2 className='dynamic-h2 form-title primary-secondary text-center'>
+                  Register for an info session
+                </h2>
 
                 <WorkforceForm sessionDates={sessionDates} />
               </div>
@@ -135,6 +155,7 @@ const InfoSessionStyles = styled.div`
     grid-template-columns: 1fr 1fr;
     grid-gap: 1rem;
     justify-content: space-between;
+
     .halle-img {
       width: 100%;
       height: 20vw;
@@ -145,18 +166,11 @@ const InfoSessionStyles = styled.div`
       }
     }
 
-    .form-title {
-      margin: 1.5rem 0 0.5rem 0;
-    }
-
     .whats-to-learn {
       margin: 0 auto;
       display: flex;
       flex-flow: column;
-      .dynamic-h2 {
-        font-weight: 900;
-        margin: 0;
-      }
+      justify-content: center;
     }
 
     .info-session-left {
@@ -169,6 +183,7 @@ const InfoSessionStyles = styled.div`
       .left-header {
         width: 100%;
         text-align: center;
+        display: grid;
       }
       ul {
         list-style: none;
@@ -204,11 +219,16 @@ const InfoSessionStyles = styled.div`
       max-width: 500px;
       min-width: 400px;
       ${cardShadowLtr}
+      display: flex;
+      flex-flow: column;
+      grid-gap: 1rem;
+      position: relative;
+      .form-title.date-time {
+        color: ${({ theme }) => (theme.isLightMode ? theme.magenta[0] : theme.green[0])};
+        font-weight: 500;
+      }
     }
-    h2 {
-      margin-top: 2rem;
-      margin-bottom: 1rem;
-    }
+
     .info-highschool {
       b {
         color: ${({ theme }) => theme.red[0]};
@@ -222,7 +242,7 @@ const InfoSessionStyles = styled.div`
   .video-container {
     display: flex;
     width: 100%;
-    align-items: center;
+    align-items: flex-end;
     margin: 0;
     border-radius: 0.5rem;
     overflow: hidden;
