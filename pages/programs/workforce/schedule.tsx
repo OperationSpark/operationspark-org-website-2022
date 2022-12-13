@@ -129,6 +129,8 @@ const CohortSchedule: NextPage = () => {
 
                       {course && groupBy === 'course' && <CourseInfo course={course} />}
                     </div>
+
+                    {/* Limit list size when filtering by course only. When filtering by cohort, slicing will prevent shoing every phase */}
                     {(groupBy === 'course' ? courses?.slice(0, 5) : courses)?.map(
                       (s) =>
                         s &&
