@@ -129,7 +129,9 @@ const CohortSchedule: NextPage = () => {
 
                       {course && groupBy === 'course' && <CourseInfo course={course} />}
                     </div>
-                    {courses?.map(
+
+                    {/* Limit list size when filtering by course only. When filtering by cohort, slicing will prevent shoing every phase */}
+                    {(groupBy === 'course' ? courses?.slice(0, 5) : courses)?.map(
                       (s) =>
                         s &&
                         !s.isPast && (
@@ -234,19 +236,22 @@ export const CohortScheduleStyles = styled.div`
   }
 
   .schedule-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(18rem, auto));
-    grid-template-rows: auto;
+    display: flex;
+    flex-flow: row wrap;
+    /* grid-template-columns: repeat(auto-fill, minmax(18rem, auto));
+    grid-template-rows: 1fr; */
 
     padding: 1rem;
     grid-gap: 1.5rem;
     margin: 0 auto;
   }
   .schedule-cohort {
-    width: 100%;
+    flex: 1;
+    min-width: 18rem;
   }
   .schedule-cohort-container {
     width: 100%;
+
     display: flex;
     flex-flow: column;
     grid-gap: 0.5rem;
