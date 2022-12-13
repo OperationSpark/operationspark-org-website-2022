@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
 import { motion } from 'framer-motion';
 
-const Spinner = ({ size = 4 }: { size?: number }) => {
+const Spinner = ({ size = 4, text }: { size?: number; text?: string }) => {
   const [loadingDots, setLoadingDots] = useState('.');
 
   const theme = useTheme();
@@ -171,7 +171,8 @@ const Spinner = ({ size = 4 }: { size?: number }) => {
         className='primary-secondary loading-text'
         style={{ fontSize: `${size / 4}rem`, fontWeight: 700 }}
       >
-        Loading<span className='loading-dots'>{loadingDots}</span>
+        {text || 'Loading'}
+        <span className='loading-dots'>{loadingDots}</span>
       </div>
     </SpinnerStyles>
   );
@@ -182,6 +183,7 @@ const SpinnerStyles = styled(motion.div)`
   align-items: center;
   justify-content: center;
   flex-flow: column;
+  user-select: none;
   .loading-text {
     position: relative;
     .loading-dots {
