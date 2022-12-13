@@ -24,6 +24,7 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
     if (hasErrors) {
       return form.toggleShowErrors();
     }
+    setIsSubmitting(true);
     const { sessionDate, userLocation, ...values } = form.values();
     userLocation.value = userLocation.name;
     const session = sessionDates.find((s) => s._id === sessionDate.value);
@@ -42,10 +43,6 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
       }),
     };
 
-    setIsSubmitting(true);
-    setTimeout(() => setIsSubmitting(false), 10000);
-
-    return;
     axios
       .post('/api/infoSession/user', body)
       .then(() => {
