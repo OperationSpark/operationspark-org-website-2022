@@ -22,9 +22,7 @@ interface InfoSessionProps extends IInfoSession {
 const InfoSession: NextPage<InfoSessionProps> = ({ commonQuestions, logos }) => {
   const sessionDates = useInfoSession();
 
-  const nextSession = getFormattedDateTime(
-    sessionDates?.[sessionDates.length - 1]?.times?.start?.dateTime,
-  );
+  const nextSession = getFormattedDateTime(sessionDates?.[0]?.times?.start?.dateTime);
 
   return (
     <Main>
