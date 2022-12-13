@@ -132,6 +132,7 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
         isValid={form.isValid('attendingLocation')}
         isErr={form.isErr('attendingLocation')}
         onChange={form.onChange('attendingLocation')}
+        delay={(workforceFormInputs.length + 1) * 0.3}
         required
       />
 

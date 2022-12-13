@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import Radio from './Radio';
 import RequiredStatus from './RequiredStatus';
@@ -7,6 +8,7 @@ interface RadioProps {
   onChange: (value: string, isValid: boolean) => void;
   value: string;
   isValid: boolean;
+  delay?: number;
   required?: boolean;
   isErr: boolean;
   options: {
@@ -20,16 +22,22 @@ const RadioGroup = ({
   options,
   isValid,
   value,
+  delay,
   required,
   isErr = false,
   onChange,
 }: RadioProps) => {
   return (
-    <RadioGroupStyles className={isErr ? '_input_err' : ''}>
+    <RadioGroupStyles
+      className={isErr ? '_input_err' : ''}
+      initial={{ opacity: 0, y: 100 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.2, delay: delay ?? undefined }}
+    >
       <div className='radio-group-label'>{label}</div>
       {required && <RequiredStatus isValid={isValid} />}
 
-      {options.map(({ name, label }) => (
+      {options.map(({ name, label }, index) => (
         <Radio
           key={name}
           name={name}
@@ -37,6 +45,7 @@ const RadioGroup = ({
           checked={value === name}
           onChange={(value) => onChange(value, true)}
           value={name}
+          delay={delay ? delay + index * 0.25 : 0}
         />
       ))}
     </RadioGroupStyles>
@@ -45,7 +54,7 @@ const RadioGroup = ({
 
 export default RadioGroup;
 
-const RadioGroupStyles = styled.div`
+const RadioGroupStyles = styled(motion.div)`
   box-shadow: 0 0 2px ${({ theme }) => theme.alpha.fg};
   padding: 0.5rem;
   border-radius: 0.25rem;

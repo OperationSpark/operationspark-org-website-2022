@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
 interface RadioProps {
@@ -6,92 +7,95 @@ interface RadioProps {
   label: string;
   value: string;
   checked: boolean;
+  delay?: number;
 }
 
-const Radio = ({ name, label, value, checked, onChange }: RadioProps) => {
+const Radio = ({ name, label, value, checked, delay, onChange }: RadioProps) => {
   return (
-    <RadioStyles aria-label={name}>
-      <label>
-        <input
-          type='radio'
-          role='radio'
-          name={name}
-          value={value}
-          checked={checked}
-          onChange={(e) => onChange(e.target.value)}
-          aria-labelledby={label}
-        />
-        <div className='radio'></div>
-        <div className='label' aria-label={label}>
-          {label}
-        </div>
-      </label>
+    <RadioStyles
+      aria-label={name}
+      initial={{ opacity: 0, x: 100 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.25, delay: delay ?? undefined }}
+    >
+      <input
+        type='radio'
+        role='radio'
+        name={name}
+        value={value}
+        checked={checked}
+        onChange={(e) => onChange(e.target.value)}
+        aria-labelledby={label}
+      />
+      <div className='radio'></div>
+      <div className='label' aria-label={label}>
+        {label}
+      </div>
     </RadioStyles>
   );
 };
 
 export default Radio;
 
-const RadioStyles = styled.div`
+const RadioStyles = styled(motion.label)`
   display: flex;
   align-items: center;
+  padding: 0.25rem 0.5rem 0.25rem 2.5rem;
+  position: relative;
+  user-select: none;
+  border-radius: 0.25rem;
+  :hover,
+  :has(:focus-visible) {
+    outline: 1px solid ${({ theme }) => theme.secondary[800]};
+  }
 
-  label {
-    padding: 0.25rem;
-    padding-left: 2rem;
-    position: relative;
-    user-select: none;
-    input {
+  input {
+    position: absolute;
+    width: 1.4rem;
+    height: 1.4rem;
+    z-index: 1;
+    left: 0;
+    opacity: 0;
+  }
+  .radio {
+    position: absolute;
+    width: 1.4rem;
+    height: 1.4rem;
+    margin-left: 0.5rem;
+    left: 0;
+    border-radius: 50%;
+    box-shadow: 0 0 1px 1px
+      ${({ theme: { isLightMode, primary, secondary } }) =>
+        isLightMode ? primary[500] : secondary[500]}
+      inset;
+    ::after {
+      display: none;
       position: absolute;
-      width: 1.4rem;
-      height: 1.4rem;
-      z-index: 1;
-      left: 0;
-      opacity: 0;
-    }
-    .radio {
-      position: absolute;
-      width: 1.4rem;
-      height: 1.4rem;
 
-      left: 0;
+      content: '➜';
+
+      color: ${({ theme }) => (theme.isLightMode ? theme.secondary[0] : theme.primary[0])};
+      font-weight: 900;
+
       border-radius: 50%;
-      box-shadow: 0 0 1px 1px
-        ${({ theme: { isLightMode, primary, secondary } }) =>
-          isLightMode ? primary[500] : secondary[500]}
-        inset;
-      ::after {
-        display: none;
-        position: absolute;
+      width: 1.4rem;
+      height: 1.5rem;
+      top: 0;
+      left: 0;
 
-        content: '➜';
-
-        color: ${({ theme }) => (theme.isLightMode ? theme.secondary[0] : theme.primary[0])};
-        font-weight: 900;
-
-        border-radius: 50%;
-        width: 1.4rem;
-        height: 1.5rem;
-        top: 0;
-        left: 0;
-
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-      }
+      justify-content: center;
+      align-items: center;
+      text-align: center;
     }
+  }
 
-    input:focus-visible ~ .radio {
-      outline: 2px solid ${({ theme }) => theme.secondary[800]};
-    }
-    input:checked ~ .radio {
-      background-color: ${({ theme: { isLightMode, primary, secondary } }) =>
-        isLightMode ? primary[500] : secondary[500]};
-      color: ${({ theme: { bg } }) => bg};
+  input:checked ~ .radio {
+    background-color: ${({ theme: { isLightMode, primary, secondary } }) =>
+      isLightMode ? primary[500] : secondary[500]};
+    color: ${({ theme: { bg } }) => bg};
 
-      ::after {
-        display: flex;
-      }
+    ::after {
+      display: flex;
     }
   }
 `;
