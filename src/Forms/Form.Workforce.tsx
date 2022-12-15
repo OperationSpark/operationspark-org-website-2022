@@ -10,6 +10,7 @@ import { Form, Input, useForm } from '@this/components/Form';
 import Button from '@this/components/Elements/Button';
 import unitedStates from './formData/unitedStates.json';
 import Spinner from '../components/Elements/Spinner';
+import { pixel } from '@this/lib/pixel';
 
 interface WorkforceFormProps {
   sessionDates: ISessionDates[];
@@ -24,6 +25,7 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
     if (hasErrors) {
       return form.toggleShowErrors();
     }
+
     setIsSubmitting(true);
     const { sessionDate, userLocation, ...values } = form.values();
     userLocation.value = userLocation.name;
@@ -42,6 +44,7 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
         },
       }),
     };
+    pixel.event('infoSessionSignup', { email: body.email });
 
     axios
       .post('/api/infoSession/user', body)
