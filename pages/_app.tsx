@@ -9,6 +9,7 @@ import { MainContainer } from '@this/components/layout';
 import theme from '@this/src/theme';
 import { ILogo, ISupporterFunderLogos } from '../data/types/logos';
 import Meta from '@this/src/components/Elements/Meta';
+import { PixelRoot } from '@this/lib/pixel';
 
 const Theme = dynamic(() => import('@this/src/theme/styled/Theme'));
 const Navbar = dynamic(() => import('@this/components/Navbar/Navbar'));
@@ -26,6 +27,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={theme}>
       <Theme theme={theme.colors.brand}>
+        <PixelRoot />
         <Meta />
         <Navbar alertInfo={alertInfo} />
 
