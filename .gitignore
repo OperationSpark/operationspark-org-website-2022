@@ -42,4 +42,5 @@ jspm_packages
 
 .idea
 .env.*
+!.env.example
 ngrokrc.yml
