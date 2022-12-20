@@ -143,7 +143,22 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
       <Input.RadioGroup
         label='Are you attending in person or virtually?'
         options={[
-          { name: 'IN_PERSON', label: 'In Person (514 Franklin Avenue)' },
+          {
+            name: 'IN_PERSON',
+            label: (
+              <span>
+                In Person{' '}
+                <a
+                  className='anchor'
+                  href='https://goo.gl/maps/X6eQ54sWbbH2RbVd8'
+                  target='_blank'
+                  rel='noreferrer'
+                >
+                  (514 Franklin Avenue, New Orleans)
+                </a>
+              </span>
+            ),
+          },
           { name: 'VIRTUAL', label: 'Virtually (via Zoom)' },
         ]}
         value={form.get('attendingLocation')}
@@ -231,19 +246,32 @@ const referencedByOptions = [
     name: 'Flyer',
   },
   {
+    value: 'radio',
+    name: 'Radio Advertising',
+  },
+  {
+    value: 'tv-streaming',
+    name: 'T.V. or Streaming Service',
+  },
+  {
+    value: 'other-advertising',
+    name: 'Other Advertising',
+    additionalInfo: 'Where did you hear about us?',
+  },
+  {
     value: 'verbal',
     name: 'Word of mouth',
-    additionalInfo: 'Who told you about us',
+    additionalInfo: 'Who told you about us?',
   },
   {
     value: 'event',
     name: 'Community Event',
-    additionalInfo: 'Which event',
+    additionalInfo: 'Which event?',
   },
   {
     value: 'organization',
     name: 'Community Organization',
-    additionalInfo: 'Which organization',
+    additionalInfo: 'Which organization?',
   },
 ];
 

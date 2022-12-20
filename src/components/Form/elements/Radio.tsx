@@ -1,10 +1,11 @@
+import { ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
 interface RadioProps {
   onChange: (value: string) => void;
   name: string;
-  label: string;
+  label: string | ReactNode;
   value: string;
   checked: boolean;
   delay?: number;
@@ -25,10 +26,10 @@ const Radio = ({ name, label, value, checked, delay, onChange }: RadioProps) => 
         value={value}
         checked={checked}
         onChange={(e) => onChange(e.target.value)}
-        aria-labelledby={label}
+        aria-labelledby={name}
       />
       <div className='radio'></div>
-      <div className='label' aria-label={label}>
+      <div className='label' aria-label={name}>
         {label}
       </div>
     </RadioStyles>
