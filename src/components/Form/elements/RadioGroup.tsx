@@ -1,10 +1,11 @@
+import { ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import Radio from './Radio';
 import RequiredStatus from './RequiredStatus';
 
 interface RadioProps {
-  label: string;
+  label: string | ReactNode;
   onChange: (value: string, isValid: boolean) => void;
   value: string;
   isValid: boolean;
@@ -13,7 +14,7 @@ interface RadioProps {
   isErr: boolean;
   options: {
     name: string;
-    label: string;
+    label: string | ReactNode;
   }[];
 }
 
