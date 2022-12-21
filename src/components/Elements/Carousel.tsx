@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import styled, { DefaultTheme, useTheme } from 'styled-components';
 import { AnimatePresence, HTMLMotionProps, motion, MotionProps } from 'framer-motion';
 import { CSSProperties, useEffect, useRef, useState } from 'react';
@@ -75,7 +75,7 @@ const CarouselItem = ({
         >
           <Image
             width={size}
-            height={'100%'}
+            height={100}
             objectFit={'contain'}
             layout={'fixed'}
             alt={name}

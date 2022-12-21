@@ -1,5 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+
+interface AssetRequest extends NextApiRequest {
+  query: { asset: string };
+}
+
+export default async function handler(req: AssetRequest, res: NextApiResponse) {
   const { asset } = req.query;
 
   try {

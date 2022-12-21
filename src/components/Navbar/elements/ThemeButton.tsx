@@ -1,5 +1,5 @@
 import styled, { useTheme } from 'styled-components';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 
 import { useClickAway } from '@this/src/hooks/useClickAway';
 import { AnimatePresence, motion } from 'framer-motion';

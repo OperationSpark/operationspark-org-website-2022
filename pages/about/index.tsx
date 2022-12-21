@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from 'react';
 import { GetStaticProps, NextPage } from 'next';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import Link from 'next/link';
 import styled from 'styled-components';
 import { shuffle } from 'underscore';
@@ -58,8 +58,8 @@ const About: NextPage<IAbout> = ({ mission, team, history, awards }) => {
                   ))}
 
                   {i < mission.sections.length - 1 && (
-                    <Link href='/cultureOfCode'>
-                      <a className='anchor'>Our Culture of Code</a>
+                    <Link href='/cultureOfCode' className='anchor'>
+                      Our Culture of Code
                     </Link>
                   )}
                   {i < mission.sections.length - 1 && <hr />}

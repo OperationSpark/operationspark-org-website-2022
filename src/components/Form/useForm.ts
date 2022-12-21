@@ -35,7 +35,9 @@ interface OnSelectChangeProps {
 const useForm = <T extends Record<keyof T, T[keyof T]>>() => {
   const toast = useToast();
   const [values, setValues] = useState<IValues<T>>({} as T);
-  const [selectValues, setSelectValues] = useState<ISelectValues<T>>({} as T);
+  // TODO: Fix this type error
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [selectValues, setSelectValues] = useState<ISelectValues<any>>({} as T);
   const [checkboxGroupValues, setCheckboxGroupValues] = useState<TCheckboxGroup>({} as T);
   const [checkboxValues, setCheckboxValues] = useState<TCheckboxes>({} as T);
   const [validation, setValidation] = useState<IValidation>({});
@@ -47,7 +49,7 @@ const useForm = <T extends Record<keyof T, T[keyof T]>>() => {
 
     /** Fetches values for provided `select` property (key) */
     getSelect: (name: string): TOption =>
-      selectValues[name as keyof T] || {
+      selectValues[name] || {
         value: '',
         name: '',
       },

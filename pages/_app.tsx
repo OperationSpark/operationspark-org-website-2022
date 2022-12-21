@@ -11,7 +11,8 @@ import { ILogo, ISupporterFunderLogos } from '../data/types/logos';
 import Meta from '@this/src/components/Elements/Meta';
 
 const Theme = dynamic(() => import('@this/src/theme/styled/Theme'));
-const Navbar = dynamic(() => import('@this/components/Navbar/Navbar'));
+// TODO: Figure out why UI mismatch happens when `ssr` is true
+const Navbar = dynamic(() => import('@this/components/Navbar/Navbar'), { ssr: false });
 const Footer = dynamic(() => import('@this/components/footer/footer'));
 
 export default function App({ Component, pageProps }: AppProps) {

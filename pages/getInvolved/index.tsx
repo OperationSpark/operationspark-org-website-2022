@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import styled, { useTheme } from 'styled-components';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import { useState } from 'react';
 import { IoMdCloseCircle } from 'react-icons/io';
 import { BsArrowRightSquareFill } from 'react-icons/bs';
@@ -38,8 +38,8 @@ const GetInvolved: NextPage = () => {
                 <h3 className='dynamic-h3' style={{ maxWidth: '600px', textAlign: 'center' }}>
                   At Operation Spark, we love when software engineers come and present on a topic or
                   technology being used in the industry. If you are interested,{' '}
-                  <Link href='/contact'>
-                    <a className='primary-secondary'>please get in touch here</a>
+                  <Link href='/contact' className='primary-secondary'>
+                    please get in touch here
                   </Link>
                   .
                 </h3>
@@ -50,8 +50,8 @@ const GetInvolved: NextPage = () => {
                 <h2 className='dynamic-h2 primary-secondary text-center'>Hire Our Grads</h2>
                 <h3 className='dynamic-h3'>
                   If you are interested in hiring our grads,{' '}
-                  <Link href='/contact'>
-                    <a className='primary-secondary'>please get in touch here</a>
+                  <Link href='/contact' className='primary-secondary'>
+                    please get in touch here
                   </Link>
                   .
                 </h3>

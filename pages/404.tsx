@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import styled from 'styled-components';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 
 import { Main } from '@this/components/layout';
 

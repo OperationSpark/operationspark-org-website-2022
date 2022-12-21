@@ -26,7 +26,7 @@ const TopCard = () => {
                   <p className='dynamic-txt college-credit-desc'>
                     Our certifications are eligible for college credit!
                   </p>
-                  <Link href='/collegeCredit' passHref>
+                  <Link href='/collegeCredit'>
                     <Button color='yellow'>Learn more</Button>
                   </Link>
                 </div>

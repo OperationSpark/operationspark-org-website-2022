@@ -38,11 +38,13 @@ const HighschoolSignup: NextPage = () => {
                   </b>
                 </p>
               </div>
-              <Link href='/programs/highschool' passHref>
-                <a style={{ display: 'flex', alignItems: 'center' }} className='anchor'>
-                  <FiChevronLeft style={{ marginRight: '0.25rem' }} />
-                  High School Programs
-                </a>
+              <Link
+                href='/programs/highschool'
+                style={{ display: 'flex', alignItems: 'center' }}
+                className='anchor'
+              >
+                <FiChevronLeft style={{ marginRight: '0.25rem' }} />
+                High School Programs
               </Link>
             </div>
           </Content>

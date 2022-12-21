@@ -36,8 +36,8 @@ const AlumSpotlight = () => {
             </h2>
 
             {FEAT_GRAD_STORIES && (
-              <Link href='/testimonials/graduates'>
-                <a className='anchor right-arr-left'>Read more graduate stories</a>
+              <Link href='/testimonials/graduates' className='anchor right-arr-left'>
+                Read more graduate stories
               </Link>
             )}
           </div>

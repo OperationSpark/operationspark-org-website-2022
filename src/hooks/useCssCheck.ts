@@ -4,7 +4,9 @@ export const useValidCss = (cssProp: string, cssVal: string) => {
   const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
-    CSS && CSS.supports(cssProp, cssVal) && setIsValid(true);
+    if (typeof window !== 'undefined') {
+      CSS && CSS.supports(cssProp, cssVal) && setIsValid(true);
+    }
   }, [cssProp, cssVal]);
   return isValid;
 };

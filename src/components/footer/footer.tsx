@@ -1,6 +1,6 @@
 // Logo sheet - https://docs.google.com/spreadsheets/d/1NomIolcAQIPH4c6SCdfuZsm0Geqv6vjvzKp8yohQ-kU/edit
 
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { VStack, HStack, Text } from '@chakra-ui/react';
@@ -67,7 +67,7 @@ const Footer = ({ logos }: FooterProps) => {
                 >
                   <Image
                     width={50 * width}
-                    height='100%'
+                    height={50}
                     objectFit='contain'
                     layout='fixed'
                     alt={name}

@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import styled, { DefaultTheme } from 'styled-components';
 
 import rgbDataURL from '@this/src/helpers/rgbDataURL';

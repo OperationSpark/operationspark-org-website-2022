@@ -102,8 +102,8 @@ const ProgramInfoCard = ({
             {infoMessage && (
               <p className='dynamic-txt info-message flex-col-between'>
                 <b>{infoMessage}</b>
-                <Link href='/infoSession'>
-                  <a className='anchor right-arr-left'>Sign up here</a>
+                <Link href='/infoSession' className='anchor right-arr-left'>
+                  Sign up here
                 </Link>
               </p>
             )}

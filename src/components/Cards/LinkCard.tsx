@@ -68,10 +68,13 @@ const LinkCard = ({ title, description, linkText, linkUrl }: LinkCardProps) => {
           <p>{description}</p>
 
           {linkUrl && linkText && (
-            <Link href={linkUrl}>
-              <a className='anchor right-arr-left' title={linkText} aria-label={linkText}>
-                {linkText}
-              </a>
+            <Link
+              href={linkUrl}
+              className='anchor right-arr-left'
+              title={linkText}
+              aria-label={linkText}
+            >
+              {linkText}
             </Link>
           )}
         </div>

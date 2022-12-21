@@ -5,24 +5,14 @@ const { validateData } = require('./data/validate');
 
 const { OVERRIDE_NODE_ENV = '' } = process.env;
 
-module.exports = (phase, { defaultConfig }) => {
+module.exports = async (phase /*{ defaultConfig } */) => {
   console.info(color.magentaBright.bold('\nValidating... '));
+
   if (
     !process.env.GITHUB_ACTION &&
     [PHASE_PRODUCTION_BUILD, PHASE_DEVELOPMENT_SERVER].includes(phase)
   ) {
-    checkEnvVars([
-      'MAILCHIMP_API_KEY',
-      'MAILCHIMP_AUDIENCE_ID',
-      'GREENLIGHT_API_ENDPOINT',
-      'SIGNUP_API_ENDPOINT',
-      'GOOGLE_SERVICE_ACCOUNT',
-      'HIGHSCHOOL_FORM_RESPONSES_ID',
-      'WUFOO_HOST',
-      'WUFOO_TOKEN',
-      'WUFOO_CONTACT_FORM_ID',
-      'GOOGLE_EVENTS_CALENDAR_ID',
-    ]);
+    checkEnvVars();
     validateData();
   }
   if (PHASE_DEVELOPMENT_SERVER === phase) {
@@ -32,7 +22,7 @@ module.exports = (phase, { defaultConfig }) => {
    * @type {import('next').NextConfig}
    */
   return {
-    ...defaultConfig,
+    // ...defaultConfig,
     reactStrictMode: true,
     compiler: {
       styledComponents: true,
@@ -68,7 +58,19 @@ module.exports = (phase, { defaultConfig }) => {
   };
 };
 
-function checkEnvVars(requiredVars) {
+function checkEnvVars() {
+  const requiredVars = [
+    'MAILCHIMP_API_KEY',
+    'MAILCHIMP_AUDIENCE_ID',
+    'GREENLIGHT_API_ENDPOINT',
+    'SIGNUP_API_ENDPOINT',
+    'GOOGLE_SERVICE_ACCOUNT',
+    'HIGHSCHOOL_FORM_RESPONSES_ID',
+    'WUFOO_HOST',
+    'WUFOO_TOKEN',
+    'WUFOO_CONTACT_FORM_ID',
+    'GOOGLE_EVENTS_CALENDAR_ID',
+  ];
   for (const requiredVar of requiredVars) {
     if (!process.env[requiredVar]) {
       throw new Error(`"${requiredVar}" environment variable not found.`);

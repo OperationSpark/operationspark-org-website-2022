@@ -1,6 +1,6 @@
 import { MouseEvent } from 'react';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import styled from 'styled-components';
 
 import rgbDataURL from '@this/src/helpers/rgbDataURL';

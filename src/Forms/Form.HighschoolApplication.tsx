@@ -12,7 +12,8 @@ import PlainCard from '@this/src/components/Cards/PlainCard';
 
 const SpringApplicationStyles = styled.div`
   width: 100%;
-
+  max-width: 900px;
+  margin: 0 auto;
   .form-info {
     color: ${({ theme }) => (theme.isLightMode ? theme.red[700] : theme.red[200])};
   }
@@ -67,7 +68,7 @@ interface SpringApplicationProps {
   onSubmitComplete?: () => void;
 }
 
-const SpringApplication = ({ onSubmitComplete }: SpringApplicationProps) => {
+const HighSchoolApplication = ({ onSubmitComplete }: SpringApplicationProps) => {
   const sheetsTabName = 'Applications - Spring 2023';
   const form = useForm();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -104,10 +105,6 @@ const SpringApplication = ({ onSubmitComplete }: SpringApplicationProps) => {
     }
   };
 
-  // const equipmentData = form.getCheckboxes('equipment');
-  // const showEquipment =
-  //   (Object.keys(equipmentData).length < 5 && !equipmentData.none) ?? equipmentData.none;
-
   useEffect(() => {
     form.onSelectChange('courseTime')({ option: { name: '', value: '' }, isValid: true });
     //! Do not want to watch form
@@ -118,9 +115,9 @@ const SpringApplication = ({ onSubmitComplete }: SpringApplicationProps) => {
     <SpringApplicationStyles>
       <Form onSubmit={handleSubmit}>
         <div className='form-grid'>
-          <h3 className='dynamic-h3 form-section-title'>Student info</h3>
+          <h3 className='dynamic-h3 form-section-title'>Student Information</h3>
 
-          {SpringApplicationInputs.studentInfo.map((field) => (
+          {HighSchoolApplicationInputs.studentInfo.map((field) => (
             <field.Element
               key={field.name}
               {...field}
@@ -166,7 +163,7 @@ const SpringApplication = ({ onSubmitComplete }: SpringApplicationProps) => {
 
           <h3 className='dynamic-h3 form-section-title'>Parent/Guardian Information</h3>
 
-          {SpringApplicationInputs.guardianInfo.map((field) => (
+          {HighSchoolApplicationInputs.guardianInfo.map((field) => (
             <field.Element
               key={field.name}
               {...field}
@@ -178,78 +175,76 @@ const SpringApplication = ({ onSubmitComplete }: SpringApplicationProps) => {
           ))}
 
           <h3 className='dynamic-h3 form-section-title'>Course Information</h3>
-          <div className='form-col-span dynamic-txt' style={{ marginBottom: '1rem' }}>
-            <PlainCard noDivider={true}>
-              <p>
-                This semester, we are offering both in-person and virtual classes.{' '}
-                <b>
-                  <i>You can enroll in one or the other (No hybrid option).</i>
-                </b>
-              </p>
+          <div className='form-col-span'>
+            <p>
+              This semester, we are offering both in-person and virtual classes.{' '}
+              <b>
+                <i>You can enroll in one or the other (No hybrid option).</i>
+              </b>
+            </p>
 
-              <p>
-                <b>
-                  Days of the week vary by course and format, and will appear after selecting the
-                  appropriate course in the application.
-                </b>
-              </p>
-              <br />
-              <div>
-                {courseTimeOptions && (
-                  <p className='form-info'>
-                    <b>{courseTimeOptions.note}</b>
-                  </p>
-                )}
-                <Input.Select
-                  label='Which class are you interested in?'
-                  name='course'
-                  options={courses}
-                  option={form.getSelect('course')}
-                  isErr={form.isErr('course')}
-                  isValid={form.isValid('course')}
-                  onChange={form.onSelectChange('course')}
-                  required
-                />
-              </div>
-              {courseTimeOptions && (
-                <div>
-                  <p className='form-info'>
-                    <b>{`You must choose in person or virtual (No hybrid option)`}</b>
-                  </p>
-                  <Input.Select
-                    label=' What is your course preference?'
-                    name='course'
-                    options={courseTimeOptions.options}
-                    option={form.getSelect('courseTime')}
-                    isErr={form.isErr('courseTime')}
-                    isValid={form.isValid('courseTime')}
-                    onChange={form.onSelectChange('courseTime')}
-                    required
-                  />
-                </div>
-              )}
-              <Input.Select
-                label='What is your current level of interest in the program?'
-                name='interestLevel'
-                options={interestLevel}
-                option={form.getSelect('interestLevel')}
-                isErr={form.isErr('interestLevel')}
-                isValid={form.isValid('interestLevel')}
-                onChange={form.onSelectChange('interestLevel')}
-                required
-              />
-              <Input.Select
-                label='How did you hear about us?'
-                name='referencedBy'
-                options={referencedByOptions}
-                option={form.getSelect('referencedBy')}
-                isErr={form.isErr('referencedBy')}
-                isValid={form.isValid('referencedBy')}
-                onChange={form.onSelectChange('referencedBy')}
-                required
-              />
-            </PlainCard>
+            <p>
+              <b>
+                Days of the week vary by course and format, and will appear after selecting the
+                appropriate course in the application.
+              </b>
+            </p>
+            <br />
           </div>
+          <div>
+            {courseTimeOptions && (
+              <p className='form-info'>
+                <b>{courseTimeOptions.note}</b>
+              </p>
+            )}
+            <Input.Select
+              label='Which class are you interested in?'
+              name='course'
+              options={courses}
+              option={form.getSelect('course')}
+              isErr={form.isErr('course')}
+              isValid={form.isValid('course')}
+              onChange={form.onSelectChange('course')}
+              required
+            />
+          </div>
+          {courseTimeOptions && (
+            <div>
+              <p className='form-info'>
+                <b>{`You must choose in person or virtual (No hybrid option)`}</b>
+              </p>
+              <Input.Select
+                label=' What is your course preference?'
+                name='course'
+                options={courseTimeOptions.options}
+                option={form.getSelect('courseTime')}
+                isErr={form.isErr('courseTime')}
+                isValid={form.isValid('courseTime')}
+                onChange={form.onSelectChange('courseTime')}
+                required
+              />
+            </div>
+          )}
+          <Input.Select
+            label='What is your current level of interest in the program?'
+            name='interestLevel'
+            options={interestLevel}
+            option={form.getSelect('interestLevel')}
+            isErr={form.isErr('interestLevel')}
+            isValid={form.isValid('interestLevel')}
+            onChange={form.onSelectChange('interestLevel')}
+            required
+          />
+          <Input.Select
+            label='How did you hear about us?'
+            name='referencedBy'
+            options={referencedByOptions}
+            option={form.getSelect('referencedBy')}
+            isErr={form.isErr('referencedBy')}
+            isValid={form.isValid('referencedBy')}
+            onChange={form.onSelectChange('referencedBy')}
+            required
+          />
 
           <h3 className='dynamic-h3 form-section-title'>Policy Agreement</h3>
 
@@ -309,9 +304,9 @@ const SpringApplication = ({ onSubmitComplete }: SpringApplicationProps) => {
   );
 };
 
-export default SpringApplication;
+export default HighSchoolApplication;
 
-const SpringApplicationInputs = {
+const HighSchoolApplicationInputs = {
   studentInfo: [
     {
       Element: Input.Text,

@@ -106,8 +106,8 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
                 {desc}
               </p>
             ))}
-            <Link href='/cultureOfCode'>
-              <a className='anchor'>Culture of Code</a>
+            <Link href='/cultureOfCode' className='anchor'>
+              Culture of Code
             </Link>
           </Content>
         </Section>
@@ -125,14 +125,13 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
                   valuable talent for your company.
                 </b>
               </p>
-              <Link href='/contact'>
-                <a
-                  className='anchor right-arr-left '
-                  aria-label='Contact to learn about employer partnerships'
-                  title='Contact to learn about employer partnerships'
-                >
-                  Contact us to learn more about employer partnerships
-                </a>
+              <Link
+                href='/contact'
+                className='anchor right-arr-left '
+                aria-label='Contact to learn about employer partnerships'
+                title='Contact to learn about employer partnerships'
+              >
+                Contact us to learn more about employer partnerships
               </Link>
             </div>
 
@@ -159,8 +158,8 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
           <Content style={{ paddingTop: '0', paddingBottom: '2rem' }}>
             <h1 className='dynamic-h1'>Courses</h1>
             <div className='course-resources'>
-              <Link href='/programs/workforce/schedule'>
-                <a className='anchor resource-link'>Schedule</a>
+              <Link href='/programs/workforce/schedule' className='anchor resource-link'>
+                Schedule
               </Link>
 
               <a

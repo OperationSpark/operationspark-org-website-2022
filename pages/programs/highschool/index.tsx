@@ -31,18 +31,17 @@ const HighSchool: NextPage<IHighschoolPrograms> = ({ description, courses, schoo
           style={{ maxWidth: '500px' }}
           onClick={() => setIsFormOpen(!isFormOpen)}
         >
-          <Link href='/programs/highschool/requestInfo'>
-            <a
-              className='anchor'
-              style={{
-                marginBottom: '0.75rem',
-                display: 'flex',
-                alignItems: 'center',
-              }}
-            >
-              Open form&nbsp;
-              <FiChevronRight />
-            </a>
+          <Link
+            href='/programs/highschool/requestInfo'
+            className='anchor'
+            style={{
+              marginBottom: '0.75rem',
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            Open form&nbsp;
+            <FiChevronRight />
           </Link>
           <HighschoolInfoForm
             onSubmitComplete={() => setIsFormOpen(false)}
@@ -70,8 +69,8 @@ const HighSchool: NextPage<IHighschoolPrograms> = ({ description, courses, schoo
                 {desc}
               </p>
             ))}
-            <Link href='/cultureOfCode'>
-              <a className='anchor'>Our Culture of Code</a>
+            <Link href='/cultureOfCode' className='anchor'>
+              Our Culture of Code
             </Link>
           </div>
         </Content>

@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import styled from 'styled-components';
 import rgbDataURL from '@this/src/helpers/rgbDataURL';
 
@@ -45,8 +45,8 @@ const Map = ({ href, address }: MapProps) => {
           <Image
             src='/images/opspark-map.png'
             layout='responsive'
-            width='500px'
-            height='500px'
+            width={500}
+            height={500}
             objectFit='contain'
             alt='Operation Spark map'
             quality={100}
