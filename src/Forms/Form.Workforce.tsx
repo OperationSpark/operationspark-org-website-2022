@@ -44,7 +44,11 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
         },
       }),
     };
-    pixel.event('infoSessionSignup', { email: body.email });
+
+    pixel.event('Lead', {
+      sessionId: session?._id ?? 'NO_SESSION',
+      sessionTime: session?.times?.start?.dateTime || null,
+    });
 
     axios
       .post('/api/infoSession/user', body)
@@ -58,9 +62,7 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
           msg: 'There was an error signing you up\nPlease reach out to us at "admissions@operationspark.org" or give us a call at 504-534-8277',
         });
       })
-      .finally(() => {
-        setIsSubmitting(false);
-      });
+      .finally(() => setIsSubmitting(false));
   };
 
   const sessionDateOptions = [
