@@ -1,16 +1,36 @@
-import { GetServerSideProps, NextPage } from 'next';
+import { NextPage } from 'next';
 import styled from 'styled-components';
 
 import moment from 'moment';
 import { Content, Main } from '@this/src/components/layout';
-import { getCalendarEvents, CalendarEventItem } from '@this/pages-api/calendar/events';
+import { CalendarEventItem } from '@this/pages-api/calendar/events';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import Spinner from '@this/src/components/Elements/Spinner';
 
 type CalendarEventProps = {
   calEvents: CalendarEventItem[];
 };
 
-const CalendarEvents: NextPage<CalendarEventProps> = ({ calEvents }) => {
-  return (
+const CalendarEvents: NextPage<CalendarEventProps> = () => {
+  const [loading, setLoading] = useState<boolean>(true);
+  const [calEvents, setCalEvents] = useState<CalendarEventItem[]>([]);
+
+  useEffect(() => {
+    axios
+      .get<CalendarEventItem[]>('/api/calendar/events')
+      .then(({ data }) => {
+        setCalEvents(data);
+        setLoading(false);
+      })
+      .catch((err) => console.error('Failed to fetch calendar events\n', err));
+  }, []);
+
+  return loading ? (
+    <Main>
+      <Spinner />
+    </Main>
+  ) : (
     <Main>
       <CalendarEventsStyles>
         <Content>
@@ -64,16 +84,6 @@ const CalendarEvents: NextPage<CalendarEventProps> = ({ calEvents }) => {
 };
 
 export default CalendarEvents;
-
-export const getServerSideProps: GetServerSideProps<CalendarEventProps> = async () => {
-  try {
-    const calEvents = await getCalendarEvents();
-    return { props: { calEvents } };
-  } catch (err) {
-    console.error(err);
-    return { props: { calEvents: [] } };
-  }
-};
 
 const CalendarEventsStyles = styled.div`
   .no-events-message {

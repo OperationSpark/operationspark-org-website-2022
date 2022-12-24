@@ -23,5 +23,6 @@ export const MainStyles = styled.main.attrs(({ navHeight }: { navHeight: number 
 }))`
   padding-top: ${({ theme }) => theme.navHeight}px;
   min-height: 100vh;
+  height: 100%;
   transition: padding-top 250ms;
 `;
