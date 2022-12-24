@@ -33,6 +33,7 @@ declare module 'styled-components' {
       fg50: string;
       bg25: string;
       fg25: string;
+      fg10: string;
     };
     black: string;
     white: string;
