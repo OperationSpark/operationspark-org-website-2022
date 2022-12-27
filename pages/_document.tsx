@@ -33,7 +33,7 @@ class MyDocument extends Document {
         <Head>
           <meta name='theme-color' media='(prefers-color-scheme: light)' content='#920CF8' />
           <meta name='theme-color' media='(prefers-color-scheme: dark)' content='#320067' />
-
+          <meta name='facebook-domain-verification' content='u2igk2zap14ke4q4vdpr4m9n5jirpz' />
           <link
             href='https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Roboto:wght@100;300;400;500;700;900&family=Source+Code+Pro:wght@300;400;500;700;800;900&family=Kalam:wght@300;400;700&display=swap'
             rel='stylesheet'
