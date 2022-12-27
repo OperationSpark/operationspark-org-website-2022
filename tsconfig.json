@@ -8,7 +8,8 @@
       "@this/components/*": ["src/components/*"],
       "@this/hooks/*": ["src/hooks/*"],
       "@this/api/*": ["src/api/*"],
-      "@this/pages-api/*": ["pages/api/*"]
+      "@this/pages-api/*": ["pages/api/*"],
+      "@this/lib/*": ["lib/*"]
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],

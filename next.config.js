@@ -3,7 +3,7 @@ const color = require('cli-color');
 
 const { validateData } = require('./data/validate');
 
-const { OVERRIDE_NODE_ENV = '' } = process.env;
+const { OVERRIDE_NODE_ENV = '', FB_PIXEL_ID } = process.env;
 
 module.exports = (phase, { defaultConfig }) => {
   console.info(color.magentaBright.bold('\nValidating... '));
@@ -39,6 +39,7 @@ module.exports = (phase, { defaultConfig }) => {
     },
     env: {
       OVERRIDE_NODE_ENV,
+      FB_PIXEL_ID,
     },
     async redirects() {
       return [

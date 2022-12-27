@@ -10,6 +10,7 @@ import { Form, Input, useForm } from '@this/components/Form';
 import Button from '@this/components/Elements/Button';
 import unitedStates from './formData/unitedStates.json';
 import Spinner from '../components/Elements/Spinner';
+import { pixel } from '@this/lib/pixel';
 
 interface WorkforceFormProps {
   sessionDates: ISessionDates[];
@@ -24,6 +25,7 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
     if (hasErrors) {
       return form.toggleShowErrors();
     }
+
     setIsSubmitting(true);
     const { sessionDate, userLocation, ...values } = form.values();
     userLocation.value = userLocation.name;
@@ -43,6 +45,11 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
       }),
     };
 
+    pixel.event('Lead', {
+      sessionId: session?._id ?? 'NO_SESSION',
+      sessionTime: session?.times?.start?.dateTime || null,
+    });
+
     axios
       .post('/api/infoSession/user', body)
       .then(() => {
@@ -55,9 +62,7 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
           msg: 'There was an error signing you up\nPlease reach out to us at "admissions@operationspark.org" or give us a call at 504-534-8277',
         });
       })
-      .finally(() => {
-        setIsSubmitting(false);
-      });
+      .finally(() => setIsSubmitting(false));
   };
 
   const sessionDateOptions = [
