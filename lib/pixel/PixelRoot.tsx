@@ -19,9 +19,9 @@ export const PixelRoot = () => {
     };
   }, [router.events]);
 
-  //Global Site Code Pixel - Facebook Pixel
   return (
     <Fragment>
+      {/* Facebook Pixel Script*/}
       <Script
         id='fb-pixel'
         strategy='afterInteractive'
@@ -39,6 +39,8 @@ export const PixelRoot = () => {
             `,
         }}
       />
+
+      {/* TV Squared Pixel Script */}
       <Script
         id='rvq-pixel'
         strategy='afterInteractive'
