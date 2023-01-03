@@ -46,11 +46,8 @@ const useForm = <T extends Record<keyof T, T[keyof T]>>() => {
     get: (name: string): string => values[name as keyof T] || '',
 
     /** Fetches values for provided `select` property (key) */
-    getSelect: (name: string): TOption =>
-      selectValues[name as keyof T] || {
-        value: '',
-        name: '',
-      },
+    getSelect: (name: keyof T): TOption =>
+      selectValues[name] ? selectValues[name] : { value: '', name: '' },
 
     /** Fetches values for provided `checkboxes` property (key) */
     getCheckboxes: (name: string): TCheckboxes => checkboxGroupValues[name] || {},

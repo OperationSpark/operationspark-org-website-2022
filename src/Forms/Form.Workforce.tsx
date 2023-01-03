@@ -53,7 +53,9 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
     axios
       .post('/api/infoSession/user', body)
       .then(() => {
-        form.notifySuccess();
+        form.notifySuccess({
+          msg: 'Info session registration for submitted. You should receive an email and text message shortly.',
+        });
         form.clear();
       })
       .catch(() => {
@@ -66,10 +68,12 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
   };
 
   const sessionDateOptions = [
-    ...sessionDates.map(({ _id, times: { start } }) => ({
-      name: moment(start.dateTime).format('dddd, MMMM Do h:mma'),
-      value: _id,
-    })),
+    ...sessionDates
+      .filter((s) => !s.private)
+      .map((session) => ({
+        name: moment(session.times.start.dateTime).format('dddd, MMMM Do h:mma'),
+        value: session._id,
+      })),
     {
       name: 'None of these fit my schedule',
       value: 'future',
