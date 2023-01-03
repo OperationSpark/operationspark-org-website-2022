@@ -11,6 +11,7 @@ import Button from '@this/components/Elements/Button';
 import unitedStates from './formData/unitedStates.json';
 import Spinner from '../components/Elements/Spinner';
 import { pixel } from '@this/lib/pixel';
+import useKeyCombo from '../hooks/useKeyCombo';
 
 interface WorkforceFormProps {
   sessionDates: ISessionDates[];
@@ -19,6 +20,8 @@ interface WorkforceFormProps {
 const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
   const form = useForm<IInfoSessionFormValues>();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const isKeyComboActive = useKeyCombo('o', 's');
+
   const handleSubmit = () => {
     const hasErrors = form.hasErrors();
 
@@ -53,7 +56,9 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
     axios
       .post('/api/infoSession/user', body)
       .then(() => {
-        form.notifySuccess();
+        form.notifySuccess({
+          msg: 'Info session registration for submitted. You should receive an email and text message shortly.',
+        });
         form.clear();
       })
       .catch(() => {
@@ -66,10 +71,12 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
   };
 
   const sessionDateOptions = [
-    ...sessionDates.map(({ _id, times: { start } }) => ({
-      name: moment(start.dateTime).format('dddd, MMMM Do h:mma'),
-      value: _id,
-    })),
+    ...sessionDates
+      .filter((s) => !s.private || isKeyComboActive)
+      .map((session) => ({
+        name: moment(session.times.start.dateTime).format('dddd, MMMM Do h:mma'),
+        value: session._id,
+      })),
     {
       name: 'None of these fit my schedule',
       value: 'future',
