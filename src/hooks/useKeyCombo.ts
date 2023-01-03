@@ -10,7 +10,6 @@ export const useKeyCombo = (...keys: string[]) => {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const key = e.key.toLocaleLowerCase('en-US');
-      console.log(key);
       if (key === lastKey) {
         return;
       }
