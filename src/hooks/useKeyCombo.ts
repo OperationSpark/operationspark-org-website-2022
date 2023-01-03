@@ -9,14 +9,15 @@ export const useKeyCombo = (...keys: string[]) => {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      const key = e.key.toLocaleLowerCase();
+      const key = e.key.toLocaleLowerCase('en-US');
+      console.log(key);
       if (key === lastKey) {
         return;
       }
       if (key === 'control') {
         return setCtrl(true);
       }
-      if (key === 'alt') {
+      if (key === 'alt' || key === 'meta') {
         return setOpt(true);
       }
       if (isCtrl && isOpt && keys.includes(key) && key !== lastKey) {
