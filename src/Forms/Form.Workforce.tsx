@@ -11,6 +11,7 @@ import Button from '@this/components/Elements/Button';
 import unitedStates from './formData/unitedStates.json';
 import Spinner from '../components/Elements/Spinner';
 import { pixel } from '@this/lib/pixel';
+import useKeyCombo from '../hooks/useKeyCombo';
 
 interface WorkforceFormProps {
   sessionDates: ISessionDates[];
@@ -19,6 +20,8 @@ interface WorkforceFormProps {
 const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
   const form = useForm<IInfoSessionFormValues>();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const isKeyComboActive = useKeyCombo('o', 's');
+
   const handleSubmit = () => {
     const hasErrors = form.hasErrors();
 
@@ -69,7 +72,7 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
 
   const sessionDateOptions = [
     ...sessionDates
-      .filter((s) => !s.private)
+      .filter((s) => !s.private || isKeyComboActive)
       .map((session) => ({
         name: moment(session.times.start.dateTime).format('dddd, MMMM Do h:mma'),
         value: session._id,
