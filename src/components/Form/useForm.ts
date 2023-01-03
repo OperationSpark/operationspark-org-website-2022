@@ -2,40 +2,28 @@ import { useState } from 'react';
 import { useToast } from '@chakra-ui/react';
 import { TOption } from '@this/data/types/bits';
 
-type IValues<T> = {
-  [Property in keyof T]: string;
-};
+type IValues<Values, T extends keyof Values> = Record<T, string>;
+type ISelectValues = Record<string, TOption>;
+type TCheckboxes = Record<string, boolean>;
+type TCheckboxGroup = Record<string, TCheckboxes>;
+type IValidation = Record<string, boolean>;
 
-type ISelectValues<T> = Record<keyof T, T[keyof T]>;
-
-type TCheckboxes = {
-  [key: string]: boolean;
-};
-
-type TCheckboxGroup = {
-  [key: string]: TCheckboxes;
-};
-
-interface IValidation {
-  [key: string]: boolean;
-}
-
-interface INotify {
+type INotify = {
   title?: string;
   msg?: string;
-}
+};
 
-interface OnSelectChangeProps {
+type OnSelectChangeProps = {
   option?: TOption;
   additionalInfo?: string;
   additionalInfoLabel?: string;
   isValid: boolean;
-}
+};
 
-const useForm = <T extends Record<keyof T, T[keyof T]>>() => {
+const useForm = <T extends Record<keyof T, T[keyof T]> = {}>() => {
   const toast = useToast();
-  const [values, setValues] = useState<IValues<T>>({} as T);
-  const [selectValues, setSelectValues] = useState<ISelectValues<T>>({} as T);
+  const [values, setValues] = useState<IValues<T, keyof T>>({} as T);
+  const [selectValues, setSelectValues] = useState<ISelectValues>({});
   const [checkboxGroupValues, setCheckboxGroupValues] = useState<TCheckboxGroup>({} as T);
   const [checkboxValues, setCheckboxValues] = useState<TCheckboxes>({} as T);
   const [validation, setValidation] = useState<IValidation>({});
@@ -46,8 +34,7 @@ const useForm = <T extends Record<keyof T, T[keyof T]>>() => {
     get: (name: string): string => values[name as keyof T] || '',
 
     /** Fetches values for provided `select` property (key) */
-    getSelect: (name: keyof T): TOption =>
-      selectValues[name] ? selectValues[name] : { value: '', name: '' },
+    getSelect: (name: string): TOption => selectValues[name] ?? { value: '', name: '' },
 
     /** Fetches values for provided `checkboxes` property (key) */
     getCheckboxes: (name: string): TCheckboxes => checkboxGroupValues[name] || {},
@@ -82,10 +69,11 @@ const useForm = <T extends Record<keyof T, T[keyof T]>>() => {
     onSelectChange:
       (name: string) =>
       ({ option, additionalInfo, additionalInfoLabel, isValid }: OnSelectChangeProps) => {
-        setSelectValues({
-          ...selectValues,
-          [name]: { ...option, additionalInfo, additionalInfoLabel },
-        });
+        option &&
+          setSelectValues({
+            ...selectValues,
+            [name]: { ...option, additionalInfo, additionalInfoLabel },
+          });
         setValidation({ ...validation, [name]: isValid });
       },
 
