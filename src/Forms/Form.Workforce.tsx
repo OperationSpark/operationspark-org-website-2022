@@ -30,11 +30,14 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
     }
 
     setIsSubmitting(true);
-    const { sessionDate, userLocation, ...values } = form.values();
+    const { sessionDate, userLocation, firstName, lastName, ...values } = form.values();
+
     userLocation.value = userLocation.name;
     const session = sessionDates.find((s) => s._id === sessionDate.value);
     const body: FormDataSignup = {
       ...values,
+      firstName: firstName.trim(),
+      lastName: lastName.trim(),
       userLocation,
       ...(session && {
         session: {

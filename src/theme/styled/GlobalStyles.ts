@@ -10,7 +10,7 @@ const GlobalStyles = createGlobalStyle`
   }
   html, body {
     background: ${({ theme }) => theme.bg} !important;
-    color: ${({ theme }) => theme.alpha.fg} !important;
+    color: ${({ theme }) => theme.fg} !important;
   }
   p {
      font-family: 'Roboto', sans-serif;
