@@ -338,6 +338,7 @@ export const CohortScheduleStyles = styled.div`
       position: static;
       padding: 0;
       font-weight: 900;
+      print-color-adjust: exact;
       background: transparent !important;
       -webkit-print-color-adjust: economy;
     }
@@ -348,6 +349,7 @@ export const CohortScheduleStyles = styled.div`
     }
     .schedule-block {
       width: fit-content;
+      print-color-adjust: exact;
       -webkit-print-color-adjust: exact;
       background: rgba(255, 255, 255, 0);
     }

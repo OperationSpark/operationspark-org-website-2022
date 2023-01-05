@@ -3,10 +3,16 @@ import { useEffect, useState } from 'react';
 
 import { ISessionDates } from '@this/pages-api/infoSession/dates';
 
-function useInfoSession(nextOnly: boolean): ISessionDates;
-function useInfoSession(): ISessionDates[];
+type UseInfoSessionArgs = {
+  /** Only fetch the next (non-private) session */
+  nextOnly?: boolean;
+  /** Show hidden (fake) sessions for development purposes */
+  showPrivate?: boolean;
+};
 
-function useInfoSession(nextOnly?: boolean) {
+const useInfoSession = (options: UseInfoSessionArgs = {}): ISessionDates[] => {
+  const { nextOnly, showPrivate } = options;
+
   const [sessionDates, setSessionDates] = useState<ISessionDates[]>([]);
 
   useEffect(() => {
@@ -14,9 +20,10 @@ function useInfoSession(nextOnly?: boolean) {
   }, []);
 
   if (nextOnly) {
-    return sessionDates[0] ?? null;
+    const nextSession = sessionDates.find((s) => !s.private);
+    return nextSession ? [nextSession] : [];
   }
-  return sessionDates;
-}
+  return sessionDates.filter((session) => !session.private || showPrivate);
+};
 
 export default useInfoSession;
