@@ -4,7 +4,9 @@ import { useEffect, useState } from 'react';
 import { ISessionDates } from '@this/pages-api/infoSession/dates';
 
 type UseInfoSessionArgs = {
+  /** Only fetch the next (non-private) session*/
   nextOnly?: boolean;
+  /** Show hidden (fake) sessions for development purposes */
   showPrivate?: boolean;
 };
 
