@@ -11,6 +11,7 @@ import { getStaticAsset } from '@this/pages-api/static/[asset]';
 import { Main, Section, Content } from '@this/components/layout';
 import useInfoSession from '@this/src/hooks/useInfoSession';
 import { getFormattedDateTime } from '@this/src/helpers/timeUtils';
+import useKeyCombo from '@this/hooks/useKeyCombo';
 
 const WorkforceForm = dynamic(() => import('@this/src/Forms/Form.Workforce'));
 const Carousel = dynamic(() => import('@this/components/Elements/Carousel'));
@@ -20,7 +21,8 @@ interface InfoSessionProps extends IInfoSession {
 }
 
 const InfoSession: NextPage<InfoSessionProps> = ({ commonQuestions, logos }) => {
-  const sessionDates = useInfoSession();
+  const isKeyComboActive = useKeyCombo('o', 's');
+  const sessionDates = useInfoSession({ showPrivate: isKeyComboActive });
 
   const nextSession = getFormattedDateTime(sessionDates?.[0]?.times?.start?.dateTime);
 
@@ -52,9 +54,9 @@ const InfoSession: NextPage<InfoSessionProps> = ({ commonQuestions, logos }) => 
 
               <motion.div
                 className='video-container'
-                initial={{ opacity: 0, x: 0, y: -400, rotate: 90 }}
-                animate={{ opacity: 1, x: 0, y: 0, rotate: 0 }}
-                transition={{ type: 'spring', duration: 0.8, stiffness: 100 }}
+                initial={{ opacity: 0, x: 0, y: 150, scale: 0.6 }}
+                animate={{ opacity: 1, x: 0, y: 0, scale: 1 }}
+                transition={{ type: 'tween', duration: 0.8 }}
               >
                 <video width='100%' height='auto' controls>
                   <source
