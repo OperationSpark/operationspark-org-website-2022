@@ -12,7 +12,7 @@ const useInfoSession = (options: UseInfoSessionArgs = {}): ISessionDates[] => {
   const { nextOnly, showPrivate } = options;
 
   const [sessionDates, setSessionDates] = useState<ISessionDates[]>([]);
-  console.log(sessionDates);
+
   useEffect(() => {
     axios.get('/api/infoSession/dates').then(({ data }) => setSessionDates(data));
   }, []);
