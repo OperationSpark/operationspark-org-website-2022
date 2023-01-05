@@ -38,7 +38,7 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
 
   const quote = companyQuotes[quoteIndex];
 
-  const nextInfoSession = useInfoSession(true);
+  const [nextInfoSession] = useInfoSession({ nextOnly: true });
 
   const nextInfoSessionDate = !nextInfoSession
     ? null
