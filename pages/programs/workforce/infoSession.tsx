@@ -23,8 +23,8 @@ interface InfoSessionProps extends IInfoSession {
 const InfoSession: NextPage<InfoSessionProps> = ({ commonQuestions, logos }) => {
   const isKeyComboActive = useKeyCombo('o', 's');
   const sessionDates = useInfoSession({ showPrivate: isKeyComboActive });
-
-  const nextSession = getFormattedDateTime(sessionDates?.[0]?.times?.start?.dateTime);
+  const nextSessionDate = sessionDates.find((s) => !s.private);
+  const nextSession = getFormattedDateTime(nextSessionDate?.times?.start?.dateTime);
 
   return (
     <Main>
