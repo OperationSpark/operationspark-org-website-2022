@@ -478,10 +478,10 @@ const courseTimes = {
       value: 'onsite-thurs-4-8',
       name: 'In-person, Wednesdays, 4:45 - 8:00 PM',
     },
-    {
-      value: 'virtual-tues-thurs-5-7',
-      name: 'Virtual, Tuesdays + Thursdays, 5:00 - 7:00 PM',
-    },
+    // {
+    //   value: 'virtual-tues-thurs-5-7',
+    //   name: 'Virtual, Tuesdays + Thursdays, 5:00 - 7:00 PM',
+    // },
   ],
   advanced: [
     {

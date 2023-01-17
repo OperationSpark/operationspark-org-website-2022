@@ -56,6 +56,23 @@ const HighschoolSignup: NextPage = () => {
                   in one or the other (No hybrid option).
                 </p>
                 <br />
+                <div
+                  style={{
+                    display: 'flex',
+                    flexFlow: 'row wrap',
+                    gap: '1rem',
+                    fontSize: '1.25em',
+                  }}
+                >
+                  <p className='primary-secondary'>
+                    <b>We still have a few open spots for late applicants.</b>
+                  </p>
+                  <p className='primary-secondary'>
+                    <b>The spring application will close on Monday, January 23.</b>
+                  </p>
+                </div>
+
+                <br />
                 <p>
                   <b>Available Courses:</b>
                 </p>
@@ -67,9 +84,15 @@ const HighschoolSignup: NextPage = () => {
                   <b>No Prerequisite</b>
                 </p>
                 <ul>
-                  <li>
+                  {/* <li>
                     <b className='primary-secondary'>Virtual: </b> Tuesdays + Thursdays, 5:00 - 7:00
                     PM
+                  </li> */}
+                  <li>
+                    <s>
+                      <b>Virtual: </b> Tuesdays + Thursdays, 5:00 - 7:00 PM
+                    </s>
+                    <b className='primary-secondary'> (FULL)</b>
                   </li>
                   <li>
                     <b className='primary-secondary'>In Person: </b> Wednesdays, 4:45 - 8:00 PM
@@ -182,6 +205,9 @@ const HighschoolSignupStyles = styled.div`
       gap: 1rem;
       .left-col {
         flex: 1;
+      }
+      li > s {
+        color: ${({ theme }) => theme.grey[600]};
       }
       .right-col {
         display: flex;
