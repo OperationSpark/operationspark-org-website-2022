@@ -44,12 +44,16 @@ const InfoSession: NextPage<InfoSessionProps> = ({ commonQuestions, logos }) => 
                 </h1>
               </div>
               <div className='whats-to-learn'>
-                <h2 className='dynamic-h2 '>{`IN THIS SESSION YOU'LL LEARN`}</h2>
+                <h2 className='dynamic-h2 '>{`YOU'LL LEARN ABOUT`}</h2>
                 <ul className='what-to-learn-list'>
-                  <li>about coding and career opportunities</li>
-                  <li>about our programs and job search support</li>
-                  <li>what it takes to be successful in our program</li>
+                  <li>Coding and career opportunities</li>
+                  <li>Our programs and job search support</li>
+                  <li>What it takes to be successful in our program</li>
+                  <li>How to enroll at Operation Spark</li>
                 </ul>
+                <a className='anchor' href='#common-questions' style={{ alignSelf: 'center' }}>
+                  Learn More
+                </a>
               </div>
 
               <motion.div
@@ -114,13 +118,15 @@ const InfoSession: NextPage<InfoSessionProps> = ({ commonQuestions, logos }) => 
             <h1 className='dynamic-h1 primary-secondary'>Our grads work at great companies!</h1>
             <div className='stats'>
               <h2 className='dynamic-h2'>100% Job Placement</h2>
-              <h2 className='dynamic-h2'>$62,000 avg starting salary</h2>
+              <h2 className='dynamic-h2'>$62,000 average starting salary</h2>
             </div>
           </Content>
         </Section>
         <Carousel logos={logos} style={{ marginTop: '3rem' }} />
         <Section>
+          <div id='common-questions' className='page-marker'></div>
           <Content className='common-questions'>
+            <h1 className='dynamic-h2'>Common Questions</h1>
             {commonQuestions.map(({ question, answer }) => (
               <div key={question.join('')} className='question-answer'>
                 <h3 className='dynamic-h3'>{question}</h3>
@@ -189,20 +195,28 @@ const InfoSessionStyles = styled.div`
       }
       ul {
         list-style: none;
-
+        padding-top: 1rem;
         li {
           font-size: 1.25rem;
           font-weight: 500;
           margin-left: 1.25rem;
           position: relative;
-          line-height: 1em;
-          padding: 0.5rem 0;
+          line-height: 1.5em;
+          padding: 0.5rem 0 0.75rem 1.5rem;
+
           ::before {
             content: '✓';
-            color: green;
+            color: ${({ theme }) => theme.green[0]};
             font-weight: 900;
+            font-size: 2rem;
             position: absolute;
             left: -1.25rem;
+            height: 100%;
+            top: 0;
+            display: flex;
+            align-items: center;
+            filter: drop-shadow(0 0 3px rgba(0, 255, 0, 1));
+            text-shadow: 0 0 3px rgba(0, 0, 0, 1);
           }
         }
       }
@@ -220,11 +234,12 @@ const InfoSessionStyles = styled.div`
       border-radius: 0.5rem;
       max-width: 500px;
       min-width: 400px;
-      ${cardShadowLtr}
+      ${cardShadowLtr};
       display: flex;
       flex-flow: column;
       grid-gap: 1rem;
       position: relative;
+      height: fit-content;
       .form-title.date-time {
         color: ${({ theme }) => (theme.isLightMode ? theme.magenta[0] : theme.green[0])};
         font-weight: 500;

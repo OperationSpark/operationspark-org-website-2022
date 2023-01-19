@@ -11,9 +11,10 @@ export interface ISessionUser extends NextApiRequest {
 }
 interface ISession {
   id: string;
-  cohort: string;
-  startDateTime: string;
   programId: string;
+  cohort: string;
+  code?: string;
+  startDateTime: string;
   locationType: LocationType;
   googlePlace?: GooglePlace;
 }
@@ -59,11 +60,13 @@ export interface ISessionSignup {
   token: string;
   userLocation: string;
   attendingLocation: AttendingLocation;
+  code?: string;
 }
 
 export default async function handleInfoSessionForm(req: ISessionUser, res: NextApiResponse) {
   try {
     const payload: ISessionSignup = formatPayload(req.body);
+
     await runCloudFunction({
       url: SIGNUP_API_ENDPOINT,
       body: payload,
@@ -112,5 +115,6 @@ function formatPayload(form: FormDataSignup): ISessionSignup {
     token: GREENLIGHT_API_TOKEN ?? '',
     userLocation: location.additionalInfo || location.value,
     attendingLocation,
+    code: session?.code,
   };
 }

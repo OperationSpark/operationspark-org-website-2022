@@ -15,6 +15,10 @@ const GlobalStyles = createGlobalStyle`
   p {
      font-family: 'Roboto', sans-serif;
    }
+   .page-marker {
+      content: '';
+      height: ${({ theme }) => theme.navHeight / 2}px;
+   }
   .primary-secondary {
     color: ${({ theme }) => (theme.isLightMode ? theme.primary[700] : theme.secondary[500])};
   }

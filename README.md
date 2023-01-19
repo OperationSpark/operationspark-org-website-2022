@@ -1,24 +1,23 @@
 <h1 align='center'>
-  <a href='https://staging.operationspark.org' target='_blank'>
-    <p><b>OperationSpark.org Website 2022</b></p>
+  <a href='https://operationspark.org' target='_blank'>
+    <p><b>OperationSpark.org Website</b></p>
     <img src='public/images/opspark-banner.png' width='250px'>
   </a>
 </h1>
 
-## Development / Production
-
-1. Install dependencies `npm i`
-2. Make a copy of [.env.sample](.env.sample) called `.env.local` file to root directory
-3. Create/add necessary env variables (replace placeholders)
-
 ## Development
 
-4. Run project in development with `npm run dev`
+- Install dependencies `npm i`
+- Make a copy of [.env.sample](.env.sample) called `.env.development.local` in project root.
+- Create/add necessary env variables (replace placeholders)
+- Run project in development with `npm run dev`
 
 ## Production
 
-4. Build the project with `npm run build`
-5. Start the server with `npm start`
+- Install dependencies `npm i`
+- Make a copy of [.env.sample](.env.sample) called `.env.local` in project root
+- Build the project with `npm run build`
+- Start the server with `npm start`
 
 ---
 

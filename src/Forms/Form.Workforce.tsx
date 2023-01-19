@@ -44,6 +44,7 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
           id: session._id,
           cohort: session.cohort,
           programId: session.programId,
+          code: session.code,
           startDateTime: session.times.start.dateTime,
           googlePlace: session.googlePlace,
           locationType: session.locationType,

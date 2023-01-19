@@ -9,6 +9,7 @@ export interface ISessionDates {
   cohort: string;
   programId: string;
   private?: boolean;
+  code?: string;
   times: {
     start: {
       dateTime: string;
