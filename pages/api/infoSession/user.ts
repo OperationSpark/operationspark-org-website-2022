@@ -60,7 +60,7 @@ export interface ISessionSignup {
   token: string;
   userLocation: string;
   attendingLocation: AttendingLocation;
-  code?: string;
+  joinCode?: string;
 }
 
 export default async function handleInfoSessionForm(req: ISessionUser, res: NextApiResponse) {
@@ -115,6 +115,6 @@ function formatPayload(form: FormDataSignup): ISessionSignup {
     token: GREENLIGHT_API_TOKEN ?? '',
     userLocation: location.additionalInfo || location.value,
     attendingLocation,
-    code: session?.code,
+    joinCode: session?.code,
   };
 }
