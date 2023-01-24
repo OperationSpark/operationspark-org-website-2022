@@ -6,7 +6,14 @@ import NavLink from './elements/NavLink';
 
 const BonusBar = ({ children }: { children?: ReactNode }) => {
   const router = useRouter();
-  const SHOW_HS_APPLICATION = true;
+  /**
+   * High School Application - `/programs/highschool/apply`
+   * - `true` - Show high school application button
+   *   - Uncomment redirect in [next.config.js](../../../next.config.js)
+   * - `false` - Hide high school application button
+   *   - Comment out redirect in  [next.config.js](../../../next.config.js)
+   */
+  const SHOW_HS_APPLICATION = false;
 
   const checkIsPath = (...paths: string[]) => {
     return paths.reduce((isPath, path) => {
