@@ -53,12 +53,16 @@ module.exports = (phase, { defaultConfig }) => {
           destination: '/programs/workforce/infoSession',
           permanent: true,
         },
-        // uncomment to add redirect (when form is not available)
-        // {
-        //   source: '/programs/highschool/apply',
-        //   destination: '/programs/highschool',
-        //   permanent: false,
-        // },
+        /**
+         * High School Application - `/programs/highschool/apply`
+         * comment/uncomment to remove/add redirect (when high school form is (un)available)
+         * Also toggle `SHOW_HS_APPLICATION` in src/components/Navbar/BonusBar.tsx
+         */
+        {
+          source: '/programs/highschool/apply',
+          destination: '/programs/highschool',
+          permanent: false,
+        },
         {
           source: '/privacy',
           destination: '/privacyPolicy',
