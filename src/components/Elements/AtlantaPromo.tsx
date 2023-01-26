@@ -2,10 +2,11 @@ import { CSSProperties, FC, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-// import Image from 'next/image';
+import Image from 'next/image';
+
 import { useMounted } from '@this/src/hooks/useMounted';
 import { XIcon } from '../icons/XIcon';
-import { Georgia } from './Georgia';
+import { ExpandIcon } from '../icons/Expand';
 
 type AtlantaPromoProps = { style?: CSSProperties };
 const AtlantaPromo: FC<AtlantaPromoProps> = ({ style }) => {
@@ -37,24 +38,25 @@ const AtlantaPromo: FC<AtlantaPromoProps> = ({ style }) => {
           role={hidePromo ? 'button' : 'banner'}
           onClick={handleShowPromo}
         >
-          {!hidePromo && (
-            <div className='close-btn'>
+          {hidePromo ? (
+            <div className='open-btn'>
+              <ExpandIcon size={24} weight={2} className='expand-icon' />
+            </div>
+          ) : (
+            <div className='close-btn' title='Close Promo'>
               <button onClick={handleClose} name='Close alert bar' aria-label='Close alert bar'>
-                <XIcon size={32} weight={2} />
+                <XIcon size={32} weight={2} className='close-icon' />
               </button>
             </div>
           )}
-          {/* State background*/}
-          <Georgia />
 
-          {/* Peach background*/}
-          {/* <Image
+          <Image
             src='/images/display/peach.png'
             width='400px'
             height='400px'
             alt='Peach'
-            style={{ maxWidth: '100%', opacity: '0.6' }}
-          /> */}
+            style={{ maxWidth: '100%', opacity: 0.75 }}
+          />
 
           <div className='promo-content'>
             <a
@@ -73,7 +75,7 @@ const AtlantaPromo: FC<AtlantaPromoProps> = ({ style }) => {
 
 const AtlantaPromoStyles = styled(motion.div)`
   position: fixed;
-  width: 275px;
+  width: 256px;
   top: calc(${({ theme }) => theme.navHeight}px + 0.5rem);
   right: 1rem;
   user-select: none;
@@ -86,7 +88,7 @@ const AtlantaPromoStyles = styled(motion.div)`
 
   &.hide-promo {
     background: rgba(232, 236, 240, 0);
-    width: 50px;
+    width: 48px;
     cursor: pointer;
     right: 0.5rem;
     .promo-content {
@@ -94,21 +96,45 @@ const AtlantaPromoStyles = styled(motion.div)`
       opacity: 0;
       pointer-events: none;
     }
+
+    .open-btn {
+      transition: all 250ms;
+      color: ${({ theme }) => theme.secondary[700]};
+    }
+    :hover {
+      .open-btn {
+        transition: all 250ms;
+        color: ${({ theme }) => theme.green[0]};
+        transform: rotate(-90deg);
+      }
+    }
   }
 
   .close-btn {
     position: absolute;
-    left: 1rem;
+    right: 1rem;
     top: 1.25rem;
     z-index: 1;
-    button {
-      transition: transform 250ms;
+    button > .close-icon {
+      transition: all 250ms;
       :hover {
         color: ${({ theme }) => theme.red[0]};
         transform: rotate(90deg);
       }
     }
   }
+
+  .open-btn {
+    position: absolute;
+    inset: 0;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+  }
+
   .promo-content {
     position: absolute;
     inset: 0;
@@ -127,7 +153,7 @@ const AtlantaPromoStyles = styled(motion.div)`
       text-shadow: 0 0 0.25rem ${({ theme }) => theme.black};
       backdrop-filter: blur(0px);
       line-height: 1.25em;
-      margin-top: 3rem;
+      margin-top: 1.5rem;
       font-weight: 900;
       letter-spacing: 1.25px;
       border-radius: 2rem;
@@ -139,12 +165,7 @@ const AtlantaPromoStyles = styled(motion.div)`
       }
 
       :hover {
-        /* color: ${({ theme }) => theme.secondary[200]}; */
         text-decoration: underline;
-      }
-      :active {
-        transition: all 75ms;
-        /* color: ${({ theme }) => theme.secondary[900]}; */
       }
     }
   }
