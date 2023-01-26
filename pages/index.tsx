@@ -15,6 +15,7 @@ import {
 
 import Carousel from '@this/components/Elements/Carousel';
 import { ILogo } from '@this/data/types/logos';
+import AtlantaPromo from '@this/src/components/Elements/AtlantaPromo';
 
 interface HomeProps extends IHome {
   logos: ILogo[];
@@ -30,6 +31,7 @@ const Home: NextPage<HomeProps> = ({
   return (
     <Main style={{ paddingTop: '0' }}>
       <TopCard />
+      <AtlantaPromo />
       <IgniteCareer {...igniteCareer} />
       <ProgramsForAll {...programsForAll} className='_progress' id='programs' />
       <GreatCompanies {...greatCompanies} />

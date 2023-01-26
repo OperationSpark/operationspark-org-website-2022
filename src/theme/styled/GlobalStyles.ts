@@ -12,6 +12,10 @@ const GlobalStyles = createGlobalStyle`
     background: ${({ theme }) => theme.bg} !important;
     color: ${({ theme }) => theme.fg} !important;
   }
+  #atlanta-promo-root {
+    position: relative;
+    z-index: 1;
+  }
   p {
      font-family: 'Roboto', sans-serif;
    }

@@ -42,6 +42,7 @@ class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
+          <div id='atlanta-promo-root'></div>
         </body>
       </Html>
     );
