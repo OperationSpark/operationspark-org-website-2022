@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { useMounted } from '@this/src/hooks/useMounted';
 import { XIcon } from '../icons/XIcon';
 import { ExpandIcon } from '../icons/Expand';
+import Link from 'next/link';
 
 type AtlantaPromoProps = { style?: CSSProperties };
 const AtlantaPromo: FC<AtlantaPromoProps> = ({ style }) => {
@@ -59,14 +60,13 @@ const AtlantaPromo: FC<AtlantaPromoProps> = ({ style }) => {
           />
 
           <div className='promo-content'>
-            <a
-              href='https://docs.google.com/forms/d/e/1FAIpQLSeXLAXmPtJlm8lyM6jAMCppOR-XA93YoRdbiBXxeq339OXVkw/viewform'
-              target='_blank'
-              rel='noreferrer'
-            >
-              Now offering classes in Atlanta, GA
-              <div className='learn-more-text'>Click to learn more</div>
-            </a>
+            {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+            <Link href='/programs/workforce/infoSession'>
+              <a>
+                Live in Georgia? Sign up here!
+                <div className='learn-more-text'>Click to learn more</div>
+              </a>
+            </Link>
           </div>
         </AtlantaPromoStyles>,
         document.getElementById('atlanta-promo-root')!,
@@ -142,22 +142,25 @@ const AtlantaPromoStyles = styled(motion.div)`
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 2rem;
+    padding: 1rem 1.5rem;
     opacity: 1;
     pointer-events: initial;
     transition: opacity 500ms;
     a {
-      transition: all 200ms;
+      padding: 1rem 0;
+      transition: all 400ms;
       font-size: 1.5rem;
       color: ${({ theme }) => theme.secondary[400]};
       text-shadow: 0 0 0.25rem ${({ theme }) => theme.black};
-      backdrop-filter: blur(0px);
+      filter: drop-shadow(0 0 0.25rem ${({ theme }) => theme.secondary[900]});
+      box-shadow: 0rem 0rem 0.1rem ${({ theme }) => theme.secondary[900]},
+        0rem 0rem 0.1rem ${({ theme }) => theme.secondary[800]};
       line-height: 1.25em;
       margin-top: 1.5rem;
       font-weight: 900;
       letter-spacing: 1.25px;
-      border-radius: 2rem;
-
+      border-radius: 2rem 2rem 3rem 3rem;
+      backdrop-filter: blur(5px);
       .learn-more-text {
         font-size: 0.8rem;
         font-weight: 500;
@@ -165,7 +168,15 @@ const AtlantaPromoStyles = styled(motion.div)`
       }
 
       :hover {
-        text-decoration: underline;
+        filter: drop-shadow(0 0 1rem ${({ theme }) => theme.secondary[200]});
+        box-shadow: 0.2rem 0.2rem 0.2rem ${({ theme }) => theme.secondary[900]},
+          -0.2rem -0.2rem 0.2rem ${({ theme }) => theme.secondary[800]};
+      }
+      :active {
+        transition: all 125ms;
+        filter: drop-shadow(0 0 1rem ${({ theme }) => theme.secondary[900]});
+        box-shadow: 0rem 0rem 0.1rem ${({ theme }) => theme.secondary[900]},
+          0rem 0rem 0.1rem ${({ theme }) => theme.secondary[800]};
       }
     }
   }
