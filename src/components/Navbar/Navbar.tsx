@@ -129,7 +129,7 @@ export default function Nav({ alertInfo }: NavProps) {
 }
 
 export const NavbarStyles = styled(motion.nav)`
-  z-index: 500;
+  z-index: 1000;
   position: fixed;
   top: 0;
   left: 0;
