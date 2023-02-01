@@ -67,7 +67,7 @@ const AtlantaPromo: FC<AtlantaPromoProps> = ({ style }) => {
           <div className='promo-content'>
             {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
             <Link href='/programs/workforce/infoSession'>
-              <a>
+              <a className='promo-anchor'>
                 Live in Georgia? Sign up here!
                 <div className='learn-more-text'>Click to sign up</div>
               </a>
@@ -110,6 +110,11 @@ const AtlantaPromo: FC<AtlantaPromoProps> = ({ style }) => {
                       a year of immersive training.”
                     </i>
                   </p>
+                  <Link href='/programs/workforce/infoSession'>
+                    <a className='anchor' style={{ margin: '0 auto' }}>
+                      Sign up here!
+                    </a>
+                  </Link>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -198,7 +203,7 @@ const AtlantaPromoStyles = styled(motion.div)`
     pointer-events: initial;
     transition: opacity 500ms;
 
-    a {
+    .promo-anchor {
       padding: 1rem 0;
       transition: all 250ms;
       font-size: 1.5rem;
