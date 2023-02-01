@@ -1,7 +1,7 @@
 import { CSSProperties, FC, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 
 import { useMounted } from '@this/src/hooks/useMounted';
@@ -9,12 +9,13 @@ import { XIcon } from '../icons/XIcon';
 import { ExpandIcon } from '../icons/Expand';
 import Link from 'next/link';
 import { InfoIcon } from '../icons/Info';
+import { useClickAway } from '@this/src/hooks/useClickAway';
 
 type AtlantaPromoProps = { style?: CSSProperties };
 const AtlantaPromo: FC<AtlantaPromoProps> = ({ style }) => {
   const isMounted = useMounted();
   const [hidePromo, setHidePromo] = useState(false);
-  const [showPromoInfo, setShowPromoInfo] = useState(false);
+  const [promoInfoRef, showPromoInfo, setShowPromoInfo] = useClickAway();
 
   const handleClose = () => {
     localStorage.setItem('hide-atlanta-promo', 'true');
@@ -75,38 +76,43 @@ const AtlantaPromo: FC<AtlantaPromoProps> = ({ style }) => {
               <InfoIcon size={20} weight={2} />
               Learn more
             </button>
-            {showPromoInfo && (
-              <motion.div
-                className='promo-more-info'
-                initial={{ y: 100, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-              >
-                <div className='close-btn' title='Close info'>
-                  <button
-                    onClick={() => setShowPromoInfo(false)}
-                    name='Close info window'
-                    aria-label='Close info window'
-                  >
-                    <XIcon size={24} weight={2} className='close-icon' />
-                  </button>
-                </div>
-                <p>
-                  Groundbreaking non-profit tech bootcamp, Operation Spark, is now approved by the
-                  Georgia Non-Public Education Commission to offer training in the Peach State. With
-                  over 300 graduates working in high-wage jobs at over 100 companies worldwide,
-                  Operation Spark has effectively changed the trajectory of workforce development
-                  for the software industry.
-                </p>
-                <p>
-                  <i>
-                    “Our success to date proves we have an effective, workable model that provides
-                    accessible, industry-level training in software development”, said CEO John
-                    Fraboni. “Operation Spark graduates enter high-wage employment with less than a
-                    year of immersive training.”
-                  </i>
-                </p>
-              </motion.div>
-            )}
+            <AnimatePresence>
+              {showPromoInfo && (
+                <motion.div
+                  className='promo-more-info'
+                  initial={{ y: 100, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ x: 1000, opacity: 0 }}
+                  ref={promoInfoRef}
+                >
+                  <div className='close-btn' title='Close info'>
+                    <button
+                      onClick={() => setShowPromoInfo(false)}
+                      name='Close info window'
+                      aria-label='Close info window'
+                    >
+                      <XIcon size={24} weight={2} className='close-icon' />
+                    </button>
+                  </div>
+
+                  <p>
+                    Groundbreaking non-profit tech bootcamp, Operation Spark, is now approved by the
+                    Georgia Non-Public Education Commission to offer training in the Peach State.
+                    With over 300 graduates working in high-wage jobs at over 100 companies
+                    worldwide, Operation Spark has effectively changed the trajectory of workforce
+                    development for the software industry.
+                  </p>
+                  <p>
+                    <i>
+                      “Our success to date proves we have an effective, workable model that provides
+                      accessible, industry-level training in software development”, said CEO John
+                      Fraboni. “Operation Spark graduates enter high-wage employment with less than
+                      a year of immersive training.”
+                    </i>
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </AtlantaPromoStyles>,
         document.getElementById('atlanta-promo-root')!,
@@ -238,6 +244,9 @@ const AtlantaPromoStyles = styled(motion.div)`
       color: ${({ theme }) => theme.secondary[400]};
     }
     .promo-more-info {
+      p {
+        user-select: text;
+      }
       position: absolute;
       top: 1rem;
       right: 0;
