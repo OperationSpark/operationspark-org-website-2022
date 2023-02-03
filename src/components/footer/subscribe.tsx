@@ -27,7 +27,9 @@ const SubscribeStyles = styled.div`
     .subscribe-input {
       width: 100%;
       position: relative;
+      z-index: 0;
     }
+
     button {
       margin-left: 0.5rem;
     }
