@@ -47,7 +47,7 @@ const InfoSession: NextPage<InfoSessionProps> = ({ commonQuestions, logos }) => 
                 <h2 className='dynamic-h2 '>{`YOU'LL LEARN ABOUT`}</h2>
                 <ul className='what-to-learn-list'>
                   <li>Coding and career opportunities</li>
-                  <li>Our programs and job search support</li>
+                  <li>Our program and job search support</li>
                   <li>What it takes to be successful in our program</li>
                   <li>How to enroll at Operation Spark</li>
                 </ul>
