@@ -61,6 +61,20 @@ const CohortSchedule: NextPage = () => {
             </option>
           ))}
         </select>
+        {groupBy === 'cohort' && (
+          <select onChange={(e) => setFilter(e.target.value)} value={filter}>
+            {
+              <option value='' disabled={!filter} className={filter ? 'reset-option' : ''}>
+                {filter ? 'Reset' : 'Filter By Cohort'}
+              </option>
+            }
+            {filterOptions.map((id, i) => (
+              <option key={id + i} value={id}>
+                {id[0].toUpperCase() + id.slice(1)}
+              </option>
+            ))}
+          </select>
+        )}
         <Content>
           <p className='schedule-disclaimer dynamic-txt'>
             Operation Spark includes 6 - 7 months of escalated, intense instruction geared towards a
@@ -77,20 +91,6 @@ const CohortSchedule: NextPage = () => {
             </i>
           </p>
         </Content>
-        {groupBy === 'cohort' && (
-          <select onChange={(e) => setFilter(e.target.value)} value={filter}>
-            {
-              <option value='' disabled={!filter} className={filter ? 'reset-option' : ''}>
-                {filter ? 'Reset' : 'Filter By Cohort'}
-              </option>
-            }
-            {filterOptions.map((id, i) => (
-              <option key={id + i} value={id}>
-                {id[0].toUpperCase() + id.slice(1)}
-              </option>
-            ))}
-          </select>
-        )}
 
         {isLoading && <Spinner size={6} />}
         <div className='schedule-container'>
@@ -130,7 +130,7 @@ const CohortSchedule: NextPage = () => {
                       {course && groupBy === 'course' && <CourseInfo course={course} />}
                     </div>
 
-                    {/* Limit list size when filtering by course only. When filtering by cohort, slicing will prevent shoing every phase */}
+                    {/* Limit list size when filtering by course only. When filtering by cohort, slicing will prevent showing every phase */}
                     {(groupBy === 'course' ? courses?.slice(0, 5) : courses)?.map(
                       (s) =>
                         s &&
@@ -238,9 +238,6 @@ export const CohortScheduleStyles = styled.div`
   .schedule-container {
     display: flex;
     flex-flow: row wrap;
-    /* grid-template-columns: repeat(auto-fill, minmax(18rem, auto));
-    grid-template-rows: 1fr; */
-
     padding: 1rem;
     grid-gap: 1.5rem;
     margin: 0 auto;
@@ -320,6 +317,7 @@ export const CohortScheduleStyles = styled.div`
     position: relative;
     padding: 0.2rem 0.4rem;
     border-radius: 0.25rem;
+    -webkit-print-color-adjust: exact;
   }
   .schedule-header {
   }
@@ -338,7 +336,7 @@ export const CohortScheduleStyles = styled.div`
       position: static;
       padding: 0;
       font-weight: 900;
-      print-color-adjust: exact;
+      color-adjust: exact;
       background: transparent !important;
       -webkit-print-color-adjust: economy;
     }
@@ -349,7 +347,6 @@ export const CohortScheduleStyles = styled.div`
     }
     .schedule-block {
       width: fit-content;
-      print-color-adjust: exact;
       -webkit-print-color-adjust: exact;
       background: rgba(255, 255, 255, 0);
     }
