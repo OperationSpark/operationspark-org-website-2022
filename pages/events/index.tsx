@@ -7,6 +7,7 @@ import { CalendarEventItem } from '@this/pages-api/calendar/events';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Spinner from '@this/src/components/Elements/Spinner';
+import { anchor } from '@this/src/theme/styled/mixins/anchor';
 
 type CalendarEventProps = {
   calEvents: CalendarEventItem[];
@@ -34,7 +35,6 @@ const CalendarEvents: NextPage<CalendarEventProps> = () => {
     <Main>
       <CalendarEventsStyles>
         <Content>
-          <h1 className='dynamic-h1 primary-secondary text-center'>Upcoming Events</h1>
           {!calEvents.length ? (
             <div className='text-center no-events-message'>
               <h2 className='dynamic-h2'>No upcoming events at this time</h2>
@@ -42,6 +42,27 @@ const CalendarEvents: NextPage<CalendarEventProps> = () => {
             </div>
           ) : (
             <div className='calendar-events'>
+              <div className='promo-header'>
+                <div className='promo-image'>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={'/images/display/opspark-hackathon-2023.png'}
+                    width='100%'
+                    height='auto'
+                    style={{ objectFit: 'contain' }}
+                    alt='Hackathon 2023'
+                  />
+                </div>
+                <a
+                  className='anchor right-arr-left'
+                  target='_blank'
+                  href='https://ospk.org/opspark-hackathon-2023'
+                  rel='noreferrer'
+                >
+                  Buy tickets here
+                </a>
+              </div>
+              <h1 className='dynamic-h1 primary-secondary text-center'>Upcoming Events</h1>
               {calEvents.map((calItem) => (
                 <div key={calItem.id} className='calendar-event'>
                   <h2 className='dynamic-h2 primary-secondary event-title'>{calItem.title}</h2>
@@ -89,6 +110,23 @@ const CalendarEventsStyles = styled.div`
   .no-events-message {
     padding: 1rem 0;
   }
+
+  .promo-header {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    .promo-image {
+      img {
+        max-width: 700px;
+        border-radius: 0.5rem;
+        box-shadow: 0 0 0.5rem ${({ theme }) => theme.alpha.fg50};
+      }
+    }
+    a {
+      margin-top: 0.5rem;
+    }
+  }
   .calendar-events {
     display: flex;
     align-content: center;
@@ -98,6 +136,7 @@ const CalendarEventsStyles = styled.div`
 
     border-radius: 0.5rem;
   }
+
   .calendar-event {
     box-shadow: 0 0 2px ${({ theme }) => theme.alpha.fg50};
     text-align: center;
@@ -114,6 +153,10 @@ const CalendarEventsStyles = styled.div`
         ${theme.alpha.fg25} 150%
       )
     `};
+  }
+
+  a {
+    ${anchor};
   }
 
   .event-title {
