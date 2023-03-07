@@ -59,7 +59,7 @@ const CalendarEvents: NextPage<CalendarEventProps> = () => {
                   href='https://ospk.org/opspark-hackathon-2023'
                   rel='noreferrer'
                 >
-                  Buy tickets here
+                  Get tickets here
                 </a>
               </div>
               <h1 className='dynamic-h1 primary-secondary text-center'>Upcoming Events</h1>
