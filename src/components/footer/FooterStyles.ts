@@ -6,6 +6,9 @@ export const FooterStyles = styled.footer`
   @media print {
     text-align: center;
   }
+  .fraud-link {
+    margin-bottom: 0.5rem;
+  }
 `;
 
 export const InfoSessionStyles = styled(VStack)`

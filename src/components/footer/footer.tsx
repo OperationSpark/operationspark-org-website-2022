@@ -48,37 +48,49 @@ const Footer = ({ logos }: FooterProps) => {
       <VStack w='100%' className='content' pb='0'>
         <SupportersStyles w='100%'>
           <VStack justify='space-between' borderColor='brand.purple.900' borderBottom='1px'>
-            <h1 className='dynamic-h4'>Thanks to our Supporters!</h1>
+            {logos.length && <h1 className='dynamic-h4'>Thanks to our Supporters!</h1>}
             <Text color={fadedGreyTextColor}>Operation Spark is a 501(c)3 not-for-profit.</Text>
-            <HStack
-              flexWrap='wrap'
-              justifyContent='space-around'
-              className='supporter-logos'
-              paddingBottom='1rem'
+
+            {logos.length && (
+              <HStack
+                flexWrap='wrap'
+                justifyContent='space-around'
+                className='supporter-logos'
+                paddingBottom='1rem'
+              >
+                {logos.map(({ name, url, logoDark, logoLight, width }, i) => (
+                  <a
+                    key={name + i}
+                    href={url}
+                    target='_blank'
+                    rel='noreferrer'
+                    style={{ padding: '0 1rem', marginLeft: 0 }}
+                    className='anchor'
+                  >
+                    <Image
+                      width={50 * width}
+                      height='100%'
+                      objectFit='contain'
+                      layout='fixed'
+                      alt={name}
+                      title={name}
+                      src={theme.colorMode === 'light' ? logoLight : logoDark}
+                      placeholder='blur'
+                      blurDataURL={rgbDataURL()}
+                    />
+                  </a>
+                ))}
+              </HStack>
+            )}
+
+            <a
+              className='anchor right-arr-left fraud-link'
+              href='https://www.reportfraud.la/'
+              rel='external nofollow noopener noreferrer'
+              target='_blank'
             >
-              {logos.map(({ name, url, logoDark, logoLight, width }, i) => (
-                <a
-                  key={name + i}
-                  href={url}
-                  target='_blank'
-                  rel='noreferrer'
-                  style={{ padding: '0 1rem', marginLeft: 0 }}
-                  className='anchor'
-                >
-                  <Image
-                    width={50 * width}
-                    height='100%'
-                    objectFit='contain'
-                    layout='fixed'
-                    alt={name}
-                    title={name}
-                    src={theme.colorMode === 'light' ? logoLight : logoDark}
-                    placeholder='blur'
-                    blurDataURL={rgbDataURL()}
-                  />
-                </a>
-              ))}
-            </HStack>
+              Report fraud, waste, or abuse.
+            </a>
           </VStack>
         </SupportersStyles>
         <Text className='dynamic-txt'>Follow Us!</Text>
