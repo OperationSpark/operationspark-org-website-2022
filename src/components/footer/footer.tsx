@@ -82,15 +82,6 @@ const Footer = ({ logos }: FooterProps) => {
                 ))}
               </HStack>
             )}
-
-            <a
-              className='anchor right-arr-left fraud-link'
-              href='https://www.reportfraud.la/'
-              rel='external nofollow noopener noreferrer'
-              target='_blank'
-            >
-              Report fraud, waste, or abuse.
-            </a>
           </VStack>
         </SupportersStyles>
         <Text className='dynamic-txt'>Follow Us!</Text>
@@ -111,6 +102,28 @@ const Footer = ({ logos }: FooterProps) => {
       </HStack>
       <HStack justify='center' align='center' w='100%' padding='0.5rem 0'>
         <a
+          className='anchor right-arr-left fraud-link'
+          href='https://www.reportfraud.la/'
+          rel='external nofollow noopener noreferrer'
+          target='_blank'
+        >
+          Report fraud, waste, or abuse.
+        </a>
+        <a
+          href='https://www.reportfraud.la/'
+          rel='external nofollow noopener noreferrer'
+          target='_blank'
+        >
+          <Image
+            src='/images/logos/etc/louisiana-legislative-auditor-report-light.png'
+            alt='Report Fraud'
+            width={310 / 4}
+            height={163 / 4}
+          />
+        </a>
+      </HStack>
+      <HStack justify='center' align='center' w='100%' padding='0.5rem 0'>
+        <a
           href='https://vercel.com/?utm_source=operation-spark&utm_campaign=oss'
           target='_blank'
           rel='noreferrer'
@@ -124,6 +137,7 @@ const Footer = ({ logos }: FooterProps) => {
           />
         </a>
       </HStack>
+
       <HStack justify='space-between' w='100%' padding='0 0.25rem'>
         <Text
           w='50%'
