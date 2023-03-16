@@ -1,4 +1,4 @@
-import { NextPage } from 'next';
+import { GetStaticProps, NextPage } from 'next';
 
 import Link from 'next/link';
 import styled from 'styled-components';
@@ -10,8 +10,32 @@ import { BgImg } from '@this/src/components/Elements';
 import Map from '@this/src/components/Elements/Map';
 import HighschoolApplicationForm from '@this/src/Forms/Form.HighschoolApplication';
 import PlainCard from '@this/src/components/Cards/PlainCard';
+import { courseTimes } from '@this/src/Forms/formData/highSchoolApplicationData';
+import { IHighschoolPrograms } from '@this/data/types/programs';
+import { InfoIcon } from '@this/src/components/icons/Info';
+import { getStaticAsset } from '@this/pages-api/static/[asset]';
+import { useState } from 'react';
+import { useClickAway } from '@this/src/hooks/useClickAway';
 
-const HighschoolSignup: NextPage = () => {
+type HighschoolSignupProps = {
+  courses: IHighschoolPrograms['courses'];
+};
+
+const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
+  const [courseInfo, setCourseInfo] = useState<IHighschoolPrograms['courses'][0] | null>(null);
+  const [courseInfoRef, isOpen, setOpen] = useClickAway(() => setCourseInfo(null));
+
+  const toggleCourseInfo = (course?: string) => {
+    const c = courses.find(({ id }) => course === id);
+    if (!course || !c || c.id === courseInfo?.id) {
+      setCourseInfo(null);
+      return setOpen(false);
+    }
+
+    setCourseInfo(c);
+    setOpen(true);
+  };
+
   return (
     <Main style={{ paddingTop: 0 }}>
       <HighschoolSignupStyles>
@@ -26,106 +50,62 @@ const HighschoolSignup: NextPage = () => {
           >
             <div className='program-header'>
               <div className='header-card'>
-                <h1 className='dynamic-xl secondary'>Spring 2023 High School</h1>
-                <h2 className='dynamic-h2 secondary'>After-School Application</h2>
+                <h1 className='dynamic-xl secondary'>Summer 2023</h1>
+                <h2 className='dynamic-h2 secondary'>Coding Camp Application</h2>
                 <p className='dynamic-txt'>
-                  Are you currently enrolled in a high school in the Greater New Orleans area and
-                  interested in our after-school classes? Apply here!
+                  Open to rising sophomores through graduating seniors
+                  <b> (Graduating classes of 2023, 2024, 2025, and 2026)</b>.
                 </p>
                 <p className='dynamic-txt'>
-                  <b className='secondary'>
-                    Spring classes start the week of January 16 and end the week of May 22.
-                  </b>
+                  Classes meet <b className='secondary'> three hours</b> a day,
+                  <b className='secondary'> Monday</b> through <b className='secondary'>Friday</b>.
+                </p>
+                <p className='dynamic-txt'>
+                  Summer classes start
+                  <b className='secondary'> June 1st </b>
+                  and end on
+                  <b className='secondary'> June 30th</b>.
                 </p>
               </div>
               <Link href='/programs/highschool' passHref>
                 <a style={{ display: 'flex', alignItems: 'center' }} className='anchor'>
                   <FiChevronLeft style={{ marginRight: '0.25rem' }} />
-                  High School Programs
+                  Back to High School Programs
                 </a>
               </Link>
             </div>
           </Content>
         </BgImg>
         <Content>
-          <PlainCard className='hs-application-description dynamic-txt'>
-            <div className='desc-columns'>
-              <div className='left-col'>
-                <p>
-                  This semester, we are offering both in-person and virtual classes. You can enroll
-                  in one or the other (No hybrid option).
-                </p>
-                <br />
-                <div
-                  style={{
-                    display: 'flex',
-                    flexFlow: 'row wrap',
-                    gap: '1rem',
-                    fontSize: '1.25em',
-                  }}
-                >
-                  <p className='primary-secondary'>
-                    <b>We still have a few open spots for late applicants.</b>
-                  </p>
-                  <p className='primary-secondary'>
-                    <b>The spring application will close on Monday, January 23.</b>
-                  </p>
-                </div>
+          <div className='hs-application-description dynamic-txt'>
+            <PlainCard noDivider={true}>
+              <div className='desc-columns'>
+                <div className='left-col'>
+                  <div className='hs-program-overview'>
+                    <p>
+                      {`This summer, we are offering both in-person and virtual classes. You can enroll in one or the other- there is no hybrid option. If you're able to arrange for reliable transportation to our learning center in the Marigny, we recommend in-person classes. We have a great lab with brand new equipment and an awesome staff to get you started on your coding journey. You'll also meet other students from a wide range of schools and backgrounds!`}
+                    </p>
+                    <br />
 
-                <br />
-                <p>
-                  <b>Available Courses:</b>
-                </p>
-                <p>
-                  <b className='primary-secondary'>Fundamentals of HTML, CSS, and Javascript</b>
-                </p>
-
-                <p>
-                  <b>No Prerequisite</b>
-                </p>
-                <ul>
-                  {/* <li>
-                    <b className='primary-secondary'>Virtual: </b> Tuesdays + Thursdays, 5:00 - 7:00
-                    PM
-                  </li> */}
-                  <li>
-                    <s>
-                      <b>Virtual: </b> Tuesdays + Thursdays, 5:00 - 7:00 PM
-                    </s>
-                    <b className='primary-secondary'> (FULL)</b>
-                  </li>
-                  <li>
-                    <b className='primary-secondary'>In Person: </b> Wednesdays, 4:45 - 8:00 PM
-                  </li>
-                </ul>
-                <br />
-                <p className='primary-secondary'>
-                  <b>Advanced Javascript, Functional Programming and Web Development</b>
-                </p>
-                <p>
-                  <b>Prerequisite: </b>Fundamentals of HTML, CSS, and Javascript
-                </p>
-                <ul>
-                  <li>
-                    <b className='primary-secondary'>Virtual: </b> Tuesdays + Thursdays, 5:00 - 7:00
-                    PM
-                  </li>
-                  <li>
-                    <b className='primary-secondary'>In Person: </b> Thursdays, 4:45 - 8:00 PM
-                  </li>
-                </ul>
-                <div className='reqs-list'>
-                  <b>For virtual classes, you will need:</b>
-                  <ul>
-                    <li>laptop/desktop computer (Mac, Windows, or Chromebook)</li>
-                    <li>webcam and mic </li>
-                    <li>reliable internet connection </li>
-                    <li>quiet place to work</li>
-                  </ul>
+                    <div>
+                      <p className='primary-secondary'>
+                        {`For virtual classes, you'll need a chromebook, laptop, or desktop computer with
+                    a webcam and mic, a reliable internet connection, AND a quiet place to work
+                    (that last part is super-important!).`}
+                      </p>
+                    </div>
+                    <div className='reqs-list'>
+                      <b>For virtual classes, you will need:</b>
+                      <ul>
+                        <li>laptop/desktop computer (Mac, Windows, or Chromebook)</li>
+                        <li>webcam and mic </li>
+                        <li>reliable internet connection </li>
+                        <li>quiet place to work</li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div className='right-col'>
-                <PlainCard noDivider={true} shadow='none'>
+                <div className='right-col'>
                   <p>
                     <b>In person classes </b>
                     will be held at the Operation Spark Technical Learning Center
@@ -138,21 +118,93 @@ const HighschoolSignup: NextPage = () => {
                       address='514 Franklin Avenue, New Orleans, LA 70117'
                     />
                   </div>
-                </PlainCard>
+                </div>
               </div>
+            </PlainCard>
+            <div className='program-time-details'>
+              <h2 className='dynamic-h2'>
+                <b>Summer Course Schedule:</b>
+              </h2>
+              <div className='course-title'>
+                <b className='primary-secondary'>Fundamentals of HTML, CSS, and Javascript</b>
+                <button
+                  className='program-info-button'
+                  onClick={() => toggleCourseInfo('fundamentals')}
+                >
+                  <InfoIcon />
+                </button>
+              </div>
+              {isOpen && courseInfo?.id === 'fundamentals' && (
+                <div className='course-description' ref={courseInfoRef}>
+                  <PlainCard noDivider={true} shadow='none'>
+                    <h3 className='dynamic-h3'> Program description </h3>
+                    <p>{courseInfo.description}</p>
+                    <div className='close-button'>
+                      <button onClick={() => toggleCourseInfo()}>Close</button>
+                    </div>
+                  </PlainCard>
+                </div>
+              )}
+
+              <p>
+                <b>No Prerequisite</b>
+              </p>
+
+              <ul>
+                {courseTimes.fundamentals.map((course) => (
+                  <li key={course.value}>
+                    <b className='primary-secondary'> {course.location}: </b>
+                    {course.time}
+                  </li>
+                ))}
+              </ul>
+
+              <br />
+              <div className='course-title'>
+                <p className='primary-secondary'>
+                  <b>Advanced Javascript, Functional Programming and Web Development</b>
+                </p>
+                <button
+                  className='program-info-button'
+                  onClick={() => toggleCourseInfo('advanced')}
+                >
+                  <InfoIcon />
+                </button>
+              </div>
+              {isOpen && courseInfo?.id === 'advanced' && (
+                <div className='course-description' ref={courseInfoRef}>
+                  <PlainCard noDivider={true} shadow='none'>
+                    <h3 className='dynamic-h3'> Program description </h3>
+                    <p>{courseInfo.description}</p>
+                    <div className='close-button'>
+                      <button onClick={() => toggleCourseInfo()}>Close</button>
+                    </div>
+                  </PlainCard>
+                </div>
+              )}
+              <p>
+                <b>Prerequisite: </b>Fundamentals of HTML, CSS, and Javascript
+              </p>
+              <ul>
+                {courseTimes.advanced.map((course) => (
+                  <li key={course.value}>
+                    <b className='primary-secondary'> {course.location}: </b>
+                    {course.time}
+                  </li>
+                ))}
+              </ul>
             </div>
-            <p>
-              Within 3 business days of completing this form, you will receive more detailed
-              information about the course and next steps to finalize enrollment.
-            </p>
-            &nbsp;
-            <p>
-              Our courses are open to students in grades 10-12. The course is free for students
-              attending public, parochial, or home school in New Orleans. If you do not fit that
-              description, we may be able to partner with your school district to cover the cost,
-              and if not, we offer discounted tuition to families paying privately.
-            </p>
-          </PlainCard>
+            <PlainCard noDivider={true}>
+              <p>
+                Within 3 business days of completing this form, you will receive more detailed
+                information about the course and next steps to finalize enrollment.
+              </p>
+              <br />
+              <p>
+                {`The course is free for students attending public, parochial, or home school in New Orleans. If you don't fit that description, we may be able to partner with your school district to cover the cost, and if not, we offer discounted tuition to families paying privately.`}
+              </p>
+            </PlainCard>
+          </div>
           <div className='hs-form'>
             <HighschoolApplicationForm />
           </div>
@@ -163,6 +215,12 @@ const HighschoolSignup: NextPage = () => {
 };
 
 export default HighschoolSignup;
+
+export const getStaticProps: GetStaticProps<HighschoolSignupProps> = async () => {
+  const { courses }: IHighschoolPrograms = await getStaticAsset('programs', 'highschool');
+
+  return { props: { courses } };
+};
 
 const HighschoolSignupStyles = styled.div`
   .program-header {
@@ -192,6 +250,44 @@ const HighschoolSignupStyles = styled.div`
       }
     }
   }
+
+  .course-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .course-description {
+    width: 100%;
+    margin: 0.5rem 0;
+    box-shadow: 0 0 3px ${({ theme }) => theme.alpha.fg25};
+    border-radius: 0.5rem;
+    overflow: hidden;
+    font-weight: 300;
+    font-size: 1rem;
+    h3 {
+      margin-bottom: 0.5rem;
+    }
+    .close-button {
+      text-align: center;
+      margin-top: 1rem;
+      color: ${({ theme }) => theme.red[0]};
+    }
+  }
+  .program-info-button {
+    color: ${({ theme }) => theme.magenta[0]};
+  }
+  .program-time-details {
+    margin: 2rem 0;
+  }
+
+  .plain-card-body {
+    padding: 1rem;
+  }
+
+  .hs-program-overview {
+    margin-bottom: 1rem;
+  }
   .hs-application-description {
     ul {
       padding-left: 2rem;
@@ -202,7 +298,7 @@ const HighschoolSignupStyles = styled.div`
     .desc-columns {
       display: flex;
       flex-flow: row wrap;
-      gap: 1rem;
+      gap: 2rem;
       .left-col {
         flex: 1;
       }
@@ -212,8 +308,9 @@ const HighschoolSignupStyles = styled.div`
       .right-col {
         display: flex;
         flex-flow: column;
-        max-width: 350px;
         margin: 0 auto;
+        margin-bottom: 2rem;
+        max-width: 350px;
         .opspark-map {
           max-width: 325px;
           margin: 0 auto;
@@ -224,7 +321,7 @@ const HighschoolSignupStyles = styled.div`
       }
     }
   }
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1000px) {
     .hs-application-description {
       .desc-columns {
         flex-flow: column;

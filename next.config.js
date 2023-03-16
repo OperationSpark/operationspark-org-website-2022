@@ -3,7 +3,9 @@ const color = require('cli-color');
 
 const { validateData } = require('./data/validate');
 
-const { OVERRIDE_NODE_ENV = '', FB_PIXEL_ID } = process.env;
+const { OVERRIDE_NODE_ENV = '', FB_PIXEL_ID, HIGHSCHOOL_FORM_ACTIVE = 'false' } = process.env;
+
+const isHsFormActive = HIGHSCHOOL_FORM_ACTIVE === 'true';
 
 module.exports = (phase, { defaultConfig }) => {
   console.info(color.magentaBright.bold('\nValidating... '));
@@ -40,6 +42,7 @@ module.exports = (phase, { defaultConfig }) => {
     env: {
       OVERRIDE_NODE_ENV,
       FB_PIXEL_ID,
+      HIGHSCHOOL_FORM_ACTIVE: isHsFormActive,
     },
     async redirects() {
       return [
@@ -58,7 +61,7 @@ module.exports = (phase, { defaultConfig }) => {
          * comment/uncomment to remove/add redirect (when high school form is (un)available)
          * Also toggle `SHOW_HS_APPLICATION` in src/components/Navbar/BonusBar.tsx
          */
-        {
+        !isHsFormActive && {
           source: '/programs/highschool/apply',
           destination: '/programs/highschool',
           permanent: false,
@@ -68,7 +71,7 @@ module.exports = (phase, { defaultConfig }) => {
           destination: '/privacyPolicy',
           permanent: true,
         },
-      ];
+      ].filter(Boolean);
     },
   };
 };
