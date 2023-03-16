@@ -26,8 +26,12 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
   const [courseInfoRef, isOpen, setOpen] = useClickAway(() => setCourseInfo(null));
 
   const toggleCourseInfo = (course?: string) => {
+    if (!course) {
+      setCourseInfo(null);
+      return setOpen(false);
+    }
     const c = courses.find(({ id }) => course === id);
-    if (!course || !c || c.id === courseInfo?.id) {
+    if (!c || c.id === courseInfo?.id) {
       setCourseInfo(null);
       return setOpen(false);
     }

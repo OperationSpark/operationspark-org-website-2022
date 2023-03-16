@@ -5,7 +5,7 @@ const { validateData } = require('./data/validate');
 
 const { OVERRIDE_NODE_ENV = '', FB_PIXEL_ID, HIGHSCHOOL_FORM_ACTIVE = 'false' } = process.env;
 
-const isHsFormActive = HIGHSCHOOL_FORM_ACTIVE === 'true';
+const isHsFormActive = HIGHSCHOOL_FORM_ACTIVE?.toLowerCase() === 'true';
 
 module.exports = (phase, { defaultConfig }) => {
   console.info(color.magentaBright.bold('\nValidating... '));
@@ -71,6 +71,7 @@ module.exports = (phase, { defaultConfig }) => {
           destination: '/privacyPolicy',
           permanent: true,
         },
+        // Filter out false/undefined/null routes
       ].filter(Boolean);
     },
   };
