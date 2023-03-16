@@ -166,7 +166,7 @@ export const courseTimes = {
   fundamentals: [
     {
       course: 'fundamentals',
-      value: 'onsite-thurs-4-8',
+      value: 'fundamentals-onsite-m-f-9-12',
       location: 'In Person',
       preReq: 'No Prerequisite',
       time: 'Monday - Friday, 9:00am - 12:00pm',
@@ -174,7 +174,7 @@ export const courseTimes = {
     },
     {
       course: 'fundamentals',
-      value: 'virtual-tues-thurs-5-7',
+      value: 'fundamentals-virtual-m-f-1-4',
       location: 'Virtual',
       preReq: 'No Prerequisite',
       time: 'Monday - Friday, 1:00pm - 4:00pm',
@@ -184,7 +184,7 @@ export const courseTimes = {
   advanced: [
     {
       course: 'advanced',
-      value: 'virtual-tues-thurs-5-7',
+      value: 'advanced-virtual-m-f-9-12',
       location: 'Virtual',
       preReq: 'Fundamentals of HTML, CSS, and Javascript',
       time: 'Monday - Friday, 9:00am - 12:00pm',
@@ -192,7 +192,7 @@ export const courseTimes = {
     },
     {
       course: 'advanced',
-      value: 'onsite-thurs-4-8',
+      value: 'advanced-onsite-m-f-1-4',
       location: 'In Person',
       preReq: 'Fundamentals of HTML, CSS, and Javascript',
       time: 'Monday - Friday, 1:00pm - 4:00pm',
