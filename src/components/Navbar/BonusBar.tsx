@@ -13,7 +13,7 @@ const BonusBar = ({ children }: { children?: ReactNode }) => {
    * - `false` - Hide high school application button
    *   - Comment out redirect in  [next.config.js](../../../next.config.js)
    */
-  const SHOW_HS_APPLICATION = false;
+  const SHOW_HS_APPLICATION = true;
 
   const checkIsPath = (...paths: string[]) => {
     return paths.reduce((isPath, path) => {

@@ -103,14 +103,14 @@ const Footer = ({ logos }: FooterProps) => {
       <HStack justify='center' align='center' w='100%' padding='0.5rem 0'>
         <a
           className='anchor right-arr-left fraud-link'
-          href='https://www.reportfraud.la/'
+          href='https://www.lla.la.gov/report-fraud'
           rel='external nofollow noopener noreferrer'
           target='_blank'
         >
           Report fraud, waste, or abuse.
         </a>
         <a
-          href='https://www.reportfraud.la/'
+          href='https://www.lla.la.gov/report-fraud'
           rel='external nofollow noopener noreferrer'
           target='_blank'
         >
