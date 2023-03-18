@@ -225,7 +225,7 @@ const HighSchoolApplication = ({ onSubmitComplete }: HighSchoolApplicationProps)
             <ul className='form-info dynamic-txt'>
               <li>{`Attendance is mandatory for both in-person and virtual classes.`}</li>
               <li>
-                {`If I miss more than two classes (in-person) or four classes (virtual), or fail to complete assignments in a timely manner, Operation Spark may drop me from the class and ask me to re-enroll at a later date.`}
+                {`If I miss more than two classes total, or fail to complete assignments in a timely manner, Operation Spark may drop me from the class and ask me to re-enroll at a later date.`}
               </li>
               <li>
                 <b>{`The first two class meetings are mandatory, with NO EXCEPTIONS.`}</b>
