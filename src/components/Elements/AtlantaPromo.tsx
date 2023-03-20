@@ -205,18 +205,20 @@ const AtlantaPromoStyles = styled(motion.div)`
 
     .promo-anchor {
       padding: 1rem 0;
+      padding-bottom: 0;
       transition: all 250ms;
       font-size: 1.5rem;
       color: ${({ theme }) => theme.secondary[400]};
       text-shadow: 0 0 0.25rem ${({ theme }) => theme.black};
       filter: drop-shadow(0 0 0.4rem ${({ theme }) => theme.secondary[900]});
       box-shadow: 0rem 0rem 0rem ${({ theme }) => theme.secondary[900]},
-        0rem 0rem 0rem ${({ theme }) => theme.secondary[800]};
+        0rem 0rem 0rem ${({ theme }) => theme.secondary[800]},
+        0rem 0rem 0rem ${({ theme }) => theme.black} inset;
       line-height: 1.25em;
       margin-top: 1.5rem;
       font-weight: 900;
       letter-spacing: 1.25px;
-      border-radius: 2rem 2rem 3rem 3rem;
+      border-radius: 2rem;
       backdrop-filter: blur(3px);
       .learn-more-text {
         font-size: 0.8rem;
@@ -225,17 +227,17 @@ const AtlantaPromoStyles = styled(motion.div)`
       }
 
       :hover {
-        backdrop-filter: blur(5px);
         filter: drop-shadow(0 0 0.5rem ${({ theme }) => theme.secondary[200]});
         box-shadow: 0.1rem 0.1rem 0.2rem ${({ theme }) => theme.secondary[900]},
-          -0.1rem -0.1rem 0.2rem ${({ theme }) => theme.secondary[800]};
+          -0.1rem -0.1rem 0.2rem ${({ theme }) => theme.secondary[800]},
+          0rem 0rem 0rem ${({ theme }) => theme.black} inset;
       }
       :active {
-        backdrop-filter: blur(5px);
         transition: all 125ms;
         filter: drop-shadow(0 0 1rem ${({ theme }) => theme.secondary[900]});
         box-shadow: 0rem 0rem 0.1rem ${({ theme }) => theme.secondary[900]},
-          0rem 0rem 0.1rem ${({ theme }) => theme.secondary[800]};
+          0rem 0rem 0.1rem ${({ theme }) => theme.secondary[800]},
+          0rem 0rem 0.5rem ${({ theme }) => theme.black} inset;
       }
     }
 
