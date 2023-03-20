@@ -204,7 +204,7 @@ export const courseTimes = {
 export const interestLevel = [
   {
     value: 'positive',
-    name: "I'm sure I want to take the class this spring",
+    name: "I'm sure I want to take this class this summer",
   },
   {
     value: 'future',
