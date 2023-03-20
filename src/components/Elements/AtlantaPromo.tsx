@@ -143,15 +143,17 @@ const AtlantaPromoStyles = styled(motion.div)`
       pointer-events: none;
     }
 
-    .open-btn > button {
-      transition: all 250ms;
-      color: ${({ theme }) => theme.secondary[700]};
-    }
-    .open-btn > button {
-      :hover {
+    .open-btn {
+      button > .expand-icon {
         transition: all 250ms;
-        color: ${({ theme }) => theme.green[0]};
-        transform: rotate(-90deg);
+        color: ${({ theme }) => theme.secondary[700]};
+      }
+      :hover {
+        button > .expand-icon {
+          transition: all 250ms;
+          color: ${({ theme }) => theme.green[0]};
+          transform: rotate(-90deg);
+        }
       }
     }
   }
@@ -168,10 +170,17 @@ const AtlantaPromoStyles = styled(motion.div)`
       right: 1rem;
       top: 1.25rem;
     }
+    :hover {
+      button > .close-icon {
+        color: ${({ theme }) => theme.red[0]};
+        transform: rotate(90deg);
+      }
+    }
     button > .close-icon {
       border-radius: 50%;
       transition: all 250ms;
       padding: 0;
+      pointer-events: none;
       :hover {
         color: ${({ theme }) => theme.red[0]};
         transform: rotate(90deg);
