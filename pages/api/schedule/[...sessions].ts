@@ -188,7 +188,7 @@ const parseCohortData = (cohortData?: string[][]): ISessionRow[] => {
     const startDate = toCentTime(`${start} 9:00`);
     const endDate = toCentTime(`${end} 9:00`);
 
-    if (today > startDate) {
+    if (today > endDate) {
       return [];
     }
 
@@ -199,8 +199,9 @@ const parseCohortData = (cohortData?: string[][]): ISessionRow[] => {
       start: startDate,
       end: endDate,
       char,
+      isCurrent: today > startDate,
       isNext: isNext === 'TRUE',
-      isPast: today > startDate,
+      isPast: today > endDate,
       order: Number(order),
       bg,
       fg,

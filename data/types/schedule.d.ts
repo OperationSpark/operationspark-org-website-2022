@@ -5,6 +5,7 @@ export type ISessionRow = {
   start: Date;
   end: Date;
   char: string;
+  isCurrent: boolean;
   isNext: boolean;
   isPast: boolean;
   order: number;
