@@ -140,14 +140,18 @@ const CohortSchedule: NextPage = () => {
                               hidden: { y: -50, opacity: 0 },
                               show: { y: 0, opacity: 1 },
                             }}
-                            className={`schedule-block ${s.isNext ? 'next-session' : ''}`}
+                            className={`schedule-block ${
+                              s.isNext ? 'next-session' : s.isCurrent ? 'current-session' : ''
+                            }`}
                             key={`${s.course}-${s.cohort}-${s.year}`}
                           >
                             <div className='schedule-block-inner'>
                               <span
                                 className='schedule-block-course'
                                 style={
-                                  groupBy === 'course' ? { color: s.fg, background: s.bg } : {}
+                                  !s.isCurrent && groupBy === 'course'
+                                    ? { color: s.fg, background: s.bg }
+                                    : {}
                                 }
                               >
                                 {groupBy === 'course' ? s.cohort : s.course}
@@ -166,7 +170,14 @@ const CohortSchedule: NextPage = () => {
                                   dateStyle: 'medium',
                                 })}
                               </p>
-                              {s.isNext && <span className='schedule-block-next'>Up Next</span>}
+                              {s.isNext && (
+                                <span className='schedule-block-text next-session'>Up Next</span>
+                              )}
+                              {s.isCurrent && (
+                                <span className='schedule-block-text current-session'>
+                                  Active Cohort
+                                </span>
+                              )}
                             </div>
                           </motion.div>
                         ),
@@ -184,6 +195,7 @@ const CohortSchedule: NextPage = () => {
 export default CohortSchedule;
 
 export const CohortScheduleStyles = styled.div`
+  cursor: default;
   .schedule-disclaimer {
     padding: 0.5rem 0;
     a {
@@ -289,22 +301,29 @@ export const CohortScheduleStyles = styled.div`
     padding: 0.2rem 0.4rem;
     line-height: 1em;
   }
-  .schedule-block-next {
+  .schedule-block-text {
     position: absolute;
     bottom: 0.2rem;
     right: 0.2rem;
     font-size: 0.8rem;
     font-weight: 600;
-    font-style: italic;
-    color: ${({ theme }) => (theme.isLightMode ? theme.green[300] : theme.green[300])};
-    background: ${({ theme }) => (theme.isLightMode ? theme.alpha.fg : theme.alpha.bg)};
     padding: 0.2rem 0.4rem;
     line-height: 1em;
     border-radius: 0.25rem;
+    font-style: italic;
+
+    &.current-session {
+      font-weight: 400;
+      color: ${({ theme }) => theme.alpha.fg50};
+    }
+    &.next-session {
+      color: ${({ theme }) => theme.green[300]};
+      background: ${({ theme }) => (theme.isLightMode ? theme.alpha.fg : theme.alpha.bg)};
+    }
   }
   .schedule-block.next-session {
-    box-shadow: 0 0 3px
-      ${({ theme }) => (theme.isLightMode ? theme.primary[0] : theme.secondary[0])};
+    box-shadow: 0 0 3px ${({ theme }) => (theme.isLightMode ? theme.green[900] : theme.green[300])};
+
     background-color: ${({ theme }) => theme.bg};
     background-image: ${({ theme }) =>
       theme.isLightMode
@@ -312,15 +331,28 @@ export const CohortScheduleStyles = styled.div`
         : 'url(/images/textures/cream-paper-yellow.png)'};
     font-weight: bold;
   }
+  .schedule-block.current-session {
+    color: ${({ theme }) => theme.alpha.fg25};
+    background: ${({ theme }) => theme.alpha.fg10};
+    box-shadow: 0 0 2px ${({ theme }) => theme.alpha.fg25};
+    .schedule-block-inner {
+      background: none;
+    }
+    .schedule-block-course {
+      color: ${({ theme }) => theme.alpha.fg25};
+      background: ${({ theme }) => theme.alpha.fg10};
+      box-shadow: 0 0 2px ${({ theme }) => theme.alpha.fg25};
+    }
+  }
   .schedule-block-inner {
-    background: ${({ theme }) => theme.bg};
+    background: ${({ theme }) => (theme.isLightMode ? theme.alpha.bg50 : theme.alpha.bg)};
+    backdrop-filter: blur(1px);
     position: relative;
     padding: 0.2rem 0.4rem;
     border-radius: 0.25rem;
     -webkit-print-color-adjust: exact;
   }
-  .schedule-header {
-  }
+
   @media print {
     .schedule-container {
       display: flex;
