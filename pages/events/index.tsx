@@ -42,9 +42,8 @@ const CalendarEvents: NextPage<CalendarEventProps> = () => {
             </div>
           ) : (
             <div className='calendar-events'>
-              <div className='promo-header'>
+              {/* <div className='promo-header'>
                 <div className='promo-image'>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={'/images/display/opspark-hackathon-2023.png'}
                     width='100%'
@@ -61,7 +60,7 @@ const CalendarEvents: NextPage<CalendarEventProps> = () => {
                 >
                   Get tickets here
                 </a>
-              </div>
+              </div> */}
               <h1 className='dynamic-h1 primary-secondary text-center'>Upcoming Events</h1>
               {calEvents.map((calItem) => (
                 <div key={calItem.id} className='calendar-event'>
