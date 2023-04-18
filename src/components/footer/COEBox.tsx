@@ -24,8 +24,7 @@ const COEBox = () => {
               {!showCoeInfo ? <InfoIcon size={20} /> : <CloseIcon size={20} />}
             </button>
             <p className='dynamic-txt'>
-              Operation Spark is applying for initial accreditation with the Commission of the
-              Council on Occupational Education.
+              Operation Spark is accredited by the Council on Occupational Education
             </p>
 
             <motion.button
@@ -68,7 +67,7 @@ const COEBox = () => {
                     </a>
                   </div>
                   <p className='dynamic-txt primary-secondary'>
-                    <b>Persons wishing to make comments should either</b>
+                    <b>Persons with grievances should either</b>
                   </p>
                   <ul style={{ paddingLeft: '1rem' }}>
                     <li>
@@ -82,7 +81,7 @@ const COEBox = () => {
                     </li>
 
                     <li>
-                      Submit comments through the Council’s website{' '}
+                      {`Submit comments through the Council's website `}
                       <a
                         className='anchor'
                         href='https://council.org/'
