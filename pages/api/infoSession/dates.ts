@@ -37,7 +37,7 @@ export default async function infoSession(
 }
 
 export const getInfoSessionDates = async (): Promise<ISessionDates[]> => {
-  const endpoint = GREENLIGHT_API_ENDPOINT + '/sessions/open?programId=5sTmB97DzcqCwEZFR&limit=4';
+  const endpoint = GREENLIGHT_API_ENDPOINT + '/sessions/open?programId=5sTmB97DzcqCwEZFR&limit=6';
 
   try {
     const { data: sessionDates } = await axios.get<{
