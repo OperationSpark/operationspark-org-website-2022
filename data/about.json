@@ -5,24 +5,23 @@
     ],
     "sections": [
       {
-        "title": ["Who We Serve"],
+        "title": [
+          "Who We Serve"
+        ],
         "description": [
-          "80% of low-income students drop out of college strapped with debt. Across the South, thet's left us with thousands of young adults, ages 16 to 24, not in school and un- or underemployed. The impact of this on our communities is devastating",
-
+          "80% of low-income students drop out of college strapped with debt. Across the South, we have been left with thousands of young adults, ages 16 to 24, not in school and unemployed or underemployed. The impact on our communities is devastating.",
           "Meanwhile, as of June 2022, nearly 700,000 high-wage computing jobs remain unfilled across the country, while our colleges and universities graduated less than 200,000 computer science students last year.",
-
-          "Focused on areas where generational poverty is an issue, Operation Spark delivers practical learning tools and programs that provide accessible, accelerated workforce development for high-wage careers in technology",
-
+          "Focused on areas where generational poverty is an issue, Operation Spark delivers practical learning tools and programs that provide accessible, accelerated workforce development for high-wage careers in technology.",
           "What does that mean concretely? We teach you to write software using industrial tools, writing actual apps, and working in an awesome team environment. With six months of training, you'll be ready to launch your career as a fully autonomous, full-stack developer in the high-wage software industry."
         ]
       },
       {
-        "title": ["A Career for Everyone"],
+        "title": [
+          "A Career for Everyone"
+        ],
         "description": [
           "The field of software development is quite wide. No matter your interests or aptitude, there's certainly a career for you in the software industry. You just need to build a few apps to start discovering all that software has to offer.",
-
           "The skills involved in building mobile video games and apps are quite varied, including application design, game mechanics and user experience, visual and sound design, computer engineering of various sorts, quality assurance, project, product and cost management, content management, and public relations of all kinds. And each of these skills leads to careers, careers with futures - for example, an entry-level quality assurance analyst is a well-paying, entry-level position that can lead to a job in management or a career as a UX designer.",
-
           "The Operation Spark model is simple: We introduce you to a wide set of skills and help you apply these skills in building engaging projects like mobile video games and apps. At Operation Spark, you may just discover a high-wage career that ignites your passion."
         ]
       }
@@ -30,12 +29,8 @@
   },
   "history": [
     "Started in September 2013, as a pilot project with youth community centers around New Orleans, Operation Spark taught young adults how to build simple mobile video games and apps with the goal of igniting the pursuit of an employable passion. These early experiments led to a robust High-School to High-Wage software training program for public school students across Louisiana. Coupled with an extensive summer teacher academy that prepares educators to offer our curriculum in their local classrooms, Operation Spark annually engages over 600 young people in exploring software careers.",
-
     "In 2015, Operation Spark partnered with Hack Reactor in San Francisco to develop an adult workforce program, Immersion, graduating its first class in January 2016. Later that year, we were granted a license by the Louisiana Board of Regents to operate as a proprietary school offering Industry-Based Credentials in JavaScript, Functional Programming, and Web Development (Levels 1, 2, and 3). Operation Spark graduates are now applying their career-changing skills worldwide at companies like LinkedIn, UbiSoft, DXC, GE, the Australian Broadcasting Corporation, and PayPal. ",
-
-    "Today, Operation Spark is an approved training provider with the Louisiana Department of Education and the Louisiana Workforce Commission, providing in-demand software training programs for high school students, teachers, and adult learners across the Southeast.",
-
-    ""
+    "Today, Operation Spark is an approved training provider with the Louisiana Department of Education and the Louisiana Workforce Commission, providing in-demand software training programs for high school students, teachers, and adult learners across the Southeast."
   ],
   "team": {
     "staff": [
@@ -49,9 +44,7 @@
         },
         "about": [
           "John has 24 years of professional experience in software development, having worked for a diverse set of clients including, Tabasco, Tulane University, Riley Foods, Oreck Vacuums, The Canadian Imperial Bank of Commerce, Microsoft, Ernst and Young, Disney, and Sony. Beginning in 2009, his work in the video game industry in Montreal contributed to some of the most successful games on social platforms.",
-
           "Mr. Fraboni holds a Bachelor of Music from McGill University and a Master of Music degree from the Manhattan School of Music. He is also the recipient of performing arts awards from the Canada Council for the Arts, the Ontario Arts Council, the Manhattan School of Music, International House New York, as well as the Canadian Academy of Recording Arts and Sciences (a Juno award, the Canadian equivalent of Grammy).",
-
           "He has lived in Montreal, New York, New Orleans, and Toronto."
         ]
       },
@@ -61,7 +54,6 @@
         "image": "/images/people/staff/kim-farrell.jpg",
         "about": [
           "Born in Ohio and raised in New Orleans. Kim spent many years in the legal and law enforcement fields before transitioning to a career in finance. She loves giving back and supporting her community, which ultimately led to her Operation Spark.",
-
           "Kim has a love for history and everything New Orleans. When she's not working, you can find her outside in her garden or painting and creating art. If you look closely, you can even find her dressed for the occasion and parading through the streets of New Orleans with the Krewe of the Rolling Elvi."
         ]
       },
@@ -71,7 +63,6 @@
         "image": "/images/people/staff/pam-stewart.jpg",
         "about": [
           "A native of New Orleans, Pam is a firm believer in the potential of our youth and the promise of our city. With a background in administration, fundraising, and marketing, Pam has served on the opening teams of 3 area charter schools, raised over $7M in support of local nonprofits, and coached new school start-ups in six parishes.",
-
           "Pam is an Agile-certified Scrum Master/Product Owner and holds an MFA in nonprofit administration. She's found her forever home at Operation Spark, where she's honored to work with this amazing team to build new opportunities for young people in New Orleans."
         ]
       },
@@ -81,7 +72,6 @@
         "image": "/images/people/staff/mayukh-raychaudhuri.jpg",
         "about": [
           "Mayukh is passionate about empowering individuals and communities through access to innovative educational opportunities. He began his professional career as an attorney for multiple Philadelphia law firms working on large-scale class action litigations. After moving to New Orleans in 2013, he spent five years teaching English and Math for KIPP, Firstline, and Jefferson Parish Schools.",
-
           "Mayukh holds a Bachelor's degree in English from the University of Michigan and a J.D. from Rutgers University. Outside of work, he enjoys spicy food, travel, and the films of Spike Lee, Richard Linklater, and Pedro Almodovar."
         ]
       },
@@ -91,7 +81,6 @@
         "image": "/images/people/staff/harvey-sanders.jpg",
         "about": [
           "Harvey has a passion for learning, teaching and using technology. He focuses on producing exciting and effective web applications through Operation Spark's software development shop. Prior to creating software with Operation Spark, Harvey introduced underserved youth to web development through the Work & Learn Program at the Youth Empowerment Project. As Assistant Director of Work & Learn, Harvey also established two businesses with a goal of giving youth valuable job and life skills.",
-
           "Harvey is a graduate of Operation Spark's Immersion program and holds a Bachelor's Degree in Marketing from Grand Valley State University in his hometown of Grand Rapids, Michigan."
         ]
       },
@@ -109,9 +98,7 @@
         "image": "/images/people/staff/johnnie-james-ii.jpg",
         "about": [
           "Johnnie is an entrepreneur with experience in non-profits, real estate, live event production and more. He has college and technical training from Florida A&M - Business, the University of New Mexico - Urban Planning, Tulane - Public Relations, and Operation Spark - software engineering.",
-
           "He is an advocate for justice, a poet, a consultant, an actor and a former concert promoter. Among many other diverse roles and responsibilities, Johnnie has volunteered for organizations such as School of Rock, PlayBuild NOLA, NOTEP, and Operation Spark underscoring his personal commitment to STEAM education principles.",
-
           "In his free time, Johnnie can often be found cooking, watching pro wrestling or mma, or tending to one of he and his wife's five animals at home."
         ]
       },
@@ -121,7 +108,6 @@
         "image": "/images/people/staff/taylor-shephard.jpg",
         "about": [
           "Taylor Shephard was born and raised in New Orleans, Louisiana. She graduated from St. Mary’s Academy High School in New Orleans East in 2014 and then headed to Southeastern Louisiana University to further her studies for a couple years. She attempted to teach herself html and css because she was always very interested in knowing what it takes to make websites. Soon after she found Operation Spark where Taylor gained her passion for coding. She completed Operation Spark's immersion program in July 2018.",
-
           "Soon after completing the program, Taylor joined the Operation Spark team as an instructor. She really enjoys helping others learn to code, watching their skills grow, and witnessing them become awesome software engineers. Her interests include traveling, photography, fashion, coding, learning new things, and making a difference. "
         ]
       },
@@ -131,20 +117,16 @@
         "image": "/images/people/staff/greg-thompson.jpg",
         "about": [
           "Greg is a New Orleans native who graduated from Ben Franklin High School and then headed across town to study education at Tulane. After finding a passion working with robotics, he spent five years teaching high school and middle school engineering, robotics, computer science, and math. He completed Operation Spark's Immersion program in the fall of 2020 and is now part of the high school team at Operation Spark.",
-
           "In his spare time, Greg enjoys running with former students at Youth Run NOLA events, playing board games and solving logic puzzles, and baking up a storm in the kitchen."
         ]
       },
-
       {
         "name": "Brianna Taylor",
         "role": "Student Success Lead / Software Engineer",
         "image": "/images/people/staff/brianna-taylor.jpg",
         "about": [
           "Brianna is a New Orleans native who graduated from Warren Easton. She enjoys helping adults and young adults gain stability and opportunities to discover their passion. Brianna pursued a career in workforce program development and obtained her Bachelor of Science from Louisiana Tech University in Family and Child Studies.",
-
           "Brianna started her journey with Operation Spark to skill up in software development and data. In 2020 she graduated from Operation Spark and joined the student success team the following year.",
-
           "In her free time, Brianna enjoys traveling, watching anime, and tackling DIY projects."
         ]
       },
@@ -154,7 +136,6 @@
         "image": "/images/people/staff/jessalyn-daggs.jpg",
         "about": [
           "Jessalyn is from Thibodaux, LA and believes that the opportunity Operation Spark brings to New Orleanians can provide new possibilities for the entire Southeast region and beyond. After more than 10 years managing retail businesses, she sought out a career that would allow her to be mother to her newborn first, while exploring her passion for design thinking and problem solving.",
-
           "She graduated from Operation Spark in 2020 and accepted her dream job as a part of the Opspark team aiding students in overcoming challenges and celebrating wins while navigating our program from beginning their training to being hired in tech. She believes we can change the status quo when we inspire others to go beyond what's already been established. Her hope is that New Orleans' black women and girls continue to explore the value that they bring to the technology landscape and dare to take up space in the tech economy."
         ]
       },
@@ -164,7 +145,6 @@
         "image": "/images/people/staff/amika-kali.jpg",
         "about": [
           "Amika is a California native with a heart of gold. Before joining us as the Outreach Coordinator here at Operation Spark, she spent twelve (12) years as a classroom teacher in both traditional and non-traditional classroom settings. Her love and passion for lifelong learning has carried over to OpSpark. She wants to ensure that our students have the resources and opportunities needed to make their learning journey successful.",
-
           "When Amika is not out attending events or hosting Information Sessions, she can be found browsing Pinterest and crafting. "
         ]
       },
@@ -174,7 +154,6 @@
         "image": "/images/people/staff/jon-cosper.jpg",
         "about": [
           "Jon was born and raised in the 9th ward of New Orleans and is a graduate of Edna Karr High School. Jon joined the Operation Spark team in January of 2022. He began his professional career in education and most recently was the Director of Athletics and Career and Technical Education at a local charter school.",
-
           "Jon earned his MBA from the University of New Orleans and his Bachelor’s degree in Business Management from Tulane University's A.B. Freeman School of Business. He is a part of the Beta Gamma Sigma International Honor Society. Though he stays busy as the Workforce Outcomes Lead, Jon relishes every free moment he gets. He loves to spend time with his wife and 3 kids, is an avid gamer and sports fan."
         ]
       },
@@ -192,9 +171,7 @@
         "image": "/images/people/staff/patrice-williams.jpg",
         "about": [
           "Patrice is a native of New Orleans, LA. She graduated from Xavier University of LA in 2012, where she received her Bachelor's in Biology. In 2015, she received a Master's in Public  Health from LSU Health Sciences Center specializing in Behavioral and Community Health.",
-
           "After working as a Student Success Specialist at Xavier University of LA, then transitioning to the Mortgage industry, Patrice was ready to try something new. She graduated from Operation Spark in 2021 and now works there as a software developer and instructor.",
-
           "Her hobbies include taking her kids on new adventures, playing with her dogs, coding, and watching movies. Patrice loves helping her students learn to code and watch as they blossom into amazing software engineers. "
         ]
       },
@@ -212,7 +189,6 @@
         "image": "/images/people/staff/peter-barnum.jpg",
         "about": [
           "Peter grew up in Denver, Colorado, and has always been passionate about technology, computer science, and teaching others these valuable skills. In his early years, Peter realized that the internet was a powerful resource for learning about technology and code. Teaching himself to code has provided a high level of autonomy and problem-solving, fundamental in software development.",
-
           "Peter loves problem-solving and coding, spending most of his free time working on one project or another. Whether creating services to automate tasks, building out new applications/websites, or exploring new technologies, he spends most of his time expanding his knowledge."
         ]
       },
@@ -223,11 +199,8 @@
         "about": [
           "Jessica is a Louisiana native whose pursuit of new and interesting things has taken her across many unrelated industries.",
           "Before deciding to begin Operation Spark as a student herself, she had attended LSU for Biomedical Engineering, bartended at craft cocktail ___, worked as a medical assistant in orthopedic surgery, started a career as a train mechanic, and trained as a car photographer.",
-
           "It only took the first days of the Prep phase, here, to make her realize that she had finally found a lasting home in programming.",
-
           "The around the clock opportunities for innovative problem solving, continued learning, and infinite possibilities in the realm of creation combined the best parts of each past career (and if she takes her laptop to the backyard, she even gets to work outdoors again). Jessica applies experience from each previous discipline in her teaching of the Junior phase and works to identify and meet the way that each student learns best.",
-
           "In her free time, she still enjoys welding+woodworking, cooking, and has been teaching herself 3D Development."
         ]
       }
