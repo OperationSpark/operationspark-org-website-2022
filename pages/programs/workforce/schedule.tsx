@@ -117,7 +117,7 @@ const CohortSchedule: NextPage = () => {
                             className='schedule-block-course'
                             style={!s.isCurrent ? { color: s.color } : {}}
                           >
-                            {s.phase}
+                            {s.cohort}
                           </span>
                           <p>
                             <span className='dim-label'>Start:</span>{' '}
@@ -271,11 +271,13 @@ export const CohortScheduleStyles = styled.div`
     right: 0.2rem;
     font-size: 0.8rem;
     border-radius: 0.25rem;
-    font-weight: 600;
+    font-weight: 500;
+    font-size: 1.1rem;
     color: ${({ theme }) => (theme.isLightMode ? theme.magenta[700] : theme.magenta[100])};
     background: ${({ theme }) => theme.black};
     padding: 0.2rem 0.4rem;
     line-height: 1em;
+    filter: saturate(4);
   }
   .schedule-block-text {
     position: absolute;
