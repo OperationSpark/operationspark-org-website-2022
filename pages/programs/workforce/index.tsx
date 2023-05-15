@@ -3,7 +3,6 @@ import { GetStaticProps, NextPage } from 'next';
 import Link from 'next/link';
 import styled, { useTheme } from 'styled-components';
 import axios from 'axios';
-import moment from 'moment';
 import { AiOutlineCloudDownload as DownloadIcon } from 'react-icons/ai';
 
 import { Main, Section, Content } from '@this/components/layout';
@@ -17,6 +16,7 @@ import { BgImg } from '@this/src/components/Elements';
 import useInfoSession from '@this/src/hooks/useInfoSession';
 import { ICourseInfo, ISessionRow } from '@this/data/types/schedule';
 import ProgramInfoCard from '@this/src/components/Cards/ProgramInfoCard';
+import { toDayJs } from '@this/src/helpers/time';
 
 export interface AdultProgramsProps {
   header: ITitleDescription;
@@ -48,7 +48,7 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
 
   const nextInfoSessionDate = !nextInfoSession
     ? null
-    : moment(nextInfoSession.times.start.dateTime).format('dddd, MMMM Do h:mma');
+    : toDayJs(nextInfoSession.times.start.dateTime).format('dddd, MMMM Do h:mma (z)');
 
   const handleShift = (n: number) => {
     setIsPaused(true);
