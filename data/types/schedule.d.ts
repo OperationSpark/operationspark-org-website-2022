@@ -1,19 +1,57 @@
 export type ISessionRow = {
-  course: string;
+  _id?: string;
+
+  /** Session/Cohort in format `'PHASE-YYYY-MM-DD-HHmm'` ex. `'pr-2022-09-26-1300'` */
+  cohortId: string;
+
+  /** Junior, Prep, etc */
+  phase: string;
+
+  /** imj, pr, etc */
+  abbr: string;
+
+  /** Alfa, Bravo, ...Zulu */
   cohort: string;
-  year: number;
-  start: Date;
-  end: Date;
-  char: string;
-  isCurrent: boolean;
+
+  /** A, B, ...Z */
+  cohortLetter: string;
+
+  /** A, B, or C */
+  iteration?: string;
+
+  /** America/Chicago */
+  timezone: string;
+
+  /** Session start date/time */
+  startDate: Date;
+
+  /** Session end date/time */
+  endDate: Date;
+
+  /** Session orientation date/time */
+  orientationDate: Date;
+
+  /** Session enrollment deadline date/time */
+  enrollmentDeadlineDate: Date;
+
+  /** Designated color for cohort badge */
+  color: string;
+
+  /** Is the session archived */
+  isArchived: boolean;
+
+  /** Is the session hidden on website */
+  isHidden: boolean;
+
+  /** Next upcoming session */
   isNext: boolean;
-  isPast: boolean;
-  order: number;
-  bg: string;
-  fg: string;
+
+  /** Current (next active) session */
+  isCurrent: boolean;
 };
 
 export type ICourseInfo = {
+  id: string;
   title: string;
   length: string;
   days: string[];

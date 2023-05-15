@@ -11,11 +11,12 @@ import { BgImg } from '@this/src/components/Elements';
 import { ICourseInfo, ISessionRow } from '@this/data/types/schedule';
 import Spinner from '@this/src/components/Elements/Spinner';
 import { useClickAway } from '@this/src/hooks/useClickAway';
+import { toDayJs } from '@this/src/helpers/time';
 
 type CohortState = {
   title: string;
   course?: ICourseInfo;
-  courses: (ISessionRow | null)[];
+  courses: ISessionRow[];
 };
 
 const CohortSchedule: NextPage = () => {
@@ -23,24 +24,25 @@ const CohortSchedule: NextPage = () => {
   const [filter, setFilter] = useState<string>('');
   const [filterOptions, setFilterOptions] = useState<string[]>([]);
   const [isLoading, setLoading] = useState<boolean>(true);
-  const [sessionDates, setSessionDates] = useState<CohortState[]>([]);
+
+  const [courses, setCourses] = useState<CohortState[]>([]);
 
   useEffect(() => {
     setLoading(true);
-    axios
-      .get<CohortState[]>(`/api/schedule/${groupBy}/${filter ? `/${filter}` : ''}`)
-      .then(({ data }) => {
-        setSessionDates(data);
-        setLoading(false);
-      });
+
+    axios.get<CohortState[]>('/api/programs').then(({ data }) => {
+      console.log(data);
+      setLoading(false);
+      setCourses(data);
+    });
   }, [groupBy, filter]);
 
-  // Set cohort letters once with all existing cohorts
-  useEffect(() => {
-    axios.get<CohortState[]>('/api/schedule/cohort').then(({ data }) => {
-      setFilterOptions(data.map(({ title }) => title));
-    });
-  }, []);
+  // // Set cohort letters once with all existing cohorts
+  // useEffect(() => {
+  //   axios.get<CohortState[]>('/api/schedule/cohort').then(({ data }) => {
+  //     setFilterOptions(data.map(({ title }) => title));
+  //   });
+  // }, []);
 
   return (
     <Main style={{ paddingTop: 0 }}>
@@ -54,7 +56,7 @@ const CohortSchedule: NextPage = () => {
           </Section>
         </BgImg>
 
-        <select onChange={(e) => setGroupBy(e.target.value)} value={groupBy}>
+        {/* <select onChange={(e) => setGroupBy(e.target.value)} value={groupBy}>
           {['course', 'cohort'].map((id) => (
             <option key={id} value={id}>
               {id[0].toUpperCase() + id.slice(1)}
@@ -74,7 +76,7 @@ const CohortSchedule: NextPage = () => {
               </option>
             ))}
           </select>
-        )}
+        )} */}
         <Content>
           <p className='schedule-disclaimer dynamic-txt'>
             Operation Spark includes 6 - 7 months of escalated, intense instruction geared towards a
@@ -94,7 +96,7 @@ const CohortSchedule: NextPage = () => {
 
         {isLoading && <Spinner size={6} />}
         <div className='schedule-container'>
-          {sessionDates.map(
+          {courses.map(
             ({ title, courses, course }, i) =>
               title && (
                 <motion.div
@@ -131,57 +133,47 @@ const CohortSchedule: NextPage = () => {
                     </div>
 
                     {/* Limit list size when filtering by course only. When filtering by cohort, slicing will prevent showing every phase */}
-                    {(groupBy === 'course' ? courses?.slice(0, 5) : courses)?.map(
-                      (s) =>
-                        s &&
-                        !s.isPast && (
-                          <motion.div
-                            variants={{
-                              hidden: { y: -50, opacity: 0 },
-                              show: { y: 0, opacity: 1 },
-                            }}
-                            className={`schedule-block ${
-                              s.isNext ? 'next-session' : s.isCurrent ? 'current-session' : ''
-                            }`}
-                            key={`${s.course}-${s.cohort}-${s.year}`}
+                    {(groupBy === 'course' ? courses?.slice(0, 5) : courses)?.map((s) => (
+                      <motion.div
+                        variants={{
+                          hidden: { y: -50, opacity: 0 },
+                          show: { y: 0, opacity: 1 },
+                        }}
+                        className={`schedule-block ${
+                          s.isNext ? 'next-session' : s.isCurrent ? 'current-session' : ''
+                        }`}
+                        key={`${s.phase}-${s.cohort}-${s.startDate}`}
+                      >
+                        <div className='schedule-block-inner'>
+                          <span
+                            className='schedule-block-course'
+                            style={!s.isCurrent && groupBy === 'course' ? { color: s.color } : {}}
                           >
-                            <div className='schedule-block-inner'>
-                              <span
-                                className='schedule-block-course'
-                                style={
-                                  !s.isCurrent && groupBy === 'course'
-                                    ? { color: s.fg, background: s.bg }
-                                    : {}
-                                }
-                              >
-                                {groupBy === 'course' ? s.cohort : s.course}
-                              </span>
-                              <p>
-                                Start:{' '}
-                                <b className={s.isNext ? 'primary-secondary' : ''}>
-                                  {new Date(s.start).toLocaleDateString('en-us', {
-                                    dateStyle: 'medium',
-                                  })}
-                                </b>
-                              </p>
-                              <p>
-                                End:{' '}
-                                {new Date(s.end).toLocaleDateString('en-us', {
-                                  dateStyle: 'medium',
-                                })}
-                              </p>
-                              {s.isNext && (
-                                <span className='schedule-block-text next-session'>Up Next</span>
-                              )}
-                              {s.isCurrent && (
-                                <span className='schedule-block-text current-session'>
-                                  Active Cohort
-                                </span>
-                              )}
-                            </div>
-                          </motion.div>
-                        ),
-                    )}
+                            {groupBy === 'course' ? s.cohort : s.phase}
+                          </span>
+                          <p>
+                            Start:{' '}
+                            <b className={s.isNext ? 'primary-secondary' : ''}>
+                              {toDayJs(s.startDate).format('MMM D, YYYY')}
+                            </b>
+                          </p>
+                          <p>End: {toDayJs(s.endDate).format('MMM D, YYYY')}</p>
+                          <p>
+                            {toDayJs(s.startDate).format('h:mma')}
+                            {' - '}
+                            {toDayJs(s.endDate).format('h:mma (z)')}
+                          </p>
+                          {s.isNext && (
+                            <span className='schedule-block-text next-session'>Up Next</span>
+                          )}
+                          {s.isCurrent && (
+                            <span className='schedule-block-text current-session'>
+                              Active Cohort
+                            </span>
+                          )}
+                        </div>
+                      </motion.div>
+                    ))}
                   </motion.div>
                 </motion.div>
               ),
@@ -260,7 +252,7 @@ export const CohortScheduleStyles = styled.div`
   }
   .schedule-cohort-container {
     width: 100%;
-
+    page-break-inside: avoid;
     display: flex;
     flex-flow: column;
     grid-gap: 0.5rem;
@@ -297,7 +289,7 @@ export const CohortScheduleStyles = styled.div`
     border-radius: 0.25rem;
     font-weight: 600;
     color: ${({ theme }) => (theme.isLightMode ? theme.magenta[700] : theme.magenta[100])};
-    background: ${({ theme }) => (theme.isLightMode ? theme.alpha.bg : theme.alpha.bg)};
+    background: ${({ theme }) => theme.black};
     padding: 0.2rem 0.4rem;
     line-height: 1em;
   }
@@ -318,7 +310,7 @@ export const CohortScheduleStyles = styled.div`
     }
     &.next-session {
       color: ${({ theme }) => theme.green[300]};
-      background: ${({ theme }) => (theme.isLightMode ? theme.alpha.fg : theme.alpha.bg)};
+      background: ${({ theme }) => (theme.isLightMode ? theme.alpha.fg50 : theme.alpha.bg)};
     }
   }
   .schedule-block.next-session {
@@ -350,7 +342,7 @@ export const CohortScheduleStyles = styled.div`
     position: relative;
     padding: 0.2rem 0.4rem;
     border-radius: 0.25rem;
-    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 
   @media print {
@@ -368,7 +360,8 @@ export const CohortScheduleStyles = styled.div`
       position: static;
       padding: 0;
       font-weight: 900;
-      color-adjust: exact;
+      print-color-adjust: exact;
+
       background: transparent !important;
       -webkit-print-color-adjust: economy;
     }
@@ -379,12 +372,13 @@ export const CohortScheduleStyles = styled.div`
     }
     .schedule-block {
       width: fit-content;
-      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
       background: rgba(255, 255, 255, 0);
     }
     .schedule-block-inner {
       background: rgba(255, 255, 255, 0);
     }
+
     .schedule-block.next-session {
       background: rgba(50, 175, 100, 1);
       .schedule-block-inner {
@@ -404,57 +398,71 @@ const CourseInfo = ({ course }: { course: ICourseInfo }) => {
 
   return (
     <CourseInfoStyles ref={iconRef}>
-      <button className={`info-icon ${isOpen ? 'open' : ''}`} onClick={() => setOpen(!isOpen)}>
-        <CloseOrInfoIcon size={20} />
-      </button>
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            className='course-info'
-            initial={{ y: '-50%', opacity: 0 }}
-            animate={{ y: '0%', opacity: 1 }}
-            exit={{ y: '-50%', opacity: 0 }}
-            transition={{ type: 'tween', duration: 0.15 }}
-          >
-            <div className='course-info-section'>
-              <p className='primary-secondary bold'> {title}</p>
-            </div>
-            <div className='course-info-section'>
-              <p className='dim italic'> {length}</p>
-            </div>
-            <div className='course-info-section'>
-              <p className='dim bold'>{dayRange}</p>
-              {hours.map((hour) => (
-                <p className='dim' key={hour}>
-                  {hour}
-                </p>
-              ))}
-            </div>
-            <div className='course-info-section'>
-              <p className='dim bold italic'>{cost}</p>
-            </div>
-            <div className='course-info-section'>
-              <p className='dim bold'>Prerequisites</p>
-              <p className='dim italic'>{preReqs}</p>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <div className='course-info-container'>
+        <button className={`info-icon ${isOpen ? 'open' : ''}`} onClick={() => setOpen(!isOpen)}>
+          <CloseOrInfoIcon size={20} />
+        </button>
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              className='course-info'
+              initial={{ y: '-50%', opacity: 0 }}
+              animate={{ y: '0%', opacity: 1 }}
+              exit={{ y: '-50%', opacity: 0 }}
+              transition={{ type: 'tween', duration: 0.15 }}
+            >
+              <div className='course-info-section'>
+                <p className='primary-secondary bold'> {title}</p>
+              </div>
+              <div className='course-info-section'>
+                <p className='dim italic'> {length}</p>
+              </div>
+              <div className='course-info-section'>
+                <p className='dim bold'>{dayRange}</p>
+                {hours.map((hour) => (
+                  <p className='dim' key={hour}>
+                    {hour}
+                  </p>
+                ))}
+              </div>
+              <div className='course-info-section'>
+                <p className='dim bold italic'>{cost}</p>
+              </div>
+              <div className='course-info-section'>
+                <p className='dim bold'>Prerequisites</p>
+                <p className='dim italic'>{preReqs}</p>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </CourseInfoStyles>
   );
 };
 
 const CourseInfoStyles = styled.div`
   position: absolute;
-  top: 0rem;
+  top: 0;
+  left: 0;
+  right: 0;
   width: calc(100% - 1rem);
   margin: 0 0.5rem;
+  display: flex;
+  justify-content: center;
+  z-index: 100;
+
+  .course-info-container {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    padding: 0.5rem;
+  }
   .info-icon {
     position: absolute;
-    right: 0.25rem;
-    top: 0.25rem;
+    right: 0.5rem;
+    top: 0.5rem;
     width: fit-content;
-    color: ${({ theme }) => (theme.isLightMode ? theme.grey[500] : theme.grey[400])};
+    color: ${({ theme }) => (theme.isLightMode ? theme.primary[0] : theme.secondary[0])};
     :hover,
     &.open {
       z-index: 101;
@@ -473,15 +481,17 @@ const CourseInfoStyles = styled.div`
     }
   }
   .course-info {
-    position: absolute;
+    /* position: absolute; */
     overflow: hidden;
-    right: 0;
+
     top: 0;
     z-index: 100;
     display: flex;
     flex-flow: column;
     align-items: center;
     width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
     background: ${({ theme }) => theme.bg};
 
     backdrop-filter: blur(8px);
