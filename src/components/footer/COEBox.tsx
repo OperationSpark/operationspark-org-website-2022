@@ -59,7 +59,7 @@ const COEBox = () => {
                       className='img-link'
                     >
                       <Image
-                        src='/images/logos/etc/council-org-logo.svg'
+                        src='/images/logos/etc/council-org-accredited.png'
                         width={100}
                         height={100}
                         alt='COE | council.org'
