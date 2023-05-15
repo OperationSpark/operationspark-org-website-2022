@@ -20,9 +20,6 @@ type CohortState = {
 };
 
 const CohortSchedule: NextPage = () => {
-  const [groupBy, setGroupBy] = useState<string>('course');
-  const [filter, setFilter] = useState<string>('');
-  const [filterOptions, setFilterOptions] = useState<string[]>([]);
   const [isLoading, setLoading] = useState<boolean>(true);
 
   const [courses, setCourses] = useState<CohortState[]>([]);
@@ -31,18 +28,10 @@ const CohortSchedule: NextPage = () => {
     setLoading(true);
 
     axios.get<CohortState[]>('/api/programs').then(({ data }) => {
-      console.log(data);
       setLoading(false);
       setCourses(data);
     });
-  }, [groupBy, filter]);
-
-  // // Set cohort letters once with all existing cohorts
-  // useEffect(() => {
-  //   axios.get<CohortState[]>('/api/schedule/cohort').then(({ data }) => {
-  //     setFilterOptions(data.map(({ title }) => title));
-  //   });
-  // }, []);
+  }, []);
 
   return (
     <Main style={{ paddingTop: 0 }}>
@@ -56,27 +45,6 @@ const CohortSchedule: NextPage = () => {
           </Section>
         </BgImg>
 
-        {/* <select onChange={(e) => setGroupBy(e.target.value)} value={groupBy}>
-          {['course', 'cohort'].map((id) => (
-            <option key={id} value={id}>
-              {id[0].toUpperCase() + id.slice(1)}
-            </option>
-          ))}
-        </select>
-        {groupBy === 'cohort' && (
-          <select onChange={(e) => setFilter(e.target.value)} value={filter}>
-            {
-              <option value='' disabled={!filter} className={filter ? 'reset-option' : ''}>
-                {filter ? 'Reset' : 'Filter By Cohort'}
-              </option>
-            }
-            {filterOptions.map((id, i) => (
-              <option key={id + i} value={id}>
-                {id[0].toUpperCase() + id.slice(1)}
-              </option>
-            ))}
-          </select>
-        )} */}
         <Content>
           <p className='schedule-disclaimer dynamic-txt'>
             Operation Spark includes 6 - 7 months of escalated, intense instruction geared towards a
@@ -126,14 +94,14 @@ const CohortSchedule: NextPage = () => {
                   >
                     <div className='schedule-block-header'>
                       <h3 className='dynamic-h3 schedule-block cohort-name primary-secondary'>
-                        {groupBy === 'course' && `${i + 1}.`} {title}
+                        {`${i + 1}.`} {title}
                       </h3>
 
-                      {course && groupBy === 'course' && <CourseInfo course={course} />}
+                      {course && <CourseInfo course={course} />}
                     </div>
 
                     {/* Limit list size when filtering by course only. When filtering by cohort, slicing will prevent showing every phase */}
-                    {(groupBy === 'course' ? courses?.slice(0, 5) : courses)?.map((s) => (
+                    {courses?.slice(0, 5)?.map((s) => (
                       <motion.div
                         variants={{
                           hidden: { y: -50, opacity: 0 },
@@ -147,18 +115,22 @@ const CohortSchedule: NextPage = () => {
                         <div className='schedule-block-inner'>
                           <span
                             className='schedule-block-course'
-                            style={!s.isCurrent && groupBy === 'course' ? { color: s.color } : {}}
+                            style={!s.isCurrent ? { color: s.color } : {}}
                           >
-                            {groupBy === 'course' ? s.cohort : s.phase}
+                            {s.phase}
                           </span>
                           <p>
-                            Start:{' '}
+                            <span className='dim-label'>Start:</span>{' '}
                             <b className={s.isNext ? 'primary-secondary' : ''}>
                               {toDayJs(s.startDate).format('MMM D, YYYY')}
                             </b>
                           </p>
-                          <p>End: {toDayJs(s.endDate).format('MMM D, YYYY')}</p>
                           <p>
+                            <span className='dim-label'>End: </span>{' '}
+                            {toDayJs(s.endDate).format('MMM D, YYYY')}
+                          </p>
+                          <p className='session-time'>
+                            <span className='dim-label'>Time: </span>{' '}
                             {toDayJs(s.startDate).format('h:mma')}
                             {' - '}
                             {toDayJs(s.endDate).format('h:mma (z)')}
@@ -248,7 +220,7 @@ export const CohortScheduleStyles = styled.div`
   }
   .schedule-cohort {
     flex: 1;
-    min-width: 18rem;
+    min-width: 20rem;
   }
   .schedule-cohort-container {
     width: 100%;
@@ -277,6 +249,18 @@ export const CohortScheduleStyles = styled.div`
     :first-child {
       box-shadow: none;
     }
+    p {
+      display: flex;
+    }
+    .session-time {
+      color: ${({ theme }) => theme.grey[500]};
+      font-weight: 400;
+      font-size: 0.9rem;
+    }
+  }
+  .dim-label {
+    color: ${({ theme }) => theme.grey[500]};
+    width: 50px;
   }
   .schedule-block-header {
     position: relative;
