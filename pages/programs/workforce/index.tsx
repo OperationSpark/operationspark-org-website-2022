@@ -15,7 +15,7 @@ import { IQuote, ITitleDescription } from '@this/data/types/bits';
 import { ICourses } from '@this/data/types/programs';
 import { BgImg } from '@this/src/components/Elements';
 import useInfoSession from '@this/src/hooks/useInfoSession';
-import { ISessionRow } from '@this/data/types/schedule';
+import { ICourseInfo, ISessionRow } from '@this/data/types/schedule';
 import ProgramInfoCard from '@this/src/components/Cards/ProgramInfoCard';
 
 export interface AdultProgramsProps {
@@ -24,6 +24,12 @@ export interface AdultProgramsProps {
   courses: ICourses[];
   companyQuotes: IQuote[];
 }
+
+type ProgramsResponse = {
+  title: string;
+  course?: ICourseInfo;
+  courses: ISessionRow[];
+};
 
 const AdultPrograms: NextPage<AdultProgramsProps> = ({
   overview,
@@ -78,9 +84,17 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
   }, [companyQuotes.length, isPaused, quoteIndex]);
 
   useEffect(() => {
-    axios
-      .get<{ [key: string]: ISessionRow }>('/api/schedule/cohorts/next')
-      .then(({ data }) => setNextSessionDates(data));
+    axios.get<ProgramsResponse[]>('/api/programs').then(({ data }) => {
+      const nextDates = {} as { [key: string]: ISessionRow };
+      data.forEach((row) => {
+        row.courses.forEach((course) => {
+          if (course.isNext && !nextDates.hasOwnProperty(row.title)) {
+            nextDates[row.title] = course;
+          }
+        });
+      });
+      setNextSessionDates(nextDates);
+    });
   }, []);
 
   return (

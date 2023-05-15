@@ -79,7 +79,7 @@ const ProgramInfoCard = ({
                 <div className='program-info next-session'>
                   <p>
                     <b>Next start date</b>
-                    <i>{moment(nextSessionDates[title].start).format('MMMM DD, yyyy')}</i>
+                    <i>{moment(nextSessionDates[title].startDate).format('MMMM DD, yyyy')}</i>
                   </p>
                 </div>
               )}
