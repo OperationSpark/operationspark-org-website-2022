@@ -27,10 +27,11 @@ const CohortSchedule: NextPage = () => {
   useEffect(() => {
     setLoading(true);
 
-    axios.get<CohortState[]>('/api/programs').then(({ data }) => {
-      setLoading(false);
-      setCourses(data);
-    });
+    axios
+      .get<CohortState[]>('/api/programs')
+      .then(({ data }) => setCourses(data))
+      .catch((err) => console.error(err))
+      .finally(() => setLoading(false));
   }, []);
 
   return (
