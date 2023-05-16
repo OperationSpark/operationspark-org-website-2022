@@ -84,17 +84,20 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
   }, [companyQuotes.length, isPaused, quoteIndex]);
 
   useEffect(() => {
-    axios.get<ProgramsResponse[]>('/api/programs').then(({ data }) => {
-      const nextDates = {} as { [key: string]: ISessionRow };
-      data.forEach((row) => {
-        row.courses.forEach((course) => {
-          if (course.isNext && !nextDates.hasOwnProperty(row.title)) {
-            nextDates[row.title] = course;
-          }
-        });
-      });
-      setNextSessionDates(nextDates);
-    });
+    axios
+      .get<ProgramsResponse[]>('/api/programs')
+      .then(({ data }) => {
+        const nextDates = {} as { [key: string]: ISessionRow };
+        data.forEach((row) =>
+          row.courses.forEach((course) => {
+            if (course.isNext && !nextDates.hasOwnProperty(row.title)) {
+              nextDates[row.title] = course;
+            }
+          }),
+        );
+        setNextSessionDates(nextDates);
+      })
+      .catch((err) => console.error(err));
   }, []);
 
   return (
