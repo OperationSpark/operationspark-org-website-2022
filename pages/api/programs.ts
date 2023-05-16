@@ -9,20 +9,29 @@ const courseData = programsData.adult.courses.flatMap<ICourseInfo>(
     if (!id) {
       return [];
     }
-    return { id, title, length, cost, preReqs, days, hours } as ICourseInfo;
+    return { id, title, length, cost, preReqs, days, hours };
   },
 );
 
 export default async function getProgramsReqHandler(_req: Req, res: Res) {
-  const courses = courseData.map(async (course) => ({
-    title: course.title,
-    course,
-    courses: await axios
-      .get<ISessionRow[]>(`https://tools.operationspark.org/api/sessions?phase=${course.id}`)
-      .then(({ data }) => data),
-  }));
+  try {
+    const courses = courseData.map(async (course) => ({
+      title: course.title,
+      course,
+      courses: await axios
+        .get<ISessionRow[]>(`https://tools.operationspark.org/api/sessions?phase=${course.id}`)
+        .then(({ data }) => data)
+        .catch((err) => {
+          console.error(err);
+          return [];
+        }),
+    }));
 
-  const programs = await Promise.all(courses);
+    const programs = await Promise.all(courses);
 
-  res.status(200).send(programs);
+    res.status(200).send(programs);
+  } catch (err) {
+    console.error(err);
+    res.status(500).end();
+  }
 }
