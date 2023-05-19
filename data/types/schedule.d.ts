@@ -48,14 +48,38 @@ export type ISessionRow = {
 
   /** Current (next active) session */
   isCurrent: boolean;
+
+  /** Is the session archived */
+  isArchived: boolean;
+
+  /** Is the session hidden on website */
+  isHidden: boolean;
+
+  /** Is there an orientation */
+  isOrientation: boolean;
+
+  /** Is there an enrollment deadline */
+  isEnrollmentDeadline: boolean;
+
+  /** Does a holiday occur during the session */
+  isBreak: boolean;
 };
 
 export type ICourseInfo = {
   id: string;
   title: string;
+  isImmersion: boolean;
   length: string;
   days: string[];
   hours: string[];
   cost: string;
   preReqs: string;
 };
+
+export type CourseSessions = {
+  sessions: ISessionRow[];
+} & ICourseInfo;
+
+export type CourseSession = {
+  session: ISessionRow | null;
+} & ICourseInfo;

@@ -21,6 +21,7 @@
       {
         "id": "pr",
         "title": "Prep",
+        "isImmersion": false,
         "length": "2.5 Weeks / 30 Hours",
         "cost": "Free",
         "days": [
@@ -44,6 +45,7 @@
       {
         "id": "bc",
         "title": "Bootcamp",
+        "isImmersion": false,
         "subtitle": "Introduction to Programming Bootcamp",
         "length": "6 Weeks / 72 Hours",
         "cost": "$825.00",
@@ -67,6 +69,7 @@
       {
         "id": "ip",
         "title": "Precourse",
+        "isImmersion": true,
         "length": "3 Weeks / 120 Hours",
         "cost": "$500.00",
         "days": [
@@ -88,6 +91,7 @@
       {
         "id": "imj",
         "title": "Junior",
+        "isImmersion": true,
         "length": "6 Weeks / 450 Hours",
         "cost": "$11,000.00",
         "days": [
@@ -110,6 +114,7 @@
       {
         "id": "ims",
         "title": "Senior",
+        "isImmersion": true,
         "length": "7 Weeks / 500 Hours",
         "nextStartDate": "September 12, 2022",
         "cost": "Included in junior tuition",
