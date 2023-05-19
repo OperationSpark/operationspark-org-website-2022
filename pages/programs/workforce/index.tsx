@@ -14,7 +14,7 @@ import { IQuote, ITitleDescription } from '@this/data/types/bits';
 import { ICourses } from '@this/data/types/programs';
 import { BgImg } from '@this/src/components/Elements';
 import useInfoSession from '@this/src/hooks/useInfoSession';
-import { ICourseInfo, ISessionRow } from '@this/data/types/schedule';
+import { CourseSession } from '@this/data/types/schedule';
 import ProgramInfoCard from '@this/src/components/Cards/ProgramInfoCard';
 import { toDayJs } from '@this/src/helpers/time';
 
@@ -25,10 +25,15 @@ export interface AdultProgramsProps {
   companyQuotes: IQuote[];
 }
 
-type ProgramsResponse = {
-  title: string;
-  course?: ICourseInfo;
-  courses: ISessionRow[];
+const fetchProgram = async (phaseId: string): Promise<CourseSession | null> => {
+  try {
+    const { data } = await axios.get<CourseSession>(`/api/programs/${phaseId}?next=true`);
+    console.log(data);
+    return data;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
 };
 
 const AdultPrograms: NextPage<AdultProgramsProps> = ({
@@ -40,7 +45,7 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
   const theme = useTheme();
   const [quoteIndex, setQuoteIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [nextSessionDates, setNextSessionDates] = useState<{ [key: string]: ISessionRow }>({});
+  const [nextSessionDates, setNextSessionDates] = useState<Record<string, CourseSession>>({});
 
   const quote = companyQuotes[quoteIndex];
 
@@ -84,20 +89,32 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
   }, [companyQuotes.length, isPaused, quoteIndex]);
 
   useEffect(() => {
-    axios
-      .get<ProgramsResponse[]>('/api/programs')
-      .then(({ data }) => {
-        const nextDates = {} as { [key: string]: ISessionRow };
-        data.forEach((row) =>
-          row.courses.forEach((course) => {
-            if (course.isNext && !nextDates.hasOwnProperty(row.title)) {
-              nextDates[row.title] = course;
-            }
-          }),
-        );
-        setNextSessionDates(nextDates);
-      })
-      .catch((err) => console.error(err));
+    const fetchPrograms = async () => {
+      const phases = ['ip', 'bc', 'ip', 'imj', 'ims'];
+      const allPrograms = await Promise.all(phases.map(fetchProgram));
+      const nextDates = {} as Record<string, CourseSession>;
+      allPrograms.forEach((program) => {
+        if (program?.session) {
+          nextDates[program.id] = program;
+        }
+      });
+      setNextSessionDates(nextDates);
+    };
+    fetchPrograms();
+    // axios
+    //   .get<CourseSessions[]>('/api/programs')
+    //   .then(({ data }) => {
+    //     const nextDates = {} as { [key: string]: ISessionRow };
+    //     data.forEach((row) =>
+    //       row.courses.forEach((course) => {
+    //         if (course.isNext && !nextDates.hasOwnProperty(row.title)) {
+    //           nextDates[row.title] = course;
+    //         }
+    //       }),
+    //     );
+    //     setNextSessionDates(nextDates);
+    //   })
+    //   .catch((err) => console.error(err));
   }, []);
 
   return (
@@ -200,7 +217,7 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
                 key={course.title + course.nextStartDate}
                 {...course}
                 nextInfoSessionDate={nextInfoSessionDate}
-                nextSessionDates={nextSessionDates}
+                nextSession={nextSessionDates[course.id]}
               />
             ))}
           </Content>

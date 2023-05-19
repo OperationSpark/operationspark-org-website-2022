@@ -79,3 +79,7 @@ export type ICourseInfo = {
 export type CourseSessions = {
   sessions: ISessionRow[];
 } & ICourseInfo;
+
+export type CourseSession = {
+  session: ISessionRow | null;
+} & ICourseInfo;

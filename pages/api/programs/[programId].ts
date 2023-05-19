@@ -13,26 +13,38 @@ const courseData = programsData.adult.courses.flatMap<ICourseInfo>(
   },
 );
 
-const fetchSessions = async (phaseId: string) => {
+const fetchSessions = async (phaseId: string, isNext?: boolean) => {
+  const next = isNext ? '&next=true' : '';
+  const query = `?phase=${phaseId}${next}`;
   try {
     const { data } = await axios.get<ISessionRow[]>(
-      `https://tools.operationspark.org/api/sessions?phase=${phaseId}`,
+      `https://tools.operationspark.org/api/sessions${query}`,
     );
     return data;
   } catch (err) {
     console.error(err);
-    return [];
+    return isNext ? null : [];
   }
 };
 
 export default async function getProgramsReqHandler(req: Req, res: Res) {
-  const { programId } = req.query;
-
+  const { programId, next } = req.query;
+  console.log({ next });
   const phaseInfo = courseData.find(({ id }) => id === programId);
   if (!phaseInfo || typeof programId !== 'string') {
     return res.status(404).end(`Phase ${programId} not found`);
   }
 
+  // Return a single session if next=true
+  if (next === 'true') {
+    const phase = {
+      ...phaseInfo,
+      session: await fetchSessions(programId, true),
+    };
+    return res.status(200).send(phase);
+  }
+
+  // Return multiple sessions
   const phase = {
     ...phaseInfo,
     sessions: await fetchSessions(programId),
