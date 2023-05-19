@@ -5,11 +5,11 @@ import type { ICourseInfo, ISessionRow } from '@this/data/types/schedule';
 import axios from 'axios';
 
 const courseData = programsData.adult.courses.flatMap<ICourseInfo>(
-  ({ id, title, length, cost, preReqs, days, hours, immersion }) => {
+  ({ id, title, length, cost, preReqs, days, hours, isImmersion }) => {
     if (!id) {
       return [];
     }
-    return { id, title, length, cost, preReqs, days, hours, immersion: !!immersion };
+    return { id, title, length, cost, preReqs, days, hours, isImmersion: !!isImmersion };
   },
 );
 

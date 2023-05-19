@@ -1,7 +1,7 @@
 export interface ICourses {
   id: string;
   title: string;
-  immersion?: boolean;
+  isImmersion?: boolean;
   subtitle?: string;
   length: string;
   description: string[];

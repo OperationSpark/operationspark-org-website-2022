@@ -68,7 +68,7 @@ export type ISessionRow = {
 export type ICourseInfo = {
   id: string;
   title: string;
-  immersion: boolean;
+  isImmersion: boolean;
   length: string;
   days: string[];
   hours: string[];
