@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import styled from 'styled-components';
-import moment from 'moment';
 
+import { toDayJs } from '@this/src/helpers/time';
 import { CourseSession } from '@this/data/types/schedule';
 import { ICourses } from '@this/data/types/programs';
 import PlainCard from './PlainCard';
@@ -75,11 +75,11 @@ const ProgramInfoCard = ({
                   </p>
                 </div>
               )}
-              {nextSession && !infoMessage && (
+              {nextSession?.session?.startDate && !infoMessage && (
                 <div className='program-info next-session'>
                   <p>
                     <b>Next start date</b>
-                    <i>{moment(nextSession.session?.startDate).format('MMMM DD, yyyy')}</i>
+                    <i>{toDayJs(nextSession.session?.startDate).format('MMMM Do, YYYY')}</i>
                   </p>
                 </div>
               )}
