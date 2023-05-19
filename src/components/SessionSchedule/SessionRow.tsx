@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 
 import { ISessionRow } from '@this/data/types/schedule';
 import { toDayJs } from '@this/src/helpers/time';
+import { GiftIcon } from '../icons/gift';
+import CursorTooltip from '@this/src/Typography/elements/CursorTooltip';
 
 type SessionRowProps = {
   session: ISessionRow;
@@ -13,6 +15,11 @@ const SessionRow = ({ session }: SessionRowProps) => {
   const currentSessionClassName = session.isCurrent ? 'current-session' : '';
   const startDate = toDayJs(session.startDate);
   const endDate = toDayJs(session.endDate);
+  const orientationDate = toDayJs(session.orientationDate);
+  const cohortName = `${session.cohort}${session.iteration ? ` (${session.iteration})` : ''}`;
+
+  const isPastStart = startDate.isAfter(Date.now());
+  const isPastOrientation = orientationDate.isAfter(Date.now(), 'hour');
 
   const transitionVariants = {
     hidden: { y: -50, opacity: 0 },
@@ -25,28 +32,57 @@ const SessionRow = ({ session }: SessionRowProps) => {
       className={nextSessionClassName || currentSessionClassName}
     >
       <div className='session-row-content'>
-        <span
-          className='cohort-name source-code primary-secondary'
-          style={!session.isCurrent ? { color: session.color } : {}}
-        >
-          {session.cohort} {session.iteration ? `(${session.iteration})` : ''}
-        </span>
-        <p>
-          <span className='dim-label'>Start:</span>{' '}
-          <b className={session.isNext ? 'primary-secondary' : ''}>
-            {startDate.format('MMM D, YYYY')}
-          </b>
-        </p>
-        <p>
-          <span className='dim-label'>End: </span> {endDate.format('MMM D, YYYY')}
-        </p>
-        <p>
-          <span className='dim-label'>Time: </span> {startDate.format('h:mma')}
-          {' - '}
-          {endDate.format('h:mma (z)')}
-        </p>
-        {session.isNext && <span className='session-badge next-session'>Up Next</span>}
-        {session.isCurrent && <span className='session-badge current-session'>Active Cohort</span>}
+        <div className='session-info'>
+          {isPastStart && (
+            <p>
+              <span className='dim-label'>Start:</span>{' '}
+              <b className={session.isNext ? 'primary-secondary' : ''}>
+                {startDate.format('MMM D, YYYY')}
+              </b>
+            </p>
+          )}
+          <p>
+            <span className='dim-label'>End: </span> {endDate.format('MMM D, YYYY')}
+          </p>
+          <p>
+            <span className='dim-label'>Time: </span> {startDate.format('h:mma')}
+            {' - '}
+            {endDate.format('h:mma (z)')}
+          </p>
+          {session.isOrientation && isPastOrientation && (
+            <div>
+              <span>Orientation: </span>
+              {orientationDate.format('M/D/YYYY @ h:mma (z)')}
+            </div>
+          )}
+        </div>
+        <div className='session-badges'>
+          <CursorTooltip title={`Cohort name: ${cohortName}`}>
+            <span
+              className='cohort-name source-code primary-secondary'
+              style={!session.isCurrent ? { color: session.color } : {}}
+            >
+              {cohortName}
+            </span>
+          </CursorTooltip>
+          {session.isBreak && (
+            <CursorTooltip title='This session is broken up by a holiday'>
+              <span className='session-badge break-session'>
+                <GiftIcon size={16} /> Holiday
+              </span>
+            </CursorTooltip>
+          )}
+          {session.isNext && (
+            <CursorTooltip title='This cohort is up next'>
+              <span className='session-badge next-session'>Up Next</span>
+            </CursorTooltip>
+          )}
+          {session.isCurrent && (
+            <CursorTooltip title='This cohort is currently in session'>
+              <span className='session-badge current-session'>Active Cohort</span>
+            </CursorTooltip>
+          )}
+        </div>
       </div>
     </SessionRowStyles>
   );
@@ -64,21 +100,20 @@ export const SessionRowStyles = styled(motion.div)`
   width: 100%;
   margin: 0 auto;
 
-  :first-child {
-    box-shadow: none;
-  }
-
   .session-row-content {
-    background: ${({ theme }) => (theme.isLightMode ? theme.alpha.bg : theme.alpha.bg)};
+    background: ${({ theme }) => theme.alpha.bg};
     backdrop-filter: blur(1px);
     position: relative;
     padding: 0.2rem 0.4rem;
     border-radius: 0.25rem;
     print-color-adjust: exact;
-  }
-
-  p {
     display: flex;
+    justify-content: space-between;
+    max-width: 100%;
+    p {
+      display: flex;
+      white-space: pre;
+    }
   }
 
   .dim-label {
@@ -93,42 +128,56 @@ export const SessionRowStyles = styled(motion.div)`
   }
 
   .cohort-name {
-    position: absolute;
-    top: 0.2rem;
-    right: 0.2rem;
     font-size: 0.8rem;
     border-radius: 0.25rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
-
+    display: flex;
+    white-space: pre;
     background: ${({ theme }) => theme.black};
     padding: 0.2rem 0.4rem;
     line-height: 1em;
     filter: saturate(4);
   }
+
+  .session-badges {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 0.25rem;
+  }
   .session-badge {
-    position: absolute;
-    bottom: 0.2rem;
-    right: 0.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+
+    gap: 0.25rem;
     font-size: 0.8rem;
     font-weight: 600;
-    padding: 0.2rem 0.4rem;
+    padding: 0.25rem;
     line-height: 1em;
     border-radius: 0.25rem;
-    font-style: italic;
-
+    /* Session badges */
     &.current-session {
       font-weight: 400;
       color: ${({ theme }) => theme.alpha.fg50};
+      font-style: italic;
     }
     &.next-session {
       color: ${({ theme }) => theme.green[300]};
       background: ${({ theme }) => theme.black};
+      font-style: italic;
+    }
+    &.break-session {
+      color: ${({ theme }) => (theme.isLightMode ? theme.magenta[0] : theme.magenta[100])};
     }
   }
+  /* Next session for entire block */
   &.next-session {
-    /* background-image: url('/images/textures/cream-paper.png'); */
+    background-image: url('/images/textures/cream-paper.png');
 
     background-color: ${({ theme }) => (theme.isLightMode ? theme.green[300] : theme.green[900])};
     font-weight: 700;
@@ -136,6 +185,7 @@ export const SessionRowStyles = styled(motion.div)`
       color: ${({ theme }) => theme.fg};
     }
   }
+  /* Current session for entire block */
   &.current-session {
     color: ${({ theme }) => theme.alpha.fg25};
     background: ${({ theme }) => theme.alpha.fg10};
@@ -152,44 +202,6 @@ export const SessionRowStyles = styled(motion.div)`
       color: ${({ theme }) => theme.alpha.fg25};
       background: ${({ theme }) => theme.alpha.fg10};
       box-shadow: 0 0 2px ${({ theme }) => theme.alpha.fg25};
-    }
-  }
-
-  @media print {
-    .schedule-container {
-      display: flex;
-      flex-flow: column;
-    }
-    .schedule-cohort-container {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-    }
-    grid-column: span 4;
-    .schedule-block-next,
-    .cohort-name {
-      position: static;
-      padding: 0;
-      font-weight: 900;
-      print-color-adjust: exact;
-
-      background: transparent !important;
-      -webkit-print-color-adjust: economy;
-    }
-
-    .schedule-block {
-      width: fit-content;
-      print-color-adjust: exact;
-      background: rgba(255, 255, 255, 0);
-    }
-    .session-row-content {
-      background: rgba(255, 255, 255, 0);
-    }
-
-    .schedule-block.next-session {
-      background: rgba(50, 175, 100, 1);
-      .session-row-content {
-        background: rgba(255, 255, 255, 1);
-      }
     }
   }
 `;

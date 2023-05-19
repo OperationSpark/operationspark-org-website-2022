@@ -5,6 +5,7 @@ import { IoMdCloseCircle as CloseIcon } from 'react-icons/io';
 
 import { CourseSessions } from '@this/data/types/schedule';
 import { useClickAway } from '@this/src/hooks/useClickAway';
+import CursorTooltip from '@this/src/Typography/elements/CursorTooltip';
 
 type PhaseInfoWindowProps = {
   phase: CourseSessions;
@@ -22,7 +23,13 @@ export const PhaseInfoWindow = ({ phase }: PhaseInfoWindowProps) => {
     <PhaseInfoWindowStyles ref={iconRef}>
       <div className='course-info-container'>
         <button className={`info-icon ${isOpen ? 'open' : ''}`} onClick={() => setOpen(!isOpen)}>
-          <CloseOrInfoIcon size={20} />
+          {isOpen ? (
+            <CloseIcon size={20} />
+          ) : (
+            <CursorTooltip title={'Phase Information'}>
+              <CloseOrInfoIcon size={20} />
+            </CursorTooltip>
+          )}
         </button>
         <AnimatePresence>
           {isOpen && (
