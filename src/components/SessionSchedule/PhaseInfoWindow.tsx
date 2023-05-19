@@ -13,7 +13,7 @@ type PhaseInfoWindowProps = {
 
 export const PhaseInfoWindow = ({ phase }: PhaseInfoWindowProps) => {
   const [iconRef, isOpen, setOpen] = useClickAway();
-  const { cost, days, hours, length, preReqs, title } = phase;
+  const { cost, days, hours, length, preReqs, title, description } = phase;
 
   const dayRange = `${days[0]} - ${days[days.length - 1]}`;
 
@@ -26,7 +26,7 @@ export const PhaseInfoWindow = ({ phase }: PhaseInfoWindowProps) => {
           {isOpen ? (
             <CloseIcon size={20} />
           ) : (
-            <CursorTooltip title={'Phase Information'}>
+            <CursorTooltip title={`${title} Details`}>
               <CloseOrInfoIcon size={20} />
             </CursorTooltip>
           )}
@@ -60,6 +60,10 @@ export const PhaseInfoWindow = ({ phase }: PhaseInfoWindowProps) => {
               <div className='course-info-section'>
                 <p className='dim bold'>Prerequisites</p>
                 <p className='dim italic'>{preReqs}</p>
+              </div>
+              <div className='phase-description'>
+                <p className='dim bold text-center'>About {title}</p>
+                <div className='phase-description-scroll'>{description}</div>
               </div>
             </motion.div>
           )}
@@ -110,7 +114,6 @@ const PhaseInfoWindowStyles = styled.div`
     }
   }
   .course-info {
-    /* position: absolute; */
     overflow: hidden;
 
     top: 0;
@@ -127,6 +130,7 @@ const PhaseInfoWindowStyles = styled.div`
     box-shadow: 0 0 0.25rem ${({ theme }) => theme.alpha.fg50};
     border-radius: 0.25rem;
     padding: 0.5rem 0;
+    padding-bottom: 0;
     .dim {
       color: ${({ theme }) => (theme.isLightMode ? theme.grey[600] : theme.grey[400])};
     }
@@ -144,6 +148,21 @@ const PhaseInfoWindowStyles = styled.div`
       }
       :last-of-type {
         padding-bottom: 0;
+      }
+    }
+    .phase-description {
+      padding-top: 0.5rem;
+
+      .phase-description-scroll {
+        max-height: 200px;
+        overflow-y: auto;
+        line-height: 1.25em;
+        padding: 0 0.5rem;
+        ::-webkit-scrollbar {
+          box-shadow: none;
+          background: none;
+        }
+        box-shadow: 0 0 2px ${({ theme }) => theme.alpha.fg25} inset;
       }
     }
   }

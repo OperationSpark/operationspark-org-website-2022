@@ -74,6 +74,7 @@ export type ICourseInfo = {
   hours: string[];
   cost: string;
   preReqs: string;
+  description: string;
 };
 
 export type CourseSessions = {

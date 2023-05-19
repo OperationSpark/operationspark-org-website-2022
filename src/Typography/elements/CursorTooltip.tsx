@@ -23,7 +23,6 @@ export const CursorTooltip = ({ children, title }: CursorTooltipProps) => {
 
   const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!isActive) {
-      document.body.click();
       const rect = tooltipRef.current?.getBoundingClientRect() ?? mouseCoords;
       const { width, height, y } = rect;
       clearTimeout(timeoutRef.current);
