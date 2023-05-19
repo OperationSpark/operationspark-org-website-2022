@@ -24,12 +24,12 @@ type PhaseColumnProps = {
 };
 
 const PhaseColumn = ({ phaseId }: PhaseColumnProps) => {
-  const [isLoading, setLoading] = useState<boolean>(true);
+  const [isLoading, setLoading] = useState<boolean>(false);
 
   const [phase, setPhase] = useState<CourseSessions | null>(null);
 
   // sessions visible upcoming sessions to 5
-  const sessions = phase?.sessions?.slice(0, 5) || [];
+  const sessions = phase?.sessions?.slice(0, 5) || new Array(5).fill(null);
 
   useEffect(() => {
     setLoading(true);
@@ -40,17 +40,19 @@ const PhaseColumn = ({ phaseId }: PhaseColumnProps) => {
       .catch((err) => console.error(err))
       .finally(() => setLoading(false));
   }, [phaseId]);
-  console.log(phase);
-  if (!phase || (!phase?.sessions && !isLoading)) {
+
+  if (!phase) {
     return null;
   }
-  return isLoading ? (
-    <div style={{ width: '15rem', height: '20rem' }}>
+  return isLoading || !phase ? (
+    <LoadingPlaceholder>
       <div className='text-center dynamic-h3 primary-secondary' style={{ paddingBottom: '1rem' }}>
         {getPhaseById(phaseId)} Sessions
       </div>
-      <Spinner size={4} />
-    </div>
+      <div className='loading-spinner'>
+        <Spinner style={{ opacity: 0.5 }} size={3} />
+      </div>
+    </LoadingPlaceholder>
   ) : (
     <PhaseColumnStyles>
       <motion.div
@@ -83,6 +85,26 @@ const PhaseColumn = ({ phaseId }: PhaseColumnProps) => {
 
 export default PhaseColumn;
 
+export const LoadingPlaceholder = styled.div`
+  background: ${({ theme }) => theme.bg};
+  box-shadow: 0 0 2px ${({ theme }) => theme.alpha.fg};
+  border-radius: 0.25rem;
+  max-width: 600px;
+  min-width: 21rem;
+  height: 20rem;
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  flex: 1;
+
+  .loading-spinner {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+  }
+`;
 export const PhaseColumnStyles = styled.div`
   flex: 1;
   width: 20rem;
