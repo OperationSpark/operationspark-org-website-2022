@@ -29,7 +29,7 @@ const fetchSessions = async (phaseId: string, isNext?: boolean) => {
 
 export default async function getProgramsReqHandler(req: Req, res: Res) {
   const { programId, next } = req.query;
-  console.log({ next });
+
   const phaseInfo = courseData.find(({ id }) => id === programId);
   if (!phaseInfo || typeof programId !== 'string') {
     return res.status(404).end(`Phase ${programId} not found`);

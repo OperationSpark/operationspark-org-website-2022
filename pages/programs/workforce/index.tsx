@@ -28,7 +28,6 @@ export interface AdultProgramsProps {
 const fetchProgram = async (phaseId: string): Promise<CourseSession | null> => {
   try {
     const { data } = await axios.get<CourseSession>(`/api/programs/${phaseId}?next=true`);
-    console.log(data);
     return data;
   } catch (err) {
     console.error(err);
