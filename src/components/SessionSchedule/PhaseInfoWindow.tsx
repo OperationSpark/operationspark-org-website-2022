@@ -157,7 +157,7 @@ const PhaseInfoWindowStyles = styled.div`
         max-height: 200px;
         overflow-y: auto;
         line-height: 1.25em;
-        padding: 0 0.5rem;
+        padding: 0.5rem;
         ::-webkit-scrollbar {
           box-shadow: none;
           background: none;
