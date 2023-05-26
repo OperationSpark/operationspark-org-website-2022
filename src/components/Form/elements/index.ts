@@ -10,6 +10,7 @@ const aCheckbox = dynamic(() => import('./Checkbox'));
 const aCheckboxGroup = dynamic(() => import('./CheckboxGroup'));
 const aRadio = dynamic(() => import('./Radio'));
 const aRadioGroup = dynamic(() => import('./RadioGroup'));
+const aZipCode = dynamic(() => import('./ZipCode'));
 
 export const Text = aText;
 export const Phone = aPhone;
@@ -21,6 +22,7 @@ export const Checkbox = aCheckbox;
 export const CheckboxGroup = aCheckboxGroup;
 export const Radio = aRadio;
 export const RadioGroup = aRadioGroup;
+export const ZipCode = aZipCode;
 
 const Input = {
   Text: aText,
@@ -33,6 +35,7 @@ const Input = {
   CheckboxGroup: aCheckboxGroup,
   Radio: aRadio,
   RadioGroup: aRadioGroup,
+  ZipCode: aZipCode,
 };
 
 export default Input;
