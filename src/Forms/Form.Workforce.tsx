@@ -1,6 +1,6 @@
 import moment from 'moment';
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AiOutlineInfoCircle } from 'react-icons/ai';
 
 import { IInfoSessionFormValues } from '@this/data/types/infoSession';
@@ -12,6 +12,7 @@ import unitedStates from './formData/unitedStates.json';
 import Spinner from '../components/Elements/Spinner';
 import { pixel } from '@this/lib/pixel';
 import useKeyCombo from '../hooks/useKeyCombo';
+import { getStateFromZipCode } from '../components/Form/helpers';
 
 interface WorkforceFormProps {
   sessionDates: ISessionDates[];
@@ -21,6 +22,8 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
   const form = useForm<IInfoSessionFormValues>();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const isKeyComboActive = useKeyCombo('o', 's');
+
+  const currentValues = form.values();
 
   const handleSubmit = () => {
     const hasErrors = form.hasErrors();
@@ -87,6 +90,40 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
     },
   ];
 
+  useEffect(() => {
+    const zipChange = form.onSelectChange('userLocation');
+
+    if (currentValues.zipCode && currentValues.zipCode.length !== 5) {
+      zipChange({
+        option: {
+          name: 'Please select your state',
+          value: '',
+        },
+        isValid: false,
+      });
+      return;
+    }
+    const zipCode = Number(currentValues.zipCode);
+
+    if (isNaN(Number(zipCode))) {
+      return;
+    }
+
+    const state = getStateFromZipCode(zipCode);
+
+    if (state) {
+      form.set('userLocation', state);
+      zipChange({
+        option: {
+          name: state,
+          value: state,
+        },
+        isValid: true,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentValues.zipCode]);
+
   return (
     <Form onSubmit={handleSubmit}>
       {isSubmitting ? (
@@ -133,6 +170,7 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
         required
         delay={workforceFormInputs.length * 0.15}
       />
+
       <Input.Select
         label='How did you hear about us?'
         name='referencedBy'
@@ -240,6 +278,13 @@ const workforceFormInputs = [
     label: 'Phone Number',
     name: 'phone',
     placeholder: '303-123-9876',
+    required: true,
+  },
+  {
+    Element: Input.ZipCode,
+    label: 'Zip Code',
+    name: 'zipCode',
+    placeholder: '70119',
     required: true,
   },
 ];
