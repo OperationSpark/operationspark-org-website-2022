@@ -36,6 +36,7 @@ export default function App({ Component, pageProps }: AppProps) {
         </MainContainer>
 
         <Footer logos={logos} />
+        <div id='tooltip-root'></div>
       </Theme>
     </ChakraProvider>
   );

@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import styled from 'styled-components';
-import moment from 'moment';
 
-import { ISessionRow } from '@this/data/types/schedule';
+import { toDayJs } from '@this/src/helpers/time';
+import { CourseSession } from '@this/data/types/schedule';
 import { ICourses } from '@this/data/types/programs';
 import PlainCard from './PlainCard';
 import { cardShadowLtr } from '@this/src/theme/styled/mixins/shadows';
@@ -10,8 +10,8 @@ import { cardShadowLtr } from '@this/src/theme/styled/mixins/shadows';
 import { BsInfo as InfoIcon } from 'react-icons/bs';
 
 type ProgramInfoCardProps = {
-  nextSessionDates: { [key: string]: ISessionRow };
-  nextInfoSessionDate: string | null;
+  nextSession: CourseSession;
+  nextInfoSessionDate?: string | null;
 } & ICourses;
 
 const ProgramInfoCard = ({
@@ -23,7 +23,7 @@ const ProgramInfoCard = ({
   infoMessage,
   preReqs,
   nextInfoSessionDate,
-  nextSessionDates,
+  nextSession,
 }: ProgramInfoCardProps) => {
   return (
     <ProgramInfoCardStyles>
@@ -75,11 +75,11 @@ const ProgramInfoCard = ({
                   </p>
                 </div>
               )}
-              {nextSessionDates[title] && !infoMessage && (
+              {nextSession?.session?.startDate && !infoMessage && (
                 <div className='program-info next-session'>
                   <p>
                     <b>Next start date</b>
-                    <i>{moment(nextSessionDates[title].start).format('MMMM DD, yyyy')}</i>
+                    <i>{toDayJs(nextSession.session?.startDate).format('MMMM Do, YYYY')}</i>
                   </p>
                 </div>
               )}
