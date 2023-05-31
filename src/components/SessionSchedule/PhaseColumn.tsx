@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 
@@ -24,7 +24,8 @@ type PhaseColumnProps = {
 };
 
 const PhaseColumn = ({ phaseId }: PhaseColumnProps) => {
-  const [isLoading, setLoading] = useState<boolean>(false);
+  const theme = useTheme();
+  const [isLoading, setLoading] = useState<boolean>(true);
 
   const [phase, setPhase] = useState<CourseSessions | null>(null);
 
@@ -41,16 +42,16 @@ const PhaseColumn = ({ phaseId }: PhaseColumnProps) => {
       .finally(() => setLoading(false));
   }, [phaseId]);
 
-  if (!phase) {
-    return null;
-  }
   return isLoading || !phase ? (
-    <LoadingPlaceholder>
+    <LoadingPlaceholder
+      animate={{ background: [theme.bg, theme.bgHover, theme.bg] }}
+      transition={{ duration: 2, repeat: Infinity, repeatType: 'reverse', type: 'tween' }}
+    >
       <div className='text-center dynamic-h3 primary-secondary' style={{ paddingBottom: '1rem' }}>
         {getPhaseById(phaseId)} Sessions
       </div>
       <div className='loading-spinner'>
-        <Spinner style={{ opacity: 0.5 }} size={3} />
+        <Spinner />
       </div>
     </LoadingPlaceholder>
   ) : (
@@ -85,7 +86,7 @@ const PhaseColumn = ({ phaseId }: PhaseColumnProps) => {
 
 export default PhaseColumn;
 
-export const LoadingPlaceholder = styled.div`
+export const LoadingPlaceholder = styled(motion.div)`
   background: ${({ theme }) => theme.bg};
   box-shadow: 0 0 2px ${({ theme }) => theme.alpha.fg};
   border-radius: 0.25rem;
@@ -102,6 +103,7 @@ export const LoadingPlaceholder = styled.div`
   .loading-spinner {
     display: flex;
     justify-content: center;
+    align-items: center;
     flex: 1;
   }
 `;
