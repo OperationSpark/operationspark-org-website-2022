@@ -1,8 +1,16 @@
 import { useEffect, useState } from 'react';
-import styled, { useTheme } from 'styled-components';
+import styled, { CSSProperties, useTheme } from 'styled-components';
 import { motion } from 'framer-motion';
 
-const Spinner = ({ size = 4, text }: { size?: number; text?: string }) => {
+const Spinner = ({
+  size = 4,
+  text,
+  style,
+}: {
+  size?: number;
+  text?: string;
+  style?: CSSProperties;
+}) => {
   const [loadingDots, setLoadingDots] = useState('.');
 
   const theme = useTheme();
@@ -22,7 +30,7 @@ const Spinner = ({ size = 4, text }: { size?: number; text?: string }) => {
   }, [loadingDots]);
 
   return (
-    <SpinnerStyles>
+    <SpinnerStyles style={style}>
       <div style={{ width: `${size}rem`, height: `${size}rem` }}>
         <svg
           xmlns='http://www.w3.org/2000/svg'
