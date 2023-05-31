@@ -92,8 +92,9 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
 
   useEffect(() => {
     const zipChange = form.onSelectChange('userLocation');
+    const zipCode = Number(currentValues.zipCode);
 
-    if (currentValues.zipCode && currentValues.zipCode.length !== 5) {
+    if (String(currentValues.zipCode)?.length !== 5) {
       zipChange({
         option: {
           name: 'Please select your state',
@@ -103,7 +104,6 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
       });
       return;
     }
-    const zipCode = Number(currentValues.zipCode);
 
     if (isNaN(Number(zipCode))) {
       return;
