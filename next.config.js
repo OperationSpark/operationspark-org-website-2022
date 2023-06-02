@@ -58,8 +58,7 @@ module.exports = (phase, { defaultConfig }) => {
         },
         /**
          * High School Application - `/programs/highschool/apply`
-         * comment/uncomment to remove/add redirect (when high school form is (un)available)
-         * Also toggle `SHOW_HS_APPLICATION` in src/components/Navbar/BonusBar.tsx
+         * - When high school form is available, set env variable 'HIGHSCHOOL_FORM_ACTIVE' to 'true' otherwise 'false'
          */
         !isHsFormActive && {
           source: '/programs/highschool/apply',
