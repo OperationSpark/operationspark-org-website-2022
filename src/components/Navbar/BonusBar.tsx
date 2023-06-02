@@ -4,16 +4,15 @@ import { ReactNode } from 'react';
 import styled from 'styled-components';
 import NavLink from './elements/NavLink';
 
+const HIGHSCHOOL_FORM_ACTIVE = process.env.HIGHSCHOOL_FORM_ACTIVE;
+
 const BonusBar = ({ children }: { children?: ReactNode }) => {
   const router = useRouter();
   /**
    * High School Application - `/programs/highschool/apply`
-   * - `true` - Show high school application button
-   *   - Uncomment redirect in [next.config.js](../../../next.config.js)
-   * - `false` - Hide high school application button
-   *   - Comment out redirect in  [next.config.js](../../../next.config.js)
+   * - When high school form is available, set env variable 'HIGHSCHOOL_FORM_ACTIVE' to 'true' otherwise 'false'
    */
-  const SHOW_HS_APPLICATION = true;
+  const SHOW_HS_APPLICATION = !!HIGHSCHOOL_FORM_ACTIVE;
 
   const checkIsPath = (...paths: string[]) => {
     return paths.reduce((isPath, path) => {
