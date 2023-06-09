@@ -21,6 +21,9 @@ interface WorkforceFormProps {
 const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
   const form = useForm<IInfoSessionFormValues>();
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const [locationMessage, setLocationMessage] = useState('');
+
   const isKeyComboActive = useKeyCombo('o', 's');
 
   const currentValues = form.values();
@@ -80,10 +83,17 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
   const sessionDateOptions = [
     ...sessionDates
       .filter((s) => !s.private || isKeyComboActive)
-      .map((session) => ({
-        name: moment(session.times.start.dateTime).format('dddd, MMMM Do h:mma'),
-        value: session._id,
-      })),
+      .map((session) => {
+        const dateTime = moment(session.times.start.dateTime).format('dddd, MMMM Do h:mma');
+        const locationType = session.locationType
+          .split('_')
+          .map((word) => `${word[0]}${word.slice(1).toLocaleLowerCase()}`)
+          .join(' ');
+        return {
+          name: `${dateTime} (${locationType})`,
+          value: session._id,
+        };
+      }),
     {
       name: 'None of these fit my schedule',
       value: 'future',
@@ -123,6 +133,32 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentValues.zipCode]);
+
+  useEffect(() => {
+    const sessionId = currentValues.sessionDate?.value;
+
+    if (!sessionId || sessionId === 'future') {
+      setLocationMessage('We will reach out to you when we have more sessions scheduled');
+      return;
+    }
+    const session = sessionDates.find((s) => s._id === sessionId);
+    if (!session) {
+      return;
+    }
+    const locationTypeChange = form.onChange('attendingLocation');
+    if (session.locationType === 'IN_PERSON') {
+      setLocationMessage('This session is in person only');
+      return locationTypeChange('IN_PERSON', true);
+    }
+
+    if (session.locationType === 'VIRTUAL') {
+      setLocationMessage('This session is virtual only');
+      return locationTypeChange('VIRTUAL', true);
+    }
+    setLocationMessage('');
+    locationTypeChange('', true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- Ignore form
+  }, [currentValues.sessionDate, currentValues.attendingLocation, sessionDates]);
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -191,37 +227,53 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
         isErr={form.isErr('sessionDate')}
         isValid={form.isValid('sessionDate')}
         options={sessionDateOptions}
-        delay={(workforceFormInputs.length + 1) * 0.25}
         required
       />
-      <Input.RadioGroup
-        label='Are you attending in person or virtually?'
-        options={[
-          {
-            name: 'IN_PERSON',
-            label: (
-              <span>
-                In Person{' '}
-                <a
-                  className='anchor'
-                  href='https://goo.gl/maps/X6eQ54sWbbH2RbVd8'
-                  target='_blank'
-                  rel='noreferrer'
-                >
-                  (514 Franklin Avenue, New Orleans)
-                </a>
-              </span>
-            ),
-          },
-          { name: 'VIRTUAL', label: 'Virtually (via Zoom)' },
-        ]}
-        value={form.get('attendingLocation')}
-        isValid={form.isValid('attendingLocation')}
-        isErr={form.isErr('attendingLocation')}
-        onChange={form.onChange('attendingLocation')}
-        delay={(workforceFormInputs.length + 1) * 0.3}
-        required
-      />
+
+      {locationMessage ? (
+        <div
+          className='primary-secondary location-message'
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            width: '100%',
+            fontSize: '1.25rem',
+            fontWeight: 600,
+            textAlign: 'center',
+          }}
+        >
+          {locationMessage}
+        </div>
+      ) : (
+        <Input.RadioGroup
+          label='Are you attending in person or virtually?'
+          options={[
+            {
+              name: 'IN_PERSON',
+              label: (
+                <span>
+                  In Person{' '}
+                  <a
+                    className='anchor'
+                    href='https://goo.gl/maps/X6eQ54sWbbH2RbVd8'
+                    target='_blank'
+                    rel='noreferrer'
+                  >
+                    (514 Franklin Avenue, New Orleans)
+                  </a>
+                </span>
+              ),
+            },
+            { name: 'VIRTUAL', label: 'Virtually (via Zoom)' },
+          ]}
+          value={form.get('attendingLocation')}
+          isValid={form.isValid('attendingLocation')}
+          isErr={form.isErr('attendingLocation')}
+          onChange={form.onChange('attendingLocation')}
+          delay={(workforceFormInputs.length + 1) * 0.3}
+          required
+        />
+      )}
 
       {form.showErrors() && form.hasErrors() && (
         <div className='form-error'>

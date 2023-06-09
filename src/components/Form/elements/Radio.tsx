@@ -8,16 +8,17 @@ interface RadioProps {
   label: string | ReactNode;
   value: string;
   checked: boolean;
+  transition?: boolean;
   delay?: number;
 }
 
-const Radio = ({ name, label, value, checked, delay, onChange }: RadioProps) => {
+const Radio = ({ name, label, value, checked, delay, transition, onChange }: RadioProps) => {
   return (
     <RadioStyles
       aria-label={name}
-      initial={{ opacity: 0, x: 100 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.25, delay: delay ?? undefined }}
+      initial={transition ? { opacity: 0, x: 100 } : {}}
+      animate={transition ? { opacity: 1, x: 0 } : {}}
+      transition={transition ? { duration: 0.25, delay: delay ?? undefined } : {}}
     >
       <input
         type='radio'

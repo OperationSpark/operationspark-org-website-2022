@@ -10,6 +10,7 @@ interface RadioProps {
   value: string;
   isValid: boolean;
   delay?: number;
+  transition?: boolean;
   required?: boolean;
   isErr: boolean;
   options: {
@@ -24,6 +25,7 @@ const RadioGroup = ({
   isValid,
   value,
   delay,
+  transition,
   required,
   isErr = false,
   onChange,
@@ -31,9 +33,9 @@ const RadioGroup = ({
   return (
     <RadioGroupStyles
       className={isErr ? '_input_err' : ''}
-      initial={{ opacity: 0, y: 100 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.2, delay: delay ?? undefined }}
+      initial={transition ? { opacity: 0, y: 100 } : {}}
+      animate={transition ? { opacity: 1, y: 0 } : {}}
+      transition={transition ? { duration: 0.2, delay: delay ?? undefined } : {}}
     >
       <div className='radio-group-label'>{label}</div>
       {required && <RequiredStatus isValid={isValid} />}
