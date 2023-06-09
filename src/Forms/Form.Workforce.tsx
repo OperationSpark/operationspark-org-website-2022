@@ -147,9 +147,10 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
       return;
     }
     const session = sessionDates.find((s) => s._id === sessionId);
-    if (!session) {
+    if (!session || !session.locationType) {
       return;
     }
+
     const locationTypeChange = form.onChange('attendingLocation');
     if (session.locationType === 'IN_PERSON') {
       setLocationMessage('This session is in person only');
@@ -161,7 +162,7 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
       return locationTypeChange('VIRTUAL', true);
     }
     setLocationMessage('');
-    locationTypeChange('', true);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps -- Ignore form change
   }, [currentValues.sessionDate, currentValues.attendingLocation, sessionDates]);
 
