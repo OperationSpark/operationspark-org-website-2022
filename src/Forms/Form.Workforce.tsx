@@ -121,16 +121,15 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
 
     const state = getStateFromZipCode(zipCode);
 
-    if (state) {
-      form.set('userLocation', state);
-      zipChange({
-        option: {
-          name: state,
-          value: state,
-        },
-        isValid: true,
-      });
-    }
+    form.set('userLocation', state ?? 'unknown');
+    zipChange({
+      option: {
+        name: state,
+        value: state,
+      },
+      isValid: true,
+    });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentValues.zipCode]);
 
@@ -197,8 +196,12 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
           }}
         />
       ))}
-
-      <Input.Select
+      {form.getSelect('userLocation').value && (
+        <div style={{ paddingBottom: '1rem', lineHeight: '1em' }}>
+          <b>{form.getSelect('userLocation').value}</b>
+        </div>
+      )}
+      {/* <Input.Select
         label='Where are you located?'
         name='userLocation'
         options={userLocationOptions}
@@ -208,7 +211,7 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
         onChange={form.onSelectChange('userLocation')}
         required
         delay={workforceFormInputs.length * 0.15}
-      />
+      /> */}
 
       <Input.Select
         label='How did you hear about us?'
