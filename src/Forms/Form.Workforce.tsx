@@ -8,7 +8,6 @@ import { ISessionDates } from '@this/pages-api/infoSession/dates';
 import { FormDataSignup } from '@this/pages-api/infoSession/user';
 import { Form, Input, useForm } from '@this/components/Form';
 import Button from '@this/components/Elements/Button';
-import unitedStates from './formData/unitedStates.json';
 import Spinner from '../components/Elements/Spinner';
 import { pixel } from '@this/lib/pixel';
 import useKeyCombo from '../hooks/useKeyCombo';
@@ -130,7 +129,7 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
       isValid: true,
     });
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- Ignore form change
   }, [currentValues.zipCode]);
 
   useEffect(() => {
@@ -159,7 +158,7 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
     }
     setLocationMessage('');
     locationTypeChange('', true);
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- Ignore form
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- Ignore form change
   }, [currentValues.sessionDate, currentValues.attendingLocation, sessionDates]);
 
   return (
@@ -201,17 +200,6 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
           <b>{form.getSelect('userLocation').value}</b>
         </div>
       )}
-      {/* <Input.Select
-        label='Where are you located?'
-        name='userLocation'
-        options={userLocationOptions}
-        option={form.getSelect('userLocation')}
-        isErr={form.isErr('userLocation')}
-        isValid={form.isValid('userLocation')}
-        onChange={form.onSelectChange('userLocation')}
-        required
-        delay={workforceFormInputs.length * 0.15}
-      /> */}
 
       <Input.Select
         label='How did you hear about us?'
@@ -392,16 +380,4 @@ const referencedByOptions = [
     name: 'Community Organization',
     additionalInfo: 'Which organization?',
   },
-];
-
-const userLocationOptions = [
-  {
-    value: 'other',
-    name: 'Outside United States',
-    additionalInfo: 'What country do you live in?',
-  },
-  ...Object.entries(unitedStates).map(([abbr, state]) => ({
-    value: abbr,
-    name: state,
-  })),
 ];
