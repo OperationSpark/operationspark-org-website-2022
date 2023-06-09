@@ -30,5 +30,6 @@ export interface IInfoSessionFormValues {
   referencedBy: SelectItem;
   sessionDate: SelectItem;
   userLocation: SelectItem;
+  zipCode: string;
   attendingLocation: AttendingLocation;
 }

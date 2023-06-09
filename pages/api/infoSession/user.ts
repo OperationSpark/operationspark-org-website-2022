@@ -39,6 +39,7 @@ export type FormDataSignup = {
   firstName: string;
   lastName: string;
   phone: string;
+  zipCode: string;
   userLocation: SelectItem;
   referencedBy: SelectItem;
   attendingLocation: AttendingLocation;
@@ -58,6 +59,7 @@ export interface ISessionSignup {
   locationType?: LocationType;
   sessionId: string;
   token: string;
+  zipCode: string;
   userLocation: string;
   attendingLocation: AttendingLocation;
   joinCode?: string;
@@ -90,6 +92,7 @@ function formatPayload(form: FormDataSignup): ISessionSignup {
     lastName,
     phone,
     referencedBy,
+    zipCode,
     userLocation: location,
     attendingLocation,
   } = form;
@@ -113,6 +116,7 @@ function formatPayload(form: FormDataSignup): ISessionSignup {
     locationType: session?.locationType,
     googlePlace: session?.googlePlace,
     token: GREENLIGHT_API_TOKEN ?? '',
+    zipCode,
     userLocation: location.additionalInfo || location.value,
     attendingLocation,
     joinCode: session?.code,

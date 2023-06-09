@@ -16,7 +16,14 @@ const ClearButtonStyles = styled(motion.div)`
   align-items: center;
   vertical-align: middle;
   color: ${({ theme: { grey } }) => grey[500]};
-  opacity: 0.5;
+
+  button {
+    transition: transform 125ms;
+  }
+  button:hover {
+    transform: scale(1.2) !important;
+    color: ${({ theme: { red, isLightMode } }) => (isLightMode ? red[0] : red[300])};
+  }
   button:active {
     transform: scale(0.9);
   }
