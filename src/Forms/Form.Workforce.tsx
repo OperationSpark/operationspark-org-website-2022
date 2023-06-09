@@ -2,6 +2,7 @@ import moment from 'moment';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { AiOutlineInfoCircle } from 'react-icons/ai';
+import styled from 'styled-components';
 
 import { IInfoSessionFormValues } from '@this/data/types/infoSession';
 import { ISessionDates } from '@this/pages-api/infoSession/dates';
@@ -78,16 +79,19 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
       })
       .finally(() => setIsSubmitting(false));
   };
-
+  const getLocationType = (session: ISessionDates) => {
+    const locationType = session.locationType
+      .split('_')
+      .map((word) => `${word[0]}${word.slice(1).toLocaleLowerCase()}`)
+      .join(' ');
+    return locationType;
+  };
   const sessionDateOptions = [
     ...sessionDates
       .filter((s) => !s.private || isKeyComboActive)
       .map((session) => {
         const dateTime = moment(session.times.start.dateTime).format('dddd, MMMM Do h:mma');
-        const locationType = session.locationType
-          .split('_')
-          .map((word) => `${word[0]}${word.slice(1).toLocaleLowerCase()}`)
-          .join(' ');
+        const locationType = getLocationType(session);
         return {
           name: `${dateTime} (${locationType})`,
           value: session._id,
@@ -162,138 +166,183 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
   }, [currentValues.sessionDate, currentValues.attendingLocation, sessionDates]);
 
   return (
-    <Form onSubmit={handleSubmit}>
-      {isSubmitting ? (
-        <div
-          className='form-overlay'
-          style={{
-            position: 'absolute',
-            inset: 0,
-            zIndex: 10,
-            backdropFilter: 'blur(1.5px)',
-            background: 'rgba(125,125,125,0.2)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <Spinner text='Submitting' />
+    <WorkforceFormStyles>
+      <Form onSubmit={handleSubmit}>
+        {isSubmitting ? (
+          <div className='form-overlay'>
+            <Spinner text='Submitting' />
+          </div>
+        ) : null}
+        {workforceFormInputs.map((field, i) => (
+          <field.Element
+            key={field.name}
+            {...field}
+            value={form.get(field.name)}
+            onChange={form.onChange(field.name)}
+            isValid={form.isValid(field.name)}
+            isErr={form.isErr(field.name)}
+            animation={{
+              initial: { x: 100, opacity: 0 },
+              animate: { x: 0, opacity: 1 },
+              transition: { duration: 0.2, delay: 0.25 * i },
+            }}
+          />
+        ))}
+        <div className='user-location-row'>
+          <Input.ZipCode
+            label='Zip Code'
+            name='zipCode'
+            placeholder='70119'
+            required={true}
+            value={form.get('zipCode')}
+            onChange={form.onChange('zipCode')}
+            isValid={form.isValid('zipCode')}
+            isErr={form.isErr('zipCode')}
+            animation={{
+              initial: { x: 100, opacity: 0 },
+              animate: { x: 0, opacity: 1 },
+              transition: { duration: 0.2, delay: 0.25 * workforceFormInputs.length },
+            }}
+          />
+          {form.getSelect('userLocation').value && (
+            <div className='user-location-state'>{form.getSelect('userLocation').value}</div>
+          )}
         </div>
-      ) : null}
-      {workforceFormInputs.map((field, i) => (
-        <field.Element
-          key={field.name}
-          {...field}
-          value={form.get(field.name)}
-          onChange={form.onChange(field.name)}
-          isValid={form.isValid(field.name)}
-          isErr={form.isErr(field.name)}
-          animation={{
-            initial: { x: 100, opacity: 0 },
-            animate: { x: 0, opacity: 1 },
-            transition: { duration: 0.2, delay: 0.25 * i },
-          }}
+
+        <Input.Select
+          label='How did you hear about us?'
+          name='referencedBy'
+          options={referencedByOptions}
+          option={form.getSelect('referencedBy')}
+          isErr={form.isErr('referencedBy')}
+          isValid={form.isValid('referencedBy')}
+          onChange={form.onSelectChange('referencedBy')}
+          required
+          delay={workforceFormInputs.length * 0.25}
         />
-      ))}
-      {form.getSelect('userLocation').value && (
-        <div style={{ paddingBottom: '1rem', lineHeight: '1em' }}>
-          <b>{form.getSelect('userLocation').value}</b>
-        </div>
-      )}
 
-      <Input.Select
-        label='How did you hear about us?'
-        name='referencedBy'
-        options={referencedByOptions}
-        option={form.getSelect('referencedBy')}
-        isErr={form.isErr('referencedBy')}
-        isValid={form.isValid('referencedBy')}
-        onChange={form.onSelectChange('referencedBy')}
-        required
-        delay={workforceFormInputs.length * 0.25}
-      />
-
-      <Input.Select
-        label='Select an info session date'
-        name='sessionDate'
-        option={form.getSelect('sessionDate')}
-        onChange={form.onSelectChange('sessionDate')}
-        isErr={form.isErr('sessionDate')}
-        isValid={form.isValid('sessionDate')}
-        options={sessionDateOptions}
-        required
-      />
-
-      {locationMessage ? (
-        <div
-          className='primary-secondary location-message'
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            width: '100%',
-            fontSize: '1.25rem',
-            fontWeight: 600,
-            textAlign: 'center',
-          }}
-        >
-          {locationMessage}
-        </div>
-      ) : (
-        <Input.RadioGroup
-          label='Are you attending in person or virtually?'
-          options={[
-            {
-              name: 'IN_PERSON',
-              label: (
-                <span>
-                  In Person{' '}
-                  <a
-                    className='anchor'
-                    href='https://goo.gl/maps/X6eQ54sWbbH2RbVd8'
-                    target='_blank'
-                    rel='noreferrer'
-                  >
-                    (514 Franklin Avenue, New Orleans)
-                  </a>
-                </span>
-              ),
-            },
-            { name: 'VIRTUAL', label: 'Virtually (via Zoom)' },
-          ]}
-          value={form.get('attendingLocation')}
-          isValid={form.isValid('attendingLocation')}
-          isErr={form.isErr('attendingLocation')}
-          onChange={form.onChange('attendingLocation')}
-          delay={(workforceFormInputs.length + 1) * 0.3}
+        <Input.Select
+          label='Select an info session date'
+          name='sessionDate'
+          option={form.getSelect('sessionDate')}
+          onChange={form.onSelectChange('sessionDate')}
+          isErr={form.isErr('sessionDate')}
+          isValid={form.isValid('sessionDate')}
+          options={sessionDateOptions}
+          delay={(workforceFormInputs.length - 1) * 0.25}
           required
         />
-      )}
 
-      {form.showErrors() && form.hasErrors() && (
-        <div className='form-error'>
-          <AiOutlineInfoCircle /> <p>Please complete required fields</p>
-        </div>
-      )}
+        {locationMessage ? (
+          <div
+            className='primary-secondary location-message'
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              width: '100%',
+              fontSize: '1.25rem',
+              fontWeight: 600,
+              textAlign: 'center',
+            }}
+          >
+            {locationMessage}
+          </div>
+        ) : (
+          <Input.RadioGroup
+            label='Are you attending in person or virtually?'
+            options={[
+              {
+                name: 'IN_PERSON',
+                label: (
+                  <span>
+                    In Person at{' '}
+                    <a
+                      className='primary-secondary location-option'
+                      href='https://goo.gl/maps/X6eQ54sWbbH2RbVd8'
+                      target='_blank'
+                      rel='noreferrer'
+                      tabIndex={-1}
+                    >
+                      514 Franklin Ave, New Orleans
+                    </a>
+                  </span>
+                ),
+              },
+              { name: 'VIRTUAL', label: 'Virtually (via Zoom)' },
+            ]}
+            value={form.get('attendingLocation')}
+            isValid={form.isValid('attendingLocation')}
+            isErr={form.isErr('attendingLocation')}
+            onChange={form.onChange('attendingLocation')}
+            delay={(workforceFormInputs.length + 1) * 0.3}
+            required
+          />
+        )}
 
-      <Button
-        className={form.hasErrors() ? 'info disabled' : 'info'}
-        color='yellow'
-        style={{
-          marginTop: '1rem',
-          transition: 'background-color 250ms',
-          width: '100%',
-          position: 'relative',
-          zIndex: 1,
-        }}
-        disabled={isSubmitting}
-      >
-        Register!
-      </Button>
-    </Form>
+        {form.showErrors() && form.hasErrors() && (
+          <div className='form-error'>
+            <AiOutlineInfoCircle /> <p>Please complete required fields</p>
+          </div>
+        )}
+
+        <Button
+          className={form.hasErrors() ? 'info disabled' : 'info'}
+          color='yellow'
+          style={{
+            marginTop: '1rem',
+            transition: 'background-color 250ms',
+            width: '100%',
+            position: 'relative',
+            zIndex: 1,
+          }}
+          disabled={isSubmitting}
+        >
+          Register!
+        </Button>
+      </Form>
+    </WorkforceFormStyles>
   );
 };
 
 export default WorkforceForm;
+
+const WorkforceFormStyles = styled.div`
+  .form-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    backdrop-filter: blur(1.5px);
+    background: rgba(125, 125, 125, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .user-location-row {
+    display: flex;
+    width: 100%;
+    position: relative;
+  }
+  .user-location-state {
+    padding: 1rem;
+    position: absolute;
+    z-index: 100;
+    right: 2rem;
+    pointer-events: none;
+    font-weight: 300;
+    color: ${({ theme }) => theme.alpha.fg50};
+  }
+  .location-option {
+    font-size: calc(0.7rem + 0.25vw);
+    font-weight: 500;
+    border-bottom: 1px solid transparent;
+    transition: border-bottom 175ms;
+    :hover {
+      border-bottom: 1px solid
+        ${({ theme: { isLightMode, primary, secondary } }) =>
+          isLightMode ? primary[0] : secondary[0]} !important;
+    }
+  }
+`;
 
 const workforceFormInputs = [
   {
@@ -324,13 +373,6 @@ const workforceFormInputs = [
     label: 'Phone Number',
     name: 'phone',
     placeholder: '303-123-9876',
-    required: true,
-  },
-  {
-    Element: Input.ZipCode,
-    label: 'Zip Code',
-    name: 'zipCode',
-    placeholder: '70119',
     required: true,
   },
 ];
