@@ -137,7 +137,10 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
   useEffect(() => {
     const sessionId = currentValues.sessionDate?.value;
 
-    if (!sessionId || sessionId === 'future') {
+    if (!sessionId) {
+      return;
+    }
+    if (sessionId === 'future') {
       setLocationMessage('We will reach out to you when we have more sessions scheduled');
       return;
     }
