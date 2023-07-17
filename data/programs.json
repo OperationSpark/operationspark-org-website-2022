@@ -50,11 +50,11 @@
         "length": "3 Weeks / 120 Hours",
         "cost": "$500.00",
         "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        "hours": ["9:00am - 5:00pm"],
+        "hours": ["9:00am - 6:00pm"],
         "nextStartDate": "September 26, 2022",
         "preReqs": "Prep, Bootcamp",
         "description": [
-          "Unlike our other courses, Immersion has a designated Precourse section. For the three weeks immediately prior to immersion students will come in from 9-5, Monday through Friday, to work individually on multiple JavaScript projects. This Precourse gives students an introduction to what immersion will really be like, and is a last chance to test whether this is really something you are ready for and interested in, as well as for teachers to decide whether this is right for you. Precourse ends with a culminating exam to determine one final time whether students are ready or not for the immersion program."
+          "Unlike our other courses, Immersion has a designated Precourse section. For the three weeks immediately prior to immersion students will come in from 9am-6pm, Monday through Friday, to work individually on multiple JavaScript projects. This Precourse gives students an introduction to what immersion will really be like, and is a last chance to test whether this is really something you are ready for and interested in, as well as for teachers to decide whether this is right for you. Precourse ends with a culminating exam to determine one final time whether students are ready or not for the immersion program."
         ]
       },
       {
