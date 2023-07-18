@@ -1,17 +1,11 @@
 {
   "adult": {
     "header": {
-      "title": [
-        "Develop a Career"
-      ],
-      "description": [
-        "Adult Workforce Immersion Program"
-      ]
+      "title": ["Develop a Career"],
+      "description": ["Adult Workforce Immersion Program"]
     },
     "overview": {
-      "title": [
-        "Program Overview"
-      ],
+      "title": ["Program Overview"],
       "description": [
         "The Operation Spark workforce program is less than a year of escalated intensity learning geared toward getting each student a full time job in software engineering. Through each step of the program our students will learn more about software, how it is created and how it works.",
         "Our students come from a diverse set of backgrounds in terms of age, gender, race, and education. Most were born in southeast Louisiana, over half have college degrees, and the majority have some form of professional experience in the workplace. All of our students are highly driven, passionate software engineers who enjoy creative problem solving and the endless pursuit of writing clean, concise code."
@@ -24,17 +18,8 @@
         "isImmersion": false,
         "length": "2.5 Weeks / 30 Hours",
         "cost": "Free",
-        "days": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday"
-        ],
-        "hours": [
-          "9:00am - 12:00pm",
-          "1:00pm - 4:00pm",
-          "6:00pm - 9:00pm"
-        ],
+        "days": ["Monday", "Tuesday", "Wednesday", "Thursday"],
+        "hours": ["9:00am - 12:00pm", "1:00pm - 4:00pm", "6:00pm - 9:00pm"],
         "infoMessage": "Attending info session and orientation is required prior to starting prep",
         "preReqs": "None",
         "description": [
@@ -49,16 +34,8 @@
         "subtitle": "Introduction to Programming Bootcamp",
         "length": "6 Weeks / 72 Hours",
         "cost": "$825.00",
-        "days": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday"
-        ],
-        "hours": [
-          "1:00pm - 4:00pm",
-          "6:00pm - 9:00pm"
-        ],
+        "days": ["Monday", "Tuesday", "Wednesday", "Thursday"],
+        "hours": ["1:00pm - 4:00pm", "6:00pm - 9:00pm"],
         "nextStartDate": "September 26, 2022",
         "preReqs": "Prep",
         "description": [
@@ -72,20 +49,12 @@
         "isImmersion": true,
         "length": "3 Weeks / 120 Hours",
         "cost": "$500.00",
-        "days": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday"
-        ],
-        "hours": [
-          "9:00am - 5:00pm"
-        ],
+        "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "hours": ["9:00am - 6:00pm"],
         "nextStartDate": "September 26, 2022",
         "preReqs": "Prep, Bootcamp",
         "description": [
-          "Unlike our other courses, Immersion has a designated Precourse section. For the three weeks immediately prior to immersion students will come in from 9-5, Monday through Friday, to work individually on multiple JavaScript projects. This Precourse gives students an introduction to what immersion will really be like, and is a last chance to test whether this is really something you are ready for and interested in, as well as for teachers to decide whether this is right for you. Precourse ends with a culminating exam to determine one final time whether students are ready or not for the immersion program."
+          "Unlike our other courses, Immersion has a designated Precourse section. For the three weeks immediately prior to immersion students will come in from 9am-6pm, Monday through Friday, to work individually on multiple JavaScript projects. This Precourse gives students an introduction to what immersion will really be like, and is a last chance to test whether this is really something you are ready for and interested in, as well as for teachers to decide whether this is right for you. Precourse ends with a culminating exam to determine one final time whether students are ready or not for the immersion program."
         ]
       },
       {
@@ -94,17 +63,8 @@
         "isImmersion": true,
         "length": "6 Weeks / 450 Hours",
         "cost": "$11,000.00",
-        "days": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday"
-        ],
-        "hours": [
-          "9:00am - 8:00pm"
-        ],
+        "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        "hours": ["9:00am - 8:00pm"],
         "nextStartDate": "September 19, 2022",
         "preReqs": "Prep, Bootcamp, Precourse",
         "description": [
@@ -119,17 +79,8 @@
         "nextStartDate": "September 12, 2022",
         "cost": "Included in junior tuition",
         "preReqs": "Prep, Bootcamp, Precourse, Junior",
-        "days": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday"
-        ],
-        "hours": [
-          "9:00am - 8:00pm"
-        ],
+        "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        "hours": ["9:00am - 8:00pm"],
         "description": [
           "The senior phase, taking place during the final seven weeks, consists of several student driven projects. Students will take the skills they have crafted during the junior phase to create full stack applications of their own choosing."
         ]
@@ -155,9 +106,7 @@
     "courses": [
       {
         "id": "fundamentals",
-        "title": [
-          "Fundamentals of HTML, CSS, and JavaScript"
-        ],
+        "title": ["Fundamentals of HTML, CSS, and JavaScript"],
         "description": [
           "Students learn the fundamentals of Web programming in JavaScript, HTML and CSS through designing and competing website, animation and video game projects. Projects appear within a portfolio on the student's website project.",
           "All curriculum and tools are Cloud based, allowing students to work from any computer with ease. Students are provided multiple choice quizzes and code quizzes to help practice for the mid-term and the IBC exam; they may be taken multiple times to assist in sharpening skills. All projects, quizzes, code quizzes and homework are delivered and graded via our LMS, Greenlight. Schools receive a spreadsheet summary of student progress.",
@@ -169,9 +118,7 @@
       },
       {
         "id": "advanced",
-        "title": [
-          "Advanced Javascript, Functional Programming, and Web Development"
-        ],
+        "title": ["Advanced Javascript, Functional Programming, and Web Development"],
         "description": [
           "Continuing from Fundamentals of HTML, CSS, and JavaScript, this course dives deeply into advanced programming concepts, including jQuery, functional programming, higher order functions.",
           "Additional projects build out the student's website portfolio, including a study of widely used JavaScript functional programming libraries, basic data structures and video games.",
@@ -184,9 +131,7 @@
       },
       {
         "id": "web-mobile",
-        "title": [
-          "Professional Web and Mobile Development"
-        ],
+        "title": ["Professional Web and Mobile Development"],
         "description": [
           "Beginning in September 2018, we're piloting a half day program, Professional Web and Mobile Development. The pilot year is open to graduates of our Advanced Javascript, Functional Programming, and Web Development who earned their IBC.",
           "Introduced in this course are server side and database programming, frameworks, testing software, version control, design and deployment.The curriculum covered in Professional Web and Mobile Development mirrors our adult workforce program, Immersion, but is mapped out daily over a school year, providing high schoolers a more gradual approach and more frequency of practice. The curriculum is industrial grade, by which we mean students practice professional level software engineering, adopting the same techniques, tools and work methodology practiced within the software industry in designing, building and deploying software products.",
@@ -197,9 +142,7 @@
       },
       {
         "id": "fundamentals-game",
-        "title": [
-          "Fundamentals of Video Game Programming"
-        ],
+        "title": ["Fundamentals of Video Game Programming"],
         "description": [
           "Students learn the fundamentals of video game programming, explore new design patterns, learn the basics of Object Oriented programming, apply trigonometry to simulate simple physics engines, create code libraries to support game development, study classic Atari style 2D video games, and design and build additional video game levels. Introduced is the concept of game mechanics - the art of designing a compelling and captivating game."
         ],
@@ -208,9 +151,7 @@
       },
       {
         "id": "iot",
-        "title": [
-          "Internet of Things"
-        ],
+        "title": ["Internet of Things"],
         "description": [
           "Smart Homes are the norm now, as controlling hardware devices across the Internet is providing new conveniences. A hands-on course that will teach students how to design and implement scalable, flexible, and open IoT solutions using Web technologies. This course focuses on providing the right balance of theory, code, and practical examples to enable students to successfully connect all sorts of devices to the Web and to expose their services and data over REST APIs."
         ],
