@@ -32,4 +32,5 @@ export interface IInfoSessionFormValues {
   userLocation: SelectItem;
   zipCode: string;
   attendingLocation: AttendingLocation;
+  smsOptIn: 'true' | 'false';
 }

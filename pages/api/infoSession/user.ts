@@ -43,6 +43,7 @@ export type FormDataSignup = {
   userLocation: SelectItem;
   referencedBy: SelectItem;
   attendingLocation: AttendingLocation;
+  smsOptIn: 'true' | 'false';
 };
 
 export interface ISessionSignup {
@@ -63,6 +64,7 @@ export interface ISessionSignup {
   userLocation: string;
   attendingLocation: AttendingLocation;
   joinCode?: string;
+  smsOptIn: boolean;
 }
 
 export default async function handleInfoSessionForm(req: ISessionUser, res: NextApiResponse) {
@@ -95,6 +97,7 @@ function formatPayload(form: FormDataSignup): ISessionSignup {
     zipCode,
     userLocation: location,
     attendingLocation,
+    smsOptIn,
   } = form;
 
   // Sometimes greenlight returns an empty string rather than a google place object
@@ -116,6 +119,7 @@ function formatPayload(form: FormDataSignup): ISessionSignup {
     locationType: session?.locationType,
     googlePlace: session?.googlePlace,
     token: GREENLIGHT_API_TOKEN ?? '',
+    smsOptIn: smsOptIn === 'true',
     zipCode,
     userLocation: location.additionalInfo || location.value,
     attendingLocation,

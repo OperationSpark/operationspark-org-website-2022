@@ -1,6 +1,6 @@
 import moment from 'moment';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { AiOutlineInfoCircle } from 'react-icons/ai';
 import styled from 'styled-components';
 
@@ -138,8 +138,11 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
 
   useEffect(() => {
     const sessionId = currentValues.sessionDate?.value;
+    const locationTypeChange = form.onChange('attendingLocation');
 
     if (!sessionId) {
+      setLocationMessage('');
+      locationTypeChange('', false);
       return;
     }
     if (sessionId === 'future') {
@@ -147,11 +150,11 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
       return;
     }
     const session = sessionDates.find((s) => s._id === sessionId);
+
     if (!session || !session.locationType) {
       return;
     }
 
-    const locationTypeChange = form.onChange('attendingLocation');
     if (session.locationType === 'IN_PERSON') {
       setLocationMessage('This session is in person only');
       return locationTypeChange('IN_PERSON', true);
@@ -165,7 +168,8 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps -- Ignore form change
   }, [currentValues.sessionDate, currentValues.attendingLocation, sessionDates]);
-
+  console.log('sessionDate', form.getSelect('sessionDate'));
+  console.log('attendingLocation', form.get('attendingLocation'));
   return (
     <WorkforceFormStyles>
       <Form onSubmit={handleSubmit}>
@@ -189,24 +193,7 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
             }}
           />
         ))}
-        {/* Checkbox to opt-in to receving SMS messages */}
-        <div className='sms-opt-in-row'>
-          <Input.CheckboxGroup
-            label='Agree to SMS messages'
-            checkboxes={[
-              {
-                name: 'smsOptIn',
-                label:
-                  "By providing your phone number, you agree to receive text messages from Operation Spark. We'll send you information and reminders about your upcoming session. You can also text us with any additional questions. Message and data rates may apply. Message frequency varies. Reply STOP to opt-out.",
-              },
-            ]}
-            values={form.getCheckboxes('smsOptIn')}
-            isValid={form.isValid('smsOptIn')}
-            isErr={form.isErr('smsOptIn')}
-            onChange={form.onCheckboxGroupChange('smsOptIn')}
-            clearCheckboxes={form.clearCheckboxGroup('smsOptIn')}
-          />
-        </div>
+
         <div className='user-location-row'>
           <Input.ZipCode
             label='Zip Code'
@@ -251,52 +238,87 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
           delay={(workforceFormInputs.length - 1) * 0.25}
           required
         />
+        {currentValues.sessionDate?.value && (
+          <Fragment>
+            {locationMessage ? (
+              <div
+                className='primary-secondary location-message'
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  width: '100%',
+                  fontSize: '1.25rem',
+                  fontWeight: 600,
+                  textAlign: 'center',
+                }}
+              >
+                {locationMessage}
+              </div>
+            ) : (
+              <Input.RadioGroup
+                label='Are you attending in person or virtually?'
+                options={[
+                  {
+                    name: 'IN_PERSON',
+                    label: (
+                      <span>
+                        In Person at{' '}
+                        <a
+                          className='primary-secondary location-option'
+                          href='https://goo.gl/maps/X6eQ54sWbbH2RbVd8'
+                          target='_blank'
+                          rel='noreferrer'
+                          tabIndex={-1}
+                        >
+                          514 Franklin Ave, New Orleans
+                        </a>
+                      </span>
+                    ),
+                  },
+                  { name: 'VIRTUAL', label: 'Virtually (via Zoom)' },
+                ]}
+                value={form.get('attendingLocation')}
+                isValid={form.isValid('attendingLocation')}
+                isErr={form.isErr('attendingLocation')}
+                onChange={form.onChange('attendingLocation')}
+                delay={(workforceFormInputs.length + 1) * 0.3}
+                required
+              />
+            )}
+          </Fragment>
+        )}
 
-        {locationMessage ? (
-          <div
-            className='primary-secondary location-message'
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              width: '100%',
-              fontSize: '1.25rem',
-              fontWeight: 600,
-              textAlign: 'center',
-            }}
-          >
-            {locationMessage}
-          </div>
-        ) : (
+        {/* Checkbox to opt-in to receiving SMS messages */}
+        <div className='sms-opt-in-row'>
           <Input.RadioGroup
-            label='Are you attending in person or virtually?'
+            label='Would you like to receive SMS message reminders?'
             options={[
               {
-                name: 'IN_PERSON',
-                label: (
-                  <span>
-                    In Person at{' '}
-                    <a
-                      className='primary-secondary location-option'
-                      href='https://goo.gl/maps/X6eQ54sWbbH2RbVd8'
-                      target='_blank'
-                      rel='noreferrer'
-                      tabIndex={-1}
-                    >
-                      514 Franklin Ave, New Orleans
-                    </a>
-                  </span>
-                ),
+                name: 'true',
+                label: 'Yes, send SMS reminders',
               },
-              { name: 'VIRTUAL', label: 'Virtually (via Zoom)' },
+              { name: 'false', label: 'No, do not send SMS reminders' },
             ]}
-            value={form.get('attendingLocation')}
-            isValid={form.isValid('attendingLocation')}
-            isErr={form.isErr('attendingLocation')}
-            onChange={form.onChange('attendingLocation')}
+            value={form.get('smsOptIn')}
+            isValid={form.isValid('smsOptIn')}
+            isErr={form.isErr('smsOptIn')}
+            onChange={form.onChange('smsOptIn')}
             delay={(workforceFormInputs.length + 1) * 0.3}
             required
           />
-        )}
+          {form.get('smsOptIn') === 'true' && (
+            <p className='sms-disclaimer'>
+              {`By providing your phone number, you agree to receive text messages from Operation Spark. We'll send you information and reminders about your upcoming session. You can also text us with any additional questions. Message and data rates may apply. Message frequency varies. Reply "STOP" to opt-out.`}
+            </p>
+          )}
+          {form.get('smsOptIn') === 'false' && (
+            <p className='sms-disclaimer sms-decline'>{`By opting out of SMS messaging, you acknowledge that you may miss important information about upcoming sessions and registrations.`}</p>
+          )}
+
+          {form.get('smsOptIn') === '' && (
+            <p className='sms-disclaimer'>{`You can opt out of sms notifications at any time by replying "STOP"`}</p>
+          )}
+        </div>
 
         {form.showErrors() && form.hasErrors() && (
           <div className='form-error'>
@@ -355,16 +377,29 @@ const WorkforceFormStyles = styled.div`
     font-weight: 500;
     border-bottom: 1px solid transparent;
     transition: border-bottom 175ms;
+    margin-bottom: 0.75rem;
     :hover {
       border-bottom: 1px solid
         ${({ theme: { isLightMode, primary, secondary } }) =>
           isLightMode ? primary[0] : secondary[0]} !important;
     }
   }
+  .location-message {
+    margin-bottom: 0.75rem;
+  }
   .sms-opt-in-row {
     display: flex;
+    flex-flow: column;
     width: 100%;
-    position: relative;
+  }
+  .sms-disclaimer {
+    font-size: calc(0.7rem + 0.25vw);
+    font-weight: 300;
+    color: ${({ theme }) => theme.alpha.fg50};
+    padding: 0.25rem 0.5rem;
+  }
+  .sms-decline {
+    color: ${({ theme }) => theme.red[0]};
   }
 `;
 
@@ -397,7 +432,7 @@ const workforceFormInputs = [
     label: 'Phone Number',
     name: 'phone',
     placeholder: '303-123-9876',
-    required: false,
+    required: true,
   },
 ];
 
