@@ -189,6 +189,24 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
             }}
           />
         ))}
+        {/* Checkbox to opt-in to receving SMS messages */}
+        <div className='sms-opt-in-row'>
+          <Input.CheckboxGroup
+            label='Agree to SMS messages'
+            checkboxes={[
+              {
+                name: 'smsOptIn',
+                label:
+                  "By providing your phone number, you agree to receive text messages from Operation Spark. We'll send you information and reminders about your upcoming session. You can also text us with any additional questions. Message and data rates may apply. Message frequency varies. Reply STOP to opt-out.",
+              },
+            ]}
+            values={form.getCheckboxes('smsOptIn')}
+            isValid={form.isValid('smsOptIn')}
+            isErr={form.isErr('smsOptIn')}
+            onChange={form.onCheckboxGroupChange('smsOptIn')}
+            clearCheckboxes={form.clearCheckboxGroup('smsOptIn')}
+          />
+        </div>
         <div className='user-location-row'>
           <Input.ZipCode
             label='Zip Code'
@@ -343,6 +361,11 @@ const WorkforceFormStyles = styled.div`
           isLightMode ? primary[0] : secondary[0]} !important;
     }
   }
+  .sms-opt-in-row {
+    display: flex;
+    width: 100%;
+    position: relative;
+  }
 `;
 
 const workforceFormInputs = [
@@ -374,7 +397,7 @@ const workforceFormInputs = [
     label: 'Phone Number',
     name: 'phone',
     placeholder: '303-123-9876',
-    required: true,
+    required: false,
   },
 ];
 
