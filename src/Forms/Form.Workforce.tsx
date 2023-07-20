@@ -168,8 +168,7 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps -- Ignore form change
   }, [currentValues.sessionDate, currentValues.attendingLocation, sessionDates]);
-  console.log('sessionDate', form.getSelect('sessionDate'));
-  console.log('attendingLocation', form.get('attendingLocation'));
+
   return (
     <WorkforceFormStyles>
       <Form onSubmit={handleSubmit}>
@@ -291,7 +290,7 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
         {/* Checkbox to opt-in to receiving SMS messages */}
         <div className='sms-opt-in-row'>
           <Input.RadioGroup
-            label='Would you like to receive SMS message reminders?'
+            label='Would you like to receive text message reminders?'
             options={[
               {
                 name: 'true',
@@ -312,11 +311,11 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
             </p>
           )}
           {form.get('smsOptIn') === 'false' && (
-            <p className='sms-disclaimer sms-decline'>{`By opting out of SMS messaging, you acknowledge that you may miss important information about upcoming sessions and registrations.`}</p>
+            <p className='sms-disclaimer sms-decline'>{`By opting out of text messages, you acknowledge that you may miss important information about upcoming sessions and registrations.`}</p>
           )}
 
           {form.get('smsOptIn') === '' && (
-            <p className='sms-disclaimer'>{`You can opt out of sms notifications at any time by replying "STOP"`}</p>
+            <p className='sms-disclaimer'>{`You can opt out of text messages at any time by replying "STOP"`}</p>
           )}
         </div>
 
