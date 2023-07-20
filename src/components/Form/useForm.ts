@@ -149,11 +149,16 @@ const useForm = <T extends Record<keyof T, T[keyof T]> = {}>() => {
     /** Clear/reset form values */
     clear: () => {
       setValues({} as T);
-      setSelectValues({} as T);
       setCheckboxValues({} as T);
       setCheckboxGroupValues({} as T);
       setValidation({});
       setShowErrors(false);
+
+      const clearedSelectValues = Object.keys(selectValues).reduce((acc, key) => {
+        acc[key] = { value: '', name: '' };
+        return acc;
+      }, {} as ISelectValues);
+      setSelectValues(clearedSelectValues);
     },
   };
 };
