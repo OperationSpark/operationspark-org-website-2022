@@ -20,6 +20,8 @@ import {
   referencedByOptions,
 } from './formData/highSchoolApplicationData';
 
+const sheetsTabName = process.env.HIGHSCHOOL_FORM_RESPONSES_NAME;
+
 const getSelectedCourseTimes = (selected: string): { options: TOption[]; note: string } | null => {
   if (selected === 'fundamentals') {
     return { options: courseTimes.fundamentals, note: courseTimes.notes.fundamentals };
@@ -35,7 +37,6 @@ interface HighSchoolApplicationProps {
 }
 
 const HighSchoolApplication = ({ onSubmitComplete }: HighSchoolApplicationProps) => {
-  const sheetsTabName = 'Applications - Summer 2023';
   const form = useForm();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const hasErrors = form.hasErrors();
@@ -61,7 +62,7 @@ const HighSchoolApplication = ({ onSubmitComplete }: HighSchoolApplicationProps)
         tabName: sheetsTabName,
         date: Date.now(),
       });
-      form.clear();
+      // form.clear();
       form.notifySuccess();
       onSubmitComplete?.();
     } catch {
