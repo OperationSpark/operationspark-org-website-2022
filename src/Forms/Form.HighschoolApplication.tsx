@@ -62,7 +62,7 @@ const HighSchoolApplication = ({ onSubmitComplete }: HighSchoolApplicationProps)
         tabName: sheetsTabName,
         date: Date.now(),
       });
-      // form.clear();
+      form.clear();
       form.notifySuccess();
       onSubmitComplete?.();
     } catch {
