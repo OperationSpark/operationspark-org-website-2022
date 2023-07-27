@@ -184,19 +184,19 @@ export const courseTimes = {
   advanced: [
     {
       course: 'advanced',
-      value: 'advanced-virtual-th-4-8',
+      value: 'advanced-virtual-t-th-5-7',
       location: 'Virtual',
       preReq: 'Fundamentals of HTML, CSS, and Javascript',
-      time: 'Thursdays | 4:45pm - 8:00pm',
-      name: 'Virtual: Thursdays | 4:45pm - 8:00pm',
+      time: 'Tuesdays + Thursdays | 5:00pm - 7:00pm',
+      name: 'Virtual: Tuesdays + Thursdays | 5:00pm - 7:00pm',
     },
     {
       course: 'advanced',
-      value: 'advanced-onsite-t-th-5-7',
+      value: 'advanced-onsite-th-4-8',
       location: 'In Person',
       preReq: 'Fundamentals of HTML, CSS, and Javascript',
-      time: 'Tuesdays + Thursdays | 5:00pm - 7:00pm',
-      name: 'In Person: Tuesdays + Thursdays | 5:00pm - 7:00pm',
+      time: 'Thursdays | 4:45pm - 8:00pm',
+      name: 'In Person: Thursdays | 4:45pm - 8:00pm',
     },
   ],
 };

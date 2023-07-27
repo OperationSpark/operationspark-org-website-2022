@@ -57,8 +57,8 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
                 <h1 className='dynamic-xl secondary'>Fall 2023</h1>
                 <h2 className='dynamic-h2 secondary'>After-School Application</h2>
                 <p className='dynamic-txt'>
-                  Open to rising sophomores through graduating seniors
-                  <b> (Graduating classes of 2023, 2024, 2025, and 2026)</b>.
+                  Open to sophomores, juniors, and seniors
+                  <b> (Graduating classes of 2024, 2025, and 2026)</b>.
                 </p>
                 {/* Common meeting time */}
                 {/* <p className='dynamic-txt'>
@@ -128,7 +128,7 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
             </PlainCard>
             <div className='program-time-details'>
               <h2 className='dynamic-h2'>
-                <b>Summer Course Schedule:</b>
+                <b>Fall Course Schedule:</b>
               </h2>
               <div className='course-title'>
                 <b className='primary-secondary'>Fundamentals of HTML, CSS, and Javascript</b>

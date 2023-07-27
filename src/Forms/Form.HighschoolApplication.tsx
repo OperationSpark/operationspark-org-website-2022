@@ -35,6 +35,7 @@ const getSelectedCourseTimes = (selected: string): { options: TOption[]; note: s
 interface HighSchoolApplicationProps {
   onSubmitComplete?: () => void;
 }
+const gradYears = [2024, 2025, 2026];
 
 const HighSchoolApplication = ({ onSubmitComplete }: HighSchoolApplicationProps) => {
   const form = useForm();
@@ -43,9 +44,8 @@ const HighSchoolApplication = ({ onSubmitComplete }: HighSchoolApplicationProps)
 
   const courseTimeOptions = getSelectedCourseTimes(form.getSelect('course').value);
 
-  const year = new Date().getFullYear();
   const graduationYears = [
-    ...[2023, 2024, 2025, 2026].map((e, i) => ({ name: `${year + i}`, value: `${year + i}` })),
+    ...gradYears.map((year) => ({ name: String(year), value: String(year) })),
     { name: 'Other', value: 'other', additionalInfo: 'Please explain' },
   ];
 
