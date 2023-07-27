@@ -54,21 +54,22 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
           >
             <div className='program-header'>
               <div className='header-card'>
-                <h1 className='dynamic-xl secondary'>Summer 2023</h1>
-                <h2 className='dynamic-h2 secondary'>Coding Camp Application</h2>
+                <h1 className='dynamic-xl secondary'>Fall 2023</h1>
+                <h2 className='dynamic-h2 secondary'>After-School Application</h2>
                 <p className='dynamic-txt'>
-                  Open to rising sophomores through graduating seniors
-                  <b> (Graduating classes of 2023, 2024, 2025, and 2026)</b>.
+                  Open to sophomores, juniors, and seniors
+                  <b> (Graduating classes of 2024, 2025, and 2026)</b>.
                 </p>
-                <p className='dynamic-txt'>
+                {/* Common meeting time */}
+                {/* <p className='dynamic-txt'>
                   Classes meet <b className='secondary'> three hours</b> a day,
                   <b className='secondary'> Monday</b> through <b className='secondary'>Friday</b>.
-                </p>
+                </p> */}
                 <p className='dynamic-txt'>
-                  Summer classes start
-                  <b className='secondary'> June 1st </b>
-                  and end on
-                  <b className='secondary'> June 30th</b>.
+                  Fall classes start the week of
+                  <b className='secondary'> August 21st </b>
+                  and end the week of
+                  <b className='secondary'> December 11th</b>.
                 </p>
               </div>
               <Link href='/programs/highschool' passHref>
@@ -87,7 +88,7 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
                 <div className='left-col'>
                   <div className='hs-program-overview'>
                     <p>
-                      {`This summer, we are offering both in-person and virtual classes. You can enroll in one or the other- there is no hybrid option. If you're able to arrange for reliable transportation to our learning center in the Marigny, we recommend in-person classes. We have a great lab with brand new equipment and an awesome staff to get you started on your coding journey. You'll also meet other students from a wide range of schools and backgrounds!`}
+                      {`This fall, we are offering both in-person and virtual classes. You can enroll in one or the other- there is no hybrid option. If you're able to arrange for reliable transportation to our learning center in the Marigny, we recommend in-person classes. We have a great lab with brand new equipment and an awesome staff to get you started on your coding journey. You'll also meet other students from a wide range of schools and backgrounds!`}
                     </p>
                     <br />
 
@@ -101,10 +102,10 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
                     <div className='reqs-list'>
                       <b>For virtual classes, you will need:</b>
                       <ul>
-                        <li>laptop/desktop computer (Mac, Windows, or Chromebook)</li>
-                        <li>webcam and mic </li>
-                        <li>reliable internet connection </li>
-                        <li>quiet place to work</li>
+                        <li>Laptop/desktop computer (Mac, Windows, or Chromebook)</li>
+                        <li>Webcam and mic</li>
+                        <li>Reliable internet connection </li>
+                        <li>Quiet place to work</li>
                       </ul>
                     </div>
                   </div>
@@ -127,7 +128,7 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
             </PlainCard>
             <div className='program-time-details'>
               <h2 className='dynamic-h2'>
-                <b>Summer Course Schedule:</b>
+                <b>Fall Course Schedule:</b>
               </h2>
               <div className='course-title'>
                 <b className='primary-secondary'>Fundamentals of HTML, CSS, and Javascript</b>
@@ -200,8 +201,7 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
             </div>
             <PlainCard noDivider={true}>
               <p>
-                Within 3 business days of completing this form, you will receive more detailed
-                information about the course and next steps to finalize enrollment.
+                {`Within 3 business days of completing this form, you will receive more detailed information about the course and next steps to finalize enrollment.`}
               </p>
               <br />
               <p>
