@@ -187,8 +187,8 @@ export const courseTimes = {
       value: 'advanced-virtual-t-th-5-7',
       location: 'Virtual',
       preReq: 'Fundamentals of HTML, CSS, and Javascript',
-      time: 'Tuesdays + Thursdays | 5:00pm - 7:00pm',
-      name: 'Virtual: Tuesdays + Thursdays | 5:00pm - 7:00pm',
+      time: 'Mondays + Wednesdays | 5:00pm - 7:00pm',
+      name: 'Virtual: Mondays + Wednesdays | 5:00pm - 7:00pm',
     },
     {
       course: 'advanced',
