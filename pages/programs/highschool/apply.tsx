@@ -67,9 +67,9 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
                 </p> */}
                 <p className='dynamic-txt'>
                   Fall classes start the week of
-                  <b className='secondary'> August 21st </b>
+                  <b className='secondary'> August 28th </b>
                   and end the week of
-                  <b className='secondary'> December 11th</b>.
+                  <b className='secondary'> December 18th</b>.
                 </p>
               </div>
               <Link href='/programs/highschool' passHref>
