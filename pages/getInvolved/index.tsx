@@ -1,10 +1,9 @@
 import { NextPage } from 'next';
-import styled, { useTheme } from 'styled-components';
+import styled from 'styled-components';
 import Image from 'next/image';
 import { useState } from 'react';
 import { IoMdCloseCircle } from 'react-icons/io';
 import { BsArrowRightSquareFill } from 'react-icons/bs';
-import { MdOpenInNew } from 'react-icons/md';
 
 import Content from '@this/components/layout/Content';
 import Main from '@this/components/layout/Main';
@@ -15,10 +14,18 @@ import { BgImg } from '@this/src/components/Elements';
 import Link from 'next/link';
 import SocialNetworks from '@this/src/components/Elements/SocialNetworks';
 import { TwoColumns } from '@this/src/components/Elements/Columns';
+import Spinner from '@this/src/components/Elements/Spinner';
+import { Center } from '@this/src/components/layout/Center';
 
 const GetInvolved: NextPage = () => {
-  const theme = useTheme();
   const [showDonate, setShowDonate] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleShowDonate = () => {
+    setLoading(true);
+    setShowDonate(true);
+    setTimeout(() => setLoading(false), 2000);
+  };
 
   return (
     <Main style={{ paddingTop: 0 }}>
@@ -67,7 +74,9 @@ const GetInvolved: NextPage = () => {
                 <p className='dynamic-txt desc'>
                   We depend on dedicated individuals and organizations to run our programs.
                 </p>
-                <p className='dynamic-txt desc'>Your donation can make the following possible:</p>
+                <p className='dynamic-txt desc'>
+                  <b>Your donation can make the following possible:</b>
+                </p>
                 <div className='donation-list'>
                   {[
                     [25, 'Our hosting bill for a month'],
@@ -93,7 +102,7 @@ const GetInvolved: NextPage = () => {
                     priority
                   />
                 </div>
-                <Button color='yellow' onClick={() => setShowDonate(!showDonate)}>
+                <Button color='yellow' onClick={handleShowDonate}>
                   Donate to Operation Spark!
                 </Button>
                 <p className='tax-deduct'>
@@ -102,40 +111,6 @@ const GetInvolved: NextPage = () => {
                   </span>
                   <span title='EIN# 47-1514606'>47-1514606</span>
                 </p>
-              </div>
-            </div>
-            <div className='donate-box'>
-              <div className='donate-wrapper'>
-                <p className='dynamic-txt'>
-                  Shop at Amazon Smile and 0.5% of eligible purchases will be donated to Operation
-                  Spark!
-                </p>
-
-                <div className='img'>
-                  <Image
-                    src={`/images/logos/etc/amazon-smile-halle-${theme.colorMode}.png`}
-                    layout='fill'
-                    objectFit='contain'
-                    alt='Amazon Smile | Operation Spark'
-                    quality={100}
-                    blurDataURL={rgbDataURL(134, 0, 241)}
-                    loading='eager'
-                    priority
-                  />
-                </div>
-
-                <a
-                  href='https://smile.amazon.com/ch/47-1514606'
-                  target='_blank'
-                  rel='noreferrer'
-                  title='Amazon Smile'
-                  className='anchor'
-                >
-                  Shop Now!{' '}
-                  <span className='icon'>
-                    <MdOpenInNew />
-                  </span>
-                </a>
               </div>
             </div>
           </div>
@@ -147,10 +122,16 @@ const GetInvolved: NextPage = () => {
                     <IoMdCloseCircle size={30} />
                   </Button>
                 </div>
+                <div className='donation-loading-spinner' hidden={!loading}>
+                  <Center style={{ width: '400px', height: '500px' }}>
+                    <Spinner />
+                  </Center>
+                </div>
                 <iframe
                   src='https://commitchange.com/nonprofits/3745/donate?offsite=t&amp;origin=http://operationspark.org/#!/donate'
                   width='400px'
                   height='500px'
+                  hidden={loading}
                 ></iframe>
               </div>
             </div>
@@ -187,9 +168,19 @@ const GetInvolvedStyles = styled.div`
     align-items: center;
 
     backdrop-filter: blur(3px);
+
+    .donation-loading-spinner {
+      background: ${({ theme }) =>
+        theme.isLightMode ? 'rgba(251,251,251,1)' : 'rgba(29, 29, 29, 1)'};
+      color: ${({ theme }) => theme.fg};
+      border-radius: 0.5rem;
+      box-shadow: 0 0 0.5rem
+        ${({ theme }) => (theme.isLightMode ? 'rgba(0,0,0,0.5)' : 'rgba(0, 0, 0, 1)')};
+    }
     .iframe-wrapper {
       margin: 1rem;
       position: relative;
+      border-radius: 0.5rem;
       .overlay-btn {
         position: absolute;
         z-index: 1;
@@ -209,7 +200,9 @@ const GetInvolvedStyles = styled.div`
         user-select: none;
         max-width: 100%;
         filter: ${({ theme }) =>
-          theme.isLightMode ? 'invert(0) hue-rotate(-240deg)' : 'invert(0.9) grayscale(100%)'};
+          theme.isLightMode
+            ? 'invert(0) hue-rotate(-240deg) drop-shadow(0 0 0.5rem rgba(0, 0, 0, 0.5))'
+            : 'invert(0.9) grayscale(100%) drop-shadow(0 0 0.5rem rgba(0, 0, 0, 0.8))'};
       }
     }
   }
@@ -238,6 +231,7 @@ const GetInvolvedStyles = styled.div`
 
       p.desc {
         padding: 0.25rem 0;
+        width: 100%;
       }
       .tax-deduct {
         color: ${({ theme }) => (theme.isLightMode ? theme.grey[700] : theme.grey[500])};
