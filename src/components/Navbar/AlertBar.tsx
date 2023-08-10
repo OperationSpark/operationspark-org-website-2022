@@ -33,6 +33,7 @@ const AlertBarStyles = styled(motion.div)`
     width: 100%;
     font-size: 0.9em;
     margin-right: 0.5rem;
+    text-align: center;
     a {
       padding: 0 0.5rem;
       border-radius: 0.5rem;
