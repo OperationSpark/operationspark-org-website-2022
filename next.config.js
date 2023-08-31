@@ -51,6 +51,13 @@ module.exports = (phase, { defaultConfig }) => {
       HIGHSCHOOL_FORM_ACTIVE: isHsFormActive,
       HIGHSCHOOL_FORM_RESPONSES_NAME,
     },
+
+    // TODO: This will need to be updated when NextJS is updated due to change in 12.3.0 (Currently 12.1.0)
+    // https://nextjs.org/docs/messages/next-image-unconfigured-host
+
+    images: {
+      domains: ['storage.googleapis.com'],
+    },
     async redirects() {
       return [
         {
