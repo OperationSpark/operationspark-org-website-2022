@@ -2,131 +2,131 @@
   <style>
     @keyframes pathFill {
       0% {
-        fill: #10FF0080;
+        fill: #10FF00CC;
       }
 
       3% {
-        fill: #20FF0080;
+        fill: #20FF00CC;
       }
 
       6% {
-        fill: #30FF0080;
+        fill: #30FF00CC;
       }
 
       9% {
-        fill: #40FF0080;
+        fill: #40FF00CC;
       }
 
       12% {
-        fill: #50FF0080;
+        fill: #50FF00CC;
       }
 
       16% {
-        fill: #60FF0080;
+        fill: #60FF00CC;
       }
 
       19% {
-        fill: #70FF0080;
+        fill: #70FF00CC;
       }
 
       22% {
-        fill: #80FF0080;
+        fill: #80FF00CC;
       }
 
       25% {
-        fill: #90FF0080;
+        fill: #90FF00CC;
       }
 
       29% {
-        fill: #A0FF0080;
+        fill: #A0FF00CC;
       }
 
       32% {
-        fill: #B0FF0080;
+        fill: #B0FF00CC;
       }
 
       35% {
-        fill: #C0FF0080;
+        fill: #C0FF00CC;
       }
 
       38% {
-        fill: #D0FF0080;
+        fill: #D0FF00CC;
       }
 
       41% {
-        fill: #E0FF0080;
+        fill: #E0FF00CC;
       }
 
       45% {
-        fill: #F0FF0080;
+        fill: #F0FF00CC;
       }
 
       48% {
-        fill: #FFFF0080;
+        fill: #FFFF00CC;
       }
 
       51% {
-        fill: #FFF00080;
+        fill: #FFF000CC;
       }
 
       54% {
-        fill: #FFE00080;
+        fill: #FFE000CC;
       }
 
       58% {
-        fill: #FFD00080;
+        fill: #FFD000CC;
       }
 
       61% {
-        fill: #FFC00080;
+        fill: #FFC000CC;
       }
 
       64% {
-        fill: #FFB00080;
+        fill: #FFB000CC;
       }
 
       67% {
-        fill: #FFA00080;
+        fill: #FFA000CC;
       }
 
       70% {
-        fill: #FF900080;
+        fill: #FF9000CC;
       }
 
       74% {
-        fill: #FF800080;
+        fill: #FF8000CC;
       }
 
       77% {
-        fill: #FF700080;
+        fill: #FF7000CC;
       }
 
       80% {
-        fill: #FF600080;
+        fill: #FF6000CC;
       }
 
       83% {
-        fill: #FF500080;
+        fill: #FF5000CC;
       }
 
       87% {
-        fill: #FF400080;
+        fill: #FF4000CC;
       }
 
       90% {
-        fill: #FF300080;
+        fill: #FF3000CC;
       }
 
       93% {
-        fill: #FF200080;
+        fill: #FF2000CC;
       }
 
       96% {
-        fill: #FF100080;
+        fill: #FF1000CC;
       }
 
       100% {
-        fill: #FF000080;
+        fill: #FF0000CC;
       }
     }
 

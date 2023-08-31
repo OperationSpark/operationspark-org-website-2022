@@ -70,6 +70,7 @@ const ShowcasePromo: FC<ShowcasePromoProps> = ({ info }) => {
 
   return (
     <ShowcasePromoStyles speed={animationSpeed} opacity={circuitOpacity}>
+      <div className='circuit-board-overlay'></div>
       <Content className='promo-content dynamic-txt'>
         <div className='showcase-header'>
           <h1 className='showcase-title dynamic-xl'>GRADUATION</h1>
@@ -112,29 +113,29 @@ export default ShowcasePromo;
 
 const circuitAnimation = keyframes`
   0% {
-    transform: scale(3) translate3d(0, 0, 0);
+    transform: scale(3) translate(0, 0);
   }
   20% { // zoom in
-    transform: scale(3) translate3d(25%, 0, 8em)
+    transform: scale(3) translate(25%, 0);
 
   }
   40% { // scroll bottom right
-    transform: scale(3) translate3d(25%, 25%, 8em)
+    transform: scale(3) translate(25%, 25%);
   }
   50% { // scroll left
-    transform: scale(3) translate3d(0%, 25%, 8em)
+    transform: scale(3) translate(0%, 25%);
   }
   60% {
-    transform: scale(3) translate3d(-25%, 25%, 8em)
+    transform: scale(3) translate(-25%, 25%);
   }
   70% {
-    transform: scale(3) translate3d(-25%, 0, 8em)
+    transform: scale(3) translate(-25%, 0);
   }
   80% {
-    transform: scale(2.5)  translate3d(0, 0, 0);
+    transform: scale(2.5)  translate(0, 0);
   }
   100% {
-    transform: scale(1.75) translate3d(0, 0, 0);
+    transform: scale(1.75) translate(0, 0);
   }
 `;
 const fireworkAnimation = keyframes`
@@ -151,22 +152,22 @@ const fireworkAnimation = keyframes`
 
 export const ShowcasePromoStyles = styled.div<{ speed: number; opacity: number }>`
   position: relative;
-  z-index: 1;
+  z-index: 0;
 
   padding-top: ${({ theme }) => theme.navHeight}px;
   overflow: hidden;
 
-  ::after {
+  .circuit-board-overlay {
     position: absolute;
     inset: 0;
-    content: '';
+
     ${circuitBoardBg};
     transform-style: preserve-3d;
     animation: ${circuitAnimation} ${(p) => p.speed * 12}s ease-in-out infinite alternate;
 
     zoom: 0.25;
     opacity: ${(p) => p.opacity / 100};
-    z-index: -1;
+    z-index: -2;
   }
 
   ::before {
@@ -176,14 +177,16 @@ export const ShowcasePromoStyles = styled.div<{ speed: number; opacity: number }
     background-image: url('/images/display/celebrate.webp');
     animation: ${fireworkAnimation} ${(p) => p.speed * 12}s ease-in-out infinite;
 
-    z-index: -2;
+    z-index: -3;
   }
 
   .promo-content {
+    position: relative;
     display: flex;
     flex-flow: column;
     align-items: center;
     gap: 2rem;
+    z-index: 10;
   }
   .showcase-header {
     display: flex;
