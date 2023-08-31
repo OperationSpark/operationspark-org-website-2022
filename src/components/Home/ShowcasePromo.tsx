@@ -94,6 +94,15 @@ const ShowcasePromo: FC<ShowcasePromoProps> = ({ info }) => {
 
           <CountdownTimer endTime={new Date(info.startDateTime)} />
         </div>
+
+        <div className='register-section'>
+          <button
+            className='showcase-website-button'
+            onClick={() => window.open('https://showcase.operationspark.org', '_blank')}
+          >
+            Learn more or get tickets here!
+          </button>
+        </div>
       </Content>
     </ShowcasePromoStyles>
   );
@@ -272,5 +281,32 @@ export const ShowcasePromoStyles = styled.div<{ speed: number; opacity: number }
   .primary-green {
     color: ${({ theme: { isLightMode, green, primary } }) =>
       isLightMode ? primary[800] : green[300]};
+  }
+
+  .register-section {
+    .showcase-website-button {
+      font-size: 1.4rem;
+      font-weight: 700;
+      padding: 1rem 2rem;
+      border-radius: 1rem;
+      background: ${({ theme }) => theme.alpha.bg25};
+      box-shadow: ${({ theme }, { isLightMode, alpha, secondary } = theme) => `
+        -0.1rem 0.1rem 0.5rem 0.2rem ${isLightMode ? alpha.fg50 : alpha.bg50},
+        0 0 0.5rem ${isLightMode ? secondary[500] : secondary[0]} inset
+      `};
+      backdrop-filter: blur(3px);
+      border: none;
+      color: ${({ theme }, { isLightMode, primary, secondary } = theme) =>
+        isLightMode ? primary[700] : secondary[700]};
+      cursor: pointer;
+      transition: all 0.25s ease-in-out;
+
+      :hover {
+        transform: scale(1.04);
+      }
+      :active {
+        transform: scale(0.94);
+      }
+    }
   }
 `;
