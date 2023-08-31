@@ -1,4 +1,4 @@
-import { CSSProperties, FC, useEffect, useState } from 'react';
+import { CSSProperties, FC, useState } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -14,37 +14,48 @@ import { useClickAway } from '@this/src/hooks/useClickAway';
 type AtlantaPromoProps = { style?: CSSProperties };
 const AtlantaPromo: FC<AtlantaPromoProps> = ({ style }) => {
   const isMounted = useMounted();
-  const [hidePromo, setHidePromo] = useState(false);
+  const [showPromo, setShowPromo] = useState(false);
   const [promoInfoRef, showPromoInfo, setShowPromoInfo] = useClickAway();
 
   const handleClose = () => {
-    localStorage.setItem('hide-atlanta-promo', 'true');
-    setHidePromo(true);
+    console.log('close');
+    localStorage.setItem('show-atlanta-promo', 'false');
+    setShowPromo(false);
   };
-  const handleShowPromo = () => {
-    if (hidePromo) {
-      localStorage.setItem('hide-atlanta-promo', 'false');
-      setHidePromo(false);
-    }
+  const handleOpen = () => {
+    console.log('open');
+    localStorage.setItem('show-atlanta-promo', 'true');
+    setShowPromo(true);
   };
-
-  useEffect(() => {
-    setHidePromo(localStorage.getItem('hide-atlanta-promo') === 'true');
-  }, []);
 
   return !isMounted
     ? null
     : createPortal(
         <AtlantaPromoStyles
           style={style}
-          className={hidePromo ? 'hide-promo' : ''}
-          title={hidePromo ? 'Open Atlanta Promo' : ''}
-          role={hidePromo ? 'button' : 'banner'}
-          onClick={handleShowPromo}
+          className={!showPromo ? 'hide-promo' : ''}
+          title={!showPromo ? 'Open Atlanta Promo' : ''}
+          role={!showPromo ? 'button' : 'banner'}
         >
-          {hidePromo ? (
+          <AnimatePresence>
+            {!showPromo && (
+              <motion.div
+                className='circular-text'
+                initial={{ opacity: 0 }}
+                exit={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+              >
+                {'Live in Georgia?'.split('').map((letter, i) => (
+                  <span key={i} className={`letter-${i}`}>
+                    {letter}
+                  </span>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+          {!showPromo ? (
             <div className='open-btn'>
-              <button>
+              <button onClick={handleOpen}>
                 <ExpandIcon size={24} weight={2} className='expand-icon' />
               </button>
             </div>
@@ -65,7 +76,6 @@ const AtlantaPromo: FC<AtlantaPromoProps> = ({ style }) => {
           />
 
           <div className='promo-content'>
-            {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
             <Link href='/programs/workforce/infoSession'>
               <a className='promo-anchor'>
                 Live in Georgia? Sign up here!
@@ -127,10 +137,46 @@ const AtlantaPromo: FC<AtlantaPromoProps> = ({ style }) => {
 const AtlantaPromoStyles = styled(motion.div)`
   position: fixed;
   width: 256px;
-  top: calc(${({ theme }) => theme.navHeight}px + 0.5rem);
+  top: calc(${({ theme }) => theme.navHeight}px + 1rem);
   right: 1rem;
   user-select: none;
   transition: all 200ms;
+
+  .circular-text {
+    position: absolute;
+    right: 55px;
+    top: 56px;
+    transform: rotate(240deg);
+    z-index: 10;
+    pointer-events: none;
+
+    span {
+      font-family: 'Source Code Pro', monospace;
+      font-weight: 700;
+      height: 40px;
+      font-size: 12px;
+      position: absolute;
+
+      width: 24px;
+      left: 0;
+      top: 0;
+      transform-origin: bottom center;
+      color: ${({ theme }, { isLightMode, secondary } = theme) =>
+        isLightMode ? secondary[900] : secondary[700]};
+    }
+    ${'Live in Georgia?'
+      .split('')
+      .map((_letter, i) => `.letter-${i} { transform: rotate(${12 * (i + 1)}deg); }`)}
+    .char1 {
+      transform: rotate(6deg);
+    }
+    .char2 {
+      transform: rotate(12deg);
+    }
+    .char3 {
+      transform: rotate(18deg);
+    }
+  }
 
   &.hide-promo {
     background: rgba(232, 236, 240, 0);
