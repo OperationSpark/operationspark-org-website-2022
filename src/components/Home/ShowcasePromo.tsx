@@ -16,6 +16,7 @@ const ShowcasePromo: FC<ShowcasePromoProps> = ({ info }) => {
   const doorsOpen = toDayJs(new Date(info.startDateTime)).subtract(30, 'minute');
 
   const [animationSpeed, setAnimationSpeed] = useState(10);
+  const [circuitOpacity, setCircuitOpacity] = useState(65);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -39,6 +40,24 @@ const ShowcasePromo: FC<ShowcasePromoProps> = ({ info }) => {
             return s;
           });
         }
+
+        if (key === 'ArrowLeft') {
+          e.preventDefault();
+          setCircuitOpacity((prev) => {
+            const o = prev - 1 < 0 ? 0 : prev - 1;
+            console.info('Circuit Opacity: ', o);
+            return o;
+          });
+        }
+
+        if (key === 'ArrowRight') {
+          e.preventDefault();
+          setCircuitOpacity((prev) => {
+            const o = prev + 1 > 100 ? 100 : prev + 1;
+            console.info('Circuit Opacity: ', o);
+            return o;
+          });
+        }
       }
     };
 
@@ -50,7 +69,7 @@ const ShowcasePromo: FC<ShowcasePromoProps> = ({ info }) => {
   }, []);
 
   return (
-    <ShowcasePromoStyles speed={animationSpeed}>
+    <ShowcasePromoStyles speed={animationSpeed} opacity={circuitOpacity}>
       <Content className='promo-content dynamic-txt'>
         <div className='showcase-header'>
           <h1 className='showcase-title dynamic-xl'>GRADUATION</h1>
@@ -121,7 +140,7 @@ const fireworkAnimation = keyframes`
   }
 `;
 
-export const ShowcasePromoStyles = styled.div<{ speed: number }>`
+export const ShowcasePromoStyles = styled.div<{ speed: number; opacity: number }>`
   position: relative;
   z-index: 1;
 
@@ -137,7 +156,7 @@ export const ShowcasePromoStyles = styled.div<{ speed: number }>`
     animation: ${circuitAnimation} ${(p) => p.speed * 12}s ease-in-out infinite alternate;
 
     zoom: 0.25;
-    opacity: 0.5;
+    opacity: ${(p) => p.opacity / 100};
     z-index: -1;
   }
 
@@ -252,6 +271,6 @@ export const ShowcasePromoStyles = styled.div<{ speed: number }>`
   }
   .primary-green {
     color: ${({ theme: { isLightMode, green, primary } }) =>
-      isLightMode ? primary[500] : green[300]};
+      isLightMode ? primary[800] : green[300]};
   }
 `;

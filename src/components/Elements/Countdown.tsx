@@ -103,7 +103,7 @@ export const CountdownTimer = ({ endTime }: CountdownProps) => {
 
 const CountdownTimerStyles = styled.div`
   color: ${({ theme: { isLightMode, green, primary } }) =>
-    isLightMode ? primary[700] : green[500]};
+    isLightMode ? primary[800] : green[500]};
   display: flex;
   justify-content: space-evenly;
   text-align: center;
