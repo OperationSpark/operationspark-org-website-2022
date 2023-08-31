@@ -183,7 +183,7 @@ export const ShowcasePromoStyles = styled.div<{ speed: number; opacity: number }
     display: flex;
     flex-flow: column;
     align-items: center;
-    gap: 2.5rem;
+    gap: 2rem;
   }
   .showcase-header {
     display: flex;
@@ -253,7 +253,7 @@ export const ShowcasePromoStyles = styled.div<{ speed: number; opacity: number }
     gap: 1rem;
 
     .date-time-container {
-      font-size: 1.4rem;
+      font-size: calc(1.1rem + 0.4vw);
       text-align: center;
       font-weight: 500;
       display: flex;
@@ -263,6 +263,7 @@ export const ShowcasePromoStyles = styled.div<{ speed: number; opacity: number }
     }
     .start-date {
       word-spacing: 0.25em;
+      /* white-space: nowrap; */
     }
     .start-time {
       display: flex;
@@ -285,7 +286,7 @@ export const ShowcasePromoStyles = styled.div<{ speed: number; opacity: number }
 
   .register-section {
     .showcase-website-button {
-      font-size: 1.4rem;
+      font-size: 1.25rem;
       font-weight: 700;
       padding: 1rem 2rem;
       border-radius: 1rem;
@@ -306,6 +307,22 @@ export const ShowcasePromoStyles = styled.div<{ speed: number; opacity: number }
       }
       :active {
         transform: scale(0.94);
+      }
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .date-time-info {
+      .date-time-container {
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+  @media screen and (min-width: 1400px) {
+    .date-time-info {
+      .date-time-container {
+        font-size: 1.5rem;
       }
     }
   }
