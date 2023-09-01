@@ -53,6 +53,7 @@ const AtlantaPromo: FC<AtlantaPromoProps> = ({ style }) => {
               </motion.div>
             )}
           </AnimatePresence>
+
           {!showPromo ? (
             <div className='open-btn'>
               <button onClick={handleOpen}>
@@ -72,8 +73,10 @@ const AtlantaPromo: FC<AtlantaPromoProps> = ({ style }) => {
             width='400px'
             height='400px'
             alt='Peach'
+            className='promo-img'
             style={{ maxWidth: '100%', opacity: 0.75 }}
           />
+          <div className='circle-bg'></div>
 
           <div className='promo-content'>
             <Link href='/programs/workforce/infoSession'>
@@ -137,8 +140,8 @@ const AtlantaPromo: FC<AtlantaPromoProps> = ({ style }) => {
 const AtlantaPromoStyles = styled(motion.div)`
   position: fixed;
   width: 256px;
-  top: calc(${({ theme }) => theme.navHeight}px + 1rem);
-  right: 1rem;
+  top: calc(${({ theme }) => theme.navHeight}px + 2rem);
+  right: 1.5rem;
   user-select: none;
   transition: all 200ms;
 
@@ -183,6 +186,9 @@ const AtlantaPromoStyles = styled(motion.div)`
     width: 48px;
     cursor: pointer;
     right: 0.5rem;
+    .circle-bg {
+      opacity: 1;
+    }
     .promo-content {
       transition: opacity 100ms;
       opacity: 0;
@@ -192,7 +198,7 @@ const AtlantaPromoStyles = styled(motion.div)`
     .open-btn {
       button > .expand-icon {
         transition: all 250ms;
-        color: ${({ theme }) => theme.secondary[700]};
+        color: ${({ theme }) => theme.secondary[200]};
       }
       :hover {
         button > .expand-icon {
@@ -232,6 +238,25 @@ const AtlantaPromoStyles = styled(motion.div)`
         transform: rotate(90deg);
       }
     }
+  }
+
+  .circle-bg {
+    position: absolute;
+    width: 85px;
+    height: 85px;
+    background: ${({ theme }) => theme.alpha.bg};
+    border-radius: 50%;
+    z-index: -1;
+    top: -17px;
+    left: -21px;
+    transition: all 150ms;
+    box-shadow: ${({ theme }) => `
+      -1px -1px 3px ${theme.secondary[300]},
+      1px 1px 3px  ${theme.secondary[800]},
+      0 0 6px 1px ${theme.black} inset
+    `};
+    backdrop-filter: blur(4px);
+    opacity: 0;
   }
 
   .open-btn {
@@ -327,7 +352,8 @@ const AtlantaPromoStyles = styled(motion.div)`
   }
 
   @media screen and (max-width: 768px) {
-    top: calc(${({ theme }) => theme.navHeight}px - 2.5rem);
+    top: calc(${({ theme }) => theme.navHeight}px);
+    right: 1.5rem;
   }
 `;
 

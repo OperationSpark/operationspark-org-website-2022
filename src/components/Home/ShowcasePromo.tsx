@@ -84,7 +84,7 @@ const ShowcasePromo: FC<ShowcasePromoProps> = ({ info }) => {
           <div className='date-time-container'>
             <div className='start-date'>{showcaseStart.format('dddd, MMMM D, YYYY')}</div>
             <div className='start-time'>
-              Doors Open: {doorsOpen.format('h:mma')}
+              Doors Open: <span className='primary-green time'>{doorsOpen.format('h:mma')}</span>
               <span className='timezone'>{doorsOpen.format('z')}</span>
             </div>
             <div className='start-time'>
@@ -264,7 +264,7 @@ export const ShowcasePromoStyles = styled.div<{ speed: number; opacity: number }
 
     .date-time-container {
       font-size: calc(1.1rem + 0.4vw);
-      text-align: center;
+
       font-weight: 500;
       display: flex;
       flex-flow: column;
@@ -280,6 +280,9 @@ export const ShowcasePromoStyles = styled.div<{ speed: number; opacity: number }
       justify-content: center;
       gap: 0.1rem;
       .time {
+        font-family: 'Kalam', cursive;
+        /* font-family: 'Source Code Pro', monospace; */
+        font-weight: 700;
         margin-left: 0.5rem;
       }
     }
@@ -297,7 +300,7 @@ export const ShowcasePromoStyles = styled.div<{ speed: number; opacity: number }
   }
   .primary-green {
     color: ${({ theme: { isLightMode, green, primary } }) =>
-      isLightMode ? primary[800] : green[300]};
+      isLightMode ? primary[900] : green[300]};
   }
 
   .register-section {
@@ -316,7 +319,7 @@ export const ShowcasePromoStyles = styled.div<{ speed: number; opacity: number }
       backdrop-filter: blur(3px);
       border: none;
       color: ${({ theme }, { isLightMode, primary, secondary } = theme) =>
-        isLightMode ? primary[700] : secondary[700]};
+        isLightMode ? primary[900] : secondary[700]};
       cursor: pointer;
       transition: all 0.25s ease-in-out;
 
