@@ -84,12 +84,12 @@ const ShowcasePromo: FC<ShowcasePromoProps> = ({ info }) => {
           <div className='date-time-container'>
             <div className='start-date'>{showcaseStart.format('dddd, MMMM D, YYYY')}</div>
             <div className='start-time'>
-              Door {doorsOpen.format('h:mma')}
-              <span className='timezone'>{doorsOpen.format('(z)')}</span>
+              Doors Open: {doorsOpen.format('h:mma')}
+              <span className='timezone'>{doorsOpen.format('z')}</span>
             </div>
             <div className='start-time'>
-              Start <span className='primary-green time'>{showcaseStart.format('h:mma')}</span>
-              <span className='timezone'>{showcaseStart.format('(z)')}</span>
+              Starts: <span className='primary-green time'>{showcaseStart.format('h:mma')}</span>
+              <span className='timezone'>{showcaseStart.format('z')}</span>
             </div>
           </div>
 
@@ -117,7 +117,6 @@ const circuitAnimation = keyframes`
   }
   20% { // zoom in
     transform: scale(3) translate(25%, 0);
-
   }
   40% { // scroll bottom right
     transform: scale(3) translate(25%, 25%);
@@ -151,9 +150,9 @@ const fireworkAnimation = keyframes`
 `;
 
 export const ShowcasePromoStyles = styled.div<{ speed: number; opacity: number }>`
+  user-select: none;
   position: relative;
   z-index: 0;
-
   padding-top: ${({ theme }) => theme.navHeight}px;
   overflow: hidden;
 
@@ -194,18 +193,20 @@ export const ShowcasePromoStyles = styled.div<{ speed: number; opacity: number }
     align-items: center;
     justify-content: center;
     filter: drop-shadow(-0.1rem 0.1rem 0.25rem rgba(25, 25, 25, 0.75));
-    text-shadow: 0 0 0.5rem ${({ theme }) => theme.alpha.bg25};
-    background: ${({ theme }, { secondary } = theme) => `
-    linear-gradient(
-      100deg,
-      ${secondary[700]} 0%,
-      ${secondary[300]} 25%,
-      ${secondary[300]} 75%,
-      ${secondary[700]} 100%
-    )`};
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    .showcase-title {
+      text-shadow: 0 0 0.5rem ${({ theme }) => theme.alpha.bg25};
+      background: ${({ theme }, { secondary } = theme) => `
+      linear-gradient(
+        100deg,
+        ${secondary[700]} 0%,
+        ${secondary[300]} 25%,
+        ${secondary[300]} 75%,
+        ${secondary[700]} 100%
+      )`};
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
   }
 
   .cohort-badge {
@@ -249,9 +250,15 @@ export const ShowcasePromoStyles = styled.div<{ speed: number; opacity: number }
     display: flex;
     flex-flow: column;
     background: ${({ theme }) => theme.alpha.bg25};
-    box-shadow: -0.1rem 0.1rem 0.5rem rgba(25, 25, 25, 0.5);
+    color: ${({ theme }) => (theme.isLightMode ? 'rgba(25,25,25,1)' : 'rgba(232,232,232,1)')};
+    box-shadow: ${({ theme }) => `
+      -1px -1px 3px ${theme.secondary[300]},
+      1px 1px 3px  ${theme.secondary[800]},
+      0 0 6px 1px ${theme.black} inset
+    `};
+
     backdrop-filter: blur(3px);
-    padding: 1rem 2rem;
+    padding: 1.5rem 3rem;
     border-radius: 1rem;
     gap: 1rem;
 
@@ -262,24 +269,30 @@ export const ShowcasePromoStyles = styled.div<{ speed: number; opacity: number }
       display: flex;
       flex-flow: column;
       align-items: center;
-      gap: 0.5rem;
     }
     .start-date {
       word-spacing: 0.25em;
-      /* white-space: nowrap; */
+      padding-bottom: 0.5em;
     }
     .start-time {
       display: flex;
       align-items: center;
       justify-content: center;
+      gap: 0.1rem;
       .time {
         margin-left: 0.5rem;
       }
     }
     .timezone {
+      display: flex;
+      line-height: 1.2em;
       font-size: 0.5em;
-      align-self: flex-start;
-      padding: 0.5em 0.5em;
+      font-weight: 700;
+      padding: 0.1rem 0.25rem;
+      margin-left: 0.5em;
+      background: ${({ theme }) => (theme.isLightMode ? theme.alpha.fg : theme.alpha.bg)};
+      color: ${({ theme }) => theme.green[0]};
+      border-radius: 0.5em;
     }
   }
   .primary-green {
@@ -294,9 +307,11 @@ export const ShowcasePromoStyles = styled.div<{ speed: number; opacity: number }
       padding: 1rem 2rem;
       border-radius: 1rem;
       background: ${({ theme }) => theme.alpha.bg25};
-      box-shadow: ${({ theme }, { isLightMode, alpha, secondary } = theme) => `
-        -0.1rem 0.1rem 0.5rem 0.2rem ${isLightMode ? alpha.fg50 : alpha.bg50},
-        0 0 0.5rem ${isLightMode ? secondary[500] : secondary[0]} inset
+
+      box-shadow: ${({ theme }) => `
+        -1px -1px 3px ${theme.secondary[300]},
+        1px 1px 3px  ${theme.secondary[800]},
+        0 0 6px 1px ${theme.black} inset
       `};
       backdrop-filter: blur(3px);
       border: none;
@@ -306,10 +321,15 @@ export const ShowcasePromoStyles = styled.div<{ speed: number; opacity: number }
       transition: all 0.25s ease-in-out;
 
       :hover {
-        transform: scale(1.04);
+        transform: scale(1.01);
+        box-shadow: ${({ theme }) => `
+          -1px -1px 3px ${theme.secondary[300]},
+          1px 1px 3px  ${theme.secondary[800]},
+          0 0 2px 1px ${theme.black} inset
+        `};
       }
       :active {
-        transform: scale(0.94);
+        transform: scale(0.98);
       }
     }
   }
@@ -319,6 +339,7 @@ export const ShowcasePromoStyles = styled.div<{ speed: number; opacity: number }
       .date-time-container {
         font-size: 1.2rem;
       }
+      padding: 1rem 2rem;
     }
   }
 

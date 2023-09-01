@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import { anchor } from './mixins/anchor';
+import { circuitBoardBg } from './mixins/circuitBoardBg';
 
 const GlobalStyles = createGlobalStyle`
   * {
@@ -114,11 +115,13 @@ const GlobalStyles = createGlobalStyle`
     box-shadow: 0 0 1px 0px ${({ theme }) => theme.alpha.fg} inset;
   }
   ::-webkit-scrollbar-thumb {
-    border: 3px solid transparent;
+    /* border: 3px solid transparent;
     border-top-width: 2px;
-    border-bottom-width: 2px;
+    border-bottom-width: 2px; */
+    ${circuitBoardBg}
+    zoom: 0.35;
 
-    border-radius: 5px;
+    border-radius: 0.5rem;
     box-shadow: 0 0 5px 5px ${({ theme }) => theme.primary[500]} inset;
     :hover {
       box-shadow: 0 0 5px 5px ${({ theme }) => theme.primary[300]} inset;

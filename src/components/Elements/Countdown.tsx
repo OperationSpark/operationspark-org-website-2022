@@ -102,11 +102,11 @@ export const CountdownTimer = ({ endTime }: CountdownProps) => {
 };
 
 const CountdownTimerStyles = styled.div`
-  color: ${({ theme: { isLightMode, green, primary } }) =>
-    isLightMode ? primary[800] : green[500]};
+  color: ${({ theme }) => theme.green[500]};
   display: flex;
   justify-content: space-evenly;
   text-align: center;
+  gap: 0.5rem;
 
   p {
     font-size: 0.8rem;
@@ -125,6 +125,10 @@ const CountdownTimerStyles = styled.div`
     flex-flow: column;
     padding: 0.5rem 0;
     width: 3.5rem;
+    background: ${({ theme }) => (theme.isLightMode ? theme.alpha.fg50 : theme.alpha.bg50)};
+    box-shadow: 0 0 2px 1px ${({ theme }) => theme.green[400]};
+    border-radius: 0.5rem;
+
     .time-num {
       font-size: 1.5em;
     }
