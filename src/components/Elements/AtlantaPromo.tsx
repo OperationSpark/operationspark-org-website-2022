@@ -1,4 +1,4 @@
-import { CSSProperties, FC, useEffect, useState } from 'react';
+import { CSSProperties, FC, useState } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -14,37 +14,49 @@ import { useClickAway } from '@this/src/hooks/useClickAway';
 type AtlantaPromoProps = { style?: CSSProperties };
 const AtlantaPromo: FC<AtlantaPromoProps> = ({ style }) => {
   const isMounted = useMounted();
-  const [hidePromo, setHidePromo] = useState(false);
+  const [showPromo, setShowPromo] = useState(false);
   const [promoInfoRef, showPromoInfo, setShowPromoInfo] = useClickAway();
 
   const handleClose = () => {
-    localStorage.setItem('hide-atlanta-promo', 'true');
-    setHidePromo(true);
+    console.log('close');
+    localStorage.setItem('show-atlanta-promo', 'false');
+    setShowPromo(false);
   };
-  const handleShowPromo = () => {
-    if (hidePromo) {
-      localStorage.setItem('hide-atlanta-promo', 'false');
-      setHidePromo(false);
-    }
+  const handleOpen = () => {
+    console.log('open');
+    localStorage.setItem('show-atlanta-promo', 'true');
+    setShowPromo(true);
   };
-
-  useEffect(() => {
-    setHidePromo(localStorage.getItem('hide-atlanta-promo') === 'true');
-  }, []);
 
   return !isMounted
     ? null
     : createPortal(
         <AtlantaPromoStyles
           style={style}
-          className={hidePromo ? 'hide-promo' : ''}
-          title={hidePromo ? 'Open Atlanta Promo' : ''}
-          role={hidePromo ? 'button' : 'banner'}
-          onClick={handleShowPromo}
+          className={!showPromo ? 'hide-promo' : ''}
+          title={!showPromo ? 'Open Atlanta Promo' : ''}
+          role={!showPromo ? 'button' : 'banner'}
         >
-          {hidePromo ? (
+          <AnimatePresence>
+            {!showPromo && (
+              <motion.div
+                className='circular-text'
+                initial={{ opacity: 0 }}
+                exit={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+              >
+                {'Live in Georgia?'.split('').map((letter, i) => (
+                  <span key={i} className={`letter-${i}`}>
+                    {letter}
+                  </span>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {!showPromo ? (
             <div className='open-btn'>
-              <button>
+              <button onClick={handleOpen}>
                 <ExpandIcon size={24} weight={2} className='expand-icon' />
               </button>
             </div>
@@ -61,11 +73,12 @@ const AtlantaPromo: FC<AtlantaPromoProps> = ({ style }) => {
             width='400px'
             height='400px'
             alt='Peach'
+            className='promo-img'
             style={{ maxWidth: '100%', opacity: 0.75 }}
           />
+          <div className='circle-bg'></div>
 
           <div className='promo-content'>
-            {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
             <Link href='/programs/workforce/infoSession'>
               <a className='promo-anchor'>
                 Live in Georgia? Sign up here!
@@ -127,16 +140,55 @@ const AtlantaPromo: FC<AtlantaPromoProps> = ({ style }) => {
 const AtlantaPromoStyles = styled(motion.div)`
   position: fixed;
   width: 256px;
-  top: calc(${({ theme }) => theme.navHeight}px + 0.5rem);
-  right: 1rem;
+  top: calc(${({ theme }) => theme.navHeight}px + 2rem);
+  right: 1.5rem;
   user-select: none;
   transition: all 200ms;
+
+  .circular-text {
+    position: absolute;
+    right: 55px;
+    top: 56px;
+    transform: rotate(240deg);
+    z-index: 10;
+    pointer-events: none;
+
+    span {
+      font-family: 'Source Code Pro', monospace;
+      font-weight: 700;
+      height: 40px;
+      font-size: 12px;
+      position: absolute;
+
+      width: 24px;
+      left: 0;
+      top: 0;
+      transform-origin: bottom center;
+      color: ${({ theme }, { isLightMode, secondary } = theme) =>
+        isLightMode ? secondary[900] : secondary[700]};
+    }
+    ${'Live in Georgia?'
+      .split('')
+      .map((_letter, i) => `.letter-${i} { transform: rotate(${12 * (i + 1)}deg); }`)}
+    .char1 {
+      transform: rotate(6deg);
+    }
+    .char2 {
+      transform: rotate(12deg);
+    }
+    .char3 {
+      transform: rotate(18deg);
+    }
+  }
 
   &.hide-promo {
     background: rgba(232, 236, 240, 0);
     width: 48px;
     cursor: pointer;
     right: 0.5rem;
+    .circle-bg {
+      opacity: 1;
+    }
     .promo-content {
       transition: opacity 100ms;
       opacity: 0;
@@ -146,7 +198,7 @@ const AtlantaPromoStyles = styled(motion.div)`
     .open-btn {
       button > .expand-icon {
         transition: all 250ms;
-        color: ${({ theme }) => theme.secondary[700]};
+        color: ${({ theme }) => theme.secondary[200]};
       }
       :hover {
         button > .expand-icon {
@@ -186,6 +238,25 @@ const AtlantaPromoStyles = styled(motion.div)`
         transform: rotate(90deg);
       }
     }
+  }
+
+  .circle-bg {
+    position: absolute;
+    width: 85px;
+    height: 85px;
+    background: ${({ theme }) => theme.alpha.bg};
+    border-radius: 50%;
+    z-index: -1;
+    top: -17px;
+    left: -21px;
+    transition: all 150ms;
+    box-shadow: ${({ theme }) => `
+      -1px -1px 3px ${theme.secondary[300]},
+      1px 1px 3px  ${theme.secondary[800]},
+      0 0 6px 1px ${theme.black} inset
+    `};
+    backdrop-filter: blur(4px);
+    opacity: 0;
   }
 
   .open-btn {
@@ -281,7 +352,8 @@ const AtlantaPromoStyles = styled(motion.div)`
   }
 
   @media screen and (max-width: 768px) {
-    top: calc(${({ theme }) => theme.navHeight}px - 2.5rem);
+    top: calc(${({ theme }) => theme.navHeight}px);
+    right: 1.5rem;
   }
 `;
 
