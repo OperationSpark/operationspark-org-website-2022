@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 
-import { getCountdownTime, TCountdownTime } from '@this/src/helpers/timeUtils';
+import { getCountdownTime, parseShowcaseTime, TCountdownTime } from '@this/src/helpers/timeUtils';
 import { toDayJs } from '@this/src/helpers/time';
 
 const CountdownStyles = styled.div`
@@ -43,9 +43,10 @@ const CountdownStyles = styled.div`
 
 interface CountdownProps {
   endTime: Date | null;
+  onComplete?: () => void;
 }
 
-const Countdown = ({ endTime }: CountdownProps) => {
+const Countdown = ({ endTime, onComplete }: CountdownProps) => {
   const time = useMemo(() => (endTime ? toDayJs(endTime) : null), [endTime]);
   const isPast = useMemo(() => time?.isBefore(toDayJs(), 'minute'), [time]);
 
@@ -57,7 +58,7 @@ const Countdown = ({ endTime }: CountdownProps) => {
           {time.format('h:mm A')} <span className='tz'>({time.format('z')})</span>
         </div>
       </div>
-      <CountdownTimer endTime={endTime} />
+      <CountdownTimer endTime={endTime} onComplete={onComplete} />
     </CountdownStyles>
   );
 };
@@ -67,7 +68,7 @@ const formatNamePlural = (name: string, val: number) => {
   return val === 1 ? str.slice(0, -1) : str;
 };
 
-export const CountdownTimer = ({ endTime }: CountdownProps) => {
+export const CountdownTimer = ({ endTime, onComplete }: CountdownProps) => {
   const [time, updateTime] = useState<TCountdownTime | null>(null);
 
   type timeStrings = 'days' | 'hours' | 'minutes' | 'seconds';
@@ -79,13 +80,23 @@ export const CountdownTimer = ({ endTime }: CountdownProps) => {
     }
     updateTime(getCountdownTime(endTime));
     const interval = setInterval(() => {
-      updateTime(getCountdownTime(endTime));
+      const t = getCountdownTime(endTime);
+
+      if (t.isComplete) {
+        // If countdown is over, check if parsed info still exists (i.e.a little buffer time before removing promo)
+        const parsedInfo = parseShowcaseTime(endTime.toISOString?.());
+        if (!parsedInfo) {
+          clearInterval(interval);
+          onComplete?.();
+        }
+      }
+      updateTime(t.isComplete ? null : t);
     }, 100);
 
     return () => {
       clearInterval(interval);
     };
-  }, [endTime]);
+  }, [endTime, onComplete]);
 
   return !time || time.isComplete ? null : (
     <CountdownTimerStyles>

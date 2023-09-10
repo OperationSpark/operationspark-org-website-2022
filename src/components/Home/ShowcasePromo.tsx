@@ -9,9 +9,10 @@ import { toDayJs } from '@this/src/helpers/time';
 
 type ShowcasePromoProps = {
   info: IGradShowcase;
+  clearShowcase: () => void;
 };
 
-const ShowcasePromo: FC<ShowcasePromoProps> = ({ info }) => {
+const ShowcasePromo: FC<ShowcasePromoProps> = ({ info, clearShowcase }) => {
   const showcaseStart = toDayJs(info.startDateTime);
   const doorsOpen = toDayJs(new Date(info.startDateTime)).subtract(30, 'minute');
 
@@ -93,7 +94,7 @@ const ShowcasePromo: FC<ShowcasePromoProps> = ({ info }) => {
             </div>
           </div>
 
-          <CountdownTimer endTime={new Date(info.startDateTime)} />
+          <CountdownTimer endTime={new Date(info.startDateTime)} onComplete={clearShowcase} />
         </div>
 
         <div className='register-section'>

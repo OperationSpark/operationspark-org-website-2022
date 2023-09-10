@@ -1,4 +1,5 @@
 import moment from 'moment-timezone';
+import { toDayJs } from './time';
 
 export const toCentTime = (d?: string | Date): Date =>
   moment(typeof d === 'string' ? new Date(d) : d)
@@ -49,4 +50,17 @@ export const getFormattedDateTime = (dateTime?: string | Date | null) => {
     time: d.toLocaleTimeString('en-US', { timeStyle: 'short' }),
     tz: d.toLocaleString('en-US', { timeZoneName: 'short' }).split(' ').pop(),
   };
+};
+
+export const parseShowcaseTime = (endTime?: string): string | null => {
+  if (!endTime) return null;
+  // Force showcase timezone to CT while preserving the hours/minutes
+  const showcaseStart = toDayJs(new Date(endTime)).tz('America/Chicago', true);
+  const now = toDayJs(new Date()).tz('America/Chicago', true);
+
+  if (showcaseStart && !now.isAfter(showcaseStart, 'hour')) {
+    return showcaseStart.toISOString();
+  }
+
+  return null;
 };
