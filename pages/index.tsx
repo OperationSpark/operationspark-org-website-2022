@@ -1,4 +1,5 @@
 import type { GetStaticProps, NextPage } from 'next';
+import { useState } from 'react';
 
 import { IHome } from '../data/types/home';
 import { getStaticAsset } from './api/static/[asset]';
@@ -19,13 +20,13 @@ import AtlantaPromo from '@this/src/components/Elements/AtlantaPromo';
 import PromoVideo from '@this/src/components/Home/PromoVideo';
 import ShowcasePromo from '@this/src/components/Home/ShowcasePromo';
 import { IGradShowcase } from '@this/data/types/gradShowcase';
-import { toDayJs } from '@this/src/helpers/time';
+import { parseShowcaseTime } from '@this/src/helpers/timeUtils';
 
 // const gCloudBaseUrl = 'https://storage.googleapis.com/operationspark-org';
 
 interface HomeProps extends IHome {
   logos: ILogo[];
-  showcase?: IGradShowcase;
+  showcase?: IGradShowcase | null;
 }
 
 const Home: NextPage<HomeProps> = ({
@@ -36,9 +37,15 @@ const Home: NextPage<HomeProps> = ({
   teamEffort,
   showcase,
 }) => {
+  const [showcaseInfo, setShowcaseInfo] = useState<IGradShowcase | null>(showcase || null);
+
   return (
     <Main style={{ paddingTop: 0 }}>
-      {showcase ? <ShowcasePromo info={showcase} /> : <TopCard />}
+      {showcaseInfo ? (
+        <ShowcasePromo info={showcaseInfo} clearShowcase={() => setShowcaseInfo(null)} />
+      ) : (
+        <TopCard />
+      )}
 
       <AtlantaPromo />
       <PromoVideo />
@@ -57,7 +64,9 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
     'index',
   );
   const logos: ILogo[] = await getStaticAsset('logos', 'partners');
-  const showcase: IGradShowcase = await getStaticAsset('gradShowcase');
+  const showcaseInfo: IGradShowcase = await getStaticAsset('gradShowcase');
+  const startDateTime = parseShowcaseTime(showcaseInfo.startDateTime);
+  const showcase = startDateTime ? { ...showcaseInfo, startDateTime: startDateTime } : null;
 
   return {
     props: {
@@ -66,12 +75,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
       igniteCareer,
       teamEffort,
       logos,
-      showcase: {
-        ...showcase,
-        startDateTime: toDayJs(new Date(showcase.startDateTime))
-          .tz('America/Chicago', true)
-          .toISOString(),
-      },
+      showcase,
     },
   };
 };
