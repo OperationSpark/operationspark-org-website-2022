@@ -33,8 +33,9 @@ const InfoSession: NextPage<InfoSessionProps> = ({ commonQuestions, logos }) => 
   const [referredBy, setReferredBy] = useState<TOption | undefined>();
 
   useEffect(() => {
-    const { referred_by } = router.query;
-    if (!referred_by || referred_by !== 'snap') return;
+    const { referred_by = '' } = router.query;
+    if (!referred_by || typeof referred_by !== 'string' || referred_by.toLowerCase() !== 'snap')
+      return;
     setReferredBy({ name: 'SNAP', value: 'snap' });
   }, [router.query]);
 
