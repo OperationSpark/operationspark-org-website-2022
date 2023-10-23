@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { GetStaticProps, NextPage } from 'next';
+import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { IInfoSession } from '@this/data/types/infoSession';
@@ -12,6 +13,8 @@ import { Main, Section, Content } from '@this/components/layout';
 import useInfoSession from '@this/src/hooks/useInfoSession';
 import { getFormattedDateTime } from '@this/src/helpers/timeUtils';
 import useKeyCombo from '@this/hooks/useKeyCombo';
+import { useEffect, useState } from 'react';
+import { TOption } from '@this/data/types/bits';
 
 const WorkforceForm = dynamic(() => import('@this/src/Forms/Form.Workforce'));
 const Carousel = dynamic(() => import('@this/components/Elements/Carousel'));
@@ -21,10 +24,20 @@ interface InfoSessionProps extends IInfoSession {
 }
 
 const InfoSession: NextPage<InfoSessionProps> = ({ commonQuestions, logos }) => {
+  const router = useRouter();
   const isKeyComboActive = useKeyCombo('o', 's');
   const sessionDates = useInfoSession({ showPrivate: isKeyComboActive });
   const nextSessionDate = sessionDates.find((s) => !s.private);
   const nextSession = getFormattedDateTime(nextSessionDate?.times?.start?.dateTime);
+
+  const [referredBy, setReferredBy] = useState<TOption | undefined>();
+
+  useEffect(() => {
+    const { referred_by = '' } = router.query;
+    if (!referred_by || typeof referred_by !== 'string' || referred_by.toLowerCase() !== 'snap')
+      return;
+    setReferredBy({ name: 'SNAP', value: 'snap' });
+  }, [router.query]);
 
   return (
     <Main>
@@ -98,7 +111,7 @@ const InfoSession: NextPage<InfoSessionProps> = ({ commonQuestions, logos }) => 
                   Register for an info session
                 </h2>
 
-                <WorkforceForm sessionDates={sessionDates} />
+                <WorkforceForm sessionDates={sessionDates} referredBy={referredBy} />
               </div>
             </div>
           </Content>

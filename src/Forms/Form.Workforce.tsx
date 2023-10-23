@@ -16,9 +16,10 @@ import { getStateFromZipCode } from '../components/Form/helpers';
 
 interface WorkforceFormProps {
   sessionDates: ISessionDates[];
+  referredBy?: { name: string; value: string };
 }
 
-const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
+const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
   const form = useForm<IInfoSessionFormValues>();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -168,6 +169,16 @@ const WorkforceForm = ({ sessionDates }: WorkforceFormProps) => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps -- Ignore form change
   }, [currentValues.sessionDate, currentValues.attendingLocation, sessionDates]);
+
+  useEffect(() => {
+    if (referredBy) {
+      form.onSelectChange('referencedBy')({
+        option: referredBy,
+        isValid: true,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- Ignore form change
+  }, [referredBy]);
 
   return (
     <WorkforceFormStyles>
@@ -459,6 +470,10 @@ const referencedByOptions = [
   {
     value: 'tv-streaming',
     name: 'T.V. or Streaming Service',
+  },
+  {
+    value: 'snap',
+    name: 'SNAP',
   },
   {
     value: 'other-advertising',
