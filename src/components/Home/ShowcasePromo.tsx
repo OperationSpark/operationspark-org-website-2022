@@ -100,7 +100,12 @@ const ShowcasePromo: FC<ShowcasePromoProps> = ({ info, clearShowcase }) => {
         <div className='register-section'>
           <button
             className='showcase-website-button'
-            onClick={() => window.open('https://showcase.operationspark.org', '_blank')}
+            onClick={() =>
+              window.open(
+                'https://showcase.operationspark.org/Operation%20Spark%20Website',
+                '_blank',
+              )
+            }
           >
             Learn more or get tickets here!
           </button>
