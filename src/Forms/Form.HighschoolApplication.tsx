@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { MouseEvent, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { AiOutlineInfoCircle as InfoIcon } from 'react-icons/ai';
@@ -19,6 +19,7 @@ import {
   policyAgreementOptions,
   referencedByOptions,
 } from './formData/highSchoolApplicationData';
+import { MotionProps, motion } from 'framer-motion';
 
 const sheetsTabName = process.env.HIGHSCHOOL_FORM_RESPONSES_NAME;
 
@@ -38,6 +39,8 @@ interface HighSchoolApplicationProps {
 const gradYears = [2024, 2025, 2026];
 
 const HighSchoolApplication = ({ onSubmitComplete }: HighSchoolApplicationProps) => {
+  const formRef = useRef<HTMLDivElement>(null);
+  const [step, setStep] = useState(1);
   const form = useForm();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const hasErrors = form.hasErrors();
@@ -48,6 +51,19 @@ const HighSchoolApplication = ({ onSubmitComplete }: HighSchoolApplicationProps)
     ...gradYears.map((year) => ({ name: String(year), value: String(year) })),
     { name: 'Other', value: 'other', additionalInfo: 'Please explain' },
   ];
+
+  const stepTransition: MotionProps = {
+    initial: { opacity: 0, x: -300 },
+    animate: { opacity: 1, x: 0 },
+    exit: { opacity: 0, x: 300 },
+  };
+
+  const handleChangeStep = (e: MouseEvent<HTMLButtonElement>, stepNumber: number) => {
+    e.stopPropagation();
+    e.preventDefault();
+    setStep(stepNumber);
+    formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   const handleSubmit = async () => {
     if (hasErrors) {
@@ -82,195 +98,238 @@ const HighSchoolApplication = ({ onSubmitComplete }: HighSchoolApplicationProps)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [courseTimeOptions?.options]);
 
+  useEffect(() => {}, []);
+
   return (
-    <HighSchoolApplicationStyles>
+    <HighSchoolApplicationStyles ref={formRef}>
       <Form onSubmit={handleSubmit}>
-        <div className='form-grid'>
-          <h3 className='dynamic-h3 form-section-title'>Student info</h3>
+        <div className='form-body'>
+          {step === 1 && (
+            <FormStep key='step-2' {...stepTransition} id='step-1'>
+              <h3 className='dynamic-h3 form-section-title'>Student Info</h3>
 
-          {highSchoolApplication.studentInfo.map((field) => (
-            <field.Element
-              key={field.name}
-              {...field}
-              value={form.get(field.name)}
-              onChange={form.onChange(field.name)}
-              isValid={form.isValid(field.name)}
-              isErr={form.isErr(field.name)}
-            />
-          ))}
-          <Input.Select
-            label='Gender'
-            name='gender'
-            options={genderOptions}
-            option={form.getSelect('gender')}
-            isErr={form.isErr('gender')}
-            isValid={form.isValid('gender')}
-            onChange={form.onSelectChange('gender')}
-            required
-          />
-          <Input.Select
-            label='What year will you graduate'
-            name='gradYear'
-            options={graduationYears}
-            option={form.getSelect('gradYear')}
-            isErr={form.isErr('gradYear')}
-            isValid={form.isValid('gradYear')}
-            onChange={form.onSelectChange('gradYear')}
-            required
-          />
+              {highSchoolApplication.studentInfo.map((field) => (
+                <field.Element
+                  key={field.name}
+                  {...field}
+                  value={form.get(field.name)}
+                  onChange={form.onChange(field.name)}
+                  isValid={form.isValid(field.name)}
+                  isErr={form.isErr(field.name)}
+                />
+              ))}
+              <Input.Select
+                label='Gender'
+                name='gender'
+                options={genderOptions}
+                option={form.getSelect('gender')}
+                isErr={form.isErr('gender')}
+                isValid={form.isValid('gender')}
+                onChange={form.onSelectChange('gender')}
+                required
+              />
+              <Input.Select
+                label='What year will you graduate'
+                name='gradYear'
+                options={graduationYears}
+                option={form.getSelect('gradYear')}
+                isErr={form.isErr('gradYear')}
+                isValid={form.isValid('gradYear')}
+                onChange={form.onSelectChange('gradYear')}
+                required
+              />
 
-          <div className='form-col-span'>
-            <Input.CheckboxGroup
-              label='Race/Ethnicity (select one or more)'
-              checkboxes={ethnicities}
-              values={form.getCheckboxes('ethnicities')}
-              isValid={form.isValid('ethnicities')}
-              isErr={form.isErr('ethnicities')}
-              onChange={form.onCheckboxGroupChange('ethnicities')}
-              clearCheckboxes={form.clearCheckboxGroup('ethnicities')}
-              required
-            />
-          </div>
-
-          <h3 className='dynamic-h3 form-section-title'>Parent/Guardian Information</h3>
-
-          {highSchoolApplication.guardianInfo.map((field) => (
-            <field.Element
-              key={field.name}
-              {...field}
-              value={form.get(field.name)}
-              onChange={form.onChange(field.name)}
-              isValid={form.isValid(field.name)}
-              isErr={form.isErr(field.name)}
-            />
-          ))}
-
-          <h3 className='dynamic-h3 form-section-title'>Course Information</h3>
-          <div className='form-col-span dynamic-txt' style={{ marginBottom: '1rem' }}>
-            <PlainCard noDivider={true}>
-              <p>
-                This semester, we are offering both in-person and virtual classes.{' '}
-                <b>
-                  <i>You can enroll in one or the other (No hybrid option).</i>
-                </b>
-              </p>
-
-              <p>
-                <b>
-                  Days of the week vary by course and format, and will appear after selecting the
-                  appropriate course in the application.
-                </b>
-              </p>
-              <br />
-              <div>
-                {courseTimeOptions && (
-                  <p className='form-info'>
-                    <small>{courseTimeOptions.note}</small>
-                  </p>
-                )}
-                <Input.Select
-                  label='Which class are you interested in?'
-                  name='course'
-                  options={courses}
-                  option={form.getSelect('course')}
-                  isErr={form.isErr('course')}
-                  isValid={form.isValid('course')}
-                  onChange={form.onSelectChange('course')}
+              <div className='form-col-span'>
+                <Input.CheckboxGroup
+                  label='Race/Ethnicity (select one or more)'
+                  checkboxes={ethnicities}
+                  values={form.getCheckboxes('ethnicities')}
+                  isValid={form.isValid('ethnicities')}
+                  isErr={form.isErr('ethnicities')}
+                  onChange={form.onCheckboxGroupChange('ethnicities')}
+                  clearCheckboxes={form.clearCheckboxGroup('ethnicities')}
                   required
                 />
               </div>
-              {courseTimeOptions && (
-                <div>
-                  <p className='form-info'>
-                    <small>{`You must choose in person or virtual (No hybrid option)`}</small>
+              <div className='step-buttons'>
+                <Button onClick={(e) => handleChangeStep(e, 2)} disabled={isSubmitting}>
+                  Next
+                </Button>
+              </div>
+            </FormStep>
+          )}
+
+          {step === 2 && (
+            <FormStep {...stepTransition} id='step-2' key='step-2'>
+              <h3 className='dynamic-h3 form-section-title'>Parent/Guardian Information</h3>
+
+              {highSchoolApplication.guardianInfo.map((field) => (
+                <field.Element
+                  key={field.name}
+                  {...field}
+                  value={form.get(field.name)}
+                  onChange={form.onChange(field.name)}
+                  isValid={form.isValid(field.name)}
+                  isErr={form.isErr(field.name)}
+                />
+              ))}
+              <div className='step-buttons'>
+                <Button onClick={(e) => handleChangeStep(e, 1)} disabled={isSubmitting}>
+                  Back
+                </Button>
+                <Button onClick={(e) => handleChangeStep(e, 3)} disabled={isSubmitting}>
+                  Next
+                </Button>
+              </div>
+            </FormStep>
+          )}
+
+          {step === 3 && (
+            <FormStep {...stepTransition} id='step-3' key='step-3'>
+              <h3 className='dynamic-h3 form-section-title'>Course Information</h3>
+
+              <div className='form-col-span dynamic-txt' style={{ marginBottom: '1rem' }}>
+                <PlainCard noDivider={true}>
+                  <p>
+                    This semester, we are offering both in-person and virtual classes.{' '}
+                    <b>
+                      <i>You can enroll in one or the other (No hybrid option).</i>
+                    </b>
                   </p>
+
+                  <p>
+                    <b>
+                      Days of the week vary by course and format, and will appear after selecting
+                      the appropriate course in the application.
+                    </b>
+                  </p>
+                  <br />
+                  <div>
+                    {courseTimeOptions && (
+                      <p className='form-info'>
+                        <small>{courseTimeOptions.note}</small>
+                      </p>
+                    )}
+                    <Input.Select
+                      label='Which class are you interested in?'
+                      name='course'
+                      options={courses}
+                      option={form.getSelect('course')}
+                      isErr={form.isErr('course')}
+                      isValid={form.isValid('course')}
+                      onChange={form.onSelectChange('course')}
+                      required
+                    />
+                  </div>
+                  {courseTimeOptions && (
+                    <div>
+                      <p className='form-info'>
+                        <small>{`You must choose in person or virtual (No hybrid option)`}</small>
+                      </p>
+                      <Input.Select
+                        label=' What is your course preference?'
+                        name='course'
+                        options={courseTimeOptions.options}
+                        option={form.getSelect('courseTime')}
+                        isErr={form.isErr('courseTime')}
+                        isValid={form.isValid('courseTime')}
+                        onChange={form.onSelectChange('courseTime')}
+                        required
+                      />
+                    </div>
+                  )}
                   <Input.Select
-                    label=' What is your course preference?'
-                    name='course'
-                    options={courseTimeOptions.options}
-                    option={form.getSelect('courseTime')}
-                    isErr={form.isErr('courseTime')}
-                    isValid={form.isValid('courseTime')}
-                    onChange={form.onSelectChange('courseTime')}
+                    label='What is your current level of interest in the program?'
+                    name='interestLevel'
+                    options={interestLevel}
+                    option={form.getSelect('interestLevel')}
+                    isErr={form.isErr('interestLevel')}
+                    isValid={form.isValid('interestLevel')}
+                    onChange={form.onSelectChange('interestLevel')}
                     required
                   />
+                  <Input.Select
+                    label='How did you hear about us?'
+                    name='referencedBy'
+                    options={referencedByOptions}
+                    option={form.getSelect('referencedBy')}
+                    isErr={form.isErr('referencedBy')}
+                    isValid={form.isValid('referencedBy')}
+                    onChange={form.onSelectChange('referencedBy')}
+                    required
+                  />
+                </PlainCard>
+              </div>
+              <div className='step-buttons'>
+                <Button onClick={(e) => handleChangeStep(e, 2)} disabled={isSubmitting}>
+                  Back
+                </Button>
+                <Button onClick={(e) => handleChangeStep(e, 4)} disabled={isSubmitting}>
+                  Next
+                </Button>
+              </div>
+            </FormStep>
+          )}
+
+          {step === 4 && (
+            <FormStep {...stepTransition} id='step-4' key='step-4'>
+              <h3 className='dynamic-h3 form-section-title'>Policy Agreement</h3>
+
+              <PlainCard noDivider={true} className='form-col-span'>
+                <h3 className='form-info dynamic-h3'>{`I understand that:`}</h3>
+                <ul className='form-info dynamic-txt'>
+                  <li>{`Attendance is mandatory for both in-person and virtual classes.`}</li>
+                  <li>
+                    {`If I miss more than two classes total, or fail to complete assignments in a timely manner, Operation Spark may drop me from the class and ask me to re-enroll at a later date.`}
+                  </li>
+                  <li>
+                    <b>{`The first two class meetings are mandatory, with NO EXCEPTIONS.`}</b>
+                  </li>
+                </ul>
+
+                <Input.Select
+                  label='Policy Agreement'
+                  name='policyAgreement'
+                  options={policyAgreementOptions}
+                  option={form.getSelect('policyAgreement')}
+                  isErr={form.isErr('policyAgreement')}
+                  isValid={form.isValid('policyAgreement')}
+                  onChange={form.onSelectChange('policyAgreement')}
+                  required
+                />
+              </PlainCard>
+
+              <div className='form-col-span'>
+                <Input.TextArea
+                  style={{ marginTop: '1rem' }}
+                  label='Other questions/comments'
+                  name='questionsComments'
+                  placeholder='Other questions/comments'
+                  value={form.get('message')}
+                  onChange={form.onChange('message')}
+                />
+              </div>
+
+              {hasErrors && form.showErrors() && (
+                <div className='form-error'>
+                  <InfoIcon /> <p>Please complete required fields</p>
                 </div>
               )}
-              <Input.Select
-                label='What is your current level of interest in the program?'
-                name='interestLevel'
-                options={interestLevel}
-                option={form.getSelect('interestLevel')}
-                isErr={form.isErr('interestLevel')}
-                isValid={form.isValid('interestLevel')}
-                onChange={form.onSelectChange('interestLevel')}
-                required
-              />
-              <Input.Select
-                label='How did you hear about us?'
-                name='referencedBy'
-                options={referencedByOptions}
-                option={form.getSelect('referencedBy')}
-                isErr={form.isErr('referencedBy')}
-                isValid={form.isValid('referencedBy')}
-                onChange={form.onSelectChange('referencedBy')}
-                required
-              />
-            </PlainCard>
-          </div>
-
-          <h3 className='dynamic-h3 form-section-title'>Policy Agreement</h3>
-
-          <PlainCard noDivider={true} className='form-col-span'>
-            <h3 className='form-info dynamic-h3'>{`I understand that:`}</h3>
-            <ul className='form-info dynamic-txt'>
-              <li>{`Attendance is mandatory for both in-person and virtual classes.`}</li>
-              <li>
-                {`If I miss more than two classes total, or fail to complete assignments in a timely manner, Operation Spark may drop me from the class and ask me to re-enroll at a later date.`}
-              </li>
-              <li>
-                <b>{`The first two class meetings are mandatory, with NO EXCEPTIONS.`}</b>
-              </li>
-            </ul>
-
-            <Input.Select
-              label='Policy Agreement'
-              name='policyAgreement'
-              options={policyAgreementOptions}
-              option={form.getSelect('policyAgreement')}
-              isErr={form.isErr('policyAgreement')}
-              isValid={form.isValid('policyAgreement')}
-              onChange={form.onSelectChange('policyAgreement')}
-              required
-            />
-          </PlainCard>
-
-          <h3 className='dynamic-h3 form-section-title'>Other</h3>
-          <div className='form-col-span'>
-            <Input.TextArea
-              label='Other questions/comments'
-              name='questionsComments'
-              placeholder='Other questions/comments'
-              value={form.get('message')}
-              onChange={form.onChange('message')}
-            />
-          </div>
-
-          {hasErrors && form.showErrors() && (
-            <div className='form-error'>
-              <InfoIcon /> <p>Please complete required fields</p>
-            </div>
+              <div className='step-buttons'>
+                <Button onClick={(e) => handleChangeStep(e, 3)} disabled={isSubmitting}>
+                  Back
+                </Button>
+                <Button
+                  className={form.hasErrors() ? 'info disabled' : 'info'}
+                  color='yellow'
+                  style={{ width: '100%' }}
+                  disabled={isSubmitting}
+                >
+                  Sign up!
+                </Button>
+              </div>
+            </FormStep>
           )}
-          <div className='form-col-span'>
-            <Button
-              className={form.hasErrors() ? 'info disabled' : 'info'}
-              color='yellow'
-              style={{ width: '100%' }}
-              disabled={isSubmitting}
-            >
-              Sign up!
-            </Button>
-          </div>
         </div>
       </Form>
     </HighSchoolApplicationStyles>
@@ -281,9 +340,16 @@ export default HighSchoolApplication;
 
 const HighSchoolApplicationStyles = styled.div`
   width: 100%;
-
+  display: flex;
   .form-info {
     color: ${({ theme }) => (theme.isLightMode ? theme.red[700] : theme.red[200])};
+  }
+  .form-body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
   }
   .form-section-title {
     font-weight: 700;
@@ -296,14 +362,6 @@ const HighSchoolApplicationStyles = styled.div`
     grid-column: 1 / -1;
   }
 
-  .form-grid {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(300px, 1fr));
-    grid-template-rows: auto;
-    grid-gap: 0.25rem 1rem;
-    align-items: flex-start;
-  }
   ul {
     padding-left: 2rem;
     margin-bottom: 0.5rem;
@@ -312,14 +370,33 @@ const HighSchoolApplicationStyles = styled.div`
     padding-bottom: 0.5rem;
     line-height: 1.25em;
   }
+`;
+
+const FormStep = styled(motion.div)`
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(300px, 1fr));
+  grid-template-rows: auto;
+  grid-gap: 0.25rem 1rem;
+  align-items: flex-start;
+  box-shadow: 0 0 3px 0px ${({ theme }) => theme.alpha.fg25};
+  padding: 1rem;
+  margin-top: 3rem;
+  border-radius: 0.5rem;
+  .step-buttons {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    gap: 1rem;
+  }
 
   @media screen and (max-width: 768px) {
-    .form-grid {
-      grid-template-columns: 1fr;
-      grid-template-rows: auto;
-      grid-gap: 0.25rem 1rem;
-      max-width: 500px;
-      margin: 0 auto;
-    }
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-gap: 0.25rem 1rem;
+    max-width: 600px;
+    margin: 0 auto;
   }
 `;
