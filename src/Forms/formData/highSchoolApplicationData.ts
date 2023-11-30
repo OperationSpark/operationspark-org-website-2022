@@ -48,20 +48,20 @@ export const courseTimes = {
   advanced: [
     {
       course: 'advanced',
-      value: 'advanced-virtual-t-th-5-7',
+      value: 'advanced-virtual-m-w-5-7',
       location: 'Virtual',
       preReq: 'Fundamentals of HTML, CSS, and Javascript',
       time: 'Mondays + Wednesdays | 5:00pm - 7:00pm',
       name: 'Virtual: Mondays + Wednesdays | 5:00pm - 7:00pm',
     },
-    {
-      course: 'advanced',
-      value: 'advanced-onsite-th-4-8',
-      location: 'In Person',
-      preReq: 'Fundamentals of HTML, CSS, and Javascript',
-      time: 'Thursdays | 4:45pm - 8:00pm',
-      name: 'In Person: Thursdays | 4:45pm - 8:00pm',
-    },
+    // {
+    //   course: 'advanced',
+    //   value: 'advanced-onsite-th-4-8',
+    //   location: 'In Person',
+    //   preReq: 'Fundamentals of HTML, CSS, and Javascript',
+    //   time: 'Thursdays | 4:45pm - 8:00pm',
+    //   name: 'In Person: Thursdays | 4:45pm - 8:00pm',
+    // },
   ],
 };
 
