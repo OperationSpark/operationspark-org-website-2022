@@ -54,7 +54,7 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
           >
             <div className='program-header'>
               <div className='header-card'>
-                <h1 className='dynamic-xl secondary'>Fall 2023</h1>
+                <h1 className='dynamic-xl secondary'>Spring 2024</h1>
                 <h2 className='dynamic-h2 secondary'>After-School Application</h2>
                 <p className='dynamic-txt'>
                   Open to sophomores, juniors, and seniors
@@ -66,10 +66,10 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
                   <b className='secondary'> Monday</b> through <b className='secondary'>Friday</b>.
                 </p> */}
                 <p className='dynamic-txt'>
-                  Fall classes start the week of
-                  <b className='secondary'> August 28th </b>
+                  Spring classes start the week of
+                  <b className='secondary'> January 22nd </b>
                   and end the week of
-                  <b className='secondary'> December 18th</b>.
+                  <b className='secondary'> May 20th</b>.
                 </p>
               </div>
               <Link href='/programs/highschool' passHref>
@@ -111,12 +111,16 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
                   </div>
                 </div>
                 <div className='right-col'>
-                  <p>
-                    <b>In person classes </b>
-                    will be held at the Operation Spark Technical Learning Center
-                  </p>
-                  <br />
-                  <p className='primary-secondary text-center'>514 Franklin Avenue, New Orleans</p>
+                  <div>
+                    <p>
+                      <b>In person classes </b>
+                      will be held at the Operation Spark Technical Learning Center
+                    </p>
+                    <br />
+                    <p className='primary-secondary text-center'>
+                      514 Franklin Avenue, New Orleans
+                    </p>
+                  </div>
                   <div className='opspark-map'>
                     <Map
                       href='https://goo.gl/maps/X6eQ54sWbbH2RbVd8'
@@ -128,7 +132,7 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
             </PlainCard>
             <div className='program-time-details'>
               <h2 className='dynamic-h2'>
-                <b>Fall Course Schedule:</b>
+                <b>Spring Course Schedule:</b>
               </h2>
               <div className='course-title'>
                 <b className='primary-secondary'>Fundamentals of HTML, CSS, and Javascript</b>
@@ -315,6 +319,7 @@ const HighschoolSignupStyles = styled.div`
         margin: 0 auto;
         margin-bottom: 2rem;
         max-width: 350px;
+        justify-content: center;
         .opspark-map {
           max-width: 325px;
           margin: 0 auto;
@@ -325,15 +330,28 @@ const HighschoolSignupStyles = styled.div`
       }
     }
   }
-  @media screen and (max-width: 1000px) {
-    .hs-application-description {
-      .desc-columns {
-        flex-flow: column;
-        .right-col {
-          .opspark-map {
-            max-width: 250px;
-          }
+  @media screen and (max-width: 768px) {
+    .hs-application-description .desc-columns {
+      flex-flow: column;
+      .right-col {
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        max-width: 500px;
+
+        margin: 0 auto;
+        .opspark-map {
+          max-width: 150px;
         }
+      }
+    }
+  }
+  @media screen and (max-width: 500px) {
+    .hs-application-description .desc-columns .right-col {
+      flex-flow: column;
+      .opspark-map {
+        max-width: 200px;
       }
     }
   }
