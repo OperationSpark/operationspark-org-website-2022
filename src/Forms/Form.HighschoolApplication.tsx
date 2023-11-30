@@ -165,7 +165,7 @@ const HighSchoolApplication = ({ onSubmitComplete }: HighSchoolApplicationProps)
               <div>
                 {courseTimeOptions && (
                   <p className='form-info'>
-                    <b>{courseTimeOptions.note}</b>
+                    <small>{courseTimeOptions.note}</small>
                   </p>
                 )}
                 <Input.Select
@@ -182,7 +182,7 @@ const HighSchoolApplication = ({ onSubmitComplete }: HighSchoolApplicationProps)
               {courseTimeOptions && (
                 <div>
                   <p className='form-info'>
-                    <b>{`You must choose in person or virtual (No hybrid option)`}</b>
+                    <small>{`You must choose in person or virtual (No hybrid option)`}</small>
                   </p>
                   <Input.Select
                     label=' What is your course preference?'
@@ -318,6 +318,8 @@ const HighSchoolApplicationStyles = styled.div`
       grid-template-columns: 1fr;
       grid-template-rows: auto;
       grid-gap: 0.25rem 1rem;
+      max-width: 500px;
+      margin: 0 auto;
     }
   }
 `;
