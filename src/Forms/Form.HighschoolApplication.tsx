@@ -1,7 +1,9 @@
-import { MouseEvent, useEffect, useRef, useState } from 'react';
+import { KeyboardEvent, MouseEvent, useEffect, useRef, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
 import axios from 'axios';
 import { AiOutlineInfoCircle as InfoIcon } from 'react-icons/ai';
+
+import { FaCheck as CheckIcon } from 'react-icons/fa';
 
 import { Input } from '@this/components/Form';
 import Form from '@this/components/Form/Form';
@@ -32,14 +34,10 @@ const fieldToLabel = {
   policyAgreement: 'You must agree to our policy',
   guardian: 'Parent/Guardian',
 };
+
 const formatFieldName = (name: string) => {
   const label = fieldToLabel[name as keyof typeof fieldToLabel];
   if (label) return label;
-  const removingWords = ['student', 'guardian'];
-
-  const [isRemoveMatch] = [...name.matchAll(new RegExp(removingWords.join('|'), 'gi'))];
-
-  console.log(isRemoveMatch);
 
   return formatName(name);
 };
@@ -60,6 +58,8 @@ const stepFields: Record<number, string[]> = {
   3: ['course', 'courseTime', 'interestLevel', 'referencedBy'],
   4: ['policyAgreement'],
 };
+
+const maxSteps = Object.keys(stepFields).length;
 
 const getSelectedCourseTimes = (selected: string): { options: TOption[]; note: string } | null => {
   if (selected === 'fundamentals') {
@@ -129,21 +129,40 @@ const HighSchoolApplication = ({ onSubmitComplete }: HighSchoolApplicationProps)
     transition: { duration: 0.1 },
   };
 
-  const handleChangeStep = (e: MouseEvent<HTMLButtonElement>, stepNumber: number) => {
-    e.stopPropagation();
-    e.preventDefault();
+  const scrollFormTop = () => {
+    const top = formRef.current?.getBoundingClientRect()?.top ?? 0;
+    const scrollOffset = window.scrollY;
+    const navHeight = theme.navHeight;
+    const offset = top ? top + scrollOffset - navHeight / 2 : 0;
+
+    if (!offset) return;
+
+    window.scrollTo({ top: offset, behavior: 'smooth' });
+  };
+
+  const changeStep = (stepNumber: number) => {
+    if (stepNumber > maxSteps || stepNumber < 1) {
+      return;
+    }
     const stepErrs = getStepErrors(step);
 
     if (stepErrs.length && stepNumber > step) {
       setShowStepErrors(true);
       validateSteps();
+      focusElement(stepErrs[0]);
       return;
     }
 
     setShowStepErrors(false);
 
     setStep(stepNumber);
-    formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    scrollFormTop();
+  };
+  const handleChangeStep = (e: MouseEvent<HTMLButtonElement>, stepNumber: number) => {
+    e.stopPropagation();
+    e.preventDefault();
+    changeStep(stepNumber);
   };
 
   const handleSubmit = async () => {
@@ -161,6 +180,8 @@ const HighSchoolApplication = ({ onSubmitComplete }: HighSchoolApplicationProps)
       });
       form.clear();
       form.notifySuccess();
+      setStep(1);
+
       onSubmitComplete?.();
     } catch {
       form.notifyError();
@@ -186,33 +207,59 @@ const HighSchoolApplication = ({ onSubmitComplete }: HighSchoolApplicationProps)
     return !!getStepErrors(stepNumber).length ? 'disabled' : 'info';
   };
 
+  const getProgressSectionClassName = (stepNumber: number) => {
+    if (step === stepNumber) return 'progress-section active';
+    if (step > stepNumber) return 'progress-section complete';
+    return 'progress-section';
+  };
+
   const focusElement = (name: string) => {
     let el = formRef.current?.querySelector(`#${name}`) as HTMLInputElement;
-    // if (!el) {
-    //   el = formRef.current?.querySelector(`[name=${name}]`) as HTMLInputElement;
-    // }
-    el?.focus();
+    const $input = el?.querySelector(
+      `#${name}, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])`,
+    ) as HTMLInputElement;
 
-    const top = el?.getBoundingClientRect().top;
-    const scrollOffset = window.scrollY;
-    const navHeight = theme.navHeight;
-    const offset = top ? top + scrollOffset - navHeight : 0;
-
-    if (!offset) return;
-    window.scrollTo({ top: offset, behavior: 'smooth' });
-
+    scrollFormTop();
     if (!el) return;
 
+    el.focus();
+    $input?.focus();
     el.classList.add('flash-input0');
     setTimeout(() => {
       el.classList.add('flash-input1');
       setTimeout(() => {
+        el.focus();
+        $input?.focus();
         el.classList.remove('flash-input0');
         el.classList.remove('flash-input1');
       }, 250);
     }, 250);
   };
 
+  const selectNextElement = (e: KeyboardEvent<HTMLFormElement>) => {
+    const { key } = e;
+    const tag = (e.target as HTMLElement | null)?.tagName ?? '';
+
+    const isEnter = key === 'Enter';
+
+    const isButton = /button/gi.test(tag);
+
+    if (isEnter && !isButton) {
+      e.preventDefault();
+      const stepErrs = getStepErrors(step);
+
+      if (stepErrs.length) {
+        setShowStepErrors(true);
+        focusElement(stepErrs[0]);
+        return;
+      }
+      const nextStep = step + 1;
+      if (nextStep > 4) {
+        return handleSubmit();
+      }
+      changeStep(nextStep);
+    }
+  };
   useEffect(() => {
     form.onSelectChange('courseTime')({ option: { name: '', value: '' }, isValid: true });
     //! Do not want to watch form
@@ -221,58 +268,93 @@ const HighSchoolApplication = ({ onSubmitComplete }: HighSchoolApplicationProps)
 
   return (
     <HighSchoolApplicationStyles ref={formRef}>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} onEnter={selectNextElement}>
         <div className='form-body'>
+          <motion.div
+            className='progress-bar'
+            animate={{
+              background: `linear-gradient(to right, ${
+                theme.isLightMode ? theme.primary[0] : theme.secondary[0]
+              } ${step * 25}%, ${'rgba(0, 0, 0, 0)'} ${step * (100 / maxSteps)}%)`,
+            }}
+          >
+            <div className={getProgressSectionClassName(1)}>
+              1. Student <CheckIcon className='check-icon' />
+            </div>
+            <div className={getProgressSectionClassName(2)}>
+              2. Parent/Guardian <CheckIcon className='check-icon' />
+            </div>
+            <div className={getProgressSectionClassName(3)}>
+              3. Select Course <CheckIcon className='check-icon' />
+            </div>
+            <div className={getProgressSectionClassName(4)}>
+              4. Policy Agreement <CheckIcon className='check-icon' />
+            </div>
+          </motion.div>
           <AnimatePresence exitBeforeEnter>
             {step === 1 && (
               <FormStep key='step-1' {...stepTransition} id='step-1'>
                 <h3 className='dynamic-h3 form-section-title'>Student Info</h3>
+                <div className='step-buttons'>
+                  <div>{/* Force "Next" button to right -- the cheap way */}</div>
+                  <Button
+                    onClick={(e) => handleChangeStep(e, 2)}
+                    disabled={isSubmitting}
+                    className={getStepBtnClassName(1)}
+                  >
+                    Next
+                  </Button>
+                </div>
+                <div className='form-section-content'>
+                  {highSchoolApplication.studentInfo.map((field, i) => (
+                    <field.Element
+                      {...field}
+                      key={field.name + i}
+                      value={form.get(field.name)}
+                      onChange={(value, isValid) => handleChange(field.name, value, isValid)}
+                      isValid={form.isValid(field.name)}
+                      isErr={checkErr(1, field.name)}
+                    />
+                  ))}
 
-                {highSchoolApplication.studentInfo.map((field, i) => (
-                  <field.Element
-                    {...field}
-                    key={field.name + i}
-                    value={form.get(field.name)}
-                    onChange={(value, isValid) => handleChange(field.name, value, isValid)}
-                    isValid={form.isValid(field.name)}
-                    isErr={checkErr(1, field.name)}
-                  />
-                ))}
-                <Input.Select
-                  id='gender'
-                  label='Gender'
-                  name='gender'
-                  options={genderOptions}
-                  option={form.getSelect('gender')}
-                  isErr={checkErr(1, 'gender')}
-                  isValid={form.isValid('gender')}
-                  onChange={form.onSelectChange('gender')}
-                  required
-                />
-                <Input.Select
-                  id='gradYear'
-                  label='What year will you graduate'
-                  name='gradYear'
-                  options={graduationYears}
-                  option={form.getSelect('gradYear')}
-                  isErr={checkErr(1, 'gradYear')}
-                  isValid={form.isValid('gradYear')}
-                  onChange={form.onSelectChange('gradYear')}
-                  required
-                />
-
-                <div className='form-col-span'>
-                  <Input.CheckboxGroup
-                    id='ethnicities'
-                    label='Race/Ethnicity (select one or more)'
-                    checkboxes={ethnicities}
-                    values={form.getCheckboxes('ethnicities')}
-                    isValid={form.isValid('ethnicities')}
-                    isErr={checkErr(1, 'ethnicities')}
-                    onChange={form.onCheckboxGroupChange('ethnicities')}
-                    clearCheckboxes={form.clearCheckboxGroup('ethnicities')}
+                  <Input.Select
+                    animate={false}
+                    id='gender'
+                    label='Gender'
+                    name='gender'
+                    options={genderOptions}
+                    option={form.getSelect('gender')}
+                    isErr={checkErr(1, 'gender')}
+                    isValid={form.isValid('gender')}
+                    onChange={form.onSelectChange('gender')}
                     required
                   />
+                  <Input.Select
+                    animate={false}
+                    id='gradYear'
+                    label='What year will you graduate'
+                    name='gradYear'
+                    options={graduationYears}
+                    option={form.getSelect('gradYear')}
+                    isErr={checkErr(1, 'gradYear')}
+                    isValid={form.isValid('gradYear')}
+                    onChange={form.onSelectChange('gradYear')}
+                    required
+                  />
+
+                  <div className='form-col-span'>
+                    <Input.CheckboxGroup
+                      id='ethnicities'
+                      label='Race/Ethnicity (select one or more)'
+                      checkboxes={ethnicities}
+                      values={form.getCheckboxes('ethnicities')}
+                      isValid={form.isValid('ethnicities')}
+                      isErr={checkErr(1, 'ethnicities')}
+                      onChange={form.onCheckboxGroupChange('ethnicities')}
+                      clearCheckboxes={form.clearCheckboxGroup('ethnicities')}
+                      required
+                    />
+                  </div>
                 </div>
                 {!!getStepErrors(1).length && showStepErrors && (
                   <div className='form-errors form-error'>
@@ -296,178 +378,217 @@ const HighSchoolApplication = ({ onSubmitComplete }: HighSchoolApplicationProps)
                     </div>
                   </div>
                 )}
-                <div className='step-buttons'>
-                  <Button
-                    onClick={(e) => handleChangeStep(e, 2)}
-                    disabled={isSubmitting}
-                    className={getStepBtnClassName(1)}
-                  >
-                    Next
-                  </Button>
-                </div>
+                {!getStepErrors(1).length && (
+                  <div className='step-buttons'>
+                    <div>{/* Force "Next" button to right -- the cheap way */}</div>
+                    <Button
+                      onClick={(e) => handleChangeStep(e, 2)}
+                      disabled={isSubmitting}
+                      className={getStepBtnClassName(1)}
+                      style={{ width: '200px' }}
+                    >
+                      Next
+                    </Button>
+                  </div>
+                )}
               </FormStep>
             )}
             {step === 2 && (
               <FormStep {...stepTransition} id='step-2' key='step-2'>
                 <h3 className='dynamic-h3 form-section-title'>Parent/Guardian Information</h3>
-
-                {highSchoolApplication.guardianInfo.map((field, i) => (
-                  <field.Element
-                    {...field}
-                    key={field.name + i}
-                    value={form.get(field.name)}
-                    onChange={form.onChange(field.name)}
-                    isValid={form.isValid(field.name)}
-                    isErr={form.isErr(field.name)}
-                  />
-                ))}
                 <div className='step-buttons'>
-                  <Button onClick={(e) => handleChangeStep(e, 1)} disabled={isSubmitting}>
+                  <Button
+                    className='back-btn'
+                    onClick={(e) => handleChangeStep(e, 1)}
+                    disabled={isSubmitting}
+                  >
                     Back
                   </Button>
-                  <Button onClick={(e) => handleChangeStep(e, 3)} disabled={isSubmitting}>
+                  <Button
+                    onClick={(e) => handleChangeStep(e, 3)}
+                    className={getStepBtnClassName(2)}
+                    disabled={isSubmitting}
+                  >
                     Next
                   </Button>
                 </div>
+
+                <div className='form-section-content'>
+                  {highSchoolApplication.guardianInfo.map((field, i) => (
+                    <field.Element
+                      {...field}
+                      key={field.name + i}
+                      value={form.get(field.name)}
+                      onChange={form.onChange(field.name)}
+                      isValid={form.isValid(field.name)}
+                      isErr={checkErr(2, field.name)}
+                    />
+                  ))}
+                </div>
+                {!!getStepErrors(2).length && showStepErrors && (
+                  <div className='form-errors form-error'>
+                    <Button className='close-btn' onClick={() => setShowStepErrors(false)}>
+                      <XIcon />
+                    </Button>
+
+                    <p className='form-error form-error-header'>
+                      <InfoIcon /> Missing required fields:
+                    </p>
+                    <div className='form-error-container'>
+                      {getStepErrors(2).map((err, i) => (
+                        <span
+                          key={err + i}
+                          className='form-error-item button'
+                          onClick={() => focusElement(err)}
+                        >
+                          {formatFieldName(err)}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </FormStep>
             )}
             {step === 3 && (
               <FormStep {...stepTransition} id='step-3' key='step-3'>
                 <h3 className='dynamic-h3 form-section-title'>Course Information</h3>
 
-                <div className='form-col-span dynamic-txt' style={{ marginBottom: '1rem' }}>
-                  <PlainCard noDivider={true}>
-                    <p>
-                      This semester, we are offering both in-person and virtual classes.{' '}
-                      <b>
-                        <i>You can enroll in one or the other (No hybrid option).</i>
-                      </b>
-                    </p>
-
-                    <p>
-                      <b>
-                        Days of the week vary by course and format, and will appear after selecting
-                        the appropriate course in the application.
-                      </b>
-                    </p>
-                    <br />
-                    <div>
-                      {courseTimeOptions && (
-                        <p className='form-info'>
-                          <small>{courseTimeOptions.note}</small>
-                        </p>
-                      )}
-                      <Input.Select
-                        label='Which class are you interested in?'
-                        name='course'
-                        options={courses}
-                        option={form.getSelect('course')}
-                        isErr={form.isErr('course')}
-                        isValid={form.isValid('course')}
-                        onChange={form.onSelectChange('course')}
-                        required
-                      />
-                    </div>
-                    {courseTimeOptions && (
-                      <div>
-                        <p className='form-info'>
-                          <small>{`You must choose in person or virtual (No hybrid option)`}</small>
-                        </p>
-                        <Input.Select
-                          label=' What is your course preference?'
-                          name='course'
-                          options={courseTimeOptions.options}
-                          option={form.getSelect('courseTime')}
-                          isErr={form.isErr('courseTime')}
-                          isValid={form.isValid('courseTime')}
-                          onChange={form.onSelectChange('courseTime')}
-                          required
-                        />
-                      </div>
-                    )}
-                    <Input.Select
-                      label='What is your current level of interest in the program?'
-                      name='interestLevel'
-                      options={interestLevel}
-                      option={form.getSelect('interestLevel')}
-                      isErr={form.isErr('interestLevel')}
-                      isValid={form.isValid('interestLevel')}
-                      onChange={form.onSelectChange('interestLevel')}
-                      required
-                    />
-                    <Input.Select
-                      label='How did you hear about us?'
-                      name='referencedBy'
-                      options={referencedByOptions}
-                      option={form.getSelect('referencedBy')}
-                      isErr={form.isErr('referencedBy')}
-                      isValid={form.isValid('referencedBy')}
-                      onChange={form.onSelectChange('referencedBy')}
-                      required
-                    />
-                  </PlainCard>
-                </div>
                 <div className='step-buttons'>
-                  <Button onClick={(e) => handleChangeStep(e, 2)} disabled={isSubmitting}>
+                  <Button
+                    className='back-btn'
+                    onClick={(e) => handleChangeStep(e, 2)}
+                    disabled={isSubmitting}
+                  >
                     Back
                   </Button>
-                  <Button onClick={(e) => handleChangeStep(e, 4)} disabled={isSubmitting}>
+                  <Button
+                    onClick={(e) => handleChangeStep(e, 4)}
+                    className={getStepBtnClassName(3)}
+                    disabled={isSubmitting}
+                  >
                     Next
                   </Button>
                 </div>
+                <div className='form-section-content'>
+                  <div className='form-col-span dynamic-txt' style={{ marginBottom: '1rem' }}>
+                    <PlainCard noDivider={true}>
+                      <p>
+                        This semester, we are offering both in-person and virtual classes.{' '}
+                        <b>
+                          <i>You can enroll in one or the other (No hybrid option).</i>
+                        </b>
+                      </p>
+
+                      <p>
+                        <b>
+                          Days of the week vary by course and format, and will appear after
+                          selecting the appropriate course in the application.
+                        </b>
+                      </p>
+                      <br />
+                      <div>
+                        {courseTimeOptions && (
+                          <p className='form-info'>
+                            <small>{courseTimeOptions.note}</small>
+                          </p>
+                        )}
+                        <Input.Select
+                          id='course'
+                          animate={false}
+                          label='Which class are you interested in?'
+                          name='course'
+                          options={courses}
+                          option={form.getSelect('course')}
+                          isErr={form.isErr('course')}
+                          isValid={form.isValid('course')}
+                          onChange={form.onSelectChange('course')}
+                          required
+                        />
+                      </div>
+                      {courseTimeOptions && (
+                        <div>
+                          <p className='form-info'>
+                            <small>{`You must choose in person or virtual (No hybrid option)`}</small>
+                          </p>
+                          <Input.Select
+                            id='courseTime'
+                            animate={false}
+                            label=' What is your course preference?'
+                            name='course'
+                            options={courseTimeOptions.options}
+                            option={form.getSelect('courseTime')}
+                            isErr={form.isErr('courseTime')}
+                            isValid={form.isValid('courseTime')}
+                            onChange={form.onSelectChange('courseTime')}
+                            required
+                          />
+                        </div>
+                      )}
+                      <Input.Select
+                        id='interestLevel'
+                        animate={false}
+                        label='What is your current level of interest in the program?'
+                        name='interestLevel'
+                        options={interestLevel}
+                        option={form.getSelect('interestLevel')}
+                        isErr={form.isErr('interestLevel')}
+                        isValid={form.isValid('interestLevel')}
+                        onChange={form.onSelectChange('interestLevel')}
+                        required
+                      />
+                      <Input.Select
+                        id='referencedBy'
+                        animate={false}
+                        label='How did you hear about us?'
+                        name='referencedBy'
+                        options={referencedByOptions}
+                        option={form.getSelect('referencedBy')}
+                        isErr={form.isErr('referencedBy')}
+                        isValid={form.isValid('referencedBy')}
+                        onChange={form.onSelectChange('referencedBy')}
+                        required
+                      />
+                    </PlainCard>
+                  </div>
+                </div>
+                {!!getStepErrors(3).length && showStepErrors && (
+                  <div className='form-errors form-error'>
+                    <Button className='close-btn' onClick={() => setShowStepErrors(false)}>
+                      <XIcon />
+                    </Button>
+
+                    <p className='form-error form-error-header'>
+                      <InfoIcon /> Missing required fields:
+                    </p>
+                    <div className='form-error-container'>
+                      {getStepErrors(3).map((err, i) => (
+                        <span
+                          key={err + i}
+                          className='form-error-item button'
+                          onClick={() => focusElement(err)}
+                        >
+                          {formatFieldName(err)}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </FormStep>
             )}
 
             {step === 4 && (
               <FormStep {...stepTransition} id='step-4' key='step-4'>
                 <h3 className='dynamic-h3 form-section-title'>Policy Agreement</h3>
-
-                <PlainCard noDivider={true} className='form-col-span'>
-                  <h3 className='form-info dynamic-h3'>{`I understand that:`}</h3>
-                  <ul className='form-info dynamic-txt'>
-                    <li>{`Attendance is mandatory for both in-person and virtual classes.`}</li>
-                    <li>
-                      {`If I miss more than two classes total, or fail to complete assignments in a timely manner, Operation Spark may drop me from the class and ask me to re-enroll at a later date.`}
-                    </li>
-                    <li>
-                      <b>{`The first two class meetings are mandatory, with NO EXCEPTIONS.`}</b>
-                    </li>
-                  </ul>
-
-                  <Input.Select
-                    label='Policy Agreement'
-                    name='policyAgreement'
-                    options={policyAgreementOptions}
-                    option={form.getSelect('policyAgreement')}
-                    isErr={form.isErr('policyAgreement')}
-                    isValid={form.isValid('policyAgreement')}
-                    onChange={form.onSelectChange('policyAgreement')}
-                    required
-                  />
-                </PlainCard>
-
-                <div className='form-col-span'>
-                  <Input.TextArea
-                    style={{ marginTop: '1rem' }}
-                    label='Other questions/comments'
-                    name='questionsComments'
-                    placeholder='Other questions/comments'
-                    value={form.get('message')}
-                    onChange={form.onChange('message')}
-                  />
-                </div>
-
-                {hasErrors && form.showErrors() && (
-                  <div className='form-error'>
-                    <InfoIcon /> <p>Please complete required fields</p>
-                  </div>
-                )}
                 <div className='step-buttons'>
-                  <Button onClick={(e) => handleChangeStep(e, 3)} disabled={isSubmitting}>
+                  <Button
+                    className='back-btn'
+                    onClick={(e) => handleChangeStep(e, 3)}
+                    disabled={isSubmitting}
+                  >
                     Back
                   </Button>
                   <Button
-                    className={form.hasErrors() ? 'info disabled' : 'info'}
+                    className={getStepBtnClassName(4)}
                     color='yellow'
                     style={{ width: '100%' }}
                     disabled={isSubmitting}
@@ -475,6 +596,67 @@ const HighSchoolApplication = ({ onSubmitComplete }: HighSchoolApplicationProps)
                     Sign up!
                   </Button>
                 </div>
+                <div className='form-section-content'>
+                  <PlainCard noDivider={true} className='form-col-span'>
+                    <h3 className='form-info dynamic-h3'>{`I understand that:`}</h3>
+                    <ul className='form-info dynamic-txt'>
+                      <li>{`Attendance is mandatory for both in-person and virtual classes.`}</li>
+                      <li>
+                        {`If I miss more than two classes total, or fail to complete assignments in a timely manner, Operation Spark may drop me from the class and ask me to re-enroll at a later date.`}
+                      </li>
+                      <li>
+                        <b>{`The first two class meetings are mandatory, with NO EXCEPTIONS.`}</b>
+                      </li>
+                    </ul>
+
+                    <Input.Select
+                      id='policyAgreement'
+                      animate={false}
+                      label='Policy Agreement'
+                      name='policyAgreement'
+                      options={policyAgreementOptions}
+                      option={form.getSelect('policyAgreement')}
+                      isErr={form.isErr('policyAgreement')}
+                      isValid={form.isValid('policyAgreement')}
+                      onChange={form.onSelectChange('policyAgreement')}
+                      required
+                    />
+                  </PlainCard>
+
+                  <div className='form-col-span'>
+                    <Input.TextArea
+                      style={{ marginTop: '1rem' }}
+                      label='Other questions/comments'
+                      name='questionsComments'
+                      placeholder='Other questions/comments'
+                      value={form.get('message')}
+                      onChange={form.onChange('message')}
+                    />
+                  </div>
+                </div>
+
+                {!!getStepErrors(4).length && showStepErrors && (
+                  <div className='form-errors form-error'>
+                    <Button className='close-btn' onClick={() => setShowStepErrors(false)}>
+                      <XIcon />
+                    </Button>
+
+                    <p className='form-error form-error-header'>
+                      <InfoIcon /> Missing required fields:
+                    </p>
+                    <div className='form-error-container'>
+                      {getStepErrors(4).map((err, i) => (
+                        <span
+                          key={err + i}
+                          className='form-error-item button'
+                          onClick={() => focusElement(err)}
+                        >
+                          {formatFieldName(err)}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </FormStep>
             )}
           </AnimatePresence>
@@ -500,13 +682,16 @@ const HighSchoolApplicationStyles = styled.div`
     flex-direction: column;
     align-items: center;
     padding: 1rem;
-    min-height: 100vh;
+    box-shadow: 0 0 2px ${({ theme }) => theme.alpha.fg};
+    margin-top: 2rem;
+    border-radius: 0.25rem;
   }
   .form-section-title {
     font-weight: 700;
     color: ${({ theme }) => (theme.isLightMode ? theme.magenta[700] : theme.magenta[100])};
     text-align: center;
     grid-column: 1 / -1;
+    font-size: 1.75rem;
     padding-top: 1rem;
   }
   .form-col-span {
@@ -530,34 +715,85 @@ const HighSchoolApplicationStyles = styled.div`
     background: ${({ theme }) => theme.bg} !important;
     box-shadow: 0 0 1px 1px inset ${({ theme }) => theme.alpha.red25} !important;
   }
+  .progress-bar {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 0.25rem;
+    top: 0;
+    left: 0;
+  }
+
+  .progress-section {
+    flex: 1;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: ${({ theme }) => theme.fg};
+
+    box-shadow: 0 0 3px ${({ theme }) => theme.alpha.fg};
+    gap: 0.5rem;
+    margin: 0.1rem;
+    border-radius: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .check-icon {
+      display: none;
+      color: ${({ theme }) => theme.green[500]};
+    }
+    background: rgba(0, 0, 0, 0);
+    transition: all 200ms;
+    &.active {
+      background: ${({ theme }) => theme.primary[0]};
+      color: ${({ theme }) => theme.white};
+    }
+    &.complete {
+      box-shadow: 0 0 3px ${({ theme }) => theme.green[500]};
+
+      background: ${({ theme }) => theme.primary[800]};
+      color: ${({ theme }) => theme.green[500]};
+      .check-icon {
+        display: flex;
+      }
+    }
+  }
 `;
 
 const FormStep = styled(motion.div)`
   width: 100%;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(300px, 1fr));
-  grid-template-rows: auto;
-  grid-gap: 0.25rem 1rem;
-  align-items: flex-start;
-  box-shadow: 0 0 3px 0px ${({ theme }) => theme.alpha.fg25};
-  padding: 1rem;
-  margin-top: ${({ theme }) => theme.navHeight}px;
+
+  min-height: 80vh;
   border-radius: 0.5rem;
 
+  .form-section-content {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(300px, 1fr));
+    grid-template-rows: min-content;
+    grid-gap: 0.25rem 1rem;
+  }
   .step-buttons {
     grid-column: 1 / -1;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    width: 100%;
     align-items: center;
-    margin-top: 1rem;
+    padding-bottom: 1rem;
     gap: 1rem;
+
     button {
       font-size: 1.1rem;
       padding: 0.5rem 1rem;
       transition: all 200ms;
+      justify-self: flex-end;
       &.disabled {
         border-radius: 1.5rem;
       }
+    }
+    .back-btn {
+      justify-self: flex-end;
     }
   }
   .close-btn {
@@ -620,10 +856,12 @@ const FormStep = styled(motion.div)`
   }
 
   @media screen and (max-width: 768px) {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    grid-gap: 0.25rem 1rem;
-    max-width: 600px;
-    margin: 0 auto;
+    .form-section-content {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      grid-gap: 0.25rem 1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
   }
 `;

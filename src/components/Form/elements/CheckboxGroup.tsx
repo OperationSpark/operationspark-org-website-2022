@@ -30,7 +30,7 @@ const CheckboxGroup = ({
   clearCheckboxes,
 }: CheckboxProps) => {
   const valuesKeys = Object.keys(values);
-  console.log({ label });
+
   return (
     <CheckboxGroupStyles className={isErr ? '_input_err' : ''} id={id}>
       <div className='checkbox-group-label'>{label}</div>

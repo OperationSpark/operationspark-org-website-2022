@@ -18,12 +18,10 @@ const AtlantaPromo: FC<AtlantaPromoProps> = ({ style }) => {
   const [promoInfoRef, showPromoInfo, setShowPromoInfo] = useClickAway();
 
   const handleClose = () => {
-    console.log('close');
     localStorage.setItem('show-atlanta-promo', 'false');
     setShowPromo(false);
   };
   const handleOpen = () => {
-    console.log('open');
     localStorage.setItem('show-atlanta-promo', 'true');
     setShowPromo(true);
   };

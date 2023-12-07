@@ -27,6 +27,7 @@ interface SelectProps {
   isErr: boolean;
   delay?: number;
   isValid?: boolean;
+  animate?: boolean;
 }
 
 export const Select = ({
@@ -39,6 +40,7 @@ export const Select = ({
   delay,
   required,
   onChange,
+  animate = true,
 }: SelectProps) => {
   const checkIsValid = (opt: string, info: string | undefined, hasAdditionalInfo: boolean) => {
     if (!required) {
@@ -70,20 +72,21 @@ export const Select = ({
     });
   };
 
+  const inputAnimation = {
+    initial: { opacity: 0, y: 100 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.2, delay: delay ?? undefined },
+  };
+
   return (
     <Fragment>
-      <SelectContainer
-        initial={{ opacity: 0, y: 100 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.2, delay: delay ?? undefined }}
-      >
+      <SelectContainer id={id} {...(animate && inputAnimation)}>
         <SelectStyles title={label} className={isErr && !option.value ? '_input_err' : ''}>
           <label style={{ fontSize: !option.value ? '1rem' : '0.75rem' }}>{label}</label>
           <select
             onChange={(e) => handleOptionSelect(e.target.value)}
             value={option?.value}
             name={id}
-            id={id}
           >
             {[{ name: 'Please select an option', value: '' }, ...options].map(({ name, value }) => (
               <Option value={value} name={name} key={value} />
