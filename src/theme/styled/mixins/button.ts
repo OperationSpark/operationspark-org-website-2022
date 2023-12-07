@@ -46,6 +46,17 @@ export const buttonCss = css`
     box-shadow: 0 0 3px 1px inset rgba(25, 25, 25, 0.75) !important;
     background: ${(p) => p.theme.yellow[400]} !important;
   }
+  :disabled,
+  :disabled:hover,
+  &.disabled,
+  &.disabled:hover {
+    background: ${({ theme: { grey, isLightMode } }) =>
+      isLightMode ? grey[200] : grey[800]} !important;
+    color: ${({ theme: { grey, isLightMode } }) =>
+      isLightMode ? grey[300] : grey[700]} !important;
+    cursor: default;
+    box-shadow: none;
+  }
 `;
 
 export const yellowBtn = css`
