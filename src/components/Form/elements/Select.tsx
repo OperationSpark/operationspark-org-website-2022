@@ -17,6 +17,7 @@ interface OnChangeProps {
 }
 
 interface SelectProps {
+  id?: string;
   options: TOption[];
   name: string;
   label: string;
@@ -29,6 +30,7 @@ interface SelectProps {
 }
 
 export const Select = ({
+  id,
   options = defaultOptions,
   label = '',
   option,
@@ -77,7 +79,12 @@ export const Select = ({
       >
         <SelectStyles title={label} className={isErr && !option.value ? '_input_err' : ''}>
           <label style={{ fontSize: !option.value ? '1rem' : '0.75rem' }}>{label}</label>
-          <select onChange={(e) => handleOptionSelect(e.target.value)} value={option?.value}>
+          <select
+            onChange={(e) => handleOptionSelect(e.target.value)}
+            value={option?.value}
+            name={id}
+            id={id}
+          >
             {[{ name: 'Please select an option', value: '' }, ...options].map(({ name, value }) => (
               <Option value={value} name={name} key={value} />
             ))}
