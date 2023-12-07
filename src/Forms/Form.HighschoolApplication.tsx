@@ -403,13 +403,11 @@ const HighSchoolApplication = ({ onSubmitComplete }: HighSchoolApplicationProps)
                   </div>
                 )}
                 {!getStepErrors(1).length && (
-                  <div className='step-buttons'>
-                    <div>{/* Force "Next" button to right -- the cheap way */}</div>
+                  <div className='step-button-end'>
                     <Button
                       onClick={(e) => handleChangeStep(e, 2)}
                       disabled={isSubmitting}
                       className={getStepBtnClassName(1)}
-                      style={{ width: '200px' }}
                     >
                       Next
                     </Button>
@@ -449,6 +447,18 @@ const HighSchoolApplication = ({ onSubmitComplete }: HighSchoolApplicationProps)
                     />
                   ))}
                 </div>
+                {!getStepErrors(2).length && (
+                  <div className='step-button-end'>
+                    <Button
+                      onClick={(e) => handleChangeStep(e, 3)}
+                      disabled={isSubmitting}
+                      className={getStepBtnClassName(2)}
+                      style={{ width: '200px' }}
+                    >
+                      Next
+                    </Button>
+                  </div>
+                )}
                 {!!getStepErrors(2).length && showStepErrors && (
                   <div className='form-errors form-error'>
                     <Button className='close-btn' onClick={() => setShowStepErrors(false)}>
@@ -575,6 +585,18 @@ const HighSchoolApplication = ({ onSubmitComplete }: HighSchoolApplicationProps)
                     </PlainCard>
                   </div>
                 </div>
+                {!getStepErrors(3).length && (
+                  <div className='step-button-end'>
+                    <Button
+                      onClick={(e) => handleChangeStep(e, 4)}
+                      disabled={isSubmitting}
+                      className={getStepBtnClassName(3)}
+                      style={{ width: '200px' }}
+                    >
+                      Next
+                    </Button>
+                  </div>
+                )}
                 {!!getStepErrors(3).length && showStepErrors && (
                   <div className='form-errors form-error'>
                     <Button className='close-btn' onClick={() => setShowStepErrors(false)}>
@@ -658,6 +680,19 @@ const HighSchoolApplication = ({ onSubmitComplete }: HighSchoolApplicationProps)
                     />
                   </div>
                 </div>
+
+                {!getStepErrors(4).length && (
+                  <div className='step-button-end'>
+                    <Button
+                      className={getStepBtnClassName(4)}
+                      color='yellow'
+                      style={{ width: '100%' }}
+                      disabled={isSubmitting}
+                    >
+                      Sign up!
+                    </Button>
+                  </div>
+                )}
 
                 {!!getStepErrors(4).length && showStepErrors && (
                   <div className='form-errors form-error'>
@@ -835,8 +870,20 @@ const FormStep = styled(motion.div)`
         border-radius: 1.5rem;
       }
     }
+
     .back-btn {
       justify-self: flex-end;
+    }
+  }
+  .step-button-end {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-top: 1rem;
+    button {
+      width: 100%;
+      max-width: 200px;
     }
   }
   .close-btn {
