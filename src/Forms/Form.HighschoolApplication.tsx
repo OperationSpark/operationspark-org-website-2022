@@ -117,6 +117,16 @@ const HighSchoolApplication = ({ onSubmitComplete }: HighSchoolApplicationProps)
     setStepErrors(stepErrs);
   };
 
+  const getNextValidStep = () => {
+    let step = 1;
+    for (let i = step + 1; i <= maxSteps; i++) {
+      if (getStepErrors(i).length) {
+        return i;
+      }
+    }
+    return maxSteps;
+  };
+
   const graduationYears = [
     ...gradYears.map((year) => ({ name: String(year), value: String(year) })),
     { name: 'Other', value: 'other', additionalInfo: 'Please explain' },
@@ -208,9 +218,22 @@ const HighSchoolApplication = ({ onSubmitComplete }: HighSchoolApplicationProps)
   };
 
   const getProgressSectionClassName = (stepNumber: number) => {
-    if (step === stepNumber) return 'progress-section active';
-    if (step > stepNumber) return 'progress-section complete';
-    return 'progress-section';
+    const stepErrs = getStepErrors(stepNumber);
+    const nextValidStep = getNextValidStep();
+
+    let status = 'progress-section';
+    if (stepNumber <= nextValidStep) status += ' clickable';
+    if (!stepErrs.length) status += ' valid';
+    if (step > stepNumber) status += ' complete';
+    if (step === stepNumber) status += ' active';
+
+    return status;
+  };
+
+  const goToStep = (stepNumber: number) => {
+    const nextValidStep = getNextValidStep();
+    if (stepNumber > nextValidStep) return;
+    changeStep(stepNumber);
   };
 
   const focusElement = (name: string) => {
@@ -274,20 +297,21 @@ const HighSchoolApplication = ({ onSubmitComplete }: HighSchoolApplicationProps)
             className='progress-bar'
             animate={{
               background: `linear-gradient(to right, ${
-                theme.isLightMode ? theme.primary[0] : theme.secondary[0]
+                theme.isLightMode ? theme.magenta[0] : theme.magenta[0]
               } ${step * 25}%, ${'rgba(0, 0, 0, 0)'} ${step * (100 / maxSteps)}%)`,
             }}
+            transition={{ type: 'tween', duration: 0.2 }}
           >
-            <div className={getProgressSectionClassName(1)}>
+            <div onClick={() => goToStep(1)} className={getProgressSectionClassName(1)}>
               1. Student <CheckIcon className='check-icon' />
             </div>
-            <div className={getProgressSectionClassName(2)}>
+            <div onClick={() => goToStep(2)} className={getProgressSectionClassName(2)}>
               2. Parent/Guardian <CheckIcon className='check-icon' />
             </div>
-            <div className={getProgressSectionClassName(3)}>
+            <div onClick={() => goToStep(3)} className={getProgressSectionClassName(3)}>
               3. Select Course <CheckIcon className='check-icon' />
             </div>
-            <div className={getProgressSectionClassName(4)}>
+            <div onClick={() => goToStep(4)} className={getProgressSectionClassName(4)}>
               4. Policy Agreement <CheckIcon className='check-icon' />
             </div>
           </motion.div>
@@ -671,6 +695,7 @@ export default HighSchoolApplication;
 const HighSchoolApplicationStyles = styled.div`
   width: 100%;
   display: flex;
+  min-height: 100vh;
   .form-info {
     color: ${({ theme }) => (theme.isLightMode ? theme.red[700] : theme.red[200])};
   }
@@ -678,9 +703,11 @@ const HighSchoolApplicationStyles = styled.div`
     position: relative;
     overflow-x: hidden;
     width: 100%;
+    height: fit-content;
     display: flex;
     flex-direction: column;
     align-items: center;
+
     padding: 1rem;
     box-shadow: 0 0 2px ${({ theme }) => theme.alpha.fg};
     margin-top: 2rem;
@@ -739,23 +766,40 @@ const HighSchoolApplicationStyles = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: default;
+    user-select: none;
     .check-icon {
       display: none;
       color: ${({ theme }) => theme.green[500]};
     }
     background: rgba(0, 0, 0, 0);
     transition: all 200ms;
-    &.active {
-      background: ${({ theme }) => theme.primary[0]};
-      color: ${({ theme }) => theme.white};
-    }
+
     &.complete {
       box-shadow: 0 0 3px ${({ theme }) => theme.green[500]};
-
-      background: ${({ theme }) => theme.primary[800]};
+      background: ${({ theme }) => theme.primary[700]};
       color: ${({ theme }) => theme.green[500]};
+    }
+
+    &.active {
+      background: ${({ theme }) => theme.primary[900]} !important;
+      color: ${({ theme }) => theme.white};
+      cursor: default !important;
+    }
+
+    &.valid {
       .check-icon {
         display: flex;
+      }
+    }
+
+    &.clickable {
+      cursor: pointer;
+
+      transition: all 200ms;
+      &:hover {
+        color: ${({ theme }) => theme.white};
+        background: ${({ theme }) => theme.primary[0]};
       }
     }
   }
@@ -763,8 +807,7 @@ const HighSchoolApplicationStyles = styled.div`
 
 const FormStep = styled(motion.div)`
   width: 100%;
-
-  min-height: 80vh;
+  height: fit-content;
   border-radius: 0.5rem;
 
   .form-section-content {
