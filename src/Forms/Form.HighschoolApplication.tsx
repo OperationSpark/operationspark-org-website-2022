@@ -119,7 +119,7 @@ const HighSchoolApplication = ({ onSubmitComplete }: HighSchoolApplicationProps)
 
   const getNextValidStep = () => {
     let step = 1;
-    for (let i = step + 1; i <= maxSteps; i++) {
+    for (let i = step; i <= maxSteps; i++) {
       if (getStepErrors(i).length) {
         return i;
       }
@@ -303,16 +303,16 @@ const HighSchoolApplication = ({ onSubmitComplete }: HighSchoolApplicationProps)
             transition={{ type: 'tween', duration: 0.2 }}
           >
             <div onClick={() => goToStep(1)} className={getProgressSectionClassName(1)}>
-              1. Student <CheckIcon className='check-icon' />
+              <span className='step-num'>1. </span> Student <CheckIcon className='check-icon' />
             </div>
             <div onClick={() => goToStep(2)} className={getProgressSectionClassName(2)}>
-              2. Parent/Guardian <CheckIcon className='check-icon' />
+              <span className='step-num'>2. </span> Guardian <CheckIcon className='check-icon' />
             </div>
             <div onClick={() => goToStep(3)} className={getProgressSectionClassName(3)}>
-              3. Select Course <CheckIcon className='check-icon' />
+              <span className='step-num'>3. </span> Course <CheckIcon className='check-icon' />
             </div>
             <div onClick={() => goToStep(4)} className={getProgressSectionClassName(4)}>
-              4. Policy Agreement <CheckIcon className='check-icon' />
+              <span className='step-num'>4. </span> Policy <CheckIcon className='check-icon' />
             </div>
           </motion.div>
           <AnimatePresence exitBeforeEnter>
@@ -790,7 +790,7 @@ const HighSchoolApplicationStyles = styled.div`
   .progress-section {
     flex: 1;
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     font-weight: 600;
     color: ${({ theme }) => theme.fg};
 
@@ -801,11 +801,16 @@ const HighSchoolApplicationStyles = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-flow: nowrap;
+    white-space: nowrap;
     cursor: default;
     user-select: none;
     .check-icon {
       display: none;
       color: ${({ theme }) => theme.green[500]};
+    }
+    .step-num {
+      display: flex;
     }
     background: rgba(0, 0, 0, 0);
     transition: all 200ms;
@@ -826,6 +831,9 @@ const HighSchoolApplicationStyles = styled.div`
       .check-icon {
         display: flex;
       }
+      .step-num {
+        display: none;
+      }
     }
 
     &.clickable {
@@ -836,6 +844,12 @@ const HighSchoolApplicationStyles = styled.div`
         color: ${({ theme }) => theme.white};
         background: ${({ theme }) => theme.primary[0]};
       }
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .progress-section {
+      min-width: fit-content;
     }
   }
 `;
