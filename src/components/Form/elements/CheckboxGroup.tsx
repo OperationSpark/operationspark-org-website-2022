@@ -4,6 +4,7 @@ import ClearButton from './ClearButton';
 import RequiredStatus from './RequiredStatus';
 
 interface CheckboxProps {
+  id?: string;
   label: string;
   values: { [key: string]: boolean };
   onChange: (name: string, value: boolean) => void;
@@ -18,6 +19,7 @@ interface CheckboxProps {
 }
 
 const CheckboxGroup = ({
+  id,
   label,
   checkboxes,
   values,
@@ -30,7 +32,7 @@ const CheckboxGroup = ({
   const valuesKeys = Object.keys(values);
 
   return (
-    <CheckboxGroupStyles className={isErr ? '_input_err' : ''}>
+    <CheckboxGroupStyles className={isErr ? '_input_err' : ''} id={id}>
       <div className='checkbox-group-label'>{label}</div>
       {required && <RequiredStatus isValid={isValid} />}
       <ClearButton show={!!valuesKeys.length} onClick={clearCheckboxes} />

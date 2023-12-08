@@ -34,6 +34,9 @@ declare module 'styled-components' {
       bg25: string;
       fg25: string;
       fg10: string;
+      red: string;
+      red25: string;
+      red01: string;
     };
     black: string;
     white: string;

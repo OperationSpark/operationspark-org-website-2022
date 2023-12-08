@@ -16,6 +16,7 @@ import { InfoIcon } from '@this/src/components/icons/Info';
 import { getStaticAsset } from '@this/pages-api/static/[asset]';
 import { useState } from 'react';
 import { useClickAway } from '@this/src/hooks/useClickAway';
+import { Center } from '@this/src/components/layout/Center';
 
 type HighschoolSignupProps = {
   courses: IHighschoolPrograms['courses'];
@@ -92,20 +93,18 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
                     </p>
                     <br />
 
-                    <div>
-                      <p className='primary-secondary'>
-                        {`For virtual classes, you'll need a chromebook, laptop, or desktop computer with
-                    a webcam and mic, a reliable internet connection, AND a quiet place to work
-                    (that last part is super-important!).`}
-                      </p>
-                    </div>
                     <div className='reqs-list'>
                       <b>For virtual classes, you will need:</b>
                       <ul>
                         <li>Laptop/desktop computer (Mac, Windows, or Chromebook)</li>
                         <li>Webcam and mic</li>
                         <li>Reliable internet connection </li>
-                        <li>Quiet place to work</li>
+                        <li>
+                          Quiet place to work
+                          <i className='primary-secondary' style={{ fontSize: '0.8em' }}>
+                            {' (super-important!)'}
+                          </i>
+                        </li>
                       </ul>
                     </div>
                   </div>
@@ -117,9 +116,18 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
                       will be held at the Operation Spark Technical Learning Center
                     </p>
                     <br />
-                    <p className='primary-secondary text-center'>
-                      514 Franklin Avenue, New Orleans
-                    </p>
+                    <Center style={{ height: 'fit-content' }}>
+                      <a
+                        target='_blank'
+                        className='anchor right-arr-left'
+                        href={'https://goo.gl/maps/X6eQ54sWbbH2RbVd8'}
+                        rel='noreferrer'
+                        style={{ maxWidth: '250px', justifySelf: 'flex-end' }}
+                      >
+                        514 Franklin Avenue
+                        <br /> New Orleans, LA 70117
+                      </a>
+                    </Center>
                   </div>
                   <div className='opspark-map'>
                     <Map
@@ -294,7 +302,10 @@ const HighschoolSignupStyles = styled.div`
   }
 
   .hs-program-overview {
-    margin-bottom: 1rem;
+    justify-content: center;
+    display: flex;
+    flex-flow: column;
+    height: 100%;
   }
   .hs-application-description {
     ul {
@@ -320,8 +331,9 @@ const HighschoolSignupStyles = styled.div`
         margin-bottom: 2rem;
         max-width: 350px;
         justify-content: center;
+        gap: 1rem;
         .opspark-map {
-          max-width: 325px;
+          max-width: 250px;
           margin: 0 auto;
           > div {
             margin: 0 0;

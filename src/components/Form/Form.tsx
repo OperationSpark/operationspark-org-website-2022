@@ -1,4 +1,4 @@
-import { CSSProperties, FormEvent, FormEventHandler, ReactNode } from 'react';
+import { CSSProperties, FormEvent, FormEventHandler, KeyboardEvent, ReactNode } from 'react';
 import styled from 'styled-components';
 import { motion, MotionProps } from 'framer-motion';
 
@@ -27,9 +27,10 @@ interface FormProps {
   motionProps?: MotionProps;
   className?: string;
   style?: CSSProperties;
+  onEnter?: (e: KeyboardEvent<HTMLFormElement>) => void;
 }
 
-const Form = ({ children, onSubmit, style, motionProps, className }: FormProps) => {
+const Form = ({ children, onSubmit, style, motionProps, className, onEnter }: FormProps) => {
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     onSubmit && onSubmit(e);
@@ -40,6 +41,7 @@ const Form = ({ children, onSubmit, style, motionProps, className }: FormProps) 
       className={className}
       onSubmit={handleSubmit}
       style={style}
+      onKeyDown={onEnter}
       {...motionProps}
     >
       {children}
