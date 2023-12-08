@@ -116,7 +116,7 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
                       will be held at the Operation Spark Technical Learning Center
                     </p>
                     <br />
-                    <Center>
+                    <Center style={{ height: 'fit-content' }}>
                       <a
                         target='_blank'
                         className='anchor right-arr-left'
