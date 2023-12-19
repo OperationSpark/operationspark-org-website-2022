@@ -8,6 +8,7 @@ const {
   FB_PIXEL_ID,
   HIGHSCHOOL_FORM_ACTIVE = 'false',
   HIGHSCHOOL_FORM_RESPONSES_NAME = '__TAB_NAME_NOT_SET__',
+  FUNDRAISER_PATHNAME = 'fundraiser',
 } = process.env;
 
 const isHsFormActive = HIGHSCHOOL_FORM_ACTIVE?.toLowerCase() === 'true';
@@ -69,6 +70,11 @@ module.exports = (phase, { defaultConfig }) => {
           source: '/infoSession',
           destination: '/programs/workforce/infoSession',
           permanent: true,
+        },
+        {
+          source: `/${FUNDRAISER_PATHNAME}`,
+          destination: '/getInvolved/fundraiser',
+          permanent: false,
         },
         /**
          * High School Application - `/programs/highschool/apply`
