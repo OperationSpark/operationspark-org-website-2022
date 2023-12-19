@@ -1,5 +1,5 @@
-import { ReactNode, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import { ReactNode, useEffect, useRef, useState } from 'react';
 import styled, { DefaultTheme } from 'styled-components';
 
 import rgbDataURL from '@this/src/helpers/rgbDataURL';
@@ -8,6 +8,7 @@ type TImgOverlay = {
   bg?: string;
   opacity?: number;
   blur?: number;
+  position?: 'center center' | 'top center' | 'bottom center';
 };
 
 interface BgImageProps {
@@ -39,7 +40,7 @@ const BgImg = ({ src, height = '40rem', className, children, overlay }: BgImageP
           src={src}
           layout='fill'
           objectFit='cover'
-          objectPosition='top center'
+          objectPosition={overlay?.position ?? 'top center'}
           placeholder='blur'
           blurDataURL={rgbDataURL(134, 0, 241)}
           loading={inView ? 'eager' : 'lazy'}
@@ -91,6 +92,9 @@ const ImgOverlay = styled.div<TImgOverlay>`
   position: absolute;
   width: 100%;
   height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+
   z-index: 0;
   -webkit-user-drag: none;
   @media print {
