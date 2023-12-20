@@ -157,7 +157,7 @@ const ThemeDropdown = styled(motion.div)`
   z-index: 1000;
   right: 0;
   top: calc(100% + 0.25rem);
-  width: 125px;
+  width: 150px;
 
   display: flex;
   flex-flow: column;

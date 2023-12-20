@@ -1,9 +1,4 @@
-import { extendTheme, theme as base } from '@chakra-ui/react';
-
-const theme = extendTheme({
-  config: {
-    initialColorMode: 'dark',
-  },
+const theme = {
   colors: {
     brand: {
       black: '#252525',
@@ -125,11 +120,6 @@ const theme = extendTheme({
       },
     },
   },
-  fonts: {
-    // custom fonts with default fallbacks //
-    heading: `Red Hat Display, ${base.fonts?.heading}`,
-    body: `Roboto, ${base.fonts?.body}`,
-  },
-});
+};
 
 export default theme;

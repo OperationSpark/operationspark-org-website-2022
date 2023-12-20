@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { useToast } from '@chakra-ui/react';
+
 import { TOption } from '@this/data/types/bits';
+import { toast } from 'react-toastify';
 
 type IValues<Values, T extends keyof Values> = Record<T, string>;
 type ISelectValues = Record<string, TOption>;
@@ -21,7 +22,6 @@ type OnSelectChangeProps = {
 };
 
 const useForm = <T extends Record<keyof T, T[keyof T]> = {}>() => {
-  const toast = useToast();
   const [values, setValues] = useState<IValues<T, keyof T>>({} as T);
   const [selectValues, setSelectValues] = useState<ISelectValues>({});
   const [checkboxGroupValues, setCheckboxGroupValues] = useState<TCheckboxGroup>({} as T);
@@ -121,20 +121,20 @@ const useForm = <T extends Record<keyof T, T[keyof T]> = {}>() => {
 
     /** Trigger success toast notification */
     notifySuccess: ({ title, msg }: INotify = {}) => {
-      return toast({
-        title: title ?? 'Success!',
-        description: msg ?? 'Form successfully submitted',
-        status: 'success',
-      });
+      const message = `
+        ${title ?? 'Success!'}
+        ${msg ?? 'Form successfully submitted'}
+      `;
+      toast.success(message);
     },
 
     /** Trigger error toast notification */
     notifyError: ({ title, msg }: INotify = {}) => {
-      return toast({
-        title: title ?? 'Error!',
-        description: msg ?? 'An error ocurred while submitting this form',
-        status: 'error',
-      });
+      const message = `
+        ${title ?? 'Error!'}
+        ${msg ?? 'An error ocurred while submitting this form'}
+      `;
+      return toast.error(message);
     },
 
     /** Clear checkbox fields */

@@ -14,10 +14,12 @@ export const NavLinkStyles = styled.div.attrs(({ color }: { color?: '' | 'yellow
   font-size: 0.9rem;
   z-index: 1;
   padding: 0;
+  font-family: 'Red Hat Display', sans-serif;
+  font-weight: 600;
   a {
     all: unset;
     display: flex;
-    padding: 0.3rem 0.6rem;
+    padding: 0.35rem 0.75rem;
   }
   &.sub-nav {
     transition: box-shadow 125ms;

@@ -50,14 +50,14 @@ const InfoSession: NextPage<InfoSessionProps> = ({ commonQuestions, logos }) => 
                   Interested in our <br />
                   Adult Workforce Program?
                 </h1>
-                <h1 className='dynamic-xl primary-secondary'>
+                <h1 className='dynamic-xl primary-secondary mb0 mt0'>
                   Attend a Free
                   <br />
                   Info Session!
                 </h1>
               </div>
               <div className='whats-to-learn'>
-                <h2 className='dynamic-h2 '>{`YOU'LL LEARN ABOUT`}</h2>
+                <h2 className='dynamic-h2 text-center mb0'>{`YOU'LL LEARN ABOUT`}</h2>
                 <ul className='what-to-learn-list'>
                   <li>Coding and career opportunities</li>
                   <li>Our program and job search support</li>
@@ -98,7 +98,7 @@ const InfoSession: NextPage<InfoSessionProps> = ({ commonQuestions, logos }) => 
                 </div>
 
                 <div>
-                  <h3 className='dynamic-h3 form-title primary-secondary text-center'>
+                  <h3 className='dynamic-h3 form-title primary-secondary text-center next-session'>
                     Next information session:
                   </h3>
                   {!nextSession ? null : (
@@ -256,6 +256,10 @@ const InfoSessionStyles = styled.div`
       .form-title.date-time {
         color: ${({ theme }) => (theme.isLightMode ? theme.magenta[0] : theme.green[0])};
         font-weight: 500;
+        margin: 0;
+      }
+      .form-title.next-session {
+        margin: 0;
       }
     }
 

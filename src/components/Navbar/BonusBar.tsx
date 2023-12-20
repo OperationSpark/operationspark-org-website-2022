@@ -42,8 +42,8 @@ export default BonusBar;
 const BonusBarStyles = styled(motion.div)`
   position: absolute;
   top: calc(100% + 0.5rem);
-  left: 0;
-  width: 100%;
+  right: 0;
+  width: fit-content;
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-end;

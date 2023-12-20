@@ -99,15 +99,13 @@ const MacContentStyles = styled(motion.div)`
     min-height: 125px;
     border-radius: 0.25rem;
 
-    font-weight: 400;
+    font-weight: 300;
     font-style: italic;
     text-justify: inter-word;
     text-align: justify;
     position: relative;
     margin-bottom: 1rem;
-    p {
-      font-size: 1.2em;
-    }
+
     .read-more {
       position: absolute;
       top: 100%;
