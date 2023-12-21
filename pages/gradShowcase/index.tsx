@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import { GetStaticProps, NextPage } from 'next';
 import dynamic from 'next/dynamic';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import styled from 'styled-components';
 
+import { Content, Main } from '@this/components/layout';
 import { IGradShowcase } from '@this/data/types/gradShowcase';
-import { Main, Content } from '@this/components/layout';
-import { toCentTime } from '@this/src/helpers/timeUtils';
 import { getStaticAsset } from '@this/pages-api/static/[asset]';
+import { toCentTime } from '@this/src/helpers/timeUtils';
 
 const Countdown = dynamic(() => import('@this/components/Elements/Countdown'));
 
@@ -61,7 +61,7 @@ const GradShowcase: NextPage<IGradShowcase> = ({ startDateTime, cohortName, isAc
           <Countdown endTime={showcaseDate} />
           <div className='register'>
             <h3 className='dynamic-h3 form-title anchor'>
-              <Link href='/gradShowcase/register'>Register</Link>
+              <Link href='/gradShowcase/register'>{'Register'}</Link>
             </h3>
           </div>
           <div className='vid' style={{ opacity: vidLoaded ? 1 : 0 }}>

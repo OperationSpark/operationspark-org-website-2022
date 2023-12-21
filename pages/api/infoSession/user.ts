@@ -1,8 +1,8 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
-import { SelectItem } from '@this/data/types/bits';
 import { runCloudFunction } from '@this/api/googleFunctions';
-import { config } from '../config';
+import { SelectItem } from '@this/data/types/bits';
 import { AttendingLocation } from '@this/data/types/infoSession';
+import type { NextApiRequest, NextApiResponse } from 'next';
+import { config } from '../../../src/config';
 
 const { SIGNUP_API_ENDPOINT, GREENLIGHT_API_TOKEN = '' } = config;
 

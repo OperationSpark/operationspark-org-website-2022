@@ -1,16 +1,19 @@
-import { KeyboardEvent, MouseEvent, useEffect, useRef, useState } from 'react';
-import styled, { useTheme } from 'styled-components';
 import axios from 'axios';
+import { KeyboardEvent, MouseEvent, useEffect, useRef, useState } from 'react';
 import { AiOutlineInfoCircle as InfoIcon } from 'react-icons/ai';
+import styled, { useTheme } from 'styled-components';
 
 import { FaCheck as CheckIcon } from 'react-icons/fa';
 
+import Button from '@this/components/Elements/Button';
 import { Input } from '@this/components/Form';
 import Form from '@this/components/Form/Form';
 import useForm from '@this/components/Form/useForm';
-import Button from '@this/components/Elements/Button';
 import { TOption } from '@this/data/types/bits';
 import PlainCard from '@this/src/components/Cards/PlainCard';
+import { AnimatePresence, MotionProps, motion } from 'framer-motion';
+import { XIcon } from '../components/icons/XIcon';
+import { formatName } from '../helpers/utils';
 import {
   courseTimes,
   courses,
@@ -21,9 +24,6 @@ import {
   policyAgreementOptions,
   referencedByOptions,
 } from './formData/highSchoolApplicationData';
-import { AnimatePresence, MotionProps, motion } from 'framer-motion';
-import { formatName } from '../helpers/utils';
-import { XIcon } from '../components/icons/XIcon';
 
 const sheetsTabName = process.env.HIGHSCHOOL_FORM_RESPONSES_NAME;
 
@@ -315,7 +315,7 @@ const HighSchoolApplication = ({ onSubmitComplete }: HighSchoolApplicationProps)
               <span className='step-num'>4. </span> Policy <CheckIcon className='check-icon' />
             </div>
           </motion.div>
-          <AnimatePresence exitBeforeEnter>
+          <AnimatePresence mode='wait'>
             {step === 1 && (
               <FormStep key='step-1' {...stepTransition} id='step-1'>
                 <h3 className='dynamic-h3 form-section-title'>Student Info</h3>

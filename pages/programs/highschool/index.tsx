@@ -1,17 +1,17 @@
 import { GetStaticProps, NextPage } from 'next';
 import Link from 'next/link';
 import { useState } from 'react';
-import styled from 'styled-components';
 import { FiChevronRight } from 'react-icons/fi';
+import styled from 'styled-components';
 
+import PlainCard from '@this/components/Cards/PlainCard';
+import AbsoluteBtnWindow from '@this/components/Elements/AbsoluteBtnWindow';
 import Content from '@this/components/layout/Content';
 import Main from '@this/components/layout/Main';
-import { IHighschoolPrograms } from 'data/types/programs';
 import { getStaticAsset } from '@this/pages-api/static/[asset]';
-import PlainCard from '@this/components/Cards/PlainCard';
 import HighschoolInfoForm from '@this/src/Forms/Form.HighschoolInfo';
-import AbsoluteBtnWindow from '@this/components/Elements/AbsoluteBtnWindow';
 import { BgImg } from '@this/src/components/Elements';
+import { IHighschoolPrograms } from 'data/types/programs';
 
 const HighSchool: NextPage<IHighschoolPrograms> = ({ description, courses, schools }) => {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -31,18 +31,19 @@ const HighSchool: NextPage<IHighschoolPrograms> = ({ description, courses, schoo
           style={{ maxWidth: '500px' }}
           onClick={() => setIsFormOpen(!isFormOpen)}
         >
-          <Link href='/programs/highschool/requestInfo'>
-            <a
-              className='anchor'
-              style={{
-                marginBottom: '0.75rem',
-                display: 'flex',
-                alignItems: 'center',
-              }}
-            >
+          <Link
+            href='/programs/highschool/requestInfo'
+            className='anchor'
+            style={{
+              marginBottom: '0.75rem',
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            <span>
               Open form&nbsp;
               <FiChevronRight />
-            </a>
+            </span>
           </Link>
           <HighschoolInfoForm
             onSubmitComplete={() => setIsFormOpen(false)}
@@ -50,12 +51,7 @@ const HighSchool: NextPage<IHighschoolPrograms> = ({ description, courses, schoo
           />
         </AbsoluteBtnWindow>
         <BgImg src='/images/display/code-matrix.webp' height='22rem'>
-          <Content
-            style={{
-              display: 'flex',
-              height: '100%',
-            }}
-          >
+          <Content style={{ display: 'flex', height: '100%' }}>
             <div className='hs-apply'>
               <h1 className='dynamic-xl secondary' style={{ alignSelf: 'flex-end' }}>
                 High School
@@ -70,8 +66,8 @@ const HighSchool: NextPage<IHighschoolPrograms> = ({ description, courses, schoo
                 {desc}
               </p>
             ))}
-            <Link href='/cultureOfCode'>
-              <a className='anchor'>Our Culture of Code</a>
+            <Link href='/cultureOfCode' className='anchor'>
+              {'Our Culture of Code'}
             </Link>
           </div>
         </Content>

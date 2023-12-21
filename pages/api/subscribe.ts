@@ -1,6 +1,6 @@
-import { NextApiRequest, NextApiResponse } from 'next';
 import axios from 'axios';
-import { config } from './config';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { config } from '../../src/config';
 
 const { MAILCHIMP_API_KEY: API_KEY = '', MAILCHIMP_AUDIENCE_ID: AUDIENCE_ID } = config;
 

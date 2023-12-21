@@ -1,10 +1,10 @@
-import Image from 'next/image';
-import styled, { DefaultTheme, useTheme } from 'styled-components';
-import { AnimatePresence, HTMLMotionProps, motion, MotionProps } from 'framer-motion';
+import { AnimatePresence, HTMLMotionProps, MotionProps, motion } from 'framer-motion';
 import { CSSProperties, useEffect, useRef, useState } from 'react';
 import { IoMdArrowRoundBack, IoMdArrowRoundForward } from 'react-icons/io';
+import styled, { DefaultTheme, useTheme } from 'styled-components';
 
 import { ILogo } from '@this/data/types/logos';
+import { Img } from '@this/src/Typography/elements/Html';
 
 const carouselGradient =
   (bgColor: string) =>
@@ -35,6 +35,8 @@ const CarouselStyles = styled(motion.div)`
 const CarouselItemStyles = styled(motion.div)`
   border-radius: 0.5rem;
   user-select: none;
+  display: flex;
+  align-items: center;
 
   a {
     display: flex;
@@ -73,11 +75,8 @@ const CarouselItem = ({
           }}
           tabIndex={-1}
         >
-          <Image
+          <Img
             width={size}
-            height={'100%'}
-            objectFit={'contain'}
-            layout={'fixed'}
             alt={name}
             title={name}
             src={theme.colorMode === 'light' ? logoLight : logoDark}

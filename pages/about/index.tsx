@@ -1,17 +1,17 @@
-import { Fragment, useEffect, useState } from 'react';
 import { GetStaticProps, NextPage } from 'next';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import Link from 'next/link';
+import { Fragment, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { shuffle } from 'underscore';
 
-import { IAbout } from '@this/data/types/about';
-import Main from '@this/components/layout/Main';
-import Section from '@this/components/layout/Section';
-import Content from '@this/components/layout/Content';
-import { getStaticAsset } from '../api/static/[asset]';
 import PlainCard from '@this/components/Cards/PlainCard';
 import BgImg from '@this/components/Elements/BgImg';
+import Content from '@this/components/layout/Content';
+import Main from '@this/components/layout/Main';
+import Section from '@this/components/layout/Section';
+import { IAbout } from '@this/data/types/about';
+import { getStaticAsset } from '../api/static/[asset]';
 
 const About: NextPage<IAbout> = ({ mission, team, history, awards }) => {
   const [staffMembers, setStaffMembers] = useState<IAbout['team']['staff']>([]);
@@ -58,8 +58,8 @@ const About: NextPage<IAbout> = ({ mission, team, history, awards }) => {
                   ))}
 
                   {i < mission.sections.length - 1 && (
-                    <Link href='/cultureOfCode'>
-                      <a className='anchor'>Our Culture of Code</a>
+                    <Link className='anchor' href='/cultureOfCode'>
+                      {'Our Culture of Code'}
                     </Link>
                   )}
                   {i < mission.sections.length - 1 && <hr />}
@@ -263,7 +263,7 @@ const AboutStyles = styled.div`
 
     ::before {
       background-image: url(images/textures/parchment.png);
-      backdrop-filter: blur(10px);
+      backdrop-filter: invert(1);
       content: '';
       position: absolute;
       z-index: -1;

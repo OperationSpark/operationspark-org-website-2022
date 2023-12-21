@@ -1,20 +1,19 @@
 // Logo sheet - https://docs.google.com/spreadsheets/d/1NomIolcAQIPH4c6SCdfuZsm0Geqv6vjvzKp8yohQ-kU/edit
 
-import Image from 'next/image';
+import { motion } from 'framer-motion';
+import Image from 'next/legacy/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styled, { useTheme } from 'styled-components';
-import { motion } from 'framer-motion';
 
-import { SlashDivider } from '@this/elements/SlashDivider';
+import SocialNetworks from '@this/components/Elements/SocialNetworks';
 import NavLink from '@this/components/Navbar/elements/NavLink';
 import { ILogo } from '@this/data/types/logos';
-import rgbDataURL from '@this/helpers/rgbDataURL';
-import SocialNetworks from '@this/components/Elements/SocialNetworks';
+import { SlashDivider } from '@this/elements/SlashDivider';
 
-import Subscribe from './subscribe';
-import COEBox from './COEBox';
 import { Img } from '@this/src/Typography/elements/Html';
+import COEBox from './COEBox';
+import Subscribe from './subscribe';
 
 interface FooterProps {
   logos: ILogo[];
@@ -32,7 +31,7 @@ const Footer = ({ logos }: FooterProps) => {
       <COEBox />
       {!isInfoSessionPage && !isHighschoolPage ? (
         <InfoSessionStyles>
-          <h2 style={{ paddingBottom: '1rem' }} className='primary-secondary dynamic-h2'>
+          <h2 style={{ paddingBottom: '1rem' }} className='secondary dynamic-h2'>
             ATTEND A FREE INFO SESSION
           </h2>
           <NavLink className='info' href='/infoSession'>
@@ -62,16 +61,12 @@ const Footer = ({ logos }: FooterProps) => {
                     style={{ padding: '0 1rem', marginLeft: 0 }}
                     className='anchor'
                   >
-                    <Image
+                    <Img
                       width={50 * width}
                       height='100%'
-                      objectFit='contain'
-                      layout='fixed'
                       alt={name}
                       title={name}
                       src={theme.colorMode === 'light' ? logoLight : logoDark}
-                      placeholder='blur'
-                      blurDataURL={rgbDataURL()}
                     />
                   </a>
                 ))}
@@ -135,7 +130,7 @@ const Footer = ({ logos }: FooterProps) => {
       <div className='privacy-copyright'>
         <p aria-label='Copyright 2022 Operation Spark'>&copy; 2024 Operation Spark</p>
         <p aria-label='Privacy Policy'>
-          <Link href='/privacyPolicy'>Privacy Policy</Link>
+          <Link href='/privacyPolicy'>{'Privacy Policy'}</Link>
         </p>
       </div>
     </FooterStyles>
