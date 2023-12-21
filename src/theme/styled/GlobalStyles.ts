@@ -60,6 +60,7 @@ const GlobalStyles = createGlobalStyle`
 
    .bg-subtle-dark {
      background: ${({ theme }) => (theme.isLightMode ? theme.alpha.fg : theme.alpha.bg)};
+     color: ${({ theme }) => theme.white};
    }
    .p-1 {
       padding: 0.5rem;
