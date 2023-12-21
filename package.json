@@ -13,8 +13,8 @@
     "lint:fix": "eslint . --ext ts,tsx --fix"
   },
   "dependencies": {
-    "@googleapis/calendar": "^2.0.0",
-    "@googleapis/sheets": "^2.0.1",
+    "@googleapis/calendar": "^9.5.0",
+    "@googleapis/sheets": "^5.0.5",
     "axios": "^0.26.0",
     "framer-motion": "^6.2.7",
     "google-auth-library": "^8.0.2",
