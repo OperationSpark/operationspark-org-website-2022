@@ -7,6 +7,12 @@ const FormErrStyles = styled(motion.div)`
   align-items: center;
   user-select: none;
   color: ${({ theme }) => theme.red[theme.isLightMode ? 600 : 300]};
+  &.light {
+    color: ${({ theme }) => theme.red[300]};
+  }
+  &.dark {
+    color: ${({ theme }) => theme.red[600]};
+  }
   p {
     padding-left: 0.5rem;
   }
@@ -15,10 +21,11 @@ const FormErrStyles = styled(motion.div)`
 interface FormErrProps {
   text: string;
   style?: MotionStyle;
+  colorTheme?: 'light' | 'dark';
 }
-const FormErr = ({ text, style }: FormErrProps) => {
+const FormErr = ({ text, style, colorTheme }: FormErrProps) => {
   return (
-    <FormErrStyles style={style}>
+    <FormErrStyles style={style} className={colorTheme}>
       <AiOutlineInfoCircle /> <p>{text}</p>
     </FormErrStyles>
   );

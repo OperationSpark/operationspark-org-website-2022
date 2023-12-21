@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import type { AppProps } from 'next/app';
-import { ChakraProvider } from '@chakra-ui/react';
 
 import { getStaticAsset } from '@this/pages-api/static/[asset]';
 import { IAlert } from '@this/data/types/bits';
@@ -10,6 +9,7 @@ import theme from '@this/src/theme';
 import { ILogo, ISupporterFunderLogos } from '../data/types/logos';
 import Meta from '@this/src/components/Elements/Meta';
 import { PixelRoot } from '@this/lib/pixel';
+import Notifications from '@this/src/components/Notifications';
 
 const Theme = dynamic(() => import('@this/src/theme/styled/Theme'));
 const Navbar = dynamic(() => import('@this/components/Navbar/Navbar'));
@@ -25,19 +25,18 @@ export default function App({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <ChakraProvider theme={theme}>
-      <Theme theme={theme.colors.brand}>
-        <PixelRoot />
-        <Meta />
-        <Navbar alertInfo={alertInfo} />
+    <Theme theme={theme.colors.brand}>
+      <Notifications />
+      <PixelRoot />
+      <Meta />
+      <Navbar alertInfo={alertInfo} />
 
-        <MainContainer>
-          <Component {...pageProps} />
-        </MainContainer>
+      <MainContainer>
+        <Component {...pageProps} />
+      </MainContainer>
 
-        <Footer logos={logos} />
-        <div id='tooltip-root'></div>
-      </Theme>
-    </ChakraProvider>
+      <Footer logos={logos} />
+      <div id='tooltip-root'></div>
+    </Theme>
   );
 }

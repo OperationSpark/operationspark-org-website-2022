@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import styled from 'styled-components';
 import { TiArrowSortedDown as DownArrow } from 'react-icons/ti';
+import styled from 'styled-components';
 
 import { useClickAway } from '@this/hooks/useClickAway';
 import { checkActiveSubLink } from '@this/src/helpers/navigation';
@@ -86,7 +86,7 @@ const NavDropMenu = ({ title, href, subLinks }: NavDropMenuProps) => {
         setShowMenu(true);
       }}
       onMouseLeave={() => !isClicked && setShowMenu(false)}
-      onKeyPress={({ key }) => key === 'Enter' && handleClick()}
+      onKeyDown={({ key }) => key === 'Enter' && handleClick()}
       className={`${isActive}`}
       ref={menuRef}
     >
@@ -111,7 +111,7 @@ const NavDropMenu = ({ title, href, subLinks }: NavDropMenuProps) => {
                 }
                 callback={() => setShowMenu(false)}
               >
-                {subLink.title}
+                <span>{subLink.title}</span>
               </NavLink>
             ))}
           </div>

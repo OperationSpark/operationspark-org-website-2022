@@ -23,7 +23,7 @@ const GreatCompanies = ({ title, description }: IHome['greatCompanies']) => {
           <div className='row-between'>
             <div className='outcomes-description'>
               {description.map((text) => (
-                <p key={text} className='dynamic-txt'>
+                <p key={text} className='dynamic-txt bg-subtle-dark br-1 p-1'>
                   {text}
                 </p>
               ))}

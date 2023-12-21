@@ -5,6 +5,10 @@ import { circuitBoardBg } from './mixins/circuitBoardBg';
 const GlobalStyles = createGlobalStyle`
   * {
     transition: background-color 125ms, font-size 40ms;
+    box-sizing: border-box;
+  }
+  *::before, *::after {
+    box-sizing: inherit;
   }
   :root {
     font-family: 'Roboto', sans-serif;
@@ -12,13 +16,57 @@ const GlobalStyles = createGlobalStyle`
   html, body {
     background: ${({ theme }) => theme.bg} !important;
     color: ${({ theme }) => theme.fg} !important;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
   }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Red Hat Display', sans-serif;
+    word-spacing: 0.25rem;
+    margin: 0;
+  }
+
+  button  {
+    outline: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: ${({ theme }) => theme.white};
+    font-size: 1rem;
+    font-family: 'Red Hat Display', sans-serif;
+  }
+
+  input, textarea, select {
+    outline: none;
+    border: none;
+    background: none;
+    color: ${({ theme }) => theme.fg};
+    font-size: 1rem;
+    font-family: 'Red Hat Display', sans-serif;
+  }
+
   #atlanta-promo-root {
     position: relative;
-    z-index: 1;
+    z-index: 100;
   }
   p {
      font-family: 'Roboto', sans-serif;
+     margin: 0;
+     line-height: 1.5;
+     font-weight: 400;
+   }
+
+   .bg-subtle-dark {
+     background: ${({ theme }) => (theme.isLightMode ? theme.alpha.fg : theme.alpha.bg)};
+     color: ${({ theme }) => theme.white};
+   }
+   .p-1 {
+      padding: 0.5rem;
+   }
+   .br-1 {
+      border-radius: 0.5rem;
    }
    .page-marker {
       content: '';
@@ -50,10 +98,16 @@ const GlobalStyles = createGlobalStyle`
     overflow-x: hidden;
   }
   a {
+    width: fit-content;
+    text-decoration: none;
     -webkit-user-drag: none !important;
     :focus-visible {
       outline: 2px solid ${({ theme }) => theme.secondary[800]};
     }
+  }
+  iframe {
+    border: none;
+    outline: none;
   }
   .anchor {
     ${anchor}
@@ -76,7 +130,7 @@ const GlobalStyles = createGlobalStyle`
   }
   .dynamic-h1 {
     font-size: calc(0.8vw + 2.5rem);
-    font-weight: 800;
+    font-weight: 700;
   }
   .dynamic-h2 {
     font-size: calc(0.8vw + 1.25rem);
@@ -84,7 +138,7 @@ const GlobalStyles = createGlobalStyle`
   }
   .dynamic-h3 {
     font-size: calc(0.6vw + 1.00rem);
-    font-weight: 700;
+    font-weight: 600;
   }
   .dynamic-h4 {
     font-size: calc(0.4vw + 0.8rem);
@@ -92,12 +146,12 @@ const GlobalStyles = createGlobalStyle`
   }
 
   .xl-txt {
-    font-weight: 900;
+    font-weight: 700;
     font-size: 3.5rem;
   }
 
   .lg-txt {
-    font-weight: 700;
+    font-weight: 500;
     font-size: 2rem;
   }
 
@@ -106,7 +160,13 @@ const GlobalStyles = createGlobalStyle`
     flex-flow: row;
     justify-content: space-between;
   }
+  .mb0 {
+    margin-bottom: 0
+  }
 
+  .mt0 {
+    margin-top: 0;
+  }
 
   ::-webkit-scrollbar {
     width: 0.8rem;
@@ -132,8 +192,15 @@ const GlobalStyles = createGlobalStyle`
   }
 
   ::selection {
-    background: ${({ theme }) => theme.purple.alpha[700][500]};
-    color: white;
+    background: ${({ theme }) =>
+      theme.isLightMode ? 'rgba(245, 220, 124, 0.5)' : 'rgba(245, 220, 124, 1)'} ;
+    color: ${({ theme }) => theme.black};
+    font-weight: 500;
+
+  }
+
+  .Toastify {
+    --toastify-z-index: 9999999;
   }
 
   @media screen and (max-width: 768px) {

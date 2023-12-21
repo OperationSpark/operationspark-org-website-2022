@@ -1,10 +1,10 @@
-import { HTMLMotionProps, motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 
 const MainContainer = ({ children, style }: HTMLMotionProps<'main'>) => {
   const { pathname } = useRouter();
   return (
-    <AnimatePresence exitBeforeEnter key={pathname}>
+    <AnimatePresence mode='wait' key={pathname}>
       <motion.main
         style={style}
         initial={{

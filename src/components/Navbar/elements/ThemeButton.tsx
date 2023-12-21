@@ -1,5 +1,5 @@
 import styled, { useTheme } from 'styled-components';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 
 import { useClickAway } from '@this/src/hooks/useClickAway';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -157,7 +157,7 @@ const ThemeDropdown = styled(motion.div)`
   z-index: 1000;
   right: 0;
   top: calc(100% + 0.25rem);
-  width: 125px;
+  width: 150px;
 
   display: flex;
   flex-flow: column;

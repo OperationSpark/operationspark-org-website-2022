@@ -25,12 +25,12 @@ const BonusBar = ({ children }: { children?: ReactNode }) => {
       {children}
       {!checkIsPath('/programs/highschool/apply') && SHOW_HS_APPLICATION && (
         <NavLink href='/programs/highschool/apply' className='info'>
-          High School Application
+          {'High School Application'}
         </NavLink>
       )}
       {!checkIsPath('highschool', '/programs/workforce/infoSession') && (
         <NavLink href='/programs/workforce/infoSession' className='info'>
-          Free Info Session
+          {'Free Info Session'}
         </NavLink>
       )}
     </BonusBarStyles>
@@ -42,8 +42,8 @@ export default BonusBar;
 const BonusBarStyles = styled(motion.div)`
   position: absolute;
   top: calc(100% + 0.5rem);
-  left: 0;
-  width: 100%;
+  right: 0;
+  width: fit-content;
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-end;

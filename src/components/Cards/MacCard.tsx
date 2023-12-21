@@ -129,6 +129,7 @@ const MacBtnStyles = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 0 0;
   .mac-button,
   .mac-no-button {
     width: 100%;
@@ -149,6 +150,7 @@ const MacBtnStyles = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0;
 
     :focus-visible,
     :hover {

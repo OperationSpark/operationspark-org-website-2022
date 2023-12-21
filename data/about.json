@@ -5,9 +5,7 @@
     ],
     "sections": [
       {
-        "title": [
-          "Who We Serve"
-        ],
+        "title": ["Who We Serve"],
         "description": [
           "80% of low-income students drop out of college strapped with debt. Across the South, we have been left with thousands of young adults, ages 16 to 24, not in school and unemployed or underemployed. The impact on our communities is devastating.",
           "Meanwhile, as of June 2022, nearly 700,000 high-wage computing jobs remain unfilled across the country, while our colleges and universities graduated less than 200,000 computer science students last year.",
@@ -16,9 +14,7 @@
         ]
       },
       {
-        "title": [
-          "A Career for Everyone"
-        ],
+        "title": ["A Career for Everyone"],
         "description": [
           "The field of software development is quite wide. No matter your interests or aptitude, there's certainly a career for you in the software industry. You just need to build a few apps to start discovering all that software has to offer.",
           "The skills involved in building mobile video games and apps are quite varied, including application design, game mechanics and user experience, visual and sound design, computer engineering of various sorts, quality assurance, project, product and cost management, content management, and public relations of all kinds. And each of these skills leads to careers, careers with futures - for example, an entry-level quality assurance analyst is a well-paying, entry-level position that can lead to a job in management or a career as a UX designer.",
@@ -43,7 +39,7 @@
           "phone": "504.534.8277"
         },
         "about": [
-          "John has 24 years of professional experience in software development, having worked for a diverse set of clients including, Tabasco, Tulane University, Riley Foods, Oreck Vacuums, The Canadian Imperial Bank of Commerce, Microsoft, Ernst and Young, Disney, and Sony. Beginning in 2009, his work in the video game industry in Montreal contributed to some of the most successful games on social platforms.",
+          "John has over 25 years of professional experience in software development, having worked for a diverse set of clients including, Tabasco, Tulane University, Riley Foods, Oreck Vacuums, The Canadian Imperial Bank of Commerce, Microsoft, Ernst and Young, Disney, and Sony. Beginning in 2009, his work in the video game industry in Montreal contributed to some of the most successful games on social platforms.",
           "Mr. Fraboni holds a Bachelor of Music from McGill University and a Master of Music degree from the Manhattan School of Music. He is also the recipient of performing arts awards from the Canada Council for the Arts, the Ontario Arts Council, the Manhattan School of Music, International House New York, as well as the Canadian Academy of Recording Arts and Sciences (a Juno award, the Canadian equivalent of Grammy).",
           "He has lived in Montreal, New York, New Orleans, and Toronto."
         ]

@@ -1,22 +1,22 @@
 import { GetStaticProps, NextPage } from 'next';
 
 import Link from 'next/link';
-import styled from 'styled-components';
 import { FiChevronLeft } from 'react-icons/fi';
+import styled from 'styled-components';
 
-import Main from '@this/components/layout/Main';
 import Content from '@this/components/layout/Content';
+import Main from '@this/components/layout/Main';
+import { IHighschoolPrograms } from '@this/data/types/programs';
+import { getStaticAsset } from '@this/pages-api/static/[asset]';
+import HighschoolApplicationForm from '@this/src/Forms/Form.HighschoolApplication';
+import { courseTimes } from '@this/src/Forms/formData/highSchoolApplicationData';
+import PlainCard from '@this/src/components/Cards/PlainCard';
 import { BgImg } from '@this/src/components/Elements';
 import Map from '@this/src/components/Elements/Map';
-import HighschoolApplicationForm from '@this/src/Forms/Form.HighschoolApplication';
-import PlainCard from '@this/src/components/Cards/PlainCard';
-import { courseTimes } from '@this/src/Forms/formData/highSchoolApplicationData';
-import { IHighschoolPrograms } from '@this/data/types/programs';
 import { InfoIcon } from '@this/src/components/icons/Info';
-import { getStaticAsset } from '@this/pages-api/static/[asset]';
-import { useState } from 'react';
-import { useClickAway } from '@this/src/hooks/useClickAway';
 import { Center } from '@this/src/components/layout/Center';
+import { useClickAway } from '@this/src/hooks/useClickAway';
+import { useState } from 'react';
 
 type HighschoolSignupProps = {
   courses: IHighschoolPrograms['courses'];
@@ -73,11 +73,15 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
                   <b className='secondary'> May 20th</b>.
                 </p>
               </div>
-              <Link href='/programs/highschool' passHref>
-                <a style={{ display: 'flex', alignItems: 'center' }} className='anchor'>
+              <Link
+                href='/programs/highschool'
+                style={{ display: 'flex', alignItems: 'center' }}
+                className='anchor'
+              >
+                <span>
                   <FiChevronLeft style={{ marginRight: '0.25rem' }} />
                   Back to High School Programs
-                </a>
+                </span>
               </Link>
             </div>
           </Content>
@@ -287,7 +291,9 @@ const HighschoolSignupStyles = styled.div`
     .close-button {
       text-align: center;
       margin-top: 1rem;
-      color: ${({ theme }) => theme.red[0]};
+      button {
+        color: ${({ theme }) => theme.red[500]};
+      }
     }
   }
   .program-info-button {

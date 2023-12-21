@@ -1,22 +1,22 @@
-import { useEffect, useState } from 'react';
+import axios from 'axios';
 import { GetStaticProps, NextPage } from 'next';
 import Link from 'next/link';
-import styled, { useTheme } from 'styled-components';
-import axios from 'axios';
+import { useEffect, useState } from 'react';
 import { AiOutlineCloudDownload as DownloadIcon } from 'react-icons/ai';
+import styled, { useTheme } from 'styled-components';
 
-import { Main, Section, Content } from '@this/components/layout';
-import { getStaticAsset } from '@this/pages-api/static/[asset]';
 import MacCard from '@this/components/Cards/MacCard';
 import MacContent from '@this/components/Cards/content/MacContent';
 import { SlashDivider } from '@this/components/Elements/SlashDivider';
+import { Content, Main, Section } from '@this/components/layout';
 import { IQuote, ITitleDescription } from '@this/data/types/bits';
 import { ICourses } from '@this/data/types/programs';
-import { BgImg } from '@this/src/components/Elements';
-import useInfoSession from '@this/src/hooks/useInfoSession';
 import { CourseSession } from '@this/data/types/schedule';
+import { getStaticAsset } from '@this/pages-api/static/[asset]';
 import ProgramInfoCard from '@this/src/components/Cards/ProgramInfoCard';
+import { BgImg } from '@this/src/components/Elements';
 import { toDayJs } from '@this/src/helpers/time';
+import useInfoSession from '@this/src/hooks/useInfoSession';
 
 export interface AdultProgramsProps {
   header: ITitleDescription;
@@ -70,7 +70,7 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
   };
 
   useEffect(() => {
-    let interval: NodeJS.Timer;
+    let interval: NodeJS.Timeout;
 
     if (!isPaused) {
       interval = setInterval(() => {
@@ -139,8 +139,8 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
                 {desc}
               </p>
             ))}
-            <Link href='/cultureOfCode'>
-              <a className='anchor'>Culture of Code</a>
+            <Link href='/cultureOfCode' className='anchor'>
+              {'Culture of Code'}
             </Link>
           </Content>
         </Section>
@@ -158,14 +158,13 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
                   valuable talent for your company.
                 </b>
               </p>
-              <Link href='/contact'>
-                <a
-                  className='anchor right-arr-left '
-                  aria-label='Contact to learn about employer partnerships'
-                  title='Contact to learn about employer partnerships'
-                >
-                  Contact us to learn more about employer partnerships
-                </a>
+              <Link
+                href='/contact'
+                className='anchor right-arr-left '
+                aria-label='Contact to learn about employer partnerships'
+                title='Contact to learn about employer partnerships'
+              >
+                {'Contact us to learn more about employer partnerships'}
               </Link>
             </div>
 
@@ -192,8 +191,8 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
           <Content style={{ paddingTop: '0', paddingBottom: '2rem' }}>
             <h1 className='dynamic-h1'>Courses</h1>
             <div className='course-resources'>
-              <Link href='/programs/workforce/schedule'>
-                <a className='anchor resource-link'>Schedule</a>
+              <Link className='anchor resource-link' href='/programs/workforce/schedule'>
+                {'Schedule'}
               </Link>
 
               <a
