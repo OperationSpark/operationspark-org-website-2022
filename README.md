@@ -19,16 +19,6 @@
 - Build the project with `npm run build`
 - Start the server with `npm start`
 
----
-
----
-
-## <h3 align='center'>TODO: Complete README</h3>
-
----
-
----
-
 <p align='center'>
   <a href='https://vercel.com/?utm_source=operation-spark&utm_campaign=oss' target='_blank' >
     <img src='public/images/logos/etc/vercel_banner.svg' />
