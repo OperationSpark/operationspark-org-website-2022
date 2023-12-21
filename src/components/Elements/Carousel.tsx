@@ -199,7 +199,7 @@ const Carousel = ({ logos, style }: { logos: ILogo[]; style?: CSSProperties }) =
     };
 
   useEffect(() => {
-    let interval: NodeJS.Timer;
+    let interval: NodeJS.Timeout;
 
     if (!userDrag) {
       interval = setInterval(() => shiftRight(), 4000);

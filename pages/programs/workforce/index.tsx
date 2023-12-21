@@ -70,7 +70,7 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
   };
 
   useEffect(() => {
-    let interval: NodeJS.Timer;
+    let interval: NodeJS.Timeout;
 
     if (!isPaused) {
       interval = setInterval(() => {
