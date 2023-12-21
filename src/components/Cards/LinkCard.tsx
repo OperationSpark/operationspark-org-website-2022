@@ -4,7 +4,7 @@ import { SlashDivider } from '@this/components/Elements/SlashDivider';
 import { cardShadow } from '@this/src/theme/styled/mixins/shadows';
 
 export const LinkCardStyles = styled.div`
-  width: 25%;
+  width: 50%;
   padding: 0.75rem;
 
   .card {
@@ -32,20 +32,16 @@ export const LinkCardStyles = styled.div`
     }
 
     h3 {
-      font-weight: 900;
+      font-weight: 700;
       line-height: 1em;
       padding-bottom: 1.5rem;
     }
     p {
-      font-size: 1rem;
       padding-bottom: 1.5rem;
       height: 100%;
     }
   }
 
-  @media screen and (max-width: 1200px) {
-    width: 50%;
-  }
   @media screen and (max-width: 768px) {
     width: 100%;
     padding: 0.5rem 0;
@@ -65,7 +61,7 @@ const LinkCard = ({ title, description, linkText, linkUrl }: LinkCardProps) => {
       <div className='card'>
         <div className='card-main'>
           <h3 className='dynamic-h3'>{title}</h3>
-          <p>{description}</p>
+          <p className='dynamic-txt'>{description}</p>
 
           {linkUrl && linkText && (
             <Link href={linkUrl}>

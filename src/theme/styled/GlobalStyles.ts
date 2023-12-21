@@ -54,6 +54,17 @@ const GlobalStyles = createGlobalStyle`
      font-family: 'Roboto', sans-serif;
      margin: 0;
      line-height: 1.5;
+     font-weight: 400;
+   }
+
+   .bg-subtle-dark {
+     background: ${({ theme }) => (theme.isLightMode ? theme.alpha.fg : theme.alpha.bg)};
+   }
+   .p-1 {
+      padding: 0.5rem;
+   }
+   .br-1 {
+      border-radius: 0.5rem;
    }
    .page-marker {
       content: '';
@@ -113,7 +124,7 @@ const GlobalStyles = createGlobalStyle`
   }
   .dynamic-h1 {
     font-size: calc(0.8vw + 2.5rem);
-    font-weight: 800;
+    font-weight: 700;
   }
   .dynamic-h2 {
     font-size: calc(0.8vw + 1.25rem);
@@ -121,7 +132,7 @@ const GlobalStyles = createGlobalStyle`
   }
   .dynamic-h3 {
     font-size: calc(0.6vw + 1.00rem);
-    font-weight: 700;
+    font-weight: 600;
   }
   .dynamic-h4 {
     font-size: calc(0.4vw + 0.8rem);
@@ -129,12 +140,12 @@ const GlobalStyles = createGlobalStyle`
   }
 
   .xl-txt {
-    font-weight: 900;
+    font-weight: 700;
     font-size: 3.5rem;
   }
 
   .lg-txt {
-    font-weight: 700;
+    font-weight: 500;
     font-size: 2rem;
   }
 

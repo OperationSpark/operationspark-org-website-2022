@@ -37,7 +37,7 @@ const CareersForAll = () => {
         </div>
       </div>
       <div className='halle-img'>
-        <Image src='/images/hallebot-filled.webp' alt='hallebot' width={240} height={295} />
+        <Image src='/images/os/hallebot-3d_600x.webp' alt='hallebot' width={240} height={295} />
       </div>
     </CareerForAllStyles>
   );

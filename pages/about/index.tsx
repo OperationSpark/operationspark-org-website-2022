@@ -340,6 +340,9 @@ const AboutStyles = styled.div`
     font-style: italic;
     color: ${({ theme }) => theme.alpha.fg};
   }
+  .team-member-bio {
+    font-family: 'Red Hat Display', sans-serif;
+  }
 
   .video-container {
     max-width: 800px;
