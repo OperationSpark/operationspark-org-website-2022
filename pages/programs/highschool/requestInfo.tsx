@@ -17,12 +17,17 @@ const HighschoolSignup: NextPage<IHighschoolPrograms> = () => {
         <Content>
           <Link
             href='/programs/highschool'
-            style={{ display: 'flex', alignItems: 'center' }}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: '2rem auto',
+            }}
             className='anchor'
           >
             <span>
               <FiChevronLeft style={{ marginRight: '0.25rem' }} />
-              High School Programs
+              Back to High School Programs
             </span>
           </Link>
           <div className='hs-form'>

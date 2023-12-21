@@ -104,6 +104,10 @@ const GlobalStyles = createGlobalStyle`
       outline: 2px solid ${({ theme }) => theme.secondary[800]};
     }
   }
+  iframe {
+    border: none;
+    outline: none;
+  }
   .anchor {
     ${anchor}
   }

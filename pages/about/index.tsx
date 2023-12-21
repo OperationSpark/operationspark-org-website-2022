@@ -1,5 +1,5 @@
 import { GetStaticProps, NextPage } from 'next';
-import Image from "next/legacy/image";
+import Image from 'next/legacy/image';
 import Link from 'next/link';
 import { Fragment, useEffect, useState } from 'react';
 import styled from 'styled-components';

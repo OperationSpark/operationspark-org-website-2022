@@ -1,7 +1,7 @@
 // Logo sheet - https://docs.google.com/spreadsheets/d/1NomIolcAQIPH4c6SCdfuZsm0Geqv6vjvzKp8yohQ-kU/edit
 
 import { motion } from 'framer-motion';
-import Image from "next/legacy/image";
+import Image from 'next/legacy/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styled, { useTheme } from 'styled-components';
@@ -31,7 +31,7 @@ const Footer = ({ logos }: FooterProps) => {
       <COEBox />
       {!isInfoSessionPage && !isHighschoolPage ? (
         <InfoSessionStyles>
-          <h2 style={{ paddingBottom: '1rem' }} className='primary-secondary dynamic-h2'>
+          <h2 style={{ paddingBottom: '1rem' }} className='secondary dynamic-h2'>
             ATTEND A FREE INFO SESSION
           </h2>
           <NavLink className='info' href='/infoSession'>

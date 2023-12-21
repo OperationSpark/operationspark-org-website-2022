@@ -32,7 +32,7 @@ const NavLink = ({
     >
       {href ? (
         <Link href={href} aria-label={title ?? linkTitle}>
-          <span>{children}</span>
+          {children}
         </Link>
       ) : (
         children

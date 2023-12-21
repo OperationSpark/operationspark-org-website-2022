@@ -33,6 +33,7 @@ const LogoLink = ({ src, href, alt, newTab, width, height, className }: LogoLink
     e.preventDefault();
     newTab ? window.open(href) : push(href);
   };
+
   return (
     <LogoLinkStyles href={href} onClick={handleRoute} title={alt} className={className}>
       <Img src={src} alt={alt} width={width ?? 140} height={height ?? 50} />

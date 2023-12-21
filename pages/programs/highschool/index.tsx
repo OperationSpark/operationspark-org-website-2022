@@ -51,12 +51,7 @@ const HighSchool: NextPage<IHighschoolPrograms> = ({ description, courses, schoo
           />
         </AbsoluteBtnWindow>
         <BgImg src='/images/display/code-matrix.webp' height='22rem'>
-          <Content
-            style={{
-              display: 'flex',
-              height: '100%',
-            }}
-          >
+          <Content style={{ display: 'flex', height: '100%' }}>
             <div className='hs-apply'>
               <h1 className='dynamic-xl secondary' style={{ alignSelf: 'flex-end' }}>
                 High School

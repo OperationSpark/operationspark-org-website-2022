@@ -1,8 +1,8 @@
+'use client';
 import { Transition, motion } from 'framer-motion';
 import moment from 'moment-timezone';
 import dynamic from 'next/dynamic';
 import { useEffect, useRef } from 'react';
-import { HiOutlineBeaker as TestIcon } from 'react-icons/hi';
 import styled, { useTheme } from 'styled-components';
 
 import LogoLink from '@this/components/Elements/LogoLink';
@@ -17,7 +17,7 @@ const AlertBar = dynamic(() => import('./AlertBar'));
 const DesktopNav = dynamic(() => import('./DesktopNav'));
 const MobileNav = dynamic(() => import('./MobileNav'));
 
-const { OVERRIDE_NODE_ENV } = process.env;
+// const { OVERRIDE_NODE_ENV } = process.env;
 
 interface NavProps {
   alertInfo: IAlert;
@@ -48,19 +48,7 @@ const Nav = ({ alertInfo }: NavProps) => {
 
   const extraNavHeight = 40;
 
-  const resizeObserverRef = useRef(
-    typeof window === 'undefined'
-      ? null
-      : new ResizeObserver(([nav]) =>
-          requestAnimationFrame(() => {
-            if (nav) {
-              const { height } = nav.contentRect;
-              const newHeight = Math.ceil(height + extraNavHeight);
-              theme.setNavHeight(newHeight);
-            }
-          }),
-        ),
-  );
+  const resizeObserverRef = useRef<ResizeObserver | null>(null);
 
   const transparentBg = theme.isLightMode ? 'rgba(255,255,255,0)' : 'rgba(25,25,25,0)';
   const bgColor = supportsBackdropFilter ? theme.alpha.bg : theme.bg;
@@ -78,6 +66,17 @@ const Nav = ({ alertInfo }: NavProps) => {
 
   // Dynamically update nav height
   useEffect(() => {
+    if (!resizeObserverRef.current) {
+      resizeObserverRef.current = new ResizeObserver(([nav]) =>
+        requestAnimationFrame(() => {
+          if (nav) {
+            const { height } = nav.contentRect;
+            const newHeight = Math.ceil(height + extraNavHeight);
+            theme.setNavHeight(newHeight);
+          }
+        }),
+      );
+    }
     const resizeObserver = resizeObserverRef.current;
     const navElement = navRef.current;
 
@@ -93,11 +92,12 @@ const Nav = ({ alertInfo }: NavProps) => {
 
   return (
     <NavbarStyles ref={navRef} animate={navAnimation} transition={navTransition}>
-      {OVERRIDE_NODE_ENV !== 'testing' ? null : (
+      {/* // TODO: Figure out why this breaks since update to nextjs v13 */}
+      {/* {OVERRIDE_NODE_ENV === 'testing' ? (
         <div className='test-mode'>
           <TestIcon /> &nbsp;TEST MODE&nbsp; <TestIcon />
         </div>
-      )}
+      ) : null} */}
       {showAlert && <AlertBar info={alertInfo} />}
 
       <div className='navbar'>

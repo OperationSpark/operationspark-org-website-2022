@@ -12,7 +12,6 @@ const {
 
 const isHsFormActive = HIGHSCHOOL_FORM_ACTIVE?.toLowerCase() === 'true';
 
-/** @returns {import('next').NextConfig} */
 module.exports = (phase, { defaultConfig }) => {
   console.info(color.magentaBright.bold('\nValidating... '));
   if (
@@ -41,13 +40,13 @@ module.exports = (phase, { defaultConfig }) => {
    * @type {import('next').NextConfig}
    */
   return {
-    // ...defaultConfig,
+    ...defaultConfig,
     reactStrictMode: true,
     compiler: {
       styledComponents: true,
     },
     env: {
-      OVERRIDE_NODE_ENV,
+      OVERRIDE_NODE_ENV: OVERRIDE_NODE_ENV || '',
       FB_PIXEL_ID,
       HIGHSCHOOL_FORM_ACTIVE: `${isHsFormActive}`,
       HIGHSCHOOL_FORM_RESPONSES_NAME,
@@ -57,7 +56,12 @@ module.exports = (phase, { defaultConfig }) => {
     // https://nextjs.org/docs/messages/next-image-unconfigured-host
 
     images: {
-      domains: ['storage.googleapis.com'],
+      remotePatterns: [
+        {
+          protocol: 'https',
+          hostname: 'storage.googleapis.com',
+        },
+      ],
     },
     async redirects() {
       return [

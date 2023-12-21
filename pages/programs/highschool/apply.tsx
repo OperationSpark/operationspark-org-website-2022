@@ -291,7 +291,9 @@ const HighschoolSignupStyles = styled.div`
     .close-button {
       text-align: center;
       margin-top: 1rem;
-      color: ${({ theme }) => theme.red[0]};
+      button {
+        color: ${({ theme }) => theme.red[500]};
+      }
     }
   }
   .program-info-button {

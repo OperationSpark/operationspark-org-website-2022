@@ -35,7 +35,7 @@ const Meta = () => {
       <meta property='og:type' content='website' />
       <link rel='icon' href={favicon} />
 
-      <title> {title} </title>
+      <title>{title}</title>
 
       <meta name='description' content={description} />
 
