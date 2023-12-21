@@ -36,10 +36,11 @@ const useSubscribe = (callback: () => void): UseSubscribeReturn => {
       handleToast(data);
     } catch (err) {
       setIsErr(true);
-      const errData = (err as AxiosError)?.response?.data;
+
+      const errData = (err as AxiosError<ToastOptions>)?.response?.data;
 
       const title = errData?.title ?? 'An error occurred';
-      const description = errData.description ?? `Please check email "${email}" and try again`;
+      const description = errData?.description ?? `Please check email "${email}" and try again`;
 
       handleToast({ title, description, email });
     }
