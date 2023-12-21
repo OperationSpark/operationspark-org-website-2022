@@ -1,6 +1,6 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
 import axios from 'axios';
-import { config } from '../config';
+import type { NextApiRequest, NextApiResponse } from 'next';
+import { config } from '../../../src/config';
 import { GooglePlace, LocationType } from './user';
 
 const { GREENLIGHT_API_ENDPOINT } = config;

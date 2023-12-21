@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import styled from 'styled-components';
 
-import { toDayJs } from '@this/src/helpers/time';
-import { CourseSession } from '@this/data/types/schedule';
 import { ICourses } from '@this/data/types/programs';
-import PlainCard from './PlainCard';
+import { CourseSession } from '@this/data/types/schedule';
+import { toDayJs } from '@this/src/helpers/time';
 import { cardShadowLtr } from '@this/src/theme/styled/mixins/shadows';
+import PlainCard from './PlainCard';
 
 import { BsInfo as InfoIcon } from 'react-icons/bs';
 
@@ -102,8 +102,8 @@ const ProgramInfoCard = ({
             {infoMessage && (
               <p className='dynamic-txt info-message flex-col-between'>
                 <b>{infoMessage}</b>
-                <Link href='/infoSession'>
-                  <a className='anchor right-arr-left'>Sign up here</a>
+                <Link href='/infoSession' className='anchor right-arr-left'>
+                  {'Sign up here'}
                 </Link>
               </p>
             )}

@@ -1,16 +1,16 @@
+import { Transition, motion } from 'framer-motion';
+import moment from 'moment-timezone';
 import dynamic from 'next/dynamic';
 import { useEffect, useRef } from 'react';
-import styled, { useTheme } from 'styled-components';
-import moment from 'moment-timezone';
-import { motion, Transition } from 'framer-motion';
 import { HiOutlineBeaker as TestIcon } from 'react-icons/hi';
+import styled, { useTheme } from 'styled-components';
 
-import { navMenus } from './navLinks';
-import { IAlert } from '@this/data/types/bits';
-import { useScrollY } from '@this/hooks/useScrollY';
-import { useValidCss } from '@this/hooks/useCssCheck';
 import LogoLink from '@this/components/Elements/LogoLink';
+import { IAlert } from '@this/data/types/bits';
+import { useValidCss } from '@this/hooks/useCssCheck';
+import { useScrollY } from '@this/hooks/useScrollY';
 import BonusBar from './BonusBar';
+import { navMenus } from './navLinks';
 
 const ProgressBar = dynamic(() => import('./ProgressBar'));
 const AlertBar = dynamic(() => import('./AlertBar'));
@@ -38,7 +38,7 @@ const withinDateRange = ({ start, end }: IAlert): boolean => {
   return !endTime || (now >= startTime && now <= endTime);
 };
 
-export default function Nav({ alertInfo }: NavProps) {
+const Nav = ({ alertInfo }: NavProps) => {
   const scrollY = useScrollY();
   const supportsBackdropFilter = useValidCss('backdrop-filter', 'blur()');
   const isTop = scrollY === null ? true : scrollY <= 5;
@@ -126,7 +126,9 @@ export default function Nav({ alertInfo }: NavProps) {
       <ProgressBar isTop={isTop} />
     </NavbarStyles>
   );
-}
+};
+
+export default Nav;
 
 export const NavbarStyles = styled(motion.nav)`
   z-index: 1000;

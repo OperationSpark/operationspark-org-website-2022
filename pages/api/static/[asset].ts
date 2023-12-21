@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { asset } = req.query;
-
+  if (!asset) return res.status(404).end('No asset specified');
   try {
     const data = await getStaticAsset(asset);
     res.status(200).json(data);

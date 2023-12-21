@@ -1,21 +1,21 @@
 import { NextPage } from 'next';
-import styled from 'styled-components';
 import Image from 'next/image';
 import { useState } from 'react';
-import { IoMdCloseCircle } from 'react-icons/io';
 import { BsArrowRightSquareFill } from 'react-icons/bs';
+import { IoMdCloseCircle } from 'react-icons/io';
+import styled from 'styled-components';
 
 import Content from '@this/components/layout/Content';
 import Main from '@this/components/layout/Main';
-import rgbDataURL from '@this/src/helpers/rgbDataURL';
-import Button from '@this/src/components/Elements/Button';
-import { cardShadow } from '@this/src/theme/styled/mixins/shadows';
 import { BgImg } from '@this/src/components/Elements';
-import Link from 'next/link';
-import SocialNetworks from '@this/src/components/Elements/SocialNetworks';
+import Button from '@this/src/components/Elements/Button';
 import { TwoColumns } from '@this/src/components/Elements/Columns';
+import SocialNetworks from '@this/src/components/Elements/SocialNetworks';
 import Spinner from '@this/src/components/Elements/Spinner';
 import { Center } from '@this/src/components/layout/Center';
+import rgbDataURL from '@this/src/helpers/rgbDataURL';
+import { cardShadow } from '@this/src/theme/styled/mixins/shadows';
+import Link from 'next/link';
 
 const GetInvolved: NextPage = () => {
   const [showDonate, setShowDonate] = useState(false);
@@ -45,8 +45,8 @@ const GetInvolved: NextPage = () => {
                 <h3 className='dynamic-h3' style={{ maxWidth: '600px', textAlign: 'center' }}>
                   At Operation Spark, we love when software engineers come and present on a topic or
                   technology being used in the industry. If you are interested,{' '}
-                  <Link href='/contact'>
-                    <a className='primary-secondary'>please get in touch here</a>
+                  <Link className='primary-secondary' href='/contact'>
+                    {'please get in touch here'}
                   </Link>
                   .
                 </h3>
@@ -57,8 +57,8 @@ const GetInvolved: NextPage = () => {
                 <h2 className='dynamic-h2 primary-secondary text-center'>Hire Our Grads</h2>
                 <h3 className='dynamic-h3'>
                   If you are interested in hiring our grads,{' '}
-                  <Link href='/contact'>
-                    <a className='primary-secondary'>please get in touch here</a>
+                  <Link className='primary-secondary' href='/contact'>
+                    {'please get in touch here'}
                   </Link>
                   .
                 </h3>

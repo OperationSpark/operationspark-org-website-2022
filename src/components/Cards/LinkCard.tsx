@@ -1,7 +1,7 @@
-import Link from 'next/link';
-import styled from 'styled-components';
 import { SlashDivider } from '@this/components/Elements/SlashDivider';
 import { cardShadow } from '@this/src/theme/styled/mixins/shadows';
+import Link from 'next/link';
+import styled from 'styled-components';
 
 export const LinkCardStyles = styled.div`
   width: 50%;
@@ -64,10 +64,13 @@ const LinkCard = ({ title, description, linkText, linkUrl }: LinkCardProps) => {
           <p className='dynamic-txt'>{description}</p>
 
           {linkUrl && linkText && (
-            <Link href={linkUrl}>
-              <a className='anchor right-arr-left' title={linkText} aria-label={linkText}>
-                {linkText}
-              </a>
+            <Link
+              href={linkUrl}
+              className='anchor right-arr-left'
+              title={linkText}
+              aria-label={linkText}
+            >
+              <span>{linkText}</span>
             </Link>
           )}
         </div>

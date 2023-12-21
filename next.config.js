@@ -12,6 +12,7 @@ const {
 
 const isHsFormActive = HIGHSCHOOL_FORM_ACTIVE?.toLowerCase() === 'true';
 
+/** @returns {import('next').NextConfig} */
 module.exports = (phase, { defaultConfig }) => {
   console.info(color.magentaBright.bold('\nValidating... '));
   if (
@@ -40,7 +41,7 @@ module.exports = (phase, { defaultConfig }) => {
    * @type {import('next').NextConfig}
    */
   return {
-    ...defaultConfig,
+    // ...defaultConfig,
     reactStrictMode: true,
     compiler: {
       styledComponents: true,
@@ -48,7 +49,7 @@ module.exports = (phase, { defaultConfig }) => {
     env: {
       OVERRIDE_NODE_ENV,
       FB_PIXEL_ID,
-      HIGHSCHOOL_FORM_ACTIVE: isHsFormActive,
+      HIGHSCHOOL_FORM_ACTIVE: `${isHsFormActive}`,
       HIGHSCHOOL_FORM_RESPONSES_NAME,
     },
 

@@ -1,5 +1,9 @@
 {
   "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  },
   "files.insertFinalNewline": true,
-  "cSpell.words": ["ethnicities"]
+  "cSpell.words": ["ethnicities", "transformative"]
 }

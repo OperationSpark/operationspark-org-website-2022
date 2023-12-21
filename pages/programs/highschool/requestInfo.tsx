@@ -1,11 +1,11 @@
 import { NextPage } from 'next';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import styled from 'styled-components';
 import { FiChevronLeft } from 'react-icons/fi';
+import styled from 'styled-components';
 
-import Main from '@this/components/layout/Main';
 import Content from '@this/components/layout/Content';
+import Main from '@this/components/layout/Main';
 import { IHighschoolPrograms } from '@this/data/types/programs';
 
 const HighschoolInfoForm = dynamic(() => import('@this/src/Forms/Form.HighschoolInfo'));
@@ -15,11 +15,15 @@ const HighschoolSignup: NextPage<IHighschoolPrograms> = () => {
     <Main>
       <HighschoolSignupStyles>
         <Content>
-          <Link href='/programs/highschool' passHref>
-            <a style={{ display: 'flex', alignItems: 'center' }} className='anchor'>
+          <Link
+            href='/programs/highschool'
+            style={{ display: 'flex', alignItems: 'center' }}
+            className='anchor'
+          >
+            <span>
               <FiChevronLeft style={{ marginRight: '0.25rem' }} />
               High School Programs
-            </a>
+            </span>
           </Link>
           <div className='hs-form'>
             <HighschoolInfoForm />

@@ -1,9 +1,8 @@
-import { MouseEvent } from 'react';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
+import { MouseEvent } from 'react';
 import styled from 'styled-components';
 
-import rgbDataURL from '@this/src/helpers/rgbDataURL';
+import { Img } from '@this/src/Typography/elements/Html';
 
 const LogoLinkStyles = styled.a`
   user-select: none;
@@ -28,16 +27,7 @@ interface LogoLinkProps {
   className?: string;
 }
 
-const LogoLink = ({
-  src,
-  href,
-  alt,
-  newTab,
-  priority = false,
-  width,
-  height,
-  className,
-}: LogoLinkProps) => {
+const LogoLink = ({ src, href, alt, newTab, width, height, className }: LogoLinkProps) => {
   const { push } = useRouter();
   const handleRoute = (e: MouseEvent) => {
     e.preventDefault();
@@ -45,16 +35,7 @@ const LogoLink = ({
   };
   return (
     <LogoLinkStyles href={href} onClick={handleRoute} title={alt} className={className}>
-      <Image
-        src={src}
-        alt={alt}
-        width={width ?? 140}
-        height={height ?? 50}
-        objectFit='contain'
-        placeholder='blur'
-        blurDataURL={rgbDataURL()}
-        priority={priority}
-      />
+      <Img src={src} alt={alt} width={width ?? 140} height={height ?? 50} />
     </LogoLinkStyles>
   );
 };
