@@ -262,14 +262,12 @@ const AboutStyles = styled.div`
     z-index: 1;
 
     ::before {
-      background-image: url(images/textures/parchment.png);
-      backdrop-filter: invert(1);
+      /* background-image: url(images/textures/parchment.png); */
       content: '';
       position: absolute;
       z-index: -1;
       inset: 0;
-      /* background: ${({ theme }) =>
-        theme.isLightMode ? theme.secondary[400] : theme.border[900]}; */
+      background: ${({ theme }) => theme.secondary[400]};
       box-shadow: ${({ theme }) => '0 0 2rem 0.1rem inset ' + theme.secondary[800]};
     }
 
