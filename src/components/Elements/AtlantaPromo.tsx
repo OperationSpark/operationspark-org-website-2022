@@ -216,6 +216,10 @@ const AtlantaPromoStyles = styled(motion.div)`
     display: flex;
     height: fit-content;
     width: fit-content;
+    button {
+      color: ${({ theme }) => theme.red[400]};
+    }
+
     &.close-promo {
       right: 1rem;
       top: 1.25rem;

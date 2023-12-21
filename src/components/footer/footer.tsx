@@ -47,7 +47,9 @@ const Footer = ({ logos }: FooterProps) => {
         <SupportersStyles>
           <div>
             {!logos.length ? null : <h1 className='dynamic-h4'>Thanks to our Supporters!</h1>}
-            <p className='text-center'>Operation Spark is a 501(c)3 not-for-profit.</p>
+            <p className='text-center' style={{ paddingBottom: '1rem' }}>
+              Operation Spark is a 501(c)3 not-for-profit
+            </p>
 
             {!logos.length ? null : (
               <div>
@@ -161,7 +163,9 @@ const FooterStyles = styled.footer`
     height: auto;
     border-radius: 0.5rem;
   }
-
+  .content {
+    padding-bottom: 0;
+  }
   .powered-by {
     display: flex;
     justify-content: center;
@@ -184,7 +188,7 @@ const FooterStyles = styled.footer`
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1rem;
+
     img {
       width: 60px;
       height: auto;

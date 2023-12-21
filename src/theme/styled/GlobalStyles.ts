@@ -25,6 +25,7 @@ const GlobalStyles = createGlobalStyle`
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Red Hat Display', sans-serif;
     word-spacing: 0.25rem;
+    margin: 0;
   }
 
   button  {
@@ -48,7 +49,7 @@ const GlobalStyles = createGlobalStyle`
 
   #atlanta-promo-root {
     position: relative;
-    z-index: 1;
+    z-index: 100;
   }
   p {
      font-family: 'Roboto', sans-serif;
