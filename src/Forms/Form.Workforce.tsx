@@ -1,18 +1,18 @@
-import moment from 'moment';
 import axios from 'axios';
+import moment from 'moment';
 import { Fragment, useEffect, useState } from 'react';
 import { AiOutlineInfoCircle } from 'react-icons/ai';
 import styled from 'styled-components';
 
+import Button from '@this/components/Elements/Button';
+import { Form, Input, useForm } from '@this/components/Form';
 import { IInfoSessionFormValues } from '@this/data/types/infoSession';
+import { pixel } from '@this/lib/pixel';
 import { ISessionDates } from '@this/pages-api/infoSession/dates';
 import { FormDataSignup } from '@this/pages-api/infoSession/user';
-import { Form, Input, useForm } from '@this/components/Form';
-import Button from '@this/components/Elements/Button';
 import Spinner from '../components/Elements/Spinner';
-import { pixel } from '@this/lib/pixel';
-import useKeyCombo from '../hooks/useKeyCombo';
 import { getStateFromZipCode } from '../components/Form/helpers';
+import useKeyCombo from '../hooks/useKeyCombo';
 
 interface WorkforceFormProps {
   sessionDates: ISessionDates[];
@@ -75,7 +75,7 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
       .catch(() => {
         form.notifyError({
           title: 'Error',
-          msg: 'There was an error signing you up\nPlease reach out to us at "admissions@operationspark.org" or give us a call at 504-534-8277',
+          msg: 'There was an error signing you up\nPlease reach out to us at "admissions@operationspark.org" or give us a call at 504-233-3838',
         });
       })
       .finally(() => setIsSubmitting(false));
