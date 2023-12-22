@@ -1,9 +1,9 @@
 import { NextPage } from 'next';
 import styled from 'styled-components';
 
-import { Main, Content } from '@this/components/layout';
-import { anchor } from '@this/src/theme/styled/mixins/anchor';
+import { Content, Main } from '@this/components/layout';
 import PlainCard from '@this/src/components/Cards/PlainCard';
+import { anchor } from '@this/src/theme/styled/mixins/anchor';
 
 const PrivacyPolicy: NextPage = () => {
   return (
@@ -560,7 +560,7 @@ const PrivacyPolicy: NextPage = () => {
                   </li>
                   <li>
                     <p>
-                      <b>By phone number:</b> <a href='tel:504-534-8277'>504-534-8277</a>
+                      <b>By phone number:</b> <a href='tel:504-233-3838'>504-233-3838</a>
                     </p>
                   </li>
                   <li>
