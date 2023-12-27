@@ -5,6 +5,8 @@ import SocialNetworks from '@this/elements/SocialNetworks';
 import { BgImg } from '@this/elements/index';
 import Content from '@this/layout/Content';
 import Main from '@this/layout/Main';
+import ShareOnFacebookButton from '@this/src/components/Elements/ShareButtons/ShareFacebook';
+import ShareOnLinkedinButton from '@this/src/components/Elements/ShareButtons/ShareLinkedin';
 import { Center } from '@this/src/components/layout/Center';
 
 const GetInvolved: NextPage = () => {
@@ -12,21 +14,32 @@ const GetInvolved: NextPage = () => {
     <Main style={{ paddingTop: 0 }}>
       <GetInvolvedStyles>
         <BgImg
-          src='/images/display/halle-fundraiser.webp'
+          src='/images/display/noladevs-opspark-fundraiser.webp'
           height='30rem'
           overlay={{ position: 'center center' }}
-        >
-          <Content className='image-header'>
-            <h1 className='dynamic-xl secondary'>[Page Title]</h1>
-          </Content>
-        </BgImg>
+        />
 
         <Content>
           <h2 className='dynamic-h1 primary-secondary text-center'>About this fundraiser</h2>
+          <div className='share-buttons'>
+            <ShareOnLinkedinButton
+              url={
+                'https://opspark.ngrok.io/getInvolved/noladevs' /*'https://operationspark.org/noladevs'*/
+              }
+              title={'NOLADevs Fundraiser'}
+              summary={
+                'NOLADevs is teaming up with Operation Spark to host a fundraiser that supports current and future students with tuition and living stipends.'
+              }
+              source={'Operation Spark'}
+            />
+            <ShareOnFacebookButton
+              url={'https://opspark.ngrok.io/noladevs' /*'https://operationspark.org/noladevs'*/}
+            />
+          </div>
           <div className='about-fundraiser'>
             <p className='dynamic-txt'>
-              [REPLACE ME] is teaming up with Operation Spark to host a fundraiser that supports our
-              current and future students with tuition and living stipends. Operation Spark provides
+              NolaDevs is teaming up with Operation Spark to host a fundraiser that supports current
+              and future students with tuition and living stipends. Operation Spark provides
               intensive training in software development to individuals from diverse backgrounds,
               equipping them with the skills needed to pursue successful careers in the tech
               industry.
@@ -40,16 +53,15 @@ const GetInvolved: NextPage = () => {
               experience
             </p>
           </div>
-          <div style={{ paddingBottom: '2rem' }}>
-            <h2 className='dynamic-h2 primary-secondary text-center'>Spread the word</h2>
+          <div>
+            <h2 className='dynamic-h2 primary-secondary text-center'>Spread the word!</h2>
             <SocialNetworks />
           </div>
           <Center>
             <div className='iframe-wrapper' onClick={(e) => e.stopPropagation()}>
               <div className='overlay-cover'></div>
-
               <iframe
-                src='https://commitchange.com/nonprofits/3745/donate?offsite=t&amp;origin=http://operationspark.org/#!/donate'
+                src='https://commitchange.com/nonprofits/3745/donate?offsite=t&amp;origin=https://operationspark.org/#!/donate'
                 width='400px'
                 height='500px'
               ></iframe>
@@ -64,6 +76,14 @@ const GetInvolved: NextPage = () => {
 export default GetInvolved;
 
 const GetInvolvedStyles = styled.div`
+  .share-buttons {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem 0;
+  }
   a.primary-secondary:hover {
     text-decoration: underline;
   }

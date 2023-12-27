@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react';
-import dynamic from 'next/dynamic';
 import type { AppProps } from 'next/app';
+import dynamic from 'next/dynamic';
+import { useEffect, useState } from 'react';
 
-import { getStaticAsset } from '@this/pages-api/static/[asset]';
-import { IAlert } from '@this/data/types/bits';
 import { MainContainer } from '@this/components/layout';
+import { IAlert } from '@this/data/types/bits';
+import { PixelRoot } from '@this/lib/pixel';
+import { getStaticAsset } from '@this/pages-api/static/[asset]';
+import Meta from '@this/src/components/Elements/Meta';
+import Notifications from '@this/src/components/Notifications';
 import theme from '@this/src/theme';
 import { ILogo, ISupporterFunderLogos } from '../data/types/logos';
-import Meta from '@this/src/components/Elements/Meta';
-import { PixelRoot } from '@this/lib/pixel';
-import Notifications from '@this/src/components/Notifications';
 
 const Theme = dynamic(() => import('@this/src/theme/styled/Theme'));
 const Navbar = dynamic(() => import('@this/components/Navbar/Navbar'));

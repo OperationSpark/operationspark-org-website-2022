@@ -20,14 +20,16 @@ const formatRouteTitle = (str: string) => {
 const Meta = () => {
   const { pathname } = useRouter();
   const route = formatRouteTitle(pathname);
+
   const metaData = meta[route.toLowerCase().replaceAll(' ', '_')] || {};
   const defaultMeta = meta.defaultMeta || {};
+  const allMeta = { ...defaultMeta, ...metaData };
 
-  const hostname = defaultMeta.host ?? 'https://operationspark.org';
-  const description = metaData.description ?? defaultMeta.description;
-  const title = metaData.title ?? `${route ? route + ' | ' : ''}${defaultMeta.title}`;
-  const imageUrl = hostname + (metaData.imageUrl ?? defaultMeta.imageUrl);
-  const favicon = metaData.favicon ?? defaultMeta.favicon ?? '/favicon.ico';
+  const hostname = allMeta.host ?? 'https://operationspark.org';
+  const description = metaData.description ?? allMeta.description;
+  const title = metaData.title ?? `${route ? route + ' | ' : ''}${allMeta.title}`;
+  const imageUrl = hostname + (metaData.imageUrl ?? allMeta.imageUrl);
+  const favicon = metaData.favicon ?? allMeta.favicon ?? '/favicon.ico';
 
   return (
     <Head>
