@@ -1,7 +1,6 @@
 import { NextPage } from 'next';
 import styled from 'styled-components';
 
-import SocialNetworks from '@this/elements/SocialNetworks';
 import { BgImg } from '@this/elements/index';
 import Content from '@this/layout/Content';
 import Main from '@this/layout/Main';
@@ -53,10 +52,7 @@ const GetInvolved: NextPage = () => {
               experience
             </p>
           </div>
-          <div>
-            <h2 className='dynamic-h2 primary-secondary text-center'>Spread the word!</h2>
-            <SocialNetworks />
-          </div>
+
           <Center>
             <div className='iframe-wrapper' onClick={(e) => e.stopPropagation()}>
               <div className='overlay-cover'></div>
