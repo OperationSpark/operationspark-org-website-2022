@@ -7,9 +7,12 @@ type NavMenuBtnProps = {
 
 export const NavMenuBtn = styled.button<NavMenuBtnProps>`
   box-shadow: 0 0 1px ${(p) => p.theme.purple[900]};
-  padding: 0.5rem;
+  padding: 0.38rem 0.5rem;
   background: ${({ theme }) => theme.primary[theme.isLightMode ? 700 : 500]};
   border-radius: ${(p) => (p.isOpen ? '0.5rem 0.5rem 0 0' : '0.25rem')};
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: white;
   position: relative;
   margin-left: 0.5rem;
@@ -32,7 +35,12 @@ export const NavMenuBtn = styled.button<NavMenuBtnProps>`
     box-shadow: 0 0px 4px ${(p) => p.theme.purple[900]} inset;
   }
 
-  ${(p) => p.isOpen && 'box-shadow: none;'}
+  ${(p) =>
+    p.isOpen &&
+    `
+      box-shadow: none;
+      background: ${p.theme.red[500]};
+    `}
 `;
 
 const Path = (props: SVGMotionProps<SVGPathElement>) => (

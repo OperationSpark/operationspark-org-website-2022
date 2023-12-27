@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import Link from 'next/link';
+import styled from 'styled-components';
 
 import Icon from '@this/components/Elements/Icon';
 
@@ -25,19 +25,18 @@ const CareersForAll = () => {
         <div className='bottom-text'>
           <p>WE HELP STUDENTS WITH THEIR FIRST STEP INTO SOFTWARE DEVELOPMENT.</p>
 
-          <Link href='/contact'>
-            <a
-              className='anchor right-arr-left'
-              aria-label='Learn about job placement'
-              title='Job Placement'
-            >
-              Contact us to learn more about job placement
-            </a>
+          <Link
+            href='/contact'
+            className='anchor right-arr-left'
+            aria-label='Learn about job placement'
+            title='Job Placement'
+          >
+            Contact us to learn more about job placement
           </Link>
         </div>
       </div>
       <div className='halle-img'>
-        <Image src='/images/hallebot-filled.webp' alt='hallebot' width={240} height={295} />
+        <Image src='/images/os/hallebot-3d_600x.webp' alt='hallebot' width={240} height={295} />
       </div>
     </CareerForAllStyles>
   );

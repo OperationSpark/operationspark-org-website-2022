@@ -1,17 +1,17 @@
-import { Fragment, useEffect, useState } from 'react';
 import { GetStaticProps, NextPage } from 'next';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import Link from 'next/link';
+import { Fragment, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { shuffle } from 'underscore';
 
-import { IAbout } from '@this/data/types/about';
-import Main from '@this/components/layout/Main';
-import Section from '@this/components/layout/Section';
-import Content from '@this/components/layout/Content';
-import { getStaticAsset } from '../api/static/[asset]';
 import PlainCard from '@this/components/Cards/PlainCard';
 import BgImg from '@this/components/Elements/BgImg';
+import Content from '@this/components/layout/Content';
+import Main from '@this/components/layout/Main';
+import Section from '@this/components/layout/Section';
+import { IAbout } from '@this/data/types/about';
+import { getStaticAsset } from '../api/static/[asset]';
 
 const About: NextPage<IAbout> = ({ mission, team, history, awards }) => {
   const [staffMembers, setStaffMembers] = useState<IAbout['team']['staff']>([]);
@@ -58,8 +58,8 @@ const About: NextPage<IAbout> = ({ mission, team, history, awards }) => {
                   ))}
 
                   {i < mission.sections.length - 1 && (
-                    <Link href='/cultureOfCode'>
-                      <a className='anchor'>Our Culture of Code</a>
+                    <Link className='anchor' href='/cultureOfCode'>
+                      {'Our Culture of Code'}
                     </Link>
                   )}
                   {i < mission.sections.length - 1 && <hr />}
@@ -70,7 +70,7 @@ const About: NextPage<IAbout> = ({ mission, team, history, awards }) => {
         </Section>
         <Section className='about-history _progress' id='history'>
           <Content>
-            <h1 className='dynamic-h1'>History</h1>
+            <h1 className='dynamic-h1 mb0 mt0'>Our History</h1>
             {history.map((desc) => (
               <p key={desc} className='dynamic-txt'>
                 {desc}
@@ -262,30 +262,28 @@ const AboutStyles = styled.div`
     z-index: 1;
 
     ::before {
+      /* background-image: url(images/textures/parchment.png); */
       content: '';
       position: absolute;
       z-index: -1;
       inset: 0;
-      background: ${({ theme }) => (theme.isLightMode ? theme.secondary[400] : theme.border[900])};
-      box-shadow: ${({ theme }) =>
-        '0 0 0.5rem 0.1rem inset ' +
-        (theme.isLightMode ? theme.secondary[800] : theme.border[500])};
+      background: ${({ theme }) => theme.secondary[400]};
+      box-shadow: ${({ theme }) => '0 0 2rem 0.1rem inset ' + theme.secondary[800]};
     }
 
     p,
     h1 {
-      ::selection {
-        background: ${({ theme }) =>
-          theme.isLightMode ? theme.primary[700] : theme.secondary[500]};
-        color: ${({ theme }) => theme.bg};
-      }
-    }
-    p {
-      font-weight: 300;
-      font-style: italic;
+      font-family: 'Kalam', cursive;
+      font-family: 'Red Hat Display', sans-serif;
+
       padding: 1rem 0;
       text-align: justify;
       text-justify: justify;
+      color: ${({ theme }) => (theme.isLightMode ? theme.fg : theme.bg)};
+      padding: 1rem;
+    }
+    p {
+      font-weight: 400;
     }
   }
   .about-header {
@@ -339,6 +337,10 @@ const AboutStyles = styled.div`
     font-weight: 300;
     font-style: italic;
     color: ${({ theme }) => theme.alpha.fg};
+  }
+  .team-member-bio {
+    font-family: 'Red Hat Display', sans-serif;
+    font-weight: 300;
   }
 
   .video-container {

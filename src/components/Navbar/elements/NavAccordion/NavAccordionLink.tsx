@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import { checkActiveSubLink } from '@this/src/helpers/navigation';
 
 const NavAccordionLinkStyles = styled.div`
+  font-family: 'Red Hat Display', sans-serif;
+  font-weight: 500;
   cursor: pointer;
   width: 100%;
   padding: 0.6rem 1rem;

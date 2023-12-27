@@ -1,20 +1,20 @@
-import styled from 'styled-components';
-import { motion } from 'framer-motion';
-import { GetStaticProps, NextPage } from 'next';
-import { useRouter } from 'next/router';
-import dynamic from 'next/dynamic';
-import Link from 'next/link';
 import { IInfoSession } from '@this/data/types/infoSession';
 import { ILogo } from '@this/data/types/logos';
+import { motion } from 'framer-motion';
+import { GetStaticProps, NextPage } from 'next';
+import dynamic from 'next/dynamic';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import styled from 'styled-components';
 
-import { cardShadow, cardShadowLtr, cardShadowRtl } from '@this/src/theme/styled/mixins/shadows';
-import { getStaticAsset } from '@this/pages-api/static/[asset]';
-import { Main, Section, Content } from '@this/components/layout';
-import useInfoSession from '@this/src/hooks/useInfoSession';
-import { getFormattedDateTime } from '@this/src/helpers/timeUtils';
-import useKeyCombo from '@this/hooks/useKeyCombo';
-import { useEffect, useState } from 'react';
+import { Content, Main, Section } from '@this/components/layout';
 import { TOption } from '@this/data/types/bits';
+import useKeyCombo from '@this/hooks/useKeyCombo';
+import { getStaticAsset } from '@this/pages-api/static/[asset]';
+import { getFormattedDateTime } from '@this/src/helpers/timeUtils';
+import useInfoSession from '@this/src/hooks/useInfoSession';
+import { cardShadow, cardShadowLtr, cardShadowRtl } from '@this/src/theme/styled/mixins/shadows';
+import { useEffect, useState } from 'react';
 
 const WorkforceForm = dynamic(() => import('@this/src/Forms/Form.Workforce'));
 const Carousel = dynamic(() => import('@this/components/Elements/Carousel'));
@@ -50,14 +50,14 @@ const InfoSession: NextPage<InfoSessionProps> = ({ commonQuestions, logos }) => 
                   Interested in our <br />
                   Adult Workforce Program?
                 </h1>
-                <h1 className='dynamic-xl primary-secondary'>
+                <h1 className='dynamic-xl primary-secondary mb0 mt0'>
                   Attend a Free
                   <br />
                   Info Session!
                 </h1>
               </div>
               <div className='whats-to-learn'>
-                <h2 className='dynamic-h2 '>{`YOU'LL LEARN ABOUT`}</h2>
+                <h2 className='dynamic-h2 text-center mb0'>{`YOU'LL LEARN ABOUT`}</h2>
                 <ul className='what-to-learn-list'>
                   <li>Coding and career opportunities</li>
                   <li>Our program and job search support</li>
@@ -92,13 +92,13 @@ const InfoSession: NextPage<InfoSessionProps> = ({ commonQuestions, logos }) => 
                   Info sessions discuss <i style={{ fontWeight: 600 }}>Adult Workforce programs</i>.
                   To sign up or get more information about our{' '}
                   <i style={{ fontWeight: 600 }}>High School to High Wage program</i>,{' '}
-                  <Link href='/programs/highschool/requestInfo'>
-                    <a className='anchor'>please complete this form.</a>
+                  <Link href='/programs/highschool/requestInfo' className='anchor'>
+                    {'please complete this form.'}
                   </Link>
                 </div>
 
                 <div>
-                  <h3 className='dynamic-h3 form-title primary-secondary text-center'>
+                  <h3 className='dynamic-h3 form-title primary-secondary text-center next-session'>
                     Next information session:
                   </h3>
                   {!nextSession ? null : (
@@ -256,6 +256,10 @@ const InfoSessionStyles = styled.div`
       .form-title.date-time {
         color: ${({ theme }) => (theme.isLightMode ? theme.magenta[0] : theme.green[0])};
         font-weight: 500;
+        margin: 0;
+      }
+      .form-title.next-session {
+        margin: 0;
       }
     }
 

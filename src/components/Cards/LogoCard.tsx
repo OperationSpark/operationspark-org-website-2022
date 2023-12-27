@@ -1,7 +1,7 @@
-import styled from 'styled-components';
-import { SlashDivider } from '@this/components/Elements/SlashDivider';
 import LogoLink from '@this/components/Elements/LogoLink';
+import { SlashDivider } from '@this/components/Elements/SlashDivider';
 import { cardShadow } from '@this/src/theme/styled/mixins/shadows';
+import styled from 'styled-components';
 
 export const LogoCardStyles = styled.div`
   padding: 1rem;

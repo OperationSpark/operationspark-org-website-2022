@@ -1,6 +1,5 @@
-import Image from 'next/image';
+import { Img } from '@this/src/Typography/elements/Html';
 import styled from 'styled-components';
-import rgbDataURL from '@this/src/helpers/rgbDataURL';
 
 const MapStyles = styled.div`
   display: flex;
@@ -42,17 +41,12 @@ const Map = ({ href, address }: MapProps) => {
     <MapStyles>
       <div className='img'>
         <a href={href} target='_blank' rel='noreferrer' title={`${address}\n\nOpen in google maps`}>
-          <Image
+          <Img
             src='/images/opspark-map.png'
-            layout='responsive'
-            width='500px'
-            height='500px'
-            objectFit='contain'
+            width='100%'
+            height='100%'
             alt='Operation Spark map'
-            quality={100}
-            blurDataURL={rgbDataURL(134, 0, 241)}
             loading='eager'
-            priority
           />
         </a>
       </div>

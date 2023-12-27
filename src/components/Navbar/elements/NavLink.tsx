@@ -1,9 +1,45 @@
-import { ReactNode } from 'react';
-import { useRouter } from 'next/router';
-import styled from 'styled-components';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { ReactNode } from 'react';
+import styled from 'styled-components';
 
 import { buttonCss, yellowBtn } from '@this/src/theme/styled/mixins/button';
+
+const NavLink = ({
+  children,
+  href,
+  className,
+  callback,
+  color = '',
+  title,
+}: {
+  children: ReactNode | ReactNode[];
+  href?: string;
+  className?: string;
+  callback?: () => void;
+  color?: '' | 'yellow';
+  title?: string;
+}) => {
+  const linkTitle = typeof children === 'string' ? children : '';
+  const { pathname } = useRouter();
+
+  return (
+    <NavLinkStyles
+      className={`${href && pathname.includes(href) ? 'active' : ''} ${className || ''}`}
+      color={color}
+      onClick={callback}
+      title={title ?? linkTitle}
+    >
+      {href ? (
+        <Link href={href} aria-label={title ?? linkTitle}>
+          {children}
+        </Link>
+      ) : (
+        children
+      )}
+    </NavLinkStyles>
+  );
+};
 
 export const NavLinkStyles = styled.div.attrs(({ color }: { color?: '' | 'yellow' }) => ({
   color,
@@ -14,10 +50,12 @@ export const NavLinkStyles = styled.div.attrs(({ color }: { color?: '' | 'yellow
   font-size: 0.9rem;
   z-index: 1;
   padding: 0;
+  font-family: 'Red Hat Display', sans-serif;
+  font-weight: 600;
   a {
     all: unset;
     display: flex;
-    padding: 0.3rem 0.6rem;
+    padding: 0.35rem 0.75rem;
   }
   &.sub-nav {
     transition: box-shadow 125ms;
@@ -62,41 +100,5 @@ export const NavLinkStyles = styled.div.attrs(({ color }: { color?: '' | 'yellow
     }
   }
 `;
-
-const NavLink = ({
-  children,
-  href,
-  className,
-  callback,
-  color = '',
-  title,
-}: {
-  children: ReactNode | ReactNode[];
-  href?: string;
-  className?: string;
-  callback?: () => void;
-  color?: '' | 'yellow';
-  title?: string;
-}) => {
-  const linkTitle = typeof children === 'string' ? children : '';
-  const { pathname } = useRouter();
-
-  return (
-    <NavLinkStyles
-      className={`${href && pathname.includes(href) ? 'active' : ''} ${className || ''}`}
-      color={color}
-      onClick={callback}
-      title={title ?? linkTitle}
-    >
-      {href ? (
-        <Link href={href} aria-label={title ?? linkTitle}>
-          {children}
-        </Link>
-      ) : (
-        children
-      )}
-    </NavLinkStyles>
-  );
-};
 
 export default NavLink;

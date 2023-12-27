@@ -28,7 +28,7 @@ const ProgramsForAll = ({
               </h1>
             ))}
             {description.map((text) => (
-              <p key={text} className='dynamic-txt'>
+              <p key={text} className='dynamic-txt bg-subtle-dark br-1 p-1'>
                 {text}
               </p>
             ))}
@@ -63,14 +63,11 @@ const ProgramsForAllStyles = styled.div`
     h1 {
       color: ${({ theme }) => theme.secondary[400]};
       :last-of-type {
-        padding-bottom: 2rem;
+        padding-bottom: 1rem;
       }
       :first-of-type {
         line-height: 1.25em;
       }
-    }
-    p {
-      color: white;
     }
   }
   .bottom-content,

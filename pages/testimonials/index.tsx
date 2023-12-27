@@ -9,13 +9,16 @@ const Testimonials: NextPage = () => {
     <Main>
       <Content>
         <h1 className='dynamic-h1'>Testimonials</h1>
-        <a className='anchor right-arr-left'>
-          <Link href='/testimonials/company'>Company Testimonials</Link>
-        </a>
+
+        <Link href='/testimonials/company' className='anchor right-arr-left'>
+          {'Company Testimonials'}
+        </Link>
+
         <br />
-        <a className='anchor right-arr-left'>
-          <Link href='/testimonials/graduates'>Grad Testimonials</Link>
-        </a>
+
+        <Link href='/testimonials/graduates' className='anchor right-arr-left'>
+          {'Grad Testimonials'}
+        </Link>
       </Content>
     </Main>
   );

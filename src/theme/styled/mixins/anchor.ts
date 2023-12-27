@@ -9,7 +9,10 @@ export const anchor = css`
   border: none;
   border-radius: 0.25rem;
   width: fit-content;
-
+  span {
+    display: flex;
+    align-items: center;
+  }
   &.right-arr-left {
     padding: 0 0.25rem;
     height: fit-content;

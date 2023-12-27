@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import styled from 'styled-components';
 
-import { cardShadow } from '@this/src/theme/styled/mixins/shadows';
 import BgImg from '@this/components/Elements/BgImg';
 import Button from '@this/components/Elements/Button';
 import Content from '@this/components/layout/Content';
+import { cardShadow } from '@this/src/theme/styled/mixins/shadows';
 
 const TopCard = () => {
   /** Remove once page is created */
@@ -22,12 +22,12 @@ const TopCard = () => {
             </div>
             {FEAT_COLLEGE_CREDIT && (
               <div className='college-credit'>
-                <div className='college-credit-box  blurry-box'>
+                <div className='college-credit-box blurry-box'>
                   <p className='dynamic-txt college-credit-desc'>
                     Our certifications are eligible for college credit!
                   </p>
-                  <Link href='/collegeCredit' passHref>
-                    <Button color='yellow'>Learn more</Button>
+                  <Link href='/collegeCredit'>
+                    <Button color='yellow'>{'Learn more'}</Button>
                   </Link>
                 </div>
               </div>

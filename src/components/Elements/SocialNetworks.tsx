@@ -1,7 +1,7 @@
-import { HStack, VStack } from '@chakra-ui/react';
 import styled from 'styled-components';
 import { useTheme } from 'styled-components';
 import { FaFacebookSquare, FaTwitter, FaInstagram, FaGithub, FaLinkedin } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 
 const networkingIcons = [
   {
@@ -32,29 +32,34 @@ const SocialNetworks = () => {
   const networkingIconColor = theme.isLightMode ? theme.primary[700] : theme.primary[300];
 
   return (
-    <SocialStyles justify='space-around' p='1rem'>
-      <HStack textAlign='center' justifyContent='center' w='100%'>
-        {networkingIcons.map(({ Icon, url, name }) => (
-          <a
-            key={url}
-            aria-label={name}
-            href={url}
-            rel='noreferrer'
-            target='_blank'
-            title={name}
-            className='anchor'
-          >
-            <Icon name={name} size={32} color={networkingIconColor} />
-          </a>
-        ))}
-      </HStack>
+    <SocialStyles>
+      {networkingIcons.map(({ Icon, url, name }) => (
+        <a
+          key={url}
+          aria-label={name}
+          href={url}
+          rel='noreferrer'
+          target='_blank'
+          title={name}
+          className='anchor'
+        >
+          <Icon name={name} size={32} color={networkingIconColor} />
+        </a>
+      ))}
     </SocialStyles>
   );
 };
 
 export default SocialNetworks;
 
-const SocialStyles = styled(VStack)`
+const SocialStyles = styled(motion.div)`
+  padding: 1rem;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
   img,
   a {
     user-select: none;

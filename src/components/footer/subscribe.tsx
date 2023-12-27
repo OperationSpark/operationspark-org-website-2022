@@ -9,13 +9,14 @@ import FormErr from '../Form/elements/FormErr';
 
 const SubscribeStyles = styled.div`
   background: ${({ theme }) => theme.secondary[600]};
+  display: flex;
   .subscribe-content {
     display: flex;
     flex-flow: row;
     justify-content: space-between;
     align-items: center;
-
     color: rgba(25, 25, 25, 1);
+    margin-bottom: 2rem;
   }
   h3 {
     flex: 4;
@@ -92,6 +93,7 @@ const Subscribe = () => {
             />
             {isErr && (
               <FormErr
+                colorTheme='dark'
                 text='Valid email required'
                 style={{
                   position: 'absolute',

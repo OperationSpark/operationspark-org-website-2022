@@ -1,15 +1,15 @@
+import { AnimatePresence, motion } from 'framer-motion';
 import { CSSProperties, FC, useState } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
-import { AnimatePresence, motion } from 'framer-motion';
-import Image from 'next/image';
 
-import { useMounted } from '@this/src/hooks/useMounted';
-import { XIcon } from '../icons/XIcon';
-import { ExpandIcon } from '../icons/Expand';
-import Link from 'next/link';
-import { InfoIcon } from '../icons/Info';
+import { Img } from '@this/src/Typography/elements/Html';
 import { useClickAway } from '@this/src/hooks/useClickAway';
+import { useMounted } from '@this/src/hooks/useMounted';
+import Link from 'next/link';
+import { ExpandIcon } from '../icons/Expand';
+import { InfoIcon } from '../icons/Info';
+import { XIcon } from '../icons/XIcon';
 
 type AtlantaPromoProps = { style?: CSSProperties };
 const AtlantaPromo: FC<AtlantaPromoProps> = ({ style }) => {
@@ -66,22 +66,20 @@ const AtlantaPromo: FC<AtlantaPromoProps> = ({ style }) => {
             </div>
           )}
 
-          <Image
+          <Img
             src='/images/display/peach.png'
-            width='400px'
-            height='400px'
             alt='Peach'
             className='promo-img'
-            style={{ maxWidth: '100%', opacity: 0.75 }}
+            style={{ maxWidth: '100%', opacity: 0.75, objectFit: 'contain' }}
           />
           <div className='circle-bg'></div>
 
           <div className='promo-content'>
-            <Link href='/programs/workforce/infoSession'>
-              <a className='promo-anchor'>
+            <Link href='/programs/workforce/infoSession' className='promo-anchor'>
+              <span>
                 Live in Georgia? Sign up here!
                 <div className='learn-more-text'>Click to sign up</div>
-              </a>
+              </span>
             </Link>
             <button className='promo-learn-more' onClick={() => setShowPromoInfo(true)}>
               <InfoIcon size={20} weight={2} />
@@ -121,10 +119,12 @@ const AtlantaPromo: FC<AtlantaPromoProps> = ({ style }) => {
                       a year of immersive training.”
                     </i>
                   </p>
-                  <Link href='/programs/workforce/infoSession'>
-                    <a className='anchor' style={{ margin: '0 auto' }}>
-                      Sign up here!
-                    </a>
+                  <Link
+                    href='/programs/workforce/infoSession'
+                    className='anchor'
+                    style={{ margin: '0 auto' }}
+                  >
+                    {'Sign up here!'}
                   </Link>
                 </motion.div>
               )}
@@ -216,6 +216,10 @@ const AtlantaPromoStyles = styled(motion.div)`
     display: flex;
     height: fit-content;
     width: fit-content;
+    button {
+      color: ${({ theme }) => theme.red[400]};
+    }
+
     &.close-promo {
       right: 1rem;
       top: 1.25rem;

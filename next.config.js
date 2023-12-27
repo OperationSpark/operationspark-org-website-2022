@@ -47,9 +47,9 @@ module.exports = (phase, { defaultConfig }) => {
       styledComponents: true,
     },
     env: {
-      OVERRIDE_NODE_ENV,
+      OVERRIDE_NODE_ENV: OVERRIDE_NODE_ENV || '',
       FB_PIXEL_ID,
-      HIGHSCHOOL_FORM_ACTIVE: isHsFormActive,
+      HIGHSCHOOL_FORM_ACTIVE: `${isHsFormActive}`,
       HIGHSCHOOL_FORM_RESPONSES_NAME,
     },
 
@@ -57,7 +57,12 @@ module.exports = (phase, { defaultConfig }) => {
     // https://nextjs.org/docs/messages/next-image-unconfigured-host
 
     images: {
-      domains: ['storage.googleapis.com'],
+      remotePatterns: [
+        {
+          protocol: 'https',
+          hostname: 'storage.googleapis.com',
+        },
+      ],
     },
     async redirects() {
       return [

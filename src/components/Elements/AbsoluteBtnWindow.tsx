@@ -39,10 +39,10 @@ const AbsoluteBtnWindow = ({
         style={{
           padding: isOpen ? '0.25rem' : undefined,
         }}
-        className='_abs-win-btn'
+        className={`_abs-win-btn ${isOpen ? 'open' : 'closed'}}`}
         onClick={onClick}
       >
-        {isOpen ? <IoMdClose size={23} /> : text}
+        {isOpen ? <IoMdClose size={20} /> : text}
       </Button>
       <AnimatePresence>
         {isOpen && (
@@ -56,13 +56,13 @@ const AbsoluteBtnWindow = ({
               opacity: 0,
             }}
             animate={{
-              maxHeight: `calc(100vh - (${theme.navHeight}px + 3rem))`,
+              maxHeight: `calc(100vh - (${theme.navHeight}px + 1rem))`,
               width: style?.width || '500px',
               maxWidth: 'calc(100vw - 2rem)',
               opacity: 1,
             }}
             exit={{ maxHeight: `0vh`, width: '100px', opacity: 1 }}
-            transition={{ type: 'tween', duration: 0.25 }}
+            transition={{ type: 'tween', duration: 0.1 }}
             style={{ ...style, overflowY: isOpen ? 'auto' : 'hidden' }}
           >
             <h3 className='dynamic-h3 _abs-win-title'>{title}</h3>
@@ -114,16 +114,21 @@ const AbsoluteBtnWindowStyles = styled.div`
     filter: drop-shadow(0 0 0.5rem rgba(0, 0, 0, 0.75));
     border-radius: 0.25rem;
     background: ${({ theme }) => theme.bg};
-
     padding: 1rem;
   }
 
   ._abs-win-btn {
     position: absolute;
     margin: 0;
-    right: 0;
+    right: 0.8rem;
     top: 0;
     z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  ._abs-win-btn .open {
+    background: ${({ theme }) => theme.red[500]};
   }
 
   @media screen and (max-width: 768px) {

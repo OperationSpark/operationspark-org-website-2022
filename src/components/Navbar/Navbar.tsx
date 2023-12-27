@@ -1,23 +1,23 @@
+'use client';
+import { Transition, motion } from 'framer-motion';
+import moment from 'moment-timezone';
 import dynamic from 'next/dynamic';
 import { useEffect, useRef } from 'react';
 import styled, { useTheme } from 'styled-components';
-import moment from 'moment-timezone';
-import { motion, Transition } from 'framer-motion';
-import { HiOutlineBeaker as TestIcon } from 'react-icons/hi';
 
-import { navMenus } from './navLinks';
-import { IAlert } from '@this/data/types/bits';
-import { useScrollY } from '@this/hooks/useScrollY';
-import { useValidCss } from '@this/hooks/useCssCheck';
 import LogoLink from '@this/components/Elements/LogoLink';
+import { IAlert } from '@this/data/types/bits';
+import { useValidCss } from '@this/hooks/useCssCheck';
+import { useScrollY } from '@this/hooks/useScrollY';
 import BonusBar from './BonusBar';
+import { navMenus } from './navLinks';
 
 const ProgressBar = dynamic(() => import('./ProgressBar'));
 const AlertBar = dynamic(() => import('./AlertBar'));
 const DesktopNav = dynamic(() => import('./DesktopNav'));
 const MobileNav = dynamic(() => import('./MobileNav'));
 
-const { OVERRIDE_NODE_ENV } = process.env;
+// const { OVERRIDE_NODE_ENV } = process.env;
 
 interface NavProps {
   alertInfo: IAlert;
@@ -38,7 +38,7 @@ const withinDateRange = ({ start, end }: IAlert): boolean => {
   return !endTime || (now >= startTime && now <= endTime);
 };
 
-export default function Nav({ alertInfo }: NavProps) {
+const Nav = ({ alertInfo }: NavProps) => {
   const scrollY = useScrollY();
   const supportsBackdropFilter = useValidCss('backdrop-filter', 'blur()');
   const isTop = scrollY === null ? true : scrollY <= 5;
@@ -48,19 +48,7 @@ export default function Nav({ alertInfo }: NavProps) {
 
   const extraNavHeight = 40;
 
-  const resizeObserverRef = useRef(
-    typeof window === 'undefined'
-      ? null
-      : new ResizeObserver(([nav]) =>
-          requestAnimationFrame(() => {
-            if (nav) {
-              const { height } = nav.contentRect;
-              const newHeight = Math.ceil(height + extraNavHeight);
-              theme.setNavHeight(newHeight);
-            }
-          }),
-        ),
-  );
+  const resizeObserverRef = useRef<ResizeObserver | null>(null);
 
   const transparentBg = theme.isLightMode ? 'rgba(255,255,255,0)' : 'rgba(25,25,25,0)';
   const bgColor = supportsBackdropFilter ? theme.alpha.bg : theme.bg;
@@ -78,6 +66,17 @@ export default function Nav({ alertInfo }: NavProps) {
 
   // Dynamically update nav height
   useEffect(() => {
+    if (!resizeObserverRef.current) {
+      resizeObserverRef.current = new ResizeObserver(([nav]) =>
+        requestAnimationFrame(() => {
+          if (nav) {
+            const { height } = nav.contentRect;
+            const newHeight = Math.ceil(height + extraNavHeight);
+            theme.setNavHeight(newHeight);
+          }
+        }),
+      );
+    }
     const resizeObserver = resizeObserverRef.current;
     const navElement = navRef.current;
 
@@ -93,11 +92,12 @@ export default function Nav({ alertInfo }: NavProps) {
 
   return (
     <NavbarStyles ref={navRef} animate={navAnimation} transition={navTransition}>
-      {OVERRIDE_NODE_ENV !== 'testing' ? null : (
+      {/* // TODO: Figure out why this breaks since update to nextjs v13 */}
+      {/* {OVERRIDE_NODE_ENV === 'testing' ? (
         <div className='test-mode'>
           <TestIcon /> &nbsp;TEST MODE&nbsp; <TestIcon />
         </div>
-      )}
+      ) : null} */}
       {showAlert && <AlertBar info={alertInfo} />}
 
       <div className='navbar'>
@@ -126,7 +126,9 @@ export default function Nav({ alertInfo }: NavProps) {
       <ProgressBar isTop={isTop} />
     </NavbarStyles>
   );
-}
+};
+
+export default Nav;
 
 export const NavbarStyles = styled(motion.nav)`
   z-index: 1000;

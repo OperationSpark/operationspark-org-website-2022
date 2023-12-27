@@ -1,5 +1,5 @@
 import { GetStaticProps, NextPage } from 'next';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import styled from 'styled-components';
 
 import { ICultureOfCode } from '@this/data/types/cultureOfCode';
