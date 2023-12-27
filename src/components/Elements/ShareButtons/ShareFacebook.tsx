@@ -11,7 +11,7 @@ type ShareOnFacebookButtonProps = {
 };
 
 const ShareOnFacebookButton: FC<ShareOnFacebookButtonProps> = ({ url }) => {
-  const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+  const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
   return (
     <ShareOnFacebookStyles href={facebookUrl} target='_blank' title='Share on Facebook'>
       <FaFacebookSquare size={20} />

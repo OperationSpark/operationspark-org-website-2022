@@ -13,8 +13,8 @@ type ShareOnLinkedinButtonProps = {
   source: string;
 };
 
-const ShareOnLinkedinButton: FC<ShareOnLinkedinButtonProps> = ({ url, title, summary, source }) => {
-  const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}&title=${title}&summary=${summary}&source=${source}`;
+const ShareOnLinkedinButton: FC<ShareOnLinkedinButtonProps> = ({ url }) => {
+  const linkedinUrl = `https://www.linkedin.com/shareArticle?url=${encodeURIComponent(url)}`;
   return (
     <ShareOnLinkedinStyles href={linkedinUrl} target='_blank' title='Share on LinkedIn'>
       <FaLinkedin size={20} />
