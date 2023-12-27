@@ -22,18 +22,14 @@ const GetInvolved: NextPage = () => {
           <h2 className='dynamic-h1 primary-secondary text-center'>About this fundraiser</h2>
           <div className='share-buttons'>
             <ShareOnLinkedinButton
-              url={
-                'https://opspark.ngrok.io/getInvolved/noladevs' /*'https://operationspark.org/noladevs'*/
-              }
+              url={'https://www.operationspark.org/getInvolved/noladevs'}
               title={'NOLADevs Fundraiser'}
               summary={
                 'NOLADevs is teaming up with Operation Spark to host a fundraiser that supports current and future students with tuition and living stipends.'
               }
               source={'Operation Spark'}
             />
-            <ShareOnFacebookButton
-              url={'https://opspark.ngrok.io/noladevs' /*'https://operationspark.org/noladevs'*/}
-            />
+            <ShareOnFacebookButton url={'https://www.operationspark.org/getInvolved/noladevs'} />
           </div>
           <div className='about-fundraiser'>
             <p className='dynamic-txt'>
