@@ -7,6 +7,7 @@ import Main from '@this/layout/Main';
 import ShareOnFacebookButton from '@this/src/components/Elements/ShareButtons/ShareFacebook';
 import ShareOnLinkedinButton from '@this/src/components/Elements/ShareButtons/ShareLinkedin';
 import { Center } from '@this/src/components/layout/Center';
+import { nolaDevsFont } from '@this/src/fonts';
 
 const GetInvolved: NextPage = () => {
   return (
@@ -15,11 +16,13 @@ const GetInvolved: NextPage = () => {
         <BgImg
           src='/images/display/noladevs-opspark-fundraiser.webp'
           height='30rem'
-          overlay={{ position: 'center center' }}
+          overlay={{ position: 'center center', blur: 0, opacity: 0 }}
         />
 
         <Content>
-          <h2 className='dynamic-h1 primary-secondary text-center'>About this fundraiser</h2>
+          <h2 className='noladevs dynamic-h1 primary-secondary text-center'>
+            <span className={nolaDevsFont.className}>About this fundraiser</span>
+          </h2>
           <div className='share-buttons'>
             <ShareOnLinkedinButton
               url={'https://www.operationspark.org/getInvolved/noladevs'}
@@ -75,6 +78,9 @@ const GetInvolvedStyles = styled.div`
     align-items: center;
     gap: 1rem;
     padding: 0.5rem 0;
+  }
+  .noladevs {
+    font-family: var(--font-noladevs);
   }
   a.primary-secondary:hover {
     text-decoration: underline;
