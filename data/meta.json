@@ -21,5 +21,9 @@
   },
   "highschool": {
     "description": "Sign up to learn more about what high school programs we offer."
+  },
+  "noladevs": {
+    "description": "NolaDevs is teaming up with Operation Spark to host a fundraiser that supports current and future students with tuition and living stipends. Operation Spark provides intensive training in software development to individuals from diverse backgrounds, equipping them with the skills needed to pursue successful careers in the tech industry.",
+    "imageUrl": "/images/noladevs-fundraiser-meta.png"
   }
 }

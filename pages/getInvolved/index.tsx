@@ -66,6 +66,11 @@ const GetInvolved: NextPage = () => {
             }
           />
         </Content>
+        <Center className='dynamic-txt'>
+          <Link href='/noladevs' className='anchor dynamic-txt'>
+            NolaDevs/OpSpark Fundraiser
+          </Link>
+        </Center>
         <Content>
           <h2 className='dynamic-h1 primary-secondary text-center'>Give</h2>
           <div className='donation-methods'>

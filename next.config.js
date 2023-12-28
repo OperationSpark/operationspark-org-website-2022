@@ -8,6 +8,7 @@ const {
   FB_PIXEL_ID,
   HIGHSCHOOL_FORM_ACTIVE = 'false',
   HIGHSCHOOL_FORM_RESPONSES_NAME = '__TAB_NAME_NOT_SET__',
+
 } = process.env;
 
 const isHsFormActive = HIGHSCHOOL_FORM_ACTIVE?.toLowerCase() === 'true';
@@ -74,6 +75,11 @@ module.exports = (phase, { defaultConfig }) => {
           source: '/infoSession',
           destination: '/programs/workforce/infoSession',
           permanent: true,
+        },
+        {
+          source: `/noladevs`,
+          destination: '/getInvolved/noladevs',
+          permanent: false,
         },
         /**
          * High School Application - `/programs/highschool/apply`
