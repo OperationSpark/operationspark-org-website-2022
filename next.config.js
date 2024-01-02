@@ -8,7 +8,6 @@ const {
   FB_PIXEL_ID,
   HIGHSCHOOL_FORM_ACTIVE = 'false',
   HIGHSCHOOL_FORM_RESPONSES_NAME = '__TAB_NAME_NOT_SET__',
-
 } = process.env;
 
 const isHsFormActive = HIGHSCHOOL_FORM_ACTIVE?.toLowerCase() === 'true';
@@ -35,7 +34,8 @@ module.exports = (phase, { defaultConfig }) => {
     validateData();
   }
   if (PHASE_DEVELOPMENT_SERVER === phase) {
-    console.info(color.blueBright.bold('\nhttp://localhost:3000\n'));
+    const port = process.env.PORT;
+    console.info(color.blueBright.bold('\nhttp://localhost:' + (port ?? '3000') + '\n'));
   }
   /**
    * @type {import('next').NextConfig}
