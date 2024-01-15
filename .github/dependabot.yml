@@ -6,3 +6,6 @@ updates:
     directory: '/'
     schedule:
       interval: 'weekly' # daily, weekly, monthly
+    ignore:
+      - dependency-name: 'styled-components'
+        versions: '>= 6.0.0'
