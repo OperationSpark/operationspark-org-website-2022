@@ -39,7 +39,7 @@
     "@types/styled-components": "^5.1.34",
     "@types/underscore": "^1.11.15",
     "@types/validator": "^13.11.7",
-    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/eslint-plugin": "^6.19.1",
     "@typescript-eslint/parser": "^6.15.0",
     "babel-plugin-styled-components": "^2.1.4",
     "cli-color": "^2.0.3",
