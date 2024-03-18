@@ -74,7 +74,7 @@ const getSelectedCourseTimes = (selected: string): { options: TOption[]; note: s
 interface HighSchoolApplicationProps {
   onSubmitComplete?: () => void;
 }
-const gradYears = [2024, 2025, 2026];
+const gradYears = [2024, 2025, 2026, 2027];
 
 type GetInitSteps = <T>(length: number, cb: (index: number) => T) => Record<number, T>;
 const getInitSteps: GetInitSteps = (length, cb) => {
@@ -108,11 +108,14 @@ const HighSchoolApplication = ({ onSubmitComplete }: HighSchoolApplicationProps)
   };
 
   const validateSteps = () => {
-    const stepErrs = Object.keys(stepFields).reduce((errs, stepNum) => {
-      const n = Number(stepNum);
-      errs[n] = getStepErrors(Number(n));
-      return errs;
-    }, {} as Record<number, string[]>);
+    const stepErrs = Object.keys(stepFields).reduce(
+      (errs, stepNum) => {
+        const n = Number(stepNum);
+        errs[n] = getStepErrors(Number(n));
+        return errs;
+      },
+      {} as Record<number, string[]>,
+    );
 
     setStepErrors(stepErrs);
   };

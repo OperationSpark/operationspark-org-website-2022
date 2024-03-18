@@ -55,11 +55,11 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
           >
             <div className='program-header'>
               <div className='header-card'>
-                <h1 className='dynamic-xl secondary'>Spring 2024</h1>
-                <h2 className='dynamic-h2 secondary'>After-School Application</h2>
+                <h1 className='dynamic-xl secondary'>Summer 2024</h1>
+                <h2 className='dynamic-h2 secondary'>Coding Camp Application</h2>
                 <p className='dynamic-txt'>
-                  Open to sophomores, juniors, and seniors
-                  <b> (Graduating classes of 2024, 2025, and 2026)</b>.
+                  Open to rising sophomores, juniors, seniors, and 2024 grads
+                  <b> (Graduating classes of 2024, 2025, 2026, and 2027)</b>.
                 </p>
                 {/* Common meeting time */}
                 {/* <p className='dynamic-txt'>
@@ -67,10 +67,8 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
                   <b className='secondary'> Monday</b> through <b className='secondary'>Friday</b>.
                 </p> */}
                 <p className='dynamic-txt'>
-                  Spring classes start the week of
-                  <b className='secondary'> January 22nd </b>
-                  and end the week of
-                  <b className='secondary'> May 20th</b>.
+                  <b className='secondary'> May 30 to June 28, </b>
+                  Monday-Friday, 3 hours daily.
                 </p>
               </div>
               <Link
@@ -93,7 +91,7 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
                 <div className='left-col'>
                   <div className='hs-program-overview'>
                     <p>
-                      {`This fall, we are offering both in-person and virtual classes. You can enroll in one or the other- there is no hybrid option. If you're able to arrange for reliable transportation to our learning center in the Marigny, we recommend in-person classes. We have a great lab with brand new equipment and an awesome staff to get you started on your coding journey. You'll also meet other students from a wide range of schools and backgrounds!`}
+                      {`This summer, we’re offering half day summer coding camps, with in-person and virtual options. You can enroll in one or the other- there is no hybrid option. If you're able to arrange for reliable transportation to our learning center in the Marigny, we recommend in-person classes. We have a great lab with brand new equipment and an awesome staff to get you started on your coding journey. You'll also meet other students from a wide range of schools and backgrounds!`}
                     </p>
                     <br />
 
@@ -144,7 +142,7 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
             </PlainCard>
             <div className='program-time-details'>
               <h2 className='dynamic-h2'>
-                <b>Spring Course Schedule:</b>
+                <b>Summer Course Schedule:</b>
               </h2>
               <div className='course-title'>
                 <b className='primary-secondary'>Fundamentals of HTML, CSS, and Javascript</b>
@@ -222,6 +220,13 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
               <br />
               <p>
                 {`The course is free for students attending public, parochial, or home school in New Orleans. If you don't fit that description, we may be able to partner with your school district to cover the cost, and if not, we offer discounted tuition to families paying privately.`}
+              </p>
+              <br />
+              <p>
+                {`If you go to school in a neighboring parish outside New Orleans, we may be running a
+                separate summer program in your school district. If this is the case, after you fill
+                out the application, we will let you know who to contact to apply for the
+                appropriate program.`}
               </p>
             </PlainCard>
           </div>

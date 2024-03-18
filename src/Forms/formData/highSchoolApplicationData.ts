@@ -7,7 +7,7 @@ export const courses = [
   },
   {
     value: 'advanced',
-    name: 'Advanced Javascript, Functional Programming and Web Development [Prerequisite: Fundamentals]',
+    name: 'Advanced Javascript, Functional Programming and Web Development [Prerequisite: MUST have completed Fundamentals]',
   },
   // {
   //   value: 'web-mobile',
@@ -22,6 +22,7 @@ export const courses = [
   //   name: 'Internet of Things [Prerequisite: Level 1 and 2 IBC]',
   // },
 ];
+
 export const courseTimes = {
   notes: {
     fundamentals: 'This is your first class with Op Spark',
@@ -30,38 +31,38 @@ export const courseTimes = {
   fundamentals: [
     {
       course: 'fundamentals',
-      value: 'fundamentals-onsite-w-4-8',
+      value: 'fundamentals-onsite-m-f-9-12',
       location: 'In Person',
       preReq: 'No Prerequisite',
-      time: 'Wednesdays | 4:45pm - 8:00pm',
-      name: 'In Person: Wednesdays | 4:45pm - 8:00pm',
+      time: 'Monday to Friday | 9:00 AM to 12:00 PM',
+      name: 'In Person: Monday to Friday | 9:00 AM to 12:00 PM',
     },
     {
       course: 'fundamentals',
-      value: 'fundamentals-virtual-t-th-5-7',
+      value: 'fundamentals-virtual-m-f-1-4',
       location: 'Virtual',
       preReq: 'No Prerequisite',
-      time: 'Tuesdays + Thursdays | 5:00pm - 7:00pm',
-      name: 'Virtual: Tuesdays + Thursdays | 5:00pm - 7:00pm',
+      time: 'Monday to Friday | 1:00 PM to 4:00 PM',
+      name: 'Virtual: Monday to Friday | 1:00 PM to 4:00 PM',
     },
   ],
   advanced: [
     {
       course: 'advanced',
-      value: 'advanced-virtual-m-w-5-7',
+      value: 'advanced-virtual-m-f-9-12',
       location: 'Virtual',
       preReq: 'Fundamentals of HTML, CSS, and Javascript',
-      time: 'Mondays + Wednesdays | 5:00pm - 7:00pm',
-      name: 'Virtual: Mondays + Wednesdays | 5:00pm - 7:00pm',
+      time: 'Monday to Friday | 9:00 AM to 12:00 PM',
+      name: 'Virtual: Monday to Friday | 9:00 AM to 12:00 PM',
     },
-    // {
-    //   course: 'advanced',
-    //   value: 'advanced-onsite-th-4-8',
-    //   location: 'In Person',
-    //   preReq: 'Fundamentals of HTML, CSS, and Javascript',
-    //   time: 'Thursdays | 4:45pm - 8:00pm',
-    //   name: 'In Person: Thursdays | 4:45pm - 8:00pm',
-    // },
+    {
+      course: 'advanced',
+      value: 'advanced-onsite-m-f-1-4',
+      location: 'In Person',
+      preReq: 'Fundamentals of HTML, CSS, and Javascript',
+      time: 'Monday to Friday | 1:00 PM to 4:00 PM',
+      name: 'In Person: Monday to Friday | 1:00 PM to 4:00 PM',
+    },
   ],
 };
 
