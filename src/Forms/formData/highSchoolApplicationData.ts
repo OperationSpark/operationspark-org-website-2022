@@ -22,16 +22,16 @@ export const courses = [
   //   name: 'Internet of Things [Prerequisite: Level 1 and 2 IBC]',
   // },
 ];
+
 export const courseTimes = {
   notes: {
     fundamentals: 'This is your first class with Op Spark',
     advanced: 'This is your second class with Op Spark, and you earned the level 1 credential',
   },
-  // TODO: Dervive the "name" and "values" fields?
   fundamentals: [
     {
       course: 'fundamentals',
-      value: 'fundamentals-onsite-w-4-8',
+      value: 'fundamentals-onsite-m-f-9-12',
       location: 'In Person',
       preReq: 'No Prerequisite',
       time: 'Monday to Friday | 9:00 AM to 12:00 PM',
@@ -39,7 +39,7 @@ export const courseTimes = {
     },
     {
       course: 'fundamentals',
-      value: 'fundamentals-virtual-t-th-5-7',
+      value: 'fundamentals-virtual-m-f-1-4',
       location: 'Virtual',
       preReq: 'No Prerequisite',
       time: 'Monday to Friday | 1:00 PM to 4:00 PM',
@@ -49,7 +49,7 @@ export const courseTimes = {
   advanced: [
     {
       course: 'advanced',
-      value: 'advanced-virtual-m-w-5-7',
+      value: 'advanced-virtual-m-f-9-12',
       location: 'Virtual',
       preReq: 'Fundamentals of HTML, CSS, and Javascript',
       time: 'Monday to Friday | 9:00 AM to 12:00 PM',
@@ -57,7 +57,7 @@ export const courseTimes = {
     },
     {
       course: 'advanced',
-      value: 'advanced-onsite-th-4-8',
+      value: 'advanced-onsite-m-f-1-4',
       location: 'In Person',
       preReq: 'Fundamentals of HTML, CSS, and Javascript',
       time: 'Monday to Friday | 1:00 PM to 4:00 PM',
