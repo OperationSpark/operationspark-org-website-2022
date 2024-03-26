@@ -1,6 +1,6 @@
 {
-  "startDateTime": "11/15/2023 18:00",
-  "cohortName": "Echo",
+  "startDateTime": "3/28/2024 18:00",
+  "cohortName": "Golf",
   "eventbriteUrl": "https://showcase.operationspark.org/opspark%20website",
-  "isActive": false
+  "isActive": true
 }
