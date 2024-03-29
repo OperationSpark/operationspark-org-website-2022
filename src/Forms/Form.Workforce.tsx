@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import Button from '@this/components/Elements/Button';
 import { Form, Input, useForm } from '@this/components/Form';
+import { TOption } from '@this/data/types/bits';
 import { IInfoSessionFormValues } from '@this/data/types/infoSession';
 import { pixel } from '@this/lib/pixel';
 import { ISessionDates } from '@this/pages-api/infoSession/dates';
@@ -17,7 +18,7 @@ import { referencedByOptions } from './formData/referenceOptions';
 
 interface WorkforceFormProps {
   sessionDates: ISessionDates[];
-  referredBy?: { name: string; value: string };
+  referredBy?: TOption;
 }
 
 const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
@@ -25,12 +26,10 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [locationMessage, setLocationMessage] = useState('');
-
   const isKeyComboActive = useKeyCombo('o', 's');
-
   const currentValues = form.values();
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const hasErrors = form.hasErrors();
 
     if (hasErrors) {
@@ -172,12 +171,14 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
   }, [currentValues.sessionDate, currentValues.attendingLocation, sessionDates]);
 
   useEffect(() => {
-    if (referredBy) {
-      form.onSelectChange('referencedBy')({
-        option: referredBy,
-        isValid: true,
-      });
-    }
+    if (!referredBy) return;
+    form.onSelectChange('referencedBy')({
+      option: referredBy,
+      additionalInfo: referredBy.additionalInfo,
+      additionalInfoLabel: referredBy.additionalInfoLabel,
+      isValid: true,
+    });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps -- Ignore form change
   }, [referredBy]);
 

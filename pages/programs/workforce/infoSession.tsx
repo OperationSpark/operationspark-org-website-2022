@@ -11,6 +11,7 @@ import { Content, Main, Section } from '@this/components/layout';
 import { TOption } from '@this/data/types/bits';
 import useKeyCombo from '@this/hooks/useKeyCombo';
 import { getStaticAsset } from '@this/pages-api/static/[asset]';
+import { referencedByOptions } from '@this/src/Forms/formData/referenceOptions';
 import { getFormattedDateTime } from '@this/src/helpers/timeUtils';
 import useInfoSession from '@this/src/hooks/useInfoSession';
 import { cardShadow, cardShadowLtr, cardShadowRtl } from '@this/src/theme/styled/mixins/shadows';
@@ -34,9 +35,35 @@ const InfoSession: NextPage<InfoSessionProps> = ({ commonQuestions, logos }) => 
 
   useEffect(() => {
     const { referred_by = '' } = router.query;
-    if (!referred_by || typeof referred_by !== 'string' || referred_by.toLowerCase() !== 'snap')
+    const referredByStr = Array.isArray(referred_by) ? referred_by[0] : referred_by;
+    if (!referredByStr) return;
+    const [referredType, referredValue] = referredByStr.split('@');
+    const defaultOption = {
+      name: 'Other Advertising',
+      value: 'other-advertising',
+      additionalInfoLabel: 'Where did you hear about us?',
+      additionalInfo: referredType,
+    };
+    const referredByOption = referencedByOptions.find(
+      (option) => option.value === referredType.toLowerCase(),
+    );
+
+    if (!referredByOption) {
+      setReferredBy(defaultOption);
       return;
-    setReferredBy({ name: 'SNAP', value: 'snap' });
+    }
+
+    if (referredByOption.additionalInfo) {
+      referredValue &&
+        setReferredBy({
+          ...referredByOption,
+          additionalInfoLabel: referredByOption.additionalInfo,
+          additionalInfo: referredValue,
+        });
+      return;
+    }
+
+    setReferredBy(referredByOption);
   }, [router.query]);
 
   return (
