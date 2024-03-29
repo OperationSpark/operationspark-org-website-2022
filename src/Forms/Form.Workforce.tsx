@@ -70,9 +70,9 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
 
     try {
       const { data } = await axios.post('/api/infoSession/user', body);
-
+      const textMessage = currentValues.smsOptIn === 'true' ? ' and text message' : '';
       form.notifySuccess({
-        msg: 'Info session registration for submitted. You should receive an email and text message shortly.',
+        msg: `Info session registration for submitted. You will receive an email${textMessage} shortly.`,
       });
 
       setRenderUrl(data.url);
