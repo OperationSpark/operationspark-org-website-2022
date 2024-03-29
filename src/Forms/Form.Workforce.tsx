@@ -69,10 +69,24 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
     });
 
     try {
-      const { data } = await axios.post('/api/infoSession/user', body);
+      const { data } = true
+        ? { data: { url: 'https://ospk.org/dvKqYqEJBb' } }
+        : await axios.post('/api/infoSession/user', body);
+
       const textMessage = currentValues.smsOptIn === 'true' ? ' and text message' : '';
+
+      if (currentValues.sessionDate.value === 'future') {
+        form.notifySuccess({
+          msg: `Thank you for signing up! We will reach out soon. You will receive an email ${textMessage} shortly.`,
+        });
+        setRenderUrl(data.url);
+        return setIsSubmitting(false);
+      }
+
+      const sessionDate = currentValues.sessionDate.name;
+      console.log(currentValues.sessionDate.value);
       form.notifySuccess({
-        msg: `Info session registration for submitted. You will receive an email${textMessage} shortly.`,
+        msg: `You have successfully registered for an info session on ${sessionDate}. You will receive an email ${textMessage} shortly.`,
       });
 
       setRenderUrl(data.url);
@@ -111,7 +125,7 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
 
   const closeDetails = () => {
     setRenderUrl(null);
-    form.clear();
+    // form.clear(); // TODO: Add back
   };
 
   useEffect(() => {
@@ -374,14 +388,24 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
           <div className='form-overlay'>
             <div className='form-complete-response'>
               <h2>Success!</h2>
-              <p>
-                You have successfully registered for an info session on{' '}
-                <b className='primary-secondary'>{currentValues.sessionDate.name}</b>. You will
-                receive an email {currentValues.smsOptIn === 'true' ? 'and text message' : ''}{' '}
-                shortly.
-              </p>
+              {currentValues.sessionDate.value === 'future' ? (
+                <p>
+                  Thank you for signing up! We will reach out soon. You will receive an email{' '}
+                  {currentValues.smsOptIn === 'true' ? 'and text message' : ''} shortly.
+                </p>
+              ) : (
+                <p>
+                  You have successfully registered for an info session on{' '}
+                  <b className='primary-secondary'>{currentValues.sessionDate.name}</b>. You will
+                  receive an email {currentValues.smsOptIn === 'true' ? 'and text message' : ''}{' '}
+                  shortly.
+                </p>
+              )}
               <a href={renderUrl} className='anchor' target='_blank' rel='noreferrer'>
-                View your registration details <NewTabIcon />
+                {currentValues.sessionDate.value === 'future'
+                  ? 'View details'
+                  : 'View your registration details'}
+                <NewTabIcon />
               </a>
               <button onClick={closeDetails}>
                 <CloseIcon className='close-button' />
