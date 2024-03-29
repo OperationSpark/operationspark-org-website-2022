@@ -69,9 +69,7 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
     });
 
     try {
-      const { data } = true
-        ? { data: { url: 'https://ospk.org/dvKqYqEJBb' } }
-        : await axios.post('/api/infoSession/user', body);
+      const { data } = await axios.post('/api/infoSession/user', body);
 
       const textMessage = currentValues.smsOptIn === 'true' ? ' and text message' : '';
 
@@ -84,7 +82,7 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
       }
 
       const sessionDate = currentValues.sessionDate.name;
-      console.log(currentValues.sessionDate.value);
+
       form.notifySuccess({
         msg: `You have successfully registered for an info session on ${sessionDate}. You will receive an email ${textMessage} shortly.`,
       });
@@ -125,7 +123,7 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
 
   const closeDetails = () => {
     setRenderUrl(null);
-    // form.clear(); // TODO: Add back
+    form.clear();
   };
 
   useEffect(() => {
