@@ -1,8 +1,11 @@
 import axios from 'axios';
 import moment from 'moment';
 import { Fragment, useEffect, useState } from 'react';
-import { AiOutlineInfoCircle } from 'react-icons/ai';
 import styled from 'styled-components';
+
+import { AiOutlineInfoCircle } from 'react-icons/ai';
+import { IoMdCloseCircleOutline as CloseIcon } from 'react-icons/io';
+import { MdOpenInNew as NewTabIcon } from 'react-icons/md';
 
 import Button from '@this/components/Elements/Button';
 import { Form, Input, useForm } from '@this/components/Form';
@@ -24,6 +27,7 @@ interface WorkforceFormProps {
 const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
   const form = useForm<IInfoSessionFormValues>();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [renderUrl, setRenderUrl] = useState<string | null>(null);
 
   const [locationMessage, setLocationMessage] = useState('');
   const isKeyComboActive = useKeyCombo('o', 's');
@@ -64,21 +68,22 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
       sessionTime: session?.times?.start?.dateTime || null,
     });
 
-    axios
-      .post('/api/infoSession/user', body)
-      .then(() => {
-        form.notifySuccess({
-          msg: 'Info session registration for submitted. You should receive an email and text message shortly.',
-        });
-        form.clear();
-      })
-      .catch(() => {
-        form.notifyError({
-          title: 'Error',
-          msg: 'There was an error signing you up\nPlease reach out to us at "admissions@operationspark.org" or give us a call at 504-233-3838',
-        });
-      })
-      .finally(() => setIsSubmitting(false));
+    try {
+      const { data } = await axios.post('/api/infoSession/user', body);
+
+      form.notifySuccess({
+        msg: 'Info session registration for submitted. You should receive an email and text message shortly.',
+      });
+
+      setRenderUrl(data.url);
+    } catch (error) {
+      form.notifyError({
+        title: 'Error',
+        msg: 'There was an error signing you up\nPlease reach out to us at "admissions@operationspark.org" or give us a call at 504-233-3838',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   const getLocationType = (session: ISessionDates) => {
     const locationType = session.locationType
@@ -103,6 +108,11 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
       value: 'future',
     },
   ];
+
+  const closeDetails = () => {
+    setRenderUrl(null);
+    form.clear();
+  };
 
   useEffect(() => {
     const zipChange = form.onSelectChange('userLocation');
@@ -184,12 +194,14 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
 
   return (
     <WorkforceFormStyles>
-      <Form onSubmit={handleSubmit}>
-        {isSubmitting ? (
-          <div className='form-overlay'>
-            <Spinner text='Submitting' />
-          </div>
-        ) : null}
+      <Form
+        onSubmit={handleSubmit}
+        onEnter={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          handleSubmit();
+        }}
+      >
         {workforceFormInputs.map((field, i) => (
           <field.Element
             key={field.name}
@@ -352,6 +364,31 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
         >
           Register!
         </Button>
+
+        {isSubmitting ? (
+          <div className='form-overlay'>
+            <Spinner text='Submitting' />
+          </div>
+        ) : null}
+        {renderUrl && !isSubmitting ? (
+          <div className='form-overlay'>
+            <div className='form-complete-response'>
+              <h2>Success!</h2>
+              <p>
+                You have successfully registered for an info session on{' '}
+                <b className='primary-secondary'>{currentValues.sessionDate.name}</b>. You will
+                receive an email {currentValues.smsOptIn === 'true' ? 'and text message' : ''}{' '}
+                shortly.
+              </p>
+              <a href={renderUrl} className='anchor' target='_blank' rel='noreferrer'>
+                View your registration details <NewTabIcon />
+              </a>
+              <button onClick={closeDetails}>
+                <CloseIcon className='close-button' />
+              </button>
+            </div>
+          </div>
+        ) : null}
       </Form>
     </WorkforceFormStyles>
   );
@@ -363,13 +400,61 @@ const WorkforceFormStyles = styled.div`
   .form-overlay {
     position: absolute;
     inset: 0;
-    z-index: 10;
+    z-index: 100;
     backdrop-filter: blur(1.5px);
     background: rgba(125, 125, 125, 0.2);
     display: flex;
     align-items: center;
     justify-content: center;
   }
+
+  .form-complete-response {
+    position: relative;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    background: ${({ theme }) => theme.bg};
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    max-width: 90%;
+    text-align: center;
+    h2 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    p {
+      font-size: 1.1rem;
+      font-weight: 300;
+      margin-bottom: 1rem;
+    }
+    a {
+      display: flex;
+      align-items: center;
+      font-weight: 600;
+      margin-top: 1rem;
+      gap: 0.5rem;
+    }
+    .close-button {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: ${({ theme }) => theme.red[300]};
+      transition: all 225ms;
+      :hover {
+        color: ${({ theme }) => theme.red[500]};
+        transform: scale(1.1);
+      }
+
+      :active {
+        transform: scale(0.9);
+      }
+    }
+  }
+
   .user-location-row {
     display: flex;
     width: 100%;

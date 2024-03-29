@@ -71,7 +71,8 @@ export default async function handleInfoSessionForm(req: ISessionUser, res: Next
   try {
     const payload: ISessionSignup = formatPayload(req.body);
 
-    await runCloudFunction({
+    type SignupResult = { url: string };
+    const result = await runCloudFunction<ISessionSignup, SignupResult>({
       url: SIGNUP_API_ENDPOINT,
       body: payload,
       headers: {
@@ -79,7 +80,7 @@ export default async function handleInfoSessionForm(req: ISessionUser, res: Next
       },
     });
 
-    res.status(200).end();
+    res.status(200).json(result.data);
   } catch (error) {
     console.error('Could not POST to signup service', error);
     res.status(500).end();
