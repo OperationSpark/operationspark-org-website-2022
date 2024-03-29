@@ -34,13 +34,15 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
   const currentValues = form.values();
 
   const handleSubmit = async () => {
+    if (isSubmitting) return;
+    setIsSubmitting(true);
     const hasErrors = form.hasErrors();
 
     if (hasErrors) {
+      setIsSubmitting(false);
       return form.toggleShowErrors();
     }
 
-    setIsSubmitting(true);
     const { sessionDate, userLocation, firstName, lastName, ...values } = form.values();
 
     userLocation.value = userLocation.name;
