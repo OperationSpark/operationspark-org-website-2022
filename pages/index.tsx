@@ -1,6 +1,4 @@
-import axios, { isAxiosError } from 'axios';
-import type { GetServerSideProps, NextPage } from 'next';
-import { useState } from 'react';
+import type { GetStaticProps, NextPage } from 'next';
 
 import { IHome } from '../data/types/home';
 import { getStaticAsset } from './api/static/[asset]';
@@ -20,9 +18,7 @@ import { ILogo } from '@this/data/types/logos';
 import AtlantaPromo from '@this/src/components/Elements/AtlantaPromo';
 import PromoVideo from '@this/src/components/Home/PromoVideo';
 import ShowcasePromo from '@this/src/components/Home/ShowcasePromo';
-import { toDayJs } from '@this/src/helpers/time';
-
-// const gCloudBaseUrl = 'https://storage.googleapis.com/operationspark-org';
+import { useShowcase } from '@this/src/hooks/useShowcase';
 
 interface HomeProps extends IHome {
   logos: ILogo[];
@@ -35,17 +31,12 @@ const Home: NextPage<HomeProps> = ({
   greatCompanies,
   programsForAll,
   teamEffort,
-  showcase,
 }) => {
-  const [showcaseInfo, setShowcaseInfo] = useState<Showcase | null>(showcase || null);
+  const { showcase, clearShowcase } = useShowcase();
 
   return (
     <Main style={{ paddingTop: 0 }}>
-      {showcaseInfo ? (
-        <ShowcasePromo info={showcaseInfo} clearShowcase={() => setShowcaseInfo(null)} />
-      ) : (
-        <TopCard />
-      )}
+      {showcase ? <ShowcasePromo info={showcase} clearShowcase={clearShowcase} /> : <TopCard />}
 
       <AtlantaPromo />
       <PromoVideo />
@@ -59,40 +50,11 @@ const Home: NextPage<HomeProps> = ({
   );
 };
 
-const getShowcase = async () => {
-  try {
-    const { data } = await axios.get<Showcase>(
-      'https://showcase.operationspark.org/api/showcases/active',
-    );
-
-    if (!data || !data.startDateTime || !data.websiteActive || !data.active) {
-      return null;
-    }
-
-    const disableTime = toDayJs(data.startDateTime).add(data.doorsOffset ?? 30, 'minutes');
-
-    if (disableTime.isBefore(toDayJs())) {
-      return null;
-    }
-
-    return data;
-  } catch (err) {
-    if (isAxiosError(err) && err.response?.status === 404) {
-      console.info('Showcase inactive');
-      return null;
-    }
-    console.error('Showcase fetch error: ', err);
-    return null;
-  }
-};
-
-export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
+export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const { greatCompanies, programsForAll, igniteCareer, teamEffort }: IHome = await getStaticAsset(
     'index',
   );
   const logos: ILogo[] = await getStaticAsset('logos', 'partners');
-
-  const showcase = await getShowcase();
 
   return {
     props: {
@@ -101,7 +63,6 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
       igniteCareer,
       teamEffort,
       logos,
-      showcase,
     },
   };
 };
