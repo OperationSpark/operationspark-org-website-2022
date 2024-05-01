@@ -1,5 +1,5 @@
 import axios, { isAxiosError } from 'axios';
-import type { GetStaticProps, NextPage } from 'next';
+import type { GetServerSideProps, NextPage } from 'next';
 import { useState } from 'react';
 
 import { IHome } from '../data/types/home';
@@ -86,7 +86,7 @@ const getShowcase = async () => {
   }
 };
 
-export const getStaticProps: GetStaticProps<HomeProps> = async () => {
+export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
   const { greatCompanies, programsForAll, igniteCareer, teamEffort }: IHome = await getStaticAsset(
     'index',
   );
