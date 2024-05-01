@@ -2,13 +2,13 @@ import { FC, useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 import Content from '@this/components/layout/Content';
-import { circuitBoardBg } from '@this/src/theme/styled/mixins/circuitBoardBg';
-import { IGradShowcase } from '@this/data/types/gradShowcase';
-import { CountdownTimer } from '../Elements/Countdown';
+import { Showcase } from '@this/data/types/gradShowcase';
 import { toDayJs } from '@this/src/helpers/time';
+import { circuitBoardBg } from '@this/src/theme/styled/mixins/circuitBoardBg';
+import { CountdownTimer } from '../Elements/Countdown';
 
 type ShowcasePromoProps = {
-  info: IGradShowcase;
+  info: Showcase;
   clearShowcase: () => void;
 };
 
@@ -102,7 +102,7 @@ const ShowcasePromo: FC<ShowcasePromoProps> = ({ info, clearShowcase }) => {
             className='showcase-website-button'
             onClick={() =>
               window.open(
-                'https://showcase.operationspark.org/Operation%20Spark%20Website',
+                'https://showcase.operationspark.org/share/Operation%20Spark%20Website',
                 '_blank',
               )
             }

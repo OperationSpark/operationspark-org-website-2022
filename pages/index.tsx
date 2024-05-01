@@ -4,29 +4,30 @@ import { useState } from 'react';
 import { IHome } from '../data/types/home';
 import { getStaticAsset } from './api/static/[asset]';
 
-import Main from '@this/components/layout/Main';
 import {
-  TopCard,
   AlumSpotlight,
-  ProgramsForAll,
-  IgniteCareer,
   GreatCompanies,
+  IgniteCareer,
+  ProgramsForAll,
   TeamEffort,
+  TopCard,
 } from '@this/components/Home';
+import Main from '@this/components/layout/Main';
 
 import Carousel from '@this/components/Elements/Carousel';
+import { Showcase } from '@this/data/types/gradShowcase';
 import { ILogo } from '@this/data/types/logos';
 import AtlantaPromo from '@this/src/components/Elements/AtlantaPromo';
 import PromoVideo from '@this/src/components/Home/PromoVideo';
 import ShowcasePromo from '@this/src/components/Home/ShowcasePromo';
-import { IGradShowcase } from '@this/data/types/gradShowcase';
-import { parseShowcaseTime } from '@this/src/helpers/timeUtils';
+import { toDayJs } from '@this/src/helpers/time';
+import axios from 'axios';
 
 // const gCloudBaseUrl = 'https://storage.googleapis.com/operationspark-org';
 
 interface HomeProps extends IHome {
   logos: ILogo[];
-  showcase?: IGradShowcase | null;
+  showcase?: Showcase | null;
 }
 
 const Home: NextPage<HomeProps> = ({
@@ -37,7 +38,7 @@ const Home: NextPage<HomeProps> = ({
   teamEffort,
   showcase,
 }) => {
-  const [showcaseInfo, setShowcaseInfo] = useState<IGradShowcase | null>(showcase || null);
+  const [showcaseInfo, setShowcaseInfo] = useState<Showcase | null>(showcase || null);
 
   return (
     <Main style={{ paddingTop: 0 }}>
@@ -59,14 +60,36 @@ const Home: NextPage<HomeProps> = ({
   );
 };
 
+const getShowcase = async () => {
+  try {
+    const { data } = await axios.get<Showcase>(
+      'https://showcase.operationspark.org/api/showcases/active',
+    );
+
+    if (!data || !data.startDateTime || !data.websiteActive || !data.active) {
+      return null;
+    }
+
+    const disableTime = toDayJs(data.startDateTime).add(data.doorsOffset ?? 30, 'minutes');
+
+    if (disableTime.isBefore(toDayJs())) {
+      return null;
+    }
+
+    return data;
+  } catch {
+    console.info('Showcase inactive');
+    return null;
+  }
+};
+
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const { greatCompanies, programsForAll, igniteCareer, teamEffort }: IHome = await getStaticAsset(
     'index',
   );
   const logos: ILogo[] = await getStaticAsset('logos', 'partners');
-  const showcaseInfo: IGradShowcase = await getStaticAsset('gradShowcase');
-  const startDateTime = parseShowcaseTime(showcaseInfo.startDateTime);
-  const showcase = startDateTime ? { ...showcaseInfo, startDateTime: startDateTime } : null;
+
+  const showcase = await getShowcase();
 
   return {
     props: {
