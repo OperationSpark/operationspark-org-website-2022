@@ -21,7 +21,7 @@ import AtlantaPromo from '@this/src/components/Elements/AtlantaPromo';
 import PromoVideo from '@this/src/components/Home/PromoVideo';
 import ShowcasePromo from '@this/src/components/Home/ShowcasePromo';
 import { toDayJs } from '@this/src/helpers/time';
-import axios from 'axios';
+import axios, { isAxiosError } from 'axios';
 
 // const gCloudBaseUrl = 'https://storage.googleapis.com/operationspark-org';
 
@@ -77,8 +77,12 @@ const getShowcase = async () => {
     }
 
     return data;
-  } catch {
-    console.info('Showcase inactive');
+  } catch (err) {
+    if (isAxiosError(err) && err.response?.status === 404) {
+      console.info('Showcase inactive');
+      return null;
+    }
+    console.error('Showcase fetch error: ', err);
     return null;
   }
 };
