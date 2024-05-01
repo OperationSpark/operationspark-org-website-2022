@@ -1,9 +1,11 @@
+import axios, { isAxiosError } from 'axios';
 import type { GetStaticProps, NextPage } from 'next';
 import { useState } from 'react';
 
 import { IHome } from '../data/types/home';
 import { getStaticAsset } from './api/static/[asset]';
 
+import Carousel from '@this/components/Elements/Carousel';
 import {
   AlumSpotlight,
   GreatCompanies,
@@ -13,15 +15,12 @@ import {
   TopCard,
 } from '@this/components/Home';
 import Main from '@this/components/layout/Main';
-
-import Carousel from '@this/components/Elements/Carousel';
 import { Showcase } from '@this/data/types/gradShowcase';
 import { ILogo } from '@this/data/types/logos';
 import AtlantaPromo from '@this/src/components/Elements/AtlantaPromo';
 import PromoVideo from '@this/src/components/Home/PromoVideo';
 import ShowcasePromo from '@this/src/components/Home/ShowcasePromo';
 import { toDayJs } from '@this/src/helpers/time';
-import axios from 'axios';
 
 // const gCloudBaseUrl = 'https://storage.googleapis.com/operationspark-org';
 
@@ -77,8 +76,12 @@ const getShowcase = async () => {
     }
 
     return data;
-  } catch {
-    console.info('Showcase inactive');
+  } catch (err) {
+    if (isAxiosError(err) && err.response?.status === 404) {
+      console.info('Showcase inactive');
+      return null;
+    }
+    console.error('Showcase fetch error: ', err);
     return null;
   }
 };
