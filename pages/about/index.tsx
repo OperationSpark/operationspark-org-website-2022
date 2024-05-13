@@ -330,6 +330,7 @@ const AboutStyles = styled.div`
         padding: 0;
         font-weight: 300;
         font-size: 0.9rem;
+        color: ${({ theme }) => theme.alpha.fg50};
       }
     }
   }
