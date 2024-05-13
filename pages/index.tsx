@@ -15,7 +15,7 @@ import {
 import Main from '@this/components/layout/Main';
 import { Showcase } from '@this/data/types/gradShowcase';
 import { ILogo } from '@this/data/types/logos';
-import AtlantaPromo from '@this/src/components/Elements/AtlantaPromo';
+// import AtlantaPromo from '@this/src/components/Elements/AtlantaPromo';
 import PromoVideo from '@this/src/components/Home/PromoVideo';
 import ShowcasePromo from '@this/src/components/Home/ShowcasePromo';
 import { useShowcase } from '@this/src/hooks/useShowcase';
@@ -38,7 +38,7 @@ const Home: NextPage<HomeProps> = ({
     <Main style={{ paddingTop: 0 }}>
       {showcase ? <ShowcasePromo info={showcase} clearShowcase={clearShowcase} /> : <TopCard />}
 
-      <AtlantaPromo />
+      {/* <AtlantaPromo /> */}
       <PromoVideo />
       <IgniteCareer {...igniteCareer} />
       <ProgramsForAll {...programsForAll} className='_progress' id='programs' />
