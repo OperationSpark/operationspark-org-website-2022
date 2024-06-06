@@ -1,16 +1,16 @@
-import dynamic from 'next/dynamic';
 import { GetStaticProps, NextPage } from 'next';
+import dynamic from 'next/dynamic';
 import styled from 'styled-components';
 
-import { IContact } from '@this/data/types/contact';
 import { Section } from '@this/components/layout';
+import { IContact } from '@this/data/types/contact';
 
-import { getStaticAsset } from '@this/pages-api/static/[asset]';
 import Content from '@this/components/layout/Content';
 import Main from '@this/components/layout/Main';
-import Map from '@this/src/components/Elements/Map';
-import { FiPhone, FiMapPin } from 'react-icons/fi';
+import { getStaticAsset } from '@this/pages-api/static/[asset]';
 import { BgImg } from '@this/src/components/Elements';
+import Map from '@this/src/components/Elements/Map';
+import { FiMapPin, FiPhone } from 'react-icons/fi';
 const ContactForm = dynamic(() => import('@this/src/Forms/Form.Contact'));
 
 const Contact: NextPage<IContact> = ({ address, city, state, zip, phone, gMapUrl }) => {
@@ -31,19 +31,18 @@ const Contact: NextPage<IContact> = ({ address, city, state, zip, phone, gMapUrl
             <Section className='contact-info'>
               <p>
                 <span className='contact-icon'>
-                  <FiMapPin size={28} />
+                  <FiMapPin size={28} className='primary-secondary' />
                 </span>
                 <a className='anchor' href={gMapUrl} target='_blank' rel='noreferrer'>
-                  <span>{address}</span>
-                  <br />
-                  <span>
+                  <div className='text-center'>{address}</div>
+                  <div className='text-center'>
                     {city}, {state} {zip}
-                  </span>
+                  </div>
                 </a>
               </p>
               <p>
                 <span className='contact-icon'>
-                  <FiPhone size={28} />
+                  <FiPhone size={28} className='primary-secondary' />
                 </span>
                 <a className='anchor' href={`tel:${phone}`} target='_blank' rel='noreferrer'>
                   {phone}
