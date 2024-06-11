@@ -2,6 +2,8 @@ import { GetStaticProps, NextPage } from 'next';
 import dynamic from 'next/dynamic';
 import styled from 'styled-components';
 
+import { FiMapPin, FiPhone } from 'react-icons/fi';
+
 import { Section } from '@this/components/layout';
 import { IContact } from '@this/data/types/contact';
 
@@ -10,7 +12,7 @@ import Main from '@this/components/layout/Main';
 import { getStaticAsset } from '@this/pages-api/static/[asset]';
 import { BgImg } from '@this/src/components/Elements';
 import Map from '@this/src/components/Elements/Map';
-import { FiMapPin, FiPhone } from 'react-icons/fi';
+
 const ContactForm = dynamic(() => import('@this/src/Forms/Form.Contact'));
 
 const Contact: NextPage<IContact> = ({ address, city, state, zip, phone, gMapUrl }) => {
