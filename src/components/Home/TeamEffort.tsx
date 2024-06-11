@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-import { IHome } from '@this/data/types/home';
-import { BgImg } from '@this/components/Elements';
 import YellowCard from '@this/components/Cards/LinkCard';
+import { BgImg } from '@this/components/Elements';
 import Content from '@this/components/layout/Content';
+import { IHome } from '@this/data/types/home';
 
 const TeamEffort = ({ title, description, cards }: IHome['teamEffort']) => {
   return (
@@ -11,7 +11,7 @@ const TeamEffort = ({ title, description, cards }: IHome['teamEffort']) => {
       <TeamEffortStyles className='_progress' id='partners'>
         <Content>
           {title.map((text) => (
-            <h1 key={text} className='dynamic-xl'>
+            <h1 key={text} className='dynamic-xl text-shadow'>
               {text}
             </h1>
           ))}

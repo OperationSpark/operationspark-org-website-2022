@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-import { IProgramsForAll } from '@this/data/types/home';
-import { SlashDivider } from '@this/components/Elements/SlashDivider';
 import IconBtnCard from '@this/components/Cards/IconBtnCard';
 import { BgImg } from '@this/components/Elements';
+import { SlashDivider } from '@this/components/Elements/SlashDivider';
 import CareersForAll from '@this/components/Home/CareerForAll';
 import Content from '@this/components/layout/Content';
+import { IProgramsForAll } from '@this/data/types/home';
 
 const ProgramsForAll = ({
   title,
@@ -23,15 +23,17 @@ const ProgramsForAll = ({
         <Content>
           <div className='top-content'>
             {title.map((text) => (
-              <h1 key={text} className='dynamic-xl title'>
+              <h1 key={text} className='dynamic-xl title text-shadow'>
                 {text}
               </h1>
             ))}
-            {description.map((text) => (
-              <p key={text} className='dynamic-txt bg-subtle-dark br-1 p-1'>
-                {text}
-              </p>
-            ))}
+            <div className='rounded-card bg-subtle-dark'>
+              {description.map((text) => (
+                <p key={text} className='dynamic-txt'>
+                  {text}
+                </p>
+              ))}
+            </div>
           </div>
         </Content>
       </BgImg>
