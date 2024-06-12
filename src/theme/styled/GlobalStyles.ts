@@ -37,6 +37,9 @@ const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.white};
     font-size: 1rem;
     font-family: 'Red Hat Display', sans-serif;
+    :focus-visible {
+      outline: 2px solid ${({ theme }) => theme.secondary[800]};
+    }
   }
 
   input, textarea, select {

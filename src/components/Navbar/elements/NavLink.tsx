@@ -73,13 +73,11 @@ export const NavLinkStyles = styled.div.attrs(({ color }: { color?: '' | 'yellow
     :focus {
       background: ${({ theme }) => theme.bgHover};
       color: ${({ theme }) => theme.fg};
-
       box-shadow: 0 0 3px 0px ${({ theme }) => theme.alpha.fg} inset;
-
       z-index: 1;
     }
     :focus-visible {
-      outline: 2px solid ${({ theme }) => theme.secondary[800]};
+      outline: 2px solid ${({ theme }) => theme.secondary[800]} !important;
     }
   }
   &.sub-nav.sub-nav-active {
