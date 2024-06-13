@@ -2,13 +2,15 @@
 import { Transition, motion } from 'framer-motion';
 import moment from 'moment-timezone';
 import dynamic from 'next/dynamic';
-import { useEffect, useRef } from 'react';
+import { Fragment, useEffect, useRef } from 'react';
 import styled, { useTheme } from 'styled-components';
 
 import LogoLink from '@this/components/Elements/LogoLink';
 import { IAlert } from '@this/data/types/bits';
 import { useValidCss } from '@this/hooks/useCssCheck';
 import { useScrollY } from '@this/hooks/useScrollY';
+import { useRouter } from 'next/router';
+import { MeetGradsNavButton } from '../Home/MeetOurGradsButton';
 import BonusBar from './BonusBar';
 import { navMenus } from './navLinks';
 
@@ -39,12 +41,16 @@ const withinDateRange = ({ start, end }: IAlert): boolean => {
 };
 
 const Nav = ({ alertInfo }: NavProps) => {
+  const router = useRouter();
   const scrollY = useScrollY();
   const supportsBackdropFilter = useValidCss('backdrop-filter', 'blur()');
   const isTop = scrollY === null ? true : scrollY <= 5;
   const navRef = useRef<HTMLDivElement>(null);
   const showAlert = alertInfo?.message && withinDateRange(alertInfo);
   const theme = useTheme();
+  const pathname = router.pathname;
+
+  const hideAlumBtn = pathname.includes('highschool') || (pathname === '/' && (scrollY || 0) < 300);
 
   const extraNavHeight = 40;
 
@@ -91,40 +97,43 @@ const Nav = ({ alertInfo }: NavProps) => {
   }, [theme, navRef, resizeObserverRef]);
 
   return (
-    <NavbarStyles ref={navRef} animate={navAnimation} transition={navTransition}>
-      {/* // TODO: Figure out why this breaks since update to nextjs v13 */}
-      {/* {OVERRIDE_NODE_ENV === 'testing' ? (
+    <Fragment>
+      <NavbarStyles ref={navRef} animate={navAnimation} transition={navTransition}>
+        {/* // TODO: Figure out why this breaks since update to nextjs v13 */}
+        {/* {OVERRIDE_NODE_ENV === 'testing' ? (
         <div className='test-mode'>
           <TestIcon /> &nbsp;TEST MODE&nbsp; <TestIcon />
         </div>
       ) : null} */}
-      {showAlert && <AlertBar info={alertInfo} />}
+        {showAlert && <AlertBar info={alertInfo} />}
 
-      <div className='navbar'>
-        <LogoLink
-          className='nav-logo-desktop'
-          src='/images/os/logo-halle-banner.webp'
-          href='/'
-          alt='Operation Spark'
-          width={112}
-          height={40}
-        />
-        <LogoLink
-          className='nav-logo-mobile'
-          src='/images/os/logo-halle-no-banner.webp'
-          href='/'
-          alt='Operation Spark'
-          width={40}
-          height={40}
-        />
-        <DesktopNav navMenus={navMenus} />
+        <div className='navbar'>
+          <LogoLink
+            className='nav-logo-desktop'
+            src='/images/os/logo-halle-banner.webp'
+            href='/'
+            alt='Operation Spark'
+            width={112}
+            height={40}
+          />
+          <LogoLink
+            className='nav-logo-mobile'
+            src='/images/os/logo-halle-no-banner.webp'
+            href='/'
+            alt='Operation Spark'
+            width={40}
+            height={40}
+          />
+          <DesktopNav navMenus={navMenus} />
 
-        <BonusBar />
+          <BonusBar />
 
-        <MobileNav navMenus={navMenus} />
-      </div>
-      <ProgressBar isTop={isTop} />
-    </NavbarStyles>
+          <MobileNav navMenus={navMenus} />
+        </div>
+        <ProgressBar isTop={isTop} />
+      </NavbarStyles>
+      <MeetGradsNavButton visible={!hideAlumBtn} />
+    </Fragment>
   );
 };
 
