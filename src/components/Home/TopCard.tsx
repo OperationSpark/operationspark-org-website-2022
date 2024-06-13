@@ -5,6 +5,7 @@ import BgImg from '@this/components/Elements/BgImg';
 import Button from '@this/components/Elements/Button';
 import Content from '@this/components/layout/Content';
 import { cardShadow } from '@this/src/theme/styled/mixins/shadows';
+import MeetOurGradsButton from './MeetOurGradsButton';
 
 const TopCard = () => {
   /** Remove once page is created */
@@ -13,6 +14,7 @@ const TopCard = () => {
     <BgImg src='/images/display/classroom-2.webp'>
       <ImgCardStyles>
         <Content className='top-card-content'>
+          <MeetOurGradsButton />
           <div className='row-between'>
             <div className='secondary header-content'>
               <h2 className='dynamic-h2 text-shadow'>WE ARE CHANGING LIVES WITH</h2>
