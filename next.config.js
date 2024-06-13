@@ -40,11 +40,14 @@ module.exports = (phase, { defaultConfig }) => {
   /**
    * @type {import('next').NextConfig}
    */
-  return {
+  const config = {
     ...defaultConfig,
     reactStrictMode: true,
     compiler: {
-      styledComponents: true,
+      styledComponents: {
+        pure: true,
+        displayName: true,
+      },
     },
     env: {
       OVERRIDE_NODE_ENV: OVERRIDE_NODE_ENV || '',
@@ -99,6 +102,8 @@ module.exports = (phase, { defaultConfig }) => {
       ].filter(Boolean);
     },
   };
+
+  return config;
 };
 
 function checkEnvVars(requiredVars) {

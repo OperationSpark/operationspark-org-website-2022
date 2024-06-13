@@ -1,8 +1,8 @@
+import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { ReactNode, useState } from 'react';
-import styled from 'styled-components';
-import { motion, AnimatePresence } from 'framer-motion';
 import { FiChevronRight } from 'react-icons/fi';
+import styled from 'styled-components';
 
 const NavAccordionItemStyles = styled(motion.div)`
   box-shadow: 0 -3px 3px rgba(25, 25, 25, 0) inset;
@@ -31,8 +31,11 @@ const NavAccordionItemStyles = styled(motion.div)`
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    :hover {
+    .accordion-item-title {
+      transition: all 250ms;
+    }
+    :hover .accordion-item-title,
+    :focus-visible .accordion-item-title {
       background: linear-gradient(
         90deg,
         ${({ theme }) => theme.primary[800]} 0%,
@@ -40,6 +43,9 @@ const NavAccordionItemStyles = styled(motion.div)`
         ${({ theme }) => theme.primary[600]} 96%,
         ${({ theme }) => theme.primary[800]} 100%
       );
+      box-shadow: 0 0 3px rgba(0, 0, 0, 0.5) inset;
+      border-radius: 0.25rem;
+      padding: 0 0.5rem;
     }
   }
   .sub-links {
@@ -80,7 +86,7 @@ export const NavAccordionItem = ({ title, children, href, link }: NavAccordionIt
       aria-label={title}
     >
       <button className='accordion-item'>
-        <div>{title}</div>
+        <div className='accordion-item-title'>{title}</div>
         <motion.div
           animate={{ rotate: isOpen ? 90 : 0 }}
           transition={{ type: 'tween', duration: 0.1 }}
