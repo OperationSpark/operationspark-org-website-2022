@@ -39,8 +39,8 @@ const About: NextPage<IAbout> = ({ mission, team, history, awards }) => {
               }}
             >
               <Content>
-                <h1 className='dynamic-xl'>Our Mission</h1>
-                <h2 className='dynamic-h3'>{mission.description}</h2>
+                <h1 className='dynamic-xl text-shadow'>Our Mission</h1>
+                <p className='dynamic-txt'>{mission.description}</p>
               </Content>
             </div>
           </BgImg>
@@ -330,6 +330,7 @@ const AboutStyles = styled.div`
         padding: 0;
         font-weight: 300;
         font-size: 0.9rem;
+        color: ${({ theme }) => theme.alpha.fg50};
       }
     }
   }

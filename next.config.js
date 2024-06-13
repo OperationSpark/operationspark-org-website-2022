@@ -6,13 +6,15 @@ const { validateData } = require('./data/validate');
 const {
   OVERRIDE_NODE_ENV = '',
   FB_PIXEL_ID,
-  HIGHSCHOOL_FORM_ACTIVE = 'false',
+  HIGHSCHOOL_FORM_ACTIVE_UNTIL,
   HIGHSCHOOL_FORM_RESPONSES_NAME = '__TAB_NAME_NOT_SET__',
 } = process.env;
 
-const isHsFormActive = HIGHSCHOOL_FORM_ACTIVE?.toLowerCase() === 'true';
+const hsFormActiveUntil = new Date(HIGHSCHOOL_FORM_ACTIVE_UNTIL);
 
 module.exports = (phase, { defaultConfig }) => {
+  const isHsFormActive = hsFormActiveUntil > new Date();
+
   console.info(color.magentaBright.bold('\nValidating... '));
   if (
     !process.env.GITHUB_ACTION &&
@@ -40,16 +42,19 @@ module.exports = (phase, { defaultConfig }) => {
   /**
    * @type {import('next').NextConfig}
    */
-  return {
+  const config = {
     ...defaultConfig,
     reactStrictMode: true,
     compiler: {
-      styledComponents: true,
+      styledComponents: {
+        pure: true,
+        displayName: true,
+      },
     },
     env: {
       OVERRIDE_NODE_ENV: OVERRIDE_NODE_ENV || '',
       FB_PIXEL_ID,
-      HIGHSCHOOL_FORM_ACTIVE: `${isHsFormActive}`,
+      HIGHSCHOOL_FORM_ACTIVE: isHsFormActive,
       HIGHSCHOOL_FORM_RESPONSES_NAME,
     },
 
@@ -99,6 +104,8 @@ module.exports = (phase, { defaultConfig }) => {
       ].filter(Boolean);
     },
   };
+
+  return config;
 };
 
 function checkEnvVars(requiredVars) {

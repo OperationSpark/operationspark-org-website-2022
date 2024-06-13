@@ -16,9 +16,9 @@ const TopCard = () => {
         <Content className='top-card-content'>
           <MeetOurGradsButton />
           <div className='row-between'>
-            <div className='secondary'>
-              <h2 className='dynamic-h2'>WE ARE CHANGING LIVES WITH</h2>
-              <h1 className='dynamic-xl'>
+            <div className='secondary header-content'>
+              <h2 className='dynamic-h2 text-shadow'>WE ARE CHANGING LIVES WITH</h2>
+              <h1 className='dynamic-xl text-shadow'>
                 COMPUTER <br /> PROGRAMMING <br /> SKILLS
               </h1>
             </div>

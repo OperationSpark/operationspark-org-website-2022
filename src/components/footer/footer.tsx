@@ -31,7 +31,7 @@ const Footer = ({ logos }: FooterProps) => {
       <COEBox />
       {!isInfoSessionPage && !isHighschoolPage ? (
         <InfoSessionStyles>
-          <h2 style={{ paddingBottom: '1rem' }} className='secondary dynamic-h2'>
+          <h2 style={{ paddingBottom: '1rem' }} className='secondary dynamic-h2 text-shadow'>
             ATTEND A FREE INFO SESSION
           </h2>
           <NavLink className='info' href='/infoSession'>

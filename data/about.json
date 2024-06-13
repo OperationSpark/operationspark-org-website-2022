@@ -174,16 +174,20 @@
     ],
     "directors": [
       {
+        "name": "John Fraboni, President & CEO",
+        "role": "Operation Spark, New Orleans"
+      },
+      {
         "name": "Max Gaudin, Chair",
         "role": "Head of Growth, Soul Addict"
       },
       {
-        "name": "Brandon Davis",
-        "role": "Partner, Phelps Dunbar"
+        "name": "Grace Clark-Espinoza",
+        "role": "Management Development Analyst, City of New Orleans"
       },
       {
-        "name": "Chris LeBato",
-        "role": "CEO, MC Bank New Orleans"
+        "name": "Rikia Stewart",
+        "role": "Software Developer"
       }
     ]
   },

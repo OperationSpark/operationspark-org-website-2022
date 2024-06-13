@@ -21,6 +21,7 @@ const GlobalStyles = createGlobalStyle`
     font-weight: 400;
     margin: 0;
     padding: 0;
+    overscroll-behavior: none;
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Red Hat Display', sans-serif;
@@ -36,6 +37,9 @@ const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.white};
     font-size: 1rem;
     font-family: 'Red Hat Display', sans-serif;
+    :focus-visible {
+      outline: 2px solid ${({ theme }) => theme.secondary[800]};
+    }
   }
 
   input, textarea, select {
@@ -61,6 +65,14 @@ const GlobalStyles = createGlobalStyle`
    .bg-subtle-dark {
      background: ${({ theme }) => (theme.isLightMode ? theme.alpha.fg : theme.alpha.bg)};
      color: ${({ theme }) => theme.white};
+     backdrop-filter: blur(4px);
+     -webkit-backdrop-filter: blur(4px);
+   }
+
+   .rounded-card {
+      border-radius: 0.5rem;
+      padding: 1rem;
+      box-shadow: 0 0 0.5rem 0 inset ${({ theme }) => theme.primary[300]};
    }
    .p-1 {
       padding: 0.5rem;
@@ -124,9 +136,19 @@ const GlobalStyles = createGlobalStyle`
   .dynamic-txt {
     font-size: calc(0.4vw + 0.9rem);
   }
+
+
+
   .dynamic-xl {
     font-size: calc(0.8vw + 3.2rem);
     font-weight: 900;
+
+    &.secondary {
+      text-shadow: 0 0 5px rgba(0, 0, 0, 1);
+    }
+  }
+  .text-shadow {
+    text-shadow: 0 0 5px rgba(0, 0, 0, 1);
   }
   .dynamic-h1 {
     font-size: calc(0.8vw + 2.5rem);

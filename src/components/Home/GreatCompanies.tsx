@@ -1,10 +1,10 @@
 import styled, { useTheme } from 'styled-components';
 
-import { BgImg } from '@this/components/Elements';
 import LogoCard from '@this/components/Cards/LogoCard';
+import { BgImg } from '@this/components/Elements';
 import NavLink from '@this/components/Navbar/elements/NavLink';
-import { IHome } from '@this/data/types/home';
 import Content from '@this/components/layout/Content';
+import { IHome } from '@this/data/types/home';
 
 const GreatCompanies = ({ title, description }: IHome['greatCompanies']) => {
   const theme = useTheme();
@@ -15,15 +15,15 @@ const GreatCompanies = ({ title, description }: IHome['greatCompanies']) => {
       <GreatCompaniesStyles className='_progress' id='companies'>
         <Content>
           {title.map((text) => (
-            <h1 key={text} className='dynamic-xl'>
+            <h1 key={text} className='dynamic-xl text-shadow'>
               {text}
             </h1>
           ))}
 
           <div className='row-between'>
-            <div className='outcomes-description'>
+            <div className='outcomes-description bg-subtle-dark rounded-card'>
               {description.map((text) => (
-                <p key={text} className='dynamic-txt bg-subtle-dark br-1 p-1'>
+                <p key={text} className='dynamic-txt'>
                   {text}
                 </p>
               ))}
@@ -63,9 +63,12 @@ const GreatCompaniesStyles = styled.div`
     display: flex;
     flex-flow: column;
     align-items: flex-start;
-    justify-content: space-between;
+    justify-content: center;
     color: white;
     width: 40%;
+    height: fit-content;
+    margin-top: auto;
+    margin-bottom: auto;
   }
   .logo-card {
     width: 60%;
@@ -74,6 +77,9 @@ const GreatCompaniesStyles = styled.div`
     .outcomes-description,
     .logo-card {
       width: 100%;
+    }
+    .outcomes-description {
+      margin-bottom: 1rem;
     }
     .info {
       margin: 2rem 0;
