@@ -1,5 +1,6 @@
 import { NextPage } from 'next';
 import Image from 'next/legacy/image';
+import Link from 'next/link';
 import { useState } from 'react';
 import { BsArrowRightSquareFill } from 'react-icons/bs';
 import { IoMdCloseCircle } from 'react-icons/io';
@@ -15,7 +16,6 @@ import Spinner from '@this/src/components/Elements/Spinner';
 import { Center } from '@this/src/components/layout/Center';
 import rgbDataURL from '@this/src/helpers/rgbDataURL';
 import { cardShadow } from '@this/src/theme/styled/mixins/shadows';
-import Link from 'next/link';
 
 const GetInvolved: NextPage = () => {
   const [showDonate, setShowDonate] = useState(false);
