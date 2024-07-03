@@ -86,6 +86,12 @@ module.exports = (phase, { defaultConfig }) => {
           destination: '/getInvolved/noladevs',
           permanent: false,
         },
+        {
+          source: `/donate`,
+          destination: '/getInvolved/donate',
+          permanent: false,
+        },
+
         /**
          * High School Application - `/programs/highschool/apply`
          * - When high school form is available, set env variable 'HIGHSCHOOL_FORM_ACTIVE' to 'true' otherwise 'false'
