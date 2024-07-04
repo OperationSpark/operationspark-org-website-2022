@@ -38,7 +38,8 @@ const GlobalStyles = createGlobalStyle`
     font-size: 1rem;
     font-family: 'Red Hat Display', sans-serif;
     :focus-visible {
-      outline: 2px solid ${({ theme }) => theme.secondary[800]};
+      outline: 2px solid ${({ theme }) =>
+        theme.isLightMode ? theme.magenta[400] : theme.secondary[800]} !important;
     }
   }
 
@@ -114,7 +115,8 @@ const GlobalStyles = createGlobalStyle`
     text-decoration: none;
     -webkit-user-drag: none !important;
     :focus-visible {
-      outline: 2px solid ${({ theme }) => theme.secondary[800]};
+      outline: 2px solid ${({ theme }) =>
+        theme.isLightMode ? theme.magenta[400] : theme.secondary[800]} !important;
     }
   }
   iframe {
