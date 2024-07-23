@@ -1,8 +1,9 @@
 import { GetStaticProps, NextPage } from 'next';
 
 import Link from 'next/link';
+import { FaArrowRight as RightArrowIcon } from 'react-icons/fa';
 import { FiChevronLeft } from 'react-icons/fi';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 
 import Content from '@this/components/layout/Content';
 import Main from '@this/components/layout/Main';
@@ -16,8 +17,23 @@ import Map from '@this/src/components/Elements/Map';
 import { InfoIcon } from '@this/src/components/icons/Info';
 import { Center } from '@this/src/components/layout/Center';
 import { useClickAway } from '@this/src/hooks/useClickAway';
-import { useState } from 'react';
+import { FC, Fragment, useState } from 'react';
 
+const CourseTime: FC<{ courseTime: string }> = ({ courseTime }) => {
+  const [startStr, endStr] = courseTime.split('→');
+  const theme = useTheme();
+  return (
+    <Fragment>
+      {startStr}
+      <RightArrowIcon
+        size={16}
+        color={theme.isLightMode ? theme.primary[0] : theme.secondary[0]}
+        style={{ margin: '0 0.25rem' }}
+      />
+      {endStr}
+    </Fragment>
+  );
+};
 type HighschoolSignupProps = {
   courses: IHighschoolPrograms['courses'];
 };
@@ -55,11 +71,11 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
           >
             <div className='program-header'>
               <div className='header-card'>
-                <h1 className='dynamic-xl secondary'>Summer 2024</h1>
+                <h1 className='dynamic-xl secondary'>Fall 2024</h1>
                 <h2 className='dynamic-h2 secondary'>Coding Camp Application</h2>
                 <p className='dynamic-txt'>
                   Open to rising sophomores, juniors, seniors, and 2024 grads
-                  <b> (Graduating classes of 2024, 2025, 2026, and 2027)</b>.
+                  <b> (Graduating classes of 2025, 2026, and 2027)</b>.
                 </p>
                 {/* Common meeting time */}
                 {/* <p className='dynamic-txt'>
@@ -67,8 +83,8 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
                   <b className='secondary'> Monday</b> through <b className='secondary'>Friday</b>.
                 </p> */}
                 <p className='dynamic-txt'>
-                  <b className='secondary'> May 30 to June 28, </b>
-                  Monday-Friday, 3 hours daily.
+                  Fall classes start the week of <b className='secondary'>August 19th</b> and end
+                  the week of <b className='secondary'>December 19th</b>.
                 </p>
               </div>
               <Link
@@ -91,7 +107,7 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
                 <div className='left-col'>
                   <div className='hs-program-overview'>
                     <p>
-                      {`This summer, we’re offering half day summer coding camps, with in-person and virtual options. You can enroll in one or the other- there is no hybrid option. If you're able to arrange for reliable transportation to our learning center in the Marigny, we recommend in-person classes. We have a great lab with brand new equipment and an awesome staff to get you started on your coding journey. You'll also meet other students from a wide range of schools and backgrounds!`}
+                      {`This fall, we’re offering after-school courses, with in-person and virtual options. You can enroll in one or the other- there is no hybrid option. If you're able to arrange for reliable transportation to our learning center in the Marigny, we recommend in-person classes. We have a great lab with brand new equipment and an awesome staff to get you started on your coding journey. You'll also meet other students from a wide range of schools and backgrounds!`}
                     </p>
                     <br />
 
@@ -142,7 +158,7 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
             </PlainCard>
             <div className='program-time-details'>
               <h2 className='dynamic-h2'>
-                <b>Summer Course Schedule:</b>
+                <b>Fall Course Schedule:</b>
               </h2>
               <div className='course-title'>
                 <b className='primary-secondary'>Fundamentals of HTML, CSS, and Javascript</b>
@@ -173,7 +189,7 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
                 {courseTimes.fundamentals.map((course) => (
                   <li key={course.value}>
                     <b className='primary-secondary'> {course.location}: </b>
-                    {course.time}
+                    <CourseTime courseTime={course.time} />
                   </li>
                 ))}
               </ul>
@@ -208,7 +224,7 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
                 {courseTimes.advanced.map((course) => (
                   <li key={course.value}>
                     <b className='primary-secondary'> {course.location}: </b>
-                    {course.time}
+                    <CourseTime courseTime={course.time} />
                   </li>
                 ))}
               </ul>
@@ -224,7 +240,7 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
               <br />
               <p>
                 {`If you go to school in a neighboring parish outside New Orleans, we may be running a
-                separate summer program in your school district. If this is the case, after you fill
+                separate fall program in your school district. If this is the case, after you fill
                 out the application, we will let you know who to contact to apply for the
                 appropriate program.`}
               </p>
