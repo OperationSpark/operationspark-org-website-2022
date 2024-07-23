@@ -91,7 +91,7 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
                 <div className='left-col'>
                   <div className='hs-program-overview'>
                     <p>
-                      {`This summer, we’re offering half day summer coding camps, with in-person and virtual options. You can enroll in one or the other- there is no hybrid option. If you're able to arrange for reliable transportation to our learning center in the Marigny, we recommend in-person classes. We have a great lab with brand new equipment and an awesome staff to get you started on your coding journey. You'll also meet other students from a wide range of schools and backgrounds!`}
+                      {`This fall, we’re offering half day fall coding camps, with in-person and virtual options. You can enroll in one or the other- there is no hybrid option. If you're able to arrange for reliable transportation to our learning center in the Marigny, we recommend in-person classes. We have a great lab with brand new equipment and an awesome staff to get you started on your coding journey. You'll also meet other students from a wide range of schools and backgrounds!`}
                     </p>
                     <br />
 
@@ -142,7 +142,7 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
             </PlainCard>
             <div className='program-time-details'>
               <h2 className='dynamic-h2'>
-                <b>Summer Course Schedule:</b>
+                <b>Fall Course Schedule:</b>
               </h2>
               <div className='course-title'>
                 <b className='primary-secondary'>Fundamentals of HTML, CSS, and Javascript</b>
@@ -224,7 +224,7 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
               <br />
               <p>
                 {`If you go to school in a neighboring parish outside New Orleans, we may be running a
-                separate summer program in your school district. If this is the case, after you fill
+                separate fall program in your school district. If this is the case, after you fill
                 out the application, we will let you know who to contact to apply for the
                 appropriate program.`}
               </p>
