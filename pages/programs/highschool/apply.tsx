@@ -1,8 +1,9 @@
 import { GetStaticProps, NextPage } from 'next';
 
 import Link from 'next/link';
+import { FaArrowRight as RightArrowIcon } from 'react-icons/fa';
 import { FiChevronLeft } from 'react-icons/fi';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 
 import Content from '@this/components/layout/Content';
 import Main from '@this/components/layout/Main';
@@ -16,8 +17,23 @@ import Map from '@this/src/components/Elements/Map';
 import { InfoIcon } from '@this/src/components/icons/Info';
 import { Center } from '@this/src/components/layout/Center';
 import { useClickAway } from '@this/src/hooks/useClickAway';
-import { useState } from 'react';
+import { FC, Fragment, useState } from 'react';
 
+const CourseTime: FC<{ courseTime: string }> = ({ courseTime }) => {
+  const [startStr, endStr] = courseTime.split('→');
+  const theme = useTheme();
+  return (
+    <Fragment>
+      {startStr}
+      <RightArrowIcon
+        size={16}
+        color={theme.isLightMode ? theme.primary[0] : theme.secondary[0]}
+        style={{ margin: '0 0.25rem' }}
+      />
+      {endStr}
+    </Fragment>
+  );
+};
 type HighschoolSignupProps = {
   courses: IHighschoolPrograms['courses'];
 };
@@ -173,7 +189,7 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
                 {courseTimes.fundamentals.map((course) => (
                   <li key={course.value}>
                     <b className='primary-secondary'> {course.location}: </b>
-                    {course.time}
+                    <CourseTime courseTime={course.time} />
                   </li>
                 ))}
               </ul>
@@ -208,7 +224,7 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
                 {courseTimes.advanced.map((course) => (
                   <li key={course.value}>
                     <b className='primary-secondary'> {course.location}: </b>
-                    {course.time}
+                    <CourseTime courseTime={course.time} />
                   </li>
                 ))}
               </ul>
