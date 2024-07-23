@@ -74,7 +74,7 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
                 <h1 className='dynamic-xl secondary'>Fall 2024</h1>
                 <h2 className='dynamic-h2 secondary'>Coding Camp Application</h2>
                 <p className='dynamic-txt'>
-                  Open to rising sophomores, juniors, seniors, and 2024 grads
+                  Open to sophomores, juniors, and seniors
                   <b> (Graduating classes of 2025, 2026, and 2027)</b>.
                 </p>
                 {/* Common meeting time */}
@@ -238,12 +238,6 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
                 {`The course is free for students attending public, parochial, or home school in New Orleans. If you don't fit that description, we may be able to partner with your school district to cover the cost, and if not, we offer discounted tuition to families paying privately.`}
               </p>
               <br />
-              <p>
-                {`If you go to school in a neighboring parish outside New Orleans, we may be running a
-                separate fall program in your school district. If this is the case, after you fill
-                out the application, we will let you know who to contact to apply for the
-                appropriate program.`}
-              </p>
             </PlainCard>
           </div>
           <div className='hs-form'>
