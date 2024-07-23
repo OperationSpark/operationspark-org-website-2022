@@ -55,11 +55,11 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
           >
             <div className='program-header'>
               <div className='header-card'>
-                <h1 className='dynamic-xl secondary'>Summer 2024</h1>
+                <h1 className='dynamic-xl secondary'>Fall 2024</h1>
                 <h2 className='dynamic-h2 secondary'>Coding Camp Application</h2>
                 <p className='dynamic-txt'>
                   Open to rising sophomores, juniors, seniors, and 2024 grads
-                  <b> (Graduating classes of 2024, 2025, 2026, and 2027)</b>.
+                  <b> (Graduating classes of 2025, 2026, and 2027)</b>.
                 </p>
                 {/* Common meeting time */}
                 {/* <p className='dynamic-txt'>
@@ -67,8 +67,8 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
                   <b className='secondary'> Monday</b> through <b className='secondary'>Friday</b>.
                 </p> */}
                 <p className='dynamic-txt'>
-                  <b className='secondary'> May 30 to June 28, </b>
-                  Monday-Friday, 3 hours daily.
+                  Fall classes start the week of <b className='secondary'>August 19th</b> and end
+                  the week of <b className='secondary'>December 19th</b>.
                 </p>
               </div>
               <Link
