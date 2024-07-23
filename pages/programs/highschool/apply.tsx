@@ -238,12 +238,6 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
                 {`The course is free for students attending public, parochial, or home school in New Orleans. If you don't fit that description, we may be able to partner with your school district to cover the cost, and if not, we offer discounted tuition to families paying privately.`}
               </p>
               <br />
-              <p>
-                {`If you go to school in a neighboring parish outside New Orleans, we may be running a
-                separate fall program in your school district. If this is the case, after you fill
-                out the application, we will let you know who to contact to apply for the
-                appropriate program.`}
-              </p>
             </PlainCard>
           </div>
           <div className='hs-form'>
