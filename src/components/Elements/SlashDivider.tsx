@@ -1,4 +1,4 @@
-import { ReactNode, CSSProperties } from 'react';
+import { CSSProperties, ReactNode } from 'react';
 import styled, { DefaultTheme } from 'styled-components';
 
 const getImageUrl = (theme: DefaultTheme) => {

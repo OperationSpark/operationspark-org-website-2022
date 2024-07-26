@@ -31,7 +31,7 @@ const Contact: NextPage<IContact> = ({ address, city, state, zip, phone, gMapUrl
         <Content>
           <div className='contact-top'>
             <Section className='contact-info'>
-              <p>
+              <div className='contact-item'>
                 <span className='contact-icon'>
                   <FiMapPin size={28} className='primary-secondary' />
                 </span>
@@ -41,15 +41,15 @@ const Contact: NextPage<IContact> = ({ address, city, state, zip, phone, gMapUrl
                     {city}, {state} {zip}
                   </div>
                 </a>
-              </p>
-              <p>
+              </div>
+              <div className='contact-item'>
                 <span className='contact-icon'>
                   <FiPhone size={28} className='primary-secondary' />
                 </span>
                 <a className='anchor' href={`tel:${phone}`} target='_blank' rel='noreferrer'>
                   {phone}
                 </a>
-              </p>
+              </div>
             </Section>
           </div>
           <ContactForm />
@@ -94,7 +94,7 @@ const ContactStyles = styled.div`
       text-align: center;
       margin-bottom: 1rem;
     }
-    p {
+    .contact-item {
       display: flex;
       flex-flow: column;
       align-items: center;
