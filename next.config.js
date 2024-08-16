@@ -6,7 +6,8 @@ const { validateData } = require('./data/validate');
 const {
   OVERRIDE_NODE_ENV = '',
   FB_PIXEL_ID,
-  HIGHSCHOOL_FORM_ACTIVE_UNTIL,
+  // Default to current date if not set
+  HIGHSCHOOL_FORM_ACTIVE_UNTIL = new Date().toISOString(),
   HIGHSCHOOL_FORM_RESPONSES_NAME = '__TAB_NAME_NOT_SET__',
 } = process.env;
 
@@ -90,6 +91,18 @@ module.exports = (phase, { defaultConfig }) => {
           source: `/donate`,
           destination: '/getInvolved/donate',
           permanent: false,
+        },
+
+        // High School Program
+        {
+          source: '/high-school',
+          destination: '/programs/highschool',
+          permanent: true,
+        },
+        {
+          source: '/highschool',
+          destination: '/programs/highschool',
+          permanent: true,
         },
 
         /**
