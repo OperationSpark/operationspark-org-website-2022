@@ -92,6 +92,18 @@ module.exports = (phase, { defaultConfig }) => {
           permanent: false,
         },
 
+        // High School Program
+        {
+          source: '/high-school',
+          destination: '/programs/highschool',
+          permanent: true,
+        },
+        {
+          source: '/highschool',
+          destination: '/programs/highschool',
+          permanent: true,
+        },
+
         /**
          * High School Application - `/programs/highschool/apply`
          * - When high school form is available, set env variable 'HIGHSCHOOL_FORM_ACTIVE' to 'true' otherwise 'false'
