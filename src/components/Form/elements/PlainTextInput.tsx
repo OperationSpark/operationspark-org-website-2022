@@ -14,8 +14,8 @@ const normalizeText = (value: string) => {
   /** Capitalized letters / total letters */
   const capAvg = capOnlyLen / len;
 
-  // If more than one letter and more than 50% of letters are capitalized
-  if (len > 1 && capAvg > 0.67) {
+  // If more than 60% of letters are capitalized
+  if (len > 1 && capAvg >= 0.6) {
     return capFirstLetter(value.toLowerCase());
   }
 
