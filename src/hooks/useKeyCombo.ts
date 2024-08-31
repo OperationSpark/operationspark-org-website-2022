@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export const useKeyCombo = (...keys: string[]) => {
   const [isCtrl, setCtrl] = useState(false);
@@ -9,7 +9,7 @@ export const useKeyCombo = (...keys: string[]) => {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      const key = e.key.toLocaleLowerCase('en-US');
+      const key = e.key?.toLocaleLowerCase('en-US');
       if (key === lastKey) {
         return;
       }
@@ -29,7 +29,7 @@ export const useKeyCombo = (...keys: string[]) => {
       }
     };
     const handleKeyUp = (e: KeyboardEvent) => {
-      const key = e.key.toLocaleLowerCase();
+      const key = e.key?.toLocaleLowerCase();
       if (['control', 'alt'].includes(key)) {
         setCtrl(false);
         setOpt(false);
