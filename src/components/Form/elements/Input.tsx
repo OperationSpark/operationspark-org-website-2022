@@ -1,6 +1,8 @@
+import { motion, MotionProps } from 'framer-motion';
 import {
   ChangeEvent,
   CSSProperties,
+  FocusEvent,
   HTMLInputTypeAttribute,
   KeyboardEvent,
   useEffect,
@@ -8,10 +10,9 @@ import {
   useState,
 } from 'react';
 import styled from 'styled-components';
-import { motion, MotionProps } from 'framer-motion';
 
-import RequiredStatus from './RequiredStatus';
 import ClearButton from './ClearButton';
+import RequiredStatus from './RequiredStatus';
 
 export interface TextInputProps {
   type?: HTMLInputTypeAttribute;
@@ -26,8 +27,9 @@ export interface TextInputProps {
   isValid?: boolean;
   animation?: MotionProps;
   style?: CSSProperties;
-  onEnter?: (e: KeyboardEvent) => void;
-  onTab?: (e: KeyboardEvent) => void;
+  onEnter?: (e: KeyboardEvent<HTMLInputElement>) => void;
+  onTab?: (e: KeyboardEvent<HTMLInputElement>) => void;
+  onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
   restoreCursor?: boolean;
   testId?: string;
 }
@@ -38,6 +40,7 @@ const TextInput = ({
   value,
   label,
   onChange = () => {},
+  onBlur = () => {},
   isValid,
   placeholder = '',
   isErr = false,
@@ -54,7 +57,7 @@ const TextInput = ({
   const [caretPos, setCaretPos] = useState<number | null>(null);
   const [isFocused, setIsFocus] = useState<boolean>(false);
 
-  const handleKeypress = (e: KeyboardEvent) => {
+  const handleKeypress = (e: KeyboardEvent<HTMLInputElement>) => {
     const { key } = e;
     key === 'Enter' && onEnter && onEnter(e);
     key === 'Tab' && onTab && onTab(e);
@@ -100,7 +103,10 @@ const TextInput = ({
         className={isErr ? '_input_err' : ''}
         type={type}
         onFocus={() => setIsFocus(true)}
-        onBlur={() => setIsFocus(false)}
+        onBlur={(e) => {
+          setIsFocus(false);
+          onBlur(e);
+        }}
         onKeyPress={handleKeypress}
         value={value}
         placeholder={placeholder}
