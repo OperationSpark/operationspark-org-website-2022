@@ -1,5 +1,6 @@
-import { ReactNode } from 'react';
 import { motion } from 'framer-motion';
+import kebabCase from 'lodash/kebabCase';
+import { ReactNode } from 'react';
 import styled from 'styled-components';
 
 interface RadioProps {
@@ -10,9 +11,19 @@ interface RadioProps {
   checked: boolean;
   transition?: boolean;
   delay?: number;
+  testId?: string;
 }
 
-const Radio = ({ name, label, value, checked, delay, transition, onChange }: RadioProps) => {
+const Radio = ({
+  name,
+  label,
+  value,
+  checked,
+  delay,
+  transition,
+  onChange,
+  testId,
+}: RadioProps) => {
   return (
     <RadioStyles
       aria-label={name}
@@ -28,6 +39,7 @@ const Radio = ({ name, label, value, checked, delay, transition, onChange }: Rad
         checked={checked}
         onChange={(e) => onChange(e.target.value)}
         aria-labelledby={name}
+        data-test-id={testId ?? `radio-${kebabCase(name)}`}
       />
       <div className='radio'></div>
       <div className='label' aria-label={name}>

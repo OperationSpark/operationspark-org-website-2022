@@ -1,5 +1,5 @@
+import { getNumsOnly, parseDate } from '../helpers';
 import Input, { TextInputProps } from './Input';
-import { parseDate, getNumsOnly } from '../helpers';
 
 const DateInput = ({ onChange, ...props }: TextInputProps) => {
   return (

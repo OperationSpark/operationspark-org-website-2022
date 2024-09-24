@@ -1,10 +1,13 @@
-import { ReactNode } from 'react';
 import { motion } from 'framer-motion';
+import kebabCase from 'lodash/kebabCase';
+import { ReactNode } from 'react';
 import styled from 'styled-components';
+
 import Radio from './Radio';
 import RequiredStatus from './RequiredStatus';
 
 interface RadioProps {
+  name: string;
   label: string | ReactNode;
   onChange: (value: string, isValid: boolean) => void;
   value: string;
@@ -17,9 +20,11 @@ interface RadioProps {
     name: string;
     label: string | ReactNode;
   }[];
+  testId?: string;
 }
 
 const RadioGroup = ({
+  name,
   label,
   options,
   isValid,
@@ -29,13 +34,16 @@ const RadioGroup = ({
   required,
   isErr = false,
   onChange,
+  testId,
 }: RadioProps) => {
+  const groupName = kebabCase(name);
   return (
     <RadioGroupStyles
       className={isErr ? '_input_err' : ''}
       initial={transition ? { opacity: 0, y: 100 } : {}}
       animate={transition ? { opacity: 1, y: 0 } : {}}
       transition={transition ? { duration: 0.2, delay: delay ?? undefined } : {}}
+      data-test-id={testId ?? `radio-group-${groupName}`}
     >
       <div className='radio-group-label'>{label}</div>
       {required && <RequiredStatus isValid={isValid} />}
@@ -49,6 +57,7 @@ const RadioGroup = ({
           onChange={(value) => onChange(value, true)}
           value={name}
           delay={delay ? delay + index * 0.25 : 0}
+          testId={`radio-input-${groupName}-${kebabCase(name)}`}
         />
       ))}
     </RadioGroupStyles>

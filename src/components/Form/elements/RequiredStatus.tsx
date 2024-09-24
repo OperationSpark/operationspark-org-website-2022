@@ -39,6 +39,7 @@ const RequiredStatus = ({ isValid }: RequiredStatusProps) => {
       }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.25, color: { duration: 0 } }}
+      data-test-id='required-status'
     >
       {!isValid ? 'Required' : <BsCheckCircleFill size={20} />}
     </ReqStatusStyles>

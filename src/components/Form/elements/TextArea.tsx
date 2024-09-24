@@ -1,8 +1,10 @@
+import { motion, MotionProps } from 'framer-motion';
+import kebabCase from 'lodash/kebabCase';
 import { ChangeEvent, CSSProperties, KeyboardEvent, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { motion, MotionProps } from 'framer-motion';
-import RequiredStatus from './RequiredStatus';
+
 import ClearButton from './ClearButton';
+import RequiredStatus from './RequiredStatus';
 
 export interface TextAreaProps {
   name: string;
@@ -36,7 +38,6 @@ const TextArea = ({
   onTab = () => {},
   animation = {},
   style = {},
-
   testId,
 }: TextAreaProps) => {
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -78,7 +79,7 @@ const TextArea = ({
         value={value}
         placeholder={placeholder}
         onChange={handleChange}
-        data-test-id={testId}
+        data-test-id={testId ?? `text-area-${kebabCase(name)}`}
       />
     </TextInputStyles>
   );

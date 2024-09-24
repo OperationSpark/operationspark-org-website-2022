@@ -1,4 +1,5 @@
 import axios from 'axios';
+import kebabCase from 'lodash/kebabCase';
 import moment from 'moment';
 import { Fragment, useEffect, useState } from 'react';
 import styled from 'styled-components';
@@ -225,6 +226,7 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
             onChange={form.onChange(field.name)}
             isValid={form.isValid(field.name)}
             isErr={form.isErr(field.name)}
+            testId={`info-session-input-${kebabCase(field.name)}`}
             animation={{
               initial: { x: 100, opacity: 0 },
               animate: { x: 0, opacity: 1 },
@@ -243,6 +245,7 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
             onChange={form.onChange('zipCode')}
             isValid={form.isValid('zipCode')}
             isErr={form.isErr('zipCode')}
+            testId={`info-session-input-zip-code`}
             animation={{
               initial: { x: 100, opacity: 0 },
               animate: { x: 0, opacity: 1 },
@@ -250,7 +253,9 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
             }}
           />
           {form.getSelect('userLocation').value && (
-            <div className='user-location-state'>{form.getSelect('userLocation').value}</div>
+            <div className='user-location-state' data-test-id='info-session-user-state'>
+              {form.getSelect('userLocation').value}
+            </div>
           )}
         </div>
 
@@ -264,6 +269,7 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
           onChange={form.onSelectChange('referencedBy')}
           required
           delay={workforceFormInputs.length * 0.25}
+          testId='info-session-input-referenced-by'
         />
 
         <Input.Select
@@ -276,6 +282,7 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
           options={sessionDateOptions}
           delay={(workforceFormInputs.length - 1) * 0.25}
           required
+          testId='info-session-input-session-date'
         />
         {currentValues.sessionDate?.value && (
           <Fragment>
@@ -366,6 +373,7 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
         )}
 
         <Button
+          data-test-id='info-session-submit-button'
           className={form.hasErrors() ? 'info disabled' : 'info'}
           color='yellow'
           style={{

@@ -1,11 +1,12 @@
-import styled from 'styled-components';
-import { Fragment } from 'react';
 import { motion } from 'framer-motion';
+import kebabCase from 'lodash/kebabCase';
+import { Fragment } from 'react';
+import styled from 'styled-components';
 
 import { TOption } from '@this/data/types/bits';
+import ClearButton from './ClearButton';
 import Input from './PlainTextInput';
 import RequiredStatus from './RequiredStatus';
-import ClearButton from './ClearButton';
 
 const defaultOptions = [{ name: 'Option 1', value: 'opt1' }];
 
@@ -28,12 +29,14 @@ interface SelectProps {
   delay?: number;
   isValid?: boolean;
   animate?: boolean;
+  testId?: string;
 }
 
 export const Select = ({
   id,
   options = defaultOptions,
   label = '',
+  name,
   option,
   isErr,
   isValid,
@@ -41,6 +44,7 @@ export const Select = ({
   required,
   onChange,
   animate = true,
+  testId,
 }: SelectProps) => {
   const checkIsValid = (opt: string, info: string | undefined, hasAdditionalInfo: boolean) => {
     if (!required) {
@@ -87,6 +91,7 @@ export const Select = ({
             onChange={(e) => handleOptionSelect(e.target.value)}
             value={option?.value}
             name={id}
+            data-test-id={testId ?? `select-${kebabCase(name)}`}
           >
             {[{ name: 'Please select an option', value: '' }, ...options].map(({ name, value }) => (
               <Option value={value} name={name} key={value} />

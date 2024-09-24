@@ -1,4 +1,6 @@
+import kebabCase from 'lodash/kebabCase';
 import styled from 'styled-components';
+
 import Checkbox from './Checkbox';
 import ClearButton from './ClearButton';
 import RequiredStatus from './RequiredStatus';
@@ -16,6 +18,7 @@ interface CheckboxProps {
     name: string;
     label: string;
   }[];
+  testId?: string;
 }
 
 const CheckboxGroup = ({
@@ -28,11 +31,16 @@ const CheckboxGroup = ({
   isErr = false,
   onChange,
   clearCheckboxes,
+  testId,
 }: CheckboxProps) => {
   const valuesKeys = Object.keys(values);
 
   return (
-    <CheckboxGroupStyles className={isErr ? '_input_err' : ''} id={id}>
+    <CheckboxGroupStyles
+      className={isErr ? '_input_err' : ''}
+      id={id}
+      data-test-id={testId ?? `checkbox-group-${kebabCase(id)}`}
+    >
       <div className='checkbox-group-label'>{label}</div>
       {required && <RequiredStatus isValid={isValid} />}
       <ClearButton show={!!valuesKeys.length} onClick={clearCheckboxes} />

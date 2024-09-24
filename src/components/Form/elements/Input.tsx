@@ -1,3 +1,5 @@
+import { motion, MotionProps } from 'framer-motion';
+import kebabCase from 'lodash/kebabCase';
 import {
   ChangeEvent,
   CSSProperties,
@@ -8,10 +10,9 @@ import {
   useState,
 } from 'react';
 import styled from 'styled-components';
-import { motion, MotionProps } from 'framer-motion';
 
-import RequiredStatus from './RequiredStatus';
 import ClearButton from './ClearButton';
+import RequiredStatus from './RequiredStatus';
 
 export interface TextInputProps {
   type?: HTMLInputTypeAttribute;
@@ -105,7 +106,7 @@ const TextInput = ({
         value={value}
         placeholder={placeholder}
         onChange={handleChange}
-        data-test-id={testId}
+        data-test-id={testId ?? `${type ?? 'text'}-input-${kebabCase(name)}`}
       />
       <ClearButton
         show={!!value}
