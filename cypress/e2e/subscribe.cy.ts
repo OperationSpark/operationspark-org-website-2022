@@ -5,13 +5,10 @@ const testEmail = (
   inputCleared: boolean,
 ) => {
   it(expectation, () => {
-    cy.visit('http://localhost:3000');
+    cy.visit('/');
     cy.intercept('/api/subscribe').as('subscribe');
     email && cy.get('input[data-test-id="input-subscribe-email"]').type(email);
-    cy.get('input[data-test-id="input-subscribe-email"]').should(
-      'have.value',
-      email,
-    );
+    cy.get('input[data-test-id="input-subscribe-email"]').should('have.value', email);
 
     cy.get('button[data-test-id="button-subscribe-email"]').click();
 
@@ -33,17 +30,7 @@ describe('Subscribe', () => {
     true,
   );
 
-  testEmail(
-    'Should send 400 on invalid email and not clear the input',
-    'peter@',
-    400,
-    false,
-  );
+  testEmail('Should send 400 on invalid email and not clear the input', 'peter@', 400, false);
 
-  testEmail(
-    'Should send 400 on no email and leave input field blank',
-    '',
-    400,
-    false,
-  );
+  testEmail('Should send 400 on no email and leave input field blank', '', 400, false);
 });
