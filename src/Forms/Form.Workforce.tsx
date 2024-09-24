@@ -302,7 +302,14 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
               </div>
             ) : (
               <Input.RadioGroup
+                name='attendingLocation'
                 label='Are you attending in person or virtually?'
+                value={form.get('attendingLocation')}
+                isValid={form.isValid('attendingLocation')}
+                isErr={form.isErr('attendingLocation')}
+                onChange={form.onChange('attendingLocation')}
+                delay={(workforceFormInputs.length + 1) * 0.3}
+                required
                 options={[
                   {
                     name: 'IN_PERSON',
@@ -323,12 +330,6 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
                   },
                   { name: 'VIRTUAL', label: 'Virtually (via Zoom)' },
                 ]}
-                value={form.get('attendingLocation')}
-                isValid={form.isValid('attendingLocation')}
-                isErr={form.isErr('attendingLocation')}
-                onChange={form.onChange('attendingLocation')}
-                delay={(workforceFormInputs.length + 1) * 0.3}
-                required
               />
             )}
           </Fragment>
@@ -337,7 +338,14 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
         {/* Checkbox to opt-in to receiving SMS messages */}
         <div className='sms-opt-in-row'>
           <Input.RadioGroup
+            name='smsOptIn'
             label='Would you like to receive text message reminders?'
+            value={form.get('smsOptIn')}
+            isValid={form.isValid('smsOptIn')}
+            isErr={form.isErr('smsOptIn')}
+            onChange={form.onChange('smsOptIn')}
+            delay={(workforceFormInputs.length + 1) * 0.3}
+            required
             options={[
               {
                 name: 'true',
@@ -345,12 +353,6 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
               },
               { name: 'false', label: 'No, do not send SMS reminders' },
             ]}
-            value={form.get('smsOptIn')}
-            isValid={form.isValid('smsOptIn')}
-            isErr={form.isErr('smsOptIn')}
-            onChange={form.onChange('smsOptIn')}
-            delay={(workforceFormInputs.length + 1) * 0.3}
-            required
           />
           {form.get('smsOptIn') === 'true' && (
             <p className='sms-disclaimer'>
