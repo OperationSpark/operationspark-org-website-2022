@@ -4,6 +4,12 @@ import { config } from '../../../src/config';
 import { GooglePlace, LocationType } from './user';
 
 const { GREENLIGHT_API_ENDPOINT } = config;
+
+export type DateTime = {
+  dateTime: string;
+  timeZone: 'America/Chicago';
+};
+
 export interface ISessionDates {
   _id: string;
   cohort: string;
@@ -11,14 +17,8 @@ export interface ISessionDates {
   private?: boolean;
   code?: string;
   times: {
-    start: {
-      dateTime: string;
-      timeZone: 'America/Chicago';
-    };
-    end: {
-      dateTime: string;
-      timeZone: 'America/Chicago';
-    };
+    start: DateTime;
+    end: DateTime;
     until: string;
   };
   googlePlace: GooglePlace;
