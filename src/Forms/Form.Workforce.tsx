@@ -8,15 +8,16 @@ import { IoMdCloseCircleOutline as CloseIcon } from 'react-icons/io';
 import { MdOpenInNew as NewTabIcon } from 'react-icons/md';
 
 import Button from '@this/components/Elements/Button';
+import Spinner from '@this/components/Elements/Spinner';
 import { Form, Input, useForm } from '@this/components/Form';
+import { getStateFromZipCode } from '@this/components/Form/helpers';
 import { TOption } from '@this/data/types/bits';
 import { IInfoSessionFormValues } from '@this/data/types/infoSession';
+import useKeyCombo from '@this/hooks/useKeyCombo';
 import { pixel } from '@this/lib/pixel';
 import { ISessionDates } from '@this/pages-api/infoSession/dates';
-import { FormDataSignup } from '@this/pages-api/infoSession/user';
-import Spinner from '../components/Elements/Spinner';
-import { getStateFromZipCode } from '../components/Form/helpers';
-import useKeyCombo from '../hooks/useKeyCombo';
+import { FormDataSignup } from '@this/types/signups';
+
 import { referencedByOptions } from './formData/referenceOptions';
 
 interface WorkforceFormProps {
@@ -71,7 +72,7 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
     });
 
     try {
-      const { data } = await axios.post('/api/infoSession/user', body);
+      const { data } = await axios.post('/api/signups/info', body);
 
       const textMessage = currentValues.smsOptIn === 'true' ? ' and text message' : '';
 

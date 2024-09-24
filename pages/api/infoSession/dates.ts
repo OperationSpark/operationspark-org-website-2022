@@ -1,7 +1,8 @@
 import axios from 'axios';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { config } from '../../../src/config';
-import { GooglePlace, LocationType } from './user';
+
+import config from '@this/config';
+import { GooglePlace, LocationType } from '@this/types/signups';
 
 const { GREENLIGHT_API_ENDPOINT } = config;
 
