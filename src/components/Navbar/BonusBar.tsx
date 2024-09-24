@@ -29,7 +29,11 @@ const BonusBar = ({ children }: { children?: ReactNode }) => {
         </NavLink>
       )}
       {!checkIsPath('highschool', '/programs/workforce/infoSession') && (
-        <NavLink href='/programs/workforce/infoSession' className='info'>
+        <NavLink
+          href='/programs/workforce/infoSession'
+          className='info'
+          testId='nav-info-session-link'
+        >
           {'Free Info Session'}
         </NavLink>
       )}

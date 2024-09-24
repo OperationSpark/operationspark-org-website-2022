@@ -62,7 +62,7 @@ const NavAccordion = ({ closeMenu, children }: NavAccordionProps) => {
           href='/programs/workforce/infoSession'
           className='info'
           callback={closeMenu}
-          testId='info-session-link'
+          testId='nav-info-session-link'
         >
           Free Info Session
         </NavLink>
