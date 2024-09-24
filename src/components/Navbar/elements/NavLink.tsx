@@ -1,3 +1,4 @@
+import kebabCase from 'lodash/kebabCase';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
@@ -12,6 +13,7 @@ const NavLink = ({
   callback,
   color = '',
   title,
+  testId,
 }: {
   children: ReactNode | ReactNode[];
   href?: string;
@@ -19,6 +21,7 @@ const NavLink = ({
   callback?: () => void;
   color?: '' | 'yellow';
   title?: string;
+  testId?: string;
 }) => {
   const linkTitle = typeof children === 'string' ? children : '';
   const { pathname } = useRouter();
@@ -31,7 +34,11 @@ const NavLink = ({
       title={title ?? linkTitle}
     >
       {href ? (
-        <Link href={href} aria-label={title ?? linkTitle}>
+        <Link
+          href={href}
+          aria-label={title ?? linkTitle}
+          data-test-id={testId ?? `nav-link-${kebabCase(title ?? linkTitle) ?? 'unknown'}`}
+        >
           {children}
         </Link>
       ) : (
