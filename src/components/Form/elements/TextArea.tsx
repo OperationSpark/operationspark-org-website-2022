@@ -72,6 +72,7 @@ const TextArea = ({
         spellCheck={false}
         ref={inputRef}
         id={name}
+        name={name}
         className={isErr ? '_input_err' : ''}
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}

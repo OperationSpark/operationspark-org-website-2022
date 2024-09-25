@@ -37,7 +37,8 @@ const Radio = ({
         name={name}
         value={value}
         checked={checked}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={() => onChange(value)}
+        onKeyDown={(e) => e.key === 'Enter' && onChange(value)}
         aria-labelledby={name}
         data-test-id={testId ?? `radio-${kebabCase(name)}`}
       />

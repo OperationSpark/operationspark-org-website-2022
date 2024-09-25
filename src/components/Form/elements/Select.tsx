@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import kebabCase from 'lodash/kebabCase';
-import { Fragment } from 'react';
+import { Fragment, KeyboardEvent } from 'react';
 import styled from 'styled-components';
 
 import { TOption } from '@this/data/types/bits';
@@ -25,6 +25,7 @@ interface SelectProps {
   required?: boolean;
   option: TOption;
   onChange: (args: OnChangeProps) => void;
+  onEnter?: (e: KeyboardEvent<HTMLSelectElement>) => void;
   isErr: boolean;
   delay?: number;
   isValid?: boolean;
@@ -43,6 +44,7 @@ export const Select = ({
   delay,
   required,
   onChange,
+  onEnter,
   animate = true,
   testId,
 }: SelectProps) => {
@@ -88,10 +90,19 @@ export const Select = ({
         <SelectStyles title={label} className={isErr && !option.value ? '_input_err' : ''}>
           <label style={{ fontSize: !option.value ? '1rem' : '0.75rem' }}>{label}</label>
           <select
+            id={id}
             onChange={(e) => handleOptionSelect(e.target.value)}
             value={option?.value}
-            name={id}
+            name={name}
             data-test-id={testId ?? `select-${kebabCase(name)}`}
+            onKeyDown={(e) => {
+              if (e.key !== 'Enter') return;
+              e.preventDefault();
+
+              if (isValid) {
+                return onEnter?.(e);
+              }
+            }}
           >
             {[{ name: 'Please select an option', value: '' }, ...options].map(({ name, value }) => (
               <Option value={value} name={name} key={value} />

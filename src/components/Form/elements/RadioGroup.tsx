@@ -1,15 +1,17 @@
 import { motion } from 'framer-motion';
 import kebabCase from 'lodash/kebabCase';
-import { ReactNode } from 'react';
+import { KeyboardEvent, ReactNode } from 'react';
 import styled from 'styled-components';
 
 import Radio from './Radio';
 import RequiredStatus from './RequiredStatus';
 
 interface RadioProps {
+  id?: string;
   name: string;
   label: string | ReactNode;
   onChange: (value: string, isValid: boolean) => void;
+  onEnter?: (e: KeyboardEvent<HTMLDivElement>) => void;
   value: string;
   isValid: boolean;
   delay?: number;
@@ -24,6 +26,7 @@ interface RadioProps {
 }
 
 const RadioGroup = ({
+  id,
   name,
   label,
   options,
@@ -34,16 +37,32 @@ const RadioGroup = ({
   required,
   isErr = false,
   onChange,
+  onEnter,
   testId,
 }: RadioProps) => {
   const groupName = kebabCase(name);
   return (
     <RadioGroupStyles
+      id={id ?? name}
       className={isErr ? '_input_err' : ''}
       initial={transition ? { opacity: 0, y: 100 } : {}}
       animate={transition ? { opacity: 1, y: 0 } : {}}
       transition={transition ? { duration: 0.2, delay: delay ?? undefined } : {}}
       data-test-id={testId ?? `radio-group-${groupName}`}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter') {
+          if (isValid && onEnter) {
+            e.preventDefault();
+            return onEnter(e);
+          }
+
+          if (e.target instanceof HTMLInputElement) {
+            console.log('e.target', e.target);
+            e.preventDefault();
+            return e.target.click();
+          }
+        }
+      }}
     >
       <div className='radio-group-label'>{label}</div>
       {required && <RequiredStatus isValid={isValid} />}

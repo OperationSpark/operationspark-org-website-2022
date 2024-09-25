@@ -7,7 +7,8 @@ type IValues<Values, T extends keyof Values> = Record<T, string>;
 type ISelectValues = Record<string, TOption>;
 type TCheckboxes = Record<string, boolean>;
 type TCheckboxGroup = Record<string, TCheckboxes>;
-type IValidation = Record<string, boolean>;
+type TForm<T> = Record<keyof T, T[keyof T]>;
+type TValidation<T> = Partial<Record<keyof T, boolean>>;
 
 type INotify = {
   title?: string;
@@ -21,12 +22,16 @@ type OnSelectChangeProps = {
   isValid: boolean;
 };
 
-const useForm = <T extends Record<keyof T, T[keyof T]> = {}>() => {
+type UseFormOptions<T> = {
+  fieldOrder?: (keyof T)[];
+};
+
+const useForm = <T extends TForm<T> = {}>(options: UseFormOptions<T> = {}) => {
   const [values, setValues] = useState<IValues<T, keyof T>>({} as T);
   const [selectValues, setSelectValues] = useState<ISelectValues>({});
   const [checkboxGroupValues, setCheckboxGroupValues] = useState<TCheckboxGroup>({} as T);
   const [checkboxValues, setCheckboxValues] = useState<TCheckboxes>({} as T);
-  const [validation, setValidation] = useState<IValidation>({});
+  const [validation, setValidation] = useState<TValidation<T>>({});
   const [showErrors, setShowErrors] = useState<boolean>(false);
 
   return {
@@ -50,13 +55,13 @@ const useForm = <T extends Record<keyof T, T[keyof T]> = {}>() => {
       if (!validation.hasOwnProperty(name)) {
         setValidation({ ...validation, [name]: false });
       }
-      return validation[name] || false;
+      return validation[name as keyof T] || false;
     },
     /** Check if error exists in form
      * - Only works if `toggleShowErrors()` has been invoked)
      */
     isErr: (name: string) => {
-      return showErrors && !validation[name];
+      return showErrors && !validation[name as keyof T];
     },
 
     /** Input field change handler */
@@ -110,6 +115,16 @@ const useForm = <T extends Record<keyof T, T[keyof T]> = {}>() => {
     /** Get status of errors (Errors are shown or not) */
     showErrors: () => showErrors,
 
+    /** Get all keys from form as object */
+    keys: (): (keyof T)[] => {
+      return [
+        ...Object.keys(values),
+        ...Object.keys(selectValues),
+        ...Object.keys(checkboxGroupValues),
+        ...Object.keys(checkboxValues),
+      ] as (keyof T)[];
+    },
+
     /** Get all values from form as object */
     values: (): T =>
       ({
@@ -118,6 +133,12 @@ const useForm = <T extends Record<keyof T, T[keyof T]> = {}>() => {
         ...checkboxGroupValues,
         ...checkboxValues,
       } as T),
+
+    nextInvalidKey: (): keyof T | null => {
+      const order = options.fieldOrder ?? (Object.keys(validation) as (keyof T)[]);
+      const invalidKey = order.find((key) => !validation[key]);
+      return (invalidKey as keyof T) ?? null;
+    },
 
     /** Trigger success toast notification */
     notifySuccess: ({ title, msg }: INotify = {}) => {

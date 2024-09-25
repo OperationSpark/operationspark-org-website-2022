@@ -1,6 +1,7 @@
-import Input, { TextInputProps } from './Input';
 import { getNums, parsePhoneNumber } from '../helpers';
+import Input, { TextInputProps } from './Input';
 
+// TODO: Rename to `PhoneInput`
 const NumberInput = ({ onChange, ...props }: TextInputProps) => {
   return (
     <Input

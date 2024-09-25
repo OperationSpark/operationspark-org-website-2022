@@ -1,7 +1,7 @@
 import axios from 'axios';
 import kebabCase from 'lodash/kebabCase';
 import moment from 'moment';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, KeyboardEvent, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import { AiOutlineInfoCircle } from 'react-icons/ai';
@@ -27,7 +27,20 @@ interface WorkforceFormProps {
 }
 
 const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
-  const form = useForm<IInfoSessionFormValues>();
+  const mainRef = useRef<HTMLDivElement>(null);
+  const form = useForm<IInfoSessionFormValues>({
+    fieldOrder: [
+      'firstName',
+      'lastName',
+      'email',
+      'phone',
+      'zipCode',
+      'referencedBy',
+      'sessionDate',
+      'attendingLocation',
+      'smsOptIn',
+    ],
+  });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [renderUrl, setRenderUrl] = useState<string | null>(null);
 
@@ -108,6 +121,34 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
       .join(' ');
     return locationType;
   };
+
+  const selectNextInputOrSubmit = (
+    e: KeyboardEvent<HTMLInputElement | HTMLFormElement | HTMLSelectElement | HTMLDivElement>,
+  ) => {
+    if (e.key !== 'Enter') return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    const nextInvalidKey = form.nextInvalidKey();
+    const ref = mainRef.current;
+
+    if (!nextInvalidKey || !ref) {
+      console.log('No next invalid key', nextInvalidKey);
+      return handleSubmit();
+    }
+
+    const nextInput = ref.querySelector<HTMLInputElement>(`[name='${nextInvalidKey}']`);
+
+    if (nextInput) {
+      nextInput?.focus();
+    }
+
+    const nextContainerInput = ref.querySelector<HTMLInputElement>(`#${nextInvalidKey} input`);
+
+    nextContainerInput?.focus();
+  };
+
   const sessionDateOptions = [
     ...sessionDates
       .filter((s) => !s.private || isKeyComboActive)
@@ -209,13 +250,18 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
   }, [referredBy]);
 
   return (
-    <WorkforceFormStyles>
+    <WorkforceFormStyles ref={mainRef}>
       <Form
-        onSubmit={handleSubmit}
-        onEnter={(e) => {
-          e.preventDefault();
+        onSubmit={(e) => {
+          // if (!form.nextInvalidKey()) {
+          //   e.stopPropagation();
+          //   handleSubmit();
+          // }
           e.stopPropagation();
-          handleSubmit();
+        }}
+        onEnter={() => {
+          // console.log('Next Invalid Key:', form.nextInvalidKey());
+          // selectNextInputOrSubmit('form');
         }}
       >
         {workforceFormInputs.map((field, i) => (
@@ -227,6 +273,7 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
             isValid={form.isValid(field.name)}
             isErr={form.isErr(field.name)}
             testId={`info-session-input-${kebabCase(field.name)}`}
+            onEnter={selectNextInputOrSubmit}
             animation={{
               initial: { x: 100, opacity: 0 },
               animate: { x: 0, opacity: 1 },
@@ -245,6 +292,7 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
             onChange={form.onChange('zipCode')}
             isValid={form.isValid('zipCode')}
             isErr={form.isErr('zipCode')}
+            onEnter={selectNextInputOrSubmit}
             testId={`info-session-input-zip-code`}
             animation={{
               initial: { x: 100, opacity: 0 },
@@ -266,6 +314,7 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
           option={form.getSelect('referencedBy')}
           isErr={form.isErr('referencedBy')}
           isValid={form.isValid('referencedBy')}
+          onEnter={selectNextInputOrSubmit}
           onChange={form.onSelectChange('referencedBy')}
           required
           delay={workforceFormInputs.length * 0.25}
@@ -277,6 +326,7 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
           name='sessionDate'
           option={form.getSelect('sessionDate')}
           onChange={form.onSelectChange('sessionDate')}
+          onEnter={selectNextInputOrSubmit}
           isErr={form.isErr('sessionDate')}
           isValid={form.isValid('sessionDate')}
           options={sessionDateOptions}
@@ -305,6 +355,7 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
                 name='attendingLocation'
                 label='Are you attending in person or virtually?'
                 value={form.get('attendingLocation')}
+                onEnter={selectNextInputOrSubmit}
                 isValid={form.isValid('attendingLocation')}
                 isErr={form.isErr('attendingLocation')}
                 onChange={form.onChange('attendingLocation')}
@@ -342,6 +393,7 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
             label='Would you like to receive text message reminders?'
             value={form.get('smsOptIn')}
             isValid={form.isValid('smsOptIn')}
+            onEnter={selectNextInputOrSubmit}
             isErr={form.isErr('smsOptIn')}
             onChange={form.onChange('smsOptIn')}
             delay={(workforceFormInputs.length + 1) * 0.3}

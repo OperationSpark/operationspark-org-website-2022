@@ -1,16 +1,19 @@
 import kebabCase from 'lodash/kebabCase';
 import styled from 'styled-components';
 
+import { KeyboardEvent } from 'react';
 import Checkbox from './Checkbox';
 import ClearButton from './ClearButton';
 import RequiredStatus from './RequiredStatus';
 
 interface CheckboxProps {
   id?: string;
+  name?: string;
   label: string;
   values: { [key: string]: boolean };
   onChange: (name: string, value: boolean) => void;
   clearCheckboxes: () => void;
+  onEnter?: (e: KeyboardEvent<HTMLDivElement>) => void;
   isValid: boolean;
   required?: boolean;
   isErr: boolean;
@@ -31,6 +34,7 @@ const CheckboxGroup = ({
   isErr = false,
   onChange,
   clearCheckboxes,
+  onEnter,
   testId,
 }: CheckboxProps) => {
   const valuesKeys = Object.keys(values);
@@ -40,6 +44,12 @@ const CheckboxGroup = ({
       className={isErr ? '_input_err' : ''}
       id={id}
       data-test-id={testId ?? `checkbox-group-${kebabCase(id)}`}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' && isValid && onEnter) {
+          e.preventDefault();
+          onEnter(e);
+        }
+      }}
     >
       <div className='checkbox-group-label'>{label}</div>
       {required && <RequiredStatus isValid={isValid} />}

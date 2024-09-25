@@ -27,8 +27,8 @@ export interface TextInputProps {
   isValid?: boolean;
   animation?: MotionProps;
   style?: CSSProperties;
-  onEnter?: (e: KeyboardEvent) => void;
-  onTab?: (e: KeyboardEvent) => void;
+  onEnter?: (e: KeyboardEvent<HTMLInputElement>) => void;
+  onTab?: (e: KeyboardEvent<HTMLInputElement>) => void;
   restoreCursor?: boolean;
   testId?: string;
 }
@@ -55,7 +55,7 @@ const TextInput = ({
   const [caretPos, setCaretPos] = useState<number | null>(null);
   const [isFocused, setIsFocus] = useState<boolean>(false);
 
-  const handleKeypress = (e: KeyboardEvent) => {
+  const handleKeypress = (e: KeyboardEvent<HTMLInputElement>) => {
     const { key } = e;
     key === 'Enter' && onEnter && onEnter(e);
     key === 'Tab' && onTab && onTab(e);
@@ -98,6 +98,7 @@ const TextInput = ({
         spellCheck={false}
         ref={inputRef}
         id={name}
+        name={name}
         className={isErr ? '_input_err' : ''}
         type={type}
         onFocus={() => setIsFocus(true)}
