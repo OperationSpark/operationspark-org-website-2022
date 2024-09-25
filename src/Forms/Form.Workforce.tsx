@@ -251,19 +251,7 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
 
   return (
     <WorkforceFormStyles ref={mainRef}>
-      <Form
-        onSubmit={(e) => {
-          // if (!form.nextInvalidKey()) {
-          //   e.stopPropagation();
-          //   handleSubmit();
-          // }
-          e.stopPropagation();
-        }}
-        onEnter={() => {
-          // console.log('Next Invalid Key:', form.nextInvalidKey());
-          // selectNextInputOrSubmit('form');
-        }}
-      >
+      <Form>
         {workforceFormInputs.map((field, i) => (
           <field.Element
             key={field.name}
@@ -438,6 +426,7 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
             zIndex: 1,
           }}
           disabled={isSubmitting}
+          onClick={handleSubmit}
         >
           Register!
         </Button>
@@ -448,29 +437,35 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
           </div>
         ) : null}
         {renderUrl && !isSubmitting ? (
-          <div className='form-overlay'>
+          <div className='form-overlay' data-test-id='info-session-submit-overlay'>
             <div className='form-complete-response'>
               <h2>Success!</h2>
               {currentValues.sessionDate.value === 'future' ? (
-                <p>
+                <p data-test-id='info-session-submit-message'>
                   Thank you for signing up! We will reach out soon. You will receive an email{' '}
                   {currentValues.smsOptIn === 'true' ? 'and text message' : ''} shortly.
                 </p>
               ) : (
-                <p>
+                <p data-test-id='info-session-submit-message'>
                   You have successfully registered for an info session on{' '}
                   <b className='primary-secondary'>{currentValues.sessionDate.name}</b>. You will
                   receive an email {currentValues.smsOptIn === 'true' ? 'and text message' : ''}{' '}
                   shortly.
                 </p>
               )}
-              <a href={renderUrl} className='anchor' target='_blank' rel='noreferrer'>
+              <a
+                href={renderUrl}
+                className='anchor'
+                target='_blank'
+                rel='noreferrer'
+                data-test-id='info-session-registration-link'
+              >
                 {currentValues.sessionDate.value === 'future'
                   ? 'View details'
                   : 'View your registration details'}
                 <NewTabIcon />
               </a>
-              <button onClick={closeDetails}>
+              <button onClick={closeDetails} data-test-id='info-session-details-close-button'>
                 <CloseIcon className='close-button' />
               </button>
             </div>
