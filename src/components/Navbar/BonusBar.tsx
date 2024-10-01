@@ -4,7 +4,16 @@ import { ReactNode } from 'react';
 import styled from 'styled-components';
 import NavLink from './elements/NavLink';
 
-const HIGHSCHOOL_FORM_ACTIVE = process.env.HIGHSCHOOL_FORM_ACTIVE;
+const activeUntil = process.env.HIGHSCHOOL_FORM_ACTIVE_UNTIL;
+
+const isHsFormActive = () => {
+  if (!activeUntil) return false;
+  const activeUntilDate = new Date(activeUntil);
+  if (isNaN(activeUntilDate.getTime())) return false;
+
+  const today = new Date();
+  return today < activeUntilDate;
+};
 
 const BonusBar = ({ children }: { children?: ReactNode }) => {
   const router = useRouter();
@@ -12,23 +21,25 @@ const BonusBar = ({ children }: { children?: ReactNode }) => {
    * High School Application - `/programs/highschool/apply`
    * - When high school form is available, set env variable 'HIGHSCHOOL_FORM_ACTIVE' to 'true' otherwise 'false'
    */
-  const SHOW_HS_APPLICATION = !!HIGHSCHOOL_FORM_ACTIVE;
 
   const checkIsPath = (...paths: string[]) => {
     return paths.reduce((isPath, path) => {
       return isPath || router.pathname.includes(path);
     }, false);
   };
+  const isHsApplyView = checkIsPath('/programs/highschool/apply');
+  const isHsOrInfoView = checkIsPath('highschool', '/programs/workforce/infoSession');
+  const isHsActive = !isHsApplyView && isHsFormActive();
 
   return (
     <BonusBarStyles className='bonus-bar'>
       {children}
-      {!checkIsPath('/programs/highschool/apply') && SHOW_HS_APPLICATION && (
+      {isHsActive && (
         <NavLink href='/programs/highschool/apply' className='info'>
           {'High School Application'}
         </NavLink>
       )}
-      {!checkIsPath('highschool', '/programs/workforce/infoSession') && (
+      {!isHsOrInfoView && (
         <NavLink
           href='/programs/workforce/infoSession'
           className='info'
