@@ -21,6 +21,7 @@ export interface ISessionDates {
     start: DateTime;
     end: DateTime;
     until: string;
+    byday: 'MO' | 'TU' | 'WE' | 'TH' | 'FR' | 'SA' | 'SU';
   };
   googlePlace: GooglePlace;
   locationType: LocationType;
