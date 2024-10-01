@@ -239,8 +239,9 @@ export const findBestSession = async (
  * Format the Facebook payload into a Greenlight signup payload
  */
 export const formatFacebookPayload = async (
-  data: InfoSessionFacebookPayload,
-): Promise<ISessionSignup> => {
+  data: InfoSessionFacebookPayload | null,
+): Promise<ISessionSignup | null> => {
+  if (!data) return null;
   const fields = extractFacebookFormData(data);
   const session = await findBestSession(fields.day, fields.time);
   const [firstName, ...names] = fields.name.split(' ');
