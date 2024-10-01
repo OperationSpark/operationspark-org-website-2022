@@ -11,6 +11,7 @@ import { MdOpenInNew as NewTabIcon } from 'react-icons/md';
 import Button from '@this/components/Elements/Button';
 import Spinner from '@this/components/Elements/Spinner';
 import { Form, Input, useForm } from '@this/components/Form';
+
 import { TOption } from '@this/data/types/bits';
 import { IInfoSessionFormValues } from '@this/data/types/infoSession';
 import { getStateFromZipCode } from '@this/helpers/zipLookup';
@@ -18,7 +19,6 @@ import useKeyCombo from '@this/hooks/useKeyCombo';
 import { pixel } from '@this/lib/pixel';
 import { ISessionDates } from '@this/pages-api/infoSession/dates';
 import { FormDataSignup } from '@this/types/signups';
-
 import { referencedByOptions } from './formData/referenceOptions';
 
 interface WorkforceFormProps {
@@ -134,7 +134,6 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
     const ref = mainRef.current;
 
     if (!nextInvalidKey || !ref) {
-      console.log('No next invalid key', nextInvalidKey);
       return handleSubmit();
     }
 
@@ -395,16 +394,22 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
             ]}
           />
           {form.get('smsOptIn') === 'true' && (
-            <p className='sms-disclaimer'>
+            <p className='sms-disclaimer' data-test-id='sms-disclaimer'>
               {`By providing your phone number, you agree to receive text messages from Operation Spark. We'll send you information and reminders about your upcoming session. You can also text us with any additional questions. Message and data rates may apply. Message frequency varies. Reply "STOP" to opt-out.`}
             </p>
           )}
           {form.get('smsOptIn') === 'false' && (
-            <p className='sms-disclaimer sms-decline'>{`By opting out of text messages, you acknowledge that you may miss important information about upcoming sessions and registrations.`}</p>
+            <p
+              className='sms-disclaimer sms-decline'
+              data-test-id='sms-disclaimer'
+            >{`By opting out of text messages, you acknowledge that you may miss important information about upcoming sessions and registrations.`}</p>
           )}
 
           {form.get('smsOptIn') === '' && (
-            <p className='sms-disclaimer'>{`You can opt out of text messages at any time by replying "STOP"`}</p>
+            <p
+              className='sms-disclaimer'
+              data-test-id='sms-disclaimer'
+            >{`You can opt out of text messages at any time by replying "STOP"`}</p>
           )}
         </div>
 
