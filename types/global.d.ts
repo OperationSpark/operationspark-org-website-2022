@@ -7,6 +7,7 @@ declare namespace NodeJS {
     GREENLIGHT_API_TOKEN: string;
     SIGNUP_API_ENDPOINT: string;
     FB_PIXEL_ID: string;
+    FB_ACCESS_TOKEN: string;
     FB_APP_ID: string;
     FB_APP_SECRET: string;
     FB_CLIENT_TOKEN: string;
