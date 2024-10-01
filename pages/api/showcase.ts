@@ -6,20 +6,21 @@ import axios, { isAxiosError } from 'axios';
 import dayjs from 'dayjs';
 
 export default async function showcaseHandler(req: Req, res: Res) {
+  const NO_SHOWCASE_STATUS = 204;
   if (req.method === 'GET') {
     try {
       const { data: showcase } = await axios.get<Showcase>(
         'https://showcase.operationspark.org/api/showcases/active',
       );
       if (!showcase) {
-        res.status(404).end('Showcase inactive');
+        res.status(NO_SHOWCASE_STATUS).end();
         return;
       }
 
       const { startDateTime, doorsOffset, websiteActive, active } = showcase;
 
       if (!startDateTime || !websiteActive || !active) {
-        res.status(404).end('Showcase inactive');
+        res.status(NO_SHOWCASE_STATUS).end();
         return;
       }
 
@@ -27,7 +28,7 @@ export default async function showcaseHandler(req: Req, res: Res) {
 
       if (disableTime.isBefore(dayjs())) {
         console.info('Showcase inactive');
-        res.status(404).end('Showcase inactive');
+        res.status(NO_SHOWCASE_STATUS).end();
         return;
       }
 
@@ -35,7 +36,7 @@ export default async function showcaseHandler(req: Req, res: Res) {
     } catch (err) {
       if (isAxiosError(err) && err.response?.status === 404) {
         console.info('Showcase inactive');
-        res.status(404).end('Showcase inactive');
+        res.status(NO_SHOWCASE_STATUS).end();
         return;
       }
       console.error('Showcase fetch error: ', err);

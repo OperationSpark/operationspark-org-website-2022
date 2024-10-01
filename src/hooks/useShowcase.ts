@@ -1,20 +1,19 @@
 import axios, { isAxiosError } from 'axios';
+import { useEffect, useState } from 'react';
 
 import { Showcase } from '@this/data/types/gradShowcase';
-import { useEffect, useState } from 'react';
 
 const getShowcase = async () => {
   try {
-    const { data: showcase } = await axios.get<Showcase>('/api/showcase');
-
-    if (!showcase) {
+    const { data: showcase, status } = await axios.get<Showcase>('/api/showcase');
+    // Status 204 (no content) - showcase is inactive / not created yet
+    if (!showcase?.id || status === 204) {
       return null;
     }
 
     return showcase;
   } catch (err) {
     if (isAxiosError(err) && err.response?.status === 404) {
-      console.info('Showcase inactive');
       return null;
     }
     console.error('Showcase fetch error: ', err);
