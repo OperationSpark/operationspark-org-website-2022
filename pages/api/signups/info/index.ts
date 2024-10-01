@@ -1,6 +1,6 @@
 import { runCloudFunction } from '@this/api/googleFunctions';
 import config from '@this/config';
-import { formatSignupPayload } from '@this/src/api/formatpayload';
+import { formatSignupPayload } from '@this/src/api/formatSignupPayload';
 import { ReqHandler } from '@this/types/request';
 import { FormDataSignup, ISessionSignup } from '@this/types/signups';
 

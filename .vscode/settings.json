@@ -5,7 +5,7 @@
     "source.organizeImports": "explicit"
   },
   "files.insertFinalNewline": true,
-  "cSpell.words": ["ethnicities", "noladevs", "transformative"],
+  "cSpell.words": ["adgroup", "byday", "ethnicities", "leadgen", "noladevs", "transformative"],
   "[dotenv]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
   }
