@@ -17,6 +17,16 @@ describe('Info Session Signup', () => {
     // Wait for view and form to load
     cy.wait(1000);
 
+    // Check that the next info session date is displayed
+    // NOTE: THe API won't actually send back past dates
+    cy.get(`[data-test-id="next-session-date-time"]`).should('contain.text', 'September 24, 2024');
+
+    // Check the initial SMS disclaimer message when no option is selected
+    cy.get(`[data-test-id="sms-disclaimer"]`).should(
+      'contain.text',
+      'You can opt out of text messages at any time by replying "STOP"',
+    );
+
     // Form text fields
     const textInputs = [
       { selector: 'info-session-input-first-name', value: 'Halle' },
@@ -36,8 +46,22 @@ describe('Info Session Signup', () => {
     cy.get(`select[data-test-id="info-session-input-referenced-by"]`).select('Google');
     cy.get(`select[data-test-id="info-session-input-session-date"]`).select(1);
 
-    // Click radios
+    // Click SMS radio to 'yes' to check disclaimer message
+    cy.get(`input[data-test-id="radio-input-sms-opt-in-true"]`).click();
+
+    cy.get(`[data-test-id="sms-disclaimer"]`).should(
+      'contain.text',
+      `By providing your phone number, you agree to receive text messages from Operation Spark. We'll send you information and reminders about your upcoming session. You can also text us with any additional questions. Message and data rates may apply. Message frequency varies. Reply "STOP" to opt-out.`,
+    );
+
+    // Click SMS radio to 'no' to check disclaimer message (and to submit the form)
     cy.get(`input[data-test-id="radio-input-sms-opt-in-false"]`).click();
+    cy.get(`[data-test-id="sms-disclaimer"]`).should(
+      'contain.text',
+      `By opting out of text messages, you acknowledge that you may miss important information about upcoming sessions and registrations.`,
+    );
+
+    // Click radios
     cy.get(`button[data-test-id="info-session-submit-button"]`).click();
 
     // Ensure modal opens with correct message
