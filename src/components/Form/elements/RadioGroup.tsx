@@ -57,7 +57,6 @@ const RadioGroup = ({
           }
 
           if (e.target instanceof HTMLInputElement) {
-            console.log('e.target', e.target);
             e.preventDefault();
             return e.target.click();
           }
