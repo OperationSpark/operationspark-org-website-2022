@@ -5,7 +5,6 @@ import axios, { isAxiosError } from 'axios';
 
 import { getInfoSessionDates, ISessionDates } from '@this/pages-api/infoSession/dates';
 import { getStateFromZipCode } from '@this/src/helpers/zipLookup';
-
 import { Req } from '@this/types/request';
 import { FormDataSignup, ISession, ISessionSignup } from '@this/types/signups';
 import { formatSignupPayload } from '../formatSignupPayload';

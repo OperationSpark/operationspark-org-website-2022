@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
+
 import NavLink from './elements/NavLink';
 
 const activeUntil = process.env.HIGHSCHOOL_FORM_ACTIVE_UNTIL;

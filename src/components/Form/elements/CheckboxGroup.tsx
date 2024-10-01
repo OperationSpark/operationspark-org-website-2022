@@ -1,7 +1,7 @@
 import kebabCase from 'lodash/kebabCase';
+import { KeyboardEvent } from 'react';
 import styled from 'styled-components';
 
-import { KeyboardEvent } from 'react';
 import Checkbox from './Checkbox';
 import ClearButton from './ClearButton';
 import RequiredStatus from './RequiredStatus';
