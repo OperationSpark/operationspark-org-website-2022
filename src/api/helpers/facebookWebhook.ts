@@ -167,7 +167,7 @@ export const extractFacebookFormData = (
  */
 export const formatSessionObject = (session: ISessionDates): ISession => {
   return {
-    _id: session._id,
+    id: session._id,
     programId: session.programId,
     cohort: session.cohort,
     startDateTime: session.times.start.dateTime,

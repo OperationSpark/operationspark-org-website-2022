@@ -3,7 +3,7 @@ import { ISessionDates } from '@this/pages-api/infoSession/dates';
 import { findBestSession } from '@this/src/api/helpers/facebookWebhook';
 
 const toSessionObj = (session: ISessionDates) => ({
-  _id: session._id,
+  id: session._id,
   programId: session.programId,
   cohort: session.cohort,
   startDateTime: session.times.start.dateTime,
