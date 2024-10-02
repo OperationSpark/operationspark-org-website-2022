@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "test": "jest",
+    "test:dev": "jest --watch",
     "test:ui": "cypress open",
     "test:headless": "cypress run",
     "dev": "rimraf ./.next && next dev",
@@ -33,9 +34,11 @@
     "validator": "^13.11.0"
   },
   "devDependencies": {
+    "@jest/globals": "^29.7.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.5.0",
     "@testing-library/react": "^16.0.1",
+    "@types/jest": "^29.5.13",
     "@types/lodash": "^4.14.202",
     "@types/node": "^20.10.5",
     "@types/react": "^18.2.45",

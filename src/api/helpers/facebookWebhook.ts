@@ -167,7 +167,7 @@ export const extractFacebookFormData = (
  */
 export const formatSessionObject = (session: ISessionDates): ISession => {
   return {
-    id: session._id,
+    _id: session._id,
     programId: session.programId,
     cohort: session.cohort,
     startDateTime: session.times.start.dateTime,
@@ -182,12 +182,11 @@ export const formatSessionObject = (session: ISessionDates): ISession => {
  * - If no day or time is provided, return the next session
  * - If no session is found by day and time, try again with only time, then only day
  */
-export const findBestSession = async (
+export const findBestSession = (
+  sessions: ISessionDates[],
   day?: string,
   time?: string,
-): Promise<ISession | undefined> => {
-  const sessions = await getInfoSessionDates();
-
+): ISession | undefined => {
   if (!sessions.length) {
     return;
   }
@@ -223,11 +222,11 @@ export const findBestSession = async (
   }
 
   // If no session is found by day and time. Try again with only time
-  const bestTime = await findBestSession(undefined, time);
+  const bestTime = findBestSession(sessions, undefined, time);
   if (bestTime) return bestTime;
 
   // If no session is found by time, try again with only day
-  const bestDay = await findBestSession(day);
+  const bestDay = findBestSession(sessions, day);
   if (bestDay) return bestDay;
 
   // If no session is found by day or time, return the next session
@@ -242,7 +241,9 @@ export const formatFacebookPayload = async (
 ): Promise<ISessionSignup | null> => {
   if (!data) return null;
   const fields = extractFacebookFormData(data);
-  const session = await findBestSession(fields.day, fields.time);
+  const sessions = await getInfoSessionDates();
+
+  const session = findBestSession(sessions, fields.day, fields.time);
   const [firstName, ...names] = fields.name.split(' ');
   const lastName = names.pop() ?? '';
 

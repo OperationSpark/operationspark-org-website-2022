@@ -2,7 +2,7 @@ import { SelectItem } from '@this/data/types/bits';
 import { AttendingLocation } from '@this/data/types/infoSession';
 
 export type ISession = {
-  id: string;
+  _id: string;
   programId: string;
   cohort: string;
   code?: string;
