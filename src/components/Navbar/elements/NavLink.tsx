@@ -63,6 +63,10 @@ export const NavLinkStyles = styled.div.attrs(({ color }: { color?: '' | 'yellow
     all: unset;
     display: flex;
     padding: 0.35rem 0.75rem;
+
+    :focus {
+      outline: 2px solid ${({ theme }) => theme.secondary[700]};
+    }
   }
   &.sub-nav {
     transition: box-shadow 125ms;

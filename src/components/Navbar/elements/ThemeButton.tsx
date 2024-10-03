@@ -1,5 +1,5 @@
+import Image from 'next/legacy/image';
 import styled, { useTheme } from 'styled-components';
-import Image from "next/legacy/image";
 
 import { useClickAway } from '@this/src/hooks/useClickAway';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -101,6 +101,8 @@ const ThemeDropdownButton = ({
 const ThemeButtonStyles = styled.menu`
   all: unset;
   position: relative;
+  user-select: none;
+  -webkit-user-drag: none;
   #theme-nav-button {
     height: 3rem;
     color: ${({ theme }) => theme.primary[0]};
