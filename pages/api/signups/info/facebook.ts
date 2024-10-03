@@ -3,6 +3,7 @@ import { ReqHandler } from '@this/types/request';
 import {
   fetchLead,
   formatFacebookPayload,
+  validateAndFilterPayloads,
   verifyWebhook,
   verifyWebhookSubscribe,
   WebhookBody,
@@ -52,9 +53,9 @@ const webhookHandler: WebhookHandler = async (req, res) => {
     const data = await Promise.all(leadIds.map(fetchLead));
 
     // Format payload for submission
-    const payloads = await Promise.all(
-      data.filter((v) => v !== null).map((lead) => formatFacebookPayload(lead)),
-    );
+    const formattedPayloads = await Promise.all(data.map((lead) => formatFacebookPayload(lead)));
+
+    const payloads = validateAndFilterPayloads(formattedPayloads);
 
     // TODO: Handle multiple payload submissions
     // TODO: Add instructions on how to refresh access token to the README

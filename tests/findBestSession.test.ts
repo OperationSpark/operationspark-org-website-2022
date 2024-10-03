@@ -65,10 +65,39 @@ describe('findBestSession', () => {
     const session = findBestSession([], 'Tuesday', '5:30PM');
     expect(session).toBeUndefined();
   });
+
+  test('should find afternoon session with time that is under by 30 minutes', () => {
+    const session = findBestSession(allSessions, 'Tuesday', '12:00PM');
+    expect(session).toEqual(toSessionObj(tu1230));
+  });
+  test('should find afternoon session with time that is under by 1 hour', () => {
+    const session = findBestSession(allSessions, 'Tuesday', '11:30AM');
+    expect(session).toEqual(toSessionObj(tu1230));
+  });
+
+  test('should find evening session with time that is under by 30 minutes', () => {
+    const session = findBestSession(allSessions, 'Tuesday', '5:00PM');
+    expect(session).toEqual(toSessionObj(tu1730));
+  });
+
+  test('should find evening session with time that is under by 1 hour', () => {
+    const session = findBestSession(allSessions, 'Tuesday', '4:30PM');
+    expect(session).toEqual(toSessionObj(tu1730));
+  });
+
+  test('should find evening session with time that is over by 30 minutes', () => {
+    const session = findBestSession(allSessions, 'Tuesday', '6:00PM');
+    expect(session).toEqual(toSessionObj(tu1730));
+  });
+
+  test('should find evening session with time that is over by 1 hour', () => {
+    const session = findBestSession(allSessions, 'Tuesday', '6:30PM');
+    expect(session).toEqual(toSessionObj(tu1730));
+  });
 });
 
 type ByDay = 'MO' | 'TU' | 'WE' | 'TH' | 'FR' | 'SA' | 'SU';
-type Time = '12:30PM' | '5:30PM';
+type Time = '11:00AM' | '11:30AM' | `${12 | 1 | 4 | 5 | 6}:${0 | 3}${0}PM`;
 
 function createSession(day: ByDay, time: Time): ISessionDates {
   const t = time.toLowerCase().replace(':', '-');

@@ -11,6 +11,8 @@ import { formatSignupPayload } from '../formatSignupPayload';
 
 const { FB_WEBHOOK_TOKEN, FB_ACCESS_TOKEN, FB_APP_SECRET } = process.env;
 
+const REQUIRED_SIGNUP_FIELDS = ['nameFirst', 'nameLast', 'email', 'cell', 'zipCode'];
+
 export type FacebookPayloadFieldKey = 'day' | 'time' | 'name' | 'email' | 'phone' | 'zip';
 
 export type FacebookPayloadField = {
@@ -177,6 +179,41 @@ export const formatSessionObject = (session: ISessionDates): ISession => {
   };
 };
 
+const extractTimeInfo = (time?: string) => {
+  if (!time)
+    return {
+      hours: 5,
+      minutes: 30,
+      amPm: 'PM',
+    };
+  const [hour, minuteInfo] = time.split(':');
+  const hours = Number(hour);
+  const minutes = Number(minuteInfo?.replaceAll(/\D/g, ''));
+  const amPm = minuteInfo?.replaceAll(/\d/g, '')?.toLowerCase() ?? 'pm';
+  return {
+    hours: isNaN(hours) ? 5 : hours,
+    minutes: isNaN(minutes) ? 30 : minutes,
+    amPm,
+  };
+};
+
+const createCohortTimes = (time?: string) => {
+  const { hours, minutes, amPm } = extractTimeInfo(time);
+
+  const mins = minutes || 30;
+
+  const flip = hours === 12;
+
+  return [
+    `${hours - 1}${flip ? 'am' : amPm}`,
+    `${hours - 1}-${mins}${flip ? 'am' : amPm}`,
+    `${hours}${amPm}`,
+    `${hours}-${mins}${amPm}`,
+    `${flip ? 1 : hours + 1}${amPm}`,
+    `${flip ? 1 : hours + 1}-${mins}${amPm}`,
+  ];
+};
+
 /**
  * Find the best session based on the day and time provided
  * - If no day or time is provided, return the next session
@@ -198,16 +235,17 @@ export const findBestSession = (
   const d = day?.toLowerCase() === 'tuesday' ? 'TU' : 'TH';
 
   const selectedDay = day ? d : undefined;
-  const cohortTime = time?.toLowerCase().replace(':', '-');
+
+  const cohortTimes = !!time && createCohortTimes(time);
 
   const session = sessions.find((s) => {
     const byDay = s.times.byday;
     const cohort = s.cohort;
-    if (selectedDay && cohortTime) {
-      return byDay === selectedDay && cohort.includes(cohortTime);
+    if (selectedDay && cohortTimes) {
+      return byDay === selectedDay && cohortTimes.some((t) => cohort.endsWith(t));
     }
-    if (cohortTime) {
-      return cohort.includes(cohortTime);
+    if (cohortTimes) {
+      return cohortTimes.some((t) => cohort.endsWith(t));
     }
     if (selectedDay) {
       return byDay === selectedDay;
@@ -233,6 +271,8 @@ export const findBestSession = (
   return formatSessionObject(sessions[0]);
 };
 
+const stripSpecialChars = (str: string) => (!str ? '' : str.replaceAll(/[^a-zA-Z0-9]/g, '')).trim();
+
 /**
  * Format the Facebook payload into a Greenlight signup payload
  */
@@ -244,8 +284,10 @@ export const formatFacebookPayload = async (
   const sessions = await getInfoSessionDates();
 
   const session = findBestSession(sessions, fields.day, fields.time);
-  const [firstName, ...names] = fields.name.split(' ');
-  const lastName = names.pop() ?? '';
+  const [fullFirstName, ...names] = fields.name.split(' ');
+  const firstName = stripSpecialChars(fullFirstName);
+  const lastName = stripSpecialChars(names.pop() ?? '');
+  const state = getStateFromZipCode(Number(fields.zip)) ?? 'No State';
 
   const payload: FormDataSignup = {
     email: fields.email,
@@ -255,18 +297,38 @@ export const formatFacebookPayload = async (
     zipCode: fields.zip,
 
     userLocation: {
-      name: 'userLocation',
-      value: getStateFromZipCode(Number(fields.zip)),
+      name: state,
+      value: state,
       additionalInfo: '',
     },
     referencedBy: {
       name: 'referencedBy',
       value: 'Facebook',
-      additionalInfo: '',
+      additionalInfo: JSON.stringify({ formId: data.form_id, adId: data.ad_id, leadId: data.id }),
     },
     smsOptIn: 'false' as const,
     attendingLocation: 'VIRTUAL' as const,
     session,
   };
   return formatSignupPayload(payload);
+};
+
+export const validateAndFilterPayloads = (
+  payloads: (ISessionSignup | null)[],
+): ISessionSignup[] => {
+  return payloads.filter((payload) => {
+    if (!payload || payload === null) {
+      return false;
+    }
+
+    const missingFields = REQUIRED_SIGNUP_FIELDS.filter(
+      (field) => !payload[field as keyof ISessionSignup],
+    );
+    if (missingFields.length) {
+      console.error('Missing required fields on payload', { payload, missingFields });
+      return false;
+    }
+
+    return true;
+  }) as ISessionSignup[];
 };

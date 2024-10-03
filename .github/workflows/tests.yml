@@ -1,7 +1,7 @@
 name: Unit Tests
 on: [push]
 jobs:
-  cypress-run:
+  jest-tests:
     name: Run Jest Tests
     runs-on: ubuntu-22.04
     environment: test
@@ -13,4 +13,6 @@ jobs:
         with:
           node-version: '22'
       - run: npm install
+      - run: npm run build
+      - run: npm start
       - run: npm test

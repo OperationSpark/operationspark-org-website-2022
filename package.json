@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "test": "jest",
-    "test:dev": "jest --watch",
+    "test:dev": "jest --watchAll",
     "test:ui": "cypress open",
     "test:headless": "cypress run",
     "dev": "rimraf ./.next && next dev",
