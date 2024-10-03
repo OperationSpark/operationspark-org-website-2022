@@ -1,6 +1,17 @@
 import { describe, expect, test } from '@jest/globals';
 import { ISessionDates } from '@this/pages-api/infoSession/dates';
 import { findBestSession } from '@this/src/api/helpers/facebookWebhook';
+import { GooglePlace } from '@this/types/signups';
+
+import dayjs from 'dayjs';
+
+import advanced from 'dayjs/plugin/advancedFormat';
+import timezone from 'dayjs/plugin/timezone';
+import utc from 'dayjs/plugin/utc';
+
+dayjs.extend(advanced);
+dayjs.extend(timezone);
+dayjs.extend(utc);
 
 const toSessionObj = (session: ISessionDates) => ({
   id: session._id,
@@ -13,113 +24,145 @@ const toSessionObj = (session: ISessionDates) => ({
 });
 
 describe('findBestSession', () => {
-  const tu1230 = createSession('TU', '12:30PM');
-  const tu1730 = createSession('TU', '5:30PM');
-  const th1230 = createSession('TH', '12:30PM');
-  const th1730 = createSession('TH', '5:30PM');
+  const tues1230pm = createSession('TU', '12:30PM');
+  const tues530pm = createSession('TU', '5:30PM');
+  const thurs1230pm = createSession('TH', '12:30PM');
+  const thurs530pm = createSession('TH', '5:30PM');
 
-  const allSessions = [tu1230, tu1730, th1230, th1730];
+  const allSessions = [tues1230pm, tues530pm, thurs1230pm, thurs530pm];
 
-  test('should exist', () => {
-    expect(findBestSession).toBeInstanceOf(Function);
-  });
+  describe('Find exact match', () => {
+    const testCases = [
+      ['Tuesday', '12:30PM', tues1230pm],
+      ['Tuesday', '5:30PM', tues530pm],
+      ['Thursday', '12:30PM', thurs1230pm],
+      ['Thursday', '5:30PM', thurs530pm],
+    ] as const;
 
-  const testCases = [
-    ['Tuesday', '12:30PM', tu1230],
-    ['Tuesday', '5:30PM', tu1730],
-    ['Thursday', '12:30PM', th1230],
-    ['Thursday', '5:30PM', th1730],
-  ] as const;
-
-  testCases.forEach(([day, time, initialSession]) => {
-    test(`should return correct session for "${day} at ${time}"`, () => {
-      const session = findBestSession(allSessions, day, time);
-      expect(session).toEqual(toSessionObj(initialSession));
+    testCases.forEach(([day, time, initialSession]) => {
+      test(`should return correct session for "${day} at ${time}"`, () => {
+        const got = findBestSession(allSessions, day, time);
+        const expected = toSessionObj(initialSession);
+        expect(got).toEqual(expected);
+      });
     });
   });
 
-  test('should return next session if no day or time provided', () => {
-    const session = findBestSession(allSessions);
-    expect(session).toEqual(toSessionObj(tu1230));
-  });
+  describe('Find best match', () => {
+    test('should return next session if no day or time provided', () => {
+      const got = findBestSession(allSessions);
+      expect(got).toEqual(toSessionObj(tues1230pm));
+    });
 
-  test('should return best day if no time matches', () => {
-    const sessions = [tu1230, th1230];
-    const session = findBestSession(sessions, 'Tuesday', '5:30PM');
-    expect(session).toEqual(toSessionObj(tu1230));
-  });
+    test('should return best day if no time matches', () => {
+      const sessions = [tues1230pm, thurs1230pm];
+      const got = findBestSession(sessions, 'Tuesday', '5:30PM');
+      const expected = toSessionObj(tues1230pm);
+      expect(got).toEqual(expected);
+    });
 
-  test('should return best time if no day matches', () => {
-    const sessions = [th1230, th1730];
-    const session = findBestSession(sessions, 'Tuesday', '5:30PM');
-    expect(session).toEqual(toSessionObj(th1730));
-  });
+    test('should return best time if no day matches', () => {
+      const sessions = [thurs1230pm, thurs530pm];
+      const got = findBestSession(sessions, 'Tuesday', '5:30PM');
+      const expected = toSessionObj(thurs530pm);
+      expect(got).toEqual(expected);
+    });
 
-  test('should return best time on different day if time of selected day is unavailable', () => {
-    const sessions = [tu1230, th1230, th1730];
-    const session = findBestSession(sessions, 'Tuesday', '5:30PM');
-    expect(session).toEqual(toSessionObj(th1730));
-  });
+    test('should return best time on different day if time of selected day is unavailable', () => {
+      const sessions = [tues1230pm, thurs1230pm, thurs530pm];
+      const got = findBestSession(sessions, 'Tuesday', '5:30PM');
+      const expected = toSessionObj(thurs530pm);
+      expect(got).toEqual(expected);
+    });
 
-  test('should return undefined if no sessions', () => {
-    const session = findBestSession([], 'Tuesday', '5:30PM');
-    expect(session).toBeUndefined();
-  });
+    test('should return undefined if no sessions', () => {
+      const got = findBestSession([], 'Tuesday', '5:30PM');
+      expect(got).toBeUndefined();
+    });
 
-  test('should find afternoon session with time that is under by 30 minutes', () => {
-    const session = findBestSession(allSessions, 'Tuesday', '12:00PM');
-    expect(session).toEqual(toSessionObj(tu1230));
-  });
-  test('should find afternoon session with time that is under by 1 hour', () => {
-    const session = findBestSession(allSessions, 'Tuesday', '11:30AM');
-    expect(session).toEqual(toSessionObj(tu1230));
-  });
+    test('should find afternoon session with time that is under by 30 minutes', () => {
+      const got = findBestSession(allSessions, 'Tuesday', '12:00PM');
+      const expected = toSessionObj(tues1230pm);
+      expect(got).toEqual(expected);
+    });
+    test('should find afternoon session with time that is under by 1 hour', () => {
+      const got = findBestSession(allSessions, 'Tuesday', '11:30AM');
+      const expected = toSessionObj(tues1230pm);
+      expect(got).toEqual(expected);
+    });
 
-  test('should find evening session with time that is under by 30 minutes', () => {
-    const session = findBestSession(allSessions, 'Tuesday', '5:00PM');
-    expect(session).toEqual(toSessionObj(tu1730));
-  });
+    test('should find evening session with time that is under by 30 minutes', () => {
+      const got = findBestSession(allSessions, 'Tuesday', '5:00PM');
+      const expected = toSessionObj(tues530pm);
+      expect(got).toEqual(expected);
+    });
 
-  test('should find evening session with time that is under by 1 hour', () => {
-    const session = findBestSession(allSessions, 'Tuesday', '4:30PM');
-    expect(session).toEqual(toSessionObj(tu1730));
-  });
+    test('should find evening session with time that is under by 1 hour', () => {
+      const got = findBestSession(allSessions, 'Tuesday', '4:30PM');
+      const expected = toSessionObj(tues530pm);
+      expect(got).toEqual(expected);
+    });
 
-  test('should find evening session with time that is over by 30 minutes', () => {
-    const session = findBestSession(allSessions, 'Tuesday', '6:00PM');
-    expect(session).toEqual(toSessionObj(tu1730));
-  });
+    test('should find evening session with time that is over by 30 minutes', () => {
+      const got = findBestSession(allSessions, 'Tuesday', '6:00PM');
+      const expected = toSessionObj(tues530pm);
+      expect(got).toEqual(expected);
+    });
 
-  test('should find evening session with time that is over by 1 hour', () => {
-    const session = findBestSession(allSessions, 'Tuesday', '6:30PM');
-    expect(session).toEqual(toSessionObj(tu1730));
+    test('should find evening session with time that is over by 1 hour', () => {
+      const got = findBestSession(allSessions, 'Tuesday', '6:30PM');
+      const expected = toSessionObj(tues530pm);
+      expect(got).toEqual(expected);
+    });
   });
 });
 
 type ByDay = 'MO' | 'TU' | 'WE' | 'TH' | 'FR' | 'SA' | 'SU';
 type Time = '11:00AM' | '11:30AM' | `${12 | 1 | 4 | 5 | 6}:${0 | 3}${0}PM`;
 
-function createSession(day: ByDay, time: Time): ISessionDates {
-  const t = time.toLowerCase().replace(':', '-');
+function findNextDay(day: ByDay, time: Time): dayjs.Dayjs {
+  const [hourStr, minuteAndAmPm] = time.split(':');
+  const amPm = minuteAndAmPm.replaceAll(/[^apm]/gi, '')?.toLowerCase() ?? 'pm';
+  const add12 = amPm === 'pm' && hourStr !== '12' ? 12 : 0;
+  const hour = parseInt(hourStr) + add12;
+  const minute = parseInt(minuteAndAmPm.replaceAll(/\D/g, ''));
+
+  const dayNum = ['MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'].indexOf(day) + 1;
+  const now = dayjs().tz('America/Chicago').set('second', 0).set('millisecond', 0);
+
+  const today = now.day();
+
+  if (today === dayNum) {
+    return now.set('hour', hour).set('minute', minute);
+  }
+
+  if (today > dayNum) {
+    return now.add(1, 'week').set('day', dayNum).set('hour', hour).set('minute', minute);
+  }
+
+  const addDays = dayNum - today;
+  return now.add(addDays, 'day').set('hour', hour).set('minute', minute);
+}
+
+function createSessionTimes(
+  day: ByDay,
+  time: Time,
+): { cohort: string; times: ISessionDates['times'] } {
+  const start = findNextDay(day, time);
+  const end = dayjs(start).add(1, 'hour').toDate();
+  const until = dayjs(start).add(1, 'day').toDate();
+  const cohortMonth = start.format('MMM').toLowerCase().slice(0, 3);
+  const cohortTime = start.format('D-YY');
+  const isTopHour = start.minute() === 0;
+  const hours = isTopHour ? start.format('ha') : start.format('h-mma');
+
   return {
-    _id: createId(17),
-    code: createId(4),
-    cohort: `is-oct-1-24-${t}`,
-    programId: createId(17),
+    cohort: `is-${cohortMonth}-${cohortTime}-${hours}`,
     times: {
-      start: { dateTime: '2024-10-01T22:30:00.000Z', timeZone: 'America/Chicago' },
-      end: { dateTime: '2024-10-01T23:30:00.000Z', timeZone: 'America/Chicago' },
-      until: '2024-10-02T22:30:00.000Z',
+      start: { dateTime: start.toISOString(), timeZone: 'America/Chicago' },
+      end: { dateTime: end.toISOString(), timeZone: 'America/Chicago' },
+      until: until.toISOString(),
       byday: day,
-    },
-    locationType: 'VIRTUAL',
-    googlePlace: {
-      placesId: 'ChIJ7YchCHSmIIYRYsAEPZN_E0o',
-      name: 'Operation Spark',
-      address: '514 Franklin Ave, New Orleans, LA 70117, USA',
-      phone: '+1 504-534-8277',
-      website: 'https://www.operationspark.org/',
-      geometry: { lat: 29.96325999999999, lng: -90.052138 },
     },
   };
 }
@@ -130,4 +173,18 @@ function createId(len: number): string {
     .map(() => Math.random().toString(36).substring(2, 12))
     .join('')
     .slice(0, len);
+}
+
+function createSession(day: ByDay, time: Time): ISessionDates {
+  const { times, cohort } = createSessionTimes(day, time);
+
+  return {
+    _id: createId(17),
+    code: createId(4),
+    programId: createId(17),
+    cohort,
+    times,
+    locationType: 'VIRTUAL',
+    googlePlace: {} as GooglePlace,
+  };
 }
