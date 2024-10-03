@@ -9,6 +9,12 @@ export interface Req<Q extends Query = {}, B extends Body = {}> extends NextApiR
   body: B;
 }
 
+export type ReqMiddleware<
+  Q extends Query = {},
+  B extends Body = {},
+  R extends unknown = unknown,
+> = (req: Req<Q, B>, res: NextApiResponse) => R;
+
 export type ReqHandler<Q extends Query = {}, B extends Body = {}> = (
   req: Req<Q, B>,
   res: NextApiResponse,

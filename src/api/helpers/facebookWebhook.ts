@@ -4,12 +4,13 @@ import type { Readable } from 'node:stream';
 import axios, { isAxiosError } from 'axios';
 
 import { getInfoSessionDates, ISessionDates } from '@this/pages-api/infoSession/dates';
+import { parsePhoneNumber } from '@this/src/components/Form/helpers';
 import { getStateFromZipCode } from '@this/src/helpers/zipLookup';
-import { Req } from '@this/types/request';
+import { Req, ReqMiddleware } from '@this/types/request';
 import { FormDataSignup, ISession, ISessionSignup } from '@this/types/signups';
 import { formatSignupPayload } from '../formatSignupPayload';
 
-const { FB_WEBHOOK_TOKEN, FB_ACCESS_TOKEN, FB_APP_SECRET } = process.env;
+const { FB_ACCESS_TOKEN, FB_APP_SECRET } = process.env;
 
 const REQUIRED_SIGNUP_FIELDS = ['nameFirst', 'nameLast', 'email', 'cell', 'zipCode'];
 
@@ -81,7 +82,7 @@ export const fetchLead = async (id: string): Promise<InfoSessionFacebookPayload 
     return data ?? null;
   } catch (err) {
     if (isAxiosError(err)) {
-      console.error(err.response?.data);
+      console.error(err.response?.data?.error);
     }
 
     return null;
@@ -89,11 +90,35 @@ export const fetchLead = async (id: string): Promise<InfoSessionFacebookPayload 
 };
 
 /**
- * Parse and verify the webhook query `hub` object and verify the token
- * - If the token is invalid, return null
- * - If the token is valid, return the parsed query object
+ * Middleware to parse and verify the webhook query `hub` object and token:
+ * - ✓ the request `hub.mode` ***is*** `subscribe`
+ * - ✓ the request `hub.verify_token` matches the environment variable `FB_WEBHOOK_TOKEN`
+ * - ✓ the request `hub.challenge` is returned as the response
+ *
+ * ### Does not end the request if:
+ * - ✗ the request `hub.mode` ***IS NOT*** `subscribe`
+ * - ✗ the request `hub.verify_token` does not match the environment variable `FB_WEBHOOK_TOKEN`
+ *
+ * @param req - The incoming request object
+ * @param res - The outgoing response object
+ *
+ * @returns
+ * - `false` if the request ***IS NOT*** a webhook subscription verification
+ *   - Does NOT end the request
+ *   - `hub.mode` ***IS NOT*** `subscribe`
+ * - `true` if the request is an initial webhook subscription
+ *   - Ends the request
+ *   - `hub.mode` ***IS*** `subscribe`
+ *
+ *  token does not match the environment variable `FB_WEBHOOK_TOKEN` AND the request `hub.mode` is `subscribe`
  */
-export const verifyWebhookSubscribe = (query: WebhookQuery): ParsedWebhookQuery | null => {
+export const handleWebhookSubscribe: ReqMiddleware<WebhookQuery, WebhookBody, boolean> = (
+  req,
+  res,
+) => {
+  const { FB_WEBHOOK_TOKEN } = process.env;
+  const { query } = req;
+
   const hubKeys = [
     { key: 'hub.mode', transformKey: 'mode' },
     { key: 'hub.challenge', transformKey: 'challenge' },
@@ -105,21 +130,40 @@ export const verifyWebhookSubscribe = (query: WebhookQuery): ParsedWebhookQuery 
     return acc;
   }, {} as ParsedWebhookQuery);
 
-  if (!hub.token || hub.token !== FB_WEBHOOK_TOKEN) {
-    return null;
+  if ((!hub.token && !hub.challenge && !hub.mode) || hub.mode !== 'subscribe') {
+    // Not an incoming webhook subscription verification
+    return false;
   }
-  return hub;
+
+  if (!hub.token || hub.token !== FB_WEBHOOK_TOKEN) {
+    // Incoming webhook subscription with invalid token
+    res.status(403).json({ message: 'Invalid subscription token' });
+    return true;
+  }
+
+  res.status(200).end(hub.challenge);
+  return true;
 };
 
 /**
  * Parse the raw body of the request into a string
  */
-const getRawBody = async (readable: Readable): Promise<string> => {
-  const chunks = [];
-  for await (const chunk of readable) {
-    chunks.push(typeof chunk === 'string' ? Buffer.from(chunk) : chunk);
+const getRawBody = async (
+  readable: Readable & { body?: Record<string, string> },
+): Promise<string> => {
+  if (readable.body && typeof readable.body === 'object') {
+    return JSON.stringify(readable.body);
   }
-  return Buffer.concat(chunks).toString();
+  try {
+    const chunks = [];
+    for await (const chunk of readable) {
+      chunks.push(typeof chunk === 'string' ? Buffer.from(chunk) : chunk);
+    }
+    return Buffer.concat(chunks).toString();
+  } catch (err) {
+    console.error(err);
+    return '';
+  }
 };
 
 const safeParse = (str?: string) => {
@@ -140,11 +184,16 @@ export const verifyWebhook = async <Q extends {}, B extends {}>(
   const headerSha = (req.headers['x-hub-signature-256'] as string)?.split('=')[1];
 
   if (headerSha !== payloadSha) {
+    console.error('Invalid Signature', {
+      headers: req.headers,
+      query: req.query,
+    });
     return {
       verified: false,
       body: null,
     };
   }
+
   return {
     verified: true,
     body: safeParse(rawBody),
@@ -283,18 +332,23 @@ export const formatFacebookPayload = async (
   const fields = extractFacebookFormData(data);
   const sessions = await getInfoSessionDates();
 
+  // Change to 'true' if we want to opt in by default
+  const smsOptIn = 'false' as const;
+
   const session = findBestSession(sessions, fields.day, fields.time);
   const [fullFirstName, ...names] = fields.name.split(' ');
   const firstName = stripSpecialChars(fullFirstName);
   const lastName = stripSpecialChars(names.pop() ?? '');
-  const state = getStateFromZipCode(Number(fields.zip)) ?? 'No State';
+  const zipCode = fields.zip?.replaceAll(/\D/g, '') || '70117';
+  const state = getStateFromZipCode(Number(zipCode)) ?? 'No State';
+  const phone = parsePhoneNumber(fields.phone) || '555-555-5555';
 
   const payload: FormDataSignup = {
     email: fields.email,
     firstName,
     lastName,
-    phone: fields.phone,
-    zipCode: fields.zip,
+    phone,
+    zipCode,
 
     userLocation: {
       name: state,
@@ -306,7 +360,7 @@ export const formatFacebookPayload = async (
       value: 'Facebook',
       additionalInfo: JSON.stringify({ formId: data.form_id, adId: data.ad_id, leadId: data.id }),
     },
-    smsOptIn: 'false' as const,
+    smsOptIn,
     attendingLocation: 'VIRTUAL' as const,
     session,
   };
