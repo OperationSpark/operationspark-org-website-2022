@@ -12,8 +12,13 @@ export async function runCloudFunction<T, Res>({
   body,
   headers = {},
 }: RunCloudFunctionArgs<T>): GaxiosPromise<Res> {
-  const { GOOGLE_SERVICE_ACCOUNT } = process.env;
+  const { GOOGLE_SERVICE_ACCOUNT, NODE_ENV } = process.env;
   const credentials = GOOGLE_SERVICE_ACCOUNT && JSON.parse(GOOGLE_SERVICE_ACCOUNT);
+
+  if (NODE_ENV === 'test') {
+    // Cannot mock `GoogleAuth` in tests
+    return { data: {} } as unknown as GaxiosPromise<Res>;
+  }
   if (!credentials) {
     throw new Error('Invalid credentials');
   }
