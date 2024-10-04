@@ -8,9 +8,13 @@ const envVars = [
 
 export type EnvVar = (typeof envVars)[number];
 
-export const config = envVars.reduce((acc, key) => {
-  acc[key as EnvVar] = process.env[key] ?? '';
-  return acc;
-}, {} as Record<EnvVar, string>);
+export const getConfig = () => {
+  return envVars.reduce((acc, key) => {
+    acc[key as EnvVar] = process.env[key] ?? '';
+    return acc;
+  }, {} as Record<EnvVar, string>);
+};
+
+export const config = getConfig();
 
 export default config;

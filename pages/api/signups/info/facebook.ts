@@ -29,10 +29,6 @@ const webhookHandler: WebhookHandler = async (req, res) => {
   // Handle webhook POST request
   const { verified, body } = await verifyWebhook(req);
   if (!verified) {
-    console.error('Invalid Signature', {
-      headers: req.headers,
-      query: req.query,
-    });
     res.status(403).json({ message: 'Invalid Signature' });
     return;
   }
@@ -44,6 +40,7 @@ const webhookHandler: WebhookHandler = async (req, res) => {
   }
 
   if (body.object !== 'page') {
+    console.error('Request not valid');
     res.status(400).json({ message: 'Request not valid' });
     return;
   }
@@ -59,7 +56,10 @@ const webhookHandler: WebhookHandler = async (req, res) => {
 
   const payloads = validateAndFilterPayloads(formattedPayloads);
 
-  console.log(payloads);
+  if (!payloads.length) {
+    res.status(400).json({ message: 'No valid payloads found' });
+    return;
+  }
 
   // TODO: Handle multiple payload submissions
   // const { GREENLIGHT_API_TOKEN, SIGNUP_API_ENDPOINT } = process.env;
@@ -78,11 +78,6 @@ const webhookHandler: WebhookHandler = async (req, res) => {
   //     }
   //   }),
   // );
-
-  if (!payloads.length) {
-    res.status(400).json({ message: 'No valid payloads found' });
-    return;
-  }
 
   res.status(200).json({ message: 'Success' });
 };

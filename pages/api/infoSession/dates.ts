@@ -1,10 +1,8 @@
 import axios from 'axios';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import config from '@this/config';
+import { getConfig } from '@this/config';
 import { GooglePlace, LocationType } from '@this/types/signups';
-
-const { GREENLIGHT_API_ENDPOINT } = config;
 
 export type DateTime = {
   dateTime: string;
@@ -39,6 +37,7 @@ export default async function infoSession(
 }
 
 export const getInfoSessionDates = async (): Promise<ISessionDates[]> => {
+  const { GREENLIGHT_API_ENDPOINT } = getConfig();
   const endpoint = GREENLIGHT_API_ENDPOINT + '/sessions/open?programId=5sTmB97DzcqCwEZFR&limit=6';
 
   try {

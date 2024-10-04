@@ -10,7 +10,7 @@ import { Req, ReqMiddleware } from '@this/types/request';
 import { FormDataSignup, ISession, ISessionSignup } from '@this/types/signups';
 import { formatSignupPayload } from '../formatSignupPayload';
 
-const { FB_ACCESS_TOKEN, FB_APP_SECRET } = process.env;
+const { FB_ACCESS_TOKEN } = process.env;
 
 const REQUIRED_SIGNUP_FIELDS = ['nameFirst', 'nameLast', 'email', 'cell', 'zipCode'];
 
@@ -177,6 +177,7 @@ const safeParse = (str?: string) => {
 export const verifyWebhook = async <Q extends {}, B extends {}>(
   req: Req<Q, B>,
 ): Promise<{ verified: boolean; body: B | null }> => {
+  const { FB_APP_SECRET } = process.env;
   const rawBody = await getRawBody(req);
 
   const payloadSha = crypto.createHmac('sha256', FB_APP_SECRET).update(rawBody).digest('hex');
@@ -184,10 +185,6 @@ export const verifyWebhook = async <Q extends {}, B extends {}>(
   const headerSha = (req.headers['x-hub-signature-256'] as string)?.split('=')[1];
 
   if (headerSha !== payloadSha) {
-    console.error('Invalid Signature', {
-      headers: req.headers,
-      query: req.query,
-    });
     return {
       verified: false,
       body: null,
@@ -328,7 +325,7 @@ const stripSpecialChars = (str: string) => (!str ? '' : str.replaceAll(/[^a-zA-Z
 export const formatFacebookPayload = async (
   data: InfoSessionFacebookPayload | null,
 ): Promise<ISessionSignup | null> => {
-  if (!data) return null;
+  if (!data?.field_data) return null;
   const fields = extractFacebookFormData(data);
   const sessions = await getInfoSessionDates();
 
