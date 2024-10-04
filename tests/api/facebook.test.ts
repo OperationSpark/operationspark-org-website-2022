@@ -11,6 +11,10 @@ import {
 } from '../support/facebookWebhook';
 
 describe('Facebook Info Session Signup Webhook', () => {
+  afterAll(() => {
+    nock.cleanAll();
+    nock.restore();
+  });
   describe('Initial Webhook Subscription | GET /api/signups/info/facebook', () => {
     test('should accept incoming webhook and respond with correct challenge code and status of 200', async () => {
       process.env.FB_WEBHOOK_TOKEN = 'FAKE_TESTING_WEBHOOK_TOKEN';

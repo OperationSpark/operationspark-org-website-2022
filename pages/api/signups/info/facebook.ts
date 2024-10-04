@@ -1,5 +1,6 @@
 import { ReqHandler } from '@this/types/request';
 
+import { runCloudFunction } from '@this/src/api/googleFunctions';
 import {
   fetchLead,
   formatFacebookPayload,
@@ -9,6 +10,7 @@ import {
   WebhookBody,
   WebhookQuery,
 } from '@this/src/api/helpers/facebookWebhook';
+import { ISessionSignup } from '@this/types/signups';
 
 /**
  * Disabled body parser to allow for raw body parsing
@@ -61,23 +63,22 @@ const webhookHandler: WebhookHandler = async (req, res) => {
     return;
   }
 
-  // TODO: Handle multiple payload submissions
-  // const { GREENLIGHT_API_TOKEN, SIGNUP_API_ENDPOINT } = process.env;
-  // await Promise.all(
-  //   payloads.map(async (payload) => {
-  //     try {
-  //       return await runCloudFunction<ISessionSignup, { url: string }>({
-  //         url: SIGNUP_API_ENDPOINT,
-  //         body: payload,
-  //         headers: {
-  //           'X-Greenlight-Signup-Api-Key': GREENLIGHT_API_TOKEN,
-  //         },
-  //       });
-  //     } catch (err) {
-  //       console.error('Could not POST to signup service', err);
-  //     }
-  //   }),
-  // );
+  const { GREENLIGHT_API_TOKEN, SIGNUP_API_ENDPOINT } = process.env;
+  await Promise.all(
+    payloads.map(async (payload) => {
+      try {
+        return await runCloudFunction<ISessionSignup, { url: string }>({
+          url: SIGNUP_API_ENDPOINT,
+          body: payload,
+          headers: {
+            'X-Greenlight-Signup-Api-Key': GREENLIGHT_API_TOKEN,
+          },
+        });
+      } catch (err) {
+        console.error('Could not POST to signup service', err);
+      }
+    }),
+  );
 
   res.status(200).json({ message: 'Success' });
 };

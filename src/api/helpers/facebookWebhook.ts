@@ -12,9 +12,14 @@ import { formatSignupPayload } from '../formatSignupPayload';
 
 const { FB_ACCESS_TOKEN } = process.env;
 
-const REQUIRED_SIGNUP_FIELDS = ['nameFirst', 'nameLast', 'email', 'cell', 'zipCode'];
-
 export type FacebookPayloadFieldKey = 'day' | 'time' | 'name' | 'email' | 'phone' | 'zip';
+const REQUIRED_SIGNUP_FIELDS: (keyof ISessionSignup)[] = [
+  'nameFirst',
+  'nameLast',
+  'email',
+  'cell',
+  'zipCode',
+];
 
 export type FacebookPayloadField = {
   name: FacebookPayloadFieldKey;
