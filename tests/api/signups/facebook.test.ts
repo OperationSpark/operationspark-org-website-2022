@@ -66,7 +66,7 @@ describe('should accept webhook challenge GET /api/signups/info/facebook', () =>
     expect(res._getData()).not.toBe(challengeCode);
   });
 
-  test('should not accept an incoming webhook if `FB_WEBHOOK_TOKEN` is missing but technically "match"', async () => {
+  test('should not accept an incoming webhook if `FB_WEBHOOK_TOKEN` is "missing" but technically "match"', async () => {
     process.env.FB_WEBHOOK_TOKEN = '';
     const challengeCode = Math.random().toString(36).substring(2);
     const { req, res } = createMocks({
