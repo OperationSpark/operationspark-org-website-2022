@@ -3,7 +3,7 @@ on: [push]
 jobs:
   jest-tests:
     name: Run Jest Tests
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     environment: test
     steps:
       - name: Checkout
