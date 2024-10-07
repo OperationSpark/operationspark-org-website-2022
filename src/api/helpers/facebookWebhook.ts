@@ -186,20 +186,20 @@ export const verifyWebhook = async <Q extends {}, B extends {}>(
   const rawBody = await getRawBody(req);
 
   const payloadSha = crypto.createHmac('sha256', FB_APP_SECRET).update(rawBody).digest('hex');
-
   const headerSha = (req.headers['x-hub-signature-256'] as string)?.split('=')[1];
 
-  if (headerSha !== payloadSha) {
-    return {
-      verified: false,
-      body: null,
-    };
+  if (!headerSha || !payloadSha) {
+    return { verified: false, body: null };
   }
 
-  return {
-    verified: true,
-    body: safeParse(rawBody),
-  };
+  const verified = crypto.timingSafeEqual(Buffer.from(payloadSha), Buffer.from(headerSha));
+
+  if (verified) {
+    const body = safeParse(rawBody);
+    return { verified, body };
+  }
+
+  return { verified, body: null };
 };
 
 /**
