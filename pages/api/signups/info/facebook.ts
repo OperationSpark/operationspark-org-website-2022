@@ -47,9 +47,10 @@ const webhookHandler: WebhookHandler = async (req, res) => {
     return;
   }
   // Flatten all lead IDs
-  const leadIds = body.entry?.flatMap(
-    (entry) => entry.changes.flatMap((change) => change.value.leadgen_id) ?? [],
-  );
+  const leadIds =
+    body.entry?.flatMap(
+      (entry) => entry.changes.flatMap((change) => change.value.leadgen_id) ?? [],
+    ) ?? [];
   // Fetch lead form data
   const data = await Promise.all(leadIds.map(fetchLead));
 
