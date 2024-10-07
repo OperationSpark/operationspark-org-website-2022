@@ -35,8 +35,9 @@ const ClearButtonStyles = styled(motion.div)`
 interface ClearButtonProps {
   show: boolean;
   onClick: () => void;
+  testId?: string;
 }
-const ClearButton = ({ show, onClick }: ClearButtonProps) => {
+const ClearButton = ({ show, onClick, testId }: ClearButtonProps) => {
   const handleClick = (e: MouseEvent) => {
     e.preventDefault();
     onClick();
@@ -56,6 +57,7 @@ const ClearButton = ({ show, onClick }: ClearButtonProps) => {
             title='Clear input'
             aria-label='Clear input'
             tabIndex={-1}
+            data-test-id={testId ?? 'clear-input-button'}
           >
             <IoMdClose size={22} />
           </motion.button>

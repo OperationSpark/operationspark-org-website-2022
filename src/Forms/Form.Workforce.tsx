@@ -1,6 +1,7 @@
 import axios from 'axios';
+import kebabCase from 'lodash/kebabCase';
 import moment from 'moment';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, KeyboardEvent, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import { AiOutlineInfoCircle } from 'react-icons/ai';
@@ -8,15 +9,16 @@ import { IoMdCloseCircleOutline as CloseIcon } from 'react-icons/io';
 import { MdOpenInNew as NewTabIcon } from 'react-icons/md';
 
 import Button from '@this/components/Elements/Button';
+import Spinner from '@this/components/Elements/Spinner';
 import { Form, Input, useForm } from '@this/components/Form';
+
 import { TOption } from '@this/data/types/bits';
 import { IInfoSessionFormValues } from '@this/data/types/infoSession';
+import { getStateFromZipCode } from '@this/helpers/zipLookup';
+import useKeyCombo from '@this/hooks/useKeyCombo';
 import { pixel } from '@this/lib/pixel';
 import { ISessionDates } from '@this/pages-api/infoSession/dates';
-import { FormDataSignup } from '@this/pages-api/infoSession/user';
-import Spinner from '../components/Elements/Spinner';
-import { getStateFromZipCode } from '../components/Form/helpers';
-import useKeyCombo from '../hooks/useKeyCombo';
+import { FormDataSignup } from '@this/types/signups';
 import { referencedByOptions } from './formData/referenceOptions';
 
 interface WorkforceFormProps {
@@ -25,7 +27,20 @@ interface WorkforceFormProps {
 }
 
 const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
-  const form = useForm<IInfoSessionFormValues>();
+  const mainRef = useRef<HTMLDivElement>(null);
+  const form = useForm<IInfoSessionFormValues>({
+    fieldOrder: [
+      'firstName',
+      'lastName',
+      'email',
+      'phone',
+      'zipCode',
+      'referencedBy',
+      'sessionDate',
+      'attendingLocation',
+      'smsOptIn',
+    ],
+  });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [renderUrl, setRenderUrl] = useState<string | null>(null);
 
@@ -71,7 +86,7 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
     });
 
     try {
-      const { data } = await axios.post('/api/infoSession/user', body);
+      const { data } = await axios.post('/api/signups/info', body);
 
       const textMessage = currentValues.smsOptIn === 'true' ? ' and text message' : '';
 
@@ -106,6 +121,33 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
       .join(' ');
     return locationType;
   };
+
+  const selectNextInputOrSubmit = (
+    e: KeyboardEvent<HTMLInputElement | HTMLFormElement | HTMLSelectElement | HTMLDivElement>,
+  ) => {
+    if (e.key !== 'Enter') return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    const nextInvalidKey = form.nextInvalidKey();
+    const ref = mainRef.current;
+
+    if (!nextInvalidKey || !ref) {
+      return handleSubmit();
+    }
+
+    const nextInput = ref.querySelector<HTMLInputElement>(`[name='${nextInvalidKey}']`);
+
+    if (nextInput) {
+      nextInput?.focus();
+    }
+
+    const nextContainerInput = ref.querySelector<HTMLInputElement>(`#${nextInvalidKey} input`);
+
+    nextContainerInput?.focus();
+  };
+
   const sessionDateOptions = [
     ...sessionDates
       .filter((s) => !s.private || isKeyComboActive)
@@ -207,15 +249,8 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
   }, [referredBy]);
 
   return (
-    <WorkforceFormStyles>
-      <Form
-        onSubmit={handleSubmit}
-        onEnter={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          handleSubmit();
-        }}
-      >
+    <WorkforceFormStyles ref={mainRef}>
+      <Form>
         {workforceFormInputs.map((field, i) => (
           <field.Element
             key={field.name}
@@ -224,6 +259,8 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
             onChange={form.onChange(field.name)}
             isValid={form.isValid(field.name)}
             isErr={form.isErr(field.name)}
+            testId={`info-session-input-${kebabCase(field.name)}`}
+            onEnter={selectNextInputOrSubmit}
             animation={{
               initial: { x: 100, opacity: 0 },
               animate: { x: 0, opacity: 1 },
@@ -242,6 +279,8 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
             onChange={form.onChange('zipCode')}
             isValid={form.isValid('zipCode')}
             isErr={form.isErr('zipCode')}
+            onEnter={selectNextInputOrSubmit}
+            testId={`info-session-input-zip-code`}
             animation={{
               initial: { x: 100, opacity: 0 },
               animate: { x: 0, opacity: 1 },
@@ -249,7 +288,9 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
             }}
           />
           {form.getSelect('userLocation').value && (
-            <div className='user-location-state'>{form.getSelect('userLocation').value}</div>
+            <div className='user-location-state' data-test-id='info-session-user-state'>
+              {form.getSelect('userLocation').value}
+            </div>
           )}
         </div>
 
@@ -260,9 +301,11 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
           option={form.getSelect('referencedBy')}
           isErr={form.isErr('referencedBy')}
           isValid={form.isValid('referencedBy')}
+          onEnter={selectNextInputOrSubmit}
           onChange={form.onSelectChange('referencedBy')}
           required
           delay={workforceFormInputs.length * 0.25}
+          testId='info-session-input-referenced-by'
         />
 
         <Input.Select
@@ -270,11 +313,13 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
           name='sessionDate'
           option={form.getSelect('sessionDate')}
           onChange={form.onSelectChange('sessionDate')}
+          onEnter={selectNextInputOrSubmit}
           isErr={form.isErr('sessionDate')}
           isValid={form.isValid('sessionDate')}
           options={sessionDateOptions}
           delay={(workforceFormInputs.length - 1) * 0.25}
           required
+          testId='info-session-input-session-date'
         />
         {currentValues.sessionDate?.value && (
           <Fragment>
@@ -294,7 +339,15 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
               </div>
             ) : (
               <Input.RadioGroup
+                name='attendingLocation'
                 label='Are you attending in person or virtually?'
+                value={form.get('attendingLocation')}
+                onEnter={selectNextInputOrSubmit}
+                isValid={form.isValid('attendingLocation')}
+                isErr={form.isErr('attendingLocation')}
+                onChange={form.onChange('attendingLocation')}
+                delay={(workforceFormInputs.length + 1) * 0.3}
+                required
                 options={[
                   {
                     name: 'IN_PERSON',
@@ -315,12 +368,6 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
                   },
                   { name: 'VIRTUAL', label: 'Virtually (via Zoom)' },
                 ]}
-                value={form.get('attendingLocation')}
-                isValid={form.isValid('attendingLocation')}
-                isErr={form.isErr('attendingLocation')}
-                onChange={form.onChange('attendingLocation')}
-                delay={(workforceFormInputs.length + 1) * 0.3}
-                required
               />
             )}
           </Fragment>
@@ -329,7 +376,15 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
         {/* Checkbox to opt-in to receiving SMS messages */}
         <div className='sms-opt-in-row'>
           <Input.RadioGroup
+            name='smsOptIn'
             label='Would you like to receive text message reminders?'
+            value={form.get('smsOptIn')}
+            isValid={form.isValid('smsOptIn')}
+            onEnter={selectNextInputOrSubmit}
+            isErr={form.isErr('smsOptIn')}
+            onChange={form.onChange('smsOptIn')}
+            delay={(workforceFormInputs.length + 1) * 0.3}
+            required
             options={[
               {
                 name: 'true',
@@ -337,24 +392,24 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
               },
               { name: 'false', label: 'No, do not send SMS reminders' },
             ]}
-            value={form.get('smsOptIn')}
-            isValid={form.isValid('smsOptIn')}
-            isErr={form.isErr('smsOptIn')}
-            onChange={form.onChange('smsOptIn')}
-            delay={(workforceFormInputs.length + 1) * 0.3}
-            required
           />
           {form.get('smsOptIn') === 'true' && (
-            <p className='sms-disclaimer'>
+            <p className='sms-disclaimer' data-test-id='sms-disclaimer'>
               {`By providing your phone number, you agree to receive text messages from Operation Spark. We'll send you information and reminders about your upcoming session. You can also text us with any additional questions. Message and data rates may apply. Message frequency varies. Reply "STOP" to opt-out.`}
             </p>
           )}
           {form.get('smsOptIn') === 'false' && (
-            <p className='sms-disclaimer sms-decline'>{`By opting out of text messages, you acknowledge that you may miss important information about upcoming sessions and registrations.`}</p>
+            <p
+              className='sms-disclaimer sms-decline'
+              data-test-id='sms-disclaimer'
+            >{`By opting out of text messages, you acknowledge that you may miss important information about upcoming sessions and registrations.`}</p>
           )}
 
           {form.get('smsOptIn') === '' && (
-            <p className='sms-disclaimer'>{`You can opt out of text messages at any time by replying "STOP"`}</p>
+            <p
+              className='sms-disclaimer'
+              data-test-id='sms-disclaimer'
+            >{`You can opt out of text messages at any time by replying "STOP"`}</p>
           )}
         </div>
 
@@ -365,6 +420,7 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
         )}
 
         <Button
+          data-test-id='info-session-submit-button'
           className={form.hasErrors() ? 'info disabled' : 'info'}
           color='yellow'
           style={{
@@ -375,6 +431,7 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
             zIndex: 1,
           }}
           disabled={isSubmitting}
+          onClick={handleSubmit}
         >
           Register!
         </Button>
@@ -385,29 +442,35 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
           </div>
         ) : null}
         {renderUrl && !isSubmitting ? (
-          <div className='form-overlay'>
+          <div className='form-overlay' data-test-id='info-session-submit-overlay'>
             <div className='form-complete-response'>
               <h2>Success!</h2>
               {currentValues.sessionDate.value === 'future' ? (
-                <p>
+                <p data-test-id='info-session-submit-message'>
                   Thank you for signing up! We will reach out soon. You will receive an email{' '}
                   {currentValues.smsOptIn === 'true' ? 'and text message' : ''} shortly.
                 </p>
               ) : (
-                <p>
+                <p data-test-id='info-session-submit-message'>
                   You have successfully registered for an info session on{' '}
                   <b className='primary-secondary'>{currentValues.sessionDate.name}</b>. You will
                   receive an email {currentValues.smsOptIn === 'true' ? 'and text message' : ''}{' '}
                   shortly.
                 </p>
               )}
-              <a href={renderUrl} className='anchor' target='_blank' rel='noreferrer'>
+              <a
+                href={renderUrl}
+                className='anchor'
+                target='_blank'
+                rel='noreferrer'
+                data-test-id='info-session-registration-link'
+              >
                 {currentValues.sessionDate.value === 'future'
                   ? 'View details'
                   : 'View your registration details'}
                 <NewTabIcon />
               </a>
-              <button onClick={closeDetails}>
+              <button onClick={closeDetails} data-test-id='info-session-details-close-button'>
                 <CloseIcon className='close-button' />
               </button>
             </div>

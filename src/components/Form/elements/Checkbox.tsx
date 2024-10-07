@@ -1,3 +1,4 @@
+import kebabCase from 'lodash/kebabCase';
 import styled from 'styled-components';
 
 interface CheckboxProps {
@@ -5,9 +6,10 @@ interface CheckboxProps {
   name: string;
   label: string;
   checked: boolean;
+  testId?: string;
 }
 
-const Checkbox = ({ name, label, checked, onChange }: CheckboxProps) => {
+const Checkbox = ({ name, label, checked, onChange, testId }: CheckboxProps) => {
   return (
     <CheckboxStyles aria-checked={checked} aria-label={name}>
       <label>
@@ -18,6 +20,7 @@ const Checkbox = ({ name, label, checked, onChange }: CheckboxProps) => {
           onChange={(e) => onChange(e.target.checked)}
           aria-label={label}
           aria-checked={checked}
+          data-test-id={testId ?? `checkbox-${kebabCase(name)}`}
         />
         <div className='checkbox'></div>
         <div className='label' aria-checked={checked}>

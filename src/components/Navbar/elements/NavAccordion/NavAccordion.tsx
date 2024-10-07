@@ -1,6 +1,6 @@
-import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { ReactNode } from 'react';
+import styled from 'styled-components';
 
 import NavLink from '../NavLink';
 import ThemeButton from '../ThemeButton';
@@ -58,7 +58,12 @@ const NavAccordion = ({ closeMenu, children }: NavAccordionProps) => {
       }}
     >
       <div className='mobile-nav-header'>
-        <NavLink href='/programs/workforce/infoSession' className='info' callback={closeMenu}>
+        <NavLink
+          href='/programs/workforce/infoSession'
+          className='info'
+          callback={closeMenu}
+          testId='nav-info-session-link'
+        >
           Free Info Session
         </NavLink>
 

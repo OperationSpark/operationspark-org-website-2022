@@ -1,6 +1,6 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
 import { addRow, createSpreadsheetTab, getSheets } from '@this/api/googleSheets';
 import moment from 'moment';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
 const { HIGHSCHOOL_FORM_RESPONSES_ID = '' } = process.env;
 

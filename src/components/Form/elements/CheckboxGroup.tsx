@@ -1,14 +1,19 @@
+import kebabCase from 'lodash/kebabCase';
+import { KeyboardEvent } from 'react';
 import styled from 'styled-components';
+
 import Checkbox from './Checkbox';
 import ClearButton from './ClearButton';
 import RequiredStatus from './RequiredStatus';
 
 interface CheckboxProps {
   id?: string;
+  name?: string;
   label: string;
   values: { [key: string]: boolean };
   onChange: (name: string, value: boolean) => void;
   clearCheckboxes: () => void;
+  onEnter?: (e: KeyboardEvent<HTMLDivElement>) => void;
   isValid: boolean;
   required?: boolean;
   isErr: boolean;
@@ -16,6 +21,7 @@ interface CheckboxProps {
     name: string;
     label: string;
   }[];
+  testId?: string;
 }
 
 const CheckboxGroup = ({
@@ -28,11 +34,23 @@ const CheckboxGroup = ({
   isErr = false,
   onChange,
   clearCheckboxes,
+  onEnter,
+  testId,
 }: CheckboxProps) => {
   const valuesKeys = Object.keys(values);
 
   return (
-    <CheckboxGroupStyles className={isErr ? '_input_err' : ''} id={id}>
+    <CheckboxGroupStyles
+      className={isErr ? '_input_err' : ''}
+      id={id}
+      data-test-id={testId ?? `checkbox-group-${kebabCase(id)}`}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' && isValid && onEnter) {
+          e.preventDefault();
+          onEnter(e);
+        }
+      }}
+    >
       <div className='checkbox-group-label'>{label}</div>
       {required && <RequiredStatus isValid={isValid} />}
       <ClearButton show={!!valuesKeys.length} onClick={clearCheckboxes} />

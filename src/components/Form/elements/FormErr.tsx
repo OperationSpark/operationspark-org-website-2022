@@ -25,7 +25,7 @@ interface FormErrProps {
 }
 const FormErr = ({ text, style, colorTheme }: FormErrProps) => {
   return (
-    <FormErrStyles style={style} className={colorTheme}>
+    <FormErrStyles style={style} className={colorTheme} data-test-id='form-error'>
       <AiOutlineInfoCircle /> <p>{text}</p>
     </FormErrStyles>
   );

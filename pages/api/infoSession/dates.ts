@@ -1,9 +1,14 @@
 import axios from 'axios';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { config } from '../../../src/config';
-import { GooglePlace, LocationType } from './user';
 
-const { GREENLIGHT_API_ENDPOINT } = config;
+import { getConfig } from '@this/config';
+import { GooglePlace, LocationType } from '@this/types/signups';
+
+export type DateTime = {
+  dateTime: string;
+  timeZone: 'America/Chicago';
+};
+
 export interface ISessionDates {
   _id: string;
   cohort: string;
@@ -11,15 +16,10 @@ export interface ISessionDates {
   private?: boolean;
   code?: string;
   times: {
-    start: {
-      dateTime: string;
-      timeZone: 'America/Chicago';
-    };
-    end: {
-      dateTime: string;
-      timeZone: 'America/Chicago';
-    };
+    start: DateTime;
+    end: DateTime;
     until: string;
+    byday: 'MO' | 'TU' | 'WE' | 'TH' | 'FR' | 'SA' | 'SU';
   };
   googlePlace: GooglePlace;
   locationType: LocationType;
@@ -37,6 +37,7 @@ export default async function infoSession(
 }
 
 export const getInfoSessionDates = async (): Promise<ISessionDates[]> => {
+  const { GREENLIGHT_API_ENDPOINT } = getConfig();
   const endpoint = GREENLIGHT_API_ENDPOINT + '/sessions/open?programId=5sTmB97DzcqCwEZFR&limit=6';
 
   try {

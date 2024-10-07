@@ -33,8 +33,7 @@ interface FormProps {
 const Form = ({ children, onSubmit, style, motionProps, className, onEnter }: FormProps) => {
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    e.stopPropagation();
-    onSubmit && onSubmit(e);
+    onSubmit?.(e);
   };
   return (
     <FormStyles

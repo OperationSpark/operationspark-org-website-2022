@@ -3,7 +3,7 @@
     "baseUrl": ".",
     "paths": {
       "@this/src/*": ["src/*"],
-      "@this/config/*": ["src/config/*"],
+      "@this/config": ["src/config"],
       "@this/data/*": ["data/*"],
       "@this/components/*": ["src/components/*"],
       "@this/layout/*": ["src/components/layout/*"],
@@ -12,7 +12,8 @@
       "@this/hooks/*": ["src/hooks/*"],
       "@this/api/*": ["src/api/*"],
       "@this/pages-api/*": ["pages/api/*"],
-      "@this/lib/*": ["lib/*"]
+      "@this/lib/*": ["lib/*"],
+      "@this/types/*": ["types/*", "data/types/*"]
     },
     "target": "es6",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -29,6 +30,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "types/global.d.ts"],
   "exclude": ["node_modules"]
 }

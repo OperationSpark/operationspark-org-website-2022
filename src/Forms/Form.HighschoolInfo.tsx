@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
 import { AiOutlineInfoCircle as InfoIcon } from 'react-icons/ai';
+import styled from 'styled-components';
 
+import Button from '@this/components/Elements/Button';
 import { Input } from '@this/components/Form';
 import Form from '@this/components/Form/Form';
 import useForm from '@this/components/Form/useForm';
-import Button from '@this/components/Elements/Button';
 
 const HighschoolFormInfoStyles = styled.div`
   .form-section {
@@ -37,7 +37,7 @@ const HighschoolFormInfo = ({ onSubmitComplete, selectedCourse }: HighschoolForm
     setIsSubmitting(true);
 
     try {
-      await axios.post('/api/signup/highschool', {
+      await axios.post('/api/signups/highschool', {
         ...form.values(),
         tabName: sheetsTabName,
         date: new Date(),

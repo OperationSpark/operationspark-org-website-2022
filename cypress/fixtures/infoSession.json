@@ -1,0 +1,78 @@
+{
+  "VIRTUAL": {
+    "_id": "m9KiLiEW3gLvWQAQK",
+    "code": "fmt8",
+    "cohort": "is-sep-24-24-5-30pm",
+    "programId": "5sTmB97DzcqCwEZFR",
+    "times": {
+      "start": {
+        "dateTime": "2024-09-24T22:30:00.000Z",
+        "timeZone": "America/Chicago"
+      },
+      "end": {
+        "dateTime": "2024-09-24T23:30:00.000Z",
+        "timeZone": "America/Chicago"
+      },
+      "until": "2024-09-25T22:30:00.000Z"
+    },
+    "locationType": "VIRTUAL"
+  },
+  "HYBRID": {
+    "_id": "LnZyJtFmjNWq5qnFT",
+    "code": "g40d",
+    "cohort": "is-oct-1-24-12pm",
+    "programId": "5sTmB97DzcqCwEZFR",
+    "times": {
+      "start": {
+        "dateTime": "2024-10-01T17:00:00.000Z",
+        "timeZone": "America/Chicago"
+      },
+      "end": {
+        "dateTime": "2024-10-01T18:00:00.000Z",
+        "timeZone": "America/Chicago"
+      },
+      "until": "2024-10-02T17:00:00.000Z"
+    },
+    "locationType": "HYBRID",
+    "googlePlace": {
+      "placesId": "ChIJ7YchCHSmIIYRYsAEPZN_E0o",
+      "name": "Operation Spark",
+      "address": "514 Franklin Ave, New Orleans, LA 70117, USA",
+      "phone": "+1 504-534-8277",
+      "website": "https://www.operationspark.org/",
+      "geometry": {
+        "lat": 29.96325999999999,
+        "lng": -90.052138
+      }
+    }
+  },
+  "IN_PERSON": {
+    "_id": "FJQpzrqubRykhbTyo",
+    "code": "7oka",
+    "cohort": "is-oct-1-24-5-30pm",
+    "programId": "5sTmB97DzcqCwEZFR",
+    "times": {
+      "start": {
+        "dateTime": "2024-10-01T22:30:00.000Z",
+        "timeZone": "America/Chicago"
+      },
+      "end": {
+        "dateTime": "2024-10-01T23:30:00.000Z",
+        "timeZone": "America/Chicago"
+      },
+      "until": "2024-10-02T22:30:00.000Z"
+    },
+    "locationType": "IN_PERSON",
+    "googlePlace": {
+      "placesId": "ChIJ7YchCHSmIIYRYsAEPZN_E0o",
+      "name": "Operation Spark",
+      "address": "514 Franklin Ave, New Orleans, LA 70117, USA",
+      "phone": "+1 504-534-8277",
+      "website": "https://www.operationspark.org/",
+      "geometry": {
+        "lat": 29.96325999999999,
+        "lng": -90.052138
+      }
+    }
+  }
+}

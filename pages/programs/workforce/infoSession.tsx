@@ -129,7 +129,10 @@ const InfoSession: NextPage<InfoSessionProps> = ({ commonQuestions, logos }) => 
                     Next information session:
                   </h3>
                   {!nextSession ? null : (
-                    <h4 className='dynamic-h4 form-title date-time text-center source-code'>
+                    <h4
+                      className='dynamic-h4 form-title date-time text-center source-code'
+                      data-test-id='next-session-date-time'
+                    >
                       {nextSession.date} <br /> {nextSession.time} ({nextSession.tz})
                     </h4>
                   )}

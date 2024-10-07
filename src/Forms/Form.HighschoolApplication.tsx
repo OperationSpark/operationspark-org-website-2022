@@ -183,7 +183,7 @@ const HighSchoolApplication = ({ onSubmitComplete }: HighSchoolApplicationProps)
     setIsSubmitting(true);
 
     try {
-      await axios.post('/api/signup/highschool', {
+      await axios.post('/api/signups/highschool', {
         ...form.values(),
         tabName: sheetsTabName,
         date: Date.now(),
