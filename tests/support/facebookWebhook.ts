@@ -28,6 +28,26 @@ export const toSessionObj = (session: ISessionDates) => {
   };
 };
 
+export const setCentralTime = (
+  date: string | Date,
+  hours: number,
+  minutes: number,
+  weeks?: number,
+) => {
+  const d = dayjs(date)
+    .tz('America/Chicago')
+    .set('hour', hours)
+    .set('minute', minutes)
+    .set('seconds', 0)
+    .set('milliseconds', 0);
+
+  if (weeks) {
+    return d.add(Math.round(weeks * 7), 'days').toDate();
+  }
+
+  return d.toDate();
+};
+
 export const findNextDay = (day: ByDay, time: Time): dayjs.Dayjs => {
   const [hourStr, minuteAndAmPm] = time.split(':');
   const amPm = minuteAndAmPm.replaceAll(/[^apm]/gi, '')?.toLowerCase() ?? 'pm';
@@ -36,7 +56,7 @@ export const findNextDay = (day: ByDay, time: Time): dayjs.Dayjs => {
   const minute = parseInt(minuteAndAmPm.replaceAll(/\D/g, ''));
 
   const dayNum = ['MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'].indexOf(day) + 1;
-  const now = dayjs().tz('America/Chicago').set('second', 0).set('millisecond', 0);
+  const now = dayjs().tz('America/Chicago', true).set('second', 0).set('millisecond', 0);
 
   const today = now.day();
 
@@ -55,8 +75,9 @@ export const findNextDay = (day: ByDay, time: Time): dayjs.Dayjs => {
 export const createSessionTimes = (
   day: ByDay,
   time: Time,
+  weeks?: number,
 ): { cohort: string; times: ISessionDates['times'] } => {
-  const start = findNextDay(day, time);
+  const start = findNextDay(day, time).add(weeks ?? 0, 'weeks');
   const end = dayjs(start).add(1, 'hour').toDate();
   const until = dayjs(start).add(1, 'day').toDate();
   const cohortMonth = start.format('MMM').toLowerCase().slice(0, 3);
@@ -67,9 +88,9 @@ export const createSessionTimes = (
   return {
     cohort: `is-${cohortMonth}-${cohortTime}-${hours}`,
     times: {
-      start: { dateTime: start.toISOString(), timeZone: 'America/Chicago' },
-      end: { dateTime: end.toISOString(), timeZone: 'America/Chicago' },
-      until: until.toISOString(),
+      start: { dateTime: start.toDate(), timeZone: 'America/Chicago' },
+      end: { dateTime: end, timeZone: 'America/Chicago' },
+      until,
       byday: day,
     },
   };
@@ -80,8 +101,8 @@ export const createId = (len: number): string => {
   return new Array(Math.ceil(len % 10)).fill(0).map(tenChars).join('').slice(0, len);
 };
 
-export const createSessionDates = (day: ByDay, time: Time): ISessionDates => {
-  const { times, cohort } = createSessionTimes(day, time);
+export const createSessionDates = (day: ByDay, time: Time, weeks?: number): ISessionDates => {
+  const { times, cohort } = createSessionTimes(day, time, weeks);
 
   return {
     _id: createId(17),
