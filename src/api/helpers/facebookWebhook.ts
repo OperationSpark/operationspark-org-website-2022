@@ -5,6 +5,7 @@ import axios, { isAxiosError } from 'axios';
 
 import { getInfoSessionDates, ISessionDates } from '@this/pages-api/infoSession/dates';
 import { parsePhoneNumber } from '@this/src/components/Form/helpers';
+import { toDayJs } from '@this/src/helpers/time';
 import { getStateFromZipCode } from '@this/src/helpers/zipLookup';
 import { Req, ReqMiddleware } from '@this/types/request';
 import { FormDataSignup, ISession, ISessionSignup } from '@this/types/signups';
@@ -223,100 +224,99 @@ export const formatSessionObject = (session: ISessionDates): ISession => {
     id: session._id,
     programId: session.programId,
     cohort: session.cohort,
-    startDateTime: session.times.start.dateTime,
+    startDateTime: session.times.start.dateTime as string,
     locationType: session.locationType,
     googlePlace: session.googlePlace,
     code: session.code,
   };
 };
 
-const extractTimeInfo = (time?: string) => {
-  if (!time)
-    return {
-      hours: 5,
-      minutes: 30,
-      amPm: 'PM',
-    };
-  const [hour, minuteInfo] = time.split(':');
-  const hours = Number(hour);
-  const minutes = Number(minuteInfo?.replaceAll(/\D/g, ''));
-  const amPm = minuteInfo?.replaceAll(/\d/g, '')?.toLowerCase() ?? 'pm';
-  return {
-    hours: isNaN(hours) ? 5 : hours,
-    minutes: isNaN(minutes) ? 30 : minutes,
-    amPm,
-  };
-};
+const getDateFromTime = (time: Date | string, tz?: string) => {
+  if (time instanceof Date) {
+    if (tz) {
+      return toDayJs(time).tz(tz);
+    }
+    return toDayJs(time);
+  }
+  const [hour, minute] = time.split(':').map((v) => {
+    const n = parseInt(v);
+    if (/PM/gi.test(v) && n < 12) {
+      return n + 12;
+    }
 
-const createCohortTimes = (time?: string) => {
-  const { hours, minutes, amPm } = extractTimeInfo(time);
+    if (/AM/gi.test(v) && n === 12) {
+      return 0;
+    }
 
-  const mins = minutes || 30;
+    return n;
+  });
+  const d = toDayJs().tz('America/Chicago').hour(hour).minute(minute).second(0).millisecond(0);
 
-  const flip = hours === 12;
-
-  return [
-    `${hours - 1}${flip ? 'am' : amPm}`,
-    `${hours - 1}-${mins}${flip ? 'am' : amPm}`,
-    `${hours}${amPm}`,
-    `${hours}-${mins}${amPm}`,
-    `${flip ? 1 : hours + 1}${amPm}`,
-    `${flip ? 1 : hours + 1}-${mins}${amPm}`,
-  ];
+  if (!d.isValid()) {
+    return;
+  }
+  if (tz) {
+    return d.tz(tz);
+  }
+  return d;
 };
 
 /**
  * Find the best session based on the day and time provided
  * - If no day or time is provided, return the next session
  * - If no session is found by day and time, try again with only time, then only day
+ * @param time - The time to find the best session for (`'12:34AM/PM'`)
  */
 export const findBestSession = (
   sessions: ISessionDates[],
-  day?: string,
-  time?: string,
+  time?: Date | `${number}:${number}${'AM' | 'PM'}` | string,
 ): ISession | undefined => {
-  if (!sessions.length) {
+  if (!sessions?.length) {
     return;
   }
+  const [nextSession] = sessions;
 
-  if (!day && !time) {
-    return formatSessionObject(sessions[0]);
+  const selectedDate =
+    time && getDateFromTime(time, nextSession.times?.start?.timeZone || 'America/Chicago');
+  if (!selectedDate || sessions.length === 1) {
+    return formatSessionObject(nextSession);
   }
 
-  const d = day?.toLowerCase() === 'tuesday' ? 'TU' : 'TH';
+  const selectedHour = selectedDate.hour();
 
-  const selectedDay = day ? d : undefined;
+  const session = sessions.reduce<(ISessionDates & { diff: number }) | null>((best, s) => {
+    const { dateTime, timeZone } = s.times.start ?? {};
+    const startTime = toDayJs(dateTime).tz(timeZone);
+    const diff = startTime.diff(selectedDate, 'minute');
+    const startHour = startTime.hour();
 
-  const cohortTimes = !!time && createCohortTimes(time);
+    const newSession = { ...s, diff };
 
-  const session = sessions.find((s) => {
-    const byDay = s.times.byday;
-    const cohort = s.cohort;
-    if (selectedDay && cohortTimes) {
-      return byDay === selectedDay && cohortTimes.some((t) => cohort.endsWith(t));
+    //! ↓ ↓ ↓ Order Matters ↓ ↓ ↓
+    if (!best && diff >= 0) {
+      return newSession;
     }
-    if (cohortTimes) {
-      return cohortTimes.some((t) => cohort.endsWith(t));
+    if (!best) {
+      return null;
     }
-    if (selectedDay) {
-      return byDay === selectedDay;
+    // Perfect match
+    if (best.diff === 0) {
+      return best;
     }
-  });
+    // If not exact match, check if session hour matches selected hour
+    if (selectedHour === startHour) {
+      return newSession;
+    }
+    // If the time is closer than the current best session and in the future
+    if (diff >= 0 && diff < best.diff) {
+      return best;
+    }
+    //! ↑ ↑ ↑ Order Matters ↑ ↑ ↑
+
+    return best;
+  }, null);
 
   if (session) return formatSessionObject(session);
-
-  if (!day || !time) {
-    // If no day or time is provided, return so we can try again with only time or day below (this will only hit for the recursive call, which may not be the final return)
-    return;
-  }
-
-  // If no session is found by day and time. Try again with only time
-  const bestTime = findBestSession(sessions, undefined, time);
-  if (bestTime) return bestTime;
-
-  // If no session is found by time, try again with only day
-  const bestDay = findBestSession(sessions, day);
-  if (bestDay) return bestDay;
 
   // If no session is found by day or time, return the next session
   return formatSessionObject(sessions[0]);
@@ -337,7 +337,7 @@ export const formatFacebookPayload = async (
   // Change to 'true' if we want to opt in by default
   const smsOptIn = 'false' as const;
 
-  const session = findBestSession(sessions, fields.day, fields.time);
+  const session = findBestSession(sessions, fields.time);
   const [fullFirstName, ...names] = fields.name.split(' ');
   const firstName = stripSpecialChars(fullFirstName);
   const lastName = stripSpecialChars(names.pop() ?? '');

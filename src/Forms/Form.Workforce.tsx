@@ -73,7 +73,7 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
           cohort: session.cohort,
           programId: session.programId,
           code: session.code,
-          startDateTime: session.times.start.dateTime,
+          startDateTime: session.times.start.dateTime as string,
           googlePlace: session.googlePlace,
           locationType: session.locationType,
         },

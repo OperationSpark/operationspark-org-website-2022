@@ -5,7 +5,7 @@ import { getConfig } from '@this/config';
 import { GooglePlace, LocationType } from '@this/types/signups';
 
 export type DateTime = {
-  dateTime: string;
+  dateTime: string | Date;
   timeZone: 'America/Chicago';
 };
 
@@ -18,7 +18,7 @@ export interface ISessionDates {
   times: {
     start: DateTime;
     end: DateTime;
-    until: string;
+    until: string | Date;
     byday: 'MO' | 'TU' | 'WE' | 'TH' | 'FR' | 'SA' | 'SU';
   };
   googlePlace: GooglePlace;
