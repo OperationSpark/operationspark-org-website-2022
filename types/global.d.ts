@@ -23,5 +23,6 @@ declare namespace NodeJS {
     GOOGLE_API_KEY: string;
     GOOGLE_EVENTS_CALENDAR_ID: string;
     GOOGLE_SERVICE_ACCOUNT: string;
+    GOOGLE_ANALYTICS_ID: string;
   }
 }

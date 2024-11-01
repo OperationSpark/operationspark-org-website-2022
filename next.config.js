@@ -6,6 +6,7 @@ const { validateData } = require('./data/validate');
 const {
   OVERRIDE_NODE_ENV = '',
   FB_PIXEL_ID,
+  GOOGLE_ANALYTICS_ID,
   // Default to current date if not set
   HIGHSCHOOL_FORM_ACTIVE_UNTIL = new Date().toISOString(),
   HIGHSCHOOL_FORM_RESPONSES_NAME = '__TAB_NAME_NOT_SET__',
@@ -33,6 +34,7 @@ module.exports = (phase, { defaultConfig }) => {
       'WUFOO_CONTACT_FORM_ID',
       'GOOGLE_EVENTS_CALENDAR_ID',
       'HIGHSCHOOL_FORM_RESPONSES_NAME',
+      'GOOGLE_ANALYTICS_ID',
     ]);
     validateData();
   }
@@ -57,10 +59,8 @@ module.exports = (phase, { defaultConfig }) => {
       FB_PIXEL_ID,
       HIGHSCHOOL_FORM_ACTIVE_UNTIL,
       HIGHSCHOOL_FORM_RESPONSES_NAME,
+      GOOGLE_ANALYTICS_ID: GOOGLE_ANALYTICS_ID || '',
     },
-
-    // TODO: This will need to be updated when NextJS is updated due to change in 12.3.0 (Currently 12.1.0)
-    // https://nextjs.org/docs/messages/next-image-unconfigured-host
 
     images: {
       remotePatterns: [

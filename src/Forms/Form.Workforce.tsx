@@ -16,6 +16,7 @@ import { TOption } from '@this/data/types/bits';
 import { IInfoSessionFormValues } from '@this/data/types/infoSession';
 import { getStateFromZipCode } from '@this/helpers/zipLookup';
 import useKeyCombo from '@this/hooks/useKeyCombo';
+import ga from '@this/lib/googleAnalytics/gtag';
 import { pixel } from '@this/lib/pixel';
 import { ISessionDates } from '@this/pages-api/infoSession/dates';
 import { FormDataSignup } from '@this/types/signups';
@@ -83,6 +84,10 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
     pixel.event('Lead', {
       sessionId: session?._id ?? 'NO_SESSION',
       sessionTime: session?.times?.start?.dateTime || null,
+    });
+
+    ga.event('generate_lead', {
+      lead_source: `Info Session Signup: ${session?._id || 'NO_SESSION'}`,
     });
 
     try {

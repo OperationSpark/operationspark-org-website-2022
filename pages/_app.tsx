@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 import { MainContainer } from '@this/components/layout';
 import { IAlert } from '@this/data/types/bits';
+import { GoogleAnalyticsRoot } from '@this/lib/googleAnalytics';
 import { PixelRoot } from '@this/lib/pixel';
 import { getStaticAsset } from '@this/pages-api/static/[asset]';
 import Meta from '@this/src/components/Elements/Meta';
@@ -28,6 +29,8 @@ export default function App({ Component, pageProps }: AppProps) {
     <Theme theme={theme.colors.brand}>
       <Notifications />
       <PixelRoot />
+      <GoogleAnalyticsRoot />
+
       <Meta />
       <Navbar alertInfo={alertInfo} />
 
