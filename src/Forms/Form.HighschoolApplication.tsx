@@ -13,6 +13,9 @@ import { TOption } from '@this/data/types/bits';
 import PlainCard from '@this/src/components/Cards/PlainCard';
 import { AnimatePresence, MotionProps, motion } from 'framer-motion';
 import { XIcon } from '../components/icons/XIcon';
+
+import env from '@this/src/clientConfig';
+
 import { formatName } from '../helpers/utils';
 import {
   courseTimes,
@@ -25,7 +28,7 @@ import {
   referencedByOptions,
 } from './formData/highSchoolApplicationData';
 
-const sheetsTabName = process.env.HIGHSCHOOL_FORM_RESPONSES_NAME;
+const sheetsTabName = env.HIGHSCHOOL_FORM_RESPONSES_NAME;
 
 const fieldToLabel = {
   studentDOB: 'Date of Birth',

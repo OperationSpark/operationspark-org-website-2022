@@ -1,5 +1,6 @@
 declare namespace NodeJS {
   interface ProcessEnv {
+    /** Currently broken. See this [TODO](https://github.com/OperationSpark/operationspark-org-website-2022/blob/add-google-analytics/src/components/Navbar/Navbar.tsx#L95) */
     OVERRIDE_NODE_ENV: string;
     MAILCHIMP_API_KEY: string;
     MAILCHIMP_AUDIENCE_ID: string;
@@ -23,5 +24,6 @@ declare namespace NodeJS {
     GOOGLE_API_KEY: string;
     GOOGLE_EVENTS_CALENDAR_ID: string;
     GOOGLE_SERVICE_ACCOUNT: string;
+    GOOGLE_ANALYTICS_ID: string;
   }
 }
