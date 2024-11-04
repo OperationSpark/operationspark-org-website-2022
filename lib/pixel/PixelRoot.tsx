@@ -1,6 +1,8 @@
-import { Fragment, useEffect } from 'react';
-import Script from 'next/script';
 import { useRouter } from 'next/router';
+import Script from 'next/script';
+import { Fragment, useEffect } from 'react';
+
+import env from '@this/src/clientConfig';
 
 import pixel from './pixel';
 
@@ -35,7 +37,7 @@ export const PixelRoot = () => {
               t.src=v;s=b.getElementsByTagName(e)[0];
               s.parentNode.insertBefore(t,s)}(window, document,'script',
               'https://connect.facebook.net/en_US/fbevents.js');
-              fbq('init', ${process.env.FB_PIXEL_ID});
+              fbq('init', ${env.FB_PIXEL_ID});
             `,
         }}
       />

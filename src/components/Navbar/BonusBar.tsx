@@ -3,9 +3,11 @@ import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 
+import env from '@this/src/clientConfig';
+
 import NavLink from './elements/NavLink';
 
-const activeUntil = process.env.HIGHSCHOOL_FORM_ACTIVE_UNTIL;
+const activeUntil = env.HIGHSCHOOL_FORM_ACTIVE_UNTIL;
 
 const isHsFormActive = () => {
   if (!activeUntil) return false;

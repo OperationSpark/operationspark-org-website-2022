@@ -193,6 +193,7 @@ export const verifyWebhook = async <Q extends {}, B extends {}>(
     return { verified: false, body: null };
   }
 
+  // @ts-expect-error - unsure why this is throwing an error. Both should be matching buffer types
   const verified = crypto.timingSafeEqual(Buffer.from(payloadSha), Buffer.from(headerSha));
 
   if (verified) {

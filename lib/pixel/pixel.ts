@@ -1,5 +1,5 @@
 import { PixelWindow } from './types';
-export const FB_PIXEL_ID = process.env.FB_PIXEL_ID;
+
 declare let window: PixelWindow;
 
 export const pageView = () => {
