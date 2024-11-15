@@ -1,5 +1,13 @@
 import Input from '@this/src/components/Form/elements';
 
+export const highSchoolApplicationDetails = {
+  season: 'Winter/Spring',
+  mainSeason: 'Spring',
+  year: '2025',
+  startWeek: 'January 20th',
+  endWeek: 'May 19th',
+};
+
 export const courses = [
   {
     value: 'fundamentals',
@@ -55,14 +63,14 @@ export const courseTimes = {
       time: 'Thursdays | 4:45 PM → 8:00 PM',
       name: 'In Person: Thursdays | 4:45 PM → 8:00 PM',
     },
-    {
-      course: 'advanced',
-      value: 'advanced-virtual-tues+thurs-5-7',
-      location: 'Virtual',
-      preReq: 'Fundamentals of HTML, CSS, and Javascript',
-      time: 'Tuesdays + Thursdays | 5:00 PM → 7:00 PM',
-      name: 'Virtual: Tuesdays + Thursdays | 5:00 PM → 7:00 PM',
-    },
+    // {
+    //   course: 'advanced',
+    //   value: 'advanced-virtual-tues+thurs-5-7',
+    //   location: 'Virtual',
+    //   preReq: 'Fundamentals of HTML, CSS, and Javascript',
+    //   time: 'Tuesdays + Thursdays | 5:00 PM → 7:00 PM',
+    //   name: 'Virtual: Tuesdays + Thursdays | 5:00 PM → 7:00 PM',
+    // },
   ],
 };
 

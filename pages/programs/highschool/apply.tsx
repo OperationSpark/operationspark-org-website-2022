@@ -10,7 +10,10 @@ import Main from '@this/components/layout/Main';
 import { IHighschoolPrograms } from '@this/data/types/programs';
 import { getStaticAsset } from '@this/pages-api/static/[asset]';
 import HighschoolApplicationForm from '@this/src/Forms/Form.HighschoolApplication';
-import { courseTimes } from '@this/src/Forms/formData/highSchoolApplicationData';
+import {
+  courseTimes,
+  highSchoolApplicationDetails,
+} from '@this/src/Forms/formData/highSchoolApplicationData';
 import PlainCard from '@this/src/components/Cards/PlainCard';
 import { BgImg } from '@this/src/components/Elements';
 import Map from '@this/src/components/Elements/Map';
@@ -71,7 +74,7 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
           >
             <div className='program-header'>
               <div className='header-card'>
-                <h1 className='dynamic-xl secondary'>Fall 2024</h1>
+                <h1 className='dynamic-xl secondary'>{highSchoolApplicationDetails.season}</h1>
                 <h2 className='dynamic-h2 secondary'>Coding Camp Application</h2>
                 <p className='dynamic-txt'>
                   Open to sophomores, juniors, and seniors
@@ -83,8 +86,9 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
                   <b className='secondary'> Monday</b> through <b className='secondary'>Friday</b>.
                 </p> */}
                 <p className='dynamic-txt'>
-                  Fall classes start the week of <b className='secondary'>August 26th</b> and end
-                  the week of <b className='secondary'>December 16th</b>.
+                  {highSchoolApplicationDetails.mainSeason} classes start the week of{' '}
+                  <b className='secondary'>{highSchoolApplicationDetails.startWeek}</b> and end the
+                  week of <b className='secondary'>{highSchoolApplicationDetails.endWeek}</b>.
                 </p>
               </div>
               <Link
@@ -107,7 +111,7 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
                 <div className='left-col'>
                   <div className='hs-program-overview'>
                     <p>
-                      {`This fall, we’re offering after-school courses, with in-person and virtual options. You can enroll in one or the other- there is no hybrid option. If you're able to arrange for reliable transportation to our learning center in the Marigny, we recommend in-person classes. We have a great lab with brand new equipment and an awesome staff to get you started on your coding journey. You'll also meet other students from a wide range of schools and backgrounds!`}
+                      {`This ${highSchoolApplicationDetails.mainSeason}, we’re offering after-school courses, with in-person and virtual options. You can enroll in one or the other- there is no hybrid option. If you're able to arrange for reliable transportation to our learning center in the Marigny, we recommend in-person classes. We have a great lab with brand new equipment and an awesome staff to get you started on your coding journey. You'll also meet other students from a wide range of schools and backgrounds!`}
                     </p>
                     <br />
 
@@ -158,7 +162,7 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
             </PlainCard>
             <div className='program-time-details'>
               <h2 className='dynamic-h2'>
-                <b>Fall Course Schedule:</b>
+                <b>{highSchoolApplicationDetails.mainSeason} Course Schedule:</b>
               </h2>
               <div className='course-title'>
                 <b className='primary-secondary'>Fundamentals of HTML, CSS, and Javascript</b>
