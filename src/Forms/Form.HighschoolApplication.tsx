@@ -651,18 +651,20 @@ const HighSchoolApplication = ({ onSubmitComplete }: HighSchoolApplicationProps)
                     <ul className='form-info dynamic-txt'>
                       <li>{`Attendance is mandatory for both in-person and virtual classes.`}</li>
                       <li>
-                        {`If I miss more than two classes total, or fail to complete assignments in a timely manner, Operation Spark may drop me from the class and ask me to re-enroll at a later date.`}
+                        If I miss more than <span className='form-info-danger'>two classes</span>{' '}
+                        total, or fail to complete assignments in a timely manner, Operation Spark
+                        may <span className='form-info-danger'>drop me from the class</span> and ask
+                        me to re-enroll at a later date.
                       </li>
                       <li>
-                        <b>{`The first two class meetings are mandatory, with NO EXCEPTIONS.`}</b>
+                        The first two class meetings are mandatory, with
+                        <span className='form-info-danger'> NO EXCEPTIONS</span>.
                       </li>
                       <li>
                         Parent permission is
-                        <b>
-                          <i>{' required '}</i>
-                        </b>
+                        <span className='form-info-danger'> required </span>
                         to enroll in Operation Spark.
-                        <b>{` I certify that I have my parent or guardian's permission to complete this application.`}</b>
+                        <span className='form-info-warn'>{` I certify that I have my parent or guardian's permission to complete this application.`}</span>
                       </li>
                     </ul>
 
@@ -742,8 +744,16 @@ const HighSchoolApplicationStyles = styled.div`
   width: 100%;
   display: flex;
   min-height: 100vh;
-  .form-info {
+
+  .form-info-danger {
     color: ${({ theme }) => (theme.isLightMode ? theme.red[700] : theme.red[200])};
+    font-weight: 700;
+    font-style: italic;
+  }
+  .form-info-warn {
+    color: ${({ theme }) => (theme.isLightMode ? theme.primary[500] : theme.secondary[500])};
+    font-weight: 500;
+    font-style: italic;
   }
   .form-body {
     position: relative;
