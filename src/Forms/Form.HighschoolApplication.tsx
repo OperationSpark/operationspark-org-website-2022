@@ -656,6 +656,14 @@ const HighSchoolApplication = ({ onSubmitComplete }: HighSchoolApplicationProps)
                       <li>
                         <b>{`The first two class meetings are mandatory, with NO EXCEPTIONS.`}</b>
                       </li>
+                      <li>
+                        Parent permission is
+                        <b>
+                          <i>{' required '}</i>
+                        </b>
+                        to enroll in Operation Spark.
+                        <b>{` I certify that I have my parent or guardian's permission to complete this application.`}</b>
+                      </li>
                     </ul>
 
                     <Input.Select
