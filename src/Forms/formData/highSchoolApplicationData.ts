@@ -1,5 +1,13 @@
 import Input from '@this/src/components/Form/elements';
 
+export const highSchoolApplicationDetails = {
+  season: 'Winter/Spring',
+  mainSeason: 'Spring',
+  year: '2025',
+  startWeek: 'January 20th',
+  endWeek: 'May 19th',
+};
+
 export const courses = [
   {
     value: 'fundamentals',
