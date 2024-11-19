@@ -17,7 +17,6 @@ const CohortSchedule: NextPage = () => {
   const theme = useTheme();
   const urbanLeagueLogo = partners.find((partner) => partner.name === 'Urban League of Louisiana');
 
-  console.log('urbanLeagueLogo:', urbanLeagueLogo);
   return (
     <Main style={{ paddingTop: 0 }}>
       <CohortScheduleStyles>
