@@ -64,7 +64,7 @@ const CohortSchedule: NextPage = () => {
           </p>
 
           <p className='dynamic-txt'>
-            {`At Operation Spark, our graduates are not just trained, they're battle-tested in Full Stack Java Script. Ready to hit the ground running on Day One. We have Alumni employed at many companies, including:`}
+            {`At Operation Spark, our graduates are not just trained, they're battle-tested in Full Stack Javascript. Ready to hit the ground running on Day One. We have Alumni employed at many companies, including:`}
           </p>
           <Carousel logos={partners} />
 
