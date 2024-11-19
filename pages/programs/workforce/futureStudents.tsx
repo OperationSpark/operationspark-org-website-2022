@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import styled, { useTheme } from 'styled-components';
 
-import { partners } from '@this/data/logos.json';
+import logos from '@this/data/logos.json';
 
 import { Content, Main, Section } from '@this/components/layout';
 import PlainCard from '@this/src/components/Cards/PlainCard';
@@ -12,6 +12,8 @@ import { Center } from '@this/src/components/layout/Center';
 import NavLink from '@this/src/components/Navbar/elements/NavLink';
 import { Img } from '@this/src/Typography/elements/Html';
 import { motion } from 'framer-motion';
+
+const partners = logos.partners;
 
 const CohortSchedule: NextPage = () => {
   const theme = useTheme();
