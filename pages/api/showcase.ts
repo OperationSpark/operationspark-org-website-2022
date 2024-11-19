@@ -27,7 +27,6 @@ export default async function showcaseHandler(req: Req, res: Res) {
       const disableTime = dayjs(startDateTime).add(doorsOffset ?? 30, 'minutes');
 
       if (disableTime.isBefore(dayjs())) {
-        console.info('Showcase inactive');
         res.status(NO_SHOWCASE_STATUS).end();
         return;
       }
@@ -35,7 +34,6 @@ export default async function showcaseHandler(req: Req, res: Res) {
       res.status(200).json(showcase);
     } catch (err) {
       if (isAxiosError(err) && err.response?.status === 404) {
-        console.info('Showcase inactive');
         res.status(NO_SHOWCASE_STATUS).end();
         return;
       }
