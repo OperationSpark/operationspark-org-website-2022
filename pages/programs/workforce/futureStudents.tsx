@@ -60,7 +60,7 @@ const CohortSchedule: NextPage = () => {
           </p>
 
           <p className='dynamic-txt'>
-            {`Our students come from a diverse set of backgrounds in term of age, gender, race and education. Most were born in SE Louisiana, over half have college degrees and the majority have some form of professional experience in the workplace. All of our students are  highly driven, passionate software engineers who enjoy creative problem solving and the endless pursuit of writing clean concise code.`}
+            {`Our students come from a diverse set of backgrounds in term of age, gender, race and education. Most reside in SE Louisiana, over half have college degrees and the majority have some form of professional experience in the workplace. All of our students are highly driven, passionate software engineers who enjoy creative problem solving and the endless pursuit of writing clean concise code.`}
           </p>
 
           <p className='dynamic-txt'>
