@@ -104,6 +104,21 @@ module.exports = (phase, { defaultConfig }) => {
           destination: '/programs/highschool',
           permanent: true,
         },
+        {
+          source: '/futurestudents',
+          destination: '/programs/workforce/futureStudents',
+          permanent: true,
+        },
+        {
+          source: '/future-students',
+          destination: '/programs/workforce/futureStudents',
+          permanent: true,
+        },
+        {
+          source: '/futureStudents',
+          destination: '/programs/workforce/futureStudents',
+          permanent: true,
+        },
 
         /**
          * High School Application - `/programs/highschool/apply`

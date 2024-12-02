@@ -6,6 +6,17 @@ import styled from 'styled-components';
 
 import { buttonCss, yellowBtn } from '@this/src/theme/styled/mixins/button';
 
+type NavLinkProps = {
+  children: ReactNode | ReactNode[];
+  href?: string;
+  className?: string;
+  callback?: () => void;
+  color?: '' | 'yellow';
+  title?: string;
+  testId?: string;
+  target?: string;
+};
+
 const NavLink = ({
   children,
   href,
@@ -14,15 +25,8 @@ const NavLink = ({
   color = '',
   title,
   testId,
-}: {
-  children: ReactNode | ReactNode[];
-  href?: string;
-  className?: string;
-  callback?: () => void;
-  color?: '' | 'yellow';
-  title?: string;
-  testId?: string;
-}) => {
+  target,
+}: NavLinkProps) => {
   const linkTitle = typeof children === 'string' ? children : '';
   const { pathname } = useRouter();
 
@@ -35,6 +39,7 @@ const NavLink = ({
     >
       {href ? (
         <Link
+          target={target}
           href={href}
           aria-label={title ?? linkTitle}
           data-test-id={testId ?? `nav-link-${kebabCase(title ?? linkTitle) ?? 'unknown'}`}

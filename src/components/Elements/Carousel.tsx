@@ -11,10 +11,10 @@ const carouselGradient =
   ({ theme: { alpha } }: { theme: DefaultTheme }) =>
     `linear-gradient(
       180deg,
-      ${alpha.fg} -25%,
+      ${alpha.bg} -25%,
       ${bgColor} 4%,
       ${bgColor} 96%,
-      ${alpha.fg} 125%
+      ${alpha.bg} 125%
     )`;
 
 const CarouselContainerStyles = styled(motion.div)`
@@ -117,19 +117,17 @@ const CarouselButton = ({ size = 20, direction, ...props }: CarouselButtonProps)
       style={{
         padding: '4px',
         [direction]: 0,
-        background: carouselGradient('rgba(100, 100, 100, 0.25)')({
-          theme,
-        }),
+        background: carouselGradient('rgba(100, 100, 100, 0.1)')({ theme }),
         boxShadow: `0 0 0px ${theme.alpha.fg}`,
       }}
       whileHover={{
         [paddingDirection]: '6px',
-        background: carouselGradient('rgba(125, 125, 125, 0.4)')({ theme }),
+        background: carouselGradient('rgba(125, 125, 125, 0.25)')({ theme }),
         boxShadow: `0 0 3px ${theme.alpha.fg}`,
       }}
       whileTap={{
         [paddingDirection]: '4px',
-        background: carouselGradient('rgba(75, 75, 75, 0.4)')({ theme }),
+        background: carouselGradient('rgba(75, 75, 75, 0.25)')({ theme }),
         boxShadow: `0 0 1px ${theme.alpha.fg}`,
       }}
       transition={{
