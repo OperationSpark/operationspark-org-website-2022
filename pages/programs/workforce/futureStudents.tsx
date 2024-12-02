@@ -63,18 +63,20 @@ const CohortSchedule: NextPage = () => {
             {`Our students come from a diverse set of backgrounds in term of age, gender, race and education. Most reside in SE Louisiana, over half have college degrees and the majority have some form of professional experience in the workplace. All of our students are highly driven, passionate software engineers who enjoy creative problem solving and the endless pursuit of writing clean concise code.`}
           </p>
 
-          <p className='dynamic-txt'>
-            {`At Operation Spark, our graduates are not just trained, they're battle-tested in Full Stack Javascript. Ready to hit the ground running on Day One. We have Alumni employed at many companies, including:`}
-          </p>
-          <Carousel logos={partners} />
+          <div className='great-companies'>
+            <p className='dynamic-txt'>
+              {`At Operation Spark, our graduates are not just trained, they're battle-tested in Full Stack Javascript. Ready to hit the ground running on Day One. We have Alumni employed at many companies, including:`}
+            </p>
+            <Carousel logos={partners} />
+          </div>
 
           <SlashDivider style={{ margin: '3rem 0', height: '0.5rem' }} />
 
-          <h2 className='dynamic-h2' style={{ marginBottom: '1rem' }}>
+          <h2 className='dynamic-h2 primary-secondary' style={{ marginBottom: '1rem' }}>
             Cost and Financial Aid Options for You at OS
           </h2>
 
-          <p className='dynamic-txt' style={{ padding: '0.5rem 1rem' }}>
+          <p className='dynamic-txt'>
             {`We understand that financial barriers can stand in the way of your goals. That's why we offer various tuition assistance options to help cover the cost of your training. Our funder partners want to assist those that will benefit the most so allow your financial barriers to propel you into career success! Operation Spark will explore and work with you to help secure funding, grants, and scholarship opportunities such as:`}
           </p>
           <ul className='dynamic-txt'>
@@ -117,19 +119,18 @@ const CohortSchedule: NextPage = () => {
                     urbanleaguela.org
                   </a>
                 </p>
-
-                <NavLink
-                  className='info-session-signup-btn'
-                  href={'/programs/workforce/infoSession'}
-                  title='Info Session Sign Up'
-                  target='_blank'
-                  color='yellow'
-                >
-                  Sign up for an info session!
-                </NavLink>
               </Center>
             </PlainCard>
           </Content>
+          <NavLink
+            className='info-session-signup-btn'
+            href={'/programs/workforce/infoSession'}
+            title='Info Session Sign Up'
+            target='_blank'
+            color='yellow'
+          >
+            Sign up for an info session!
+          </NavLink>
         </Content>
       </CohortScheduleStyles>
     </Main>
@@ -175,6 +176,23 @@ export const CohortScheduleStyles = styled.div`
     }
   }
 
+  .great-companies {
+    box-shadow: -0.25rem 0.25rem 1rem
+      ${({ theme }) => (theme.isLightMode ? 'rgba(32, 32, 32, 0.25)' : 'rgba(0, 0, 0, 0.5)')};
+
+    border: 1px solid ${({ theme }) => theme.primary[theme.isLightMode ? 400 : 800]};
+
+    border-radius: 0.5rem;
+    overflow: hidden;
+
+    p,
+    p.dynamic-txt {
+      font-size: 1.25rem;
+      padding: 1rem;
+      margin-bottom: 0;
+    }
+  }
+
   .video-wrapper {
     margin: 0 auto;
     width: 600px;
@@ -194,7 +212,7 @@ export const CohortScheduleStyles = styled.div`
     border-radius: 0.5rem;
     overflow: hidden;
     aspect-ratio: 16 / 9;
-    border: 3px solid ${({ theme }) => theme.primary[theme.isLightMode ? 600 : 900]};
+    border: 0.25rem solid ${({ theme }) => theme.primary[theme.isLightMode ? 400 : 800]};
     filter: drop-shadow(
       -0.25rem 0.25rem 1rem ${({ theme }) => (theme.isLightMode ? 'rgba(0, 0, 0, 0.75)' : 'rgba(0, 0, 0, 1)')}
     );
