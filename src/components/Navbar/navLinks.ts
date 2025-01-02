@@ -17,6 +17,7 @@ export const navMenus: NavigationMenuLink[] = [
       { title: 'Immersion Program', href: '' },
       { title: 'Session Schedule', href: '/schedule' },
       { title: 'Free Info Session', href: '/infoSession' },
+      { title: 'Future Students', href: '/futureStudents' },
     ],
   },
   {
