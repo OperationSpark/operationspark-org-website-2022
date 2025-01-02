@@ -4,8 +4,10 @@ export const highSchoolApplicationDetails = {
   season: 'Winter/Spring',
   mainSeason: 'Spring',
   year: '2025',
-  startWeek: 'January 20th',
+  startWeek: 'January 27th',
   endWeek: 'May 19th',
+  // applicationType: 'Coding Camp Application'
+  applicationType: 'After-school Application',
 };
 
 export const courses = [

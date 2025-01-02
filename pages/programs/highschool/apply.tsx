@@ -75,7 +75,9 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
             <div className='program-header'>
               <div className='header-card'>
                 <h1 className='dynamic-xl secondary'>{highSchoolApplicationDetails.season}</h1>
-                <h2 className='dynamic-h2 secondary'>Coding Camp Application</h2>
+                <h2 className='dynamic-h2 secondary'>
+                  {highSchoolApplicationDetails.applicationType}
+                </h2>
                 <p className='dynamic-txt'>
                   Open to sophomores, juniors, and seniors
                   <b> (Graduating classes of 2025, 2026, and 2027)</b>.
