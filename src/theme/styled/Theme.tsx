@@ -33,7 +33,8 @@ const hexToRgbString = (hex: string, alpha?: number, brightness?: number) => {
   return rgbaToString(hexToRgb(hex, alpha, brightness));
 };
 
-export default function Theme({ children, theme }: { children: ReactNode; theme: DefaultTheme }) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- any type is needed for theme
+export default function Theme({ children, theme }: { children: ReactNode; theme: any }) {
   const { themeMode, isSystemMode, setThemeMode } = useThemeMode();
   const isLightMode = themeMode === 'light';
   const [navHeight, setNavHeight] = useState(0);
