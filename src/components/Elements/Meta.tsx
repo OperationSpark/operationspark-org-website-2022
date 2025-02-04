@@ -1,33 +1,44 @@
 import Head from 'next/head';
-import { useRouter } from 'next/router';
+import { NextRouter, useRouter } from 'next/router';
 
 import defaultMetaData from '@this/data/meta.json';
 import { IMeta } from '@this/data/types/bits';
 
 const meta: { [key: string]: IMeta } = defaultMetaData;
 
-const formatRouteTitle = (str: string) => {
-  if (!str || str === '/') {
+const formatRouteTitle = (router: NextRouter) => {
+  const pathname = router.pathname;
+  if (!pathname || pathname === '/') {
     return '';
   }
-  return (str || '')
-    .slice(str.lastIndexOf('/') + 1, str.length)
+
+  // Handle Teacher Training sub-views
+  // /teacherTraining/[info|register]/level-[levelNumber]
+  if (pathname.includes('[level]') && typeof router.query.level === 'string') {
+    const levelNum = parseInt(router.query.level.replaceAll(/\D/g, ''));
+    const level = isNaN(levelNum) ? 1 : levelNum;
+    const view = pathname.includes('info') ? 'Info' : 'Registration';
+    return `Teacher Training Level ${level} - ${view}`;
+  }
+
+  return (pathname || '')
+    .slice(pathname.lastIndexOf('/') + 1, pathname.length)
     .split('')
     .map((char, i) => (i === 0 ? char.toUpperCase() : char.match(/[A-Z]/) ? ` ${char}` : char))
     .join('');
 };
 
 const Meta = () => {
-  const { pathname } = useRouter();
-  const route = formatRouteTitle(pathname);
+  const router = useRouter();
+  const routeTitle = formatRouteTitle(router);
 
-  const metaData = meta[route.toLowerCase().replaceAll(' ', '_')] || {};
+  const metaData = meta[routeTitle.toLowerCase().replaceAll(' ', '_')] || {};
   const defaultMeta = meta.defaultMeta || {};
   const allMeta = { ...defaultMeta, ...metaData };
 
   const hostname = allMeta.host ?? 'https://operationspark.org';
   const description = metaData.description ?? allMeta.description;
-  const title = metaData.title ?? `${route ? route + ' | ' : ''}${allMeta.title}`;
+  const title = metaData.title ?? `${routeTitle ? routeTitle + ' | ' : ''}${allMeta.title}`;
   const imageUrl = hostname + (metaData.imageUrl ?? allMeta.imageUrl);
   const favicon = metaData.favicon ?? allMeta.favicon ?? '/favicon.ico';
 
