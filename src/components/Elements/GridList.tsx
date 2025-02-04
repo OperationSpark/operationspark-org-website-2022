@@ -1,0 +1,67 @@
+import { FC, ReactNode } from 'react';
+import styled from 'styled-components';
+
+type GridListProps = {
+  items: ReactNode[];
+  interactive?: boolean;
+};
+const GridList: FC<GridListProps> = ({ items, interactive }) => {
+  return (
+    <GridListStyles className={interactive ? '_interactive-item' : ''}>
+      {items.map((item, i) => (
+        <li key={i} className='_grid-list-item'>
+          {item}
+        </li>
+      ))}
+    </GridListStyles>
+  );
+};
+
+export default GridList;
+
+const GridListStyles = styled.ul`
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 0.25rem;
+  justify-content: center;
+  max-width: 999px;
+  margin: 0 auto;
+  ._grid-list-item {
+    flex: 1 1 250px;
+    box-shadow: 0 0 1px 1px inset ${({ theme }) => theme.rgb('fg', 0.1)};
+    background: ${({ theme }) => theme.rgb('fg', 0.05)};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.125rem;
+    padding: 0.5rem;
+    text-align: center;
+
+    > * {
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.25rem 0.5rem;
+      text-align: center;
+    }
+  }
+
+  &._interactive-item {
+    ._grid-list-item {
+      padding: 0;
+
+      > * {
+        width: 100%;
+        color: ${({ theme }) => theme.rgb('fg', 0.9)};
+        color: ${({ theme }) =>
+          theme.isLightMode ? theme.rgb('blue', 1, -5) : theme.rgb('blue', 1, 5)};
+        padding: 0.5rem;
+        &:hover {
+          background: ${({ theme }) => theme.rgb('blue', 0.2)};
+          box-shadow: 0 0 0.75rem 0px inset ${({ theme }) => theme.rgb('blue', 0.5)};
+        }
+      }
+    }
+  }
+`;

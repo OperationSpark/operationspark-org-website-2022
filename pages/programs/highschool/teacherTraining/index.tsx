@@ -13,6 +13,7 @@ import { getStaticAsset } from '@this/pages-api/static/[asset]';
 import NeumorphismListCard from '@this/src/components/Cards/NeumorphismListCard';
 import TeacherTrainingCard from '@this/src/components/Cards/TeacherTrainingCard';
 import { BgImg } from '@this/src/components/Elements';
+import GridList from '@this/src/components/Elements/GridList';
 
 const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
   return (
@@ -42,13 +43,7 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
         </Content>
         <Content className='flex-column gap-4'>
           <h3 className='section-header'>Current Partners</h3>
-          <ul className='grid-list'>
-            {partners.map((partner) => (
-              <li key={partner}>
-                <div className='grid-list-item'>{partner}</div>
-              </li>
-            ))}
-          </ul>
+          <GridList items={partners} />
         </Content>
         <Content>
           <div className='TODO'>Insert some brief outcomes data</div>
@@ -170,27 +165,16 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
                 <h3 className='card-subheader text-center'>
                   Jump Start Pathways that include our courses and IBCs
                 </h3>
-                <ul className='grid-list'>
-                  <li>
-                    <div className='grid-list-item'>Arts, AV, Technology and Communication</div>
-                  </li>
-                  <li>
-                    <div className='grid-list-item'>Business Management</div>
-                  </li>
-                  <li>
-                    <div className='grid-list-item'>Information Technology</div>
-                  </li>
-                  <li>
-                    <div className='grid-list-item'>
-                      STEM Renaissance Computing and Cybersecurity
-                    </div>
-                  </li>
-                  <li>
-                    <div className='grid-list-item'>
-                      STEM Renaissance Digital Design & Emergent Media
-                    </div>
-                  </li>
-                </ul>
+
+                <GridList
+                  items={[
+                    'Arts, AV, Technology and Communication',
+                    'Business Management',
+                    'Information Technology',
+                    'STEM Renaissance Computing and Cybersecurity',
+                    'STEM Renaissance Digital Design & Emergent Media',
+                  ]}
+                />
               </div>
 
               <div className='subsection-body'>
@@ -205,30 +189,17 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
                 <p>
                   {`Students enrolled in this pathway take all five of Operation Spark's high school courses, culminating in our state-approved registered apprenticeship with a paid work-based learning component their senior year.`}
                 </p>
-                <ul className='grid-list'>
-                  <li>
-                    <div className='grid-list-item'>Fundamentals of HTML, CSS, and Javascript</div>
-                  </li>
-                  <li>
-                    <div className='grid-list-item'>
-                      Advanced Javascript, Functional Programming, and Web Development
-                    </div>
-                  </li>
-                  <li>
-                    <div className='grid-list-item'> Fundamentals of Video Game Programming</div>
-                  </li>
-                  <li>
-                    <div className='grid-list-item'> Internet of Things</div>
-                  </li>
-                  <li>
-                    <div className='grid-list-item'> Apprenticeship: Operation Spark</div>
-                  </li>
-                  <li>
-                    <div className='grid-list-item'>
-                      Apprenticeship: Operation Spark OJT (On-the-Job Training)
-                    </div>
-                  </li>
-                </ul>
+
+                <GridList
+                  items={[
+                    'Fundamentals of HTML, CSS, and Javascript',
+                    'Advanced Javascript, Functional Programming, and Web Development',
+                    'Fundamentals of Video Game Programming',
+                    'Internet of Things',
+                    'Apprenticeship: Operation Spark',
+                    'Apprenticeship: Operation Spark OJT (On-the-Job Training)',
+                  ]}
+                />
               </div>
             </div>
           </div>
@@ -238,18 +209,21 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
           <h2 className='section-header text-center'>Inquire for more information</h2>
           <div className='section-content-card'>
             <h3 className='section-subheader text-center'>Contact</h3>
-            <ul className='grid-list'>
-              <li className='flex-row'>
-                <a className='grid-list-item' href='mailto:highschool@operationspark.org'>
+            <GridList
+              interactive
+              items={[
+                <a
+                  key='email'
+                  className='grid-list-item'
+                  href='mailto:highschool@operationspark.org'
+                >
                   highschool@operationspark.org
-                </a>
-              </li>
-              <li>
-                <a className='grid-list-item' href='tel:9858038895'>
+                </a>,
+                <a key='phone' className='grid-list-item' href='tel:9858038895'>
                   985-803-8895
-                </a>
-              </li>
-            </ul>
+                </a>,
+              ]}
+            />
           </div>
         </Content>
       </HighschoolStyles>
