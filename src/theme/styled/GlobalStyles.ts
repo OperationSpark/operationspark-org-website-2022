@@ -3,8 +3,11 @@ import { createGlobalStyle, css } from 'styled-components';
 import { anchor } from './mixins/anchor';
 import { circuitBoardBg } from './mixins/circuitBoardBg';
 import { layoutCss } from './mixins/layout';
+import pageCommonCss from './mixins/pageCommon';
 
 const GlobalStyleCss = css`
+  ${layoutCss}
+  ${pageCommonCss}
   * {
     transition: background-color 125ms, font-size 40ms;
     box-sizing: border-box;
@@ -30,8 +33,6 @@ const GlobalStyleCss = css`
   body {
     overflow-x: hidden;
   }
-
-  ${layoutCss}
 
   h1,
   h2,

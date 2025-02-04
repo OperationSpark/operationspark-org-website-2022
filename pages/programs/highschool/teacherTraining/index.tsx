@@ -10,6 +10,7 @@ import Content from '@this/components/layout/Content';
 import Main from '@this/components/layout/Main';
 import { TeacherTraining } from '@this/data/types/teacherTraining';
 import { getStaticAsset } from '@this/pages-api/static/[asset]';
+import NeumorphismListCard from '@this/src/components/Cards/NeumorphismListCard';
 import TeacherTrainingCard from '@this/src/components/Cards/TeacherTrainingCard';
 import { BgImg } from '@this/src/components/Elements';
 
@@ -18,10 +19,10 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
     <Main style={{ paddingTop: 0 }}>
       <HighschoolStyles>
         <BgImg src='/images/display/abstract-space.webp' height='24rem'>
-          <Content className='teacher-training-header'>
-            <div className='teacher-training-header-content'>
+          <Content className='page-header-container'>
+            <div className='page-header-content'>
               <h1 className='dynamic-xl'>Teacher Training</h1>
-              <div className='hs-apply-and'>and</div>
+              <div className='page-header-and'>and</div>
               <h1 className='fw-900 dynamic-h1'>Curriculum Partnership</h1>
             </div>
           </Content>
@@ -44,7 +45,7 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
           <ul className='grid-list'>
             {partners.map((partner) => (
               <li key={partner}>
-                <div className='grid-list-inner'>{partner}</div>
+                <div className='grid-list-item'>{partner}</div>
               </li>
             ))}
           </ul>
@@ -175,28 +176,28 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
         <Content>
           <div className='section-content-card'>
             <h2 className='section-header text-center'>LDOE Programs and Pathways</h2>
-            <div className='section-body'>
+            <div className='section-body' style={{ padding: 0, paddingTop: '1rem' }}>
               <div className='subsection-body'>
                 <h3 className='card-subheader text-center'>
                   Jump Start Pathways that include our courses and IBCs
                 </h3>
                 <ul className='grid-list'>
                   <li>
-                    <div className='grid-list-inner'>Arts, AV, Technology and Communication</div>
+                    <div className='grid-list-item'>Arts, AV, Technology and Communication</div>
                   </li>
                   <li>
-                    <div className='grid-list-inner'>Business Management</div>
+                    <div className='grid-list-item'>Business Management</div>
                   </li>
                   <li>
-                    <div className='grid-list-inner'>Information Technology</div>
+                    <div className='grid-list-item'>Information Technology</div>
                   </li>
                   <li>
-                    <div className='grid-list-inner'>
+                    <div className='grid-list-item'>
                       STEM Renaissance Computing and Cybersecurity
                     </div>
                   </li>
                   <li>
-                    <div className='grid-list-inner'>
+                    <div className='grid-list-item'>
                       STEM Renaissance Digital Design & Emergent Media
                     </div>
                   </li>
@@ -217,24 +218,24 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
                 </p>
                 <ul className='grid-list'>
                   <li>
-                    <div className='grid-list-inner'>Fundamentals of HTML, CSS, and Javascript</div>
+                    <div className='grid-list-item'>Fundamentals of HTML, CSS, and Javascript</div>
                   </li>
                   <li>
-                    <div className='grid-list-inner'>
+                    <div className='grid-list-item'>
                       Advanced Javascript, Functional Programming, and Web Development
                     </div>
                   </li>
                   <li>
-                    <div className='grid-list-inner'> Fundamentals of Video Game Programming</div>
+                    <div className='grid-list-item'> Fundamentals of Video Game Programming</div>
                   </li>
                   <li>
-                    <div className='grid-list-inner'> Internet of Things</div>
+                    <div className='grid-list-item'> Internet of Things</div>
                   </li>
                   <li>
-                    <div className='grid-list-inner'> Apprenticeship: Operation Spark</div>
+                    <div className='grid-list-item'> Apprenticeship: Operation Spark</div>
                   </li>
                   <li>
-                    <div className='grid-list-inner'>
+                    <div className='grid-list-item'>
                       Apprenticeship: Operation Spark OJT (On-the-Job Training)
                     </div>
                   </li>
@@ -250,12 +251,12 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
             <h3 className='section-subheader text-center'>Contact</h3>
             <ul className='grid-list'>
               <li className='flex-row'>
-                <a className='grid-list-inner' href='mailto:highschool@operationspark.org'>
+                <a className='grid-list-item' href='mailto:highschool@operationspark.org'>
                   highschool@operationspark.org
                 </a>
               </li>
               <li>
-                <a className='grid-list-inner' href='tel:9858038895'>
+                <a className='grid-list-item' href='tel:9858038895'>
                   985-803-8895
                 </a>
               </li>
@@ -278,234 +279,21 @@ export const getStaticProps: GetStaticProps<TeacherTraining> = async () => {
 };
 
 const HighschoolStyles = styled.div`
-  .TODO {
-    color: ${({ theme }) => theme.rgb('red', 1)};
-    background: ${({ theme }) => theme.rgb('red', 0.1)};
-    box-shadow: 0 0 1px 1px inset ${({ theme }) => theme.rgb('red', 1)},
-      -3px 3px 1rem 1px ${({ theme }) => theme.rgb('red', 0.5)};
-    font-size: 1.5rem;
-    font-weight: 700;
-    text-align: center;
-    position: relative;
-    font-family: 'Kalam', sans-serif;
-    width: fit-content;
-    margin: 0 auto;
-    padding: 1rem;
-    padding-top: 3rem;
-    border-radius: 1rem;
-
-    &::before {
-      content: 'TODO';
-      font-size: 2rem;
-      font-family: 'Permanent Marker', serif;
-      position: absolute;
-      top: 0.5rem;
-      line-height: 1;
-      text-align: center;
-      left: 0;
-      right: 0;
-    }
-  }
-
   .__content-container {
     padding-bottom: 0;
   }
 
-  .section-header {
-    font-size: 1.5rem;
-    font-weight: 900;
-    text-align: center;
+  .page-header-container .page-header-and {
+    font-size: calc(0.4vw + 1.25rem);
+    font-weight: 600;
+    padding: 0.5rem;
+    font-style: italic;
   }
 
-  .section-body {
-    padding: 1rem;
-    gap: 1rem;
-    display: flex;
-    flex-flow: column;
-  }
-  .section-content-card {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 1rem;
-    box-shadow: 0 0 3px 1px inset ${({ theme }) => theme.rgb('fg', 0.25)};
-    border-radius: 1rem;
-    background: ${({ theme }) => theme.rgb('fg', 0.05)};
-  }
-
-  .card-subheader {
-    font-size: 1.2rem;
-    font-weight: 900;
-    margin-bottom: 0.5rem;
-  }
-  .subsection-body {
-    padding: 1rem;
-    background: ${({ theme }) => theme.rgb('bg', 0.5)};
-    border-radius: 1rem;
-    box-shadow: 0 0 3px 1px inset ${({ theme }) => theme.rgb('fg', 0.25)};
-  }
-
-  .teacher-training-header {
-    display: flex;
-    flex-flow: column;
-    justify-content: flex-end;
-    align-items: center;
-    height: 100%;
-
-    .teacher-training-header-content {
-      width: fit-content;
-      background: ${({ theme }) => (theme.isLightMode ? theme.alpha.fg25 : theme.alpha.bg25)};
-      box-shadow: 0 0 3px 1px inset
-        ${({ theme }) => (theme.isLightMode ? theme.alpha.bg50 : theme.alpha.fg50)};
-
-      width: fit-content;
-      padding: 1rem;
-      margin-bottom: 0.5rem;
-      border-radius: 1rem;
-      backdrop-filter: blur(2rem);
-      -webkit-backdrop-filter: blur(2rem);
-      line-height: 1;
-      color: ${({ theme }) => (theme.isLightMode ? theme.alpha.bg50 : theme.alpha.fg50)};
-      text-align: center;
-      .dynamic-xl {
-        font-family: 'Red Hat Display', sans-serif;
-      }
-    }
-
-    .hs-apply-and {
-      font-size: calc(0.4vw + 1.25rem);
-      font-weight: 600;
-
-      padding: 0.5rem;
-      font-style: italic;
-    }
-  }
-
-  .grid-list {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-flow: row wrap;
-    gap: 0.25rem;
-    justify-content: center;
-    max-width: 999px;
-    margin: 0 auto;
-    li {
-      flex: 1 1 250px;
-      /* box-shadow: 0 0 6px 0px inset ${({ theme }) => theme.rgb('fg', 0.2)}; */
-      background: ${({ theme }) => theme.rgb('fg', 0.05)};
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 0.1rem;
-      padding: 0.25rem;
-
-      .grid-list-inner {
-        font-size: 0.9rem;
-        font-weight: 500;
-        padding: 0.25rem 0.5rem;
-        text-align: center;
-      }
-
-      &:has(a.grid-list-inner) {
-        padding: 0;
-
-        a.grid-list-inner {
-          width: 100%;
-          color: ${({ theme }) => theme.rgb('fg', 0.9)};
-          color: ${({ theme }) =>
-            theme.isLightMode ? theme.rgb('blue', 1, -5) : theme.rgb('blue', 1, 5)};
-          padding: 0.5rem;
-        }
-        &:hover {
-          background: ${({ theme }) => theme.rgb('blue', 0.2)};
-          box-shadow: 0 0 0.75rem 0px inset ${({ theme }) => theme.rgb('blue', 0.5)};
-        }
-      }
-    }
-  }
   .curriculum-coaching-program {
     display: flex;
     flex-flow: row wrap;
     gap: 1rem;
     justify-content: center;
-    .coaching-program-card {
-      flex: 1 1 46%;
-      min-width: 300px;
-      padding: 1rem;
-      box-shadow: 0 0 3px 1px inset ${({ theme }) => theme.rgb('fg', 0.25)};
-      border-radius: 1rem;
-      background: ${({ theme }) => theme.rgb('fg', 0.05)};
-      display: flex;
-      flex-flow: column;
-      align-items: center;
-
-      &:nth-child(1) {
-        box-shadow: 0 0 3px 1px inset ${({ theme }) => theme.rgb('blue', 0.5, 1)};
-        background: ${({ theme }) => theme.rgb('blue', 0.1)};
-        --color: ${({ theme }) => theme.asRgb('blue')};
-      }
-
-      &:nth-child(2) {
-        box-shadow: 0 0 3px 1px inset ${({ theme }) => theme.rgb('primary', 0.5)};
-        background: ${({ theme }) => theme.rgb('primary', 0.1)};
-        --color: ${({ theme }) => theme.asRgb('primary', 4)};
-      }
-      &:nth-child(3) {
-        box-shadow: 0 0 3px 1px inset ${({ theme }) => theme.rgb('magenta', 0.5)};
-        background: ${({ theme }) => theme.rgb('magenta', 0.1)};
-        --color: ${({ theme }) => theme.asRgb('magenta')};
-      }
-      &:nth-child(4) {
-        box-shadow: 0 0 3px 1px inset ${({ theme }) => theme.rgb('green', 0.5, -8)};
-        background: ${({ theme }) => theme.rgb('green', 0.1, 10)};
-        --color: ${({ theme }) => theme.asRgb('green', -6)};
-      }
-    }
-    .coaching-program-title {
-      font-size: 2rem;
-      font-weight: 900;
-      color: rgba(var(--color), 1);
-    }
-    .coaching-program-icon {
-      display: flex;
-      font-size: 4rem;
-      color: ${({ theme }) => theme.rgb('bg')};
-      filter: drop-shadow(0 0 4px rgba(var(--color), 1));
-    }
-    .coaching-program-list {
-      list-style: none;
-      padding: 0;
-      display: flex;
-      flex-flow: column;
-      gap: 0.5rem;
-      margin: 0;
-      margin-top: 1rem;
-      flex: 1;
-      justify-content: space-between;
-
-      padding: 1rem;
-      box-shadow: -0.125rem 0.125rem 0.75rem 0px inset rgba(var(--color), 0.35),
-        0px 0px 0px 2px ${({ theme }) => theme.rgb('bg', 1)},
-        -0.125rem 0.125rem 0.5rem 1px rgba(var(--color), 0.5);
-      border-radius: 1rem;
-      background: ${({ theme }) => theme.rgb('bg', 0.5)};
-      li {
-        font-size: 1rem;
-        font-weight: 400;
-        padding: 0.5rem;
-        border-radius: 0.5rem;
-        width: fit-content;
-        max-width: calc(100% - 3rem);
-        background: ${({ theme }) => theme.rgb('bg', 0.75)};
-        box-shadow: 0 0 3px 1px inset rgba(var(--color), 0.5);
-        color: ${({ theme }) => theme.rgb('fg', 0.9)};
-        &:nth-child(even) {
-          margin-left: auto;
-        }
-        &:nth-child(odd) {
-          margin-right: auto;
-        }
-      }
-    }
   }
 `;
