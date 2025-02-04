@@ -10,5 +10,96 @@
     "Natchitoches Parish Public Schools",
     "St. Charles Parish Public Schools",
     "St. Tammany Parish Public Schools"
-  ]
+  ],
+  "info": {
+    "1": {
+      "level": "1",
+      "title": "Summer 2025 Teacher Training Information",
+      "summary": "Operation Spark is pleased to offer a nine-day training to Louisiana high school teachers. This training will guide participants through our introductory course, Fundamentals of HTML, CSS, and Javascript, which culminates in a Level 1 (Basic) statewide Industry Based Credential. Over the nine day period, teachers will complete all course projects and assessments in preparation for the Level 1 IBC exam. Along the way, they'll explore methods and strategies specific to the teaching of code. The exam wil be administered on the final day of the training.",
+      "format": "Hybrid. Teachers will be able to choose to attend via Zoom, with the option to join the instructor in person in our learning lab in central New Orleans on select days. Live attendance is mandatory with either option. Teachers will be asked to share their choice of format with us when registering, then confirm one week before the training. Participants who live within driving distance are encouraged to attend in person on available days.",
+      "times": {
+        "startDate": "Tuesday, July 8th",
+        "endDate": "Friday, July 18th",
+        "startTime": "9:00 AM",
+        "endTime": "3:00 PM",
+        "examDay": "Friday, July 18th",
+        "days": "Monday - Friday"
+      },
+      "cost": {
+        "amount": "$600.00",
+        "per": "participant",
+        "includeTesting": true
+      },
+
+      "prerequisites": "No Prerequisites",
+      "outcomes": [
+        {
+          "title": "Outcome 1",
+          "availabilityScore": "93%",
+          "description": [
+            "Teachers who perform very well (active participation, timely completion of coursework, and a score of 93% or higher on the IBC exam) during the training will be certified by Operation Spark to license an independently teach our level 1 curriculum, at a cost of $275 (current price, subject to change) per student, per course.",
+            "Historically, some teachers achieving this outcome have had substantial teaching or industry experience in Computer Science, but we have also seen many teachers with completely unrelated teaching and educational backgrounds excel in the training and go on to successfully deliver the curriculum in their classrooms."
+          ]
+        },
+        {
+          "title": "Outcome 2",
+          "requiredScore": "80%",
+          "description": [
+            "Teachers certified at this level may co-teach our level 1 curriculum with a full-time Operation Spar instructor Zooming into the classroom, during a regularly scheduled block. Trained teachers are our boots on the ground in the classroom - they work with our instructors on a daily basis to collaboratively deliver dynamic and effective learning experiences in their classrooms. This has been a successful model for us over the past four years, both in terms of student outcomes and teacher development. Success rates on the IBC exam in virtual classes have been between 70% and 95%. The cost of this model to schools is $600 per student, per course (current price, subject to change).",
+            "Teachers who complete the training may also be more prepared to teach introductory computer science courses separately from our in-house curriculum and associated credentials."
+          ]
+        }
+      ],
+
+      "nda": {
+        "title": "Proprietary Course Materials and NDA",
+        "description": "Our curriculum and course materials may be used by teachers and schools only through a separate agreement after training is completed. All participants must sign non-disclosure agreements before training begins."
+      },
+
+      "registration": {
+        "priorityDate": "Friday, May 2nd, 2025",
+        "deadline": "Wednesday, June 25th, 2025",
+        "refundDeadline": "Tuesday, June 10th, 2025"
+      }
+    },
+    "2": {
+      "level": "string",
+      "title": "string",
+      "summary": "string",
+      "format": "string",
+      "times": {
+        "startDate": "string",
+        "endDate": "string",
+        "startTime": "string",
+        "endTime": "string",
+        "examDay": "string",
+        "days": "string"
+      },
+      "cost": {
+        "amount": "string",
+        "per": "string",
+        "includeTesting": "string"
+      },
+
+      "prerequisites": "string",
+      "outcomes": [
+        {
+          "title": "string",
+          "availability": "string",
+          "description": "string"
+        }
+      ],
+
+      "nda": {
+        "title": "Proprietary Course Materials and NDA",
+        "description": "Our curriculum and course materials may be used by teachers and schools only through a separate agreement after training is completed. All participants must sign non-disclosure agreements before training begins."
+      },
+
+      "registration": {
+        "priorityDate": "Friday, May 2nd, 2025",
+        "deadline": "Wednesday, June 25th, 2025",
+        "refundDeadline": "Tuesday, June 10th, 2025"
+      }
+    }
+  }
 }
