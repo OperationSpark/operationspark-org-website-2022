@@ -41,10 +41,10 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
         </Content>
         <Content className='flex-column gap-4'>
           <h3 className='section-header'>Current Partners</h3>
-          <ul className='current-partners'>
+          <ul className='grid-list'>
             {partners.map((partner) => (
               <li key={partner}>
-                <div className='partner-name'>{partner}</div>
+                <div className='grid-list-inner'>{partner}</div>
               </li>
             ))}
           </ul>
@@ -152,62 +152,111 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
               </ul>
             </div>
           </div>
-          {/* <motion.img
-            src='/images/curriculum-and-coaching-program.png'
-            width='100%'
-            height='auto'
-            alt='Curriculum and coaching program'
-          /> */}
         </Content>
 
         <Content>
-          <h2>Flexible Training Options for Experienced Teachers</h2>
-          <div>
-            <p>
-              {`Teachers with prior experience in software development, completion of two or more college-level Computer Science courses, or substantial experience teaching high school Computer Science in any coding language may qualify for our self-guided training program.`}
-            </p>
-            <p>
-              {`This flexible option allows participants to schedule training at any time throughout the year. Over a 4-12 week period (based on the teacher's capacity), participants will complete required deliverables with guidance from Operation Spark staff through 3-4 check-ins. The program culminates in the IBC exam.`}
-            </p>
+          <div className='section-content-card'>
+            <h2 className='section-header'>Flexible Training Options for Experienced Teachers</h2>
+            <div className='section-body'>
+              <p>
+                {`Teachers with prior experience in software development, completion of two or more college-level Computer Science courses, or substantial experience teaching high school Computer Science in any coding language may qualify for our self-guided training program.`}
+              </p>
+              <p>
+                {`This flexible option allows participants to schedule training at any time throughout the year. Over a 4-12 week period (based on the teacher's capacity), participants will complete required deliverables with guidance from Operation Spark staff through 3-4 check-ins. The program culminates in the IBC exam.`}
+              </p>
+            </div>
           </div>
         </Content>
+
         <Content>
-          <h2>LDOE Programs and Pathways</h2>
-          <h3>Jump Start Pathways that include our courses and IBCs:</h3>
-          <ul>
-            <li>Arts, AV, Technology and Communication</li>
-            <li>Business Management</li>
-            <li>Information Technology</li>
-            <li>STEM Renaissance Computing and Cybersecurity</li>
-            <li>STEM Renaissance Digital Design & Emergent Media</li>
-          </ul>
+          <div className='section-content-card'>
+            <h2 className='section-header text-center'>LDOE Programs and Pathways</h2>
+            <div className='section-body'>
+              <div className='subsection-body'>
+                <h3 className='card-subheader text-center'>
+                  Jump Start Pathways that include our courses and IBCs
+                </h3>
+                <ul className='grid-list'>
+                  <li>
+                    <div className='grid-list-inner'>Arts, AV, Technology and Communication</div>
+                  </li>
+                  <li>
+                    <div className='grid-list-inner'>Business Management</div>
+                  </li>
+                  <li>
+                    <div className='grid-list-inner'>Information Technology</div>
+                  </li>
+                  <li>
+                    <div className='grid-list-inner'>
+                      STEM Renaissance Computing and Cybersecurity
+                    </div>
+                  </li>
+                  <li>
+                    <div className='grid-list-inner'>
+                      STEM Renaissance Digital Design & Emergent Media
+                    </div>
+                  </li>
+                </ul>
+              </div>
 
-          <h3>Computer Science as a Foreign Language:</h3>
-          <p>{`Our IBCs may be offered in conjunction with Computer Coding as a Foreign Language I or II. Teachers offering Computer Coding as a Foreign Language must be separately certified by the state in Computer Science.`}</p>
+              <div className='subsection-body'>
+                <h3 className='card-subheader text-center'>
+                  Computer Science as a Foreign Language
+                </h3>
+                <p>{`Our IBCs may be offered in conjunction with Computer Coding as a Foreign Language I or II. Teachers offering Computer Coding as a Foreign Language must be separately certified by the state in Computer Science.`}</p>
+              </div>
 
-          <h3>Fast Forward Apprenticeship Pathway</h3>
-          <p>
-            {`Students enrolled in this pathway take all five of Operation Spark's high school courses, culminating in our state-approved registered apprenticeship with a paid work-based learning component their senior year.`}
-          </p>
-          <ul>
-            <li>Fundamentals of HTML, CSS, and Javascript</li>
-            <li>Advanced Javascript, Functional Programming, and Web Development </li>
-            <li>Fundamentals of Video Game Programming</li>
-            <li>Internet of Things</li>
-            <li>Apprenticeship: Operation Spark</li>
-            <li>Apprenticeship: Operation Spark OJT (On-the-Job Training)</li>
-          </ul>
+              <div className='subsection-body'>
+                <h3 className='card-subheader text-center'>Fast Forward Apprenticeship Pathway</h3>
+                <p>
+                  {`Students enrolled in this pathway take all five of Operation Spark's high school courses, culminating in our state-approved registered apprenticeship with a paid work-based learning component their senior year.`}
+                </p>
+                <ul className='grid-list'>
+                  <li>
+                    <div className='grid-list-inner'>Fundamentals of HTML, CSS, and Javascript</div>
+                  </li>
+                  <li>
+                    <div className='grid-list-inner'>
+                      Advanced Javascript, Functional Programming, and Web Development
+                    </div>
+                  </li>
+                  <li>
+                    <div className='grid-list-inner'> Fundamentals of Video Game Programming</div>
+                  </li>
+                  <li>
+                    <div className='grid-list-inner'> Internet of Things</div>
+                  </li>
+                  <li>
+                    <div className='grid-list-inner'> Apprenticeship: Operation Spark</div>
+                  </li>
+                  <li>
+                    <div className='grid-list-inner'>
+                      Apprenticeship: Operation Spark OJT (On-the-Job Training)
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </Content>
 
         <Content>
-          Inquire for more information.
-          <h3>Contact:</h3>
-          <a className='anchor' href='mailto:highschool@operationspark.org'>
-            highschool@operationspark.org
-          </a>
-          <a className='anchor' href='tel:9858038895'>
-            985-803-8895
-          </a>
+          <h2 className='section-header text-center'>Inquire for more information</h2>
+          <div className='section-content-card'>
+            <h3 className='section-subheader text-center'>Contact</h3>
+            <ul className='grid-list'>
+              <li className='flex-row'>
+                <a className='grid-list-inner anchor' href='mailto:highschool@operationspark.org'>
+                  highschool@operationspark.org
+                </a>
+              </li>
+              <li>
+                <a className='grid-list-inner anchor' href='tel:9858038895'>
+                  <div className='grid-list-inner'>985-803-8895</div>
+                </a>
+              </li>
+            </ul>
+          </div>
         </Content>
       </HighschoolStyles>
     </Main>
@@ -237,29 +286,32 @@ const HighschoolStyles = styled.div`
     font-weight: 900;
     text-align: center;
   }
-  .plain-card-body {
-    height: 100%;
+
+  .section-body {
+    padding: 1rem;
+    gap: 1rem;
     display: flex;
     flex-flow: column;
-    gap: 1rem;
-
-    ul {
-      padding-left: 1rem;
-    }
   }
-
-  #card-level-1,
-  #card-level-2 {
-    .plain-card-body {
-      padding: 0.75rem 1.25rem;
-      background: ${({ theme }) => theme.bgHover};
-    }
+  .section-content-card {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem;
+    box-shadow: 0 0 3px 1px inset ${({ theme }) => theme.rgb('fg', 0.25)};
+    border-radius: 1rem;
+    background: ${({ theme }) => theme.rgb('fg', 0.05)};
   }
 
   .card-subheader {
     font-size: 1.2rem;
     font-weight: 900;
     margin-bottom: 0.5rem;
+  }
+  .subsection-body {
+    padding: 1rem;
+    background: ${({ theme }) => theme.rgb('bg', 0.5)};
+    border-radius: 1rem;
+    box-shadow: 0 0 3px 1px inset ${({ theme }) => theme.rgb('fg', 0.25)};
   }
 
   .teacher-training-header {
@@ -298,33 +350,7 @@ const HighschoolStyles = styled.div`
     }
   }
 
-  .registration-cards {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    gap: 1rem;
-
-    .registration-card {
-      flex: 1 1 325px;
-
-      .plain-card-body {
-        display: flex;
-        flex-flow: column;
-        justify-content: space-between;
-        height: 100%;
-        gap: 0.25rem;
-      }
-    }
-
-    .registration-card-description {
-      font-size: 0.9rem;
-      line-height: 1.25;
-    }
-    .registration-card-btn {
-    }
-  }
-
-  .current-partners {
+  .grid-list {
     list-style: none;
     padding: 0;
     display: flex;
@@ -343,7 +369,7 @@ const HighschoolStyles = styled.div`
       border-radius: 0.1rem;
       padding: 0.25rem;
 
-      .partner-name {
+      .grid-list-inner {
         font-size: 0.9rem;
         font-weight: 500;
         padding: 0.25rem 0.5rem;
