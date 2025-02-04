@@ -17,7 +17,7 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
   return (
     <Main style={{ paddingTop: 0 }}>
       <HighschoolStyles>
-        <BgImg src='/images/display/abstract-space.webp' height='20rem'>
+        <BgImg src='/images/display/abstract-space.webp' height='24rem'>
           <Content className='teacher-training-header'>
             <div className='teacher-training-header-content'>
               <h1 className='dynamic-xl'>Teacher Training</h1>
@@ -250,13 +250,13 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
             <h3 className='section-subheader text-center'>Contact</h3>
             <ul className='grid-list'>
               <li className='flex-row'>
-                <a className='grid-list-inner anchor' href='mailto:highschool@operationspark.org'>
+                <a className='grid-list-inner' href='mailto:highschool@operationspark.org'>
                   highschool@operationspark.org
                 </a>
               </li>
               <li>
-                <a className='grid-list-inner anchor' href='tel:9858038895'>
-                  <div className='grid-list-inner'>985-803-8895</div>
+                <a className='grid-list-inner' href='tel:9858038895'>
+                  985-803-8895
                 </a>
               </li>
             </ul>
@@ -281,6 +281,8 @@ const HighschoolStyles = styled.div`
   .TODO {
     color: ${({ theme }) => theme.rgb('red', 1)};
     background: ${({ theme }) => theme.rgb('red', 0.1)};
+    box-shadow: 0 0 1px 1px inset ${({ theme }) => theme.rgb('red', 1)},
+      -3px 3px 1rem 1px ${({ theme }) => theme.rgb('red', 0.5)};
     font-size: 1.5rem;
     font-weight: 700;
     text-align: center;
@@ -291,6 +293,7 @@ const HighschoolStyles = styled.div`
     padding: 1rem;
     padding-top: 3rem;
     border-radius: 1rem;
+
     &::before {
       content: 'TODO';
       font-size: 2rem;
@@ -388,7 +391,7 @@ const HighschoolStyles = styled.div`
     margin: 0 auto;
     li {
       flex: 1 1 250px;
-      box-shadow: 0 0 6px 0px inset ${({ theme }) => theme.rgb('fg', 0.2)};
+      /* box-shadow: 0 0 6px 0px inset ${({ theme }) => theme.rgb('fg', 0.2)}; */
       background: ${({ theme }) => theme.rgb('fg', 0.05)};
       display: flex;
       justify-content: center;
@@ -401,6 +404,22 @@ const HighschoolStyles = styled.div`
         font-weight: 500;
         padding: 0.25rem 0.5rem;
         text-align: center;
+      }
+
+      &:has(a.grid-list-inner) {
+        padding: 0;
+
+        a.grid-list-inner {
+          width: 100%;
+          color: ${({ theme }) => theme.rgb('fg', 0.9)};
+          color: ${({ theme }) =>
+            theme.isLightMode ? theme.rgb('blue', 1, -5) : theme.rgb('blue', 1, 5)};
+          padding: 0.5rem;
+        }
+        &:hover {
+          background: ${({ theme }) => theme.rgb('blue', 0.2)};
+          box-shadow: 0 0 0.75rem 0px inset ${({ theme }) => theme.rgb('blue', 0.5)};
+        }
       }
     }
   }

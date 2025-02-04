@@ -27,7 +27,10 @@ type TeacherTrainingCardProps = {
 
 const TeacherTrainingCard: FC<TeacherTrainingCardProps> = (props) => {
   return (
-    <TeacherTrainingCardStyles id={`teacher-training-level-${props.level}`}>
+    <TeacherTrainingCardStyles
+      id={`teacher-training-level-${props.level}`}
+      className={`teacher-training-card-${props.levelColor}`}
+    >
       <div className='card-header'>
         <h3 className='course-level-number'>Level {props.level}</h3>
         <h4 className={`course-level-name course-level-name-${props.levelColor}`}>
@@ -107,11 +110,23 @@ const TeacherTrainingCardStyles = styled.div`
   gap: 1rem;
   background: ${({ theme }) => theme.bgHover};
   padding: 1rem 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   box-shadow: 0 0 4px 0px inset ${({ theme }) => theme.alpha.fg25};
   max-width: 40rem;
   flex: 1 1 28rem;
   margin: 0 auto;
+
+  &.teacher-training-card-green {
+    box-shadow: 0 0 0.5rem 1px inset ${({ theme }) => theme.rgb('green', 0.5, -10)};
+    background: ${({ theme }) => theme.rgb('green', 0.05, -10)};
+    --level-color: ${({ theme }) => theme.asRgb('green', -10)};
+  }
+
+  &.teacher-training-card-yellow {
+    box-shadow: 0 0 0.5rem 1px inset ${({ theme }) => theme.rgb('yellow.800', 1, -4)};
+    background: ${({ theme }) => theme.rgb('yellow.800', 0.05, -4)};
+    --level-color: ${({ theme }) => theme.asRgb('yellow.800', -4)};
+  }
 
   .card-header {
     font-size: 1.4rem;
@@ -164,7 +179,7 @@ const TeacherTrainingCardStyles = styled.div`
 
   .card-section {
     background: ${({ theme }) => theme.bgHover};
-    box-shadow: 0 0 1.5px 0px inset ${({ theme }) => theme.alpha.fg50};
+    box-shadow: 0 0 1px 1px rgba(var(--level-color), 0.5);
     color: ${({ theme }) => theme.alpha.fg};
     padding: 1rem;
     border-radius: 0.5rem;
@@ -184,8 +199,8 @@ const TeacherTrainingCardStyles = styled.div`
     }
 
     &.card-section-with-subsections {
-      box-shadow: none;
-      padding: 0;
+      box-shadow: 0 0 1px 1px rgba(var(--level-color), 0.5);
+      padding: 0.5rem;
     }
   }
 
