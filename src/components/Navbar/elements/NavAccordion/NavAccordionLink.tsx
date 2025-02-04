@@ -4,17 +4,19 @@ import styled from 'styled-components';
 
 import { checkActiveSubLink } from '@this/src/helpers/navigation';
 
-const NavAccordionLinkStyles = styled.div`
-  a {
-    all: unset;
-  }
+const NavAccordionLinkStyles = styled.a`
+  all: unset;
+  /* Styles below here */
+
   font-family: 'Red Hat Display', sans-serif;
   font-weight: 500;
   cursor: pointer;
-  width: 100%;
+  display: flex;
+
   padding: 0.6rem 1rem;
   border-top: 1px solid ${(p) => p.theme.border[700]};
-  :hover,
+  &:hover,
+  &:focus-visible,
   &.active {
     background: linear-gradient(
       90deg,
@@ -28,21 +30,9 @@ const NavAccordionLinkStyles = styled.div`
   &.sub-link {
     padding-left: 2.5rem;
   }
-  a {
-    transition: all 250ms;
-  }
-  a:focus-visible,
-  a:hover {
-    background: linear-gradient(
-      90deg,
-      ${({ theme }) => theme.primary[800]} 0%,
-      ${({ theme }) => theme.primary[600]} 4%,
-      ${({ theme }) => theme.primary[600]} 96%,
-      ${({ theme }) => theme.primary[800]} 100%
-    );
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5) inset;
-    border-radius: 0.25rem;
-    padding: 0.25rem 0.5rem;
+
+  &.active {
+    cursor: default;
   }
 `;
 
@@ -68,10 +58,12 @@ export const NavAccordionLink = ({
   return (
     <NavAccordionLinkStyles
       className={`${checkActiveSubLink(href, pathname) ? 'active' : ''} ${className || ''}`}
+      href={href}
+      title={linkTitle}
+      aria-label={linkTitle}
+      onClick={handleClick}
     >
-      <a href={href} title={linkTitle} aria-label={linkTitle} onClick={handleClick}>
-        {children}
-      </a>
+      {children}
     </NavAccordionLinkStyles>
   );
 };

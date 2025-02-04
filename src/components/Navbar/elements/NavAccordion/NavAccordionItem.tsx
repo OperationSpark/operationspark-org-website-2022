@@ -6,13 +6,13 @@ import styled from 'styled-components';
 
 const NavAccordionItemStyles = styled(motion.div)`
   box-shadow: 0 -3px 3px rgba(25, 25, 25, 0) inset;
-  transition: box-shadow 200ms;
+  transition: all 200ms;
+
   &.open {
     box-shadow: 0 -2px 2px ${(p) => p.theme.primary[700]} inset;
   }
   &.open .accordion-item,
   &.active {
-    transition: box-shadow 200ms;
     background: linear-gradient(
       90deg,
       ${({ theme }) => theme.primary[800]} 0%,
@@ -21,6 +21,20 @@ const NavAccordionItemStyles = styled(motion.div)`
       ${({ theme }) => theme.primary[800]} 100%
     );
     box-shadow: 0 2px 4px ${(p) => p.theme.primary[700]};
+
+    .accordion-item-title,
+    .accordion-item-title {
+      background: linear-gradient(
+        90deg,
+        ${({ theme }) => theme.primary[800]} 0%,
+        ${({ theme }) => theme.primary[600]} 4%,
+        ${({ theme }) => theme.primary[600]} 96%,
+        ${({ theme }) => theme.primary[800]} 100%
+      );
+      box-shadow: 0 0 3px rgba(0, 0, 0, 0.5) inset;
+      border-radius: 0.25rem;
+      padding: 0 0.5rem;
+    }
   }
 
   .accordion-item {
