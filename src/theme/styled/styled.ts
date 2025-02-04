@@ -15,12 +15,7 @@ type ColorWeight =
 
 type ColorRanges = Record<ColorWeight, string>;
 
-interface BaseColors {
-  fg: string;
-  bg: string;
-  bgHover: string;
-  black: string;
-  white: string;
+interface BaseColorRanges {
   primary: ColorRanges;
   secondary: ColorRanges;
   border: ColorRanges;
@@ -31,6 +26,21 @@ interface BaseColors {
   magenta: ColorRanges;
   blue: ColorRanges;
 }
+interface BaseColors extends BaseColorRanges {
+  fg: string;
+  bg: string;
+  bgHover: string;
+  black: string;
+  white: string;
+}
+
+type BaseColorKey = keyof BaseColors;
+type BaseColorRangeKey = keyof BaseColorRanges;
+
+type BaseColorGrade = `${BaseColorRangeKey}.${ColorWeight}`;
+
+type ColorKey = BaseColorKey | BaseColorGrade;
+
 interface DefaultColors extends BaseColors {
   alpha: {
     bg: string;
@@ -86,7 +96,7 @@ declare module 'styled-components' {
      * theme.rgb('green', 0.5, -4) // 'rgba(0, 204, 0, 0.5)'
      * theme.rgb('green', 0.5)     // 'rgba(0, 255, 0, 0.5)'
      */
-    rgb: (color: keyof BaseColors, alpha?: number, brightness?: number) => string;
+    rgb: (color: ColorKey, alpha?: number, brightness?: number) => string;
     /**
      * @returns RGB only
      *
@@ -95,6 +105,6 @@ declare module 'styled-components' {
      * theme.asRgb('green', 4)  // '32, 255, 32'
      * theme.asRgb('green', -4) // '0, 204, 0'
      */
-    asRgb: (color: string, brightness?: number) => string;
+    asRgb: (colorKey: ColorKey, brightness?: number) => string;
   }
 }

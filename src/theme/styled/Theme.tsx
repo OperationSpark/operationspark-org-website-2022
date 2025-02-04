@@ -1,5 +1,6 @@
+import { get } from 'lodash';
 import { ReactNode, useEffect, useState } from 'react';
-import { DefaultTheme, ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 import GlobalStyles from './GlobalStyles';
 
 const minMax = (value: number, min: number, max: number) => {
@@ -45,7 +46,12 @@ export default function Theme({ children, theme }: { children: ReactNode; theme:
   };
 
   const getThemeColor = (color: string): string | undefined => {
-    const themeColor = themeColors[color as keyof DefaultTheme];
+    if (!color) {
+      return;
+    }
+
+    const [colorName] = color.split('.');
+    const themeColor = get(themeColors, color) || get(themeColors, colorName);
 
     if (typeof themeColor === 'string') {
       return themeColor;
