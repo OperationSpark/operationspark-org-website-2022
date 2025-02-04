@@ -83,13 +83,13 @@ const TeacherTrainingCard: FC<TeacherTrainingCardProps> = (props) => {
       <div className='flex-row gap-2'>
         <a
           className='training-card-info-link'
-          href={`/programs/highschool/teacherTraining/level/${props.level}`}
+          href={`/programs/highschool/teacherTraining/info/level-${props.level}`}
         >
           <InfoIcon className='info-icon' size={24} /> More Information
         </a>
         <a
           className='training-card-apply-link'
-          href={`/programs/highschool/teacherTraining/register/${props.level}`}
+          href={`/programs/highschool/teacherTraining/register/level-${props.level}`}
         >
           Register for Level {props.level}
           <span className='register-icon'>
