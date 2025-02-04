@@ -76,24 +76,23 @@ const TeacherTrainingCard: FC<TeacherTrainingCardProps> = (props) => {
             {props.prerequisiteNote && <p className='note'>{props.prerequisiteNote}</p>}
           </div>
         </div>
-
-        <div className='flex-row gap-2'>
-          <a
-            className='training-card-info-link'
-            href={`/programs/highschool/teacherTraining/level/${props.level}`}
-          >
-            <InfoIcon className='info-icon' size={24} /> More Information
-          </a>
-          <a
-            className='training-card-apply-link'
-            href={`/programs/highschool/teacherTraining/register/${props.level}`}
-          >
-            Register for Level {props.level}
-            <span className='register-icon'>
-              <ChevronRightIcon size={24} strokeWidth={1.5} />
-            </span>
-          </a>
-        </div>
+      </div>
+      <div className='flex-row gap-2'>
+        <a
+          className='training-card-info-link'
+          href={`/programs/highschool/teacherTraining/level/${props.level}`}
+        >
+          <InfoIcon className='info-icon' size={24} /> More Information
+        </a>
+        <a
+          className='training-card-apply-link'
+          href={`/programs/highschool/teacherTraining/register/${props.level}`}
+        >
+          Register for Level {props.level}
+          <span className='register-icon'>
+            <ChevronRightIcon size={24} strokeWidth={1.5} />
+          </span>
+        </a>
       </div>
     </TeacherTrainingCardStyles>
   );

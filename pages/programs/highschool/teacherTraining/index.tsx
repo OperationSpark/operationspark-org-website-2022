@@ -1,13 +1,17 @@
 import { GetStaticProps, NextPage } from 'next';
 import styled from 'styled-components';
 
+import { GiCoffeeCup as PrepIcon, GiWeightLiftingUp as TrainingIcon } from 'react-icons/gi';
+
+import { MdOutlineRocketLaunch as DeliverIcon } from 'react-icons/md';
+import { PiCertificate as CertifyIcon } from 'react-icons/pi';
+
 import Content from '@this/components/layout/Content';
 import Main from '@this/components/layout/Main';
 import { TeacherTraining } from '@this/data/types/teacherTraining';
 import { getStaticAsset } from '@this/pages-api/static/[asset]';
 import TeacherTrainingCard from '@this/src/components/Cards/TeacherTrainingCard';
 import { BgImg } from '@this/src/components/Elements';
-import { motion } from 'framer-motion';
 
 const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
   return (
@@ -39,7 +43,9 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
           <h3 className='section-header'>Current Partners</h3>
           <ul className='current-partners'>
             {partners.map((partner) => (
-              <li key={partner}>{partner}</li>
+              <li key={partner}>
+                <div className='partner-name'>{partner}</div>
+              </li>
             ))}
           </ul>
         </Content>
@@ -90,12 +96,68 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
 
         <Content className='TODO'>
           <h4>Schedule a Meeting with our High School Staff</h4>
-          <motion.img
+        </Content>
+        <Content>
+          <div className='curriculum-coaching-program'>
+            <div className='coaching-program-card'>
+              <div className='coaching-program-icon'>
+                <TrainingIcon fontSize='1em' />
+              </div>
+              <h2 className='coaching-program-title'>Train</h2>
+              <ul className='coaching-program-list'>
+                <li>Two week, intensive training in July</li>
+                <li>Live instruction, virtual or hybrid</li>
+                <li>
+                  Participants meeting exam score and deliverable requirements are certified to
+                  deliver curriculum
+                </li>
+              </ul>
+            </div>
+            <div className='coaching-program-card'>
+              <div className='coaching-program-icon'>
+                <PrepIcon fontSize='1em' />
+              </div>
+              <h2 className='coaching-program-title'>Prep</h2>
+              <ul className='coaching-program-list'>
+                <li>Teacher attends training and coaching sessions with Op Spark staff</li>
+                <li>Teacher works with Op Spark to develop scope and sequence, grading norms</li>
+                <li>
+                  School IT dept. works with teacher and Op Spark to prepare tech and student
+                  permissions
+                </li>
+              </ul>
+            </div>
+            <div className='coaching-program-card'>
+              <div className='coaching-program-icon'>
+                <DeliverIcon fontSize='1em' />
+              </div>
+              <h2 className='coaching-program-title'>Deliver</h2>
+              <ul className='coaching-program-list'>
+                <li>Teacher meets with Op Spark coach for 30 minutes weekly</li>
+                <li>{`Coaching tailored to each teacher's needs`}</li>
+                <li>{`Op Spark monitors student progress and provides updates to teacher and administration, upon request`}</li>
+              </ul>
+            </div>
+            <div className='coaching-program-card'>
+              <div className='coaching-program-icon'>
+                <CertifyIcon fontSize='1em' />
+              </div>
+              <h2 className='coaching-program-title'>Certify</h2>
+              <ul className='coaching-program-list'>
+                <li>{`Students with complete portfolios are eligible to test`}</li>
+                <li>
+                  {`Teacher proctors exam in line with Op Spark Test Security Policies and procedures.`}
+                </li>
+                <li>{`Students earn certs!`}</li>
+              </ul>
+            </div>
+          </div>
+          {/* <motion.img
             src='/images/curriculum-and-coaching-program.png'
             width='100%'
             height='auto'
             alt='Curriculum and coaching program'
-          />
+          /> */}
         </Content>
 
         <Content>
@@ -267,20 +329,108 @@ const HighschoolStyles = styled.div`
     padding: 0;
     display: flex;
     flex-flow: row wrap;
-    gap: 0.5rem;
+    gap: 0.25rem;
     justify-content: center;
     max-width: 999px;
     margin: 0 auto;
     li {
-      flex: 1 1 300px;
-      max-width: 333px;
-      font-size: 0.9rem;
-      font-weight: 500;
-      box-shadow: 0 0 1.5px 0px inset ${({ theme }) => theme.alpha.fg50};
-      padding: 0.5rem 1rem;
-      border-radius: 0.5rem;
-      background: ${({ theme }) => theme.bgHover};
-      text-align: center;
+      flex: 1 1 250px;
+      box-shadow: 0 0 6px 0px inset ${({ theme }) => theme.rgb('fg', 0.2)};
+      background: ${({ theme }) => theme.rgb('fg', 0.05)};
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 0.1rem;
+      padding: 0.25rem;
+
+      .partner-name {
+        font-size: 0.9rem;
+        font-weight: 500;
+        padding: 0.25rem 0.5rem;
+        text-align: center;
+      }
+    }
+  }
+  .curriculum-coaching-program {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 1rem;
+    justify-content: center;
+    .coaching-program-card {
+      flex: 1 1 46%;
+      min-width: 300px;
+      padding: 1rem;
+      box-shadow: 0 0 3px 1px inset ${({ theme }) => theme.rgb('fg', 0.25)};
+      border-radius: 1rem;
+      background: ${({ theme }) => theme.rgb('fg', 0.05)};
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+
+      &:nth-child(1) {
+        box-shadow: 0 0 3px 1px inset ${({ theme }) => theme.rgb('blue', 0.5, 1)};
+        background: ${({ theme }) => theme.rgb('blue', 0.1)};
+        --color: ${({ theme }) => theme.asRgb('blue')};
+      }
+
+      &:nth-child(2) {
+        box-shadow: 0 0 3px 1px inset ${({ theme }) => theme.rgb('primary', 0.5)};
+        background: ${({ theme }) => theme.rgb('primary', 0.1)};
+        --color: ${({ theme }) => theme.asRgb('primary', 4)};
+      }
+      &:nth-child(3) {
+        box-shadow: 0 0 3px 1px inset ${({ theme }) => theme.rgb('magenta', 0.5)};
+        background: ${({ theme }) => theme.rgb('magenta', 0.1)};
+        --color: ${({ theme }) => theme.asRgb('magenta')};
+      }
+      &:nth-child(4) {
+        box-shadow: 0 0 3px 1px inset ${({ theme }) => theme.rgb('green', 0.5, -8)};
+        background: ${({ theme }) => theme.rgb('green', 0.1, 10)};
+        --color: ${({ theme }) => theme.asRgb('green', -6)};
+      }
+    }
+    .coaching-program-title {
+      font-size: 2rem;
+      font-weight: 900;
+      color: rgba(var(--color), 1);
+    }
+    .coaching-program-icon {
+      display: flex;
+      font-size: 4rem;
+      color: ${({ theme }) => theme.rgb('bg')};
+      filter: drop-shadow(0 0 4px rgba(var(--color), 1));
+    }
+    .coaching-program-list {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-flow: column;
+      gap: 0.5rem;
+      margin: 0;
+      margin-top: 1rem;
+      flex: 1;
+      justify-content: space-between;
+
+      padding: 1rem;
+      box-shadow: 0 0 3px 1px inset ${({ theme }) => theme.rgb('fg', 0.25)};
+      border-radius: 1rem;
+      background: ${({ theme }) => theme.rgb('bg', 0.5)};
+      li {
+        font-size: 1rem;
+        font-weight: 400;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        width: fit-content;
+        max-width: 80%;
+        background: ${({ theme }) => theme.rgb('bg', 0.75)};
+        box-shadow: 0 0 3px 1px inset rgba(var(--color), 0.5);
+        &:nth-child(even) {
+          margin-left: auto;
+        }
+        &:nth-child(odd) {
+          margin-right: auto;
+        }
+      }
     }
   }
 `;
