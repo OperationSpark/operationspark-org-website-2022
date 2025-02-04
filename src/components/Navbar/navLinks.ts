@@ -23,6 +23,8 @@ export const navMenus: NavigationMenuLink[] = [
     title: 'High School',
     href: '/programs/highschool',
     subLinks: [
+      { title: 'High School Programs', href: '' },
+      { title: 'Teacher Training', href: '/teacherTraining' },
       //! Uncomment to show high school application
       // { title: 'Programs', href: '' },
       // { title: 'High School Application', href: '/apply' },
