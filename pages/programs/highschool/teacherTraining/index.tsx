@@ -104,58 +104,47 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
         </Content>
         <Content>
           <div className='curriculum-coaching-program'>
-            <div className='coaching-program-card'>
-              <div className='coaching-program-icon'>
-                <TrainingIcon fontSize='1em' />
-              </div>
-              <h2 className='coaching-program-title'>Train</h2>
-              <ul className='coaching-program-list'>
-                <li>Two week, intensive training in July</li>
-                <li>Live instruction, virtual or hybrid</li>
-                <li>
-                  Participants meeting exam score and deliverable requirements are certified to
-                  deliver curriculum
-                </li>
-              </ul>
-            </div>
-            <div className='coaching-program-card'>
-              <div className='coaching-program-icon'>
-                <PrepIcon fontSize='1em' />
-              </div>
-              <h2 className='coaching-program-title'>Prep</h2>
-              <ul className='coaching-program-list'>
-                <li>Teacher attends training and coaching sessions with Op Spark staff</li>
-                <li>Teacher works with Op Spark to develop scope and sequence, grading norms</li>
-                <li>
-                  School IT dept. works with teacher and Op Spark to prepare tech and student
-                  permissions
-                </li>
-              </ul>
-            </div>
-            <div className='coaching-program-card'>
-              <div className='coaching-program-icon'>
-                <DeliverIcon fontSize='1em' />
-              </div>
-              <h2 className='coaching-program-title'>Deliver</h2>
-              <ul className='coaching-program-list'>
-                <li>Teacher meets with Op Spark coach for 30 minutes weekly</li>
-                <li>{`Coaching tailored to each teacher's needs`}</li>
-                <li>{`Op Spark monitors student progress and provides updates to teacher and administration, upon request`}</li>
-              </ul>
-            </div>
-            <div className='coaching-program-card'>
-              <div className='coaching-program-icon'>
-                <CertifyIcon fontSize='1em' />
-              </div>
-              <h2 className='coaching-program-title'>Certify</h2>
-              <ul className='coaching-program-list'>
-                <li>{`Students with complete portfolios are eligible to test`}</li>
-                <li>
-                  {`Teacher proctors exam in line with Op Spark Test Security Policies and procedures.`}
-                </li>
-                <li>{`Students earn certs!`}</li>
-              </ul>
-            </div>
+            <NeumorphismListCard
+              color='auto'
+              title='Train'
+              Icon={TrainingIcon}
+              items={[
+                'Two week, intensive training in July',
+                'Live instruction, virtual or hybrid',
+                `Participants meeting exam score and deliverable requirements are certified to deliver curriculum`,
+              ]}
+            />
+            <NeumorphismListCard
+              color='auto'
+              title='Prep'
+              Icon={PrepIcon}
+              items={[
+                'Teacher attends training and coaching sessions with Op Spark staff',
+                'Teacher works with Op Spark to develop scope and sequence, grading norms',
+                'School IT dept. works with teacher and Op Spark to prepare tech and student permissions',
+              ]}
+            />
+
+            <NeumorphismListCard
+              color='auto'
+              title='Deliver'
+              Icon={DeliverIcon}
+              items={[
+                'Teacher meets with Op Spark coach for 30 minutes weekly',
+                `Coaching tailored to each teacher's needs`,
+                `Op Spark monitors student progress and provides updates to teacher and administration, upon request`,
+              ]}
+            />
+            <NeumorphismListCard
+              color='auto'
+              title='Certify'
+              Icon={CertifyIcon}
+              items={[
+                `Students with complete portfolios are eligible to test`,
+                `Teacher proctors exam in line with Op Spark Test Security Policies and procedures.`,
+                `Students earn certs!`,
+              ]}
+            />
           </div>
         </Content>
 
