@@ -36,8 +36,8 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
             {`We equip high school teachers to deliver our curriculum and prepare students for success in earning our statewide IBCs. During our intensive two-week summer training, teachers participate in live content instruction, complete hands-on projects, and undergo assessments for each course. On the final day of training, participants take the IBC exam, and those who meet specific benchmarks are certified by Operation Spark to deliver our courses to students.`}
           </p>
         </Content>
-        <Content className='TODO'>
-          Insert School Accountability Blurb + Workforce Readiness Blurb
+        <Content>
+          <div className='TODO'>Insert School Accountability Blurb + Workforce Readiness Blurb</div>
         </Content>
         <Content className='flex-column gap-4'>
           <h3 className='section-header'>Current Partners</h3>
@@ -49,8 +49,12 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
             ))}
           </ul>
         </Content>
-        <Content className='TODO'>Insert some brief outcomes data</Content>
-        <Content className='TODO'>Insert Testimonials from Partners</Content>
+        <Content>
+          <div className='TODO'>Insert some brief outcomes data</div>
+        </Content>
+        <Content>
+          <div className='TODO'>Insert Testimonials from Partners</div>
+        </Content>
 
         <Content className='flex-column gap-4'>
           <h2 className='section-header'>Courses and IBCs</h2>
@@ -94,8 +98,8 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
           </div>
         </Content>
 
-        <Content className='TODO'>
-          <h4>Schedule a Meeting with our High School Staff</h4>
+        <Content>
+          <div className='TODO'>Schedule a Meeting with our High School Staff</div>
         </Content>
         <Content>
           <div className='curriculum-coaching-program'>
@@ -275,10 +279,33 @@ export const getStaticProps: GetStaticProps<TeacherTraining> = async () => {
 
 const HighschoolStyles = styled.div`
   .TODO {
-    color: ${({ theme }) => theme.red[0]};
+    color: ${({ theme }) => theme.rgb('red', 1)};
+    background: ${({ theme }) => theme.rgb('red', 0.1)};
     font-size: 1.5rem;
     font-weight: 700;
     text-align: center;
+    position: relative;
+    font-family: 'Kalam', sans-serif;
+    width: fit-content;
+    margin: 0 auto;
+    padding: 1rem;
+    padding-top: 3rem;
+    border-radius: 1rem;
+    &::before {
+      content: 'TODO';
+      font-size: 2rem;
+      font-family: 'Permanent Marker', serif;
+      position: absolute;
+      top: 0.5rem;
+      line-height: 1;
+      text-align: center;
+      left: 0;
+      right: 0;
+    }
+  }
+
+  .__content-container {
+    padding-bottom: 0;
   }
 
   .section-header {
@@ -438,7 +465,9 @@ const HighschoolStyles = styled.div`
       justify-content: space-between;
 
       padding: 1rem;
-      box-shadow: 0 0 3px 1px inset ${({ theme }) => theme.rgb('fg', 0.25)};
+      box-shadow: -0.125rem 0.125rem 0.75rem 0px inset rgba(var(--color), 0.35),
+        0px 0px 0px 2px ${({ theme }) => theme.rgb('bg', 1)},
+        -0.125rem 0.125rem 0.5rem 1px rgba(var(--color), 0.5);
       border-radius: 1rem;
       background: ${({ theme }) => theme.rgb('bg', 0.5)};
       li {
@@ -447,9 +476,10 @@ const HighschoolStyles = styled.div`
         padding: 0.5rem;
         border-radius: 0.5rem;
         width: fit-content;
-        max-width: 80%;
+        max-width: calc(100% - 3rem);
         background: ${({ theme }) => theme.rgb('bg', 0.75)};
         box-shadow: 0 0 3px 1px inset rgba(var(--color), 0.5);
+        color: ${({ theme }) => theme.rgb('fg', 0.9)};
         &:nth-child(even) {
           margin-left: auto;
         }

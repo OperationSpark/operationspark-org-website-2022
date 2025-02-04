@@ -49,7 +49,7 @@ const TeacherTrainingCard: FC<TeacherTrainingCardProps> = (props) => {
         {props.ibcNote && <p className='note'>{props.ibcNote}</p>}
       </div>
 
-      <div className='card-section'>
+      <div className='card-section card-section-with-subsections'>
         <h3 className='card-subheader text-center'>Summer 2025 Training Info</h3>
 
         <div className='training-datetime'>
@@ -112,6 +112,7 @@ const TeacherTrainingCardStyles = styled.div`
   max-width: 40rem;
   flex: 1 1 28rem;
   margin: 0 auto;
+
   .card-header {
     font-size: 1.4rem;
     font-weight: 900;
@@ -180,6 +181,11 @@ const TeacherTrainingCardStyles = styled.div`
       color: ${({ theme }) => theme.alpha.fg50};
       border-left: 0.25rem solid ${({ theme }) => theme.alpha.fg25};
       padding-left: 0.5rem;
+    }
+
+    &.card-section-with-subsections {
+      box-shadow: none;
+      padding: 0;
     }
   }
 
