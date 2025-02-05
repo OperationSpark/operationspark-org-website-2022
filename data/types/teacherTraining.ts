@@ -44,9 +44,21 @@ export type TeacherTrainingInfo = {
   };
 };
 
+export type TeacherTrainingFormField = {
+  label: string;
+  type: 'text' | 'email';
+  options?: string[];
+  required: boolean;
+};
+
 export type TeacherTraining = {
   partners: string[];
   info: {
     [level: string]: TeacherTrainingInfo;
+  };
+  registrationFields: {
+    participant: TeacherTrainingFormField[];
+    completer: TeacherTrainingFormField[];
+    billing: TeacherTrainingFormField[];
   };
 };

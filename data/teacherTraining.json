@@ -33,7 +33,7 @@
       },
       "cost": {
         "amount": "$600.00",
-        "per": "participant",
+        "per": "teacher",
         "includeTesting": true
       },
       "prerequisites": "No Prerequisites",
@@ -89,7 +89,7 @@
       },
       "cost": {
         "amount": "$600.00",
-        "per": "participant",
+        "per": "teacher",
         "includeTesting": true
       },
 
@@ -117,5 +117,73 @@
         "refundDeadline": "Tuesday, June 10th, 2025"
       }
     }
+  },
+  "registrationFields": {
+    "participant": [
+      {
+        "type": "email",
+        "name": "email",
+        "label": "Email",
+        "required": true
+      },
+      {
+        "type": "text",
+        "name": "firstName",
+        "label": "First Name",
+        "required": true
+      },
+      {
+        "type": "text",
+        "name": "lastName",
+        "label": "Last Name",
+        "required": true
+      },
+      {
+        "type": "text",
+        "name": "position",
+        "label": "Position / Role",
+        "required": true
+      },
+      {
+        "type": "text",
+        "name": "district",
+        "label": "School District",
+        "required": true
+      },
+      {
+        "type": "text",
+        "name": "district",
+        "label": "School(s) Taught At",
+        "required": true
+      }
+    ],
+    "completer": [
+      {
+        "type": "text",
+        "name": "completerName",
+        "label": "First Name",
+        "required": true
+      },
+      {
+        "type": "text",
+        "name": "completerPosition",
+        "label": "Position / Role",
+        "required": true
+      }
+    ],
+    "billing": [
+      {
+        "type": "text",
+        "name": "billingFullName",
+        "label": "Billing Full Name",
+        "required": true
+      },
+      {
+        "type": "email",
+        "name": "billingEmail",
+        "label": "Billing Email",
+        "required": true
+      }
+    ]
   }
 }
