@@ -183,7 +183,7 @@ const Level1Info: NextPage<TeacherTrainingInfo> = (props) => {
             center
             Icon={CheckIcon}
             items={[
-              <div className='flex-column gap-4'>
+              <div className='flex-column gap-4' key='registration'>
                 <a
                   href={`/programs/highschool/teacherTraining/register/level-${level}`}
                   className='registration-button'
@@ -211,14 +211,16 @@ const Level1Info: NextPage<TeacherTrainingInfo> = (props) => {
             subtitle='Please get in touch with any questions'
             fit
             items={[
-              <div>
+              <div key='contact'>
                 <GridList
                   interactive
                   items={[
-                    <a href={`mailto:highschool@operationspark.org`}>
+                    <a key='email' href={`mailto:highschool@operationspark.org`}>
                       highschool@operationspark.org
                     </a>,
-                    <a href={`tel:985-803-8895`}>985-803-8895</a>,
+                    <a key='phone' href={`tel:985-803-8895`}>
+                      985-803-8895
+                    </a>,
                   ]}
                 />
               </div>,
