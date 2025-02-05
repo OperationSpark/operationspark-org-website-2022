@@ -94,7 +94,6 @@ const Level1Info: NextPage<TeacherTrainingInfo> = (props) => {
             <div className='flex-400'>
               <NeumorphismListCard
                 title='When'
-                color='blue'
                 Icon={ClockIcon}
                 center
                 items={[
