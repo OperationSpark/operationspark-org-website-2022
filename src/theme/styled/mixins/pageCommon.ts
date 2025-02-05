@@ -31,6 +31,20 @@ const pageCommonCss = css`
     }
   }
 
+  .date-value {
+    font-weight: 600;
+    font-size: 0.9em;
+    line-height: 1;
+    padding: 0.1em 0.25em;
+    color: ${({ theme }) =>
+      theme.isLightMode ? theme.rgb('primary') : theme.rgb('secondary.600', 1)};
+    background: ${({ theme }) =>
+      theme.isLightMode ? theme.rgb('primary', 0.1) : theme.rgb('secondary.600', 0.1)};
+    box-shadow: 0 0 1px 0px inset
+      ${({ theme }) =>
+        theme.isLightMode ? theme.rgb('primary', 0.5) : theme.rgb('secondary.600', 0.5)};
+    border-radius: 0.25rem;
+  }
   .page-header-container {
     display: flex;
     flex-flow: column;
