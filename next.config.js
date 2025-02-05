@@ -119,6 +119,21 @@ module.exports = (phase, { defaultConfig }) => {
           destination: '/privacyPolicy',
           permanent: true,
         },
+        {
+          source: '/teacher-training',
+          destination: '/programs/highschool/teacherTraining',
+          permanent: true,
+        },
+        {
+          source: '/teacher-training/info/:slug',
+          destination: '/programs/highschool/teacherTraining/info/:slug',
+          permanent: true,
+        },
+        {
+          source: '/teacher-training/register/:slug',
+          destination: '/programs/highschool/teacherTraining/register/:slug',
+          permanent: true,
+        },
         // Filter out false/undefined/null routes
       ].filter(Boolean);
     },
