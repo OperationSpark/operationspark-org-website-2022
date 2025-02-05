@@ -1,8 +1,14 @@
 export type TeacherTrainingInfo = {
   level: string;
+  levelName: string;
   title: string;
+  subtitle: string;
+  season: string;
   summary: string;
-  format: string;
+  format: {
+    type: 'Online' | 'In-Person' | 'Hybrid';
+    description: string;
+  };
   times: {
     startDate: string;
     endDate: string;
@@ -27,6 +33,7 @@ export type TeacherTrainingInfo = {
 
   nda: {
     title: string;
+    subtitle: string;
     description: string;
   };
 

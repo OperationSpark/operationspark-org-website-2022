@@ -40,6 +40,9 @@ const pageCommonCss = css`
     font-family: 'Red Hat Display', sans-serif;
 
     .page-header-content {
+      display: flex;
+      flex-flow: column;
+      gap: 0.5rem;
       font-family: 'Red Hat Display', sans-serif;
       width: fit-content;
       background: ${({ theme }) => (theme.isLightMode ? theme.alpha.fg25 : theme.alpha.bg25)};
@@ -53,9 +56,14 @@ const pageCommonCss = css`
       backdrop-filter: blur(2rem);
       -webkit-backdrop-filter: blur(2rem);
       line-height: 1;
-      color: ${({ theme }) => theme.rgb('fg', 0.8)};
+      color: ${({ theme }) => theme.rgb('white', 0.8)};
       text-align: center;
     }
+  }
+
+  .page-header-dim {
+    color: ${({ theme }) => theme.rgb('white', 0.5)};
+    font-style: italic;
   }
 
   .section-header {

@@ -32,6 +32,25 @@ export const layoutCss = css`
     justify-content: center;
   }
 
+  .text-subtle-1 {
+    color: ${({ theme }) => theme.rgb('fg', 0.75)};
+  }
+  .text-subtle-2 {
+    color: ${({ theme }) => theme.rgb('fg', 0.625)};
+  }
+
+  .text-subtle-3 {
+    color: ${({ theme }) => theme.rgb('fg', 0.5)};
+  }
+
+  .text-subtle-4 {
+    color: ${({ theme }) => theme.rgb('fg', 0.375)};
+  }
+
+  .text-subtle-5 {
+    color: ${({ theme }) => theme.rgb('fg', 0.25)};
+  }
+
   .gap-1 {
     gap: 0.25rem;
   }
@@ -79,6 +98,13 @@ export const layoutCss = css`
 
   .fw-900 {
     font-weight: 900 !important;
+  }
+
+  .fs-50 {
+    font-size: 0.5rem !important;
+  }
+  .fs-60 {
+    font-size: 0.6rem !important;
   }
   .fs-75 {
     font-size: 0.75rem !important;
@@ -154,5 +180,15 @@ export const layoutCss = css`
   }
   .text-nowrap {
     white-space: nowrap;
+  }
+  .fit-content {
+    width: fit-content;
+    height: fit-content;
+  }
+  .fit-height {
+    height: fit-content;
+  }
+  .fit-width {
+    width: fit-content;
   }
 `;

@@ -1,42 +1,85 @@
-import { FC } from 'react';
-import { IconType } from 'react-icons';
-import styled from 'styled-components';
+import { FC, ReactNode } from 'react';
+import styled, { keyframes } from 'styled-components';
 
 type NeumorphismListCardProps = {
   title: string;
-  Icon: IconType;
-  items: string[];
+  Icon?: FC | FC[];
+  items: ReactNode[];
+  subtitle?: string;
+  /** Card color. default: none */
   color?: 'auto' | 'blue' | 'primary' | 'magenta' | 'green';
+  /** Rotate card color. default: false -- pass number (in seconds) to adjust transition */
+  hueRotate?: boolean;
+  width?: string;
+  maxWidth?: string;
+  /** stretch with or fit content */
+  fit?: boolean | number;
+  /** center card content -- Default: alternate left/right */
+  center?: boolean;
 };
 
-const NeumorphismListCard: FC<NeumorphismListCardProps> = ({ title, Icon, items, color }) => {
+const NeumorphismListCard: FC<NeumorphismListCardProps> = ({
+  title,
+  subtitle,
+  Icon,
+  items,
+  color,
+  fit,
+  hueRotate,
+  width,
+  maxWidth,
+  center,
+}) => {
   const colorClassName = color === 'auto' ? ' _color-auto' : color ? ` _color-${color}` : '';
-
+  const hueRotateClassName = hueRotate ? ' _color-rotate' : '';
   return (
-    <NeumorphismListCardStyles className={`_neu-card${colorClassName}`}>
-      <div className='_neu-card-icon'>
-        <Icon fontSize='1em' />
-      </div>
+    <NeumorphismListCardStyles
+      className={`_neu-card${colorClassName}${hueRotateClassName}`}
+      style={fit ? { maxWidth: maxWidth ?? 'fit-content', width } : { width, maxWidth }}
+      time={typeof hueRotate === 'number' ? hueRotate : undefined}
+    >
+      {Icon && (
+        <div className='_neu-card-icon'>
+          {Array.isArray(Icon) ? Icon.map((Icn, index) => <Icn key={index} />) : <Icon />}
+        </div>
+      )}
       <h2 className='_neu-card-title'>{title}</h2>
-      <ul className='_neu-card-list'>
-        {items.map((item, i) => (
-          <li key={item + i} className='_new-card-list-item'>
-            {item}
-          </li>
-        ))}
-      </ul>
+      {subtitle && <h2 className='_neu-card-subtitle'>{subtitle}</h2>}
+      {items.length === 1 ? (
+        <div className='_neu-card-single-item'>{items[0]}</div>
+      ) : (
+        <ul className='_neu-card-list'>
+          {items.map((item, i) => (
+            <li
+              key={i}
+              className={`_neu-card-list-item${center ? ' _neu-card-list-item-center' : ''}`}
+            >
+              {item}
+            </li>
+          ))}
+        </ul>
+      )}
     </NeumorphismListCardStyles>
   );
 };
 
 export default NeumorphismListCard;
 
-const NeumorphismListCardStyles = styled.div`
+const hueRotateAnimation = keyframes`
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+`;
+
+const NeumorphismListCardStyles = styled.div<{ time?: number }>`
   flex: 1 1 46%;
+  min-height: 100%;
   display: flex;
   flex-flow: column;
   align-items: center;
-  min-width: 300px;
   padding: 1rem;
   box-shadow: 0 0 3px 1px inset ${({ theme }) => theme.rgb('fg', 0.25)};
   border-radius: 1rem;
@@ -71,35 +114,62 @@ const NeumorphismListCardStyles = styled.div`
     --color: ${({ theme }) => theme.asRgb('green', -6)};
   }
 
+  &._color-rotate {
+    animation: ${hueRotateAnimation} ${({ time }) => time ?? 30}s linear infinite;
+  }
+
   ._neu-card-title {
     font-size: 2rem;
     font-weight: 900;
-    color: rgba(var(--color), 1);
+    color: ${({ theme }) => theme.rgb('bg', 1, theme.isLightMode ? 2 : -2)};
+    filter: drop-shadow(0 0 4px rgba(var(--color), 1));
+    text-align: center;
+    /* color: rgba(var(--color), 1); */
+  }
+  ._neu-card-subtitle {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: rgba(var(--color), 0.8);
+    text-align: center;
   }
   ._neu-card-icon {
     display: flex;
     font-size: 4rem;
-    color: ${({ theme }) => theme.rgb('bg')};
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    /* color: ${({ theme }) => theme.rgb('bg')}; */
+    color: ${({ theme }) => theme.rgb('bg', 1, theme.isLightMode ? 2 : -2)};
     filter: drop-shadow(0 0 4px rgba(var(--color), 1));
+  }
+
+  ._neu-card-single-item {
+    padding: 1rem;
+    border-radius: 1rem;
+    background: ${({ theme }) => theme.rgb('bg', 0.25)};
+    box-shadow: 0 0 1px 1px inset rgba(var(--color), 0.25);
+    color: ${({ theme }) => theme.rgb('fg', 0.9)};
+    margin-top: 1rem;
   }
   ._neu-card-list {
     list-style: none;
-    padding: 0;
     display: flex;
     flex-flow: column;
     gap: 0.5rem;
     margin: 0;
     margin-top: 1rem;
+    padding: 0;
     flex: 1;
-    justify-content: space-between;
-
+    height: 100%;
+    justify-content: space-evenly;
+    width: 100%;
     padding: 1rem;
     box-shadow: -0.125rem 0.125rem 0.75rem 0px inset rgba(var(--color), 0.35),
       0px 0px 0px 2px ${({ theme }) => theme.rgb('bg', 1)},
       -0.125rem 0.125rem 0.5rem 1px rgba(var(--color), 0.5);
     border-radius: 1rem;
     background: ${({ theme }) => theme.rgb('bg', 0.5)};
-    li {
+    ._neu-card-list-item {
       font-size: 1rem;
       font-weight: 400;
       padding: 0.5rem;
@@ -114,6 +184,16 @@ const NeumorphismListCardStyles = styled.div`
       }
       &:nth-child(odd) {
         margin-right: auto;
+      }
+
+      &._neu-card-list-item-center {
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
     }
   }

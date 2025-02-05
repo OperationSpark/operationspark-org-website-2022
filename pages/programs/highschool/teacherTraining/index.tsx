@@ -41,13 +41,16 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
         <Content>
           <div className='TODO'>Insert School Accountability Blurb + Workforce Readiness Blurb</div>
         </Content>
+
         <Content className='flex-column gap-4'>
           <h3 className='section-header'>Current Partners</h3>
           <GridList items={partners} />
         </Content>
+
         <Content>
           <div className='TODO'>Insert some brief outcomes data</div>
         </Content>
+
         <Content>
           <div className='TODO'>Insert Testimonials from Partners</div>
         </Content>

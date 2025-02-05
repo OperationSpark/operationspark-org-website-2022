@@ -14,9 +14,15 @@
   "info": {
     "1": {
       "level": "1",
-      "title": "Summer 2025 Teacher Training Information",
+      "levelName": "Basic",
+      "title": "Teacher Training",
+      "season": "Summer 2025",
+      "subtitle": "Fundamentals of HTML, CSS, and Javascript",
       "summary": "Operation Spark is pleased to offer a nine-day training to Louisiana high school teachers. This training will guide participants through our introductory course, Fundamentals of HTML, CSS, and Javascript, which culminates in a Level 1 (Basic) statewide Industry Based Credential. Over the nine day period, teachers will complete all course projects and assessments in preparation for the Level 1 IBC exam. Along the way, they'll explore methods and strategies specific to the teaching of code. The exam wil be administered on the final day of the training.",
-      "format": "Hybrid. Teachers will be able to choose to attend via Zoom, with the option to join the instructor in person in our learning lab in central New Orleans on select days. Live attendance is mandatory with either option. Teachers will be asked to share their choice of format with us when registering, then confirm one week before the training. Participants who live within driving distance are encouraged to attend in person on available days.",
+      "format": {
+        "type": "Hybrid",
+        "description": "Teachers will be able to choose to attend via Zoom, with the option to join the instructor in person in our learning lab in central New Orleans on select days. Live attendance is mandatory with either option. Teachers will be asked to share their choice of format with us when registering, then confirm one week before the training. Participants who live within driving distance are encouraged to attend in person on available days."
+      },
       "times": {
         "startDate": "Tuesday, July 8th",
         "endDate": "Friday, July 18th",
@@ -30,7 +36,6 @@
         "per": "participant",
         "includeTesting": true
       },
-
       "prerequisites": "No Prerequisites",
       "outcomes": [
         {
@@ -52,7 +57,8 @@
       ],
 
       "nda": {
-        "title": "Proprietary Course Materials and NDA",
+        "title": "NDA",
+        "subtitle": "Proprietary Course Materials",
         "description": "Our curriculum and course materials may be used by teachers and schools only through a separate agreement after training is completed. All participants must sign non-disclosure agreements before training begins."
       },
 
@@ -63,35 +69,45 @@
       }
     },
     "2": {
-      "level": "string",
-      "title": "string",
-      "summary": "string",
-      "format": "string",
+      "level": "2",
+      "levelName": "Advanced",
+      "title": "Teacher Training",
+      "season": "Summer 2025",
+      "subtitle": "Javascript, Functional Programming, and Web Development",
+      "summary": "Operation Spark is pleased to offer a nine-day training to Louisiana high school teachers who have successfully taught our level 1 curriculum (Fundamentals of HTML, CSS, and Javascript) for one or more academic terms. This training will guide participants through the second core course in our sequence (Advanced Javascript, Functional Programming, and Web Development), which culminates in a Level 2 (Advanced) statewide Industry Based Credential. Over the nine day period, teachers will complete all course projects and assessments in preparation for the Level 2 IBC exam. Along the way, they'll explore methods and strategies specific to the teaching of code. The exam will  administered on the final day of the training.",
+      "format": {
+        "type": "Online",
+        "description": " Live attendance is mandatory."
+      },
       "times": {
-        "startDate": "string",
-        "endDate": "string",
-        "startTime": "string",
-        "endTime": "string",
-        "examDay": "string",
-        "days": "string"
+        "startDate": "Tuesday, July 8th",
+        "endDate": "Friday, July 18th",
+        "startTime": "9:00 AM",
+        "endTime": "3:00 PM",
+        "examDay": "Friday, July 18th",
+        "days": "Monday - Friday"
       },
       "cost": {
-        "amount": "string",
-        "per": "string",
-        "includeTesting": "string"
+        "amount": "$600.00",
+        "per": "participant",
+        "includeTesting": true
       },
 
-      "prerequisites": "string",
+      "prerequisites": "Participants must be certified by Operation Spark to lead instruction for the level course/IBC, and must have taught the level 1 course for one or more academic terms.",
       "outcomes": [
         {
-          "title": "string",
-          "availability": "string",
-          "description": "string"
+          "title": "",
+          "availabilityScore": "85%",
+          "description": [
+            "In order to lead the course at their home school, participants must attend all sessions, complete all course requirements, and score 85% or higher on the IBC exam.",
+            "Teachers who score above 70% but below 85% on the exam will be offered a retake opportunity after an additional study period of 2-5 days following the end of the training."
+          ]
         }
       ],
 
       "nda": {
-        "title": "Proprietary Course Materials and NDA",
+        "title": "NDA",
+        "subtitle": "Proprietary Course Materials",
         "description": "Our curriculum and course materials may be used by teachers and schools only through a separate agreement after training is completed. All participants must sign non-disclosure agreements before training begins."
       },
 
