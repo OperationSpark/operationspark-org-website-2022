@@ -31,7 +31,7 @@ const pageCommonCss = css`
     }
   }
 
-  .date-value {
+  .value-badge {
     font-weight: 600;
     font-size: 0.9em;
     line-height: 1;

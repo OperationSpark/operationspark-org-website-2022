@@ -9,6 +9,7 @@ import {
   FaUserGraduate as OutcomesIcon,
 } from 'react-icons/fa6';
 import {
+  HiMiniChevronLeft as ChevronLeftIcon,
   HiMiniChevronRight as ChevronRightIcon,
   HiOutlineBuildingOffice as OfficeIcon,
   HiOutlineBookOpen as SummaryIcon,
@@ -24,6 +25,7 @@ import { getStaticAsset } from '@this/pages-api/static/[asset]';
 import NeumorphismListCard from '@this/src/components/Cards/NeumorphismListCard';
 import { BgImg } from '@this/src/components/Elements';
 import GridList from '@this/src/components/Elements/GridList';
+import Link from 'next/link';
 
 const getLocationTypeIcons = (location: TeacherTrainingInfo['format']['type']) => {
   if (location === 'Hybrid') {
@@ -65,6 +67,11 @@ const Level1Info: NextPage<TeacherTrainingInfo> = (props) => {
             </div>
           </Content>
         </BgImg>
+
+        <Link className='back-to-teacher-training' href='/programs/highschool/teacherTraining'>
+          <ChevronLeftIcon strokeWidth={2} size='1.25em' />
+          Back to Teacher Training
+        </Link>
 
         <Content className='flex-column gap-4'>
           <NeumorphismListCard
@@ -194,10 +201,20 @@ const Level1Info: NextPage<TeacherTrainingInfo> = (props) => {
                   {`If the training fee will be covered by the school/district, the form should be completed for the teacher by a school/district administrator responsible for billing.`}
                 </p>
                 <p className='dynamic-txt'>
-                  {`Please include any special instructions for Invoices as required by the school or district. Invoices for training fees will be sent one month before training starts. Cancellations for a full refund will be allowed until the invoicing date, ${registration.deadline}. Any registrations received after this date will be non-refundable.`}
+                  {`Please include any special instructions for Invoices as required by the school or district. Invoices for training fees will be sent one month before training starts. Cancellations for a full refund will be allowed until the invoicing date, `}
+                  <span className='value-badge'>{registration.refundDeadline}</span>
+                  {`. `}
+                  <i className='fw-500'>
+                    Any registrations received after this date will be non-refundable.
+                  </i>
                 </p>
                 <p className='dynamic-txt'>
-                  {`The priority deadline for guaranteed availability is ${registration.priorityDate}. The final deadline to register is ${registration.deadline}, or when we reach the seat limit, whichever comes first.`}
+                  {`The priority deadline for guaranteed availability is `}
+                  <span className='value-badge'>{registration.priorityDate}</span>
+                  {`. The final deadline to register is `}
+                  <span className='value-badge'>{registration.deadline}</span>
+                  {` , `}
+                  <i className='fw-500'>or when we reach the seat limit, whichever comes first.</i>
                 </p>
               </div>,
             ]}
@@ -264,6 +281,7 @@ const Level1InfoStyles = styled.div`
     text-align: center;
     transition: 0.25s;
     margin: 1rem auto;
+
     &:hover {
       background: ${({ theme }) => theme.rgb('primary', 1, 5)};
       gap: 1rem;
@@ -271,6 +289,36 @@ const Level1InfoStyles = styled.div`
 
     &:active {
       background: ${({ theme }) => theme.rgb('primary', 1, -2)};
+    }
+  }
+
+  .back-to-teacher-training {
+    position: absolute;
+    z-index: 1;
+    top: ${({ theme }) => theme.navHeight}px;
+    left: 0.5rem;
+    padding: 0.5rem;
+    background: ${({ theme }) => theme.rgb('black', 0.25)};
+    box-shadow: 0 0 1px 1px inset ${({ theme }) => theme.rgb('secondary', 0.5)};
+    color: ${({ theme }) => theme.rgb('primary.300', 1)};
+    border-radius: 0.5rem;
+    backdrop-filter: blur(0.5rem);
+    font-weight: 500;
+    transition: all 225ms;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    &:hover {
+      background: ${({ theme }) => theme.rgb('black', 0.5, 5)};
+      color: ${({ theme }) => theme.rgb('primary.100', 1)};
+      box-shadow: 0 0 1px 1px inset ${({ theme }) => theme.rgb('secondary', 1)};
+      transform: translateY(-0.125rem);
+    }
+    &:active {
+      background: ${({ theme }) => theme.rgb('black', 0.35, 1)};
+      color: ${({ theme }) => theme.rgb('primary.300', 1)};
+      box-shadow: 0 0 1px 1px inset ${({ theme }) => theme.rgb('secondary', 0.6)};
+      transform: translateY(0);
     }
   }
 `;

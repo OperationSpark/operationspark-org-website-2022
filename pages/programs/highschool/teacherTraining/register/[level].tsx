@@ -1,5 +1,8 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import Link from 'next/link';
 import styled from 'styled-components';
+
+import { HiMiniChevronLeft as ChevronLeftIcon } from 'react-icons/hi2';
 
 import Content from '@this/components/layout/Content';
 import Main from '@this/components/layout/Main';
@@ -41,6 +44,11 @@ const TeacherTrainingRegistration: NextPage<TeacherTrainingRegistrationProps> = 
           </Content>
         </BgImg>
 
+        <Link className='back-to-teacher-training' href='/programs/highschool/teacherTraining'>
+          <ChevronLeftIcon strokeWidth={2} size='1.25em' />
+          Back to Teacher Training
+        </Link>
+
         <Content>
           <div className='flex-row flex-center'>
             <NeumorphismListCard
@@ -74,9 +82,9 @@ const TeacherTrainingRegistration: NextPage<TeacherTrainingRegistrationProps> = 
                     <div className='details-label'>Deadlines</div>
                     <div className='details-value'>
                       {`The priority deadline for guaranteed availability is `}
-                      <span className='details-date'>{info.registration.priorityDate}</span>
+                      <span className='value-badge'>{info.registration.priorityDate}</span>
                       {`. The final deadline to register is `}
-                      <span className='details-date'>{info.registration.deadline}</span>
+                      <span className='value-badge'>{info.registration.deadline}</span>
                       {`, or when we reach the seat limit, whichever comes first.`}
                     </div>
                   </div>
@@ -102,7 +110,7 @@ const TeacherTrainingRegistration: NextPage<TeacherTrainingRegistrationProps> = 
                       href={`/programs/highschool/teacherTraining/info/level-${level}`}
                       className='registration-button'
                     >
-                      See all details
+                      See all details for level {level}
                     </a>
                   </div>
                 </DetailsTable>,
@@ -120,7 +128,7 @@ const TeacherTrainingRegistration: NextPage<TeacherTrainingRegistrationProps> = 
               <div key='registration-form flex-column gap-4'>
                 <div>
                   {`Please include any special instructions for Invoices as required by the school or district. Invoices for training fees will be sent one month before training starts. Cancellations for a full refund will be allowed until the invoicing date, `}
-                  <span className='date-value'>June 10, 2025</span>
+                  <span className='value-badge'>June 10, 2025</span>
                   {`. Any registrations received after this date will be `}
                   <i>non-refundable.</i>
                 </div>
@@ -165,11 +173,12 @@ const TeacherTrainingRegisterStyles = styled.div`
     color: ${({ theme }) => theme.rgb('white', 1)};
     border-radius: 0.5rem;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 700;
     font-size: 1.25rem;
     text-align: center;
     transition: 0.25s;
     margin: 1rem auto;
+    margin-bottom: 0;
     &:hover {
       background: ${({ theme }) => theme.rgb('primary', 1, 5)};
       gap: 1rem;
@@ -177,6 +186,36 @@ const TeacherTrainingRegisterStyles = styled.div`
 
     &:active {
       background: ${({ theme }) => theme.rgb('primary', 1, -2)};
+    }
+  }
+
+  .back-to-teacher-training {
+    position: absolute;
+    z-index: 1;
+    top: ${({ theme }) => theme.navHeight}px;
+    left: 0.5rem;
+    padding: 0.5rem;
+    background: ${({ theme }) => theme.rgb('black', 0.25)};
+    box-shadow: 0 0 1px 1px inset ${({ theme }) => theme.rgb('secondary', 0.5)};
+    color: ${({ theme }) => theme.rgb('primary.300', 1)};
+    border-radius: 0.5rem;
+    backdrop-filter: blur(0.5rem);
+    font-weight: 500;
+    transition: all 225ms;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    &:hover {
+      background: ${({ theme }) => theme.rgb('black', 0.5, 5)};
+      color: ${({ theme }) => theme.rgb('primary.100', 1)};
+      box-shadow: 0 0 1px 1px inset ${({ theme }) => theme.rgb('secondary', 1)};
+      transform: translateY(-0.125rem);
+    }
+    &:active {
+      background: ${({ theme }) => theme.rgb('black', 0.35, 1)};
+      color: ${({ theme }) => theme.rgb('primary.300', 1)};
+      box-shadow: 0 0 1px 1px inset ${({ theme }) => theme.rgb('secondary', 0.6)};
+      transform: translateY(0);
     }
   }
 `;
@@ -210,19 +249,5 @@ const DetailsTable = styled.div`
   }
   .details-value {
     border-radius: 0 0.5rem 0.5rem 0;
-  }
-  .details-date {
-    font-weight: 600;
-    font-size: 0.9em;
-    line-height: 1;
-    padding: 0.1em 0.25em;
-    color: ${({ theme }) =>
-      theme.isLightMode ? theme.rgb('primary') : theme.rgb('secondary.600', 1)};
-    background: ${({ theme }) =>
-      theme.isLightMode ? theme.rgb('primary', 0.1) : theme.rgb('secondary.600', 0.1)};
-    box-shadow: 0 0 1px 0px inset
-      ${({ theme }) =>
-        theme.isLightMode ? theme.rgb('primary', 0.5) : theme.rgb('secondary.600', 0.5)};
-    border-radius: 0.25rem;
   }
 `;
