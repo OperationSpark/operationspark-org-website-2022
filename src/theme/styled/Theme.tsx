@@ -42,7 +42,7 @@ export default function Theme({ children, theme }: { children: ReactNode; theme:
 
   const themeColors = {
     ...theme,
-    ...colors[themeMode],
+    ...(themeMode ? colors[themeMode] : {}),
   };
 
   const getThemeColor = (color: string): string | undefined => {
@@ -61,7 +61,7 @@ export default function Theme({ children, theme }: { children: ReactNode; theme:
     }
   };
 
-  return (
+  return !themeMode ? null : (
     <ThemeProvider
       theme={{
         ...themeColors,
@@ -98,7 +98,7 @@ export default function Theme({ children, theme }: { children: ReactNode; theme:
 }
 
 export const useThemeMode = () => {
-  const [themeMode, setTheme] = useState<'dark' | 'light'>('dark');
+  const [themeMode, setTheme] = useState<'dark' | 'light'>();
   const [systemThemeMode, setSystemThemeMode] = useState<'dark' | 'light'>('dark');
   const [isSystemMode, setSystemMode] = useState<boolean>(false);
 
