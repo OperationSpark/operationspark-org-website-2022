@@ -4,6 +4,7 @@ const color = require('cli-color');
 const { validateData } = require('./data/validate');
 
 const {
+  NODE_ENV,
   OVERRIDE_NODE_ENV = '',
   FB_PIXEL_ID,
   GOOGLE_ANALYTICS_ID,
@@ -55,7 +56,7 @@ module.exports = (phase, { defaultConfig }) => {
       },
     },
     env: {
-      OVERRIDE_NODE_ENV: OVERRIDE_NODE_ENV || '',
+      OVERRIDE_NODE_ENV: OVERRIDE_NODE_ENV || NODE_ENV || '',
       FB_PIXEL_ID,
       HIGHSCHOOL_FORM_ACTIVE_UNTIL,
       HIGHSCHOOL_FORM_RESPONSES_NAME,
