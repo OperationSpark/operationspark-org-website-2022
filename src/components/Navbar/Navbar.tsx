@@ -41,7 +41,6 @@ const withinDateRange = ({ start, end }: IAlert): boolean => {
 };
 
 const Nav = ({ alertInfo }: NavProps) => {
-  console.log({ OVERRIDE_NODE_ENV: env.OVERRIDE_NODE_ENV });
   const scrollY = useScrollY();
   const supportsBackdropFilter = useValidCss('backdrop-filter', 'blur()');
   const isTop = scrollY === null ? true : scrollY <= 5;
