@@ -302,7 +302,7 @@ const HighschoolStyles = styled.div`
   }
 
   #arrow1.connecting-arrow {
-    top: 1rem;
+    top: calc(50% - 3rem);
     right: 0;
     transform: rotate(180deg);
   }
@@ -314,7 +314,7 @@ const HighschoolStyles = styled.div`
     justify-content: center;
   }
   #arrow3.connecting-arrow {
-    top: 1rem;
+    top: calc(50% - 3rem);
   }
 
   #card-group-deliver {
