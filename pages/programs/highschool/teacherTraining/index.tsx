@@ -13,6 +13,8 @@ import { getStaticAsset } from '@this/pages-api/static/[asset]';
 import NeumorphismListCard from '@this/src/components/Cards/NeumorphismListCard';
 import TeacherTrainingCard from '@this/src/components/Cards/TeacherTrainingCard';
 import { BgImg } from '@this/src/components/Elements';
+import BubbleList from '@this/src/components/Elements/BubbleList';
+import ConnectingArrow from '@this/src/components/Elements/ConnectingArrow';
 import GridList from '@this/src/components/Elements/GridList';
 
 const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
@@ -100,10 +102,10 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
         <Content>
           <div className='TODO'>Schedule a Meeting with our High School Staff</div>
         </Content>
-        <Content>
-          <div className='curriculum-coaching-program'>
+        <Content className='curriculum-coaching-program'>
+          <div id='card-group-train' className='coaching-section'>
             <NeumorphismListCard
-              color='auto'
+              color='blue'
               title='Train'
               Icon={TrainingIcon}
               items={[
@@ -112,8 +114,13 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
                 `Participants meeting exam score and deliverable requirements are certified to deliver curriculum`,
               ]}
             />
+            <div id='arrow1' className='connecting-arrow'>
+              <ConnectingArrow />
+            </div>
+          </div>
+          <div id='card-group-prep' className='coaching-section'>
             <NeumorphismListCard
-              color='auto'
+              color='primary'
               title='Prep'
               Icon={PrepIcon}
               items={[
@@ -122,9 +129,14 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
                 'School IT dept. works with teacher and Op Spark to prepare tech and student permissions',
               ]}
             />
+            <div id='arrow2' className='connecting-arrow'>
+              <ConnectingArrow />
+            </div>
+          </div>
 
+          <div id='card-group-deliver' className='coaching-section'>
             <NeumorphismListCard
-              color='auto'
+              color='magenta'
               title='Deliver'
               Icon={DeliverIcon}
               items={[
@@ -133,8 +145,14 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
                 `Op Spark monitors student progress and provides updates to teacher and administration, upon request`,
               ]}
             />
+            <div id='arrow3' className='connecting-arrow'>
+              <ConnectingArrow />
+            </div>
+          </div>
+
+          <div id='card-group-certify' className='coaching-section'>
             <NeumorphismListCard
-              color='auto'
+              color='green'
               title='Certify'
               Icon={CertifyIcon}
               items={[
@@ -193,14 +211,24 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
                   {`Students enrolled in this pathway take all five of Operation Spark's high school courses, culminating in our state-approved registered apprenticeship with a paid work-based learning component their senior year.`}
                 </p>
 
-                <GridList
+                <BubbleList
                   items={[
                     'Fundamentals of HTML, CSS, and Javascript',
                     'Advanced Javascript, Functional Programming, and Web Development',
                     'Fundamentals of Video Game Programming',
                     'Internet of Things',
-                    'Apprenticeship: Operation Spark',
-                    'Apprenticeship: Operation Spark OJT (On-the-Job Training)',
+
+                    <div key='opspark' className='flex-column w-50'>
+                      <span className='value-badge'>Apprenticeship</span>
+                      <span>Operation Spark</span>
+                    </div>,
+                    <div key='OJT' className='flex-column w-50'>
+                      <span className='value-badge'>Apprenticeship</span>
+                      <span>
+                        {'Operation Spark '}
+                        <abbr title='On-the-job Training'>OJT</abbr>
+                      </span>
+                    </div>,
                   ]}
                 />
               </div>
@@ -257,9 +285,88 @@ const HighschoolStyles = styled.div`
   }
 
   .curriculum-coaching-program {
+    max-width: 1600px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .coaching-section {
+    position: relative;
+  }
+  .connecting-arrow {
+    position: absolute;
+    font-size: 5rem;
     display: flex;
-    flex-flow: row wrap;
-    gap: 1rem;
+    /* pointer-events: none; */
+  }
+
+  #arrow1.connecting-arrow {
+    top: 1rem;
+    right: 0;
+    transform: rotate(180deg);
+  }
+  #arrow2.connecting-arrow {
+    bottom: -3rem;
+    left: 0;
+    right: 0;
+    transform: rotate(-90deg);
     justify-content: center;
+  }
+  #arrow3.connecting-arrow {
+    top: 1rem;
+  }
+
+  #card-group-deliver {
+    // Switch deliver and certify cards when 2x2
+    grid-column: 2;
+    grid-row: 2;
+  }
+  #card-group-certify {
+    // Switch deliver and certify cards when 2x2
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  @media screen and (max-width: 768px) {
+    .curriculum-coaching-program {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    #arrow1.connecting-arrow,
+    #arrow2.connecting-arrow,
+    #arrow3.connecting-arrow {
+      transform: rotate(-90deg);
+      top: auto;
+      bottom: -3.5rem;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+    }
+    #card-group-certify,
+    #card-group-deliver {
+      grid-column: auto;
+      grid-row: auto;
+    }
+  }
+  @media screen and (min-width: 1400px) {
+    .curriculum-coaching-program {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+    #arrow1.connecting-arrow,
+    #arrow2.connecting-arrow,
+    #arrow3.connecting-arrow {
+      bottom: auto;
+      left: auto;
+      top: 1rem;
+      right: 0;
+      transform: rotate(180deg);
+    }
+    #card-group-certify,
+    #card-group-deliver {
+      grid-column: auto;
+      grid-row: auto;
+    }
   }
 `;
