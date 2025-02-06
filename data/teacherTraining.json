@@ -124,65 +124,107 @@
         "type": "email",
         "name": "email",
         "label": "Email",
+        "placeholder": "halle.bot@operationspark.org",
         "required": true
       },
       {
         "type": "text",
         "name": "firstName",
         "label": "First Name",
+        "placeholder": "Halle",
         "required": true
       },
       {
         "type": "text",
         "name": "lastName",
         "label": "Last Name",
+        "placeholder": "Bot",
         "required": true
       },
       {
         "type": "text",
         "name": "position",
         "label": "Position / Role",
+        "placeholder": "Teacher",
         "required": true
       },
       {
         "type": "text",
         "name": "district",
         "label": "School District",
+        "placeholder": "NOLA Public Schools",
         "required": true
       },
       {
         "type": "text",
-        "name": "district",
+        "name": "schools",
         "label": "School(s) Taught At",
+        "placeholder": "Ben Franklin High School, ...",
         "required": true
       }
     ],
     "completer": [
       {
         "type": "text",
-        "name": "completerName",
+        "name": "completerFirstName",
         "label": "First Name",
+        "placeholder": "Halle",
+        "required": true
+      },
+      {
+        "type": "text",
+        "name": "completerLastName",
+        "label": "Last Name",
+        "placeholder": "Bot",
         "required": true
       },
       {
         "type": "text",
         "name": "completerPosition",
         "label": "Position / Role",
+        "placeholder": "Teacher",
+        "required": true
+      },
+      {
+        "type": "text",
+        "name": "completerEmail",
+        "label": "Email",
+        "placeholder": "halle.bot@operationspark.org",
         "required": true
       }
     ],
     "billing": [
       {
         "type": "text",
-        "name": "billingFullName",
-        "label": "Billing Full Name",
+        "name": "billingName",
+        "label": "Billing Name",
+        "placeholder": "Halle Bot / School",
         "required": true
       },
+
       {
         "type": "email",
         "name": "billingEmail",
-        "label": "Billing Email",
+        "label": "Email",
+        "placeholder": "halle.bot@operationspark.org",
         "required": true
+      }
+    ],
+    "acknowledgements": [
+      {
+        "name": "confirmRead",
+        "label": "I have read information [TODO: LINK TO INFO PAGE] regarding the scope and outcomes of this course.",
+        "value": false
+      },
+      {
+        "name": "confirmAvailable",
+        "label": "The teacher I'm registering is available July 8-18, 9 AM to 3 PM",
+        "value": false
+      },
+      {
+        "name": "confirmResources",
+        "label": "The teacher I'm registering will have access to a computer with webcam, mic, and a reliable high speed internet connection during these dates and times.",
+        "value": false
       }
     ]
   }

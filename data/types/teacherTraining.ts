@@ -45,10 +45,11 @@ export type TeacherTrainingInfo = {
 };
 
 export type TeacherTrainingFormField = {
-  label: string;
   type: 'text' | 'email';
-  options?: string[];
-  required: boolean;
+  name: string;
+  label: string;
+  placeholder?: string;
+  required?: boolean;
 };
 
 export type TeacherTraining = {
@@ -60,5 +61,6 @@ export type TeacherTraining = {
     participant: TeacherTrainingFormField[];
     completer: TeacherTrainingFormField[];
     billing: TeacherTrainingFormField[];
+    acknowledgements: TeacherTrainingFormField[];
   };
 };

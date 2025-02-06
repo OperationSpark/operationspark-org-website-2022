@@ -10,6 +10,7 @@ import { TeacherTraining, TeacherTrainingInfo } from '@this/data/types/teacherTr
 import { getStaticAsset } from '@this/pages-api/static/[asset]';
 import NeumorphismListCard from '@this/src/components/Cards/NeumorphismListCard';
 import { BgImg } from '@this/src/components/Elements';
+import TeacherTrainingApplication from '@this/src/Forms/Form.TeacherTraining';
 
 type TeacherTrainingRegistrationProps = {
   info: TeacherTrainingInfo;
@@ -132,9 +133,14 @@ const TeacherTrainingRegistration: NextPage<TeacherTrainingRegistrationProps> = 
                   {`. Any registrations received after this date will be `}
                   <i>non-refundable.</i>
                 </div>
-                <hr style={{ margin: '2rem 0' }} />
-                <div className='TODO'>Registration Form</div>
               </div>,
+              <TeacherTrainingApplication
+                key='registration-form'
+                registrationFields={formFields}
+                onSubmitComplete={() => {
+                  console.log('Form submitted');
+                }}
+              />,
             ]}
             center
           />
