@@ -120,30 +120,37 @@ const TeacherTrainingRegistration: NextPage<TeacherTrainingRegistrationProps> = 
           </div>
         </Content>
 
-        <Content className='flex-column flex-align-center'>
-          <NeumorphismListCard
-            title='Registration Form'
-            subtitle='Please complete a separate form for each participant'
-            maxWidth='800px'
-            items={[
-              <div key='registration-form flex-column gap-4'>
-                <div>
-                  {`Please include any special instructions for Invoices as required by the school or district. Invoices for training fees will be sent one month before training starts. Cancellations for a full refund will be allowed until the invoicing date, `}
-                  <span className='value-badge'>June 10, 2025</span>
-                  {`. Any registrations received after this date will be `}
-                  <i>non-refundable.</i>
-                </div>
-              </div>,
-              <TeacherTrainingApplication
-                key='registration-form'
-                registrationFields={formFields}
-                onSubmitComplete={() => {
-                  console.log('Form submitted');
-                }}
-              />,
-            ]}
-            center
-          />
+        <Content className='flex-column flex-align-center' style={{ minHeight: '100vh' }}>
+          <div>
+            <NeumorphismListCard
+              title='Registration Form'
+              subtitle='Please complete a separate form for each participant'
+              maxWidth='800px'
+              style={{ padding: 0 }}
+              itemStyle={{ padding: 0 }}
+              center
+              items={[
+                <div key='registration-form' className='registration-form flex-column gap-4'>
+                  <div className='section-content-card' style={{ margin: '1rem' }}>
+                    <div>
+                      {`Please include any special instructions for Invoices as required by the school or district. Invoices for training fees will be sent one month before training starts. Cancellations for a full refund will be allowed until the invoicing date, `}
+                      <span className='value-badge'>June 10, 2025</span>
+                      {`. Any registrations received after this date will be `}
+                      <i>non-refundable.</i>
+                    </div>
+                  </div>
+
+                  <TeacherTrainingApplication
+                    key='registration-form'
+                    registrationFields={formFields}
+                    onSubmitComplete={() => {
+                      console.log('Form submitted');
+                    }}
+                  />
+                </div>,
+              ]}
+            />
+          </div>
         </Content>
       </TeacherTrainingRegisterStyles>
     </Main>
@@ -233,8 +240,8 @@ const DetailsTable = styled.div`
   .details-row {
     display: grid;
     grid-template-columns: 125px 1fr;
-    gap: 1rem;
-    box-shadow: 0 0 4px 1px ${({ theme }) => theme.rgb('fg', 0.1)};
+    gap: 0.5rem;
+    box-shadow: 0 0 1px 1px ${({ theme }) => theme.rgb('fg', 0.2)};
     background: ${({ theme }) => theme.rgb('bg', 1)};
     border-radius: 0.5rem;
   }

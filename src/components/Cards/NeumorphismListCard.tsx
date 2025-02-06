@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled, { CSSProperties, keyframes } from 'styled-components';
 
 type NeumorphismListCardProps = {
   id?: string;
@@ -17,6 +17,9 @@ type NeumorphismListCardProps = {
   fit?: boolean | number;
   /** center card content -- Default: alternate left/right */
   center?: boolean;
+  style?: CSSProperties;
+  listStyle?: CSSProperties;
+  itemStyle?: CSSProperties;
 };
 
 const NeumorphismListCard: FC<NeumorphismListCardProps> = ({
@@ -31,6 +34,9 @@ const NeumorphismListCard: FC<NeumorphismListCardProps> = ({
   width,
   maxWidth,
   center,
+  style,
+  listStyle,
+  itemStyle,
 }) => {
   const colorClassName = color === 'auto' ? ' _color-auto' : color ? ` _color-${color}` : '';
   const hueRotateClassName = hueRotate ? ' _color-rotate' : '';
@@ -38,7 +44,11 @@ const NeumorphismListCard: FC<NeumorphismListCardProps> = ({
     <NeumorphismListCardStyles
       id={id}
       className={`_neu-card${colorClassName}${hueRotateClassName}`}
-      style={fit ? { maxWidth: maxWidth ?? 'fit-content', width } : { width, maxWidth }}
+      style={
+        fit
+          ? { ...style, maxWidth: maxWidth ?? 'fit-content', width }
+          : { ...style, width, maxWidth }
+      }
       time={typeof hueRotate === 'number' ? hueRotate : undefined}
     >
       {Icon && (
@@ -49,13 +59,16 @@ const NeumorphismListCard: FC<NeumorphismListCardProps> = ({
       <h2 className='_neu-card-title'>{title}</h2>
       {subtitle && <h2 className='_neu-card-subtitle'>{subtitle}</h2>}
       {items.length === 1 ? (
-        <div className='_neu-card-single-item'>{items[0]}</div>
+        <div className='_neu-card-single-item' style={itemStyle}>
+          {items[0]}
+        </div>
       ) : (
-        <ul className='_neu-card-list'>
+        <ul className='_neu-card-list' style={listStyle}>
           {items.map((item, i) => (
             <li
               key={i}
               className={`_neu-card-list-item${center ? ' _neu-card-list-item-center' : ''}`}
+              style={itemStyle}
             >
               {item}
             </li>

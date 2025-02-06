@@ -186,7 +186,7 @@
         "required": true
       },
       {
-        "type": "text",
+        "type": "email",
         "name": "completerEmail",
         "label": "Email",
         "placeholder": "halle.bot@operationspark.org",
