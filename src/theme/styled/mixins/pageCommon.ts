@@ -107,6 +107,9 @@ const pageCommonCss = css`
     margin-bottom: 0.5rem;
   }
   .subsection-body {
+    display: flex;
+    flex-flow: column;
+    gap: 1rem;
     padding: 1rem;
     background: ${({ theme }) => theme.rgb('bg', 0.5)};
     border-radius: 1rem;

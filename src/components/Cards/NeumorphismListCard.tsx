@@ -2,6 +2,7 @@ import { FC, ReactNode } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 type NeumorphismListCardProps = {
+  id?: string;
   title: string;
   Icon?: FC | FC[];
   items: ReactNode[];
@@ -19,6 +20,7 @@ type NeumorphismListCardProps = {
 };
 
 const NeumorphismListCard: FC<NeumorphismListCardProps> = ({
+  id,
   title,
   subtitle,
   Icon,
@@ -34,6 +36,7 @@ const NeumorphismListCard: FC<NeumorphismListCardProps> = ({
   const hueRotateClassName = hueRotate ? ' _color-rotate' : '';
   return (
     <NeumorphismListCardStyles
+      id={id}
       className={`_neu-card${colorClassName}${hueRotateClassName}`}
       style={fit ? { maxWidth: maxWidth ?? 'fit-content', width } : { width, maxWidth }}
       time={typeof hueRotate === 'number' ? hueRotate : undefined}
