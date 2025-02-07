@@ -49,6 +49,16 @@ const useForm = <T extends TForm<T> = {}>(options: UseFormOptions<T> = {}) => {
 
     /** Set value for provided input property */
     set: (name: string, value: string) => setValues({ ...values, [name]: value }),
+    setFields: (updateValues: Partial<T>) => {
+      setValues({ ...values, ...updateValues });
+
+      // Remove fields from validation
+      const updatedValidation = { ...validation };
+      Object.keys(updateValues).forEach((key) => {
+        delete updatedValidation[key as keyof T];
+      });
+      setValidation(updatedValidation);
+    },
 
     /** Check if given property is valid */
     isValid: (name: string) => {

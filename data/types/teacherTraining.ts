@@ -50,6 +50,7 @@ export type TeacherTrainingFormField = {
   label: string;
   placeholder?: string;
   required?: boolean;
+  autoCapitalize?: boolean;
 };
 
 export type TeacherTraining = {

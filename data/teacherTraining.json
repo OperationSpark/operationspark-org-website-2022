@@ -121,6 +121,22 @@
   "registrationFields": {
     "participant": [
       {
+        "type": "text",
+        "name": "firstName",
+        "label": "First Name",
+        "placeholder": "Halle",
+        "required": true,
+        "autoCapitalize": true
+      },
+      {
+        "type": "text",
+        "name": "lastName",
+        "label": "Last Name",
+        "placeholder": "Bot",
+        "required": true,
+        "autoCapitalize": true
+      },
+      {
         "type": "email",
         "name": "email",
         "label": "Email",
@@ -129,65 +145,57 @@
       },
       {
         "type": "text",
-        "name": "firstName",
-        "label": "First Name",
-        "placeholder": "Halle",
-        "required": true
-      },
-      {
-        "type": "text",
-        "name": "lastName",
-        "label": "Last Name",
-        "placeholder": "Bot",
-        "required": true
-      },
-      {
-        "type": "text",
         "name": "position",
         "label": "Position / Role",
         "placeholder": "Teacher",
-        "required": true
+        "required": true,
+        "autoCapitalize": true
       },
       {
         "type": "text",
         "name": "district",
         "label": "School District",
         "placeholder": "NOLA Public Schools",
-        "required": true
+        "required": true,
+        "autoCapitalize": true
       },
       {
         "type": "text",
         "name": "schools",
         "label": "School(s) Taught At",
         "placeholder": "Ben Franklin High School, ...",
-        "required": true
+        "required": true,
+        "autoCapitalize": true
       }
     ],
     "completer": [
       {
         "type": "text",
-        "name": "completerFirstName",
+        "name": "proxyFirstName",
         "label": "First Name",
         "placeholder": "Halle",
-        "required": true
+        "required": true,
+        "autoCapitalize": true
       },
       {
         "type": "text",
-        "name": "completerLastName",
+        "name": "proxyLastName",
         "label": "Last Name",
         "placeholder": "Bot",
-        "required": true
+        "required": true,
+        "autoCapitalize": true
       },
       {
         "type": "text",
-        "name": "completerPosition",
+        "name": "proxyPosition",
         "label": "Position / Role",
         "placeholder": "Teacher",
-        "required": true
+        "required": true,
+        "autoCapitalize": true
       },
       {
         "type": "email",
-        "name": "completerEmail",
+        "name": "proxyEmail",
         "label": "Email",
         "placeholder": "halle.bot@operationspark.org",
         "required": true
@@ -199,7 +207,8 @@
         "name": "billingName",
         "label": "Billing Name",
         "placeholder": "Halle Bot / School",
-        "required": true
+        "required": true,
+        "autoCapitalize": true
       },
 
       {

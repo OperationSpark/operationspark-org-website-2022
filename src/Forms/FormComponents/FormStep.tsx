@@ -8,13 +8,14 @@ import {
 } from 'react-icons/hi2';
 
 import Button from '@this/components/Elements/Button';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import { XIcon } from '../../components/icons/XIcon';
 
 type FormStepProps = {
   title?: string;
   step: number;
+  currentStep: number;
   children?: ReactNode | ReactNode[];
   backDisabled?: boolean;
   nextDisabled?: boolean;
@@ -36,6 +37,7 @@ const FormStep = ({
   children,
   title,
   step,
+  currentStep,
   direction,
   nextDisabled,
   backDisabled,
@@ -52,88 +54,95 @@ const FormStep = ({
   const nextBtnClassName = hasErrors ? 'next-btn disabled' : 'next-btn';
 
   return (
-    <FormStepStyles
-      key={`step-${step}`}
-      id={`step-${step}`}
-      initial={{
-        opacity: 0,
-        x: !direction || direction > 0 ? '100%' : '-100%',
-        position: 'absolute',
-      }}
-      animate={{ opacity: 1, x: 0, position: 'relative' }}
-      exit={{
-        opacity: 0,
-        x: !direction || direction > 0 ? '100%' : '-100%',
-        position: 'absolute',
-      }}
-      transition={{ duration: 0.25 }}
-    >
-      {title && <h3 className='dynamic-h3 form-section-title'>{title}</h3>}
-      {onSubmit && (
-        <div>
-          <button type='submit' onClick={(e) => onSubmit(e, step)} disabled={submitDisabled}>
-            <ChevronLeftIcon strokeWidth={2} />
-            Submit
-          </button>
-        </div>
-      )}
+    <AnimatePresence mode='popLayout'>
+      {step === currentStep && (
+        <FormStepStyles
+          key={`step-${step}`}
+          id={`step-${step}`}
+          initial={{
+            opacity: 0,
+            x: !direction || direction > 0 ? '100%' : '-100%',
+            position: 'absolute',
+          }}
+          animate={{ opacity: 1, x: 0, position: 'relative' }}
+          exit={{
+            opacity: 0,
+            x: !direction || direction > 0 ? '100%' : '-100%',
+            position: 'absolute',
+          }}
+          transition={{ duration: 0.25 }}
+        >
+          {title && <h3 className='dynamic-h3 form-section-title'>{title}</h3>}
 
-      <div className='form-section-content'>{children}</div>
-      {hasErrors && showErrors && (
-        <div className='form-errors form-error'>
-          <Button className='close-btn' onClick={onClearErrors}>
-            <XIcon />
-          </Button>
+          <div className='form-section-content'>{children}</div>
+          {hasErrors && showErrors && (
+            <div className='form-errors form-error'>
+              <Button className='close-btn' onClick={onClearErrors}>
+                <XIcon />
+              </Button>
 
-          <p className='form-error form-error-header'>
-            <InfoIcon /> Missing required fields:
-          </p>
-          <div className='form-error-container'>
-            {stepErrors?.map((err, i) =>
-              onErrorClick ? (
-                <button
-                  key={err.name + i}
-                  className='form-error-item button'
-                  onClick={() => onErrorClick?.(err.name)}
-                >
-                  {err.message}
-                </button>
-              ) : (
-                <span key={err.name + i} className='form-error-item'>
-                  {err.message}
-                </span>
-              ),
+              <p className='form-error form-error-header'>
+                <InfoIcon /> Missing required fields:
+              </p>
+              <div className='form-error-container'>
+                {stepErrors?.map((err, i) =>
+                  onErrorClick ? (
+                    <button
+                      key={err.name + i}
+                      className='form-error-item button'
+                      onClick={() => onErrorClick?.(err.name)}
+                    >
+                      {err.message}
+                    </button>
+                  ) : (
+                    <span key={err.name + i} className='form-error-item'>
+                      {err.message}
+                    </span>
+                  ),
+                )}
+              </div>
+            </div>
+          )}
+          <div className='step-buttons step-button-end'>
+            {onBack ? (
+              <button
+                type='button'
+                onClick={(e) => onBack(e, step - 1)}
+                disabled={backDisabled}
+                className='back-btn'
+              >
+                <ChevronLeftIcon strokeWidth={2} />
+                Back
+              </button>
+            ) : (
+              <div>{/* Force next button to the end */}</div>
+            )}
+            {onNext && !onSubmit && (
+              <button
+                type='button'
+                onClick={(e) => onNext(e, step + 1)}
+                disabled={nextDisabled}
+                className={nextBtnClassName}
+              >
+                Next
+                <ChevronRightIcon strokeWidth={2} />
+              </button>
+            )}
+            {onSubmit && (
+              <button
+                type='submit'
+                onClick={(e) => onSubmit(e, step)}
+                disabled={submitDisabled}
+                className={nextBtnClassName}
+              >
+                Submit
+                <ChevronRightIcon strokeWidth={2} />
+              </button>
             )}
           </div>
-        </div>
+        </FormStepStyles>
       )}
-      <div className='step-buttons step-button-end'>
-        {onBack ? (
-          <button
-            type='button'
-            onClick={(e) => onBack(e, step - 1)}
-            disabled={backDisabled}
-            className='back-btn'
-          >
-            <ChevronLeftIcon strokeWidth={2} />
-            Back
-          </button>
-        ) : (
-          <div>{/* Force next button to the end */}</div>
-        )}
-        {onNext && (
-          <button
-            type='button'
-            onClick={(e) => onNext(e, step + 1)}
-            disabled={nextDisabled}
-            className={nextBtnClassName}
-          >
-            Next
-            <ChevronRightIcon strokeWidth={2} />
-          </button>
-        )}
-      </div>
-    </FormStepStyles>
+    </AnimatePresence>
   );
 };
 
@@ -159,6 +168,7 @@ const FormStepStyles = styled(motion.div)`
     align-items: center;
     padding-bottom: 1rem;
     gap: 1rem;
+    margin-top: 2rem;
 
     button {
       font-size: 1.1rem;
@@ -226,7 +236,7 @@ const FormStepStyles = styled(motion.div)`
       }
     }
   }
-  .step-button-end {
+  /* .step-button-end {
     grid-column: 1 / -1;
     display: flex;
     justify-content: center;
@@ -237,7 +247,7 @@ const FormStepStyles = styled(motion.div)`
       width: 100%;
       max-width: 200px;
     }
-  }
+  } */
   .close-btn {
     position: absolute;
     top: 0.25rem;
