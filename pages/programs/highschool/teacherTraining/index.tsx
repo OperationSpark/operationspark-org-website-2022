@@ -31,6 +31,10 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
           </Content>
         </BgImg>
 
+        <div className='fixed-subview-buttons'>
+          <a className='button' href='#card-group-train'></a>
+        </div>
+
         <Content className='flex-column gap-4'>
           <p className='dynamic-txt'>
             {`Operation Spark, an SCA training provider and certifying agency for both Basic and Advanced statewide Industry-Based Certifications (IBCs), partners with school districts and charter schools across Louisiana through our innovative Curriculum and Coaching
@@ -60,6 +64,7 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
         <Content className='flex-column gap-4'>
           <h2 className='section-header'>Courses and IBCs</h2>
           <div className='flex-row flex-wrap gap-4'>
+            {/* // TODO: Move data to "/data/teacherTraining.json" */}
             <TeacherTrainingCard
               level={1}
               levelColor='green'
@@ -115,7 +120,7 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
               ]}
             />
             <div id='arrow1' className='connecting-arrow'>
-              <ConnectingArrow />
+              <ConnectingArrow startColor='primary' endColor='primary' />
             </div>
           </div>
           <div id='card-group-prep' className='coaching-section'>
@@ -130,13 +135,13 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
               ]}
             />
             <div id='arrow2' className='connecting-arrow'>
-              <ConnectingArrow />
+              <ConnectingArrow startColor='secondary' endColor='secondary' />
             </div>
           </div>
 
           <div id='card-group-deliver' className='coaching-section'>
             <NeumorphismListCard
-              color='magenta'
+              color='secondary'
               title='Deliver'
               Icon={DeliverIcon}
               items={[
@@ -146,7 +151,7 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
               ]}
             />
             <div id='arrow3' className='connecting-arrow'>
-              <ConnectingArrow />
+              <ConnectingArrow startColor='green' endColor='green' />
             </div>
           </div>
 
