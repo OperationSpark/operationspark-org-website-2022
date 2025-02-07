@@ -13,6 +13,7 @@ import { motion } from 'framer-motion';
 import { XIcon } from '../../components/icons/XIcon';
 
 type FormStepProps = {
+  title?: string;
   step: number;
   children?: ReactNode | ReactNode[];
   backDisabled?: boolean;
@@ -33,6 +34,7 @@ type FormStepProps = {
 
 const FormStep = ({
   children,
+  title,
   step,
   direction,
   nextDisabled,
@@ -66,7 +68,7 @@ const FormStep = ({
       }}
       transition={{ duration: 0.25 }}
     >
-      <h3 className='dynamic-h3 form-section-title'>Teacher Info</h3>
+      {title && <h3 className='dynamic-h3 form-section-title'>{title}</h3>}
       {onSubmit && (
         <div>
           <button type='submit' onClick={(e) => onSubmit(e, step)} disabled={submitDisabled}>

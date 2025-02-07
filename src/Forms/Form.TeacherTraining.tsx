@@ -46,17 +46,20 @@ const buildInputFields = (fields: TeacherTrainingFormField[]): TeacherTrainingFo
   });
 };
 
-const stepFields: Record<number, string[]> = {
-  1: ['email', 'firstName', 'lastName', 'position', 'district', 'schools'],
+const stepFields = [
+  [],
+  ['email', 'firstName', 'lastName', 'position', 'district', 'schools'],
   // TODO: Check if the user is different from the person completing the form
-  2: ['completerFirstName', 'completerLastName', 'completerPosition', 'completerEmail'],
+  ['completed'],
+  ['completerFirstName', 'completerLastName', 'completerPosition', 'completerEmail'],
   // TODO: Check if the user is different from the billing contact
-  3: ['billingName', 'billingEmail'],
+  ['completed'], // Check if completer is the same
+  ['billingName', 'billingEmail'],
   // TODO: Move acknowledgements to the end
-  4: ['acknowledgements'],
-};
+  ['acknowledgements'],
+];
 
-const maxSteps = Object.keys(stepFields).length;
+const maxSteps = stepFields.length;
 
 type GetInitSteps = <T>(length: number, cb: (index: number) => T) => Record<number, T>;
 const getInitSteps: GetInitSteps = (length, cb) => {
@@ -78,6 +81,9 @@ const TeacherTrainingApplication = ({
 }: TeacherTrainingApplicationProps) => {
   const theme = useTheme();
   const formRef = useRef<HTMLDivElement>(null);
+  const [isSelf, setIsSelf] = useState<boolean | null>(null);
+  // const [isPayee, setIsPayee] = useState<boolean | null>(null);
+
   const [step, setStep] = useState(1);
   const [lastStep, setLastStep] = useState(1);
   const form = useForm();
@@ -106,7 +112,7 @@ const TeacherTrainingApplication = ({
   };
 
   const validateSteps = () => {
-    const stepErrs = Object.keys(stepFields).reduce((errs, stepNum) => {
+    const stepErrs = stepFields.reduce((errs, stepNum) => {
       const n = Number(stepNum);
       errs[n] = getStepErrors(Number(n));
       return errs;
@@ -272,6 +278,18 @@ const TeacherTrainingApplication = ({
     }
   };
 
+  const goBack = (stepNumber: number) => {
+    if (lastStep < stepNumber) {
+      return setStep(lastStep);
+    }
+
+    if (stepNumber <= 1) {
+      return setStep(1);
+    }
+
+    setStep(stepNumber - 1);
+  };
+
   return (
     <TeacherTrainingApplicationStyles ref={formRef}>
       <Form onSubmit={handleSubmit} onEnter={selectNextElement}>
@@ -293,17 +311,19 @@ const TeacherTrainingApplication = ({
               {' Teacher Info '}
               <CheckIcon className='check-icon' />
             </div>
-            <div onClick={() => goToStep(2)} className={getProgressSectionClassName(2)}>
-              <span className='step-num'>2. </span>
-              {' Completer Info '}
-              <CheckIcon className='check-icon' />
-            </div>
-            <div onClick={() => goToStep(3)} className={getProgressSectionClassName(3)}>
+            {isSelf === false && (
+              <div onClick={() => goToStep(2)} className={getProgressSectionClassName(2)}>
+                <span className='step-num'>2. </span>
+                {' Completer Info '}
+                <CheckIcon className='check-icon' />
+              </div>
+            )}
+            <div onClick={() => goToStep(4)} className={getProgressSectionClassName(3)}>
               <span className='step-num'>3. </span>
               {' Billing '}
               <CheckIcon className='check-icon' />
             </div>
-            <div onClick={() => goToStep(4)} className={getProgressSectionClassName(4)}>
+            <div onClick={() => goToStep(5)} className={getProgressSectionClassName(4)}>
               <span className='step-num'>4. </span>
               {' Acknowledgements '}
               <CheckIcon className='check-icon' />
@@ -312,16 +332,17 @@ const TeacherTrainingApplication = ({
           <AnimatePresence mode='popLayout'>
             {step === 1 && (
               <NewFormStep
-                step={1}
+                step={step}
+                title='Teacher Information'
                 direction={step - lastStep}
                 nextDisabled={isSubmitting}
                 submitDisabled={isSubmitting}
                 onNext={handleChangeStep}
-                stepErrors={getStepErrors(1).map((err) => ({
+                stepErrors={getStepErrors(step).map((err) => ({
                   name: err,
                   message: formatName(err),
                 }))}
-                showErrors={!!getStepErrors(1).length && showStepErrors}
+                showErrors={!!getStepErrors(step).length && showStepErrors}
                 onClearErrors={() => setShowStepErrors(false)}
                 onErrorClick={focusElement}
               >
@@ -340,11 +361,47 @@ const TeacherTrainingApplication = ({
           </AnimatePresence>
           <AnimatePresence mode='popLayout'>
             {step === 2 && (
+              <NewFormStep step={step} direction={step - lastStep} onBack={() => goBack(2)}>
+                <div className='form-col-span '>
+                  <p className='form-question'>
+                    Are you completing this form for yourself or someone else?
+                  </p>
+                  <div className='flex-row gap-2 form-question-buttons'>
+                    <button
+                      type='button'
+                      className='yes-button form-btn'
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setIsSelf(false);
+                        setStep(3);
+                      }}
+                    >
+                      Someone Else
+                    </button>
+                    <button
+                      type='button'
+                      className='no-button form-btn'
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setIsSelf(true);
+                        setStep(5);
+                      }}
+                    >
+                      Myself
+                    </button>
+                  </div>
+                </div>
+              </NewFormStep>
+            )}
+          </AnimatePresence>
+          <AnimatePresence mode='popLayout'>
+            {step === 3 && (
               <NewFormStep
-                step={2}
+                title='Person Completing Form'
+                step={step}
                 direction={step - lastStep}
                 nextDisabled={isSubmitting}
-                onBack={handleChangeStep}
+                onBack={() => goBack(3)}
                 onNext={handleChangeStep}
                 stepErrors={getStepErrors(2).map((err) => ({
                   name: err,
@@ -368,18 +425,19 @@ const TeacherTrainingApplication = ({
             )}
           </AnimatePresence>
           <AnimatePresence mode='popLayout'>
-            {step === 3 && (
+            {step === 5 && (
               <NewFormStep
-                step={3}
+                step={step}
+                title='Billing Contact Information'
                 direction={step - lastStep}
                 nextDisabled={isSubmitting}
                 onNext={handleChangeStep}
-                onBack={handleChangeStep}
-                stepErrors={getStepErrors(3).map((err) => ({
+                onBack={() => goBack(5)}
+                stepErrors={getStepErrors(step).map((err) => ({
                   name: err,
                   message: formatName(err),
                 }))}
-                showErrors={!!getStepErrors(3).length && showStepErrors}
+                showErrors={!!getStepErrors(step).length && showStepErrors}
                 onClearErrors={() => setShowStepErrors(false)}
                 onErrorClick={focusElement}
               >
@@ -390,7 +448,7 @@ const TeacherTrainingApplication = ({
                     value={form.get(field.name)}
                     onChange={(value, isValid) => handleChange(field.name, value, isValid)}
                     isValid={form.isValid(field.name)}
-                    isErr={checkErr(3, field.name)}
+                    isErr={checkErr(step, field.name)}
                   />
                 ))}
               </NewFormStep>
@@ -398,18 +456,20 @@ const TeacherTrainingApplication = ({
           </AnimatePresence>
 
           <AnimatePresence mode='popLayout'>
-            {step === 4 && (
+            {step === 6 && (
               <NewFormStep
-                step={4}
+                step={step}
+                title='Acknowledgements'
                 direction={step - lastStep}
                 nextDisabled={isSubmitting}
                 submitDisabled={isSubmitting}
+                onBack={() => goBack(6)}
                 onNext={handleSubmit}
-                stepErrors={getStepErrors(4).map((err) => ({
+                stepErrors={getStepErrors(step).map((err) => ({
                   name: err,
                   message: formatName(err),
                 }))}
-                showErrors={!!getStepErrors(4).length && showStepErrors}
+                showErrors={!!getStepErrors(step).length && showStepErrors}
                 onClearErrors={() => setShowStepErrors(false)}
                 onErrorClick={focusElement}
               >
@@ -558,6 +618,59 @@ const TeacherTrainingApplicationStyles = styled.div`
         color: ${({ theme }) => theme.white};
         background: ${({ theme }) => theme.primary[0]};
       }
+    }
+  }
+
+  .form-question {
+    font-weight: 700;
+    text-align: center;
+    grid-column: 1 / -1;
+    font-size: 1.25rem;
+    padding: 1rem 0;
+    width: 100%;
+  }
+  .form-question-buttons {
+    display: flex;
+    flex-flow: row wrap;
+    max-width: 400px;
+    margin: 0 auto;
+    .form-btn {
+      flex: 1 1 150px;
+    }
+  }
+
+  .form-btn {
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    transition: all 200ms;
+    border-radius: 1.5rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    background: ${({ theme }) =>
+      theme.isLightMode ? theme.rgb('primary.500', 1) : theme.rgb('primary.500', 1, 5)};
+
+    box-shadow: 0 0 3px 1px inset ${({ theme }) => theme.rgb('primary', 0)};
+    margin-left: auto;
+    &:hover {
+      background: ${({ theme }) => theme.rgb('primary', 1, 2)};
+      box-shadow: 0 0 3px 1px inset ${({ theme }) => theme.rgb('primary', 1, 5)};
+    }
+
+    &:active {
+      background: ${({ theme }) => theme.rgb('primary', 1, 5)};
+      box-shadow: 0 0 3px 1px inset ${({ theme }) => theme.rgb('primary', 1, 10)};
+    }
+
+    &:disabled,
+    &.disabled {
+      background: ${({ theme }) => theme.rgb('primary', 0.25)};
+      box-shadow: 0 0 3px 1px inset ${({ theme }) => theme.rgb('primary', 0.25, -5)};
+      color: ${({ theme }) => theme.rgb('fg', 0.4)};
+      cursor: default;
     }
   }
 
