@@ -8,7 +8,7 @@ type NeumorphismListCardProps = {
   items: ReactNode[];
   subtitle?: string;
   /** Card color. default: none */
-  color?: 'auto' | 'blue' | 'primary' | 'magenta' | 'green';
+  color?: 'auto' | 'blue' | 'primary' | 'secondary' | 'magenta' | 'red' | 'yellow' | 'green';
   /** Rotate card color. default: false -- pass number (in seconds) to adjust transition */
   hueRotate?: boolean;
   width?: string;
@@ -139,6 +139,27 @@ const NeumorphismListCardStyles = styled.div<{ time?: number }>`
     background: ${({ theme }) => theme.rgb('green', 0.1, 10)};
     --color: ${({ theme }) => theme.asRgb('green', -6)};
     --shadow: var(--color);
+  }
+  &._color-yellow {
+    box-shadow: 0 0 3px 1px inset ${({ theme }) => theme.rgb('yellow', 0.5, -8)};
+    background: ${({ theme }) => theme.rgb('yellow', 0.1, 10)};
+    --color: ${({ theme }) => theme.asRgb('yellow', -6)};
+    --shadow: var(--color);
+  }
+
+  &._color-red {
+    box-shadow: 0 0 3px 1px inset ${({ theme }) => theme.rgb('red', 0.5, -8)};
+    background: ${({ theme }) => theme.rgb('red', 0.1, 10)};
+    --color: ${({ theme }) => theme.asRgb('red', -6)};
+    --shadow: var(--color);
+  }
+
+  &._color-secondary {
+    box-shadow: 0 0 3px 1px inset ${({ theme }) => theme.rgb('secondary', 0.5)};
+    background: ${({ theme }) =>
+      theme.isLightMode ? theme.rgb('secondary.700', 0.1) : theme.rgb('secondary', 0.1)};
+    --color: ${({ theme }) => theme.asRgb(theme.isLightMode ? 'secondary.700' : 'secondary')};
+    --shadow: ${({ theme }) => theme.asRgb(theme.isLightMode ? 'secondary.900' : 'secondary')};
   }
 
   &._color-rotate {
