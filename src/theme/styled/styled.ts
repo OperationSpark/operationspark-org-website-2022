@@ -39,7 +39,7 @@ type BaseColorRangeKey = keyof BaseColorRanges;
 
 type BaseColorGrade = `${BaseColorRangeKey}.${ColorWeight}`;
 
-type ColorKey = BaseColorKey | BaseColorGrade;
+export type ColorKey = BaseColorKey | BaseColorGrade;
 
 interface DefaultColors extends BaseColors {
   alpha: {
