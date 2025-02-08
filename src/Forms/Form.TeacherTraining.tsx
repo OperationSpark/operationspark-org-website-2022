@@ -205,6 +205,11 @@ const TeacherTrainingApplication = ({
       form.notifySuccess();
       setStep(1);
       setPreviousStep(1);
+      setShowStepErrors(false);
+      setFormQuestions({
+        isSelf: null,
+        isPayee: null,
+      });
 
       onSubmitComplete?.();
     } catch {
@@ -672,15 +677,17 @@ const TeacherTrainingApplication = ({
                     {field.value ? (
                       <div className='review-field-btn'>
                         <button
-                          onClick={() => {
+                          type='button'
+                          className='review-edit-btn'
+                          onClick={(e) => {
+                            e.preventDefault();
                             goToStep(field.step);
                             setTimeout(() => {
                               focusElement(field.name);
                             }, 100);
                           }}
-                          className='review-edit-btn'
                         >
-                          <EditIcon />
+                          <EditIcon /> Edit
                         </button>
                       </div>
                     ) : (
@@ -705,6 +712,7 @@ const TeacherTrainingApplicationStyles = styled.div`
   width: 100%;
   display: flex;
   position: relative;
+  max-width: 100%;
 
   .submitting-container {
     position: absolute;
@@ -738,6 +746,7 @@ const TeacherTrainingApplicationStyles = styled.div`
     position: relative;
     overflow: hidden;
     width: 100%;
+
     height: fit-content;
     display: flex;
     flex-flow: column;
@@ -790,16 +799,13 @@ const TeacherTrainingApplicationStyles = styled.div`
 
   .progress-section {
     flex: 1 1 100px;
-    text-align: center;
     font-size: 0.8rem;
     font-weight: 600;
     /* padding: 0.5rem; */
     color: ${({ theme }) => theme.fg};
 
-    /* box-shadow: 0 0 3px ${({ theme }) => theme.alpha.fg}; */
     gap: 0.5rem;
     margin: 0.1rem;
-    /* border-radius: 0.25rem; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -855,6 +861,7 @@ const TeacherTrainingApplicationStyles = styled.div`
     } */
   }
   .form-question-content {
+    max-width: 100%;
     padding: 1rem;
     box-shadow: 0 0 1px 1px ${({ theme }) => theme.rgb('fg', 0.25)};
     margin: 1rem 0;
@@ -959,10 +966,12 @@ const TeacherTrainingApplicationStyles = styled.div`
     margin: 0 auto;
   }
   .review-row {
-    display: grid;
+    flex: 1;
+    display: flex;
+    flex-flow: row nowrap;
     width: 100%;
     max-width: 100%;
-    grid-template-columns: 125px 1fr max-content;
+
     gap: 0.5rem;
     box-shadow: 0 0 1px 1px ${({ theme }) => theme.rgb('fg', 0.2)};
     background: ${({ theme }) => theme.rgb('bg', 1)};
@@ -981,23 +990,40 @@ const TeacherTrainingApplicationStyles = styled.div`
     color: ${({ theme }) => theme.rgb('fg', 0.75)};
     background: ${({ theme }) => theme.rgb('bg', 0.5, theme.isLightMode ? -2 : 4)};
     border-radius: 0.5rem 0 0 0.5rem;
+    overflow: hidden;
+    min-width: 125px;
+    max-width: 125px;
+    width: 125px;
+  }
+  .review-field-value {
+    flex: 1;
+    max-width: 100%;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .review-field-btn {
     display: flex;
     align-items: center;
     justify-content: center;
+    line-height: 1;
 
     .review-clone {
       padding: 0 0.5rem;
       font-size: 0.8rem;
       font-weight: 500;
       color: ${({ theme }) => theme.rgb('fg', 0.5)};
+      white-space: nowrap;
     }
   }
   .review-edit-btn {
     border: none;
     outline: none;
     background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
 
     color: ${({ theme }) => theme.rgb('fg', 0.5)};
 
@@ -1010,7 +1036,49 @@ const TeacherTrainingApplicationStyles = styled.div`
   }
   @media screen and (max-width: 768px) {
     .progress-section {
-      min-width: fit-content;
+      /* min-width: fit-content;  */
+    }
+
+    .review-container {
+      padding: 0;
+      gap: 1rem;
+      .review-row {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 0;
+        position: relative;
+      }
+      .review-field-name {
+        width: 100%;
+        min-width: 100%;
+        max-width: 100%;
+        border-radius: 0.5rem 0.5rem 0 0;
+        padding: 0.25rem;
+        justify-content: center;
+        font-size: 0.8rem;
+        font-weight: 500;
+      }
+      .review-field-value {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+      }
+
+      .review-field-btn {
+        position: absolute;
+        top: 0.125rem;
+        right: 0;
+      }
+
+      .review-edit-btn {
+        font-size: 0.75rem;
+      }
+
+      .review-clone {
+        font-weight: 400;
+        font-size: 0.75rem;
+        line-height: 1.5;
+      }
     }
   }
 `;

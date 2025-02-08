@@ -113,7 +113,10 @@ const TeacherTrainingRegistration: NextPage<TeacherTrainingRegistrationProps> = 
           />
         </Content>
 
-        <Content className='flex-column flex-align-center' style={{ minHeight: '100vh' }}>
+        <Content
+          className='flex-column flex-align-center'
+          style={{ minHeight: 'calc(100vh - 100px)' }}
+        >
           <NeumorphismListCard
             title='Registration Form'
             subtitle='Please complete a separate form for each participant'

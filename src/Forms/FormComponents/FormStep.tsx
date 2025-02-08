@@ -133,7 +133,7 @@ const FormStep = ({
                 type='submit'
                 onClick={(e) => onSubmit(e, step)}
                 disabled={submitDisabled}
-                className={nextBtnClassName}
+                className='form-step-submit-btn'
               >
                 Submit
                 <ChevronRightIcon strokeWidth={2} />
@@ -182,6 +182,37 @@ const FormStepStyles = styled(motion.div)`
       justify-content: center;
       gap: 0.25rem;
 
+      &.form-step-submit-btn {
+        background: ${({ theme }) =>
+          theme.isLightMode ? theme.rgb('green.700', 1) : theme.rgb('green.500', 1, 5)};
+        color: ${({ theme }) => (theme.isLightMode ? theme.rgb('black') : theme.rgb('bg'))};
+
+        box-shadow: 0 0 3px 1px inset ${({ theme }) => theme.rgb('green', 0)};
+        margin-left: auto;
+        &:hover {
+          box-shadow: 0 0 3px 1px inset
+            ${({ theme }) =>
+              theme.isLightMode ? theme.rgb('green.800', 1, -5) : theme.rgb('green.500', 1)};
+          background: ${({ theme }) =>
+            theme.isLightMode ? theme.rgb('green.800', 1, -2) : theme.rgb('green.700', 1)};
+        }
+
+        &:active {
+          box-shadow: 0 0 3px 1px inset
+            ${({ theme }) =>
+              theme.isLightMode ? theme.rgb('green.800', 1, -5) : theme.rgb('green.900', 1)};
+          background: ${({ theme }) =>
+            theme.isLightMode ? theme.rgb('green.900', 1, -2) : theme.rgb('green.900', 1)};
+        }
+
+        &:disabled,
+        &.disabled {
+          background: ${({ theme }) => theme.rgb('primary', 0.25)};
+          box-shadow: 0 0 3px 1px inset ${({ theme }) => theme.rgb('primary', 0.25, -5)};
+          color: ${({ theme }) => theme.rgb('fg', 0.4)};
+          cursor: default;
+        }
+      }
       &.next-btn {
         background: ${({ theme }) =>
           theme.isLightMode ? theme.rgb('primary.500', 1) : theme.rgb('primary.500', 1, 5)};
@@ -236,18 +267,7 @@ const FormStepStyles = styled(motion.div)`
       }
     }
   }
-  /* .step-button-end {
-    grid-column: 1 / -1;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    padding: 0;
-    padding-top: 1rem;
-    button {
-      width: 100%;
-      max-width: 200px;
-    }
-  } */
+
   .close-btn {
     position: absolute;
     top: 0.25rem;
