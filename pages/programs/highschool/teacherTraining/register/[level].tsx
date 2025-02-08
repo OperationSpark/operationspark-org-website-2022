@@ -22,11 +22,6 @@ const TeacherTrainingRegistration: NextPage<TeacherTrainingRegistrationProps> = 
 
   const { title, season, level, levelName } = info;
 
-  console.log({
-    info,
-    formFields,
-  });
-
   return (
     <Main style={{ paddingTop: 0 }}>
       <TeacherTrainingRegisterStyles>
@@ -142,9 +137,13 @@ const TeacherTrainingRegistration: NextPage<TeacherTrainingRegistrationProps> = 
 
                   <TeacherTrainingApplication
                     key='registration-form'
+                    level={`Level ${level} (${levelName})`}
+                    formName={`Teacher Training | ${season} | Level ${level} (${levelName})`}
                     registrationFields={formFields}
+                    infoUrl={`/programs/highschool/teacherTraining/info/level-${level}`}
+                    times={info.times}
                     onSubmitComplete={() => {
-                      console.log('Form submitted');
+                      console.log('// TODO: Form submitted');
                     }}
                   />
                 </div>,

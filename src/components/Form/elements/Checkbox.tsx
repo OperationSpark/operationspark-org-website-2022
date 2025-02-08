@@ -1,10 +1,11 @@
 import kebabCase from 'lodash/kebabCase';
+import { ReactNode } from 'react';
 import styled from 'styled-components';
 
 interface CheckboxProps {
   onChange: (value: boolean) => void;
   name: string;
-  label: string;
+  label: string | ReactNode;
   checked: boolean;
   testId?: string;
   required?: boolean;
@@ -24,7 +25,7 @@ const Checkbox = ({ name, label, checked, onChange, testId, required, isErr }: C
           name={name}
           checked={checked}
           onChange={(e) => onChange(e.target.checked)}
-          aria-label={label}
+          aria-label={typeof label === 'string' ? label : 'checkbox'}
           aria-checked={checked}
           data-test-id={testId ?? `checkbox-${kebabCase(name)}`}
           required={required}

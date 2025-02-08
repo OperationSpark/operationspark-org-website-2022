@@ -7,18 +7,20 @@ import {
   HiMiniChevronRight as ChevronRightIcon,
   HiMiniPencilSquare as EditIcon,
 } from 'react-icons/hi2';
+import { MdOpenInNew as NewTabIcon } from 'react-icons/md';
 
 import { Input } from '@this/components/Form';
 import Form from '@this/components/Form/Form';
 import useForm from '@this/components/Form/useForm';
 import { motion } from 'framer-motion';
 
-import { TeacherTraining } from '@this/data/types/teacherTraining';
-import env from '@this/src/clientConfig';
+import { TeacherTraining, TeacherTrainingInfo } from '@this/data/types/teacherTraining';
 
 import { formatName } from '../helpers/utils';
 
+import Spinner from '../components/Elements/Spinner';
 import { capFirstLetter } from '../components/Form/helpers';
+import { toDayJs } from '../helpers/time';
 import FormStep from './FormComponents/FormStep';
 import {
   buildInputFields,
@@ -27,8 +29,6 @@ import {
   stepSections,
 } from './formData/teacherTrainingData';
 
-const sheetsTabName = env.HIGHSCHOOL_FORM_RESPONSES_NAME;
-
 const stepFields = Object.values(stepSections);
 
 const maxSteps = stepFields.length;
@@ -36,11 +36,19 @@ const maxSteps = stepFields.length;
 type TeacherTrainingApplicationProps = {
   onSubmitComplete?: () => void;
   registrationFields: TeacherTraining['registrationFields'];
+  level: string;
+  formName: string;
+  infoUrl: string;
+  times: TeacherTrainingInfo['times'];
 };
 
 const TeacherTrainingApplication = ({
   onSubmitComplete,
   registrationFields,
+  level,
+  formName,
+  infoUrl,
+  times,
 }: TeacherTrainingApplicationProps) => {
   const theme = useTheme();
   const formRef = useRef<HTMLDivElement>(null);
@@ -69,6 +77,25 @@ const TeacherTrainingApplication = ({
   const participantFields = buildInputFields(registrationFields.participant);
   const completerFields = buildInputFields(registrationFields.completer);
   const billingFields = buildInputFields(registrationFields.billing);
+
+  const formValues = form.values();
+
+  const reviewList = (stepSections.review as ReviewSection).fields.map((field) => {
+    const value = formValues[field.name as keyof typeof formValues];
+    const altValue = !field.altNames
+      ? null
+      : field.altNames
+          .map((n) => formValues[n as keyof typeof formValues])
+          .filter(Boolean)
+          .join(' ')
+          .trim();
+
+    return {
+      ...field,
+      value,
+      altValue,
+    };
+  });
 
   const getStepErrors = (n: number) => {
     const currentStep = stepFields.find((step) => step.step === n);
@@ -148,16 +175,32 @@ const TeacherTrainingApplication = ({
   };
 
   const handleSubmit = async () => {
-    console.log('handleSubmit', form.values());
-    return;
     setIsSubmitting(true);
 
+    const completeFormValues = [
+      {
+        name: 'timestamp',
+        value: toDayJs().format('MM/DD/YYYY hh:mm A'),
+        label: 'Timestamp',
+      },
+      {
+        name: 'level',
+        value: level,
+        label: 'Course Level',
+      },
+      ...reviewList.map((field) => ({
+        name: field.name,
+        value: field.value || field.altValue,
+        label: field.label,
+      })),
+    ];
+
     try {
-      await axios.post('/api/signups/highschool', {
-        ...form.values(),
-        tabName: sheetsTabName,
-        date: Date.now(),
+      await axios.post('/api/signups/training', {
+        values: completeFormValues,
+        formName,
       });
+
       form.clear();
       form.notifySuccess();
       setStep(1);
@@ -173,7 +216,6 @@ const TeacherTrainingApplication = ({
 
   const validateField = (name: string, step: number) => {
     const v = !stepErrors[step]?.includes(name);
-
     return v;
   };
 
@@ -284,6 +326,11 @@ const TeacherTrainingApplication = ({
 
   return (
     <TeacherTrainingApplicationStyles ref={formRef}>
+      {isSubmitting && (
+        <div className='submitting-container'>
+          <Spinner text='Submitting Form' size={7.5} />
+        </div>
+      )}
       <Form onSubmit={handleSubmit} onEnter={selectNextElement}>
         <div className='form-body'>
           <motion.div
@@ -306,7 +353,14 @@ const TeacherTrainingApplication = ({
                   className={getProgressSectionClassName(stepButton.step)}
                 >
                   <span className='step-num'>{i + 1}. </span>
-                  {stepButton.label}
+                  <span
+                    className='step-text'
+                    style={{
+                      maxWidth: `calc(100% - ${1.5}rem)`,
+                    }}
+                  >
+                    {stepButton.label}
+                  </span>
                   <CheckIcon className='check-icon' />
                 </div>
               ),
@@ -548,17 +602,53 @@ const TeacherTrainingApplication = ({
             onErrorClick={focusElement}
           >
             <div className='form-col-span'>
-              {registrationFields.acknowledgements.map((ack) => (
-                <Input.Checkbox
-                  key={ack.name}
-                  // id={ack.name}
-                  name={ack.name}
-                  label={ack.label}
-                  checked={form.get(ack.name) === 'true'}
-                  onChange={(value) => form.onChange(ack.name)(String(value), value)}
-                  isErr={showStepErrors && form.get(ack.name) !== 'true'}
-                />
-              ))}
+              {registrationFields.acknowledgements.map((ack) => {
+                const label = formQuestions.isSelf ? ack.altLabel ?? ack.label : ack.label;
+
+                return (
+                  <Input.Checkbox
+                    key={ack.name}
+                    // id={ack.name}
+                    name={ack.name}
+                    label={
+                      ack.infoLink ? (
+                        <span>
+                          {label}{' '}
+                          <a
+                            className='anchor right-arrow-left'
+                            href={infoUrl}
+                            target='_blank'
+                            style={{
+                              boxShadow: 'none',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '0.5rem',
+                            }}
+                          >
+                            {level} Information <NewTabIcon />
+                          </a>
+                        </span>
+                      ) : ack.dateTime ? (
+                        <span>
+                          {label} <span className='value-badge'>{times.startDate}</span>
+                          {' - '}
+                          <span className='value-badge'>{times.endDate}</span>
+                          {' | '}
+                          <span className='value-badge'>{times.startTime}</span>
+                          {' - '}
+                          <span className='value-badge'>{times.endTime}</span>
+                          <small style={{ marginLeft: '0.5rem' }}>{times.days}</small>
+                        </span>
+                      ) : (
+                        label
+                      )
+                    }
+                    checked={form.get(ack.name) === 'true'}
+                    onChange={(value) => form.onChange(ack.name)(String(value), value)}
+                    isErr={showStepErrors && form.get(ack.name) !== 'true'}
+                  />
+                );
+              })}
             </div>
           </FormStep>
 
@@ -569,49 +659,38 @@ const TeacherTrainingApplication = ({
             direction={7 - previousStep}
             nextDisabled={isSubmitting}
             submitDisabled={isSubmitting}
+            backDisabled={isSubmitting}
             onBack={() => setStep(6)}
             onSubmit={handleSubmit}
           >
-            <div className='form-col-span'>
-              <div className='review-container'>
-                {(stepSections.review as ReviewSection).fields.map((field) => {
-                  const initVal = form.get(field.name);
-                  const altVal = !field.altNames
-                    ? null
-                    : field.altNames
-                        .map((n) => form.get(n))
-                        .filter(Boolean)
-                        .join(' ')
-                        .trim();
-
-                  const val = initVal || altVal;
-                  return val ? (
-                    <div className='review-row' key={field.name}>
-                      <div className='review-field-name'>{field.label}</div>
-                      <div className='review-field-value'>{val}</div>
-                      {initVal ? (
-                        <div className='review-field-btn'>
-                          <button
-                            onClick={() => {
-                              goToStep(field.step);
-                              setTimeout(() => {
-                                focusElement(field.name);
-                              }, 100);
-                            }}
-                            className='review-edit-btn'
-                          >
-                            <EditIcon />
-                          </button>
-                        </div>
-                      ) : (
-                        <div className='review-field-btn'>
-                          <span className='review-clone'>Same as above</span>
-                        </div>
-                      )}
-                    </div>
-                  ) : null;
-                })}
-              </div>
+            <div className='form-col-span review-container'>
+              {reviewList.map((field) =>
+                !field.value && !field.altValue ? null : (
+                  <div className='review-row' key={field.name}>
+                    <div className='review-field-name'>{field.label}</div>
+                    <div className='review-field-value'>{field.value || field.altValue}</div>
+                    {field.value ? (
+                      <div className='review-field-btn'>
+                        <button
+                          onClick={() => {
+                            goToStep(field.step);
+                            setTimeout(() => {
+                              focusElement(field.name);
+                            }, 100);
+                          }}
+                          className='review-edit-btn'
+                        >
+                          <EditIcon />
+                        </button>
+                      </div>
+                    ) : (
+                      <div className='review-field-btn'>
+                        <span className='review-clone'>Same as above</span>
+                      </div>
+                    )}
+                  </div>
+                ),
+              )}
             </div>
           </FormStep>
         </div>
@@ -625,6 +704,25 @@ export default TeacherTrainingApplication;
 const TeacherTrainingApplicationStyles = styled.div`
   width: 100%;
   display: flex;
+  position: relative;
+
+  .submitting-container {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+
+    border-radius: 0 0 1rem 1rem;
+
+    background: ${({ theme }) => theme.rgb('bg', 0.5)};
+    backdrop-filter: blur(0.5rem);
+    -webkit-backdrop-filter: blur(0.5rem);
+  }
 
   .form-info-danger {
     color: ${({ theme }) => (theme.isLightMode ? theme.red[700] : theme.red[200])};
@@ -680,8 +778,10 @@ const TeacherTrainingApplicationStyles = styled.div`
   .progress-bar {
     position: absolute;
     width: 100%;
+    max-width: 100%;
     display: flex;
     justify-content: space-between;
+    gap: 0.5rem;
     top: 0;
     left: 0;
     border-bottom: 1px solid ${({ theme }) => theme.rgb('fg', 0.1)};
@@ -689,11 +789,11 @@ const TeacherTrainingApplicationStyles = styled.div`
   }
 
   .progress-section {
-    flex: 1;
+    flex: 1 1 100px;
     text-align: center;
     font-size: 0.8rem;
     font-weight: 600;
-    padding: 0.5rem;
+    /* padding: 0.5rem; */
     color: ${({ theme }) => theme.fg};
 
     /* box-shadow: 0 0 3px ${({ theme }) => theme.alpha.fg}; */
@@ -713,6 +813,12 @@ const TeacherTrainingApplicationStyles = styled.div`
     }
     .step-num {
       display: flex;
+    }
+    .step-text {
+      display: inline-block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     /* background: rgba(0, 0, 0, 0); */
     transition: all 200ms;

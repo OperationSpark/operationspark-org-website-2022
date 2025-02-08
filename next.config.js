@@ -30,6 +30,7 @@ module.exports = (phase, { defaultConfig }) => {
       'SIGNUP_API_ENDPOINT',
       'GOOGLE_SERVICE_ACCOUNT',
       'HIGHSCHOOL_FORM_RESPONSES_ID',
+      'TEACHER_TRAINING_FORM_RESPONSES_ID',
       'WUFOO_HOST',
       'WUFOO_TOKEN',
       'WUFOO_CONTACT_FORM_ID',

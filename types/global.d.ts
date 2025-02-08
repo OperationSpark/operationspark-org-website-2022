@@ -16,6 +16,7 @@ declare namespace NodeJS {
     /** Generated with command: `openssl rand -base64 32` */
     FB_WEBHOOK_TOKEN: string;
     HIGHSCHOOL_FORM_RESPONSES_ID: string;
+    TEACHER_TRAINING_FORM_RESPONSES_ID: string;
     HIGHSCHOOL_FORM_ACTIVE_UNTIL: string;
     HIGHSCHOOL_FORM_RESPONSES_NAME: string;
     WUFOO_HOST: string;

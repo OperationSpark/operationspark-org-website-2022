@@ -222,18 +222,22 @@
     "acknowledgements": [
       {
         "name": "confirmRead",
-        "label": "I have read information [TODO: LINK TO INFO PAGE] regarding the scope and outcomes of this course.",
-        "value": false
+        "label": "I have read all of the information regarding the scope and outcomes of this course.",
+        "value": false,
+        "infoLink": true
       },
       {
         "name": "confirmAvailable",
-        "label": "The teacher I'm registering is available July 8-18, 9 AM to 3 PM",
+        "label": "The teacher I'm registering is available during the times listed above.",
+        "altLabel": "I am available during the times listed above.",
         "value": false
       },
       {
         "name": "confirmResources",
         "label": "The teacher I'm registering will have access to a computer with webcam, mic, and a reliable high speed internet connection during these dates and times.",
-        "value": false
+        "altLabel": "I will have access to a computer with webcam, mic, and a reliable high speed internet connection during these dates and times.",
+        "value": false,
+        "dateTime": true
       }
     ]
   }

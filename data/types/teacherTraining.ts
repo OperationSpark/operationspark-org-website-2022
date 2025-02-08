@@ -48,6 +48,9 @@ export type TeacherTrainingFormField = {
   type: 'text' | 'email';
   name: string;
   label: string;
+  altLabel?: string;
+  infoLink?: boolean;
+  dateTime?: boolean;
   placeholder?: string;
   required?: boolean;
   autoCapitalize?: boolean;

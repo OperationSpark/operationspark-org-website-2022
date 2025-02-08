@@ -220,7 +220,7 @@ export const stepSections: Record<SectionKey, StepSection> = {
       },
       {
         step: 1,
-        label: 'Teacher Email',
+        label: 'Email',
         name: 'email',
       },
       {
