@@ -295,7 +295,7 @@ const Level1InfoStyles = styled.div`
   .back-to-teacher-training {
     position: absolute;
     z-index: 1;
-    top: ${({ theme }) => theme.navHeight}px;
+    top: ${({ theme }) => theme.navHeight - 32}px;
     left: 0.5rem;
     padding: 0.5rem;
     background: ${({ theme }) => theme.rgb('black', 0.25)};

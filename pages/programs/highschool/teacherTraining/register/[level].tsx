@@ -50,6 +50,7 @@ const TeacherTrainingRegistration: NextPage<TeacherTrainingRegistrationProps> = 
             title='Details'
             center
             width='800px'
+            style={{ margin: '0 auto' }}
             items={[
               <DetailsTable key='details'>
                 <div className='details-row'>
@@ -203,7 +204,7 @@ const TeacherTrainingRegisterStyles = styled.div`
   .back-to-teacher-training {
     position: absolute;
     z-index: 1;
-    top: ${({ theme }) => theme.navHeight}px;
+    top: ${({ theme }) => theme.navHeight - 32}px;
     left: 0.5rem;
     padding: 0.5rem;
     background: ${({ theme }) => theme.rgb('black', 0.25)};
