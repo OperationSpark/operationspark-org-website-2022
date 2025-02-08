@@ -97,7 +97,7 @@ export const stepSections: Record<SectionKey, StepSection> = {
     type: 'form',
     key: 'teacherInfo',
     name: 'Teacher Information',
-    navTitle: 'Teacher Info',
+    navTitle: 'Info',
     fields: ['email', 'firstName', 'lastName', 'position', 'district', 'schools'],
   },
   isSelf: {
@@ -146,7 +146,7 @@ export const stepSections: Record<SectionKey, StepSection> = {
     type: 'form',
     key: 'completerInfo',
     name: 'Completer Information',
-    navTitle: 'Completer Info',
+    navTitle: 'Proxy',
     fields: ['proxyFirstName', 'proxyLastName', 'proxyPosition', 'proxyEmail'],
   },
   isPayee: {
@@ -188,7 +188,7 @@ export const stepSections: Record<SectionKey, StepSection> = {
     type: 'form',
     key: 'billingInfo',
     name: 'Billing Contact Information',
-    navTitle: 'Billing Info',
+    navTitle: 'Billing',
     fields: ['billingName', 'billingEmail'],
   },
   acknowledgements: {
@@ -198,7 +198,7 @@ export const stepSections: Record<SectionKey, StepSection> = {
     type: 'form',
     key: 'acknowledgements',
     name: 'Acknowledgements',
-    navTitle: 'Acknowledgements',
+    navTitle: 'Policy',
     fields: ['confirmRead', 'confirmAvailable', 'confirmResources'],
   },
 

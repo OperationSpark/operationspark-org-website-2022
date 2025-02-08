@@ -88,6 +88,7 @@ const FormStep = ({
                 {stepErrors?.map((err, i) =>
                   onErrorClick ? (
                     <button
+                      type='button'
                       key={err.name + i}
                       className='form-error-item button'
                       onClick={() => onErrorClick?.(err.name)}
