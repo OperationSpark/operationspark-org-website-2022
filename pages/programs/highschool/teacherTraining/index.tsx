@@ -35,13 +35,17 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
         </div>
 
         <Content className='flex-column gap-4'>
-          <p className='dynamic-txt'>
-            {`Operation Spark, an SCA training provider and certifying agency for both Basic and Advanced statewide Industry-Based Certifications (IBCs), partners with school districts and charter schools across Louisiana through our innovative Curriculum and Coaching
+          <div className='intro-section-1'>
+            <p className='dynamic-txt'>
+              {`Operation Spark, an SCA training provider and certifying agency for both Basic and Advanced statewide Industry-Based Certifications (IBCs), partners with school districts and charter schools across Louisiana through our innovative Curriculum and Coaching
           Program.`}
-          </p>
-          <p className='dynamic-txt'>
-            {`We equip high school teachers to deliver our curriculum and prepare students for success in earning our statewide IBCs. During our intensive two-week summer training, teachers participate in live content instruction, complete hands-on projects, and undergo assessments for each course. On the final day of training, participants take the IBC exam, and those who meet specific benchmarks are certified by Operation Spark to deliver our courses to students.`}
-          </p>
+            </p>
+          </div>
+          <div className='intro-section-2'>
+            <p className='dynamic-txt'>
+              {`We equip high school teachers to deliver our curriculum and prepare students for success in earning our statewide IBCs. During our intensive two-week summer training, teachers participate in live content instruction, complete hands-on projects, and undergo assessments for each course. On the final day of training, participants take the IBC exam, and those who meet specific benchmarks are certified by Operation Spark to deliver our courses to students.`}
+            </p>
+          </div>
         </Content>
         <Content>
           <div className='TODO'>Insert School Accountability Blurb + Workforce Readiness Blurb</div>
@@ -303,6 +307,39 @@ const HighschoolStyles = styled.div`
     gap: 2rem;
   }
 
+  .intro-section-1,
+  .intro-section-2 {
+    max-width: 80%;
+    box-shadow: ${({ theme }) => {
+      const lm = theme.isLightMode;
+      return `
+        0 0 0px 2px ${theme.rgb('bg', 1)},
+        0 0 4px 1px ${theme.rgb(lm ? 'primary' : 'secondary', 0.5)},
+        0 0 4px 2px inset ${theme.rgb(lm ? 'primary' : 'secondary', 0.25)}
+    `;
+    }};
+    background: ${({ theme }) =>
+      theme.isLightMode ? theme.rgb('primary.700', 0.1) : theme.rgb('secondary.900', 0.1)};
+    box-shadow: 0 0 3px 1px inset
+      ${({ theme }) => theme.rgb(theme.isLightMode ? 'primary' : 'secondary.100', 0.5, 1)};
+    padding: 1rem;
+    border-radius: 1rem;
+    text-align: center;
+
+    p {
+      color: ${({ theme }) =>
+        theme.isLightMode ? theme.rgb('primary.900', 0.75) : theme.rgb('secondary.100', 0.75)};
+    }
+  }
+  .intro-section-1 {
+    align-self: flex-start;
+    text-align: left;
+  }
+  .intro-section-2 {
+    align-self: flex-end;
+    text-align: right;
+  }
+
   .coaching-section {
     position: relative;
   }
@@ -341,6 +378,11 @@ const HighschoolStyles = styled.div`
   }
 
   @media screen and (max-width: 768px) {
+    .intro-section-1,
+    .intro-section-2 {
+      max-width: 100%;
+      text-align: center;
+    }
     .curriculum-coaching-program {
       grid-template-columns: 1fr;
       gap: 3rem;
