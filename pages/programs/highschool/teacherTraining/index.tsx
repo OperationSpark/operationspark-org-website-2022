@@ -13,7 +13,6 @@ import { getStaticAsset } from '@this/pages-api/static/[asset]';
 import NeumorphismListCard from '@this/src/components/Cards/NeumorphismListCard';
 import TeacherTrainingCard from '@this/src/components/Cards/TeacherTrainingCard';
 import { BgImg } from '@this/src/components/Elements';
-import BubbleList from '@this/src/components/Elements/BubbleList';
 import ConnectingArrow from '@this/src/components/Elements/ConnectingArrow';
 import GridList from '@this/src/components/Elements/GridList';
 
@@ -216,22 +215,30 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
                   {`Students enrolled in this pathway take all five of Operation Spark's high school courses, culminating in our state-approved registered apprenticeship with a paid work-based learning component their senior year.`}
                 </p>
 
-                <BubbleList
+                <GridList
                   items={[
                     'Fundamentals of HTML, CSS, and Javascript',
                     'Advanced Javascript, Functional Programming, and Web Development',
                     'Fundamentals of Video Game Programming',
                     'Internet of Things',
 
-                    <div key='opspark' className='flex-column w-50'>
-                      <span className='value-badge'>Apprenticeship</span>
-                      <span>Operation Spark</span>
+                    <div key='opspark' className='flex-column flex-center w-100 gap-2'>
+                      <span className='value-badge fit-content'>Apprenticeship</span>
+                      <span
+                        className='flex-row flex-wrap flex-center gap-2'
+                        style={{ rowGap: '0' }}
+                      >
+                        <span>Operation Spark</span>
+                      </span>
                     </div>,
-                    <div key='OJT' className='flex-column w-50'>
-                      <span className='value-badge'>Apprenticeship</span>
-                      <span>
-                        {'Operation Spark '}
-                        <abbr title='On-the-job Training'>OJT</abbr>
+                    <div key='OJT' className='flex-column flex-center w-100 gap-2'>
+                      <span className='value-badge fit-content'>Apprenticeship</span>
+                      <span
+                        className='flex-row flex-wrap flex-center gap-2'
+                        style={{ rowGap: '0' }}
+                      >
+                        <span>{'Operation Spark OJT'}</span>
+                        <span className='fs-75 text-subtle-2'>(On-the-job Training)</span>
                       </span>
                     </div>,
                   ]}
