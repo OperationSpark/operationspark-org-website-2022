@@ -47,7 +47,7 @@ const NeumorphismListCard: FC<NeumorphismListCardProps> = ({
       style={
         fit
           ? { ...style, maxWidth: maxWidth ?? 'fit-content', width }
-          : { ...style, width, maxWidth }
+          : { ...style, width, maxWidth: '100%' }
       }
       time={typeof hueRotate === 'number' ? hueRotate : undefined}
     >
@@ -93,6 +93,7 @@ const hueRotateAnimation = keyframes`
 const NeumorphismListCardStyles = styled.div<{ time?: number }>`
   flex: 1 1 46%;
   min-height: 100%;
+  max-width: 100%;
   display: flex;
   flex-flow: column;
   align-items: center;

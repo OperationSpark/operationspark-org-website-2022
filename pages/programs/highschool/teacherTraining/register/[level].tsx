@@ -46,110 +46,106 @@ const TeacherTrainingRegistration: NextPage<TeacherTrainingRegistrationProps> = 
         </Link>
 
         <Content>
-          <div className='flex-row flex-center'>
-            <NeumorphismListCard
-              title='Details'
-              center
-              maxWidth='800px'
-              items={[
-                <DetailsTable key='details'>
-                  <div className='details-row'>
-                    <div className='details-label'>IBC</div>
-                    <div className='details-value'>
-                      {info.levelName} {info.subtitle} | Level {info.level}
-                    </div>
+          <NeumorphismListCard
+            title='Details'
+            center
+            width='800px'
+            items={[
+              <DetailsTable key='details'>
+                <div className='details-row'>
+                  <div className='details-label'>IBC</div>
+                  <div className='details-value'>
+                    {info.levelName} {info.subtitle} | Level {info.level}
                   </div>
-                  <div className='details-row'>
-                    <div className='details-label'>Prerequisites</div>
-                    <div className='details-value'>{info.prerequisites}</div>
+                </div>
+                <div className='details-row'>
+                  <div className='details-label'>Prerequisites</div>
+                  <div className='details-value'>{info.prerequisites}</div>
+                </div>
+                <div className='details-row'>
+                  <div className='details-label'>Format</div>
+                  <div className='details-value'>{info.format.type}</div>
+                </div>
+                <div className='details-row'>
+                  <div className='details-label'>Cost</div>
+                  <div className='details-value'>
+                    {info.cost.amount} per {info.cost.per}
+                    {info.cost.includeTesting && ' (includes testing)'}
                   </div>
-                  <div className='details-row'>
-                    <div className='details-label'>Format</div>
-                    <div className='details-value'>{info.format.type}</div>
+                </div>
+                <div className='details-row'>
+                  <div className='details-label'>Deadlines</div>
+                  <div className='details-value'>
+                    {`The priority deadline for guaranteed availability is `}
+                    <span className='value-badge'>{info.registration.priorityDate}</span>
+                    {`. The final deadline to register is `}
+                    <span className='value-badge'>{info.registration.deadline}</span>
+                    {`, or when we reach the seat limit, whichever comes first.`}
                   </div>
-                  <div className='details-row'>
-                    <div className='details-label'>Cost</div>
-                    <div className='details-value'>
-                      {info.cost.amount} per {info.cost.per}
-                      {info.cost.includeTesting && ' (includes testing)'}
-                    </div>
-                  </div>
-                  <div className='details-row'>
-                    <div className='details-label'>Deadlines</div>
-                    <div className='details-value'>
-                      {`The priority deadline for guaranteed availability is `}
-                      <span className='value-badge'>{info.registration.priorityDate}</span>
-                      {`. The final deadline to register is `}
-                      <span className='value-badge'>{info.registration.deadline}</span>
-                      {`, or when we reach the seat limit, whichever comes first.`}
-                    </div>
-                  </div>
-                  <div className='details-row'>
-                    <div className='details-label'>Dates</div>
-                    <div className='details-value'>
-                      <div className='flex-column'>
-                        <div className='fw-700'>
-                          {info.times.startDate} - {info.times.endDate}
-                        </div>
-                        <div className='fw-700 flex-row gap-2 flex-align-center'>
-                          <span>
-                            {info.times.startTime} - {info.times.endTime}
-                          </span>
+                </div>
+                <div className='details-row'>
+                  <div className='details-label'>Dates</div>
+                  <div className='details-value'>
+                    <div className='flex-column'>
+                      <div className='fw-700'>
+                        {info.times.startDate} - {info.times.endDate}
+                      </div>
+                      <div className='fw-700 flex-row gap-2 flex-align-center'>
+                        <span>
+                          {info.times.startTime} - {info.times.endTime}
+                        </span>
 
-                          <span className='fs-75 lh-1 text-subtle-2'>{info.times.days}</span>
-                        </div>
+                        <span className='fs-75 lh-1 text-subtle-2'>{info.times.days}</span>
                       </div>
                     </div>
                   </div>
-                  <div className='flex-row flex-center'>
-                    <a
-                      href={`/programs/highschool/teacherTraining/info/level-${level}`}
-                      className='registration-button'
-                    >
-                      See all details for level {level}
-                    </a>
-                  </div>
-                </DetailsTable>,
-              ]}
-            />
-          </div>
+                </div>
+                <div className='flex-row flex-center'>
+                  <a
+                    href={`/programs/highschool/teacherTraining/info/level-${level}`}
+                    className='registration-button'
+                  >
+                    See all details for level {level}
+                  </a>
+                </div>
+              </DetailsTable>,
+            ]}
+          />
         </Content>
 
         <Content className='flex-column flex-align-center' style={{ minHeight: '100vh' }}>
-          <div>
-            <NeumorphismListCard
-              title='Registration Form'
-              subtitle='Please complete a separate form for each participant'
-              maxWidth='800px'
-              style={{ padding: 0 }}
-              itemStyle={{ padding: 0 }}
-              center
-              items={[
-                <div key='registration-form' className='registration-form flex-column gap-4'>
-                  <div className='section-content-card' style={{ margin: '1rem' }}>
-                    <div>
-                      {`Please include any special instructions for Invoices as required by the school or district. Invoices for training fees will be sent one month before training starts. Cancellations for a full refund will be allowed until the invoicing date, `}
-                      <span className='value-badge'>June 10, 2025</span>
-                      {`. Any registrations received after this date will be `}
-                      <i>non-refundable.</i>
-                    </div>
+          <NeumorphismListCard
+            title='Registration Form'
+            subtitle='Please complete a separate form for each participant'
+            maxWidth='800px'
+            style={{ padding: 0 }}
+            itemStyle={{ padding: 0 }}
+            center
+            items={[
+              <div key='registration-form' className='registration-form flex-column gap-4'>
+                <div className='section-content-card' style={{ margin: '1rem' }}>
+                  <div>
+                    {`Please include any special instructions for Invoices as required by the school or district. Invoices for training fees will be sent one month before training starts. Cancellations for a full refund will be allowed until the invoicing date, `}
+                    <span className='value-badge'>June 10, 2025</span>
+                    {`. Any registrations received after this date will be `}
+                    <i>non-refundable.</i>
                   </div>
+                </div>
 
-                  <TeacherTrainingApplication
-                    key='registration-form'
-                    level={`Level ${level} (${levelName})`}
-                    formName={`Teacher Training | ${season} | Level ${level} (${levelName})`}
-                    registrationFields={formFields}
-                    infoUrl={`/programs/highschool/teacherTraining/info/level-${level}`}
-                    times={info.times}
-                    onSubmitComplete={() => {
-                      console.log('// TODO: Form submitted');
-                    }}
-                  />
-                </div>,
-              ]}
-            />
-          </div>
+                <TeacherTrainingApplication
+                  key='registration-form'
+                  level={`Level ${level} (${levelName})`}
+                  formName={`Teacher Training | ${season} | Level ${level} (${levelName})`}
+                  registrationFields={formFields}
+                  infoUrl={`/programs/highschool/teacherTraining/info/level-${level}`}
+                  times={info.times}
+                  onSubmitComplete={() => {
+                    console.log('// TODO: Form submitted');
+                  }}
+                />
+              </div>,
+            ]}
+          />
         </Content>
       </TeacherTrainingRegisterStyles>
     </Main>
@@ -236,7 +232,11 @@ const DetailsTable = styled.div`
   display: flex;
   flex-flow: column;
   gap: 0.5rem;
+  max-width: 100%;
+  width: 100%;
   .details-row {
+    width: 100%;
+    max-width: 100%;
     display: grid;
     grid-template-columns: 125px 1fr;
     gap: 0.5rem;

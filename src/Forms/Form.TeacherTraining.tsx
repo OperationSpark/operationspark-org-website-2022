@@ -960,7 +960,9 @@ const TeacherTrainingApplicationStyles = styled.div`
   }
   .review-row {
     display: grid;
-    grid-template-columns: 175px 1fr max-content;
+    width: 100%;
+    max-width: 100%;
+    grid-template-columns: 125px 1fr max-content;
     gap: 0.5rem;
     box-shadow: 0 0 1px 1px ${({ theme }) => theme.rgb('fg', 0.2)};
     background: ${({ theme }) => theme.rgb('bg', 1)};
