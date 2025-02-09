@@ -22,7 +22,7 @@ const badge = (text: string) => `
     font-size: 0.9em;
     font-weight: 600;
     line-height: 1;
-  ">${text}</span>
+  ">${text?.trim()}</span>
 `;
 
 type FormValueType = {
