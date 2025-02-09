@@ -18,9 +18,18 @@ type TeacherTrainingRegistrationProps = {
 };
 
 const TeacherTrainingRegistration: NextPage<TeacherTrainingRegistrationProps> = (props) => {
-  const { info, formFields } = props;
-
-  const { title, season, level, levelName } = info;
+  const {
+    title,
+    season,
+    level,
+    levelName,
+    subtitle,
+    prerequisites,
+    format,
+    cost,
+    registration,
+    times,
+  } = props.info;
 
   return (
     <Main style={{ paddingTop: 0 }}>
@@ -35,7 +44,7 @@ const TeacherTrainingRegistration: NextPage<TeacherTrainingRegistrationProps> = 
               <h3 className='fw-700 dynamic-h3 page-header-dim'>
                 Level {level} ({levelName})
               </h3>
-              <h3 className='fw-500 dynamic-h4 page-header-dim'>{info.subtitle}</h3>
+              <h3 className='fw-500 dynamic-h4 page-header-dim'>{subtitle}</h3>
             </div>
           </Content>
         </BgImg>
@@ -56,31 +65,31 @@ const TeacherTrainingRegistration: NextPage<TeacherTrainingRegistrationProps> = 
                 <div className='details-row'>
                   <div className='details-label'>IBC</div>
                   <div className='details-value'>
-                    {info.levelName} {info.subtitle} | Level {info.level}
+                    {levelName} {subtitle} | Level {level}
                   </div>
                 </div>
                 <div className='details-row'>
                   <div className='details-label'>Prerequisites</div>
-                  <div className='details-value'>{info.prerequisites}</div>
+                  <div className='details-value'>{prerequisites}</div>
                 </div>
                 <div className='details-row'>
                   <div className='details-label'>Format</div>
-                  <div className='details-value'>{info.format.type}</div>
+                  <div className='details-value'>{format.type}</div>
                 </div>
                 <div className='details-row'>
                   <div className='details-label'>Cost</div>
                   <div className='details-value'>
-                    {info.cost.amount} per {info.cost.per}
-                    {info.cost.includeTesting && ' (includes testing)'}
+                    {cost.amount} per {cost.per}
+                    {cost.includeTesting && ' (includes testing)'}
                   </div>
                 </div>
                 <div className='details-row'>
                   <div className='details-label'>Deadlines</div>
                   <div className='details-value'>
                     {`The priority deadline for guaranteed availability is `}
-                    <span className='value-badge'>{info.registration.priorityDate}</span>
+                    <span className='value-badge'>{registration.priorityDate}</span>
                     {`. The final deadline to register is `}
-                    <span className='value-badge'>{info.registration.deadline}</span>
+                    <span className='value-badge'>{registration.deadline}</span>
                     {`, or when we reach the seat limit, whichever comes first.`}
                   </div>
                 </div>
@@ -89,14 +98,14 @@ const TeacherTrainingRegistration: NextPage<TeacherTrainingRegistrationProps> = 
                   <div className='details-value'>
                     <div className='flex-column'>
                       <div className='fw-700'>
-                        {info.times.startDate} - {info.times.endDate}
+                        {times.startDate} - {times.endDate}
                       </div>
                       <div className='fw-700 flex-row gap-2 flex-align-center'>
                         <span>
-                          {info.times.startTime} - {info.times.endTime}
+                          {times.startTime} - {times.endTime}
                         </span>
 
-                        <span className='fs-75 lh-1 text-subtle-2'>{info.times.days}</span>
+                        <span className='fs-75 lh-1 text-subtle-2'>{times.days}</span>
                       </div>
                     </div>
                   </div>
@@ -114,10 +123,7 @@ const TeacherTrainingRegistration: NextPage<TeacherTrainingRegistrationProps> = 
           />
         </Content>
 
-        <Content
-          className='flex-column flex-align-center'
-          style={{ minHeight: 'calc(100vh - 100px)' }}
-        >
+        <Content className='flex-column flex-align-center' style={{}}>
           <NeumorphismListCard
             title='Registration Form'
             subtitle='Please complete a separate form for each participant'
@@ -140,9 +146,10 @@ const TeacherTrainingRegistration: NextPage<TeacherTrainingRegistrationProps> = 
                   key='registration-form'
                   level={`Level ${level} (${levelName})`}
                   formName={`Teacher Training | ${season} | Level ${level} (${levelName})`}
-                  registrationFields={formFields}
+                  registrationFields={props.formFields}
                   infoUrl={`/programs/highschool/teacherTraining/info/level-${level}`}
-                  times={info.times}
+                  times={times}
+                  formInfo={props.info}
                   onSubmitComplete={() => {
                     console.log('// TODO: Form submitted');
                   }}
@@ -176,6 +183,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 const TeacherTrainingRegisterStyles = styled.div`
+  .registration-form {
+    height: 100%;
+    justify-content: space-between;
+  }
   .registration-button {
     display: inline-flex;
     align-items: center;

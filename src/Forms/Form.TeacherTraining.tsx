@@ -19,6 +19,7 @@ import { TeacherTraining, TeacherTrainingInfo } from '@this/data/types/teacherTr
 import { formatName } from '../helpers/utils';
 
 import Spinner from '../components/Elements/Spinner';
+import TextArea from '../components/Form/elements/TextArea';
 import { capFirstLetter } from '../components/Form/helpers';
 import { toDayJs } from '../helpers/time';
 import FormStep from './FormComponents/FormStep';
@@ -40,6 +41,7 @@ type TeacherTrainingApplicationProps = {
   formName: string;
   infoUrl: string;
   times: TeacherTrainingInfo['times'];
+  formInfo: TeacherTrainingInfo;
 };
 
 const TeacherTrainingApplication = ({
@@ -49,6 +51,7 @@ const TeacherTrainingApplication = ({
   formName,
   infoUrl,
   times,
+  formInfo,
 }: TeacherTrainingApplicationProps) => {
   const theme = useTheme();
   const formRef = useRef<HTMLDivElement>(null);
@@ -61,6 +64,8 @@ const TeacherTrainingApplication = ({
     isPayee: null,
   });
 
+  const [isRegisterMore, setIsRegisterMore] = useState(false);
+  const [isSignupComplete, setIsSignupComplete] = useState(false);
   const [step, setStep] = useState(1);
   const [previousStep, setPreviousStep] = useState(1);
   const form = useForm();
@@ -174,6 +179,41 @@ const TeacherTrainingApplication = ({
     changeStep(stepNumber);
   };
 
+  const registerMore = () => {
+    // Register another
+    form.setFields({
+      firstName: '',
+      lastName: '',
+      email: '',
+      position: '',
+      district: '',
+      schools: '',
+    });
+    setIsSignupComplete(false);
+    setStep(1);
+    setPreviousStep(1);
+    setShowStepErrors(false);
+    setFormQuestions({
+      isSelf: false,
+      isPayee: null,
+    });
+  };
+
+  const resetForm = () => {
+    // Registration complete
+    form.clear();
+
+    setStep(1);
+    setPreviousStep(1);
+    setShowStepErrors(false);
+    setIsRegisterMore(false);
+    setIsSignupComplete(false);
+    setFormQuestions({
+      isSelf: null,
+      isPayee: null,
+    });
+  };
+
   const handleSubmit = async () => {
     setIsSubmitting(true);
 
@@ -188,6 +228,13 @@ const TeacherTrainingApplication = ({
         value: level,
         label: 'Course Level',
       },
+
+      {
+        name: 'comments',
+        value: form.get('comments'),
+        label: 'Comments',
+      },
+
       ...reviewList.map((field) => ({
         name: field.name,
         value: field.value || field.altValue,
@@ -199,20 +246,21 @@ const TeacherTrainingApplication = ({
       await axios.post('/api/signups/training', {
         values: completeFormValues,
         formName,
+        courseInfo: formInfo,
       });
 
-      form.clear();
       form.notifySuccess();
-      setStep(1);
-      setPreviousStep(1);
-      setShowStepErrors(false);
-      setFormQuestions({
-        isSelf: null,
-        isPayee: null,
-      });
 
+      if (!formQuestions.isSelf && isRegisterMore) {
+        setIsSubmitting(false);
+        return registerMore();
+      }
+
+      setIsSubmitting(false);
+      setIsSignupComplete(true);
       onSubmitComplete?.();
-    } catch {
+    } catch (err) {
+      console.error(err);
       form.notifyError();
     } finally {
       setIsSubmitting(false);
@@ -331,6 +379,38 @@ const TeacherTrainingApplication = ({
 
   return (
     <TeacherTrainingApplicationStyles ref={formRef}>
+      {isSubmitting && (
+        <div className='submitting-container'>
+          <Spinner text='Submitting Form' size={7.5} />
+        </div>
+      )}
+      {isSignupComplete && (
+        <div className='signup-complete-container'>
+          <div className='signup-complete-content'>
+            <h2>Registration Complete!</h2>
+            <p>
+              Thank you for registering for the {level} Teacher Training. You will receive an email
+              confirmation shortly.
+            </p>
+            <div className='flex-row row-wrap flex-center gap-2'>
+              {!formQuestions.isSelf && (
+                <button
+                  className='form-btn form-btn-default flex-300 text-nowrap'
+                  onClick={registerMore}
+                >
+                  Register More
+                </button>
+              )}
+              <button
+                className='form-btn form-btn-selected flex-300 text-nowrap'
+                onClick={resetForm}
+              >
+                Done
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       {isSubmitting && (
         <div className='submitting-container'>
           <Spinner text='Submitting Form' size={7.5} />
@@ -613,14 +693,13 @@ const TeacherTrainingApplication = ({
                 return (
                   <Input.Checkbox
                     key={ack.name}
-                    // id={ack.name}
                     name={ack.name}
                     label={
                       ack.infoLink ? (
-                        <span>
-                          {label}{' '}
+                        <div className='flex-row flex-wrap flex-between'>
+                          <span className='flex-300'>{label} </span>
                           <a
-                            className='anchor right-arrow-left'
+                            className='form-btn form-btn-default form-btn-inline flex-100'
                             href={infoUrl}
                             target='_blank'
                             style={{
@@ -630,9 +709,9 @@ const TeacherTrainingApplication = ({
                               gap: '0.5rem',
                             }}
                           >
-                            {level} Information <NewTabIcon />
+                            See Details <NewTabIcon />
                           </a>
-                        </span>
+                        </div>
                       ) : ack.dateTime ? (
                         <span>
                           {label} <span className='value-badge'>{times.startDate}</span>
@@ -699,6 +778,28 @@ const TeacherTrainingApplication = ({
                 ),
               )}
             </div>
+            {!formQuestions.isSelf && (
+              <div className='form-col-span'>
+                <div className='flex-row flex-center' style={{ marginBottom: '0.5rem' }}>
+                  <Input.Checkbox
+                    name='comments'
+                    label='Register someone else?'
+                    checked={isRegisterMore}
+                    onChange={(value) => setIsRegisterMore(value)}
+                  />
+                </div>
+              </div>
+            )}
+            <div className='form-col-span'>
+              <div style={{ maxWidth: '500px', margin: '0 auto' }}>
+                <TextArea
+                  name='comments'
+                  label='Questions/Comments'
+                  value={form.get('comments')}
+                  onChange={(value) => handleChange('comments', value, true)}
+                />
+              </div>
+            </div>
           </FormStep>
         </div>
       </Form>
@@ -714,7 +815,8 @@ const TeacherTrainingApplicationStyles = styled.div`
   position: relative;
   max-width: 100%;
 
-  .submitting-container {
+  .submitting-container,
+  .signup-complete-container {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -730,6 +832,20 @@ const TeacherTrainingApplicationStyles = styled.div`
     background: ${({ theme }) => theme.rgb('bg', 0.5)};
     backdrop-filter: blur(0.5rem);
     -webkit-backdrop-filter: blur(0.5rem);
+  }
+
+  .signup-complete-content {
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 1rem;
+    background: ${({ theme }) => theme.rgb('bg', 0.5)};
+    box-shadow: 0 0 1px 1px ${({ theme }) => theme.rgb('fg', 0.25)};
+    border-radius: 1rem;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    gap: 1rem;
   }
 
   .form-info-danger {
@@ -801,7 +917,6 @@ const TeacherTrainingApplicationStyles = styled.div`
     flex: 1 1 100px;
     font-size: 0.8rem;
     font-weight: 600;
-    /* padding: 0.5rem; */
     color: ${({ theme }) => theme.fg};
 
     gap: 0.5rem;
@@ -826,17 +941,14 @@ const TeacherTrainingApplicationStyles = styled.div`
       text-overflow: ellipsis;
       white-space: nowrap;
     }
-    /* background: rgba(0, 0, 0, 0); */
+
     transition: all 200ms;
 
     &.complete {
-      /* box-shadow: 0 0 3px ${({ theme }) => theme.green[500]}; */
-      /* background: ${({ theme }) => theme.primary[700]}; */
       color: ${({ theme }) => theme.green[500]};
     }
 
     &.active {
-      /* background: ${({ theme }) => theme.primary[900]} !important; */
       color: ${({ theme }) => theme.white};
       cursor: default !important;
     }
@@ -849,16 +961,6 @@ const TeacherTrainingApplicationStyles = styled.div`
         display: none;
       }
     }
-    /*
-    &.clickable {
-      cursor: pointer;
-
-      transition: all 200ms;
-      &:hover {
-        color: ${({ theme }) => theme.white};
-        background: ${({ theme }) => theme.primary[0]};
-      }
-    } */
   }
   .form-question-content {
     max-width: 100%;
@@ -951,6 +1053,18 @@ const TeacherTrainingApplicationStyles = styled.div`
         color: ${({ theme }) => theme.rgb('fg', 0.4)};
         cursor: default;
       }
+    }
+
+    &.form-btn-inline {
+      font-weight: 400;
+      font-size: 0.9rem;
+      display: inline-flex;
+      white-space: nowrap;
+      max-width: fit-content;
+      padding: 0.25rem 0.5rem;
+      line-height: 1;
+      height: fit-content;
+      color: ${({ theme }) => theme.rgb('fg', 0.75)};
     }
   }
 

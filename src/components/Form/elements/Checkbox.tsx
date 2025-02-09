@@ -45,10 +45,12 @@ const CheckboxStyles = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 0.5em;
+  .label {
+    width: 100%;
+  }
 
   label {
     display: flex;
-    /* align-items: center; */
     padding: 0.5em;
     padding-left: 2.5em;
     position: relative;

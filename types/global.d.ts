@@ -4,6 +4,9 @@ declare namespace NodeJS {
     OVERRIDE_NODE_ENV: string;
     MAILCHIMP_API_KEY: string;
     MAILCHIMP_AUDIENCE_ID: string;
+
+    MG_DOMAIN: string;
+    MG_API_KEY: string;
     GREENLIGHT_API_ENDPOINT: string;
     GREENLIGHT_API_TOKEN: string;
     SIGNUP_API_ENDPOINT: string;

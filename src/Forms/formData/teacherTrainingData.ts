@@ -98,7 +98,7 @@ export const stepSections: Record<SectionKey, StepSection> = {
     key: 'teacherInfo',
     name: 'Teacher Information',
     navTitle: 'Info',
-    fields: ['email', 'firstName', 'lastName', 'position', 'district', 'schools'],
+    fields: ['firstName', 'lastName', 'email', 'position', 'district', 'schools'],
   },
   isSelf: {
     step: 2,

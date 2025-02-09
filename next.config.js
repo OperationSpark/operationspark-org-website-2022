@@ -26,6 +26,8 @@ module.exports = (phase, { defaultConfig }) => {
     checkEnvVars([
       'MAILCHIMP_API_KEY',
       'MAILCHIMP_AUDIENCE_ID',
+      'MG_DOMAIN',
+      'MG_API_KEY',
       'GREENLIGHT_API_ENDPOINT',
       'SIGNUP_API_ENDPOINT',
       'GOOGLE_SERVICE_ACCOUNT',

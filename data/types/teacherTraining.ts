@@ -5,6 +5,7 @@ export type TeacherTrainingInfo = {
   subtitle: string;
   season: string;
   summary: string;
+  ibcCode: string;
   format: {
     type: 'Online' | 'In-Person' | 'Hybrid';
     description: string;
