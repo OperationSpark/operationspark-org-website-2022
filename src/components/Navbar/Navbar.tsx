@@ -52,18 +52,20 @@ const Nav = ({ alertInfo }: NavProps) => {
 
   const resizeObserverRef = useRef<ResizeObserver | null>(null);
 
-  const transparentBg = theme.isLightMode ? 'rgba(255,255,255,0)' : 'rgba(25,25,25,0)';
-  const bgColor = supportsBackdropFilter ? theme.alpha.bg : theme.bg;
+  const bgOpacity = supportsBackdropFilter ? 0.75 : 1;
 
   const navAnimation = {
-    boxShadow: `0 0 8px ${!isTop ? theme.alpha.fg : 'rgba(125,125,125,0)'}`,
+    boxShadow: `0 0 1rem 1px ${
+      !isTop ? theme.rgb('black', theme.isLightMode ? 0.25 : 0.9) : theme.rgb('black', 0)
+    }`,
     backdropFilter: isTop ? 'blur(0px)' : 'blur(8px)',
     WebkitBackdropFilter: isTop ? 'blur(0px)' : 'blur(8px)',
-    background: isTop ? transparentBg : bgColor,
+    background: isTop ? theme.rgb('bg', 0) : theme.rgb('bg', bgOpacity),
   };
 
   const navTransition: Transition = {
     duration: 0.2,
+    background: { duration: isTop ? 0.25 : 0.5 },
   };
 
   // Dynamically update nav height

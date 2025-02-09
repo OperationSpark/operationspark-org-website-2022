@@ -67,8 +67,8 @@ const pageCommonCss = css`
       padding: 1rem;
       margin-bottom: 0.5rem;
       border-radius: 1rem;
-      backdrop-filter: blur(2rem);
-      -webkit-backdrop-filter: blur(2rem);
+      backdrop-filter: blur(0.75rem);
+      -webkit-backdrop-filter: blur(0.75rem);
       line-height: 1;
       color: ${({ theme }) => theme.rgb('white', 0.8)};
       text-align: center;
