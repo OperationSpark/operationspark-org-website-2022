@@ -16,8 +16,9 @@ const badge = (text: string) => `
     display: inline-block;
     padding: 2px 4px;
     border-radius: 4px;
-    background-color:rgba(118, 0, 233, 0.1);
-    border: 1px solid rgba(118, 0, 233, 0.25);
+    background-color:rgba(118, 0, 233, 0.5);
+    border: 1px solid rgba(118, 0, 233, 1);
+    color: rgba(255, 255, 255, 1);
     font-size: 0.9em;
     font-weight: 600;
     line-height: 1;
@@ -130,11 +131,12 @@ export default async function handleContactForm(req: ISignupReq, res: NextApiRes
     ? [
         {
           label: 'Signed Up By',
-          value: `${valueMap.proxyFirstName} ${valueMap.proxyLastName}`,
-        },
-        {
-          label: '',
-          value: proxyEmail ?? '',
+          value: `
+          <div>
+            <div><b>$${valueMap.proxyFirstName} ${valueMap.proxyLastName}</b></div>
+            <div style="color: #A6A6A6; font-size: 12px;">${proxyEmail}</div>
+          </div>
+          `,
         },
       ]
     : [];
