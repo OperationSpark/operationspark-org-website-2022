@@ -16,7 +16,7 @@ const badge = (text: string) => `
     display: inline-block;
     padding: 2px 4px;
     border-radius: 4px;
-    background-color:rgba(118, 0, 233, 0.5);
+    background-color:rgba(50, 0, 100, 1);
     border: 1px solid rgba(118, 0, 233, 1);
     color: rgba(255, 255, 255, 1);
     font-size: 0.9em;
