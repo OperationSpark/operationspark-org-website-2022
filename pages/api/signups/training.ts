@@ -133,7 +133,7 @@ export default async function handleContactForm(req: ISignupReq, res: NextApiRes
           label: 'Signed Up By',
           value: `
           <div>
-            <div><b>$${valueMap.proxyFirstName} ${valueMap.proxyLastName}</b></div>
+            <div><b>${valueMap.proxyFirstName} ${valueMap.proxyLastName}</b></div>
             <div style="color: #A6A6A6; font-size: 12px;">${proxyEmail}</div>
           </div>
           `,
