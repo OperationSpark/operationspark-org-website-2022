@@ -201,11 +201,11 @@ const ProgressBarStyles = styled(motion.div)`
   height: 1rem;
 
   &.progress-only {
-    height: 0.75rem;
+    height: 0.6rem;
     margin-top: 0.5rem;
 
     .progress {
-      height: 0.75rem;
+      height: 0.6rem;
     }
   }
 
