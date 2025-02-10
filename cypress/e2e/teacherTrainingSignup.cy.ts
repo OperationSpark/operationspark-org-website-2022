@@ -106,8 +106,9 @@ describe('Teacher Training Signup', () => {
     // Check that button is not selected and click
     cy.get('[data-test-id="form-next-myself-btn"]')
       .should('be.visible')
-      .should('have.class', 'form-btn-default')
-      .click();
+      .should('have.class', 'form-btn-default');
+
+    cy.get('[data-test-id="form-next-myself-btn"]').click();
 
     // Should skip step 3 (proxy info)
     cy.get('[data-test-id="form-step-3"]').should('not.exist');
@@ -145,8 +146,9 @@ describe('Teacher Training Signup', () => {
     cy.get('[data-test-id="form-next-myself-btn"]')
       .should('be.visible')
       .should('have.class', 'form-btn-default')
-      .should('not.have.class', 'form-btn-selected')
-      .click();
+      .should('not.have.class', 'form-btn-selected');
+
+    cy.get('[data-test-id="form-next-myself-btn"]').click();
 
     // Should skip to step 6 (Policy/acknowledgements)
     cy.get('[data-test-id="form-step-6"]').should('be.visible');
@@ -314,8 +316,9 @@ describe('Teacher Training Signup', () => {
     // Check that someone else button is not selected and click
     cy.get('[data-test-id="form-next-someone-else-btn"]')
       .should('be.visible')
-      .should('have.class', 'form-btn-default')
-      .click();
+      .should('have.class', 'form-btn-default');
+
+    cy.get('[data-test-id="form-next-someone-else-btn"]').click();
 
     // Should go to step 3 (Proxy info)
     cy.get('[data-test-id="form-step-3"]').should('be.visible');
@@ -326,7 +329,8 @@ describe('Teacher Training Signup', () => {
       cy.get(`[data-test-id="${field.testId}"]`).type(field.value);
     });
     // Verify that the next button is no longer disabled and click
-    cy.get('[data-test-id="form-next-btn-step-3"]').should('not.have.class', 'disabled').click();
+    cy.get('[data-test-id="form-next-btn-step-3"]').should('not.have.class', 'disabled');
+    cy.get('[data-test-id="form-next-btn-step-3"]').click();
 
     // Expect step 4 (Question: Signing someone else up)
     cy.get('[data-test-id="form-step-4"]').should('be.visible');
@@ -356,8 +360,9 @@ describe('Teacher Training Signup', () => {
     cy.get('[data-test-id="form-next-myself-btn"]')
       .should('be.visible')
       .should('have.class', 'form-btn-default')
-      .should('not.have.class', 'form-btn-selected')
-      .click();
+      .should('not.have.class', 'form-btn-selected');
+
+    cy.get('[data-test-id="form-next-myself-btn"]').click();
 
     // Should skip to step 6 (Policy/acknowledgements)
     cy.get('[data-test-id="form-step-6"]').should('be.visible');
@@ -525,6 +530,7 @@ describe('Teacher Training Signup', () => {
       .should('not.have.class', 'form-btn-selected');
 
     cy.get('[data-test-id="form-next-btn-step-2"]').click();
+
     cy.get('[data-test-id="form-step-3"]').should('be.visible');
 
     // Verify that the data persists
