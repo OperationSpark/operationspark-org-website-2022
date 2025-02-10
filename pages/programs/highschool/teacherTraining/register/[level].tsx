@@ -133,7 +133,10 @@ const TeacherTrainingRegistration: NextPage<TeacherTrainingRegistrationProps> = 
             center
             items={[
               <div key='registration-form' className='registration-form flex-column gap-4'>
-                <div className='section-content-card' style={{ margin: '1rem' }}>
+                <div
+                  className='section-content-card'
+                  style={{ margin: '1rem auto', borderRadius: 0 }}
+                >
                   <div>
                     {`Please include any special instructions for Invoices as required by the school or district. Invoices for training fees will be sent one month before training starts. Cancellations for a full refund will be allowed until the invoicing date, `}
                     <span className='value-badge'>June 10, 2025</span>
