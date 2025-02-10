@@ -62,6 +62,7 @@ export type StepSectionQuestion = {
     label: string;
     value: boolean;
     nextStep: number;
+    testId: string;
   }[];
 };
 
@@ -130,11 +131,13 @@ export const stepSections: Record<SectionKey, StepSection> = {
         label: 'Someone else',
         value: false,
         nextStep: 3,
+        testId: 'form-next-someone-else-btn',
       },
       {
         label: 'Myself',
         value: true,
         nextStep: 4,
+        testId: 'form-next-myself-btn',
       },
     ],
   },
@@ -171,11 +174,13 @@ export const stepSections: Record<SectionKey, StepSection> = {
         label: 'Someone Else',
         value: false,
         nextStep: 5,
+        testId: 'form-next-someone-else-btn',
       },
       {
         label: 'I am paying',
         value: true,
         nextStep: 6,
+        testId: 'form-next-myself-btn',
       },
     ],
   },

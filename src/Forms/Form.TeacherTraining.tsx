@@ -18,6 +18,7 @@ import { TeacherTraining, TeacherTrainingInfo } from '@this/data/types/teacherTr
 
 import { formatName } from '../helpers/utils';
 
+import { kebabCase } from 'lodash';
 import Spinner from '../components/Elements/Spinner';
 import TextArea from '../components/Form/elements/TextArea';
 import { capFirstLetter } from '../components/Form/helpers';
@@ -378,14 +379,24 @@ const TeacherTrainingApplication = ({
   };
 
   return (
-    <TeacherTrainingApplicationStyles ref={formRef}>
+    <TeacherTrainingApplicationStyles
+      ref={formRef}
+      style={
+        isSignupComplete
+          ? {
+              maxHeight: '80vh',
+              overflow: 'hidden',
+            }
+          : {}
+      }
+    >
       {isSubmitting && (
         <div className='submitting-container'>
           <Spinner text='Submitting Form' size={7.5} />
         </div>
       )}
       {isSignupComplete && (
-        <div className='signup-complete-container'>
+        <div className='signup-complete-container' data-test-id='signup-complete-container'>
           <div className='signup-complete-content'>
             <h2>Registration Complete!</h2>
             <p>
@@ -397,6 +408,7 @@ const TeacherTrainingApplication = ({
                 <button
                   className='form-btn form-btn-default flex-300 text-nowrap'
                   onClick={registerMore}
+                  data-test-id='register-more-btn'
                 >
                   Register More
                 </button>
@@ -404,6 +416,7 @@ const TeacherTrainingApplication = ({
               <button
                 className='form-btn form-btn-selected flex-300 text-nowrap'
                 onClick={resetForm}
+                data-test-id='reset-form-btn'
               >
                 Done
               </button>
@@ -498,11 +511,7 @@ const TeacherTrainingApplication = ({
               }
               setShowStepErrors(false);
 
-              if (formQuestions.isSelf) {
-                return setStep(formQuestions.isPayee ? 4 : 3);
-              }
-
-              return setStep(3);
+              return setStep(formQuestions.isSelf ? 4 : 3);
             }}
             nextDisabled={formQuestions.isSelf === null}
           >
@@ -516,6 +525,7 @@ const TeacherTrainingApplication = ({
                   <button
                     key={option.label}
                     type='button'
+                    data-test-id={option.testId}
                     className={`form-btn ${
                       formQuestions.isSelf === option.value
                         ? 'form-btn-selected'
@@ -607,6 +617,7 @@ const TeacherTrainingApplication = ({
                     <button
                       key={option.label}
                       type='button'
+                      data-test-id={option.testId}
                       className={`form-btn ${
                         formQuestions.isPayee === option.value
                           ? 'form-btn-selected'
@@ -750,20 +761,33 @@ const TeacherTrainingApplication = ({
             <div className='form-col-span review-container'>
               {reviewList.map((field) =>
                 !field.value && !field.altValue ? null : (
-                  <div className='review-row' key={field.name}>
-                    <div className='review-field-name'>{field.label}</div>
-                    <div className='review-field-value'>{field.value || field.altValue}</div>
+                  <div
+                    className='review-row'
+                    key={field.name}
+                    data-test-id={`review-row-${kebabCase(field.name)}`}
+                  >
+                    <div
+                      className='review-field-name'
+                      data-test-id={`review-label-${kebabCase(field.name)}`}
+                    >
+                      {field.label}
+                    </div>
+                    <div
+                      className='review-field-value'
+                      data-test-id={`review-value-${kebabCase(field.name)}`}
+                    >
+                      {field.value || field.altValue}
+                    </div>
                     {field.value ? (
                       <div className='review-field-btn'>
                         <button
                           type='button'
                           className='review-edit-btn'
+                          data-test-id={`review-edit-btn-${kebabCase(field.name)}`}
                           onClick={(e) => {
                             e.preventDefault();
                             goToStep(field.step);
-                            setTimeout(() => {
-                              focusElement(field.name);
-                            }, 100);
+                            setTimeout(() => focusElement(field.name), 100);
                           }}
                         >
                           <EditIcon /> Edit
@@ -771,7 +795,12 @@ const TeacherTrainingApplication = ({
                       </div>
                     ) : (
                       <div className='review-field-btn'>
-                        <span className='review-clone'>Same as above</span>
+                        <span
+                          className='review-clone'
+                          data-test-id={`review-same-${kebabCase(field.name)}`}
+                        >
+                          Same as above
+                        </span>
                       </div>
                     )}
                   </div>

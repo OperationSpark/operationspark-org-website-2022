@@ -59,6 +59,7 @@ const FormStep = ({
         <FormStepStyles
           key={`step-${step}`}
           id={`step-${step}`}
+          data-test-id={`form-step-${step}`}
           initial={{
             opacity: 0,
             x: !direction || direction > 0 ? '100%' : '-100%',
@@ -111,6 +112,7 @@ const FormStep = ({
                 onClick={(e) => onBack(e, step - 1)}
                 disabled={backDisabled}
                 className='back-btn'
+                data-test-id={`form-back-btn-step-${step}`}
               >
                 <ChevronLeftIcon strokeWidth={2} />
                 Back
@@ -124,6 +126,7 @@ const FormStep = ({
                 onClick={(e) => onNext(e, step + 1)}
                 disabled={nextDisabled}
                 className={nextBtnClassName}
+                data-test-id={`form-next-btn-step-${step}`}
               >
                 Next
                 <ChevronRightIcon strokeWidth={2} />
@@ -135,6 +138,7 @@ const FormStep = ({
                 onClick={(e) => onSubmit(e, step)}
                 disabled={submitDisabled}
                 className='form-step-submit-btn'
+                data-test-id='form-submit-btn'
               >
                 Submit
                 <ChevronRightIcon strokeWidth={2} />
