@@ -84,12 +84,14 @@ const TeacherTrainingCard: FC<TeacherTrainingCardProps> = (props) => {
         <a
           className='training-card-info-link'
           href={`/programs/highschool/teacherTraining/info/level-${props.level}`}
+          data-test-id={`teacher-training-info-${props.level}`}
         >
           <InfoIcon className='info-icon' size={24} /> More Information
         </a>
         <a
           className='training-card-apply-link'
           href={`/programs/highschool/teacherTraining/register/level-${props.level}`}
+          data-test-id={`teacher-training-register-${props.level}`}
         >
           Register for Level {props.level}
           <span className='register-icon'>
