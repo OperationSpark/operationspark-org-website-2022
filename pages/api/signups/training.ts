@@ -4,11 +4,13 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { addRow, createSpreadsheetTab, getSheets } from '@this/api/googleSheets';
 import { TeacherTrainingInfo } from '@this/data/types/teacherTraining';
+import { connectSlack } from '@this/src/api/slack';
 
 const {
   TEACHER_TRAINING_FORM_RESPONSES_ID = '',
   MG_API_KEY = '',
   MG_DOMAIN = 'mail.operationspark.org',
+  TEACHER_TRAINING_SLACK_CHANNEL_ID,
 } = process.env;
 
 const badge = (text: string) => `
@@ -119,6 +121,7 @@ export default async function handleContactForm(req: ISignupReq, res: NextApiRes
     res.status(400).end();
     return;
   }
+
   const times = courseInfo.times;
 
   const proxyFieldNames = ['proxyFirstName', 'proxyLastName', 'proxyEmail'] as const;
@@ -137,6 +140,7 @@ export default async function handleContactForm(req: ISignupReq, res: NextApiRes
             <div style="color: #A6A6A6; font-size: 12px;">${proxyEmail}</div>
           </div>
           `,
+          plainValue: `${valueMap.proxyFirstName} ${valueMap.proxyLastName} <${proxyEmail}>`,
         },
       ]
     : [];
@@ -145,15 +149,18 @@ export default async function handleContactForm(req: ISignupReq, res: NextApiRes
     {
       label: 'Name',
       value: `${valueMap.firstName} ${valueMap.lastName}`,
+      plainValue: `${valueMap.firstName} ${valueMap.lastName} <${valueMap.email}>`,
     },
     ...proxyDetails,
     {
       label: 'Course',
       value: `${courseInfo.subtitle}`,
+      plainValue: `${courseInfo.subtitle}`,
     },
     {
       label: 'IBC',
       value: `Level ${courseInfo.level} (${courseInfo.levelName}) <span style="color: #A6A6A6; font-size: 12px;">${courseInfo.ibcCode}</span>`,
+      plainValue: `Level ${courseInfo.level} (${courseInfo.levelName}) ${courseInfo.ibcCode}`,
     },
     {
       label: 'Dates',
@@ -164,62 +171,94 @@ export default async function handleContactForm(req: ISignupReq, res: NextApiRes
         <div style="color: #A6A6A6; font-size: 12px;">${times.days ?? 'Weekdays'}</div>
       </div>
       `,
+      plainValue: `${times.startDate} - ${times.endDate}\n${times.startTime} - ${times.endTime}\n${
+        times.days ?? 'Weekdays'
+      }`,
       noBorder: true,
     },
   ];
 
-  // Create the tab if it doesn't exist
-  await createSpreadsheetTab({
-    sheets,
-    spreadsheetId,
-    tabName: formName,
-    header,
-  });
+  try {
+    // Create the tab if it doesn't exist
+    await createSpreadsheetTab({
+      sheets,
+      spreadsheetId,
+      tabName: formName,
+      header,
+    });
 
-  // Add a new row to the spreadsheet
-  await addRow({
-    sheets,
-    spreadsheetId,
-    tabName: formName,
-    values: row,
-  });
+    // Add a new row to the spreadsheet
+    await addRow({
+      sheets,
+      spreadsheetId,
+      tabName: formName,
+      values: row,
+    });
 
-  // TODO: Send email confirmation with details
+    // TODO: Send email confirmation with details
 
-  type MgVariables = {
-    title: string;
-    subject: string;
-    body?: string;
-    details: {
-      label: string;
-      value: string;
-    }[];
-  };
+    type MgVariables = {
+      title: string;
+      subject: string;
+      body?: string;
+      details: {
+        label: string;
+        value: string;
+      }[];
+    };
 
-  const plainTextEmail = `Thank you for signing up for Operation Spark's Teacher Training program starting ${
-    times.startDate
-  } at ${times.startTime}. We will be in touch soon with more details.\
-  \n\nDetails:\n${emailDetails.map((detail) => `${detail.label}: ${detail.value}`).join('\n')}`;
-  const mgVariables: MgVariables = {
-    title: `Teacher Training Signup Confirmation`,
-    subject: `${formName} Confirmation`,
-    details: emailDetails,
-    body: `Thank you for signing up for Operation Spark's Teacher Training program starting ${badge(
-      courseInfo.times.startDate,
-    )} at ${badge(courseInfo.times.startTime)}. We will be in touch soon with more details.`,
-  };
+    const plainTextEmail = `Thank you for signing up for Operation Spark's Teacher Training program starting ${
+      times.startDate
+    } at ${times.startTime}. We will be in touch soon with more details.\
+      \n\nDetails:\n${emailDetails.map((detail) => `${detail.label}: ${detail.value}`).join('\n')}`;
+    const mgVariables: MgVariables = {
+      title: `Teacher Training Signup Confirmation`,
+      subject: `${formName} Confirmation`,
+      details: emailDetails,
+      body: `Thank you for signing up for Operation Spark's Teacher Training program starting ${badge(
+        courseInfo.times.startDate,
+      )} at ${badge(courseInfo.times.startTime)}. We will be in touch soon with more details.`,
+    };
 
-  // Send email
-  await mg.messages.create(MG_DOMAIN, {
-    from: 'Operation Spark <noreply@operationspark.org>',
-    to: valueMap.email,
-    cc: proxyEmail,
-    // bcc: 'highschool@operationspark.org',
-    subject: mgVariables.subject,
-    template: 'teacher-training-confirmation',
-    text: plainTextEmail,
-    'h:X-Mailgun-Variables': JSON.stringify(mgVariables),
-  });
+    // Send email
+    await mg.messages.create(MG_DOMAIN, {
+      from: 'Operation Spark <noreply@operationspark.org>',
+      to: valueMap.email,
+      cc: proxyEmail,
+      // bcc: 'highschool@operationspark.org',
+      subject: mgVariables.subject,
+      template: 'teacher-training-confirmation',
+      text: plainTextEmail,
+      'h:X-Mailgun-Variables': JSON.stringify(mgVariables),
+    });
+    const slackClient = connectSlack();
 
-  res.status(200).end();
+    const textBlock = (text: string) => ({
+      type: 'section',
+      text: { type: 'mrkdwn', text },
+    });
+
+    const slackMessage = `*${valueMap.firstName} ${valueMap.lastName}* signed up for *${
+      courseInfo.title
+    } ${courseInfo.season}*\
+        \n*Email:* ${valueMap.email}\
+        \n*Level:* ${courseInfo.level} (${courseInfo.levelName})\
+        \n*Dates:* ${times.startDate} - ${times.endDate} \
+        \n*Times:* ${times.startTime} - ${times.endTime} ${
+      hasProxy
+        ? `\n*Signed Up By:* ${valueMap.proxyFirstName} ${valueMap.proxyLastName} (${valueMap.proxyEmail})`
+        : ''
+    }`;
+
+    await slackClient.chat.postMessage({
+      channel: TEACHER_TRAINING_SLACK_CHANNEL_ID,
+      text: slackMessage,
+      blocks: [textBlock(slackMessage)],
+    });
+
+    res.status(200).end();
+  } catch (error) {
+    console.error('Error handling contact form:', error);
+    res.status(500).end();
+  }
 }

@@ -7,6 +7,8 @@ declare namespace NodeJS {
 
     MG_DOMAIN: string;
     MG_API_KEY: string;
+    SLACK_TOKEN: string;
+    TEACHER_TRAINING_SLACK_CHANNEL_ID: string;
     GREENLIGHT_API_ENDPOINT: string;
     GREENLIGHT_API_TOKEN: string;
     SIGNUP_API_ENDPOINT: string;

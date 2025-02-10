@@ -28,6 +28,8 @@ module.exports = (phase, { defaultConfig }) => {
       'MAILCHIMP_AUDIENCE_ID',
       'MG_DOMAIN',
       'MG_API_KEY',
+      'SLACK_TOKEN',
+      'TEACHER_TRAINING_SLACK_CHANNEL_ID',
       'GREENLIGHT_API_ENDPOINT',
       'SIGNUP_API_ENDPOINT',
       'GOOGLE_SERVICE_ACCOUNT',
