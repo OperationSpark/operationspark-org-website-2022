@@ -1,4 +1,5 @@
 import { GetStaticProps, NextPage } from 'next';
+import Link from 'next/link';
 import styled from 'styled-components';
 
 import { GiCoffeeCup as PrepIcon, GiWeightLiftingUp as TrainingIcon } from 'react-icons/gi';
@@ -81,7 +82,39 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
           </div>
         </Content>
         <Content>
-          <div className='TODO'>Insert School Accountability Blurb + Workforce Readiness Blurb</div>
+          {/* <div className='TODO'>Insert School Accountability Blurb + Workforce Readiness Blurb</div> */}
+          <NeumorphismListCard
+            title='Accountability Framework'
+            width='800px'
+            style={{ margin: '0 auto' }}
+            items={[
+              <div key='accountability'>
+                <p className='accountability-description'>
+                  {`Under the state's new accountability framework for high schools, our courses and certifications provide schools with a variety of options under the Career Accelerator portion of the scorecard:`}
+                </p>
+                <div className='accountability-table'>
+                  <div className='accountability-row'>
+                    <div className='accountability-label'>Basic Bundle</div>
+                    <div className='accountability-value'>
+                      {`Fundamentals of Javascript, Functional Programming, and Web Development, Level 1 + IT Specialist Python IBC`}
+                    </div>
+                  </div>
+                  <div className='accountability-row'>
+                    <div className='accountability-label'>Statewide Advanced Credential</div>
+                    <div className='accountability-value'>
+                      {`Fundamentals of Javascript, Functional Programming, and Web Development, Level 2 Fast Forward Apprenticeship Pathway`}
+                    </div>
+                  </div>
+                  <div className='accountability-row'>
+                    <div className='accountability-label'>Fast Forward Apprenticeship Pathway</div>
+                    <div className='accountability-value'>
+                      {`A series of five Operation Spark courses, culminating in a registered apprenticeship with on-the-job training. Students earn our Basic and Advanced credentials along the way, and are prepared for high-wage roles as Software Engineers within six months of graduation.`}
+                    </div>
+                  </div>
+                </div>
+              </div>,
+            ]}
+          />
         </Content>
 
         <Content className='flex-column gap-4'>
@@ -89,13 +122,13 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
           <GridList items={partners} />
         </Content>
 
-        <Content>
+        {/* <Content>
           <div className='TODO'>Insert some brief outcomes data</div>
-        </Content>
+        </Content> */}
 
-        <Content>
+        {/* <Content>
           <div className='TODO'>Insert Testimonials from Partners</div>
-        </Content>
+        </Content> */}
 
         <Content className='flex-column gap-4'>
           <h2 className='section-header'>Courses and IBCs</h2>
@@ -326,6 +359,84 @@ const HighschoolStyles = styled.div`
     padding-bottom: 0;
   }
 
+  .fixed-subview-buttons {
+    position: fixed;
+    top: ${({ theme }) => theme.navHeight - 32}px;
+    left: 0.5rem;
+    z-index: 100;
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 1rem;
+
+    .subview-button-group {
+      display: flex;
+      flex-flow: row nowrap;
+      gap: 1rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 0 3px 1px inset ${({ theme }) => theme.rgb('fg', 0.25)};
+      background: ${({ theme }) => theme.rgb('bg', 1, theme.isLightMode ? -2 : 2)};
+
+      @supports (backdrop-filter: blur(0.75rem)) {
+        background: ${({ theme }) => theme.rgb('bg', 0.75, theme.isLightMode ? -2 : 2)};
+        backdrop-filter: blur(0.75rem);
+        -webkit-backdrop-filter: blur(0.75rem);
+      }
+    }
+    .subview-button-group-label {
+      font-size: 1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      padding-left: 0.5rem;
+    }
+
+    .subview-button-group-links {
+      display: flex;
+      flex-flow: column;
+    }
+
+    .subview-button {
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.25rem 0.5rem;
+      background: ${({ theme }) =>
+        theme.isLightMode ? theme.rgb('primary.700', 0.5) : theme.rgb('primary.700', 1)};
+      color: ${({ theme }) => theme.white};
+      width: 100%;
+      text-align: center;
+      transition: all 125ms;
+      &:hover {
+        transform: scale(1.1);
+        background: ${({ theme }) =>
+          theme.isLightMode ? theme.rgb('primary.700', 0.5) : theme.rgb('primary.700', 1, 4)};
+      }
+
+      &:active {
+        background: ${({ theme }) =>
+          theme.isLightMode ? theme.rgb('primary.700', 0.5) : theme.rgb('primary.700', 1, 6)};
+
+        transform: scale(1);
+      }
+      &:first-child {
+        transform-origin: bottom left;
+        border-top-right-radius: 0.5rem;
+        background: ${({ theme }) => theme.rgb('secondary.700', 1)};
+        color: ${({ theme }) => theme.rgb('black', 0.8)};
+
+        &:hover {
+          background: ${({ theme }) =>
+            theme.isLightMode
+              ? theme.rgb('secondary.700', 1, 4)
+              : theme.rgb('secondary.700', 1, 4)};
+        }
+      }
+      &:last-child {
+        border-bottom-right-radius: 0.5rem;
+        transform-origin: top left;
+      }
+    }
+  }
+
   .page-header-container .page-header-and {
     font-size: calc(0.4vw + 1.25rem);
     font-weight: 600;
@@ -410,6 +521,47 @@ const HighschoolStyles = styled.div`
     grid-row: 2;
   }
 
+  .accountability-description {
+    font-size: 1.1rem;
+    color: ${({ theme }) => theme.rgb('fg', 0.75)};
+    margin-bottom: 1rem;
+  }
+
+  .accountability-table {
+    display: flex;
+    flex-flow: column;
+    background: ${({ theme }) => theme.rgb('bg', 0.5, theme.isLightMode ? -4 : 4)};
+
+    border-radius: 0.5rem;
+    box-shadow: 0 0 3px 1px inset ${({ theme }) => theme.rgb('fg', 0.25)};
+    padding: 0.5rem;
+
+    .accountability-row {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.5rem;
+      border-bottom: 1px solid ${({ theme }) => theme.rgb('fg', 0.25)};
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+
+    .accountability-label {
+      font-weight: 700;
+      font-size: 1rem;
+      min-width: 125px;
+      width: 20%;
+      color: ${({ theme }) => theme.rgb('fg', 1)};
+    }
+    .accountability-value {
+      font-size: 1rem;
+      width: 80%;
+      color: ${({ theme }) => theme.rgb('fg', 0.7)};
+    }
+  }
+
   @media screen and (max-width: 768px) {
     .intro-section-1,
     .intro-section-2 {
@@ -436,7 +588,35 @@ const HighschoolStyles = styled.div`
       grid-column: auto;
       grid-row: auto;
     }
+
+    .accountability-table {
+      .accountability-row {
+        display: flex;
+        flex-flow: column;
+        gap: 0.5rem;
+        box-shadow: 0 0 1px 0px inset ${({ theme }) => theme.rgb('fg', 0.5)};
+        background: ${({ theme }) => theme.rgb('bg', 0.5)};
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        margin-bottom: 1rem;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+      .accountability-label {
+        font-size: 1.1rem;
+        width: 100%;
+        text-align: center;
+      }
+      .accountability-value {
+        font-size: 1rem;
+        width: 100%;
+        text-align: center;
+      }
+    }
   }
+
   @media screen and (min-width: 1400px) {
     .curriculum-coaching-program {
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));

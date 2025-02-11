@@ -81,7 +81,7 @@ const pageCommonCss = css`
   }
 
   .section-header {
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 900;
     text-align: center;
   }
