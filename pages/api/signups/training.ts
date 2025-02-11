@@ -197,8 +197,10 @@ export default async function handleContactForm(req: ISignupReq, res: NextApiRes
       values: row,
     });
 
-    // TODO: Send email confirmation with details
+    // Send the response. don't wait for the email or slack message to finish
+    res.status(201).end();
 
+    // Finish sending the email and slack message
     type MgVariables = {
       title: string;
       subject: string;
@@ -269,7 +271,7 @@ export default async function handleContactForm(req: ISignupReq, res: NextApiRes
       console.error('Error sending Slack message:', error);
     }
 
-    res.status(201).end();
+    // Status sent after details added to spreadsheet above
   } catch (error) {
     console.error('Error handling contact form:', error);
     res.status(500).end();
