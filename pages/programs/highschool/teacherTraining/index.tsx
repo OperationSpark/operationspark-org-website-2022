@@ -88,7 +88,6 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
           </div>
         </Content>
         <Content>
-          {/* <div className='TODO'>Insert School Accountability Blurb + Workforce Readiness Blurb</div> */}
           <NeumorphismListCard
             title='School Accountability'
             width='800px'
@@ -128,18 +127,10 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
           <GridList items={partners} />
         </Content>
 
-        {/* <Content>
-          <div className='TODO'>Insert some brief outcomes data</div>
-        </Content> */}
-
-        {/* <Content>
-          <div className='TODO'>Insert Testimonials from Partners</div>
-        </Content> */}
-
         <Content className='flex-column gap-4'>
           <h2 className='section-header'>Courses and IBCs</h2>
           <div className='flex-row flex-wrap gap-4'>
-            {/* // TODO: Move data to "/data/teacherTraining.json" */}
+            {/* // TODO: Use data from "/data/teacherTraining.json" */}
             <TeacherTrainingCard
               level={1}
               levelColor='green'
@@ -158,7 +149,7 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
               prerequisites={`No prerequisites`}
               prerequisiteNote='Teachers from any background are welcome. Participants should be prepared for academically rigorous coursework with a heavy emphasis on problem solving skills, as well as readiness to navigate multiple browser-based platforms comfortably.'
             />
-
+            {/* // TODO: Use data from "/data/teacherTraining.json" */}
             <TeacherTrainingCard
               level={2}
               levelColor='yellow'
