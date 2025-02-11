@@ -3,6 +3,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 
 import { GiCoffeeCup as PrepIcon, GiWeightLiftingUp as TrainingIcon } from 'react-icons/gi';
+import { HiOutlineCalendarDays as CalendarIcon } from 'react-icons/hi2';
 
 import { MdOutlineRocketLaunch as DeliverIcon } from 'react-icons/md';
 import { PiCertificate as CertifyIcon } from 'react-icons/pi';
@@ -16,8 +17,13 @@ import TeacherTrainingCard from '@this/src/components/Cards/TeacherTrainingCard'
 import { BgImg } from '@this/src/components/Elements';
 import ConnectingArrow from '@this/src/components/Elements/ConnectingArrow';
 import GridList from '@this/src/components/Elements/GridList';
+import { motion } from 'framer-motion';
+import { useRef, useState } from 'react';
 
 const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const [showScheduleMeeting, setShowScheduleMeeting] = useState<boolean>(false);
+
   return (
     <Main style={{ paddingTop: 0 }}>
       <HighschoolStyles>
@@ -174,7 +180,37 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
         </Content>
 
         <Content>
-          <div className='TODO'>Schedule a Meeting with our High School Staff</div>
+          {/* <div className='TODO'>Schedule a Meeting with our High School Staff</div> */}
+          <motion.div
+            className='schedule-meeting-section'
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: showScheduleMeeting ? 1 : 0,
+              height: showScheduleMeeting ? '850px' : 0,
+            }}
+          >
+            <iframe
+              ref={iframeRef}
+              src='https://calendly.com/mayukh-opspark/30min?embed_domain=http://localhost:3000&amp;embed_type=Inline'
+              width='100%'
+              height='100%'
+            ></iframe>
+          </motion.div>
+          <div className='flex-row flex-center'>
+            {showScheduleMeeting ? (
+              <button
+                className='close-schedule-meeting-btn'
+                onClick={() => setShowScheduleMeeting(false)}
+              >
+                Close
+              </button>
+            ) : (
+              <button className='schedule-meeting-btn' onClick={() => setShowScheduleMeeting(true)}>
+                <CalendarIcon style={{ fontSize: '1.25em' }} />
+                Schedule a Meeting
+              </button>
+            )}
+          </div>
         </Content>
         <Content className='curriculum-coaching-program'>
           <div id='card-group-train' className='coaching-section'>
@@ -357,6 +393,15 @@ export const getStaticProps: GetStaticProps<TeacherTraining> = async () => {
 const HighschoolStyles = styled.div`
   .__content-container {
     padding-bottom: 0;
+  }
+
+  .schedule-meeting-section {
+    ${({ theme }) =>
+      theme.isLightMode
+        ? ''
+        : `
+      filter: invert(1) saturate(5) hue-rotate(180deg);
+    `}
   }
 
   .fixed-subview-buttons {
@@ -571,6 +616,42 @@ const HighschoolStyles = styled.div`
       font-size: 1rem;
       width: 80%;
       color: ${({ theme }) => theme.rgb('fg', 0.7)};
+    }
+  }
+
+  .schedule-meeting-btn {
+    font-size: 1.25rem;
+    font-weight: 700;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    background: ${({ theme }) => theme.rgb('primary.500', 1)};
+    color: ${({ theme }) => theme.rgb('white', 1)};
+    box-shadow: 0 0 1px 1px inset ${({ theme }) => theme.rgb('fg', 0.5)};
+    transition: all 125ms;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    &:hover {
+      background: ${({ theme }) => theme.rgb('primary.700', 1, -1)};
+    }
+    &:active {
+      background: ${({ theme }) => theme.rgb('primary.700', 1, -2)};
+    }
+  }
+  .close-schedule-meeting-btn {
+    font-size: 1.25rem;
+    font-weight: 700;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    background: ${({ theme }) => theme.rgb('bg', 1, theme.isLightMode ? -2 : 2)};
+    color: ${({ theme }) => theme.rgb('fg', 1)};
+    box-shadow: 0 0 1px 1px inset ${({ theme }) => theme.rgb('fg', 0.5)};
+    transition: all 125ms;
+    &:hover {
+      background: ${({ theme }) => theme.rgb('bg', 1, theme.isLightMode ? -4 : 4)};
+    }
+    &:active {
+      background: ${({ theme }) => theme.rgb('bg', 1, theme.isLightMode ? -6 : 6)};
     }
   }
 
