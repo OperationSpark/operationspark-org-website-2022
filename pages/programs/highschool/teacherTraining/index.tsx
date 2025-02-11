@@ -31,7 +31,40 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
         </BgImg>
 
         <div className='fixed-subview-buttons'>
-          <a className='button' href='#card-group-train'></a>
+          <div className='subview-button-group'>
+            <div className='subview-button-group-label'>Level 1</div>
+            <div className='subview-button-group-links'>
+              <Link
+                href='/programs/highschool/teacherTraining/info/level-1'
+                className='subview-button'
+              >
+                Info
+              </Link>
+              <Link
+                href='/programs/highschool/teacherTraining/register/level-1'
+                className='subview-button'
+              >
+                Register
+              </Link>
+            </div>
+          </div>
+          <div className='subview-button-group'>
+            <div className='subview-button-group-label'>Level 2</div>
+            <div className='subview-button-group-links'>
+              <Link
+                href='/programs/highschool/teacherTraining/info/level-2'
+                className='subview-button'
+              >
+                Info
+              </Link>
+              <Link
+                href='/programs/highschool/teacherTraining/register/level-2'
+                className='subview-button'
+              >
+                Register
+              </Link>
+            </div>
+          </div>
         </div>
 
         <Content className='flex-column gap-4'>
