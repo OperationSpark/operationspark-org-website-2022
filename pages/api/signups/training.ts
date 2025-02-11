@@ -222,28 +222,35 @@ export default async function handleContactForm(req: ISignupReq, res: NextApiRes
       )} at ${badge(courseInfo.times.startTime)}. We will be in touch soon with more details.`,
     };
 
-    try {
-      // Send email
-      await mg.messages.create(MG_DOMAIN, {
-        from: 'Operation Spark <noreply@operationspark.org>',
-        to: valueMap.email,
-        cc: proxyEmail,
-        // bcc: 'highschool@operationspark.org',
-        subject: mgVariables.subject,
-        template: 'teacher-training-confirmation',
-        text: plainTextEmail,
-        'h:X-Mailgun-Variables': JSON.stringify(mgVariables),
-      });
-    } catch (error) {
-      // Don't fail for email
-      console.error('Error sending email:', error);
-    }
+    const sendEmail = async () => {
+      try {
+        // Send email
+        await mg.messages.create(MG_DOMAIN, {
+          from: 'Operation Spark <noreply@operationspark.org>',
+          to: valueMap.email,
+          cc: proxyEmail,
+          // bcc: 'highschool@operationspark.org',
+          subject: mgVariables.subject,
+          template: 'teacher-training-confirmation',
+          text: plainTextEmail,
+          'h:X-Mailgun-Variables': JSON.stringify(mgVariables),
+        });
+        return 'QUEUED';
+      } catch (error) {
+        // Don't fail for email
+        console.error('Error sending email:', error);
+        return 'FAIL';
+      }
+    };
+    const emailCreateStatus = await sendEmail();
 
     try {
       const slackMessage = `*${valueMap.firstName} ${valueMap.lastName}* signed up for *${
         courseInfo.title
       } ${courseInfo.season}*\
-          \n*Email:* ${valueMap.email}\
+          \n*Email:* ${valueMap.email} ${
+        emailCreateStatus === 'FAIL' ? ' :caution-neon: `FAIL`' : ''
+      }\
           \n*Level:* ${courseInfo.level} (${courseInfo.levelName})\
           \n*Dates:* ${times.startDate} - ${times.endDate} \
           \n*Times:* ${times.startTime} - ${times.endTime} ${
