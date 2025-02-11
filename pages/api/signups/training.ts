@@ -79,20 +79,22 @@ const requiredFields = [
 
 type FormKey = (typeof formOutputOrder)[number];
 
-const parseRowData = (formValues: FormValueType[]) => {
-  const valueMap = {} as Record<FormKey, string>;
+const parseSpreadsheetValues = (formValues: FormValueType[]) => {
+  const outputValues = {
+    header: [] as string[],
+    row: [] as string[],
+    valueMap: {} as Record<FormKey, string>,
+  };
 
-  const header = formOutputOrder.map((key) => {
-    const value = formValues.find((formValue) => formValue.name === key);
-    return value?.label || '';
-  });
-  const row = formOutputOrder.map((key) => {
-    const value = formValues.find((formValue) => formValue.name === key);
-    valueMap[key] = value?.value || '';
-    return value?.value || '';
+  formOutputOrder.forEach((key) => {
+    const { label, value } = formValues.find((formValue) => formValue.name === key) ?? {};
+
+    outputValues.valueMap[key] = value || '';
+    outputValues.header.push(label || '');
+    outputValues.row.push(value || '');
   });
 
-  return { header, row, valueMap };
+  return outputValues;
 };
 
 const hasAllValidFields = (values: Record<FormKey, string>) => {
@@ -116,7 +118,7 @@ export default async function handleContactForm(req: ISignupReq, res: NextApiRes
   }
 
   const sheets = getSheets();
-  const { header, row, valueMap } = parseRowData(values);
+  const { header, row, valueMap } = parseSpreadsheetValues(values);
   if (!hasAllValidFields(valueMap)) {
     res.status(400).end();
     return;
