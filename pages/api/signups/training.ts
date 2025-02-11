@@ -220,43 +220,47 @@ export default async function handleContactForm(req: ISignupReq, res: NextApiRes
       )} at ${badge(courseInfo.times.startTime)}. We will be in touch soon with more details.`,
     };
 
-    // Send email
-    await mg.messages.create(MG_DOMAIN, {
-      from: 'Operation Spark <noreply@operationspark.org>',
-      to: valueMap.email,
-      cc: proxyEmail,
-      // bcc: 'highschool@operationspark.org',
-      subject: mgVariables.subject,
-      template: 'teacher-training-confirmation',
-      text: plainTextEmail,
-      'h:X-Mailgun-Variables': JSON.stringify(mgVariables),
-    });
-    const slackClient = connectSlack();
+    try {
+      // Send email
+      await mg.messages.create(MG_DOMAIN, {
+        from: 'Operation Spark <noreply@operationspark.org>',
+        to: valueMap.email,
+        cc: proxyEmail,
+        // bcc: 'highschool@operationspark.org',
+        subject: mgVariables.subject,
+        template: 'teacher-training-confirmation',
+        text: plainTextEmail,
+        'h:X-Mailgun-Variables': JSON.stringify(mgVariables),
+      });
+    } catch (error) {
+      // Don't fail for email
+      console.error('Error sending email:', error);
+    }
 
-    const textBlock = (text: string) => ({
-      type: 'section',
-      text: { type: 'mrkdwn', text },
-    });
+    try {
+      const slackMessage = `*${valueMap.firstName} ${valueMap.lastName}* signed up for *${
+        courseInfo.title
+      } ${courseInfo.season}*\
+          \n*Email:* ${valueMap.email}\
+          \n*Level:* ${courseInfo.level} (${courseInfo.levelName})\
+          \n*Dates:* ${times.startDate} - ${times.endDate} \
+          \n*Times:* ${times.startTime} - ${times.endTime} ${
+        hasProxy
+          ? `\n*Signed Up By:* ${valueMap.proxyFirstName} ${valueMap.proxyLastName} (${valueMap.proxyEmail})`
+          : ''
+      }`;
+      const slackClient = connectSlack();
+      await slackClient.chat.postMessage({
+        channel: TEACHER_TRAINING_SLACK_CHANNEL_ID,
+        text: slackMessage,
+        blocks: [{ type: 'section', text: { type: 'mrkdwn', text: slackMessage } }],
+      });
+    } catch (error) {
+      // Don't fail for slack
+      console.error('Error sending Slack message:', error);
+    }
 
-    const slackMessage = `*${valueMap.firstName} ${valueMap.lastName}* signed up for *${
-      courseInfo.title
-    } ${courseInfo.season}*\
-        \n*Email:* ${valueMap.email}\
-        \n*Level:* ${courseInfo.level} (${courseInfo.levelName})\
-        \n*Dates:* ${times.startDate} - ${times.endDate} \
-        \n*Times:* ${times.startTime} - ${times.endTime} ${
-      hasProxy
-        ? `\n*Signed Up By:* ${valueMap.proxyFirstName} ${valueMap.proxyLastName} (${valueMap.proxyEmail})`
-        : ''
-    }`;
-
-    await slackClient.chat.postMessage({
-      channel: TEACHER_TRAINING_SLACK_CHANNEL_ID,
-      text: slackMessage,
-      blocks: [textBlock(slackMessage)],
-    });
-
-    res.status(200).end();
+    res.status(201).end();
   } catch (error) {
     console.error('Error handling contact form:', error);
     res.status(500).end();
