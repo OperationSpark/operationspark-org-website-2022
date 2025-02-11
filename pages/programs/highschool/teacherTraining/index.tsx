@@ -90,7 +90,7 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
         <Content>
           {/* <div className='TODO'>Insert School Accountability Blurb + Workforce Readiness Blurb</div> */}
           <NeumorphismListCard
-            title='Accountability Framework'
+            title='School Accountability'
             width='800px'
             style={{ margin: '0 auto' }}
             items={[
@@ -108,7 +108,7 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
                   <div className='accountability-row'>
                     <div className='accountability-label'>Statewide Advanced Credential</div>
                     <div className='accountability-value'>
-                      {`Fundamentals of Javascript, Functional Programming, and Web Development, Level 2 Fast Forward Apprenticeship Pathway`}
+                      {`Fundamentals of Javascript, Functional Programming, and Web Development, Level 2`}
                     </div>
                   </div>
                   <div className='accountability-row'>
@@ -164,7 +164,7 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
               levelColor='yellow'
               levelName='Advanced'
               ibcCode='080520'
-              courseName='Javascript, Functional Programming, and Web Development'
+              courseName='Advanced Javascript, Functional Programming, and Web Development'
               ibcName='Fundamentals of Javascript, Functional Programming, and Web Development - Level 2 (Advanced)'
               format='Trainings are remote and delivered over video call.'
               startDate='Tuesday, July 8th'
