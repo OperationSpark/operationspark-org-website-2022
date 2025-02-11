@@ -134,7 +134,7 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
             <TeacherTrainingCard
               level={1}
               levelColor='green'
-              levelName='Fundamentals'
+              levelName='Basic'
               ibcCode='080523'
               courseName='Fundamentals of HTML, CSS, and Javascript'
               ibcName='Fundamentals of Javascript, Functional Programming, and Web Development - Level 1 (Basic)'
