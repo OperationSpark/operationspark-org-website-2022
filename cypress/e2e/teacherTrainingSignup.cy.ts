@@ -538,4 +538,11 @@ describe('Teacher Training Signup', () => {
       cy.get(`[data-test-id="${field.testId}"]`).should('have.value', field.value);
     });
   });
+
+  it.skip('Should submit valid teacher training signup where user is signing someone else up and another user is paying', () => {
+    cy.visit('/programs/highschool/teacherTraining/register/level-2');
+    cy.get('[data-test-id="form-step-1"]').should('be.visible');
+
+    // TODO: Implement this test
+  });
 });
