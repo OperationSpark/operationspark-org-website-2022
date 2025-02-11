@@ -32,7 +32,7 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
         </BgImg>
 
         <div className='fixed-subview-buttons'>
-          <div className='subview-button-group'>
+          <div className='subview-button-group level-1'>
             <div className='subview-button-group-label'>Level 1</div>
             <div className='subview-button-group-links'>
               <Link
@@ -49,7 +49,7 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
               </Link>
             </div>
           </div>
-          <div className='subview-button-group'>
+          <div className='subview-button-group level-2'>
             <div className='subview-button-group-label'>Level 2</div>
             <div className='subview-button-group-links'>
               <Link
@@ -376,6 +376,13 @@ const HighschoolStyles = styled.div`
       box-shadow: 0 0 3px 1px inset ${({ theme }) => theme.rgb('fg', 0.25)};
       background: ${({ theme }) => theme.rgb('bg', 1, theme.isLightMode ? -2 : 2)};
 
+      &.level-1 {
+        box-shadow: 0 0 4px 1px inset ${({ theme }) => theme.rgb('green.700', 0.5)};
+      }
+      &.level-2 {
+        box-shadow: 0 0 4px 1px inset ${({ theme }) => theme.rgb('secondary.800', 0.75)};
+      }
+
       @supports (backdrop-filter: blur(0.75rem)) {
         background: ${({ theme }) => theme.rgb('bg', 0.75, theme.isLightMode ? -2 : 2)};
         backdrop-filter: blur(0.75rem);
@@ -399,35 +406,40 @@ const HighschoolStyles = styled.div`
       font-size: 0.8rem;
       font-weight: 600;
       padding: 0.25rem 0.5rem;
-      background: ${({ theme }) =>
-        theme.isLightMode ? theme.rgb('primary.700', 0.5) : theme.rgb('primary.700', 1)};
-      color: ${({ theme }) => theme.white};
+      box-shadow: 0 0 1px 1px inset ${({ theme }) => theme.rgb('fg', 0.25)};
+      color: ${({ theme }) => theme.rgb('fg', 1)};
+      background: ${({ theme }) => theme.rgb('bg', 0.25)};
       width: 100%;
       text-align: center;
       transition: all 125ms;
       &:hover {
-        transform: scale(1.1);
+        color: ${({ theme }) => theme.rgb('white', 0.8)};
         background: ${({ theme }) =>
           theme.isLightMode ? theme.rgb('primary.700', 0.5) : theme.rgb('primary.700', 1, 4)};
       }
 
       &:active {
-        background: ${({ theme }) =>
-          theme.isLightMode ? theme.rgb('primary.700', 0.5) : theme.rgb('primary.700', 1, 6)};
-
-        transform: scale(1);
+        color: ${({ theme }) => theme.rgb('white', 0.8)};
+        background: ${({ theme }) => theme.rgb('primary.700', 1, -1)};
       }
       &:first-child {
         transform-origin: bottom left;
         border-top-right-radius: 0.5rem;
-        background: ${({ theme }) => theme.rgb('secondary.700', 1)};
-        color: ${({ theme }) => theme.rgb('black', 0.8)};
 
         &:hover {
+          color: ${({ theme }) => theme.rgb('black', 0.8)};
           background: ${({ theme }) =>
             theme.isLightMode
               ? theme.rgb('secondary.700', 1, 4)
               : theme.rgb('secondary.700', 1, 4)};
+        }
+
+        &:active {
+          color: ${({ theme }) => theme.rgb('black', 0.8)};
+          background: ${({ theme }) =>
+            theme.isLightMode
+              ? theme.rgb('secondary.700', 1, -1)
+              : theme.rgb('secondary.700', 1, -1)};
         }
       }
       &:last-child {
