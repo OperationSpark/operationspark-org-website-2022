@@ -34,6 +34,20 @@ const NavAccordionLinkStyles = styled.a`
   &.active {
     cursor: default;
   }
+
+  &.has-subtitle {
+    padding-top: 0.25rem;
+    padding-bottom: 1rem;
+
+    position: relative;
+    .nav-link-subtitle {
+      position: absolute;
+      bottom: 0;
+      font-weight: 500;
+      font-size: 0.8rem;
+      color: ${({ theme }) => theme.alpha.fg};
+    }
+  }
 `;
 
 export const NavAccordionLink = ({
@@ -41,11 +55,13 @@ export const NavAccordionLink = ({
   href,
   className,
   closeMenu,
+  subtitle,
 }: {
   children: ReactNode;
   href: string;
   className?: string;
   closeMenu: () => void;
+  subtitle?: string;
 }) => {
   const linkTitle = typeof children === 'string' ? children : '';
   const { pathname, push } = useRouter();
@@ -57,13 +73,16 @@ export const NavAccordionLink = ({
   };
   return (
     <NavAccordionLinkStyles
-      className={`${checkActiveSubLink(href, pathname) ? 'active' : ''} ${className || ''}`}
+      className={`${checkActiveSubLink(href, pathname) ? 'active' : ''} ${className || ''}${
+        subtitle ? ' has-subtitle' : ''
+      }`}
       href={href}
       title={linkTitle}
       aria-label={linkTitle}
       onClick={handleClick}
     >
       {children}
+      {subtitle && <span className='nav-link-subtitle'>{subtitle}</span>}
     </NavAccordionLinkStyles>
   );
 };

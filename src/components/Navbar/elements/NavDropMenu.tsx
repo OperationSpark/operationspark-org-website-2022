@@ -105,6 +105,7 @@ const NavDropMenu = ({ title, href, subLinks }: NavDropMenuProps) => {
               <NavLink
                 href={href + subLink.href}
                 key={href + subLink.href}
+                subtitle={subLink.subtitle}
                 className={
                   checkActiveSubLink(href + subLink.href, pathname)
                     ? 'sub-nav sub-nav-active'

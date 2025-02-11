@@ -14,6 +14,7 @@ const NavLink = ({
   color = '',
   title,
   testId,
+  subtitle,
 }: {
   children: ReactNode | ReactNode[];
   href?: string;
@@ -22,13 +23,16 @@ const NavLink = ({
   color?: '' | 'yellow';
   title?: string;
   testId?: string;
+  subtitle?: string;
 }) => {
   const linkTitle = typeof children === 'string' ? children : '';
   const { pathname } = useRouter();
 
   return (
     <NavLinkStyles
-      className={`${href && pathname.includes(href) ? 'active' : ''} ${className || ''}`}
+      className={`${href && pathname.includes(href) ? 'active' : ''} ${className || ''}${
+        subtitle ? ' has-subtitle' : ''
+      }`}
       color={color}
       onClick={callback}
       title={title ?? linkTitle}
@@ -40,6 +44,7 @@ const NavLink = ({
           data-test-id={testId ?? `nav-link-${kebabCase(title ?? linkTitle) ?? 'unknown'}`}
         >
           {children}
+          {subtitle && <span className='nav-link-subtitle'>{subtitle}</span>}
         </Link>
       ) : (
         children
@@ -106,6 +111,22 @@ export const NavLinkStyles = styled.div.attrs(({ color }: { color?: '' | 'yellow
     cursor: default;
     :hover {
       box-shadow: 0 0 3px 1px ${({ theme }) => theme.fg} inset;
+    }
+  }
+
+  &.has-subtitle {
+    a {
+      padding-top: 0.25rem;
+      padding-bottom: 0.75rem;
+      font-weight: 800;
+    }
+    .nav-link-subtitle {
+      position: absolute;
+      font-size: 0.72rem;
+      font-weight: 600;
+      bottom: 0;
+      left: 0.75rem;
+      right: 0.75rem;
     }
   }
 `;

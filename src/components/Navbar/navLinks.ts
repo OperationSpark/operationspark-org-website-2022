@@ -1,5 +1,6 @@
 export type NavigationSubLink = {
   title: string;
+  subtitle?: string;
   href: string;
 };
 
@@ -24,7 +25,7 @@ export const navMenus: NavigationMenuLink[] = [
     href: '/programs/highschool',
     subLinks: [
       { title: 'High School Programs', href: '' },
-      { title: 'Teacher Training', href: '/teacherTraining' },
+      { title: 'Teacher Training', subtitle: '+ Curriculum Partnership', href: '/teacherTraining' },
       //! Uncomment to show high school application
       // { title: 'Programs', href: '' },
       // { title: 'High School Application', href: '/apply' },
