@@ -54,12 +54,18 @@ const GridListStyles = styled.ul`
       > * {
         width: 100%;
         color: ${({ theme }) => theme.rgb('fg', 0.9)};
-        color: ${({ theme }) =>
-          theme.isLightMode ? theme.rgb('blue', 1, -5) : theme.rgb('blue', 1, 5)};
         padding: 0.5rem;
+        transition: 225ms;
+        background: ${({ theme }) =>
+          theme.isLightMode ? theme.rgb('primary.700', 0.05) : theme.rgb('secondary', 0.05)};
         &:hover {
-          background: ${({ theme }) => theme.rgb('blue', 0.2)};
-          box-shadow: 0 0 0.75rem 0px inset ${({ theme }) => theme.rgb('blue', 0.5)};
+          color: ${({ theme }) =>
+            theme.isLightMode ? theme.rgb('primary.700', 1) : theme.rgb('secondary', 1, 5)};
+          background: ${({ theme }) =>
+            theme.isLightMode ? theme.rgb('primary.700', 0.1) : theme.rgb('secondary', 0.1)};
+          box-shadow: 0 0 0.75rem 0px inset
+            ${({ theme }) =>
+              theme.isLightMode ? theme.rgb('primary.700', 0.35) : theme.rgb('secondary', 0.5)};
         }
       }
     }

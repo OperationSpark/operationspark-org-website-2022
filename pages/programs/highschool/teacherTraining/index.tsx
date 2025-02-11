@@ -357,7 +357,9 @@ const HighSchool: NextPage<TeacherTraining> = ({ partners }) => {
         <Content>
           <h2 className='section-header text-center'>Inquire for more information</h2>
           <div className='section-content-card'>
-            <h3 className='section-subheader text-center'>Contact</h3>
+            <h3 className='section-subheader text-center' style={{ marginBottom: '1rem' }}>
+              Contact
+            </h3>
             <GridList
               interactive
               items={[

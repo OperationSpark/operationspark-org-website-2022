@@ -222,26 +222,31 @@ const Level1Info: NextPage<TeacherTrainingInfo> = (props) => {
         </Content>
 
         <Content className='flex-row flex-center'>
-          <NeumorphismListCard
-            title='Contact'
-            subtitle='Please get in touch with any questions'
-            fit
-            items={[
-              <div key='contact'>
+          <div className='flex-row flex-center'>
+            <NeumorphismListCard
+              title='Contact'
+              subtitle='Please get in touch with any questions'
+              width='500px'
+              items={[
                 <GridList
+                  key='contact'
                   interactive
                   items={[
-                    <a key='email' href={`mailto:highschool@operationspark.org`}>
+                    <a
+                      className='flex-300'
+                      key='email'
+                      href={`mailto:highschool@operationspark.org`}
+                    >
                       highschool@operationspark.org
                     </a>,
-                    <a key='phone' href={`tel:985-803-8895`}>
+                    <a className='flex-300' key='phone' href={`tel:985-803-8895`}>
                       985-803-8895
                     </a>,
                   ]}
-                />
-              </div>,
-            ]}
-          />
+                />,
+              ]}
+            />
+          </div>
         </Content>
       </Level1InfoStyles>
     </Main>
