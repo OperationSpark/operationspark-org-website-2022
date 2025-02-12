@@ -1,19 +1,26 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, css } from 'styled-components';
+
 import { anchor } from './mixins/anchor';
 import { circuitBoardBg } from './mixins/circuitBoardBg';
+import { layoutCss } from './mixins/layout';
+import pageCommonCss from './mixins/pageCommon';
 
-const GlobalStyles = createGlobalStyle`
+const GlobalStyleCss = css`
+  ${layoutCss}
+  ${pageCommonCss}
   * {
     transition: background-color 125ms, font-size 40ms;
     box-sizing: border-box;
   }
-  *::before, *::after {
+  *::before,
+  *::after {
     box-sizing: inherit;
   }
   :root {
     font-family: 'Roboto', sans-serif;
   }
-  html, body {
+  html,
+  body {
     background: ${({ theme }) => theme.bg} !important;
     color: ${({ theme }) => theme.fg} !important;
     font-family: 'Roboto', sans-serif;
@@ -23,13 +30,22 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
     overscroll-behavior: none;
   }
-  h1, h2, h3, h4, h5, h6 {
+  body {
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: 'Red Hat Display', sans-serif;
     word-spacing: 0.25rem;
     margin: 0;
   }
 
-  button  {
+  button {
     outline: none;
     border: none;
     background: none;
@@ -42,7 +58,9 @@ const GlobalStyles = createGlobalStyle`
     }
   }
 
-  input, textarea, select {
+  input,
+  textarea,
+  select {
     outline: none;
     border: none;
     background: none;
@@ -56,34 +74,34 @@ const GlobalStyles = createGlobalStyle`
     z-index: 100;
   }
   p {
-     font-family: 'Roboto', sans-serif;
-     margin: 0;
-     line-height: 1.5;
-     font-weight: 400;
-   }
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    line-height: 1.5;
+    font-weight: 400;
+  }
 
-   .bg-subtle-dark {
-     background: ${({ theme }) => (theme.isLightMode ? theme.alpha.fg : theme.alpha.bg)};
-     color: ${({ theme }) => theme.white};
-     backdrop-filter: blur(4px);
-     -webkit-backdrop-filter: blur(4px);
-   }
+  .bg-subtle-dark {
+    background: ${({ theme }) => (theme.isLightMode ? theme.alpha.fg : theme.alpha.bg)};
+    color: ${({ theme }) => theme.white};
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
 
-   .rounded-card {
-      border-radius: 0.5rem;
-      padding: 1rem;
-      box-shadow: 0 0 0.5rem 0 inset ${({ theme }) => theme.primary[300]};
-   }
-   .p-1 {
-      padding: 0.5rem;
-   }
-   .br-1 {
-      border-radius: 0.5rem;
-   }
-   .page-marker {
-      content: '';
-      height: ${({ theme }) => theme.navHeight / 2}px;
-   }
+  .rounded-card {
+    border-radius: 0.5rem;
+    padding: 1rem;
+    box-shadow: 0 0 0.5rem 0 inset ${({ theme }) => theme.primary[300]};
+  }
+  .p-1 {
+    padding: 0.5rem;
+  }
+  .br-1 {
+    border-radius: 0.5rem;
+  }
+  .page-marker {
+    content: '';
+    height: ${({ theme }) => theme.navHeight / 2}px;
+  }
   .primary-secondary {
     color: ${({ theme }) => (theme.isLightMode ? theme.primary[700] : theme.secondary[500])};
   }
@@ -93,7 +111,13 @@ const GlobalStyles = createGlobalStyle`
   .secondary {
     color: ${({ theme }) => theme.secondary[500]};
   }
-  .red-hat, h1, h2, h3, h4, h5, h6 {
+  .red-hat,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: 'Red Hat Display', sans-serif;
     word-spacing: 0.25rem;
   }
@@ -106,9 +130,7 @@ const GlobalStyles = createGlobalStyle`
   .source-code {
     font-family: 'Source Code Pro', monospace;
   }
-   body {
-    overflow-x: hidden;
-  }
+
   a {
     width: fit-content;
     text-decoration: none;
@@ -129,15 +151,6 @@ const GlobalStyles = createGlobalStyle`
     margin: 0 auto;
     padding: calc(0.8vw + 1.6rem);
   }
-  .text-center {
-    text-align: center;
-  }
-
-  .dynamic-txt {
-    font-size: calc(0.4vw + 0.9rem);
-  }
-
-
 
   .dynamic-xl {
     font-size: calc(0.8vw + 3.2rem);
@@ -152,14 +165,14 @@ const GlobalStyles = createGlobalStyle`
   }
   .dynamic-h1 {
     font-size: calc(0.8vw + 2.5rem);
-    font-weight: 700;
+    font-weight: 800;
   }
   .dynamic-h2 {
     font-size: calc(0.8vw + 1.25rem);
     font-weight: 700;
   }
   .dynamic-h3 {
-    font-size: calc(0.6vw + 1.00rem);
+    font-size: calc(0.6vw + 1rem);
     font-weight: 600;
   }
   .dynamic-h4 {
@@ -168,7 +181,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   .xl-txt {
-    font-weight: 700;
+    font-weight: 600;
     font-size: 3.5rem;
   }
 
@@ -183,7 +196,7 @@ const GlobalStyles = createGlobalStyle`
     justify-content: space-between;
   }
   .mb0 {
-    margin-bottom: 0
+    margin-bottom: 0;
   }
 
   .mt0 {
@@ -197,9 +210,6 @@ const GlobalStyles = createGlobalStyle`
     box-shadow: 0 0 1px 0px ${({ theme }) => theme.alpha.fg} inset;
   }
   ::-webkit-scrollbar-thumb {
-    /* border: 3px solid transparent;
-    border-top-width: 2px;
-    border-bottom-width: 2px; */
     ${circuitBoardBg}
     zoom: 0.35;
 
@@ -209,16 +219,15 @@ const GlobalStyles = createGlobalStyle`
       box-shadow: 0 0 5px 5px ${({ theme }) => theme.primary[300]} inset;
     }
     :active {
-        box-shadow: 0 0 5px 4px ${({ theme }) => theme.primary[700]} inset;
+      box-shadow: 0 0 5px 4px ${({ theme }) => theme.primary[700]} inset;
     }
   }
 
   ::selection {
     background: ${({ theme }) =>
-      theme.isLightMode ? 'rgba(245, 220, 124, 0.5)' : 'rgba(245, 220, 124, 1)'} ;
+      theme.isLightMode ? 'rgba(245, 220, 124, 0.5)' : 'rgba(245, 220, 124, 1)'};
     color: ${({ theme }) => theme.black};
     font-weight: 500;
-
   }
 
   .Toastify {
@@ -226,13 +235,27 @@ const GlobalStyles = createGlobalStyle`
   }
 
   @media screen and (max-width: 768px) {
-    .dynamic-txt { font-size: 1rem; }
-    .xl-txt { font-size: 2rem; }
-    .lg-txt { font-size: 1.25rem; }
-    .dynamic-xl { font-size: calc(0.8vw + 2.25rem); }
-    .dynamic-h1 { font-size: calc(0.8vw + 2rem); }
-    .dynamic-h2 { font-size: calc(0.8vw + 1.1rem); }
-    .dynamic-h3 { font-size: calc(0.8vw + 1rem); }
+    .dynamic-txt {
+      font-size: 1rem;
+    }
+    .xl-txt {
+      font-size: 2rem;
+    }
+    .lg-txt {
+      font-size: 1.25rem;
+    }
+    .dynamic-xl {
+      font-size: calc(0.8vw + 2rem);
+    }
+    .dynamic-h1 {
+      font-size: calc(0.8vw + 1.4rem);
+    }
+    .dynamic-h2 {
+      font-size: calc(0.8vw + 1.1rem);
+    }
+    .dynamic-h3 {
+      font-size: calc(0.8vw + 1rem);
+    }
     .row-between {
       flex-flow: column;
     }
@@ -241,29 +264,48 @@ const GlobalStyles = createGlobalStyle`
     }
   }
   @media screen and (min-width: 1200px) {
-    .dynamic-txt { font-size: 1.2rem; }
-    .xl-txt { font-size: 2rem; }
-    .lg-txt { font-size: 2rem; }
-    .dynamic-xl { font-size: 4rem; }
-    .dynamic-h1 { font-size: 3.2rem; }
-    .dynamic-h2 { font-size: 1.9rem; }
-    .dynamic-h3 { font-size: 1.4rem; }
+    .dynamic-txt {
+      font-size: 1.2rem;
+    }
+    .xl-txt {
+      font-size: 2rem;
+    }
+    .lg-txt {
+      font-size: 2rem;
+    }
+    .dynamic-xl {
+      font-size: 4rem;
+    }
+    .dynamic-h1 {
+      font-size: 3.2rem;
+    }
+    .dynamic-h2 {
+      font-size: 1.9rem;
+    }
+    .dynamic-h3 {
+      font-size: 1.4rem;
+    }
   }
 
   @media print {
-    img, .img, .opspark-value-img, button, a {
+    img,
+    .img,
+    .opspark-value-img,
+    button,
+    a {
       display: none !important;
     }
     * {
       box-shadow: none !important;
-      color: rgba(50,50,50,1) !important;
+      color: rgba(50, 50, 50, 1) !important;
       width: 100% !important;
       flex-flow: column;
       overflow: visible !important;
     }
     overflow: visible !important;
-
   }
 `;
+
+const GlobalStyles = createGlobalStyle`${GlobalStyleCss}`;
 
 export default GlobalStyles;

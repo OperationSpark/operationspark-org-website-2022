@@ -5,6 +5,8 @@ import dynamic from 'next/dynamic';
 import { useEffect, useRef } from 'react';
 import styled, { useTheme } from 'styled-components';
 
+import { FaBiohazard as DevIcon } from 'react-icons/fa6';
+
 import LogoLink from '@this/components/Elements/LogoLink';
 import { IAlert } from '@this/data/types/bits';
 import { useValidCss } from '@this/hooks/useCssCheck';
@@ -12,12 +14,12 @@ import { useScrollY } from '@this/hooks/useScrollY';
 import BonusBar from './BonusBar';
 import { navMenus } from './navLinks';
 
+import env from '@this/src/clientConfig';
+
 const ProgressBar = dynamic(() => import('./ProgressBar'));
 const AlertBar = dynamic(() => import('./AlertBar'));
 const DesktopNav = dynamic(() => import('./DesktopNav'));
 const MobileNav = dynamic(() => import('./MobileNav'));
-
-// const { OVERRIDE_NODE_ENV } = process.env;
 
 interface NavProps {
   alertInfo: IAlert;
@@ -50,18 +52,20 @@ const Nav = ({ alertInfo }: NavProps) => {
 
   const resizeObserverRef = useRef<ResizeObserver | null>(null);
 
-  const transparentBg = theme.isLightMode ? 'rgba(255,255,255,0)' : 'rgba(25,25,25,0)';
-  const bgColor = supportsBackdropFilter ? theme.alpha.bg : theme.bg;
+  const bgOpacity = supportsBackdropFilter ? 0.75 : 1;
 
   const navAnimation = {
-    boxShadow: `0 0 8px ${!isTop ? theme.alpha.fg : 'rgba(125,125,125,0)'}`,
+    boxShadow: `0 0 1rem 1px ${
+      !isTop ? theme.rgb('black', theme.isLightMode ? 0.25 : 0.9) : theme.rgb('black', 0)
+    }`,
     backdropFilter: isTop ? 'blur(0px)' : 'blur(8px)',
     WebkitBackdropFilter: isTop ? 'blur(0px)' : 'blur(8px)',
-    background: isTop ? transparentBg : bgColor,
+    background: isTop ? theme.rgb('bg', 0) : theme.rgb('bg', bgOpacity),
   };
 
   const navTransition: Transition = {
     duration: 0.2,
+    background: { duration: isTop ? 0.25 : 0.5 },
   };
 
   // Dynamically update nav height
@@ -93,11 +97,11 @@ const Nav = ({ alertInfo }: NavProps) => {
   return (
     <NavbarStyles ref={navRef} animate={navAnimation} transition={navTransition}>
       {/* // TODO: Figure out why this breaks since update to nextjs v13 */}
-      {/* {OVERRIDE_NODE_ENV === 'testing' ? (
-        <div className='test-mode'>
-          <TestIcon /> &nbsp;TEST MODE&nbsp; <TestIcon />
+      {env.OVERRIDE_NODE_ENV === 'development' ? (
+        <div className='dev-mode'>
+          <DevIcon /> &nbsp;DEVELOPMENT&nbsp; <DevIcon />
         </div>
-      ) : null} */}
+      ) : null}
       {showAlert && <AlertBar info={alertInfo} />}
 
       <div className='navbar'>
@@ -140,28 +144,25 @@ export const NavbarStyles = styled(motion.nav)`
   justify-content: space-between;
   align-items: center;
   flex-flow: row wrap;
-  .test-mode {
+  .dev-mode {
     display: flex;
     width: 100%;
     background: ${({ theme }) => `
     linear-gradient(0deg,
-      ${theme.red[800]} -25%,
-      ${theme.magenta[700]} 35%,
-      ${theme.magenta[700]} 65%,
-      ${theme.red[800]} 125%
+      ${theme.rgb('red', 1)} 0%,
+      ${theme.rgb('red', 1, -10)} 50%,
+      ${theme.rgb('red', 1)} 100%
     )
     `};
     color: ${({ theme }) => theme.white};
     z-index: 1000;
     font-weight: 700;
-    line-height: 1.25em;
+    line-height: 1;
+    height: 1.25rem;
     font-family: 'Source Code Pro', monospace;
     text-align: center;
     justify-content: center;
     align-items: center;
-    svg {
-      color: ${({ theme }) => theme.green[500]};
-    }
   }
   .navbar {
     display: flex;

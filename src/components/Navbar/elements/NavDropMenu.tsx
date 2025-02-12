@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import { useClickAway } from '@this/hooks/useClickAway';
 import { checkActiveSubLink } from '@this/src/helpers/navigation';
+import { kebabCase } from 'lodash';
 import type { NavigationSubLink } from '../navLinks';
 import NavLink from './NavLink';
 
@@ -104,12 +105,14 @@ const NavDropMenu = ({ title, href, subLinks }: NavDropMenuProps) => {
               <NavLink
                 href={href + subLink.href}
                 key={href + subLink.href}
+                subtitle={subLink.subtitle}
                 className={
                   checkActiveSubLink(href + subLink.href, pathname)
                     ? 'sub-nav sub-nav-active'
                     : 'sub-nav'
                 }
                 callback={() => setShowMenu(false)}
+                testId={kebabCase(subLink.title)}
               >
                 <span>{subLink.title}</span>
               </NavLink>

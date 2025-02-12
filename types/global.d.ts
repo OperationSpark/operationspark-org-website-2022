@@ -4,6 +4,11 @@ declare namespace NodeJS {
     OVERRIDE_NODE_ENV: string;
     MAILCHIMP_API_KEY: string;
     MAILCHIMP_AUDIENCE_ID: string;
+
+    MG_DOMAIN: string;
+    MG_API_KEY: string;
+    SLACK_TOKEN: string;
+    TEACHER_TRAINING_SLACK_CHANNEL_ID: string;
     GREENLIGHT_API_ENDPOINT: string;
     GREENLIGHT_API_TOKEN: string;
     SIGNUP_API_ENDPOINT: string;
@@ -16,6 +21,7 @@ declare namespace NodeJS {
     /** Generated with command: `openssl rand -base64 32` */
     FB_WEBHOOK_TOKEN: string;
     HIGHSCHOOL_FORM_RESPONSES_ID: string;
+    TEACHER_TRAINING_FORM_RESPONSES_ID: string;
     HIGHSCHOOL_FORM_ACTIVE_UNTIL: string;
     HIGHSCHOOL_FORM_RESPONSES_NAME: string;
     WUFOO_HOST: string;

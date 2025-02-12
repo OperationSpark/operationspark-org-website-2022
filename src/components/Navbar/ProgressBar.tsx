@@ -25,6 +25,18 @@ const ProgressBar = ({ isTop, progressOnly = false }: ProgressBarProps) => {
   const theme = useTheme();
   const router = useRouter();
 
+  const outerOpacity = isTop ? 0 : 0.2;
+  const innerOpacity = isTop ? 0 : 0.1;
+
+  const bg = `
+    linear-gradient(
+      0deg,
+      ${theme.rgb('fg', outerOpacity)} 0%,
+      ${theme.rgb('bg', innerOpacity)} 15%,
+      ${theme.rgb('bg', innerOpacity)} 85%,
+      ${theme.rgb('fg', outerOpacity)} 100%
+    )`;
+
   const handleClick = ({ top }: TNodeItem) => {
     window.scrollTo({
       top,
@@ -94,16 +106,28 @@ const ProgressBar = ({ isTop, progressOnly = false }: ProgressBarProps) => {
     };
   }, [router.pathname, theme.navHeight]);
 
+  const isProgressOnly = progressOnly || !nodes.length;
+
   return (
-    <ProgressBarStyles>
-      {progressOnly || !nodes.length ? (
+    <ProgressBarStyles
+      className={`progress-bar-container ${isProgressOnly ? 'progress-only' : ''}`}
+    >
+      {isProgressOnly ? (
         isLoaded && (
-          <div className='progress-bar'>
+          <motion.div
+            className='progress-bar'
+            animate={{
+              background: bg,
+            }}
+          >
             <div
               className='progress'
-              style={{ width: `${percent}%`, display: isTop ? 'none' : 'flex' }}
+              style={{
+                width: `${percent}%`,
+                display: isTop ? 'none' : 'flex',
+              }}
             ></div>
-          </div>
+          </motion.div>
         )
       ) : (
         <Fragment>
@@ -115,12 +139,11 @@ const ProgressBar = ({ isTop, progressOnly = false }: ProgressBarProps) => {
                   <motion.button
                     className={`node-item ${node.name === currentNode ? 'active' : ''}`}
                     onClick={() => handleClick(node)}
-                    initial={{ scale: 0, y: -25, opacity: 0 }}
-                    animate={{ scale: 1, y: 0, opacity: 1 }}
+                    initial={{ x: '-100%', opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
                     exit={{
-                      scale: 0,
                       opacity: 0,
-                      y: -25,
+                      x: '100%',
                       transition: { duration: 0.2 },
                     }}
                     transition={{ type: 'tween' }}
@@ -174,7 +197,17 @@ const ProgressBarStyles = styled(motion.div)`
   width: 100%;
   display: flex;
   justify-content: space-between;
+
   height: 1rem;
+
+  &.progress-only {
+    height: 0.6rem;
+    margin-top: 0.5rem;
+
+    .progress {
+      height: 0.6rem;
+    }
+  }
 
   position: relative;
   pointer-events: none;
@@ -182,15 +215,21 @@ const ProgressBarStyles = styled(motion.div)`
     width: 100%;
   }
   .progress {
-    height: 0.5rem;
-    margin-top: 0.5rem;
-    background: ${({ theme: { isLightMode, primary } }) => `linear-gradient(
-      0deg,
-      ${primary[isLightMode ? 300 : 700]} 0%,
-      ${primary[isLightMode ? 100 : 300]} 25%,
-      ${primary[isLightMode ? 100 : 300]} 75%,
-      ${primary[isLightMode ? 300 : 700]} 100%
-    )`};
+    height: 0.75rem;
+
+    background: ${({ theme }) => {
+      const lm = theme.isLightMode;
+      const outerColor = theme.rgb(lm ? 'primary.300' : 'primary.700');
+      const innerColor = theme.rgb(lm ? 'primary.100' : 'primary.300');
+      return `
+      linear-gradient(
+        0deg,
+        ${outerColor} 0%,
+        ${innerColor} 25%,
+        ${innerColor} 75%,
+        ${outerColor} 100%
+      )`;
+    }};
   }
   .progress-positions {
     position: absolute;

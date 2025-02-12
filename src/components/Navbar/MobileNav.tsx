@@ -1,9 +1,9 @@
 import { AnimatePresence } from 'framer-motion';
 
 import { useClickAway } from '@this/hooks/useClickAway';
+import { NavAccordionLink } from './elements/NavAccordion/NavAccordionLink';
 import { NavMenuBtn, NavMenuIcon } from './elements/NavAccordion/NavMenuBtn';
 import type { NavigationMenuLink } from './navLinks';
-import { NavAccordionLink } from './elements/NavAccordion/NavAccordionLink';
 
 import NavAccordion from './elements/NavAccordion/NavAccordion';
 import NavAccordionItem from './elements/NavAccordion/NavAccordionItem';
@@ -33,6 +33,7 @@ const MobileNav = ({ navMenus = [] }: { navMenus: NavigationMenuLink[] }) => {
                       closeMenu={() => setShowMenu(false)}
                       href={navMenu.href + subLink.href}
                       className='sub-link'
+                      subtitle={subLink.subtitle}
                     >
                       {subLink.title}
                     </NavAccordionLink>

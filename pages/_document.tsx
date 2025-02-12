@@ -1,4 +1,4 @@
-import Document, { DocumentContext, Html, Head, Main, NextScript } from 'next/document';
+import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document';
 import React from 'react';
 import { ServerStyleSheet } from 'styled-components';
 
@@ -58,6 +58,12 @@ class MyDocument extends Document {
             href='https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap'
             rel='stylesheet'
           />
+
+          {/* Permanent Marker - Cursive | Used for TODOS */}
+          <link
+            href='https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap'
+            rel='stylesheet'
+          ></link>
         </Head>
         <body>
           <Main />

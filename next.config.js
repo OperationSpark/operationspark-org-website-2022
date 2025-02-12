@@ -4,6 +4,7 @@ const color = require('cli-color');
 const { validateData } = require('./data/validate');
 
 const {
+  NODE_ENV,
   OVERRIDE_NODE_ENV = '',
   FB_PIXEL_ID,
   GOOGLE_ANALYTICS_ID,
@@ -25,10 +26,15 @@ module.exports = (phase, { defaultConfig }) => {
     checkEnvVars([
       'MAILCHIMP_API_KEY',
       'MAILCHIMP_AUDIENCE_ID',
+      'MG_DOMAIN',
+      'MG_API_KEY',
+      'SLACK_TOKEN',
+      'TEACHER_TRAINING_SLACK_CHANNEL_ID',
       'GREENLIGHT_API_ENDPOINT',
       'SIGNUP_API_ENDPOINT',
       'GOOGLE_SERVICE_ACCOUNT',
       'HIGHSCHOOL_FORM_RESPONSES_ID',
+      'TEACHER_TRAINING_FORM_RESPONSES_ID',
       'WUFOO_HOST',
       'WUFOO_TOKEN',
       'WUFOO_CONTACT_FORM_ID',
@@ -55,7 +61,7 @@ module.exports = (phase, { defaultConfig }) => {
       },
     },
     env: {
-      OVERRIDE_NODE_ENV: OVERRIDE_NODE_ENV || '',
+      OVERRIDE_NODE_ENV: OVERRIDE_NODE_ENV || NODE_ENV || '',
       FB_PIXEL_ID,
       HIGHSCHOOL_FORM_ACTIVE_UNTIL,
       HIGHSCHOOL_FORM_RESPONSES_NAME,
@@ -117,6 +123,21 @@ module.exports = (phase, { defaultConfig }) => {
         {
           source: '/privacy',
           destination: '/privacyPolicy',
+          permanent: true,
+        },
+        {
+          source: '/teacher-training',
+          destination: '/programs/highschool/teacherTraining',
+          permanent: true,
+        },
+        {
+          source: '/teacher-training/info/:slug',
+          destination: '/programs/highschool/teacherTraining/info/:slug',
+          permanent: true,
+        },
+        {
+          source: '/teacher-training/register/:slug',
+          destination: '/programs/highschool/teacherTraining/register/:slug',
           permanent: true,
         },
         // Filter out false/undefined/null routes

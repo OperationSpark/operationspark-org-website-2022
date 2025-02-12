@@ -1,0 +1,246 @@
+{
+  "partners": [
+    "Allen Parish Public Schools",
+    "Ascension Parish Public Schools",
+    "NOLA Public Schools",
+    "Collegiate Academies, New Orleans",
+    "Jefferson Parish Public Schools",
+    "Lafayette Parish School System",
+    "Louisiana Virtual Charter Academy",
+    "Natchitoches Parish Public Schools",
+    "St. Charles Parish Public Schools",
+    "St. Tammany Parish Public Schools"
+  ],
+  "info": {
+    "1": {
+      "level": "1",
+      "levelName": "Basic",
+      "title": "Teacher Training",
+      "season": "Summer 2025",
+      "subtitle": "Fundamentals of HTML, CSS, and Javascript",
+      "ibcCode": "080523",
+      "summary": "Operation Spark is pleased to offer a nine-day training to Louisiana high school teachers. This training will guide participants through our introductory course, Fundamentals of HTML, CSS, and Javascript, which culminates in a Level 1 (Basic) statewide Industry Based Credential. Over the nine day period, teachers will complete all course projects and assessments in preparation for the Level 1 IBC exam. Along the way, they'll explore methods and strategies specific to the teaching of code. The exam wil be administered on the final day of the training.",
+      "format": {
+        "type": "Hybrid",
+        "description": "Teachers will be able to choose to attend via Zoom, with the option to join the instructor in person in our learning lab in central New Orleans on select days. Live attendance is mandatory with either option. Teachers will be asked to share their choice of format with us when registering, then confirm one week before the training. Participants who live within driving distance are encouraged to attend in person on available days."
+      },
+      "times": {
+        "startDate": "Tuesday, July 8th",
+        "endDate": "Friday, July 18th",
+        "startTime": "9:00 AM",
+        "endTime": "3:00 PM",
+        "examDay": "Friday, July 18th",
+        "days": "Monday - Friday"
+      },
+      "cost": {
+        "amount": "$600.00",
+        "per": "teacher",
+        "includeTesting": true
+      },
+      "prerequisites": "No Prerequisites",
+      "outcomes": [
+        {
+          "title": "Outcome 1",
+          "availabilityScore": "93%",
+          "description": [
+            "Teachers who perform very well (active participation, timely completion of coursework, and a score of 93% or higher on the IBC exam) during the training will be certified by Operation Spark to license an independently teach our level 1 curriculum, at a cost of $275 (current price, subject to change) per student, per course.",
+            "Historically, some teachers achieving this outcome have had substantial teaching or industry experience in Computer Science, but we have also seen many teachers with completely unrelated teaching and educational backgrounds excel in the training and go on to successfully deliver the curriculum in their classrooms."
+          ]
+        },
+        {
+          "title": "Outcome 2",
+          "requiredScore": "80%",
+          "description": [
+            "Teachers certified at this level may co-teach our level 1 curriculum with a full-time Operation Spar instructor Zooming into the classroom, during a regularly scheduled block. Trained teachers are our boots on the ground in the classroom - they work with our instructors on a daily basis to collaboratively deliver dynamic and effective learning experiences in their classrooms. This has been a successful model for us over the past four years, both in terms of student outcomes and teacher development. Success rates on the IBC exam in virtual classes have been between 70% and 95%. The cost of this model to schools is $600 per student, per course (current price, subject to change).",
+            "Teachers who complete the training may also be more prepared to teach introductory computer science courses separately from our in-house curriculum and associated credentials."
+          ]
+        }
+      ],
+
+      "nda": {
+        "title": "NDA",
+        "subtitle": "Proprietary Course Materials",
+        "description": "Our curriculum and course materials may be used by teachers and schools only through a separate agreement after training is completed. All participants must sign non-disclosure agreements before training begins."
+      },
+
+      "registration": {
+        "priorityDate": "Friday, May 2nd, 2025",
+        "deadline": "Friday, June 27th, 2025",
+        "refundDeadline": "Tuesday, June 10th, 2025"
+      }
+    },
+    "2": {
+      "level": "2",
+      "levelName": "Advanced",
+      "title": "Teacher Training",
+      "season": "Summer 2025",
+      "subtitle": "Advanced Javascript, Functional Programming, and Web Development",
+      "ibcCode": "080520",
+      "summary": "Operation Spark is pleased to offer a nine-day training to Louisiana high school teachers who have successfully taught our level 1 curriculum (Fundamentals of HTML, CSS, and Javascript) for one or more academic terms. This training will guide participants through the second core course in our sequence (Advanced Javascript, Functional Programming, and Web Development), which culminates in a Level 2 (Advanced) statewide Industry Based Credential. Over the nine day period, teachers will complete all course projects and assessments in preparation for the Level 2 IBC exam. Along the way, they'll explore methods and strategies specific to the teaching of code. The exam will  administered on the final day of the training.",
+      "format": {
+        "type": "Online",
+        "description": " Live attendance is mandatory."
+      },
+      "times": {
+        "startDate": "Tuesday, July 8th",
+        "endDate": "Friday, July 18th",
+        "startTime": "9:00 AM",
+        "endTime": "3:00 PM",
+        "examDay": "Friday, July 18th",
+        "days": "Monday - Friday"
+      },
+      "cost": {
+        "amount": "$600.00",
+        "per": "teacher",
+        "includeTesting": true
+      },
+
+      "prerequisites": "Participants must be certified by Operation Spark to lead instruction for the level course/IBC, and must have taught the level 1 course for one or more academic terms.",
+      "outcomes": [
+        {
+          "title": "",
+          "availabilityScore": "85%",
+          "description": [
+            "In order to lead the course at their home school, participants must attend all sessions, complete all course requirements, and score 85% or higher on the IBC exam.",
+            "Teachers who score above 70% but below 85% on the exam will be offered a retake opportunity after an additional study period of 2-5 days following the end of the training."
+          ]
+        }
+      ],
+
+      "nda": {
+        "title": "NDA",
+        "subtitle": "Proprietary Course Materials",
+        "description": "Our curriculum and course materials may be used by teachers and schools only through a separate agreement after training is completed. All participants must sign non-disclosure agreements before training begins."
+      },
+
+      "registration": {
+        "priorityDate": "Friday, May 2nd, 2025",
+        "deadline": "Friday, June 27th, 2025",
+        "refundDeadline": "Tuesday, June 10th, 2025"
+      }
+    }
+  },
+  "registrationFields": {
+    "participant": [
+      {
+        "type": "text",
+        "name": "firstName",
+        "label": "First Name",
+        "placeholder": "Halle",
+        "required": true,
+        "autoCapitalize": true
+      },
+      {
+        "type": "text",
+        "name": "lastName",
+        "label": "Last Name",
+        "placeholder": "Bot",
+        "required": true,
+        "autoCapitalize": true
+      },
+      {
+        "type": "email",
+        "name": "email",
+        "label": "Email",
+        "placeholder": "halle.bot@operationspark.org",
+        "required": true
+      },
+      {
+        "type": "text",
+        "name": "position",
+        "label": "Position / Role",
+        "placeholder": "Teacher",
+        "required": true,
+        "autoCapitalize": true
+      },
+      {
+        "type": "text",
+        "name": "district",
+        "label": "School District",
+        "placeholder": "NOLA Public Schools",
+        "required": true,
+        "autoCapitalize": true
+      },
+      {
+        "type": "text",
+        "name": "schools",
+        "label": "School(s) Taught At",
+        "placeholder": "Ben Franklin High School, ...",
+        "required": true,
+        "autoCapitalize": true
+      }
+    ],
+    "completer": [
+      {
+        "type": "text",
+        "name": "proxyFirstName",
+        "label": "First Name",
+        "placeholder": "Halle",
+        "required": true,
+        "autoCapitalize": true
+      },
+      {
+        "type": "text",
+        "name": "proxyLastName",
+        "label": "Last Name",
+        "placeholder": "Bot",
+        "required": true,
+        "autoCapitalize": true
+      },
+      {
+        "type": "text",
+        "name": "proxyPosition",
+        "label": "Position / Role",
+        "placeholder": "Teacher",
+        "required": true,
+        "autoCapitalize": true
+      },
+      {
+        "type": "email",
+        "name": "proxyEmail",
+        "label": "Email",
+        "placeholder": "halle.bot@operationspark.org",
+        "required": true
+      }
+    ],
+    "billing": [
+      {
+        "type": "text",
+        "name": "billingName",
+        "label": "Billing Name",
+        "placeholder": "Halle Bot / School",
+        "required": true,
+        "autoCapitalize": true
+      },
+
+      {
+        "type": "email",
+        "name": "billingEmail",
+        "label": "Email",
+        "placeholder": "halle.bot@operationspark.org",
+        "required": true
+      }
+    ],
+    "acknowledgements": [
+      {
+        "name": "confirmRead",
+        "label": "I have read all of the information regarding the scope and outcomes of this course.",
+        "value": false,
+        "infoLink": true
+      },
+      {
+        "name": "confirmAvailable",
+        "label": "The teacher I'm registering is available during the times listed above.",
+        "altLabel": "I am available during the times listed above.",
+        "value": false
+      },
+      {
+        "name": "confirmResources",
+        "label": "The teacher I'm registering will have access to a computer with webcam, mic, and a reliable high speed internet connection during these dates and times.",
+        "altLabel": "I will have access to a computer with webcam, mic, and a reliable high speed internet connection during these dates and times.",
+        "value": false,
+        "dateTime": true
+      }
+    ]
+  }
+}

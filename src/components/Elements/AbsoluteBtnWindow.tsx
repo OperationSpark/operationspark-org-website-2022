@@ -1,10 +1,10 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { ReactNode, useEffect, useRef } from 'react';
-import styled, { CSSProperties, useTheme } from 'styled-components';
 import { IoMdClose } from 'react-icons/io';
+import styled, { CSSProperties, useTheme } from 'styled-components';
 
-import { cardShadowLtr } from '@this/src/theme/styled/mixins/shadows';
 import Button from '@this/components/Elements/Button';
+import { cardShadowLtr } from '@this/src/theme/styled/mixins/shadows';
 
 interface AbsoluteBtnWindowProps {
   title: string;
@@ -44,13 +44,13 @@ const AbsoluteBtnWindow = ({
       >
         {isOpen ? <IoMdClose size={20} /> : text}
       </Button>
-      <AnimatePresence>
+      <AnimatePresence mode='sync'>
         {isOpen && (
           <motion.div
             className='_abs-win'
             ref={winRef}
             initial={{
-              maxHeight: `0vh`,
+              maxHeight: `24px`,
               width: '100px',
               maxWidth: 'calc(100vw - 1rem)',
               opacity: 0,
@@ -61,9 +61,9 @@ const AbsoluteBtnWindow = ({
               maxWidth: 'calc(100vw - 2rem)',
               opacity: 1,
             }}
-            exit={{ maxHeight: `0vh`, width: '100px', opacity: 1 }}
-            transition={{ type: 'tween', duration: 0.1 }}
-            style={{ ...style, overflowY: isOpen ? 'auto' : 'hidden' }}
+            exit={{ maxHeight: `24px`, width: '100px', opacity: 0 }}
+            transition={{ type: 'tween', duration: 0.25 }}
+            style={isOpen ? { ...style, overflow: 'auto' } : { ...style, overflow: 'hidden' }}
           >
             <h3 className='dynamic-h3 _abs-win-title'>{title}</h3>
 
