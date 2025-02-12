@@ -228,10 +228,9 @@ export default async function handleContactForm(req: ISignupReq, res: NextApiRes
       try {
         // Send email
         await mg.messages.create(MG_DOMAIN, {
-          from: 'Operation Spark <noreply@operationspark.org>',
+          from: 'Operation Spark <highschool@operationspark.org>',
           to: valueMap.email,
           cc: proxyEmail,
-          // bcc: 'highschool@operationspark.org',
           subject: mgVariables.subject,
           template: 'teacher-training-confirmation',
           text: plainTextEmail,
