@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/nextjs';
 import axios from 'axios';
 import { KeyboardEvent, MouseEvent, useRef, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
@@ -74,10 +75,13 @@ const TeacherTrainingApplication = ({
 
   const [showStepErrors, setShowStepErrors] = useState<boolean>(false);
   const [stepErrors, setStepErrors] = useState<Record<number, string[]>>(
-    stepFields.reduce((acc, section) => {
-      acc[section.step] = section.type === 'form' ? section.fields : [];
-      return acc;
-    }, {} as Record<number, string[]>),
+    stepFields.reduce(
+      (acc, section) => {
+        acc[section.step] = section.type === 'form' ? section.fields : [];
+        return acc;
+      },
+      {} as Record<number, string[]>,
+    ),
   );
 
   const participantFields = buildInputFields(registrationFields.participant);
@@ -135,11 +139,14 @@ const TeacherTrainingApplication = ({
     .filter((v) => v !== null);
 
   const validateSteps = () => {
-    const stepErrs = stepFields.reduce((errs, stepNum) => {
-      const n = Number(stepNum);
-      errs[n] = getStepErrors(Number(n));
-      return errs;
-    }, {} as Record<number, string[]>);
+    const stepErrs = stepFields.reduce(
+      (errs, stepNum) => {
+        const n = Number(stepNum);
+        errs[n] = getStepErrors(Number(n));
+        return errs;
+      },
+      {} as Record<number, string[]>,
+    );
 
     setStepErrors(stepErrs);
   };
@@ -261,6 +268,7 @@ const TeacherTrainingApplication = ({
       setIsSignupComplete(true);
       onSubmitComplete?.();
     } catch (err) {
+      Sentry.captureException(err);
       console.error(err);
       form.notifyError();
     } finally {
@@ -543,11 +551,14 @@ const TeacherTrainingApplication = ({
 
                       const newVals = (
                         stepSections.isSelf as StepSectionQuestion
-                      ).fieldMapList.reduce((newVals, map) => {
-                        newVals[map.toField] = '';
+                      ).fieldMapList.reduce(
+                        (newVals, map) => {
+                          newVals[map.toField] = '';
 
-                        return newVals;
-                      }, {} as Record<string, string>);
+                          return newVals;
+                        },
+                        {} as Record<string, string>,
+                      );
 
                       form.setFields(newVals);
                     }}
@@ -631,13 +642,16 @@ const TeacherTrainingApplication = ({
                         if (!option.nextStep) return;
                         const newVals = (
                           stepSections.isPayee as StepSectionQuestion
-                        ).fieldMapList.reduce((newVals, map) => {
-                          const toField = map.toField;
+                        ).fieldMapList.reduce(
+                          (newVals, map) => {
+                            const toField = map.toField;
 
-                          newVals[toField] = '';
+                            newVals[toField] = '';
 
-                          return newVals;
-                        }, {} as Record<string, string>);
+                            return newVals;
+                          },
+                          {} as Record<string, string>,
+                        );
 
                         form.setFields(newVals);
                       }}

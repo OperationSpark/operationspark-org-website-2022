@@ -1,5 +1,6 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
+import * as Sentry from '@sentry/nextjs';
 import axios from 'axios';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
 const { WUFOO_TOKEN, WUFOO_CONTACT_FORM_ID, WUFOO_HOST } = process.env;
 
@@ -34,6 +35,7 @@ export default async function handleContactForm(req: IContactFormRequest, res: N
     await axios.post(formUrl, form, { headers });
     res.status(201).end();
   } catch (err) {
+    Sentry.captureException(err);
     console.error('Failed to submit form\n', err);
     res.status(500).end();
   }

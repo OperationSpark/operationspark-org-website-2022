@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/nextjs';
 import axios from 'axios';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
@@ -47,6 +48,7 @@ export const getInfoSessionDates = async (): Promise<ISessionDates[]> => {
 
     return sessionDates.sessions;
   } catch (err) {
+    Sentry.captureException(err);
     console.error('Error fetching info session dates\n', err);
     return [];
   }

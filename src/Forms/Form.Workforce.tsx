@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/nextjs';
 import axios from 'axios';
 import kebabCase from 'lodash/kebabCase';
 import moment from 'moment';
@@ -111,6 +112,7 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
 
       setRenderUrl(data.url);
     } catch (error) {
+      Sentry.captureException(error);
       form.notifyError({
         title: 'Error',
         msg: 'There was an error signing you up\nPlease reach out to us at "admissions@operationspark.org" or give us a call at 504-233-3838',

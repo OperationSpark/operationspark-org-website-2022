@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/nextjs';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { AiOutlineInfoCircle as InfoIcon } from 'react-icons/ai';
@@ -46,6 +47,7 @@ const HighschoolFormInfo = ({ onSubmitComplete, selectedCourse }: HighschoolForm
       form.notifySuccess();
       onSubmitComplete?.();
     } catch {
+      Sentry.captureMessage('Failed to submit highschool info form');
       form.notifyError();
     } finally {
       setIsSubmitting(false);

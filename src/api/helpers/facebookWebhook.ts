@@ -1,7 +1,7 @@
+import * as Sentry from '@sentry/nextjs';
+import axios, { isAxiosError } from 'axios';
 import crypto from 'crypto';
 import type { Readable } from 'node:stream';
-
-import axios, { isAxiosError } from 'axios';
 
 import { getInfoSessionDates, ISessionDates } from '@this/pages-api/infoSession/dates';
 import { parsePhoneNumber } from '@this/src/components/Form/helpers';
@@ -87,6 +87,7 @@ export const fetchLead = async (id: string): Promise<InfoSessionFacebookPayload 
 
     return data ?? null;
   } catch (err) {
+    Sentry.captureException(err);
     if (isAxiosError(err)) {
       console.error(err.response?.data?.error);
     }
@@ -210,10 +211,13 @@ export const verifyWebhook = async <Q extends {}, B extends {}>(
 export const extractFacebookFormData = (
   data: InfoSessionFacebookPayload,
 ): Record<FacebookPayloadFieldKey, string> => {
-  const fields = data.field_data.reduce((acc, field) => {
-    acc[field.name] = field.values[0];
-    return acc;
-  }, {} as Record<FacebookPayloadFieldKey, string>);
+  const fields = data.field_data.reduce(
+    (acc, field) => {
+      acc[field.name] = field.values[0];
+      return acc;
+    },
+    {} as Record<FacebookPayloadFieldKey, string>,
+  );
   return fields;
 };
 

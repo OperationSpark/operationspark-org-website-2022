@@ -142,7 +142,7 @@ const useForm = <T extends TForm<T> = {}>(options: UseFormOptions<T> = {}) => {
         ...selectValues,
         ...checkboxGroupValues,
         ...checkboxValues,
-      } as T),
+      }) as T,
 
     nextInvalidKey: (): keyof T | null => {
       const order = options.fieldOrder ?? (Object.keys(validation) as (keyof T)[]);
@@ -163,7 +163,7 @@ const useForm = <T extends TForm<T> = {}>(options: UseFormOptions<T> = {}) => {
     notifyError: ({ title, msg }: INotify = {}) => {
       const message = `
         ${title ?? 'Error!'}
-        ${msg ?? 'An error ocurred while submitting this form'}
+        ${msg ?? 'An error occurred while submitting this form'}
       `;
       return toast.error(message);
     },
