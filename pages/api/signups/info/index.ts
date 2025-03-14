@@ -18,12 +18,22 @@ const handleInfoSessionFormSubmit: ReqHandler<{}, FormDataSignup> = async (req: 
   try {
     const payload = formatSignupPayload(req.body);
 
+    const headers: {
+      [key: string]: string;
+    } = {
+      'X-Greenlight-Signup-Api-Key': GREENLIGHT_API_TOKEN,
+    };
+
+    if (typeof req.headers.baggage === 'string') {
+      headers.baggage = req.headers.baggage;
+    }
+    if (typeof req.headers['sentry-trace'] === 'string') {
+      headers['sentry-trace'] = req.headers['sentry-trace'];
+    }
     const result = await runCloudFunction<ISessionSignup, SignupResult>({
       url: SIGNUP_API_ENDPOINT,
       body: payload,
-      headers: {
-        'X-Greenlight-Signup-Api-Key': GREENLIGHT_API_TOKEN,
-      },
+      headers,
     });
 
     res.status(200).json(result.data);

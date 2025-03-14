@@ -2,15 +2,18 @@
 // The config you add here will be used whenever a users loads a page in their browser.
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 
-import * as Sentry from "@sentry/nextjs";
+import { browserTracingIntegration } from '@sentry/browser';
+import * as Sentry from '@sentry/nextjs';
+import config from '@this/config';
+
+const { SIGNUP_API_ENDPOINT } = config;
 
 Sentry.init({
-  dsn: "https://2b3b08a6edc118c629a1e68874df48ae@o4508836956078080.ingest.us.sentry.io/4508966651494400",
+  dsn: 'https://2b3b08a6edc118c629a1e68874df48ae@o4508836956078080.ingest.us.sentry.io/4508966651494400',
 
-  // Add optional integrations for additional features
-  integrations: [
-    Sentry.replayIntegration(),
-  ],
+  integrations: [browserTracingIntegration(), Sentry.replayIntegration()],
+
+  tracePropagationTargets: [SIGNUP_API_ENDPOINT],
 
   // Define how likely traces are sampled. Adjust this value in production, or use tracesSampler for greater control.
   tracesSampleRate: 1,
