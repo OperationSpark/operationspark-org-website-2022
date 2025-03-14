@@ -41,6 +41,10 @@ jspm_packages
 .DS_Store
 
 .idea
+.env
 .env.*
 !.env.example
 ngrokrc.yml
+
+# Sentry Config File
+.env.sentry-build-plugin

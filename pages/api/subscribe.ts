@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/nextjs';
 import axios from 'axios';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { config } from '../../src/config';
@@ -30,6 +31,7 @@ const subscribe = async (req: NextApiRequest, res: NextApiResponse) => {
     });
   } catch (err) {
     if (!axios.isAxiosError(err) || !err.response?.data.title) {
+      Sentry.captureException(err);
       return res.status(500).json({
         title: `Error signing you up for the newsletter :(`,
         description: `Shoot us an email at [support@operationspark.org] and we'll add you to the list`,

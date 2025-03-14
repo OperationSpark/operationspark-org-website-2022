@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/nextjs';
 import axios from 'axios';
 import { KeyboardEvent, MouseEvent, useEffect, useRef, useState } from 'react';
 import { AiOutlineInfoCircle as InfoIcon } from 'react-icons/ai';
@@ -111,11 +112,14 @@ const HighSchoolApplication = ({ onSubmitComplete }: HighSchoolApplicationProps)
   };
 
   const validateSteps = () => {
-    const stepErrs = Object.keys(stepFields).reduce((errs, stepNum) => {
-      const n = Number(stepNum);
-      errs[n] = getStepErrors(Number(n));
-      return errs;
-    }, {} as Record<number, string[]>);
+    const stepErrs = Object.keys(stepFields).reduce(
+      (errs, stepNum) => {
+        const n = Number(stepNum);
+        errs[n] = getStepErrors(Number(n));
+        return errs;
+      },
+      {} as Record<number, string[]>,
+    );
 
     setStepErrors(stepErrs);
   };
@@ -197,6 +201,7 @@ const HighSchoolApplication = ({ onSubmitComplete }: HighSchoolApplicationProps)
 
       onSubmitComplete?.();
     } catch {
+      Sentry.captureMessage('Failed to submit highschool application form');
       form.notifyError();
     } finally {
       setIsSubmitting(false);

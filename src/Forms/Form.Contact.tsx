@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import * as Sentry from '@sentry/nextjs';
 import axios from 'axios';
+import { useState } from 'react';
 
-import { Form, Input, useForm } from '@this/components/Form';
 import Button from '@this/components/Elements/Button';
 import { TwoColumns } from '@this/components/Elements/Columns';
+import { Form, Input, useForm } from '@this/components/Form';
 
 const ContactForm = () => {
   const form = useForm();
@@ -25,6 +26,7 @@ const ContactForm = () => {
       });
       form.clear();
     } catch (err) {
+      Sentry.captureException(err);
       form.notifyError({
         title: 'An error occurred!',
         msg: "There was an error submitting your request. Shoot us an email at [support@operationspark.org] and we'll get back to you.",
