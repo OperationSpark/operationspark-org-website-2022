@@ -1,6 +1,7 @@
 import { runCloudFunction } from '@this/api/googleFunctions';
 import config from '@this/config';
 import { formatSignupPayload } from '@this/src/api/formatSignupPayload';
+import { extractSentryHeadersFromRequest } from '@this/src/api/sentry';
 import { ReqHandler } from '@this/types/request';
 import { FormDataSignup, ISessionSignup } from '@this/types/signups';
 
@@ -17,23 +18,15 @@ type SignupResult = { url: string };
 const handleInfoSessionFormSubmit: ReqHandler<{}, FormDataSignup> = async (req: Req, res: Res) => {
   try {
     const payload = formatSignupPayload(req.body);
+    const sentryHeaders = extractSentryHeadersFromRequest(req);
 
-    const headers: {
-      [key: string]: string;
-    } = {
-      'X-Greenlight-Signup-Api-Key': GREENLIGHT_API_TOKEN,
-    };
-
-    if (typeof req.headers.baggage === 'string') {
-      headers.baggage = req.headers.baggage;
-    }
-    if (typeof req.headers['sentry-trace'] === 'string') {
-      headers['sentry-trace'] = req.headers['sentry-trace'];
-    }
     const result = await runCloudFunction<ISessionSignup, SignupResult>({
       url: SIGNUP_API_ENDPOINT,
       body: payload,
-      headers,
+      headers: {
+        'X-Greenlight-Signup-Api-Key': GREENLIGHT_API_TOKEN,
+        ...sentryHeaders,
+      },
     });
 
     res.status(200).json(result.data);
