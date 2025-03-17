@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export const useKeyCombo = (...keys: string[]) => {
   const [isCtrl, setCtrl] = useState(false);
@@ -8,7 +8,12 @@ export const useKeyCombo = (...keys: string[]) => {
   const [isActive, setIsActive] = useState<boolean>(false);
 
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
+    const handleKeyDown = (e: KeyboardEvent | Event) => {
+      // Mobile browsers don't have the key property apparently
+      // https://stackoverflow.com/questions/45433810/event-key-is-undefined-in-mobile-browsers-for-keyup-keydown-and-keypress
+      if (!('key' in e)) {
+        return;
+      }
       const key = e.key.toLocaleLowerCase('en-US');
       if (key === lastKey) {
         return;
@@ -28,7 +33,12 @@ export const useKeyCombo = (...keys: string[]) => {
         return;
       }
     };
-    const handleKeyUp = (e: KeyboardEvent) => {
+    const handleKeyUp = (e: KeyboardEvent | Event) => {
+      // Mobile browsers don't have the key property apparently
+      // https://stackoverflow.com/questions/45433810/event-key-is-undefined-in-mobile-browsers-for-keyup-keydown-and-keypress
+      if (!('key' in e)) {
+        return;
+      }
       const key = e.key.toLocaleLowerCase();
       if (['control', 'alt'].includes(key)) {
         setCtrl(false);
