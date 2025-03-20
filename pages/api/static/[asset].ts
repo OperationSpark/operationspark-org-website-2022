@@ -11,13 +11,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 }
 
-export const getStaticAsset = async (page: string | string[], property?: string) => {
+export const getStaticAsset = async <T>(
+  page: string | string[],
+  property?: string,
+): Promise<T | null> => {
   try {
     const data = await import(`/data/${page}.json`);
     if (property && data.default[property]) {
-      return data.default[property];
+      return data.default[property] as T;
     }
-    return data.default;
+    return data.default as T;
   } catch (err) {
     console.error(`Error fetching asset: "${page}"`, err);
     return null;
