@@ -21,8 +21,12 @@ export default function App({ Component, pageProps }: AppProps) {
   const [alertInfo, setAlertInfo] = useState<IAlert>({ message: '', url: '' });
 
   useEffect(() => {
-    getStaticAsset('logos').then((l: ISupporterFunderLogos) => setLogos(l.funders));
-    getStaticAsset('alert').then(setAlertInfo);
+    getStaticAsset<ISupporterFunderLogos>('logos').then((l) => {
+      if (l) {
+        setLogos(l.funders);
+      }
+    });
+    getStaticAsset<IAlert>('alert').then((alert) => alert && setAlertInfo(alert));
   }, []);
 
   return (
