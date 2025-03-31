@@ -83,7 +83,14 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
                 <h2 className='dynamic-h2 secondary'>{applicationType}</h2>
                 <div className='header-grad-years'>
                   <p className='dynamic-txt'>
-                    {'Open to rising sophomores, juniors, and seniors '}
+                    {'Open to '}
+                    {['Rising sophomores', 'juniors', 'seniors', '2025 grads.'].map((text, i) => (
+                      <span className='grad-year' key={text}>
+                        <b className='secondary'>{text}</b>
+                        {i < 3 && ', '}
+                        {i === 2 && ' and '}
+                      </span>
+                    ))}
                   </p>
                   <p className='grad-years'>
                     Graduating classes of{' '}
