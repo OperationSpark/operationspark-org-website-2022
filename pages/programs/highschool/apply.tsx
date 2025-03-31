@@ -74,13 +74,19 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
           >
             <div className='program-header'>
               <div className='header-card'>
-                <h1 className='dynamic-xl secondary'>{highSchoolApplicationDetails.season}</h1>
+                <h1 className='dynamic-xl secondary'>
+                  {highSchoolApplicationDetails.season} {highSchoolApplicationDetails.year}
+                </h1>
                 <h2 className='dynamic-h2 secondary'>
                   {highSchoolApplicationDetails.applicationType}
                 </h2>
                 <p className='dynamic-txt'>
                   Open to sophomores, juniors, and seniors
-                  <b> (Graduating classes of 2025, 2026, and 2027)</b>.
+                  <b>
+                    {' '}
+                    (Graduating classes of {highSchoolApplicationDetails.gradYears.join(', ')})
+                  </b>
+                  .
                 </p>
                 {/* Common meeting time */}
                 {/* <p className='dynamic-txt'>
@@ -113,7 +119,12 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
                 <div className='left-col'>
                   <div className='hs-program-overview'>
                     <p>
-                      {`This ${highSchoolApplicationDetails.mainSeason}, we’re offering after-school courses, with in-person and virtual options. You can enroll in one or the other- there is no hybrid option. If you're able to arrange for reliable transportation to our learning center in the Marigny, we recommend in-person classes. We have a great lab with brand new equipment and an awesome staff to get you started on your coding journey. You'll also meet other students from a wide range of schools and backgrounds!`}
+                      {/* After School Courses [Spring/Fall/Winter] */}
+                      {/* {`This ${highSchoolApplicationDetails.mainSeason}, we're offering after-school courses, with in-person and virtual options. You can enroll in one or the other- there is no hybrid option. If you're able to arrange for reliable transportation to our learning center in the Marigny, we recommend in-person classes. We have a great lab with brand new equipment and an awesome staff to get you started on your coding journey. You'll also meet other students from a wide range of schools and backgrounds!`} */}
+                    </p>
+                    <p>
+                      {/* Summer Camp [Summer] */}
+                      {`This ${highSchoolApplicationDetails.mainSeason}, we’re offering half day summer coding camps, with in-person and virtual options. You can enroll in one or the other- there is no hybrid option. If you're able to arrange for reliable transportation to our learning center in the Marigny, we recommend in-person classes. We have a great lab with brand new equipment and an awesome staff to get you started on your coding journey. You'll also meet other students from a wide range of schools and backgrounds!`}
                     </p>
                     <br />
 

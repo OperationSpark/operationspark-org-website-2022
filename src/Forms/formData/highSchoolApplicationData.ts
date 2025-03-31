@@ -1,13 +1,14 @@
 import Input from '@this/src/components/Form/elements';
 
 export const highSchoolApplicationDetails = {
-  season: 'Winter/Spring',
-  mainSeason: 'Spring',
+  gradYears: ['2025', '2026', '2027', '2028'],
+  season: 'Summer',
+  mainSeason: 'Summer',
   year: '2025',
-  startWeek: 'January 27th',
-  endWeek: 'May 19th',
-  // applicationType: 'Coding Camp Application'
-  applicationType: 'After-school Application',
+  startWeek: 'May 29th',
+  endWeek: 'June 27th',
+  applicationType: 'Coding Camp Application', // Summer
+  // applicationType: 'After-school Application', // Winter/Fall/Spring
 };
 
 export const courses = [
@@ -39,32 +40,48 @@ export const courseTimes = {
     advanced: 'This is your second class with Op Spark, and you earned the level 1 credential',
   },
   fundamentals: [
+    // {
+    //   course: 'fundamentals',
+    //   value: 'fundamentals-onsite-w-4-8',
+    //   location: 'In Person',
+    //   preReq: 'No Prerequisite',
+    //   time: 'Wednesdays | 4:45 PM → 8:00 PM',
+    //   name: 'In Person: Wednesdays | 4:45 PM → 8:00 PM',
+    // },
+    // {
+    //   course: 'fundamentals',
+    //   value: 'fundamentals-virtual-tues+thurs-5-7',
+    //   location: 'Virtual',
+    //   preReq: 'No Prerequisite',
+    //   time: 'Tuesdays + Thursdays | 5:00 PM → 7:00 PM',
+    //   name: 'Virtual: Tuesdays + Thursdays | 5:00 PM → 7:00 PM',
+    // },
     {
       course: 'fundamentals',
-      value: 'fundamentals-onsite-w-4-8',
+      value: 'fundamentals-onsite-mon-fri-9-12',
       location: 'In Person',
       preReq: 'No Prerequisite',
-      time: 'Wednesdays | 4:45 PM → 8:00 PM',
-      name: 'In Person: Wednesdays | 4:45 PM → 8:00 PM',
+      time: 'Monday - Friday | 9:00 AM → 12:00 PM',
+      name: 'In Person: Monday - Friday | 9:00 AM → 12:00 PM',
     },
     {
       course: 'fundamentals',
-      value: 'fundamentals-virtual-tues+thurs-5-7',
+      value: 'fundamentals-virtual-mon-fri-1-4',
       location: 'Virtual',
       preReq: 'No Prerequisite',
-      time: 'Tuesdays + Thursdays | 5:00 PM → 7:00 PM',
-      name: 'Virtual: Tuesdays + Thursdays | 5:00 PM → 7:00 PM',
+      time: 'Monday - Friday | 1:00 PM → 4:00 PM',
+      name: 'Virtual: Monday - Friday | 1:00 PM → 4:00 PM',
     },
   ],
   advanced: [
-    {
-      course: 'advanced',
-      value: 'advanced-onsite-thurs-4-8',
-      location: 'In Person',
-      preReq: 'Fundamentals of HTML, CSS, and Javascript',
-      time: 'Thursdays | 4:45 PM → 8:00 PM',
-      name: 'In Person: Thursdays | 4:45 PM → 8:00 PM',
-    },
+    // {
+    //   course: 'advanced',
+    //   value: 'advanced-onsite-thurs-4-8',
+    //   location: 'In Person',
+    //   preReq: 'Fundamentals of HTML, CSS, and Javascript',
+    //   time: 'Thursdays | 4:45 PM → 8:00 PM',
+    //   name: 'In Person: Thursdays | 4:45 PM → 8:00 PM',
+    // },
     // {
     //   course: 'advanced',
     //   value: 'advanced-virtual-tues+thurs-5-7',
@@ -73,6 +90,22 @@ export const courseTimes = {
     //   time: 'Tuesdays + Thursdays | 5:00 PM → 7:00 PM',
     //   name: 'Virtual: Tuesdays + Thursdays | 5:00 PM → 7:00 PM',
     // },
+    {
+      course: 'advanced',
+      value: 'advanced-onsite-mon-fri-1-4',
+      location: 'In Person',
+      preReq: 'Fundamentals of HTML, CSS, and Javascript',
+      time: 'Monday - Friday | 1:00 PM → 4:00 PM',
+      name: 'In Person: Monday - Friday | 1:00 PM → 4:00 PM',
+    },
+    {
+      course: 'advanced',
+      value: 'advanced-virtual-mon-fri-9-12',
+      location: 'Virtual',
+      preReq: 'Fundamentals of HTML, CSS, and Javascript',
+      time: 'Monday - Friday | 9:00 AM PM → 12:00 PM',
+      name: 'Virtual: Monday - Friday | 9:00 AM PM → 12:00 PM',
+    },
   ],
 };
 
