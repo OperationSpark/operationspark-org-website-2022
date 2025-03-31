@@ -5,8 +5,8 @@ export const highSchoolApplicationDetails = {
   season: 'Summer',
   mainSeason: 'Summer',
   year: '2025',
-  startWeek: 'May 29th',
-  endWeek: 'June 27th',
+  startWeek: 'Thursday, May 29th',
+  endWeek: 'Friday, June 27th',
   applicationType: 'Coding Camp Application', // Summer
   // applicationType: 'After-school Application', // Winter/Fall/Spring
 };
