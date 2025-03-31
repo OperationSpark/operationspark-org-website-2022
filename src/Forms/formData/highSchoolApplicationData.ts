@@ -103,8 +103,8 @@ export const courseTimes = {
       value: 'advanced-virtual-mon-fri-9-12',
       location: 'Virtual',
       preReq: 'Fundamentals of HTML, CSS, and Javascript',
-      time: 'Monday - Friday | 9:00 AM PM → 12:00 PM',
-      name: 'Virtual: Monday - Friday | 9:00 AM PM → 12:00 PM',
+      time: 'Monday - Friday | 9:00 AM → 12:00 PM',
+      name: 'Virtual: Monday - Friday | 9:00 AM → 12:00 PM',
     },
   ],
 };
