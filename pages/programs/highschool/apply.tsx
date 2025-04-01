@@ -45,6 +45,9 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
   const [courseInfo, setCourseInfo] = useState<IHighschoolPrograms['courses'][0] | null>(null);
   const [courseInfoRef, isOpen, setOpen] = useClickAway(() => setCourseInfo(null));
 
+  const { season, mainSeason, year, gradYears, startWeek, endWeek, applicationType } =
+    highSchoolApplicationDetails;
+
   const toggleCourseInfo = (course?: string) => {
     if (!course) {
       setCourseInfo(null);
@@ -74,23 +77,42 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
           >
             <div className='program-header'>
               <div className='header-card'>
-                <h1 className='dynamic-xl secondary'>{highSchoolApplicationDetails.season}</h1>
-                <h2 className='dynamic-h2 secondary'>
-                  {highSchoolApplicationDetails.applicationType}
-                </h2>
-                <p className='dynamic-txt'>
-                  Open to sophomores, juniors, and seniors
-                  <b> (Graduating classes of 2025, 2026, and 2027)</b>.
-                </p>
+                <h1 className='dynamic-xl secondary'>
+                  {season} {year}
+                </h1>
+                <h2 className='dynamic-h2 secondary'>{applicationType}</h2>
+                <div className='header-grad-years'>
+                  <p className='dynamic-txt'>
+                    {'Open to '}
+                    {['Rising sophomores', 'juniors', 'seniors', '2025 grads.'].map((text, i) => (
+                      <span className='grad-year' key={text}>
+                        <b className='secondary'>{text}</b>
+                        {i < 3 && ', '}
+                        {i === 2 && ' and '}
+                      </span>
+                    ))}
+                  </p>
+                  <p className='grad-years'>
+                    Graduating classes of{' '}
+                    {gradYears.map((y, i) => (
+                      <span className='grad-year' key={y}>
+                        <b className='secondary'>{y}</b>
+                        {i < gradYears.length - 1 && ', '}
+                        {i === gradYears.length - 2 && ' and '}
+                      </span>
+                    ))}
+                  </p>
+                </div>
                 {/* Common meeting time */}
                 {/* <p className='dynamic-txt'>
                   Classes meet <b className='secondary'> three hours</b> a day,
                   <b className='secondary'> Monday</b> through <b className='secondary'>Friday</b>.
                 </p> */}
                 <p className='dynamic-txt'>
-                  {highSchoolApplicationDetails.mainSeason} classes start the week of{' '}
-                  <b className='secondary'>{highSchoolApplicationDetails.startWeek}</b> and end the
-                  week of <b className='secondary'>{highSchoolApplicationDetails.endWeek}</b>.
+                  {`All ${mainSeason} classes start on `}
+                  <b className='secondary'>{startWeek}</b>
+                  {' and run through '}
+                  <b className='secondary'>{endWeek}</b>.
                 </p>
               </div>
               <Link
@@ -113,7 +135,12 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
                 <div className='left-col'>
                   <div className='hs-program-overview'>
                     <p>
-                      {`This ${highSchoolApplicationDetails.mainSeason}, we’re offering after-school courses, with in-person and virtual options. You can enroll in one or the other- there is no hybrid option. If you're able to arrange for reliable transportation to our learning center in the Marigny, we recommend in-person classes. We have a great lab with brand new equipment and an awesome staff to get you started on your coding journey. You'll also meet other students from a wide range of schools and backgrounds!`}
+                      {/* After School Courses [Spring/Fall/Winter] */}
+                      {/* {`This ${mainSeason}, we're offering after-school courses, with in-person and virtual options. You can enroll in one or the other- there is no hybrid option. If you're able to arrange for reliable transportation to our learning center in the Marigny, we recommend in-person classes. We have a great lab with brand new equipment and an awesome staff to get you started on your coding journey. You'll also meet other students from a wide range of schools and backgrounds!`} */}
+                    </p>
+                    <p>
+                      {/* Summer Camp [Summer] */}
+                      {`This ${mainSeason}, we're offering half day summer coding camps, with in-person and virtual options. You can enroll in one or the other- there is no hybrid option. If you're able to arrange for reliable transportation to our learning center in the Marigny, we recommend in-person classes. We have a great lab with brand new equipment and an awesome staff to get you started on your coding journey. You'll also meet other students from a wide range of schools and backgrounds!`}
                     </p>
                     <br />
 
@@ -164,7 +191,7 @@ const HighschoolSignup: NextPage<HighschoolSignupProps> = ({ courses }) => {
             </PlainCard>
             <div className='program-time-details'>
               <h2 className='dynamic-h2'>
-                <b>{highSchoolApplicationDetails.mainSeason} Course Schedule:</b>
+                <b>{mainSeason} Course Schedule:</b>
               </h2>
               <div className='course-title'>
                 <b className='primary-secondary'>Fundamentals of HTML, CSS, and Javascript</b>
@@ -292,6 +319,27 @@ const HighschoolSignupStyles = styled.div`
     }
   }
 
+  .header-grad-years {
+    display: flex;
+    flex-flow: column;
+    gap: 0;
+    margin-top: 1rem;
+    p {
+      margin: 0;
+    }
+
+    .grad-years {
+      font-size: 0.9rem;
+      margin-left: 0.1rem;
+      padding-left: 0.5rem;
+      border-left: 2px solid ${({ theme }) => theme.secondary[300]};
+      line-height: 1.25;
+    }
+    .grad-year .secondary {
+      font-weight: 500;
+      color: ${({ theme }) => theme.secondary[300]};
+    }
+  }
   .course-title {
     display: flex;
     align-items: center;
