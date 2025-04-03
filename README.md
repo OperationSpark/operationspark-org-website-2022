@@ -1,7 +1,7 @@
 <h1 align='center'>
   <a href='https://operationspark.org' target='_blank'>
     <p><b>OperationSpark.org Website</b></p>
-    <img src='public/images/opspark-banner.png' width='250px'>
+    <img src='public/images/og-banner.png' width='250px'>
   </a>
 </h1>
 
@@ -24,3 +24,7 @@
     <img src='public/images/logos/etc/vercel_banner.svg' />
   </a>
 </p>
+
+### Share links
+
+- [Facebook share link debug tools](https://developers.facebook.com/tools/debug/?q=https%3A%2F%2Fwww.operationspark.org%2FgetInvolved%2Fdonate)
