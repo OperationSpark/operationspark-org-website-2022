@@ -1,0 +1,85 @@
+{
+  "title": "Dev Shop",
+  "subtitle": "We build quality software",
+  "about": "Operation Spark is a software engineering school, also known as a code school. We teach people how to think like software engineers and succeed inborn and raised in New Orleans. Through an immensely immersive learning today's tech industry. Our program is adopted from San Francisco, bringing the Harvard of Code Schools and their Silicon Valley-tested curriculum to people in New Orleans. And it over-prepares our graduates for careers in software development. In fact, _**over 100 companies**_ have hired our grads, including GE, PayPal, Nike, The New York Times, LinkedIn, DXC, and Entergy, just to name a few.",
+  "skills": {
+    "title": "Skillset & Performance of an Immersion Grad",
+    "sections": [
+      {
+        "header": "We want our graduates to be overly prepared",
+        "text": "Our Immersion program is in-depth, rigorous and demanding. In studying 6 days a week, 11 hours a day for4 months, graduates over-train for the job. Imagine training for the Olympics of software development, and you've correctly understood the Immersion experience."
+      },
+      {
+        "header": "Learn the tools of the trade",
+        "text": "The Immersion program is modeled on the typical working environment of a software company. In the first 6 weeks of Immersion, students must complete Sprints, each addressing different concepts and technologies."
+      },
+      {
+        "header": "Working with the latest technologies",
+        "text": "Sprints provide a deep working knowledge of the technology being introduced.",
+        "grid": [
+          "Data Structures",
+          "Classic Algorithms",
+          "Time Complexity",
+          "Relational Databases",
+          "Document Databases",
+          "RESTful API",
+          "Web servers (Node.js/express.js",
+          "Authentication + Authorization",
+          "Security",
+          "Micro Services",
+          "Cloud Deployment",
+          "Test Driven Development (TDD)",
+          "Continuous Integration (CI)",
+          "Continuous Deployment (CD)",
+          "HTML",
+          "CSS",
+          "UI/UX Design Patterns",
+          "JavaScript",
+          "Angular.JS",
+          "Angular / TypeScript",
+          "React",
+          "React Native",
+          "Ionic / Cordova",
+          "D3",
+          "Material UI",
+          "Bootstrap",
+          "Mobile Development"
+        ]
+      }
+    ]
+  },
+  "contractToHire": {
+    "title": "How Can Operation Spark Help My Company",
+    "subtitle": "Contract to Hire or Our Dev Shop",
+    "sections": [
+      {
+        "header": "Contract to Hire",
+        "text": "Do you need to quickly dial-up a capable software team? Working with Operation Spark's Contract-to-Hire program, Operation Spark will provide and manage the talent, and after 3 months, once you are sure your project has legs, you may hire our contractors as full-time employees.  This is sometimes called a temp-to-perm program and can help your company try-before-you-buy.Let us talk to you about resources need and our hourly rate."
+      },
+      {
+        "header": "Our Dev Shop - Hire Us",
+        "text": "Operation Spark writes software of any kind, including video games, so you can hire us to build and maintain your project.  Even better - we cost an uncompromising fraction of the going market rates! Our past client projects range in complexity",
+        "grid": [
+          "Two-year project for the USDA",
+          "Logistics applications for the shipping industry",
+          "French Quarter Fest mobile app"
+        ],
+        "tagline": "_**We can design, build, deploy, and maintain pretty much anything!**_"
+      },
+      {
+        "header": "Scale your workforce as needed with our flexible hiring programs",
+        "text": "Companies can elect to hire graduates directly, work with us on our contractor-to-hire model, or bring on remote team members as needed, and we'll house and support them. Having access to an immediate and solid talent pipeline also reduces hiring costs."
+      },
+      {
+        "header": "Partner with Operation Spark for the following benefits to your company",
+        "list": [
+          "Easy, cost-effective way to acquire high quality talent",
+          "Increase the diversity of your workforce",
+          "Access to solid talent pipeline reduces hiring costs",
+          "Great public relations opportunity",
+          "Scale your talent as needed with our flexible hiring programs"
+        ]
+      }
+    ]
+  }
+}
