@@ -33,6 +33,11 @@ const BonusBar = ({ children }: { children?: ReactNode }) => {
   const isHsApplyView = checkIsPath('/programs/highschool/apply');
   const isHsOrInfoView = checkIsPath('highschool', '/programs/workforce/infoSession');
   const isHsActive = !isHsApplyView && isHsFormActive();
+  const isDevShop = checkIsPath('/devShop');
+
+  if (isDevShop) {
+    return null;
+  }
 
   return (
     <BonusBarStyles className='bonus-bar'>
