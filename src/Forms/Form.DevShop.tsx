@@ -122,7 +122,8 @@ const DevShopForm: FC<DevShopFormProps> = ({ onCancel, onSuccess }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formErrors, setFormErrors] = useState<Partial<Record<DevShopFormKeys, string>>>({});
 
-  const validateForm = (formValues: DevShopFormInputs = form) => {};
+  // TODO: Implement form validation
+  // const validateForm = (formValues: DevShopFormInputs = form) => {};
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
@@ -131,6 +132,8 @@ const DevShopForm: FC<DevShopFormProps> = ({ onCancel, onSuccess }) => {
 
     setIsSubmitting(false);
     onSuccess?.(form);
+    setForm(defaultFormInputs);
+    setFormErrors({});
   };
 
   return (
