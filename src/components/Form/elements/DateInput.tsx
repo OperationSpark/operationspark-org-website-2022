@@ -1,13 +1,13 @@
-import { getNumsOnly, parseDate } from '../helpers';
-import Input, { TextInputProps } from './Input';
+import { toDayJs } from '@this/src/helpers/time';
+import TextInput, { TextInputProps } from './Input';
 
 const DateInput = ({ onChange, ...props }: TextInputProps) => {
   return (
-    <Input
+    <TextInput
       {...props}
-      type='tel' // use 'tel' to force number pad
-      onChange={(value, isValid) => onChange(parseDate(value), isValid)}
-      validator={(value) => getNumsOnly(value).length >= 8}
+      type='date' // use 'tel' to force number pad
+      onChange={(value, isValid) => onChange(toDayJs(value).format('YYYY-MM-DD'), isValid)}
+      validator={(value) => toDayJs(value).isValid()}
       restoreCursor
     />
   );
