@@ -235,7 +235,7 @@ export const layoutCss = css`
 
   .btn {
     padding: 0.35rem 1rem;
-    border-radius: 0.5rem;
+    border-radius: 0.25rem;
     font-weight: 700;
     transition: all 225ms;
   }

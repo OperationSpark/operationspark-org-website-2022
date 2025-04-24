@@ -15,6 +15,9 @@ import DevShopForm from '@this/src/Forms/Form.DevShop';
 const DevShop: NextPage<DevShopType> = ({ title, subtitle, about, skills, contractToHire }) => {
   const modalCtrl = useModal('Request Info', {
     blurBackground: true,
+    style: {
+      marginBottom: '3.25rem',
+    },
   });
 
   return (

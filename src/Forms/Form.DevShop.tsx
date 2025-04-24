@@ -1,19 +1,16 @@
 import { FC, useState } from 'react';
+import { toast } from 'react-toastify';
+import styled from 'styled-components';
+import isEmail from 'validator/lib/isEmail';
 
 import { Form } from '@this/components/Form';
-import styled from 'styled-components';
+import { DevShopFormInputs } from '@this/data/types/devShop';
+import axios from 'axios';
 import { TextArea } from '../components/Form/elements';
 import EmailInput from '../components/Form/elements/EmailInput';
 import TextInput from '../components/Form/elements/Input';
 
 type DevShopFormKeys = 'name' | 'company' | 'email' | 'description';
-
-type DevShopFormInputs = {
-  name: string;
-  company: string;
-  email: string;
-  description: string;
-};
 
 const defaultFormInputs: DevShopFormInputs = {
   name: '',
@@ -25,7 +22,7 @@ const defaultFormInputs: DevShopFormInputs = {
 type DevShopFormField = {
   name: string;
   label: string;
-  errMessage: string;
+  errMessage?: string;
   required?: boolean;
 };
 
@@ -39,8 +36,6 @@ const formFields: Record<keyof DevShopFormInputs, DevShopFormField> = {
   company: {
     name: 'company',
     label: 'Company',
-    errMessage: 'Please enter your company name',
-    required: true,
   },
   email: {
     name: 'email',
@@ -56,57 +51,180 @@ const formFields: Record<keyof DevShopFormInputs, DevShopFormField> = {
   },
 };
 
+type FormErrorState = Partial<Record<DevShopFormKeys, string>>;
+
 type DevShopFormProps = {
   onCancel?: () => void;
   onSuccess?: (form: DevShopFormInputs) => void;
 };
+
 const DevShopForm: FC<DevShopFormProps> = ({ onCancel, onSuccess }) => {
   const [form, setForm] = useState<DevShopFormInputs>(defaultFormInputs);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formErrors, setFormErrors] = useState<Partial<Record<DevShopFormKeys, string>>>({});
+  const [formErrors, setFormErrors] = useState<FormErrorState>(
+    Object.keys(formFields).reduce((acc, key) => {
+      const field = formFields[key as keyof DevShopFormInputs];
+      if (!field.required) {
+        return acc;
+      }
+      acc[key as keyof DevShopFormInputs] = field.errMessage;
+      return acc;
+    }, {} as FormErrorState),
+  );
+  const [showFormErrors, setShowFormErrors] = useState<boolean>(false);
 
-  // TODO: Implement form validation
-  // const validateForm = (formValues: DevShopFormInputs = form) => {};
+  /**
+   * @returns array of missing field names if true. null if all fields are valid
+   */
+  const validateForm = (formValues: DevShopFormInputs = form) => {
+    const errors: FormErrorState = {};
+    Object.keys(formFields).forEach((key) => {
+      const field = formFields[key as keyof DevShopFormInputs];
+      if (!field.required) {
+        return;
+      }
+
+      const val = (formValues[key as keyof DevShopFormInputs] || '').trim();
+
+      if (!val) {
+        errors[key as keyof DevShopFormInputs] = field.errMessage;
+      }
+
+      if (field.name === 'email' && !isEmail(val)) {
+        errors[key as keyof DevShopFormInputs] = field.errMessage;
+
+        return;
+      }
+    });
+    setFormErrors(errors);
+    const errs = Object.keys(errors);
+    return errs.length ? errs : null;
+  };
+
+  const isFieldError = (fieldName: keyof DevShopFormInputs) => {
+    if (!showFormErrors) {
+      return false;
+    }
+    return !!formErrors[fieldName];
+  };
+  const isFieldValid = (fieldName: keyof DevShopFormInputs) => {
+    return !formErrors[fieldName];
+  };
+
+  const fieldErrMessage = (fieldName: keyof DevShopFormInputs) => {
+    if (!showFormErrors || !formErrors[fieldName]) {
+      return;
+    }
+    return formErrors[fieldName];
+  };
+
+  const handleChange = (fieldName: keyof DevShopFormInputs) => {
+    return (value: string, isValid: boolean) => {
+      const newForm = { ...form, [fieldName]: value };
+
+      setForm(newForm);
+      validateForm(newForm);
+
+      if (fieldName === 'email' && !isValid) {
+        return;
+      }
+    };
+  };
 
   const handleSubmit = async () => {
+    const missingFields = validateForm();
+    if (missingFields) {
+      setShowFormErrors(true);
+
+      toast.error(
+        <ToastErr>
+          Missing required fields:
+          <br />
+          {missingFields.map((v, i) => (
+            <span key={v}>
+              <code>{v}</code>
+              {i < missingFields.length - 1 ? ', ' : ''}
+            </span>
+          ))}
+        </ToastErr>,
+        {
+          toastId: 'dev-shop-form-error',
+        },
+      );
+      return;
+    }
+
+    setShowFormErrors(false);
     setIsSubmitting(true);
-
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    setIsSubmitting(false);
-    onSuccess?.(form);
-    setForm(defaultFormInputs);
     setFormErrors({});
+
+    try {
+      const { data } = await axios.post('/api/contact/devShop', form);
+      onSuccess?.(form);
+      setForm(defaultFormInputs);
+      console.log('Form submitted successfully', data);
+    } catch (err) {
+      console.error('Error submitting form', err);
+      toast.error('There was an error submitting the form. Please try again later.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
-    <DevShopFormStyles onSubmit={handleSubmit}>
+    <DevShopFormStyles
+      onSubmit={handleSubmit}
+      onEnter={(e) => {
+        const target = e.target as HTMLInputElement;
+        const isInput = target.tagName === 'INPUT';
+        if (isInput) {
+          e.preventDefault();
+        }
+      }}
+    >
       <h3 className='dynamic-h3 fw-900 orm-title text-center w-100'>Contact Our Dev Shop</h3>
       <hr className='w-100' />
       <TextInput
         {...formFields.name}
+        isErr={isFieldError('name')}
+        isValid={isFieldValid('name')}
         value={form.name}
-        onChange={(name) => setForm({ ...form, name })}
+        onChange={handleChange('name')}
       />
+
+      <FormErrorMessage message={fieldErrMessage('name')} />
+
       <TextInput
         {...formFields.company}
+        isErr={isFieldError('company')}
+        isValid={!!form.company}
         value={form.company}
-        onChange={(company) => setForm({ ...form, company })}
+        onChange={handleChange('company')}
       />
+
+      <FormErrorMessage message={fieldErrMessage('company')} />
 
       <EmailInput
         {...formFields.email}
+        isErr={isFieldError('email')}
+        isValid={isFieldValid('email')}
         value={form.email}
-        onChange={(email) => setForm({ ...form, email })}
+        onChange={handleChange('email')}
       />
+
+      <FormErrorMessage message={fieldErrMessage('email')} />
 
       <TextArea
         {...formFields.description}
+        isErr={isFieldError('description')}
+        isValid={isFieldValid('description')}
         value={form.description}
-        onChange={(description) => setForm({ ...form, description })}
+        onChange={handleChange('description')}
         minHeight='100px'
         autosize
       />
+
+      <FormErrorMessage message={fieldErrMessage('description')} />
 
       <div className='form-footer'>
         {onCancel && (
@@ -125,6 +243,7 @@ const DevShopForm: FC<DevShopFormProps> = ({ onCancel, onSuccess }) => {
 export default DevShopForm;
 
 const DevShopFormStyles = styled(Form)`
+  height: 100%;
   margin-bottom: 3.5rem;
 
   .form-footer {
@@ -140,5 +259,41 @@ const DevShopFormStyles = styled(Form)`
     bottom: 0;
     z-index: 100;
     background: ${({ theme }) => theme.bg};
+  }
+`;
+
+const ToastErr = styled.div`
+  code {
+    color: ${({ theme }) => theme.rgb('red')};
+    font-weight: 700;
+    box-shadow: 0 0 0 1px inset ${({ theme }) => theme.rgb('red', 0.25)};
+    padding: 0 0.25rem;
+    background: ${({ theme }) => theme.rgb('red', 0.1)};
+    border-radius: 0.25rem;
+    line-height: 1;
+  }
+`;
+
+const FormErrorMessage = ({ message }: { message?: string }) => {
+  if (!message) {
+    return null;
+  }
+
+  return (
+    <FormErrorMessageStyles>
+      <span className='error-message'>{message}</span>
+    </FormErrorMessageStyles>
+  );
+};
+const FormErrorMessageStyles = styled.div`
+  margin-bottom: 1rem;
+  margin-top: -0.5rem;
+
+  .error-message {
+    color: ${({ theme }) => theme.rgb('red')};
+    border-left: 2px solid ${({ theme }) => theme.rgb('red', 0.5)};
+    padding-left: 0.5rem;
+    margin-left: 0.5rem;
+    font-size: 0.8rem;
   }
 `;

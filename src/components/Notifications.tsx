@@ -1,5 +1,5 @@
-import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useTheme } from 'styled-components';
 
 const Notifications: React.FC = () => {
