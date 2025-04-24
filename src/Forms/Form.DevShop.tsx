@@ -159,10 +159,10 @@ const DevShopForm: FC<DevShopFormProps> = ({ onCancel, onSuccess }) => {
     setFormErrors({});
 
     try {
-      const { data } = await axios.post('/api/contact/devShop', form);
+      await axios.post('/api/contact/devShop', form);
       onSuccess?.(form);
       setForm(defaultFormInputs);
-      console.log('Form submitted successfully', data);
+      toast.success('Thank you for your message! We will get back to you soon.');
     } catch (err) {
       console.error('Error submitting form', err);
       toast.error('There was an error submitting the form. Please try again later.');
