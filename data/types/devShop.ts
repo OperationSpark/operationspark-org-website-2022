@@ -22,3 +22,10 @@ export type DevShopType = {
     }[];
   };
 };
+
+export type DevShopFormInputs = {
+  name: string;
+  company: string;
+  email: string;
+  description: string;
+};
