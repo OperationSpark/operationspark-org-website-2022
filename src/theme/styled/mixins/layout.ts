@@ -245,8 +245,9 @@ export const layoutCss = css`
     color: ${({ theme }) => theme.rgb('fg', 1)};
 
     box-shadow: ${({ theme }) => {
-      const c1 = theme.rgb('fg', 0.5, -10);
-      const c2 = theme.rgb('fg', 0.25, -20);
+      const lm = theme.isLightMode;
+      const c1 = theme.rgb('fg', 0.5, lm ? 0 : -10);
+      const c2 = theme.rgb('fg', 0.25, lm ? -5 : -20);
       return `
       0 0 0.1rem 2px ${c1},
       0 0 0.5rem 1px inset ${c2}

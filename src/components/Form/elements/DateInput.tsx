@@ -5,10 +5,10 @@ const DateInput = ({ onChange, ...props }: TextInputProps) => {
   return (
     <TextInput
       {...props}
-      type='date' // use 'tel' to force number pad
+      inputStyle={{ ...props.inputStyle, paddingRight: 0 }}
+      type='date'
       onChange={(value, isValid) => onChange(toDayJs(value).format('YYYY-MM-DD'), isValid)}
       validator={(value) => toDayJs(value).isValid()}
-      restoreCursor
     />
   );
 };

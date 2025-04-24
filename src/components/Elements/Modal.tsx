@@ -370,5 +370,9 @@ const ModalStyles = styled.main`
 `;
 
 const ModalContent = styled(motion.div)`
+  ::-webkit-scrollbar,
+  * ::-webkit-scrollbar {
+    width: 0.4rem;
+  }
   border: 1px solid ${({ theme }) => theme.rgb('fg', 0.25, -2)};
 `;

@@ -27,6 +27,7 @@ export interface TextInputProps {
   isValid?: boolean;
   animation?: MotionProps;
   style?: CSSProperties;
+  inputStyle?: CSSProperties;
   onEnter?: (e: KeyboardEvent<HTMLInputElement>) => void;
   onTab?: (e: KeyboardEvent<HTMLInputElement>) => void;
   restoreCursor?: boolean;
@@ -51,6 +52,7 @@ const TextInput = ({
   onTab = () => {},
   animation = {},
   style = {},
+  inputStyle = {},
   restoreCursor = false,
   testId,
   min,
@@ -120,6 +122,7 @@ const TextInput = ({
         min={min}
         max={max}
         step={step}
+        style={inputStyle}
       />
       <ClearButton
         show={!!value}

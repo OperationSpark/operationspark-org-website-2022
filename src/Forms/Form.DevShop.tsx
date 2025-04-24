@@ -2,33 +2,17 @@ import { FC, useState } from 'react';
 
 import { Form } from '@this/components/Form';
 import styled from 'styled-components';
-import { Select, TextArea } from '../components/Form/elements';
-import DateInput from '../components/Form/elements/DateInput';
+import { TextArea } from '../components/Form/elements';
 import EmailInput from '../components/Form/elements/EmailInput';
 import TextInput from '../components/Form/elements/Input';
-import NumberInput from '../components/Form/elements/NumberInput';
-import { capFirstLetter } from '../components/Form/helpers';
 
-type DevShopFormKeys =
-  | 'name'
-  | 'company'
-  | 'email'
-  | 'description'
-  | 'appType'
-  | 'newApp'
-  | 'budget'
-  | 'startBy';
+type DevShopFormKeys = 'name' | 'company' | 'email' | 'description';
 
 type DevShopFormInputs = {
   name: string;
   company: string;
   email: string;
   description: string;
-  appType: '' | 'mobile' | 'web' | 'other';
-  appTypeOther: string;
-  newApp: string;
-  budget: string;
-  startBy: string;
 };
 
 const defaultFormInputs: DevShopFormInputs = {
@@ -36,11 +20,6 @@ const defaultFormInputs: DevShopFormInputs = {
   company: '',
   email: '',
   description: '',
-  appType: '',
-  appTypeOther: '',
-  newApp: '',
-  budget: '',
-  startBy: '',
 };
 
 type DevShopFormField = {
@@ -48,10 +27,6 @@ type DevShopFormField = {
   label: string;
   errMessage: string;
   required?: boolean;
-  dependsOn?: {
-    field: string;
-    value: string;
-  };
 };
 
 const formFields: Record<keyof DevShopFormInputs, DevShopFormField> = {
@@ -78,38 +53,6 @@ const formFields: Record<keyof DevShopFormInputs, DevShopFormField> = {
     label: 'Project Description',
     errMessage: 'Please enter a description of your project',
     required: true,
-  },
-  appType: {
-    name: 'appType',
-    label: 'App Type',
-    errMessage: 'Please select an app type',
-    required: true,
-  },
-  appTypeOther: {
-    name: 'appTypeOther',
-    label: 'What is the app type?',
-    errMessage: 'Please enter the app type',
-    required: true,
-    dependsOn: {
-      field: 'appType',
-      value: 'other',
-    },
-  },
-  newApp: {
-    name: 'newApp',
-    label: 'New or Existing App',
-    errMessage: 'Is this a new or existing application',
-    required: true,
-  },
-  budget: {
-    name: 'budget',
-    label: 'Budget',
-    errMessage: 'Budget is required',
-  },
-  startBy: {
-    name: 'startBy',
-    label: 'Start By',
-    errMessage: 'Start date is required',
   },
 };
 
@@ -157,32 +100,6 @@ const DevShopForm: FC<DevShopFormProps> = ({ onCancel, onSuccess }) => {
         onChange={(email) => setForm({ ...form, email })}
       />
 
-      <hr />
-
-      <Select
-        {...formFields.appType}
-        animate={false}
-        options={[
-          { name: 'Mobile', value: 'mobile' },
-          { name: 'Web', value: 'web' },
-          { name: 'Other', value: 'other' },
-        ]}
-        option={{ name: capFirstLetter(form.appType), value: form.appType }}
-        onChange={(appType) =>
-          setForm({ ...form, appType: appType.option?.value as DevShopFormInputs['appType'] })
-        }
-        isErr={!!formErrors.appType}
-        isValid={!!form.appType}
-      />
-
-      {form.appType === 'other' && (
-        <TextInput
-          {...formFields.appTypeOther}
-          value={form.appTypeOther}
-          onChange={(newApp) => setForm({ ...form, newApp })}
-        />
-      )}
-
       <TextArea
         {...formFields.description}
         value={form.description}
@@ -190,39 +107,6 @@ const DevShopForm: FC<DevShopFormProps> = ({ onCancel, onSuccess }) => {
         minHeight='100px'
         autosize
       />
-
-      <Select
-        {...formFields.newApp}
-        animate={false}
-        options={[
-          { name: 'New', value: 'new' },
-          { name: 'Existing', value: 'existing' },
-        ]}
-        option={{ name: capFirstLetter(form.newApp), value: form.newApp }}
-        onChange={(newApp) =>
-          setForm({ ...form, newApp: newApp.option?.value as DevShopFormInputs['newApp'] })
-        }
-        isErr={!!formErrors.newApp}
-        isValid={!!form.newApp}
-      />
-
-      <NumberInput
-        {...formFields.budget}
-        value={form.budget}
-        onChange={(budget) => setForm({ ...form, budget })}
-        placeholder='Budget'
-        min={5000}
-        step={100}
-      />
-
-      <DateInput
-        {...formFields.startBy}
-        value={form.startBy}
-        onChange={(startBy) => setForm({ ...form, startBy })}
-        placeholder='Start By'
-      />
-
-      <hr />
 
       <div className='form-footer'>
         {onCancel && (
