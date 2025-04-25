@@ -37,24 +37,15 @@ const handleContactDevShop: ReqHandler<{}, DevShopFormInputs> = async (req, res)
   const emailDetails = getDevShopConfirmEmailDetails(valueMap);
 
   try {
-    await addDevShopContactRowToSheet('Dev Shop Inquiries', { header, row });
+    await addDevShopContactRowToSheet('Dev Shop Inquiries', {
+      header,
+      row,
+    });
 
     // Send the response. don't wait for the email or slack message to finish
     res.status(201).end();
-
-    ////////////////////////////////////////////////////////////
-    // Complete non-blocking tasks after sending the response //
-    ////////////////////////////////////////////////////////////
-
-    // Send the confirmation email to the user
-    await sendDevShopConfirmEmail(valueMap.email, emailDetails);
-
-    await sendDevShopInquirySlackMessage(valueMap);
-
-    // Status sent after details added to spreadsheet above
-    return;
+    // Continue with the email and slack message below
   } catch (error) {
-    // sendDevShopConfirmEmail and sendDevShopInquirySlackMessage will never throw. We only want it to fail if the sheet fails
     console.error('Error handling contact form:', error);
 
     Sentry.captureException(error, {
@@ -66,6 +57,42 @@ const handleContactDevShop: ReqHandler<{}, DevShopFormInputs> = async (req, res)
     });
 
     res.status(500).end();
+    // Don't continue with the email and slack message if the sheet fails
+    return;
+  }
+
+  ////////////////////////////////////////////////////////////
+  // Complete non-blocking tasks after sending the response //
+  ////////////////////////////////////////////////////////////
+
+  try {
+    // Send the confirmation email to the user
+    await sendDevShopConfirmEmail(valueMap.email, emailDetails);
+  } catch (error) {
+    console.error('Error sending confirmation email:', error);
+
+    Sentry.captureException(error, {
+      tags: { type: 'dev-shop-inquiry' },
+      extra: {
+        message: 'Error sending confirmation email',
+        formValues,
+      },
+    });
+  }
+
+  try {
+    // Send the inquiry to Slack
+    await sendDevShopInquirySlackMessage(valueMap);
+  } catch (error) {
+    console.error('Error sending Slack message:', error);
+
+    Sentry.captureException(error, {
+      tags: { type: 'dev-shop-inquiry' },
+      extra: {
+        message: 'Error sending Slack message',
+        formValues,
+      },
+    });
   }
 };
 

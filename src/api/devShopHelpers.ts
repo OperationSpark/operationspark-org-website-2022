@@ -1,4 +1,3 @@
-import * as Sentry from '@sentry/nextjs';
 import formData from 'form-data';
 import Mailgun from 'mailgun.js';
 
@@ -106,41 +105,31 @@ export const getDevShopConfirmEmailDetails = (values: DevShopFormInputs): emailD
 };
 
 /**
- * Sends a confirmation email to the user after they submit the Dev Shop contact form. Does not fail if the email fails.
+ * Sends a confirmation email to the user after they submit the Dev Shop contact form.
  * @param toEmail - The email address to send the confirmation email to
  * @param emailDetails - label, value, and plainValue for each field
- * @throws {never} - Never throws. Errors are logged to the console and sent to sentry
  */
 export const sendDevShopConfirmEmail = async (toEmail: string, emailDetails: emailDetail[]) => {
   const plainTextEmail = `Thank you contacting Operation Spark's Dev Shop.  We will be in touch soon! \n\nDetails:\n${emailDetails
     .map((detail) => `${detail.label}: ${detail.value}`)
     .join('\n')}`;
+
   const mgVariables: MgVariables = {
     title: 'Operation Spark | Dev Shop Inquiry Confirmation',
     subject: 'Dev Shop Inquiry Confirmation',
     details: emailDetails,
     body: `Thank you contacting Operation Spark's Dev Shop.  We will be in touch soon!`,
   };
-  try {
-    // Send email
-    await mg.messages.create(MG_DOMAIN, {
-      from: 'Operation Spark <noreply@operationspark.org>',
-      to: toEmail,
-      subject: mgVariables.subject,
-      template: 'dev-shop-contact-confirmation',
-      text: plainTextEmail,
-      'h:X-Mailgun-Variables': JSON.stringify(mgVariables),
-    });
-  } catch (error) {
-    // Don't fail for email
-    console.error('Error sending email:', error);
-    Sentry.captureException(error, {
-      tags: {
-        type: 'dev-shop-inquiry',
-      },
-      extra: { message: 'Error sending email via mailgun', emailDetails },
-    });
-  }
+
+  // Send email
+  await mg.messages.create(MG_DOMAIN, {
+    from: 'Operation Spark <noreply@operationspark.org>',
+    to: toEmail,
+    subject: mgVariables.subject,
+    template: 'dev-shop-contact-confirmation',
+    text: plainTextEmail,
+    'h:X-Mailgun-Variables': JSON.stringify(mgVariables),
+  });
 };
 
 /**
@@ -174,9 +163,8 @@ export const addDevShopContactRowToSheet = async (
 };
 
 /**
- * Sends a Slack message to the Dev Shop contact channel with the inquiry details. Does not fail if the message fails.
+ * Sends a Slack message to the Dev Shop contact channel with the inquiry details.
  * @param valueMap - The values from the form
- * @throws {never} - Never throws. Errors are logged to the console and sent to sentry
  */
 export const sendDevShopInquirySlackMessage = async (valueMap: DevShopFormInputs) => {
   const slackMessage = `\
@@ -185,19 +173,10 @@ export const sendDevShopInquirySlackMessage = async (valueMap: DevShopFormInputs
   \n*Company:* ${valueMap.company}\
   \n*Description:*\n> ${valueMap.description.split('\n').join('\n> ')}`;
 
-  try {
-    const slackClient = connectSlack();
-    await slackClient.chat.postMessage({
-      channel: DEV_SHOP_CONTACT_SLACK_CHANNEL_ID,
-      text: slackMessage,
-      blocks: [{ type: 'section', text: { type: 'mrkdwn', text: slackMessage } }],
-    });
-  } catch (error) {
-    // Don't fail for slack
-    console.error('Error sending Slack message:', error);
-    Sentry.captureException(error, {
-      tags: { type: 'dev-shop-inquiry' },
-      extra: { message: 'Error sending Slack message', valueMap },
-    });
-  }
+  const slackClient = connectSlack();
+  await slackClient.chat.postMessage({
+    channel: DEV_SHOP_CONTACT_SLACK_CHANNEL_ID,
+    text: slackMessage,
+    blocks: [{ type: 'section', text: { type: 'mrkdwn', text: slackMessage } }],
+  });
 };
