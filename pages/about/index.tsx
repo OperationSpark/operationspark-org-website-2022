@@ -39,7 +39,7 @@ const About: NextPage<IAbout> = ({ mission, team, history, awards }) => {
                 height: '100%',
               }}
             >
-              <Content>
+              <Content className='header-content-card'>
                 <h1 className='dynamic-xl text-shadow'>Our Mission</h1>
                 <p className='dynamic-txt'>{mission.description}</p>
               </Content>

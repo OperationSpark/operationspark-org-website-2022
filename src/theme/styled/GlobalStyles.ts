@@ -301,6 +301,15 @@ const GlobalStyleCss = css`
     --toastify-z-index: 9999999;
   }
 
+  .header-content-card {
+    background: ${({ theme }) => (theme.isLightMode ? theme.alpha.fg50 : theme.alpha.bg50)};
+    width: fit-content;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 0.5rem;
+    backdrop-filter: blur(8px);
+    color: ${({ theme }) => theme.white};
+  }
   @media screen and (max-width: 768px) {
     .dynamic-txt {
       font-size: 1rem;

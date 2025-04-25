@@ -43,9 +43,6 @@ const BgImg = ({ src, height = '40rem', className, children, overlay }: BgImageP
           objectFit='cover'
           objectPosition={overlay?.position ?? 'top center'}
           placeholder='blur'
-          style={{
-            opacity: 0.5,
-          }}
           blurDataURL={rgbDataURL(134, 0, 241)}
           loading={inView ? 'eager' : 'lazy'}
           alt=''

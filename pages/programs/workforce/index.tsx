@@ -122,8 +122,10 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
         <BgImg src='/images/display/laptop-code.webp' height='35rem'>
           <Section className='programs-header'>
             <Content className='programs-header-content'>
-              <h1 className='dynamic-xl secondary'>{header.title}</h1>
-              <h2 className='dynamic-h3'>{header.description}</h2>
+              <div className='header-content-card'>
+                <h1 className='dynamic-xl secondary'>{header.title}</h1>
+                <h2 className='dynamic-h3'>{header.description}</h2>
+              </div>
             </Content>
           </Section>
         </BgImg>
@@ -251,14 +253,8 @@ export const AdultProgramsStyles = styled.div`
       display: flex;
       flex-flow: column;
       justify-content: flex-end;
-
-      h1.dynamic-xl {
-        padding-bottom: 1rem;
-      }
-      h2.dynamic-h3 {
-        font-weight: 700;
-        color: ${({ theme }) => theme.white};
-      }
+      align-items: center;
+      text-align: center;
     }
   }
   .program-overview {
