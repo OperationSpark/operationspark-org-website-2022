@@ -6,6 +6,7 @@ import isEmail from 'validator/lib/isEmail';
 import { Form } from '@this/components/Form';
 import { DevShopFormInputs } from '@this/data/types/devShop';
 import axios from 'axios';
+import Spinner from '../components/Elements/Spinner';
 import { TextArea } from '../components/Form/elements';
 import EmailInput from '../components/Form/elements/EmailInput';
 import TextInput from '../components/Form/elements/Input';
@@ -120,6 +121,9 @@ const DevShopForm: FC<DevShopFormProps> = ({ onCancel, onSuccess }) => {
 
   const handleChange = (fieldName: keyof DevShopFormInputs) => {
     return (value: string, isValid: boolean) => {
+      if (isSubmitting) {
+        return;
+      }
       const newForm = { ...form, [fieldName]: value };
 
       setForm(newForm);
@@ -182,6 +186,12 @@ const DevShopForm: FC<DevShopFormProps> = ({ onCancel, onSuccess }) => {
         }
       }}
     >
+      {isSubmitting && (
+        <div className='spinner-wrapper'>
+          <Spinner text='Sending Message' />
+        </div>
+      )}
+
       <h3 className='dynamic-h3 fw-900 orm-title text-center w-100'>Contact Our Dev Shop</h3>
       <hr className='w-100' />
       <TextInput
@@ -245,6 +255,19 @@ export default DevShopForm;
 const DevShopFormStyles = styled(Form)`
   height: 100%;
   margin-bottom: 3.5rem;
+  user-select: none;
+  .spinner-wrapper {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: ${({ theme }) => theme.rgb('bg', 0.5)};
+    z-index: 1000;
+    backdrop-filter: blur(0.1rem);
+  }
 
   .form-footer {
     height: 3.25rem;

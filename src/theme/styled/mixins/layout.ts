@@ -284,6 +284,13 @@ export const layoutCss = css`
       box-shadow: 0 0 0.1rem 2px ${({ theme }) => theme.rgb('magenta', 0.5, -10)},
         0 0 0.5rem 1px ${({ theme }) => theme.rgb('magenta', 0.25, -20)};
     }
+
+    &:disabled {
+      background: ${({ theme }) => theme.rgb('bg', 0.2, 2)};
+      color: ${({ theme }) => theme.rgb('fg', 0.5)};
+      box-shadow: none;
+      pointer-events: none;
+    }
   }
 
   .btn.btn-secondary {
@@ -328,6 +335,13 @@ export const layoutCss = css`
       outline: 2px solid ${({ theme }) => theme.rgb('secondary', 1, -2)};
       box-shadow: 0 0 0.1rem 2px ${({ theme }) => theme.rgb('secondary', 0.5, -10)},
         0 0 0.5rem 1px ${({ theme }) => theme.rgb('secondary', 0.25, -20)};
+    }
+
+    &:disabled {
+      background: ${({ theme }) => theme.rgb('secondary', 0.2, 2)};
+      color: ${({ theme }) => theme.rgb('fg', 0.5)};
+      box-shadow: none;
+      pointer-events: none;
     }
   }
 `;
