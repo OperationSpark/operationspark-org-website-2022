@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/nextjs';
 import { capitalize } from 'lodash';
 
 import { DevShopFormInputs } from '@this/data/types/devShop';
@@ -55,6 +56,15 @@ const handleContactDevShop: ReqHandler<{}, DevShopFormInputs> = async (req, res)
   } catch (error) {
     // sendDevShopConfirmEmail and sendDevShopInquirySlackMessage will never throw. We only want it to fail if the sheet fails
     console.error('Error handling contact form:', error);
+
+    Sentry.captureException(error, {
+      tags: { type: 'dev-shop-inquiry' },
+      extra: {
+        message: 'Error adding dev shop contact to sheet',
+        formValues,
+      },
+    });
+
     res.status(500).end();
   }
 };

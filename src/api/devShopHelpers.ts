@@ -1,6 +1,8 @@
-import { DevShopFormInputs } from '@this/data/types/devShop';
+import * as Sentry from '@sentry/nextjs';
 import formData from 'form-data';
 import Mailgun from 'mailgun.js';
+
+import { DevShopFormInputs } from '@this/data/types/devShop';
 import { addRow, createSpreadsheetTab, getSheets } from './googleSheets';
 import { connectSlack } from './slack';
 
@@ -103,6 +105,12 @@ export const getDevShopConfirmEmailDetails = (values: DevShopFormInputs): emailD
   ];
 };
 
+/**
+ * Sends a confirmation email to the user after they submit the Dev Shop contact form. Does not fail if the email fails.
+ * @param toEmail - The email address to send the confirmation email to
+ * @param emailDetails - label, value, and plainValue for each field
+ * @throws {never} - Never throws. Errors are logged to the console and sent to sentry
+ */
 export const sendDevShopConfirmEmail = async (toEmail: string, emailDetails: emailDetail[]) => {
   const plainTextEmail = `Thank you contacting Operation Spark's Dev Shop.  We will be in touch soon! \n\nDetails:\n${emailDetails
     .map((detail) => `${detail.label}: ${detail.value}`)
@@ -126,9 +134,20 @@ export const sendDevShopConfirmEmail = async (toEmail: string, emailDetails: ema
   } catch (error) {
     // Don't fail for email
     console.error('Error sending email:', error);
+    Sentry.captureException(error, {
+      tags: {
+        type: 'dev-shop-inquiry',
+      },
+      extra: { message: 'Error sending email via mailgun', emailDetails },
+    });
   }
 };
 
+/**
+ * Adds a new row to the Dev Shop inquiries spreadsheet. Creates the tab if it doesn't exist.
+ * @param formName - Form name === spreadsheet tab name
+ * @param parsedSheetValues - Parsed values from the form. Should contain header and row
+ */
 export const addDevShopContactRowToSheet = async (
   formName: string,
   parsedSheetValues: Omit<ParsedSheetValues, 'valueMap'>,
@@ -154,6 +173,11 @@ export const addDevShopContactRowToSheet = async (
   });
 };
 
+/**
+ * Sends a Slack message to the Dev Shop contact channel with the inquiry details. Does not fail if the message fails.
+ * @param valueMap - The values from the form
+ * @throws {never} - Never throws. Errors are logged to the console and sent to sentry
+ */
 export const sendDevShopInquirySlackMessage = async (valueMap: DevShopFormInputs) => {
   const slackMessage = `\
   \n*${valueMap.name}* has contacted the Dev Shop!\
@@ -171,5 +195,9 @@ export const sendDevShopInquirySlackMessage = async (valueMap: DevShopFormInputs
   } catch (error) {
     // Don't fail for slack
     console.error('Error sending Slack message:', error);
+    Sentry.captureException(error, {
+      tags: { type: 'dev-shop-inquiry' },
+      extra: { message: 'Error sending Slack message', valueMap },
+    });
   }
 };
