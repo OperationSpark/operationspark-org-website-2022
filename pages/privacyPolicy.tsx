@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { Content, Main } from '@this/components/layout';
 import PlainCard from '@this/src/components/Cards/PlainCard';
 import { anchor } from '@this/src/theme/styled/mixins/anchor';
+import { backdropFilter } from '@this/src/theme/styled/mixins/filters';
+import { cardShadow } from '@this/src/theme/styled/mixins/shadows';
 
 const PrivacyPolicy: NextPage = () => {
   return (
@@ -572,7 +574,6 @@ const PrivacyPolicy: NextPage = () => {
                     </p>
                   </li>
                 </ul>
-                <hr />
               </div>
             </div>
           </div>
@@ -586,7 +587,15 @@ const PrivacyPolicyStyles = styled.div`
   --header-color: ${({ theme }) => (theme.isLightMode ? theme.primary[0] : theme.secondary[300])};
   font-size: calc(0.8rem + 0.4vw);
   color: ${({ theme }) => theme.alpha.fg};
-  /* padding: 0 2rem; */
+  padding: 0 1.5rem;
+  padding-bottom: 1rem;
+
+  ${backdropFilter({ blur: 8 })}
+  background-color: ${({ theme }) => theme.rgb('bg', 0.25, 2)} !important;
+  box-shadow: 0 0 0.5rem 0
+    ${({ theme }) =>
+      theme.isLightMode ? theme.rgb('primary.300', 0.5) : theme.rgb('secondary', 0.5)};
+  border-radius: 0.5rem;
   .header,
   h1,
   h2,
@@ -628,9 +637,10 @@ const PrivacyPolicyStyles = styled.div`
     padding: 1em;
     padding-left: 2rem;
     list-style-type: circle;
-    box-shadow: 0 0 3px ${({ theme }) => theme.primary[200]};
+    ${cardShadow}
     border-radius: 0.5rem;
     margin-bottom: 2rem;
+    background: ${({ theme }) => theme.rgb('bg', 0.25)};
   }
   li {
     p:first-child strong {
@@ -647,14 +657,6 @@ const PrivacyPolicyStyles = styled.div`
     font-family: 'Roboto', sans-serif;
 
     font-size: 1em;
-  }
-  hr {
-    width: 100%;
-    border: none;
-    height: 0.1rem;
-    border-radius: 0.05rem;
-    margin: 2rem 0;
-    box-shadow: 0 0 2px ${({ theme }) => theme.alpha.fg50};
   }
 `;
 
