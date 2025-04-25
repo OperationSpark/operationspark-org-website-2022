@@ -49,7 +49,8 @@ const GridListStyles = styled.ul`
     }
   }
 
-  &._interactive-item {
+  &._interactive-item,
+  &:has(._grid-list-item a) {
     ._grid-list-item {
       padding: 0;
 

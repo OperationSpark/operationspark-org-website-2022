@@ -17,7 +17,7 @@ export type DevShopType = {
       header: string;
       text?: string;
       tagline?: string;
-      grid?: string[];
+      grid?: { name: string; url: string }[];
       list?: string[];
     }[];
   };

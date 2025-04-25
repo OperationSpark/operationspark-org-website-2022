@@ -1,6 +1,8 @@
 import { GetStaticProps, NextPage } from 'next';
 import styled from 'styled-components';
 
+import { MdOpenInNew as NewTabIcon } from 'react-icons/md';
+
 import Content from '@this/components/layout/Content';
 import Main from '@this/components/layout/Main';
 import { DevShopType } from '@this/data/types/devShop';
@@ -91,7 +93,20 @@ const DevShop: NextPage<DevShopType> = ({ title, subtitle, about, contractToHire
 
                 {section.grid && (
                   <GridList
-                    items={section.grid}
+                    items={section.grid.map((item, i) =>
+                      item.url ? (
+                        <a
+                          className='dynamic-txt flex-center gap-2'
+                          style={{ flex: 1, height: '100%' }}
+                          href={item.url}
+                          key={`dev-shop-hire-${i}`}
+                        >
+                          {item.name} <NewTabIcon size={16} />
+                        </a>
+                      ) : (
+                        item.name
+                      ),
+                    )}
                     itemStyle={{ flex: '1 1 150px' }}
                     style={{ margin: '0 auto', width: 'fit-content' }}
                   />
