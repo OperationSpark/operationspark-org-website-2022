@@ -18,5 +18,8 @@
   ],
   "[dotenv]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "workbench.editor.customLabels.patterns": {
+    "**/index.tsx": "${dirname} (.${extname})"
   }
 }
