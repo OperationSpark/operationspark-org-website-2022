@@ -135,7 +135,7 @@ const GlobalStyleCss = css`
   p {
     font-family: 'Roboto', sans-serif;
     margin: 0;
-    line-height: 1.5;
+    line-height: 1.35;
     font-weight: 400;
   }
 

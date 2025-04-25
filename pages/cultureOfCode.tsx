@@ -56,7 +56,7 @@ const CultureOfCode: NextPage<CultureOfCodeProps> = ({
           <div className='our-deal-sections basic-card'>
             {ourDeal.sections.map((section) => (
               <div key={section.title.join('')} className='our-deal-section'>
-                <h4>{section.title}</h4>
+                <h3 className='dynamic-h3 fw-800'>{section.title}</h3>
                 <p className='dynamic-txt'>{section.description}</p>
               </div>
             ))}
@@ -231,22 +231,20 @@ const CultureOfCodeStyles = styled.div`
     justify-content: space-between;
     padding: 1rem;
     margin-top: 1rem;
+    gap: 1rem;
     .our-deal-section {
-      width: 32%;
+      flex: 1 1 30%;
       text-align: center;
-      box-shadow: 0 0 1px 1px inset ${({ theme }) => theme.rgb('primary.400', 0.75)};
+      background: ${({ theme }) => theme.rgb('primary.400', 0.1)};
+      box-shadow: 0 0 1px 1px inset ${({ theme }) => theme.rgb('primary.400', 0.25)};
       border-radius: 0.5rem;
       padding: 1rem;
+      display: flex;
+      flex-flow: column;
+      gap: 1rem;
 
-      h4 {
-        font-weight: 700;
-        padding-bottom: 0.5rem;
-      }
-      :first-child {
-        text-align: left;
-      }
-      :last-child {
-        text-align: right;
+      p {
+        font-size: 1em;
       }
     }
   }

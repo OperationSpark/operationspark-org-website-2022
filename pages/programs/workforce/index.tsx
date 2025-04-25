@@ -133,17 +133,21 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
         <Section>
           <Content
             style={{ paddingTop: '2rem', paddingBottom: '2rem' }}
-            className='program-overview basic-card'
+            className='program-overview'
           >
-            <h2 className='dynamic-h2'>{overview.title}</h2>
-            {overview.description.map((desc) => (
-              <p className='dynamic-txt' key={desc} style={{ padding: '1rem 0' }}>
-                {desc}
-              </p>
-            ))}
-            <Link href='/cultureOfCode' className='anchor'>
-              {'Culture of Code'}
-            </Link>
+            <div className='basic-card'>
+              <h2 className='dynamic-h2'>{overview.title}</h2>
+              {overview.description.map((desc) => (
+                <p className='dynamic-txt' key={desc} style={{ padding: '1rem 0' }}>
+                  {desc}
+                </p>
+              ))}
+              <div className='flex-center'>
+                <Link href='/cultureOfCode' className='btn btn-secondary'>
+                  {'Check out our Culture of Code'}
+                </Link>
+              </div>
+            </div>
           </Content>
         </Section>
 
