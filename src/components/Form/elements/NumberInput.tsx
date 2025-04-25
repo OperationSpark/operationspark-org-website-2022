@@ -37,14 +37,21 @@ const NumberInput: FC<NumberInputProps> = ({
   const [isFocused, setIsFocus] = useState<boolean>(false);
 
   const isValidMinMax = () => {
-    if (min !== undefined && max !== undefined) {
-      return parseFloat(value) >= min && parseFloat(value) <= max;
+    const val = parseFloat(value);
+
+    if (isNaN(val)) {
+      return false;
     }
+
+    if (min !== undefined && max !== undefined) {
+      return val >= min && val <= max;
+    }
+
     if (min !== undefined) {
-      return parseFloat(value) >= min;
+      return val >= min;
     }
     if (max !== undefined) {
-      return parseFloat(value) <= max;
+      return val <= max;
     }
     return true;
   };
