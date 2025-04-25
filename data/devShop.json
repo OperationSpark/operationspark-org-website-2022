@@ -2,52 +2,7 @@
   "title": "Dev Shop",
   "subtitle": "We build quality software",
   "about": "Operation Spark is a cutting-edge software engineering school based in New Orleans, dedicated to transforming lives through code. We don't just teach programming — we teach people to think like software engineers and thrive in today's fast-paced tech industry. Our immersive, high-impact curriculum was originally developed in San Francisco — often dubbed the &ldquo;Harvard of Code Schools&rdquo; — and brings Silicon Valley-tested training right to the heart of New Orleans. The result? Our graduates are over-prepared for successful careers in software development. In fact, over 100 leading companies — including GE, PayPal, Nike, The New York Times, LinkedIn, DXC, Entergy, and many more — have hired Operation Spark alumni.",
-  "skills": {
-    "title": "Skillset & Performance of an Immersion Grad",
-    "sections": [
-      {
-        "header": "We want our graduates to be overly prepared",
-        "text": "Our Immersion Program is intense, transformative, and not for the faint of heart. Over the course of four months, students train six days a week, 11+ hours per day — pushing beyond the limits of a typical bootcamp. It's more than just a course; it's a deep dive into the world of software engineering. Think of it as training for the Olympics of coding — and our graduates don't just rise to the challenge, they come out over-prepared and ready to dominate in the tech industry."
-      },
-      {
-        "header": "Learn the tools of the trade",
-        "text": "The Immersion Program is designed to mirror the real-world environment of a modern software company. In the first six weeks, students tackle intensive weekly Sprints, each focused on mastering key technologies and core engineering concepts — just like a professional dev team in action. This hands-on approach ensures that our graduates are not only proficient in the latest tools and technologies, but also understand how to apply them effectively in a team setting. By the end of the program, students have a solid foundation in software engineering principles and are ready to hit the ground running in their new careers."
-      },
-      {
-        "header": "Working with the latest technologies",
-        "text": "Sprints provide a deep working knowledge of the technology being introduced.",
-        "grid": [
-          "Data Structures",
-          "Classic Algorithms",
-          "Time Complexity",
-          "Relational Databases",
-          "Document Databases",
-          "RESTful API",
-          "Web servers (Node.js/express.js",
-          "Authentication + Authorization",
-          "Security",
-          "Micro Services",
-          "Cloud Deployment",
-          "Test Driven Development (TDD)",
-          "Continuous Integration (CI)",
-          "Continuous Deployment (CD)",
-          "HTML",
-          "CSS",
-          "UI/UX Design Patterns",
-          "JavaScript",
-          "Angular.JS",
-          "Angular / TypeScript",
-          "React",
-          "React Native",
-          "Ionic / Cordova",
-          "D3",
-          "Material UI",
-          "Bootstrap",
-          "Mobile Development"
-        ]
-      }
-    ]
-  },
+
   "contractToHire": {
     "title": "How Can Operation Spark Help My Company",
     "subtitle": "Contract to Hire or Our Dev Shop",
@@ -60,9 +15,18 @@
         "header": "Our Dev Shop - Hire Us",
         "text": "Operation Spark develops custom software of all kinds and we're ready to build, maintain, and scale your next project. Best of all, we deliver high-quality results at a fraction of standard market rates, without compromising on performance or professionalism. Our client portfolio spans a wide range of projects, from simple maintenance to complex, large-scale solutions.",
         "grid": [
-          "Two-year project for the USDA",
-          "Logistics applications for the shipping industry",
-          "French Quarter Fest mobile app"
+          {
+            "name": "Logistics applications for the shipping industry",
+            "url": ""
+          },
+          {
+            "name": "French Quarter Fest mobile app",
+            "url": "https://play.google.com/store/apps/details?id=org.frenchquarterfest.fqf"
+          },
+          {
+            "name": "STEM Library Lab",
+            "url": "https://opportunities.stemlibrarylab.org/"
+          }
         ],
         "tagline": "_**We can design, build, deploy, and maintain pretty much anything!**_"
       },

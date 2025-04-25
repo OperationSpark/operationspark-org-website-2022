@@ -12,7 +12,7 @@ import { Modal, useModal } from '@this/src/components/Elements/Modal';
 import Markdown from '@this/src/components/layout/Markdown';
 import DevShopForm from '@this/src/Forms/Form.DevShop';
 
-const DevShop: NextPage<DevShopType> = ({ title, subtitle, about, skills, contractToHire }) => {
+const DevShop: NextPage<DevShopType> = ({ title, subtitle, about, contractToHire }) => {
   const modalCtrl = useModal('Request Info', {
     blurBackground: true,
     style: {
@@ -53,37 +53,7 @@ const DevShop: NextPage<DevShopType> = ({ title, subtitle, about, skills, contra
             ]}
           />
         </Content>
-        <Content>
-          <NeumorphismListCard
-            title={skills.title}
-            width='1000px'
-            color='secondary'
-            center
-            style={{ margin: '0 auto' }}
-            items={skills.sections.map(({ header, text, grid }, i) => (
-              <div
-                key={`skills-performance-1-${i}-${header}`}
-                className={`sub-card${grid ? ' center-sub-card' : ''}`}
-              >
-                <h3 className='dynamic-h3 text-center fw-900'>{header}</h3>
-                <div
-                  className={`dynamic-txt sub-card${grid ? ' text-center' : ''}`}
-                  key={`skills-performance-1-${i}-${header}`}
-                >
-                  <Markdown>{text}</Markdown>
-                </div>
-                {grid && (
-                  <GridList
-                    items={grid.map((v, i) => (
-                      <Markdown key={`${v}-${i}`}>{v}</Markdown>
-                    ))}
-                    itemStyle={{ flex: '1 1 fit-content' }}
-                  />
-                )}
-              </div>
-            ))}
-          />
-        </Content>
+
         <Content>
           <NeumorphismListCard
             title='How Can Operation Spark Help My Company'
