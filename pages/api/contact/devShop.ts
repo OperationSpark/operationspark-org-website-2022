@@ -53,12 +53,10 @@ const handleContactDevShop: ReqHandler<{}, DevShopFormInputs> = async (req, res)
     // Status sent after details added to spreadsheet above
     return;
   } catch (error) {
+    // sendDevShopConfirmEmail and sendDevShopInquirySlackMessage will never throw. We only want it to fail if the sheet fails
     console.error('Error handling contact form:', error);
     res.status(500).end();
-    return;
   }
-
-  res.status(500).end();
 };
 
 export default handleContactDevShop;

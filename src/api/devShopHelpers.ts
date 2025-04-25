@@ -136,6 +136,7 @@ export const addDevShopContactRowToSheet = async (
   const spreadsheetId = DEV_SHOP_INQUIRIES_SHEET_ID;
   const { header, row } = parsedSheetValues;
   const sheets = getSheets();
+
   // Create the tab if it doesn't exist
   await createSpreadsheetTab({
     sheets,
