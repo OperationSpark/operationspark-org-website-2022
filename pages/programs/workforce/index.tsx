@@ -131,7 +131,7 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
         <Section>
           <Content
             style={{ paddingTop: '2rem', paddingBottom: '2rem' }}
-            className='program-overview'
+            className='program-overview basic-card'
           >
             <h2 className='dynamic-h2'>{overview.title}</h2>
             {overview.description.map((desc) => (

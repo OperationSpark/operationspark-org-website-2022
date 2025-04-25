@@ -1,12 +1,12 @@
 import { GetStaticProps, NextPage } from 'next';
-import Image from "next/legacy/image";
+import Image from 'next/legacy/image';
 import styled from 'styled-components';
 
-import { ICultureOfCode } from '@this/data/types/cultureOfCode';
 import { SlashDivider } from '@this/components/Elements/SlashDivider';
-import Main from '@this/components/layout/Main';
 import Content from '@this/components/layout/Content';
+import Main from '@this/components/layout/Main';
 import Section from '@this/components/layout/Section';
+import { ICultureOfCode } from '@this/data/types/cultureOfCode';
 import { getStaticAsset } from '@this/pages-api/static/[asset]';
 import { BgImg } from '@this/src/components/Elements';
 import { useEffect, useState } from 'react';
@@ -47,11 +47,13 @@ const CultureOfCode: NextPage<CultureOfCodeProps> = ({
         </BgImg>
         <SlashDivider />
         <Content>
-          <h2 className='dynamic-h2 text-center' style={{ paddingBottom: '2rem' }}>
-            {ourDeal.title}
-          </h2>
-          <p className='opspark-community dynamic-txt'>{ourDeal.opSparkCommunity}</p>
-          <div className='our-deal-sections'>
+          <div className='basic-card'>
+            <h2 className='dynamic-h2 text-center' style={{ paddingBottom: '2rem' }}>
+              {ourDeal.title}
+            </h2>
+            <p className='opspark-community dynamic-txt'>{ourDeal.opSparkCommunity}</p>
+          </div>
+          <div className='our-deal-sections basic-card'>
             {ourDeal.sections.map((section) => (
               <div key={section.title.join('')} className='our-deal-section'>
                 <h4>{section.title}</h4>
@@ -60,7 +62,7 @@ const CultureOfCode: NextPage<CultureOfCodeProps> = ({
             ))}
           </div>
 
-          <div className='opspark-principles'>
+          <div className='opspark-principles basic-card'>
             <h4>
               <b>{ourDeal.principleIssues.title}</b>
             </h4>
@@ -70,7 +72,7 @@ const CultureOfCode: NextPage<CultureOfCodeProps> = ({
         <Content>
           <h2 className='dynamic-h2'>Operation Spark Values</h2>
           {opSparkValues1.map(({ title, description, image, effects }, i) => (
-            <div className='opspark-value' key={title.join('')}>
+            <div className='opspark-value basic-card' key={title.join('')}>
               <div className='opspark-value-card'>
                 <h4 className='card-title'>{title}</h4>
 
@@ -116,7 +118,7 @@ const CultureOfCode: NextPage<CultureOfCodeProps> = ({
 
         <Content>
           {opSparkValues2.map(({ title, description, image, rules }, i) => (
-            <div className='opspark-value' key={title.join('')}>
+            <div className='opspark-value basic-card' key={title.join('')}>
               <div className='opspark-value-card two-col-card'>
                 <h4 className='card-title'>{title}</h4>
                 <div className={rules ? 'two-col' : ''}>
@@ -227,25 +229,24 @@ const CultureOfCodeStyles = styled.div`
     display: flex;
     flex-flow: row;
     justify-content: space-between;
-    border-radius: 0.25rem;
     padding: 1rem;
     margin-top: 1rem;
     .our-deal-section {
       width: 32%;
-      padding: 0 1rem;
       text-align: center;
+      box-shadow: 0 0 1px 1px inset ${({ theme }) => theme.rgb('primary.400', 0.75)};
+      border-radius: 0.5rem;
+      padding: 1rem;
 
       h4 {
         font-weight: 700;
         padding-bottom: 0.5rem;
       }
       :first-child {
-        padding-left: 0;
         text-align: left;
       }
       :last-child {
         text-align: right;
-        padding-right: 0;
       }
     }
   }
@@ -270,7 +271,6 @@ const CultureOfCodeStyles = styled.div`
   .opspark-value {
     display: flex;
     justify-content: space-between;
-    padding: 1rem 0;
     :nth-child(even) {
       flex-flow: row-reverse;
       .opspark-value-card {

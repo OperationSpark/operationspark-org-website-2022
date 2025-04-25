@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import styled from 'styled-components';
 
-import { Main, Section, Content } from '@this/components/layout';
+import { Content, Main, Section } from '@this/components/layout';
 import { BgImg } from '@this/src/components/Elements';
 import SessionSchedule from '@this/src/components/SessionSchedule';
 
@@ -19,20 +19,22 @@ const CohortSchedule: NextPage = () => {
         </BgImg>
 
         <Content>
-          <p className='schedule-disclaimer dynamic-txt'>
-            Operation Spark includes 6 - 7 months of escalated, intense instruction geared towards a
-            career in software engineering. With breaks and schedule holidays, full completion can
-            take less than a year. Please see the schedule below for more details.
-          </p>
-          <p className='schedule-disclaimer dynamic-txt text-center'>
-            <i>
-              Dates subject to change, email
-              <a href='mailto:admissions@operationspark.org' className='anchor'>
-                admissions@operationspark.org
-              </a>
-              to confirm.
-            </i>
-          </p>
+          <div className='basic-card'>
+            <p className='schedule-disclaimer dynamic-txt'>
+              Operation Spark includes 6 - 7 months of escalated, intense instruction geared towards
+              a career in software engineering. With breaks and schedule holidays, full completion
+              can take less than a year. Please see the schedule below for more details.
+            </p>
+            <p className='schedule-disclaimer dynamic-txt text-center'>
+              <i>
+                Dates subject to change, email
+                <a href='mailto:admissions@operationspark.org' className='anchor'>
+                  admissions@operationspark.org
+                </a>
+                to confirm.
+              </i>
+            </p>
+          </div>
         </Content>
         <SessionSchedule />
       </CohortScheduleStyles>
