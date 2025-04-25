@@ -13,7 +13,7 @@ const {
 } = process.env;
 
 export const formOutputOrder = ['name', 'company', 'email', 'description'] as const;
-export const requiredFields = ['name', 'company', 'email', 'description'] as const;
+export const requiredFields = ['name', 'email', 'description'] as const;
 
 type FormKey = (typeof formOutputOrder)[number];
 
