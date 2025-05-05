@@ -1,5 +1,6 @@
 import formData from 'form-data';
 import Mailgun from 'mailgun.js';
+import { marked } from 'marked';
 
 import { DevShopFormInputs } from '@this/data/types/devShop';
 import { addRow, createSpreadsheetTab, getSheets } from './googleSheets';
@@ -114,10 +115,20 @@ export const sendDevShopConfirmEmail = async (toEmail: string, emailDetails: ema
     .map((detail) => `${detail.label}: ${detail.value}`)
     .join('\n')}`;
 
+  const emailDetailsWithMd = emailDetails.map((detail) => {
+    if (detail.label === 'Description') {
+      return {
+        ...detail,
+        value: marked.parse(detail.value, { async: false }),
+      };
+    }
+    return detail;
+  });
+
   const mgVariables: MgVariables = {
     title: 'Operation Spark | Dev Shop Inquiry Confirmation',
     subject: 'Dev Shop Inquiry Confirmation',
-    details: emailDetails,
+    details: emailDetailsWithMd,
     body: `Thank you contacting Operation Spark's Dev Shop.  We will be in touch soon!`,
   };
 
