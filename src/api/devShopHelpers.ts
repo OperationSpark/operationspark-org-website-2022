@@ -106,6 +106,29 @@ export const getDevShopConfirmEmailDetails = (values: DevShopFormInputs): emailD
 };
 
 /**
+ * Converts the description field to markdown
+ * @param details - label, value, and plainValue for each field
+ * @returns
+ */
+const convertMarkdownFields = (details: emailDetail[]) => {
+  try {
+    const newDetails = details.map((detail) => {
+      if (detail.label === 'Description') {
+        return {
+          ...detail,
+          value: marked.parse(detail.value, { async: false }),
+        };
+      }
+      return detail;
+    });
+    return newDetails;
+  } catch (error) {
+    console.error('Error parsing description as markdown:', error);
+    return details;
+  }
+};
+
+/**
  * Sends a confirmation email to the user after they submit the Dev Shop contact form.
  * @param toEmail - The email address to send the confirmation email to
  * @param emailDetails - label, value, and plainValue for each field
@@ -115,15 +138,7 @@ export const sendDevShopConfirmEmail = async (toEmail: string, emailDetails: ema
     .map((detail) => `${detail.label}: ${detail.value}`)
     .join('\n')}`;
 
-  const emailDetailsWithMd = emailDetails.map((detail) => {
-    if (detail.label === 'Description') {
-      return {
-        ...detail,
-        value: marked.parse(detail.value, { async: false }),
-      };
-    }
-    return detail;
-  });
+  const emailDetailsWithMd = convertMarkdownFields(emailDetails);
 
   const mgVariables: MgVariables = {
     title: 'Operation Spark | Dev Shop Inquiry Confirmation',
