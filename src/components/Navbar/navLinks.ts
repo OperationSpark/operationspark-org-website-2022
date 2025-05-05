@@ -34,7 +34,8 @@ export const navMenus: NavigationMenuLink[] = [
 
   { title: 'Get Involved', href: '/getInvolved', subLinks: [] },
 
-  { title: 'Dev Shop', href: '/devShop', subLinks: [] },
+  // Uncomment to show dev shop when the copy is ready
+  // { title: 'Dev Shop', href: '/devShop', subLinks: [] },
   {
     title: 'About',
     href: '/about',
