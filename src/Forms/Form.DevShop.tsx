@@ -15,8 +15,8 @@ type DevShopFormKeys = 'name' | 'company' | 'email' | 'description';
 
 const defaultFormInputs: DevShopFormInputs = {
   name: '',
-  company: '',
   email: '',
+  company: '',
   description: '',
 };
 
@@ -29,20 +29,20 @@ type DevShopFormField = {
 
 const formFields: Record<keyof DevShopFormInputs, DevShopFormField> = {
   name: {
-    name: 'name',
+    name: 'fullName',
     label: 'Name',
     errMessage: 'Please enter your name',
     required: true,
-  },
-  company: {
-    name: 'company',
-    label: 'Company',
   },
   email: {
     name: 'email',
     label: 'Email',
     errMessage: 'Please enter a valid email address',
     required: true,
+  },
+  company: {
+    name: 'company',
+    label: 'Company',
   },
   description: {
     name: 'description',
@@ -204,16 +204,6 @@ const DevShopForm: FC<DevShopFormProps> = ({ onCancel, onSuccess }) => {
 
       <FormErrorMessage message={fieldErrMessage('name')} />
 
-      <TextInput
-        {...formFields.company}
-        isErr={isFieldError('company')}
-        isValid={!!form.company}
-        value={form.company}
-        onChange={handleChange('company')}
-      />
-
-      <FormErrorMessage message={fieldErrMessage('company')} />
-
       <EmailInput
         {...formFields.email}
         isErr={isFieldError('email')}
@@ -223,6 +213,16 @@ const DevShopForm: FC<DevShopFormProps> = ({ onCancel, onSuccess }) => {
       />
 
       <FormErrorMessage message={fieldErrMessage('email')} />
+
+      <TextInput
+        {...formFields.company}
+        isErr={isFieldError('company')}
+        isValid={!!form.company}
+        value={form.company}
+        onChange={handleChange('company')}
+      />
+
+      <FormErrorMessage message={fieldErrMessage('company')} />
 
       <TextArea
         {...formFields.description}

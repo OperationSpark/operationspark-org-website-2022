@@ -68,7 +68,7 @@ const DevShop: NextPage<DevShopType> = ({ title, subtitle, about, contractToHire
               <div key={`dev-shop-hire-${i}`} className='sub-card'>
                 <h3 className='dynamic-h3 text-center fw-900'>{section.header}</h3>
                 {section.text && (
-                  <div className='dynamic-txt sub-card'>
+                  <div className='dynamic-txt sub-card flex-center'>
                     <Markdown>{section.text}</Markdown>
                   </div>
                 )}
