@@ -24,7 +24,7 @@ type DevShopFormField = {
   name: string;
   label: string;
   errMessage?: string;
-  required?: boolean;
+  required: boolean;
 };
 
 const formFields: Record<keyof DevShopFormInputs, DevShopFormField> = {
@@ -43,6 +43,7 @@ const formFields: Record<keyof DevShopFormInputs, DevShopFormField> = {
   company: {
     name: 'company',
     label: 'Company',
+    required: false,
   },
   description: {
     name: 'description',
@@ -79,24 +80,24 @@ const DevShopForm: FC<DevShopFormProps> = ({ onCancel, onSuccess }) => {
    */
   const validateForm = (formValues: DevShopFormInputs = form) => {
     const errors: FormErrorState = {};
-    Object.keys(formFields).forEach((key) => {
-      const field = formFields[key as keyof DevShopFormInputs];
+    Object.keys(formFields).forEach((k) => {
+      const key = k as keyof DevShopFormInputs;
+      const field = formFields[key];
       if (!field.required) {
         return;
       }
 
-      const val = (formValues[key as keyof DevShopFormInputs] || '').trim();
-
+      const val = (formValues[key] || '').trim();
       if (!val) {
-        errors[key as keyof DevShopFormInputs] = field.errMessage;
+        errors[key] = field.errMessage;
       }
 
       if (field.name === 'email' && !isEmail(val)) {
-        errors[key as keyof DevShopFormInputs] = field.errMessage;
-
+        errors[key] = field.errMessage;
         return;
       }
     });
+
     setFormErrors(errors);
     const errs = Object.keys(errors);
     return errs.length ? errs : null;
