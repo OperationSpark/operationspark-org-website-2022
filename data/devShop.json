@@ -16,16 +16,20 @@
         "text": "Operation Spark develops custom software of all kinds and we're ready to build, maintain, and scale your next project. Best of all, we deliver high-quality results at a fraction of standard market rates, without compromising on performance or professionalism. Our client portfolio spans a wide range of projects, from simple maintenance to complex, large-scale solutions.",
         "grid": [
           {
-            "name": "Logistics applications for the shipping industry",
-            "url": ""
-          },
-          {
-            "name": "French Quarter Fest mobile app",
+            "name": "French Quarter Fest Android/iOS app",
             "url": "https://play.google.com/store/apps/details?id=org.frenchquarterfest.fqf"
           },
           {
-            "name": "STEM Library Lab",
+            "name": "EdOpportunities Database for STEM Library Lab",
             "url": "https://opportunities.stemlibrarylab.org/"
+          },
+          {
+            "name": "Mobile and web applications for the US Dept. of Agriculture",
+            "url": ""
+          },
+          {
+            "name": "Custom Automated mailing & messaging systems",
+            "url": ""
           }
         ],
         "tagline": "_**We can design, build, deploy, and maintain pretty much anything!**_"
