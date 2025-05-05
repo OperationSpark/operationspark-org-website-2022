@@ -64,6 +64,7 @@ export const NavLinkStyles = styled.div.attrs(({ color }: { color?: '' | 'yellow
   padding: 0;
   font-family: 'Red Hat Display', sans-serif;
   font-weight: 600;
+  line-height: 1;
   a {
     all: unset;
     display: flex;

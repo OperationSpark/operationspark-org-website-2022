@@ -19,16 +19,20 @@ export const layoutCss = css`
   }
 
   .flex-wrap {
+    display: flex;
     flex-wrap: wrap;
   }
   .flex-center {
+    display: flex;
     align-items: center;
     justify-content: center;
   }
   .flex-align-center {
+    display: flex;
     align-items: center;
   }
   .flex-justify-center {
+    display: flex;
     justify-content: center;
   }
 
@@ -227,5 +231,117 @@ export const layoutCss = css`
   }
   .fit-width {
     width: fit-content;
+  }
+
+  .btn {
+    padding: 0.35rem 1rem;
+    border-radius: 0.25rem;
+    font-weight: 700;
+    transition: all 225ms;
+  }
+
+  .btn.btn-default {
+    background: ${({ theme }) => theme.rgb('bg', 1, 2)};
+    color: ${({ theme }) => theme.rgb('fg', 1)};
+
+    box-shadow: ${({ theme }) => {
+      const lm = theme.isLightMode;
+      const c1 = theme.rgb('fg', 0.5, lm ? 0 : -10);
+      const c2 = theme.rgb('fg', 0.25, lm ? -5 : -20);
+      return `
+      0 0 0.1rem 2px ${c1},
+      0 0 0.5rem 1px inset ${c2}
+      `;
+    }};
+
+    &:hover {
+      background: ${({ theme }) => theme.rgb('bg', 1, theme.isLightMode ? 4 : 8)};
+      transform: translateY(-2px) scale(1.05, 1.02);
+
+      box-shadow: ${({ theme }) => {
+        const c1 = theme.rgb('fg', 0.5, -10);
+        const c2 = theme.rgb('bg', 1, 0);
+        return `
+        0 0 0.25rem 2px ${c1},
+        0 0 0rem 2px inset ${c2}
+        `;
+      }};
+    }
+
+    &:active {
+      transform: translateY(0px) scale(1, 1);
+      box-shadow: ${({ theme }) => {
+        const c1 = theme.rgb('fg', 0.5, -10);
+        const c2 = theme.rgb('bg', 1, 0);
+        return `
+        0 0 0.1rem 2px ${c1},
+        0 0 0.5rem 1px inset ${c2}
+        `;
+      }};
+    }
+    &:focus-visible {
+      outline: 2px solid ${({ theme }) => theme.rgb('magenta', 1, -2)};
+      box-shadow: 0 0 0.1rem 2px ${({ theme }) => theme.rgb('magenta', 0.5, -10)},
+        0 0 0.5rem 1px ${({ theme }) => theme.rgb('magenta', 0.25, -20)};
+    }
+
+    &:disabled {
+      background: ${({ theme }) => theme.rgb('bg', 0.2, 2)};
+      color: ${({ theme }) => theme.rgb('fg', 0.5)};
+      box-shadow: none;
+      pointer-events: none;
+    }
+  }
+
+  .btn.btn-secondary {
+    background: ${({ theme }) => theme.rgb('secondary', 1)};
+    color: ${({ theme }) => theme.rgb('black', 1)};
+
+    box-shadow: ${({ theme }) => {
+      const c1 = theme.rgb('secondary', 0.5, -10);
+      const c2 = theme.rgb('secondary', 0.25, -20);
+      return `
+      0 0 0.1rem 2px ${c1},
+      0 0 0.5rem 1px ${c2}
+      `;
+    }};
+
+    &:hover {
+      background: ${({ theme }) => theme.rgb('secondary', 1, theme.isLightMode ? 4 : 8)};
+      transform: translateY(-2px) scale(1.05, 1.02);
+
+      box-shadow: ${({ theme }) => {
+        const c1 = theme.rgb('secondary', 0.5, -10);
+        const c2 = theme.rgb('secondary', 0.25, -20);
+        return `
+        0 0 0.25rem 2px ${c1},
+        0 0 0.75rem 2px ${c2}
+        `;
+      }};
+    }
+
+    &:active {
+      transform: translateY(0px) scale(1, 1);
+      box-shadow: ${({ theme }) => {
+        const c1 = theme.rgb('secondary', 0.5, -10);
+        const c2 = theme.rgb('secondary', 0.25, -20);
+        return `
+        0 0 0.1rem 2px ${c1},
+        0 0 0.5rem 1px ${c2}
+        `;
+      }};
+    }
+    &:focus-visible {
+      outline: 2px solid ${({ theme }) => theme.rgb('secondary', 1, -2)};
+      box-shadow: 0 0 0.1rem 2px ${({ theme }) => theme.rgb('secondary', 0.5, -10)},
+        0 0 0.5rem 1px ${({ theme }) => theme.rgb('secondary', 0.25, -20)};
+    }
+
+    &:disabled {
+      background: ${({ theme }) => theme.rgb('secondary', 0.2, 2)};
+      color: ${({ theme }) => theme.rgb('fg', 0.5)};
+      box-shadow: none;
+      pointer-events: none;
+    }
   }
 `;

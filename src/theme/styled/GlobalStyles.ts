@@ -28,7 +28,7 @@ const GlobalStyleCss = css`
     font-weight: 400;
     margin: 0;
     padding: 0;
-    overscroll-behavior: none;
+    overscroll-behavior: none !important;
   }
   body {
     overflow-x: hidden;
@@ -43,6 +43,49 @@ const GlobalStyleCss = css`
     font-family: 'Red Hat Display', sans-serif;
     word-spacing: 0.25rem;
     margin: 0;
+  }
+
+  hr {
+    border: none;
+    height: 1px;
+    width: 100%;
+    background: ${({ theme }) => `
+      linear-gradient(
+        90deg,
+        ${theme.rgb('bg', 0)} 0%,
+        ${theme.rgb(theme.isLightMode ? 'primary' : 'primary.300', 1)} 35%,
+        ${theme.rgb(theme.isLightMode ? 'primary' : 'primary.300', 1)} 65%,
+        ${theme.rgb('bg', 0)} 100%
+      )
+    `};
+    margin: 1rem 0;
+
+    &.heavy {
+      height: 2px;
+      border-radius: 0.5rem;
+    }
+
+    &.hr-0 {
+      margin: 0 0;
+    }
+    &.hr-1 {
+      margin: 0.5rem 0;
+    }
+    &.hr-2 {
+      margin: 1rem 0;
+    }
+    &.hr-3 {
+      margin: 1.5rem 0;
+    }
+    &.hr-4 {
+      margin: 2rem 0;
+    }
+    &.hr-5 {
+      margin: 2.5rem 0;
+    }
+    &.hr-6 {
+      margin: 3rem 0;
+    }
   }
 
   button {

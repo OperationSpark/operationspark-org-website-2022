@@ -196,7 +196,6 @@ export const InfoSessionStyles = styled(motion.div)`
   flex-flow: column;
   align-items: center;
   background: ${({ theme }) => theme.primary[600]};
-  position: relative;
   padding: 2rem 0;
   box-shadow: 0 -0.25rem 0.5rem rgba(25, 25, 25, 0.25);
   @media print {

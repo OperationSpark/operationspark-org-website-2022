@@ -198,7 +198,7 @@ export const NavbarStyles = styled(motion.nav)`
     }
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     .navbar {
       align-items: stretch;
       .nav-links {

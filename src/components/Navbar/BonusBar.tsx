@@ -33,6 +33,11 @@ const BonusBar = ({ children }: { children?: ReactNode }) => {
   const isHsApplyView = checkIsPath('/programs/highschool/apply');
   const isHsOrInfoView = checkIsPath('highschool', '/programs/workforce/infoSession');
   const isHsActive = !isHsApplyView && isHsFormActive();
+  const isDevShop = checkIsPath('/devShop');
+
+  if (isDevShop) {
+    return null;
+  }
 
   return (
     <BonusBarStyles className='bonus-bar'>
@@ -67,7 +72,7 @@ const BonusBarStyles = styled(motion.div)`
   justify-content: flex-end;
   grid-gap: 0.25rem;
   padding: 0 0.25rem;
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     justify-content: space-around;
     flex-flow: row wrap;
     padding-bottom: 0.75rem;

@@ -1,6 +1,6 @@
 import { motion, MotionProps } from 'framer-motion';
 import kebabCase from 'lodash/kebabCase';
-import { ChangeEvent, CSSProperties, KeyboardEvent, useRef, useState } from 'react';
+import { ChangeEvent, CSSProperties, KeyboardEvent, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import ClearButton from './ClearButton';
@@ -22,6 +22,9 @@ export interface TextAreaProps {
   onTab?: (e: KeyboardEvent) => void;
   restoreCursor?: boolean;
   testId?: string;
+  minHeight?: string;
+  maxHeight?: string;
+  autosize?: boolean;
 }
 
 const TextArea = ({
@@ -39,6 +42,7 @@ const TextArea = ({
   animation = {},
   style = {},
   testId,
+  ...props
 }: TextAreaProps) => {
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
@@ -54,8 +58,23 @@ const TextArea = ({
     onChange(e.target.value, validator(e.target.value));
   };
 
+  const minHeight = props.minHeight || '200px';
+  const maxHeight = props.maxHeight || '500px';
+
+  useEffect(() => {
+    if (!props.autosize) {
+      return;
+    }
+    const ref = inputRef.current;
+    if (!ref) {
+      return;
+    }
+
+    ref.style.height = 'auto';
+    ref.style.height = `${ref.scrollHeight}px`;
+  }, [inputRef.current?.scrollHeight, props.autosize, value]);
   return (
-    <TextInputStyles className={isErr ? '_input_err' : ''} style={style} {...animation}>
+    <TextAreaContainerStyles className={isErr ? '_input_err' : ''} style={style} {...animation}>
       {required && <RequiredStatus isValid={!!isValid} />}
       <ClearButton show={!!isValid} onClick={() => onChange('', false)} />
       <Label
@@ -67,7 +86,7 @@ const TextArea = ({
       >
         {label}
       </Label>
-      <Input
+      <TextAreaStyles
         autoComplete='off'
         spellCheck={false}
         ref={inputRef}
@@ -79,20 +98,22 @@ const TextArea = ({
         onKeyPress={handleKeypress}
         value={value}
         placeholder={placeholder}
+        style={props.autosize ? { minHeight, maxHeight } : {}}
         onChange={handleChange}
         data-test-id={testId ?? `text-area-${kebabCase(name)}`}
       />
-    </TextInputStyles>
+    </TextAreaContainerStyles>
   );
 };
 
 export default TextArea;
 
-const TextInputStyles = styled(motion.div)`
+export const TextAreaContainerStyles = styled(motion.div)`
   position: relative;
   font-size: 18px;
   width: 100%;
-  height: 100%;
+  height: fit-content;
+
   z-index: 5;
   padding-bottom: 0.5rem;
   ._required {
@@ -106,7 +127,8 @@ const TextInputStyles = styled(motion.div)`
     color: ${({ theme }) => (theme.isLightMode ? theme.grey[600] : theme.grey[400])};
   }
 `;
-const Input = styled(motion.textarea)`
+
+export const TextAreaStyles = styled(motion.textarea)`
   resize: none;
   border-radius: 0.25rem;
   border: none;
@@ -115,7 +137,7 @@ const Input = styled(motion.textarea)`
   display: flex;
   width: 100%;
   height: 100%;
-  min-height: 150px;
+  min-height: 100px;
 
   color: ${({ theme }) => theme.fg};
   background: ${({ theme }) => theme.bg};

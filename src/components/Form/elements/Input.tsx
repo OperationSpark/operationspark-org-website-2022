@@ -27,10 +27,14 @@ export interface TextInputProps {
   isValid?: boolean;
   animation?: MotionProps;
   style?: CSSProperties;
+  inputStyle?: CSSProperties;
   onEnter?: (e: KeyboardEvent<HTMLInputElement>) => void;
   onTab?: (e: KeyboardEvent<HTMLInputElement>) => void;
   restoreCursor?: boolean;
   testId?: string;
+  min?: number;
+  max?: number;
+  step?: number;
 }
 
 const TextInput = ({
@@ -48,8 +52,12 @@ const TextInput = ({
   onTab = () => {},
   animation = {},
   style = {},
+  inputStyle = {},
   restoreCursor = false,
   testId,
+  min,
+  max,
+  step,
 }: TextInputProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [caretPos, setCaretPos] = useState<number | null>(null);
@@ -72,18 +80,21 @@ const TextInput = ({
   };
 
   useEffect(() => {
+    if (type !== 'text' && type !== 'number' && type !== 'tel' && type !== 'email') {
+      return;
+    }
     if (restoreCursor && inputRef.current) {
       const { current } = inputRef;
       current.selectionStart = caretPos || 0;
       current.selectionEnd = caretPos || 0;
     }
-  }, [caretPos, restoreCursor]);
+  }, [caretPos, restoreCursor, type]);
 
   return (
-    <TextInputStyles className={isErr ? '_input_err' : ''} style={style} {...animation}>
+    <TextInputContainerStyles className={isErr ? '_input_err' : ''} style={style} {...animation}>
       {required && <RequiredStatus isValid={!!isValid} />}
 
-      <Label
+      <TextInputLabelStyles
         htmlFor={name}
         initial={{ transform: 'scale(1)' }}
         animate={{ transform: isFocused || value ? 'scale(0.7)' : 'scale(1)' }}
@@ -91,9 +102,9 @@ const TextInput = ({
         className={isErr ? `_input_err` : ''}
       >
         {label}
-      </Label>
+      </TextInputLabelStyles>
 
-      <Input
+      <TextInputStyles
         autoComplete='off'
         spellCheck={false}
         ref={inputRef}
@@ -108,6 +119,10 @@ const TextInput = ({
         placeholder={placeholder}
         onChange={handleChange}
         data-test-id={testId ?? `${type ?? 'text'}-input-${kebabCase(name)}`}
+        min={min}
+        max={max}
+        step={step}
+        style={inputStyle}
       />
       <ClearButton
         show={!!value}
@@ -116,20 +131,20 @@ const TextInput = ({
           onChange('', false);
         }}
       />
-    </TextInputStyles>
+    </TextInputContainerStyles>
   );
 };
 
 export default TextInput;
 
-const TextInputStyles = styled(motion.div)`
+export const TextInputContainerStyles = styled(motion.div)`
   position: relative;
   font-size: 18px;
   width: 100%;
   margin-bottom: 0.75rem;
   z-index: 5;
 `;
-const Input = styled(motion.input)`
+export const TextInputStyles = styled(motion.input)`
   border-radius: 0.25rem;
   border: none;
   outline: none;
@@ -179,7 +194,7 @@ const Input = styled(motion.input)`
     caret-color: ${({ theme }) => theme.fg};
   }
 `;
-const Label = styled(motion.label)`
+export const TextInputLabelStyles = styled(motion.label)`
   position: absolute;
   transform-origin: top left;
   line-height: 1em;

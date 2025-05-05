@@ -39,6 +39,7 @@ export default function App({ Component, pageProps }: AppProps) {
       </MainContainer>
 
       <Footer logos={logos} />
+      <div id='modal-root'></div>
       <div id='tooltip-root'></div>
     </Theme>
   );

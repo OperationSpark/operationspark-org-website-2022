@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 
 const aText = dynamic(() => import('./PlainTextInput'));
-const aPhone = dynamic(() => import('./NumberInput'));
+const aPhone = dynamic(() => import('./PhoneInput'));
 const aDateInput = dynamic(() => import('./DateInput'));
 const aEmail = dynamic(() => import('./EmailInput'));
 const aSelect = dynamic(() => import('./Select'));

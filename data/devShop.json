@@ -1,0 +1,54 @@
+{
+  "title": "Dev Shop",
+  "subtitle": "We build quality software",
+  "about": "Operation Spark is a cutting-edge software engineering school based in New Orleans, dedicated to transforming lives through code. We don't just teach programming — we teach people to think like software engineers and thrive in today's fast-paced tech industry. Our immersive, high-impact curriculum was originally developed in San Francisco — often dubbed the &ldquo;Harvard of Code Schools&rdquo; — and brings Silicon Valley-tested training right to the heart of New Orleans. The result? Our graduates are over-prepared for successful careers in software development. In fact, over 100 leading companies — including GE, PayPal, Nike, The New York Times, LinkedIn, DXC, Entergy, and many more — have hired Operation Spark alumni.",
+
+  "contractToHire": {
+    "title": "How Can Operation Spark Help My Company",
+    "subtitle": "Contract to Hire or Our Dev Shop",
+    "sections": [
+      {
+        "header": "Contract to Hire",
+        "text": "Need to quickly scale up your software team with proven talent? With Operation Spark's Contract-to-Hire Program, we provide and manage skilled developers who are ready to contribute from day one. After three months, if you're confident your project is moving forward, you have the option to bring our contractors on board as full-time employees. It's a “try-before-you-buy” model — flexible, low-risk, and effective. Let's talk about your resource needs and our competitive hourly rates."
+      },
+      {
+        "header": "Our Dev Shop - Hire Us",
+        "text": "Operation Spark develops custom software of all kinds and we're ready to build, maintain, and scale your next project. Best of all, we deliver high-quality results at a fraction of standard market rates, without compromising on performance or professionalism. Our client portfolio spans a wide range of projects, from simple maintenance to complex, large-scale solutions.",
+        "grid": [
+          {
+            "name": "French Quarter Fest Android/iOS app",
+            "url": "https://play.google.com/store/apps/details?id=org.frenchquarterfest.fqf"
+          },
+          {
+            "name": "EdOpportunities Database for STEM Library Lab",
+            "url": "https://opportunities.stemlibrarylab.org/"
+          },
+          {
+            "name": "Mobile and web applications for the US Dept. of Agriculture",
+            "url": ""
+          },
+          {
+            "name": "Custom Automated mailing & messaging systems",
+            "url": ""
+          }
+        ],
+        "tagline": "_**We can design, build, deploy, and maintain pretty much anything!**_"
+      },
+      {
+        "header": "Scale your workforce as needed with our flexible hiring programs",
+        "text": "Companies can choose from multiple flexible hiring options: hire our graduates directly, leverage our contract-to-hire model, or onboard remote team members supported and managed by us. With instant access to a reliable pipeline of skilled talent, you'll streamline your hiring process and significantly reduce recruitment costs."
+      },
+      {
+        "header": "Partner with Operation Spark",
+        "text": "**Your company will benefit in the following ways:**",
+        "list": [
+          "**Efficient & Affordable Access to Top Talent** -- Bring on highly qualified developers without the overhead.",
+          "**Boost Workforce Diversity** -- Expand your team with skilled professionals from underrepresented backgrounds.",
+          "**Lower Hiring Costs with a Reliable Talent Pipeline** -- Streamline recruitment and reduce time-to-hire.",
+          "**Enhance Your Brand with a Strong Social Impact Story** -- Partnering with Operation Spark makes for great PR.",
+          "**Scale with Flexibility** -- Adapt to your project needs quickly through our versatile hiring programs."
+        ]
+      }
+    ]
+  }
+}

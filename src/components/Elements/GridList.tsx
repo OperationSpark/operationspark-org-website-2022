@@ -4,12 +4,14 @@ import styled from 'styled-components';
 type GridListProps = {
   items: ReactNode[];
   interactive?: boolean;
+  style?: React.CSSProperties;
+  itemStyle?: React.CSSProperties;
 };
-const GridList: FC<GridListProps> = ({ items, interactive }) => {
+const GridList: FC<GridListProps> = ({ items, interactive, style, itemStyle }) => {
   return (
-    <GridListStyles className={interactive ? '_interactive-item' : ''}>
+    <GridListStyles className={interactive ? '_interactive-item' : ''} style={style}>
       {items.map((item, i) => (
-        <li key={i} className='_grid-list-item'>
+        <li key={i} className='_grid-list-item' style={itemStyle}>
           {item}
         </li>
       ))}
@@ -47,7 +49,8 @@ const GridListStyles = styled.ul`
     }
   }
 
-  &._interactive-item {
+  &._interactive-item,
+  &:has(._grid-list-item a) {
     ._grid-list-item {
       padding: 0;
 

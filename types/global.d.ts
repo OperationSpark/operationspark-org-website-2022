@@ -24,6 +24,8 @@ declare namespace NodeJS {
     TEACHER_TRAINING_FORM_RESPONSES_ID: string;
     HIGHSCHOOL_FORM_ACTIVE_UNTIL: string;
     HIGHSCHOOL_FORM_RESPONSES_NAME: string;
+    DEV_SHOP_INQUIRIES_SHEET_ID: string;
+    DEV_SHOP_CONTACT_SLACK_CHANNEL_ID: string;
     WUFOO_HOST: string;
     WUFOO_TOKEN: string;
     WUFOO_CONTACT_FORM_ID: string;

@@ -103,7 +103,6 @@ const NeumorphismListCardStyles = styled.div<{ time?: number }>`
   background: ${({ theme }) => theme.rgb('bg', 1, theme.isLightMode ? -1 : 1)};
 
   --color: ${({ theme }) => theme.asRgb('fg')};
-
   --shadow: ${({ theme }) => theme.asRgb('bg', theme.isLightMode ? -8 : 8)};
 
   &._color-auto:nth-child(1n),
@@ -120,9 +119,9 @@ const NeumorphismListCardStyles = styled.div<{ time?: number }>`
       ${({ theme }) =>
         theme.isLightMode ? theme.rgb('primary', 0.5) : theme.rgb('primary', 0.5, 8)};
     background: ${({ theme }) =>
-      theme.isLightMode ? theme.rgb('primary', 0.1) : theme.rgb('primary', 0.1, 5)};
+      theme.isLightMode ? theme.rgb('primary', 0.1) : theme.rgb('primary', 0.1)};
     --color: ${({ theme }) =>
-      theme.isLightMode ? theme.asRgb('primary', 4) : theme.asRgb('primary', 10)};
+      theme.isLightMode ? theme.asRgb('primary', 4) : theme.asRgb('primary', 8)};
     --shadow: var(--color);
   }
 
@@ -138,7 +137,7 @@ const NeumorphismListCardStyles = styled.div<{ time?: number }>`
   &._color-green {
     box-shadow: 0 0 3px 1px inset ${({ theme }) => theme.rgb('green', 0.5, -8)};
     background: ${({ theme }) => theme.rgb('green', 0.1, 10)};
-    --color: ${({ theme }) => theme.asRgb('green', -6)};
+    --color: ${({ theme }) => theme.asRgb('green', theme.isLightMode ? -15 : 2)};
     --shadow: var(--color);
   }
   &._color-yellow {
@@ -159,7 +158,8 @@ const NeumorphismListCardStyles = styled.div<{ time?: number }>`
     box-shadow: 0 0 3px 1px inset ${({ theme }) => theme.rgb('secondary', 0.5)};
     background: ${({ theme }) =>
       theme.isLightMode ? theme.rgb('secondary.700', 0.1) : theme.rgb('secondary', 0.1)};
-    --color: ${({ theme }) => theme.asRgb(theme.isLightMode ? 'secondary.700' : 'secondary')};
+    --color: ${({ theme }) =>
+      theme.isLightMode ? theme.asRgb('secondary.900', -2) : theme.asRgb('secondary', 4)};
     --shadow: ${({ theme }) => theme.asRgb(theme.isLightMode ? 'secondary.900' : 'secondary')};
   }
 

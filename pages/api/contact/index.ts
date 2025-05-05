@@ -15,22 +15,21 @@ interface IContactFormRequest extends NextApiRequest {
   body: IContactForm;
 }
 
-const formatPayload = ({ firstName, lastName, email, message }: IContactForm): string => {
-  return Object.entries({
+const encodeForm = ({ firstName, lastName, email, message }: IContactForm): string => {
+  const params = new URLSearchParams({
     Field1: firstName,
     Field2: lastName,
     Field3: email,
     Field4: message,
-  })
-    .map(([k, v]) => encodeURIComponent(k) + '=' + encodeURIComponent(v))
-    .join('&');
+  });
+  return params.toString();
 };
 
 export default async function handleContactForm(req: IContactFormRequest, res: NextApiResponse) {
   try {
     const formUrl = `https://${WUFOO_HOST}.wufoo.com/api/v3/forms/${WUFOO_CONTACT_FORM_ID}/entries.json`;
     const headers = { Authorization: `Basic ${WUFOO_TOKEN}` };
-    const form = formatPayload(req.body);
+    const form = encodeForm(req.body);
 
     await axios.post(formUrl, form, { headers });
     res.status(201).end();
