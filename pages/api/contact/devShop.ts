@@ -5,9 +5,9 @@ import { DevShopFormInputs } from '@this/data/types/devShop';
 import {
   addDevShopContactRowToSheet,
   checkMissingFields,
+  formOutputOrder,
   getDevShopConfirmEmailDetails,
   parseDevShopSpreadsheetValues,
-  requiredFields,
   sendDevShopConfirmEmail,
   sendDevShopInquirySlackMessage,
 } from '@this/src/api/devShopHelpers';
@@ -26,7 +26,7 @@ const handleContactDevShop: ReqHandler<{}, DevShopFormInputs> = async (req, res)
     return;
   }
 
-  const formValues = requiredFields.map((field) => ({
+  const formValues = formOutputOrder.map((field) => ({
     name: field,
     label: capitalize(field),
     value: req.body[field],
