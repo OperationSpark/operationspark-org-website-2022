@@ -11,6 +11,7 @@ import Content from '@this/components/layout/Content';
 import Main from '@this/components/layout/Main';
 import Section from '@this/components/layout/Section';
 import { IAbout } from '@this/data/types/about';
+import { backdropFilter } from '@this/src/theme/styled/mixins/filters';
 import { getStaticAsset } from '../api/static/[asset]';
 
 const About: NextPage<IAbout> = ({ mission, team, history, awards }) => {
@@ -38,7 +39,7 @@ const About: NextPage<IAbout> = ({ mission, team, history, awards }) => {
                 height: '100%',
               }}
             >
-              <Content>
+              <Content className='header-content-card'>
                 <h1 className='dynamic-xl text-shadow'>Our Mission</h1>
                 <p className='dynamic-txt'>{mission.description}</p>
               </Content>
@@ -49,7 +50,7 @@ const About: NextPage<IAbout> = ({ mission, team, history, awards }) => {
           <Content>
             <div className='mission-section'>
               {mission.sections.map((section, i) => (
-                <div key={section.title.join('')}>
+                <div className='basic-card' key={section.title.join('')}>
                   <h2 className='dynamic-h2'>{section.title}</h2>
                   {section.description.map((desc) => (
                     <p key={desc} className='dynamic-txt'>
@@ -260,15 +261,15 @@ const AboutStyles = styled.div`
   .about-history {
     position: relative;
     z-index: 1;
-
+    ${backdropFilter()}
     ::before {
       /* background-image: url(images/textures/parchment.png); */
       content: '';
       position: absolute;
       z-index: -1;
       inset: 0;
-      background: ${({ theme }) => theme.secondary[400]};
-      box-shadow: ${({ theme }) => '0 0 2rem 0.1rem inset ' + theme.secondary[800]};
+      background: ${({ theme }) => theme.rgb('secondary', 0.9)};
+      box-shadow: ${({ theme }) => `0 0 2rem 0.1rem inset ${theme.rgb('secondary.800')}`};
     }
 
     p,

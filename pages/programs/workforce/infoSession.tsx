@@ -14,7 +14,8 @@ import { getStaticAsset } from '@this/pages-api/static/[asset]';
 import { referencedByOptions } from '@this/src/Forms/formData/referenceOptions';
 import { getFormattedDateTime } from '@this/src/helpers/timeUtils';
 import useInfoSession from '@this/src/hooks/useInfoSession';
-import { cardShadow, cardShadowLtr, cardShadowRtl } from '@this/src/theme/styled/mixins/shadows';
+import { backdropFilter } from '@this/src/theme/styled/mixins/filters';
+import { cardShadow } from '@this/src/theme/styled/mixins/shadows';
 import { useEffect, useState } from 'react';
 
 const WorkforceForm = dynamic(() => import('@this/src/Forms/Form.Workforce'));
@@ -72,28 +73,30 @@ const InfoSession: NextPage<InfoSessionProps> = ({ commonQuestions, logos }) => 
         <Section>
           <Content className='free-info-session'>
             <div className='info-session-left'>
-              <div className='left-header'>
-                <h1 className='dynamic-h2'>
-                  Interested in our <br />
-                  Adult Workforce Program?
-                </h1>
-                <h1 className='dynamic-xl primary-secondary mb0 mt0'>
-                  Attend a Free
-                  <br />
-                  Info Session!
-                </h1>
-              </div>
-              <div className='whats-to-learn'>
-                <h2 className='dynamic-h2 text-center mb0'>{`YOU'LL LEARN ABOUT`}</h2>
-                <ul className='what-to-learn-list'>
-                  <li>Coding and career opportunities</li>
-                  <li>Our program and job search support</li>
-                  <li>What it takes to be successful in our program</li>
-                  <li>How to enroll at Operation Spark</li>
-                </ul>
-                <a className='anchor' href='#common-questions' style={{ alignSelf: 'center' }}>
-                  Learn More
-                </a>
+              <div className='basic-card'>
+                <div className='left-header'>
+                  <h1 className='dynamic-h2'>
+                    Interested in our <br />
+                    Adult Workforce Program?
+                  </h1>
+                  <h1 className='dynamic-xl primary-secondary mb0 mt0'>
+                    Attend a Free
+                    <br />
+                    Info Session!
+                  </h1>
+                </div>
+                <div className='whats-to-learn'>
+                  <h2 className='dynamic-h2 text-center mb0'>{`YOU'LL LEARN ABOUT`}</h2>
+                  <ul className='what-to-learn-list'>
+                    <li>Coding and career opportunities</li>
+                    <li>Our program and job search support</li>
+                    <li>What it takes to be successful in our program</li>
+                    <li>How to enroll at Operation Spark</li>
+                  </ul>
+                  <a className='anchor' href='#common-questions' style={{ alignSelf: 'center' }}>
+                    Learn More
+                  </a>
+                </div>
               </div>
 
               <motion.div
@@ -112,7 +115,7 @@ const InfoSession: NextPage<InfoSessionProps> = ({ commonQuestions, logos }) => 
               </motion.div>
             </div>
             <div className='info-session-right'>
-              <div className='info-session-form'>
+              <div className='info-session-form basic-card'>
                 <div className='info-highschool'>
                   <b>HIGH SCHOOL INFORMATION</b>
                   <br />
@@ -157,21 +160,23 @@ const InfoSession: NextPage<InfoSessionProps> = ({ commonQuestions, logos }) => 
           </Content>
         </Section>
         <Section>
-          <Content className='great-companies'>
-            <h1 className='dynamic-h1 primary-secondary'>Our grads work at great companies!</h1>
-            <div className='stats'>
-              <h2 className='dynamic-h2'>100% Job Placement</h2>
-              <h2 className='dynamic-h2'>$62,000 average starting salary</h2>
+          <Content className='great-companies' style={{ padding: '0 1rem' }}>
+            <div className='basic-card'>
+              <h1 className='dynamic-h1 primary-secondary'>Our grads work at great companies!</h1>
+              <div className='stats'>
+                <h2 className='dynamic-h2'>100% Job Placement</h2>
+                <h2 className='dynamic-h2'>$62,000 average starting salary</h2>
+              </div>
             </div>
           </Content>
         </Section>
-        <Carousel logos={logos} style={{ marginTop: '3rem' }} />
+        <Carousel logos={logos} />
         <Section>
           <div id='common-questions' className='page-marker'></div>
           <Content className='common-questions'>
             <h1 className='dynamic-h2'>Common Questions</h1>
             {commonQuestions.map(({ question, answer }) => (
-              <div key={question.join('')} className='question-answer'>
+              <div key={question.join('')} className='question-answer basic-card'>
                 <h3 className='dynamic-h3'>{question}</h3>
                 <p>{answer}</p>
               </div>
@@ -226,11 +231,12 @@ const InfoSessionStyles = styled.div`
 
     .info-session-left {
       width: 100%;
+      flex: 1;
 
       display: flex;
       flex-flow: row wrap;
       justify-content: space-between;
-      grid-gap: 1.5rem;
+      gap: 1.5rem;
       .left-header {
         width: 100%;
         text-align: center;
@@ -274,10 +280,15 @@ const InfoSessionStyles = styled.div`
     .info-session-form {
       overflow: hidden;
       padding: 1rem;
-      border-radius: 0.5rem;
-      max-width: 500px;
+      max-width: 550px;
       min-width: 400px;
-      ${cardShadowLtr};
+      flex: 1 1 400px;
+      ${backdropFilter({
+        blur: 8,
+        color: 'bg',
+        opacity: 0.1,
+      })}
+      margin: 0;
       display: flex;
       flex-flow: column;
       grid-gap: 1rem;
@@ -299,8 +310,8 @@ const InfoSessionStyles = styled.div`
       }
       max-width: 100%;
       padding: 1rem;
-      border-radius: 0.25rem;
-      ${cardShadowRtl}
+      border-radius: 0.5rem;
+      box-shadow: 0 0 1px 1px inset ${({ theme }) => theme.rgb('red', 0.75)};
     }
   }
   .video-container {
@@ -336,10 +347,6 @@ const InfoSessionStyles = styled.div`
   }
 
   .question-answer {
-    box-shadow: 0 0 4px ${({ theme }) => theme.primary[200]};
-    border-radius: 0.25rem;
-    padding: 1rem;
-
     width: 100%;
     margin-bottom: 2rem;
     ${cardShadow}

@@ -1,3 +1,4 @@
+import { backdropFilter } from '@this/src/theme/styled/mixins/filters';
 import { FC, ReactNode } from 'react';
 import styled, { CSSProperties, keyframes } from 'styled-components';
 
@@ -101,6 +102,8 @@ const NeumorphismListCardStyles = styled.div<{ time?: number }>`
   box-shadow: 0 0 3px 1px inset ${({ theme }) => theme.rgb('fg', 0.1)};
   border-radius: 1rem;
   background: ${({ theme }) => theme.rgb('bg', 1, theme.isLightMode ? -1 : 1)};
+
+  ${backdropFilter()};
 
   --color: ${({ theme }) => theme.asRgb('fg')};
   --shadow: ${({ theme }) => theme.asRgb('bg', theme.isLightMode ? -8 : 8)};
