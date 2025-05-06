@@ -28,12 +28,12 @@ const GetInvolved: NextPage = () => {
         <Content className='donate-box'>
           <div className='share-buttons'>
             <ShareOnLinkedinButton
-              url={'https://www.operationspark.org/getInvolved/donate'}
+              url={'https://www.operationspark.org/donate'}
               title={'Operation Spark Donations'}
               summary={`We depend on dedicated individuals and organizations to run our programs. Your donation can change someone's life!`}
               source={'Operation Spark'}
             />
-            <ShareOnFacebookButton url={'https://www.operationspark.org/getInvolved/donate'} />
+            <ShareOnFacebookButton url={'https://www.operationspark.org/donate'} />
           </div>
 
           <div className='donate-wrapper' title='Donate to Operation Spark'>
@@ -75,6 +75,7 @@ const GetInvolved: NextPage = () => {
                   src='https://commitchange.com/nonprofits/3745/donate?offsite=t&amp;origin=https://operationspark.org/#!/donate'
                   width='400px'
                   height='500px'
+                  tabIndex={0}
                 ></iframe>
               </div>
             </Center>
@@ -126,6 +127,7 @@ const GetInvolvedStyles = styled.div`
     iframe {
       user-select: none;
       max-width: 100%;
+
       filter: ${({ theme }) =>
         theme.isLightMode
           ? 'invert(0) hue-rotate(-240deg) drop-shadow(0 0 0.5rem rgba(0, 0, 0, 0.1))'
@@ -191,6 +193,10 @@ const GetInvolvedStyles = styled.div`
     border: none;
     color: ${({ theme }) => theme.alpha.fg50};
     font-size: 1rem;
+    padding: 0;
+    line-height: 1;
+    margin-left: 0.5rem;
+
     cursor: pointer;
     :hover {
       color: ${({ theme }) => theme.fg};
