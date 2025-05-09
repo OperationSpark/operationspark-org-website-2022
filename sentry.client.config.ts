@@ -4,16 +4,14 @@
 
 import { browserTracingIntegration } from '@sentry/browser';
 import * as Sentry from '@sentry/nextjs';
-import config from '@this/config';
+import env from '@this/src/clientConfig';
 
-const { SIGNUP_API_ENDPOINT } = config;
+const { SENTRY_ENVIRONMENT } = env;
 
 Sentry.init({
   dsn: 'https://2b3b08a6edc118c629a1e68874df48ae@o4508836956078080.ingest.us.sentry.io/4508966651494400',
 
   integrations: [browserTracingIntegration(), Sentry.replayIntegration()],
-
-  tracePropagationTargets: [SIGNUP_API_ENDPOINT],
 
   // Define how likely traces are sampled. Adjust this value in production, or use tracesSampler for greater control.
   tracesSampleRate: 1,
@@ -28,4 +26,6 @@ Sentry.init({
 
   // Setting this option to true will print useful information to the console while you're setting up Sentry.
   debug: false,
+
+  environment: SENTRY_ENVIRONMENT,
 });

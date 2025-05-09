@@ -3,6 +3,8 @@ export const OVERRIDE_NODE_ENV = process.env.OVERRIDE_NODE_ENV;
 export const FB_PIXEL_ID = process.env.FB_PIXEL_ID;
 export const HIGHSCHOOL_FORM_ACTIVE_UNTIL = process.env.HIGHSCHOOL_FORM_ACTIVE_UNTIL;
 export const HIGHSCHOOL_FORM_RESPONSES_NAME = process.env.HIGHSCHOOL_FORM_RESPONSES_NAME;
+export const SENTRY_ENVIRONMENT = process.env.SENTRY_ENVIRONMENT;
+export const SIGNUP_API_ENDPOINT = process.env.SIGNUP_API_ENDPOINT;
 
 const clientEnvironmentVariables = {
   GOOGLE_ANALYTICS_ID,
@@ -10,6 +12,8 @@ const clientEnvironmentVariables = {
   FB_PIXEL_ID,
   HIGHSCHOOL_FORM_ACTIVE_UNTIL,
   HIGHSCHOOL_FORM_RESPONSES_NAME,
+  SENTRY_ENVIRONMENT,
+  SIGNUP_API_ENDPOINT,
 };
 
 export default clientEnvironmentVariables;
