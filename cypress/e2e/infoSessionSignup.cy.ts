@@ -94,3 +94,56 @@ describe('Info Session Signup', () => {
     cy.get(`input[data-test-id="radio-input-sms-opt-in-false"]`).should('have.value', 'false');
   });
 });
+
+// This test has no HTTP intercepts and will hit the live API. We use it to test live form submissions.
+describe.skip('info session signup - live', () => {
+  const hearAboutOptions = {
+    Google: 1,
+    Facebook: 2,
+    Instagram: 3,
+    Flyer: 4,
+    Radio: 5,
+    'TV/Streaming': 6,
+    SNAP: 7,
+    Other: 8,
+    'Word of Mouth': 9,
+    'Community Event': 10,
+    'Community Organization': 11,
+  } as const;
+
+  it('should submit valid info session signup with status of 200 and clear the input', () => {
+    cy.visit('/programs/workforce/infoSession');
+    // wait for the last input on the form to load
+    cy.get(`[data-test-id="radio-group-sms-opt-in"]`, { timeout: 20_000 }).should('be.visible');
+
+    // Form text fields
+    const textInputs = [
+      { selector: 'info-session-input-first-name', value: ' Tony' },
+      { selector: 'info-session-input-last-name', value: 'Testaroni' },
+      { selector: 'info-session-input-email', value: 'tony.testaroni@operationspark.org' },
+      // Area code for phone number **must** be valid
+      { selector: 'info-session-input-phone', value: '919-456-7890' },
+      { selector: 'info-session-input-zip-code', value: '27514' },
+    ];
+
+    // Fill out text fields
+    textInputs.forEach(({ selector, value }) => {
+      cy.get(`input[data-test-id="${selector}"]`).type(value);
+    });
+
+    // Fill out select fields
+    cy.get(`select[data-test-id="info-session-input-referenced-by"]`).select(
+      hearAboutOptions['TV/Streaming'],
+    );
+    cy.get(`select[data-test-id="info-session-input-session-date"]`).select(1);
+
+    // Attend in person
+    cy.get(`input[data-test-id="radio-input-attending-location-in-person"]`).click();
+
+    // Click SMS radio to 'yes' to check disclaimer message
+    cy.get(`input[data-test-id="radio-input-sms-opt-in-true"]`).click();
+
+    // Click submit button
+    cy.get(`button[data-test-id="info-session-submit-button"]`).click({ scrollBehavior: 'center' });
+  });
+});
