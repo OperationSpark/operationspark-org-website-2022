@@ -1,0 +1,697 @@
+{
+  "questions": [
+    {
+      "category": "Basic Number Series",
+      "question": "What is the next number in the sequence: 2, 4, 8, 16, ...?",
+      "options": ["20", "24", "32", "40"],
+      "answer": "32"
+    },
+    {
+      "category": "Basic Number Series",
+      "question": "If a rectangle has a length of 10 and a width of 5, what is its area?",
+      "options": ["15", "25", "50", "100"],
+      "answer": "50"
+    },
+    {
+      "category": "Basic Number Series",
+      "question": "What is the next number in the sequence: 2, 4, 8, 16, ___?",
+      "answers": ["32", "24", "30", "64"],
+      "correct": 0
+    },
+    {
+      "category": "Basic Number Series",
+      "question": "What comes next in the sequence: 5, 10, 15, 20, ___?",
+      "answers": ["25", "30", "18", "35"],
+      "correct": 0
+    },
+    {
+      "category": "Basic Number Series",
+      "question": "What is the missing number in the series: 7, 14, 21, ___, 35?",
+      "answers": ["28", "30", "32", "25"],
+      "correct": 0
+    },
+    {
+      "category": "Alphabet and Letter Series",
+      "question": "What is the next letter in the series: A, C, E, G, ___?",
+      "answers": ["I", "H", "F", "J"],
+      "correct": 0
+    },
+    {
+      "category": "Alphabet and Letter Series",
+      "question": "Which letter is missing in the series: B, D, F, ___, J?",
+      "answers": ["G", "H", "I", "K"],
+      "correct": 0
+    },
+    {
+      "category": "Alphabet and Letter Series",
+      "question": "What is the 8th letter in the alphabet series: A, B, C, D, E, F, G, ___?",
+      "answers": ["H", "I", "J", "K"],
+      "correct": 0
+    },
+    {
+      "category": "Simple Direction Sense Test",
+      "question": "If you walk 10 meters north and then 10 meters south, what is your final position?",
+      "answers": [
+        "10 meters north",
+        "10 meters south",
+        "20 meters from the starting point",
+        "You are at the same point"
+      ],
+      "correct": 3
+    },
+    {
+      "category": "Simple Direction Sense Test",
+      "question": "A man walks 10 meters east, 10 meters north, and then 10 meters west. Where is he now?",
+      "answers": [
+        "10 meters east of the start",
+        "10 meters north of the start",
+        "10 meters west of the start",
+        "At the starting point"
+      ],
+      "correct": 3
+    },
+    {
+      "category": "Simple Direction Sense Test",
+      "question": "If you start facing west and turn 90° to your right, which direction will you be facing?",
+      "answers": ["North", "South", "East", "West"],
+      "correct": 1
+    },
+    {
+      "category": "Syllogism",
+      "question": "All dogs are animals. Some animals are pets. Are all pets dogs?",
+      "answers": ["Yes", "No", "Cannot be determined", "Some pets are dogs"],
+      "correct": 3
+    },
+    {
+      "category": "Syllogism",
+      "question": "No birds are mammals. All animals are birds. Can an animal be a mammal?",
+      "answers": ["Yes", "No", "Some animals are mammals", "Cannot be determined"],
+      "correct": 1
+    },
+    {
+      "category": "Syllogism",
+      "question": "Some fruits are apples. All apples are red. Are all fruits red?",
+      "answers": ["Yes", "No", "Cannot be determined", "Some fruits are not red"],
+      "correct": 1
+    },
+    {
+      "category": "Venn Diagrams",
+      "question": "If set A represents men and set B represents women, what does the intersection of A and B represent?",
+      "answers": ["Men and women", "Only men", "Only women", "No intersection"],
+      "correct": 3
+    },
+    {
+      "category": "Venn Diagrams",
+      "question": "In a Venn diagram, if set A is fruits and set B is vegetables, what does the intersection represent?",
+      "answers": [
+        "Both fruits and vegetables",
+        "Only fruits",
+        "Only vegetables",
+        "No intersection"
+      ],
+      "correct": 0
+    },
+    {
+      "category": "Venn Diagrams",
+      "question": "If set A represents students who study math and set B represents students who study science, what does the union represent?",
+      "answers": [
+        "Students who study only math",
+        "Students who study only science",
+        "Students who study either math or science",
+        "Students who study both math and science"
+      ],
+      "correct": 2
+    },
+    {
+      "category": "Blood Relations",
+      "question": "A man's father is my uncle. How am I related to the man?",
+      "answers": ["Brother", "Father", "Nephew", "Son"],
+      "correct": 2
+    },
+    {
+      "category": "Blood Relations",
+      "question": "If A is the brother of B, and C is the father of B, what is C to A?",
+      "answers": ["Brother", "Father", "Uncle", "None of the above"],
+      "correct": 1
+    },
+    {
+      "category": "Blood Relations",
+      "question": "P is the daughter of Q, who is the mother of R. How is R related to P?",
+      "answers": ["Sister", "Brother", "Father", "Brother or Sister"],
+      "correct": 3
+    },
+    {
+      "category": "Odd One Out",
+      "question": "Which of the following does not belong?",
+      "answers": ["Cat", "Dog", "Cow", "Snake"],
+      "correct": 3
+    },
+    {
+      "category": "Odd One Out",
+      "question": "Choose the odd one out.",
+      "answers": ["Apple", "Banana", "Carrot", "Mango"],
+      "correct": 2
+    },
+    {
+      "category": "Odd One Out",
+      "question": "Find the odd one out.",
+      "answers": ["Red", "Green", "Square", "Blue"],
+      "correct": 2
+    },
+    {
+      "category": "Coding and Decoding",
+      "question": "In a code language, if “GIRL” is written as “HJSM,” how would you write “BOY”?",
+      "answers": ["CPZ", "CPX", "CNY", "DNY"],
+      "correct": 0
+    },
+    {
+      "category": "Coding and Decoding",
+      "question": "If “PENCIL” is written as “QFODJM,” what is the code for “BOOK”?",
+      "answers": ["CPPL", "CPNL", "CNOJ", "CPOM"],
+      "correct": 0
+    },
+    {
+      "category": "Coding and Decoding",
+      "question": "If “BAT” is coded as “CBU,” what is the code for “CAT”?",
+      "answers": ["DBU", "DBT", "DCT", "DCR"],
+      "correct": 0
+    },
+    {
+      "category": "Input-Output Tests",
+      "question": "What is the next step in the series: Input: 6, 8, 10, ___?",
+      "answers": ["12", "14", "11", "13"],
+      "correct": 0
+    },
+    {
+      "category": "Input-Output Tests",
+      "question": "In a series of instructions, if the output is 3, 9, 18, what is the next number?",
+      "answers": ["27", "24", "20", "21"],
+      "correct": 0
+    },
+    {
+      "category": "Input-Output Tests",
+      "question": "If the pattern is 1, 4, 9, 16, what is the next number?",
+      "answers": ["25", "22", "30", "20"],
+      "correct": 0
+    },
+    {
+      "category": "Statement and Assumptions",
+      "question": "Statement: \"The train is late.\"",
+      "answers": [
+        "Assumption: \"Trains sometimes run late.\"",
+        "Is the assumption valid?",
+        "Yes",
+        "No",
+        "Cannot be determined",
+        "Both A and B"
+      ],
+      "correct": 0
+    },
+    {
+      "category": "Statement and Assumptions",
+      "question": "Statement: \"It's too cold to go outside.\"",
+      "answers": [
+        "Assumption: \"Cold weather makes people stay indoors.\"",
+        "Yes",
+        "No",
+        "Cannot be determined",
+        "Both A and B"
+      ],
+      "correct": 0
+    },
+    {
+      "category": "Statement and Assumptions",
+      "question": "Statement: \"This restaurant is very popular.\"",
+      "answers": [
+        "Assumption: \"The food is good.\"",
+        "Yes",
+        "No",
+        "Cannot be determined",
+        "Both A and B"
+      ],
+      "correct": 0
+    },
+    {
+      "category": "Data Sufficiency",
+      "question": "Is x > 5?",
+      "answers": [
+        "x + 3 > 8",
+        "x - 2 > 3",
+        "Statement (1) alone is sufficient",
+        "Statement (2) alone is sufficient",
+        "Both statements together are sufficient",
+        "Neither statement is sufficient"
+      ],
+      "correct": 2
+    },
+    {
+      "category": "Data Sufficiency",
+      "question": "What is the value of x?",
+      "answers": [
+        "x + 5 = 10",
+        "x = 7",
+        "Statement (1) alone is sufficient",
+        "Statement (2) alone is sufficient",
+        "Both statements together are sufficient",
+        "Neither statement is sufficient"
+      ],
+      "correct": 0
+    },
+    {
+      "category": "Data Sufficiency",
+      "question": "Is the number divisible by 6?",
+      "answers": [
+        "The number is even.",
+        "The sum of the digits is divisible by 3.",
+        "Statement (1) alone is sufficient",
+        "Statement (2) alone is sufficient",
+        "Both statements together are sufficient",
+        "Neither statement is sufficient"
+      ],
+      "correct": 2
+    },
+    {
+      "category": "Seating Arrangement",
+      "question": "In how many ways can 5 people sit around a round table?",
+      "answers": ["120", "24", "60", "10"],
+      "correct": 0
+    },
+    {
+      "category": "Seating Arrangement",
+      "question": "If P, Q, R, and S are sitting in a row, how many ways can they be arranged if P must sit next to Q?",
+      "answers": ["12", "6", "24", "8"],
+      "correct": 1
+    },
+    {
+      "category": "Seating Arrangement",
+      "question": "How many ways can 5 students be seated in 5 chairs?",
+      "answers": ["10", "25", "120", "60"],
+      "correct": 2
+    },
+    {
+      "category": "Critical Reasoning",
+      "question": "\"All dogs bark.\"",
+      "answers": [
+        "Which of the following is a valid conclusion?",
+        "Some dogs do not bark.",
+        "All dogs bark loudly.",
+        "Every dog barks.",
+        "Some dogs bark."
+      ],
+      "correct": 2
+    },
+    {
+      "category": "Critical Reasoning",
+      "question": "\"Only if you work hard will you succeed.\"",
+      "answers": [
+        "Which of the following can be inferred?",
+        "Hard work guarantees success.",
+        "Success comes only with hard work.",
+        "Hard work and success are unrelated.",
+        "Success can occur without hard work."
+      ],
+      "correct": 1
+    },
+    {
+      "category": "Critical Reasoning",
+      "question": "\"If it rains tomorrow, the match will be canceled.\"",
+      "answers": [
+        "Which of the following is true?",
+        "The match is canceled.",
+        "The match will not be canceled.",
+        "It rained yesterday.",
+        "It may rain tomorrow."
+      ],
+      "correct": 3
+    },
+    {
+      "category": "Logical Sequence",
+      "question": "What is the next number in the sequence: 1, 4, 9, 16, ___?",
+      "answers": ["25", "36", "21", "30"],
+      "correct": 0
+    },
+    {
+      "category": "Logical Sequence",
+      "question": "What comes next in the sequence: 2, 5, 10, 17, ___?",
+      "answers": ["22", "26", "29", "32"],
+      "correct": 1
+    },
+    {
+      "category": "Logical Sequence",
+      "question": "Find the next number in the series: 3, 9, 27, 81, ___?",
+      "answers": ["243", "300", "3000", "234"],
+      "correct": 0
+    },
+    {
+      "category": "Puzzles Based on Clocks and Calendars",
+      "question": "What time will it be 45 minutes after 4:30?",
+      "answers": ["5:15", "5:10", "5:00", "5:45"],
+      "correct": 0
+    },
+    {
+      "category": "Puzzles Based on Clocks and Calendars",
+      "question": "If it is 3:30 PM now, what will be the time after 120 minutes?",
+      "answers": ["4:30", "6:30", "5:30", "7:30"],
+      "correct": 1
+    },
+    {
+      "category": "Puzzles Based on Clocks and Calendars",
+      "question": "How many days are there in the month of February in a leap year?",
+      "answers": ["28", "29", "30", "31"],
+      "correct": 1
+    },
+    {
+      "category": "Assumption and Conclusion",
+      "question": "Statement: \"He is always punctual.\"",
+      "answers": ["Assumption: \"He never misses a meeting.\"", "Yes", "No", "Neither A nor B"],
+      "correct": 0
+    },
+    {
+      "category": "Assumption and Conclusion",
+      "question": "Statement: \"This laptop is very fast.\"",
+      "answers": [
+        "Assumption: \"The laptop can handle heavy tasks.\"",
+        "Yes",
+        "No",
+        "Neither A nor B"
+      ],
+      "correct": 0
+    },
+    {
+      "category": "Assumption and Conclusion",
+      "question": "Statement: \"It's raining heavily.\"",
+      "answers": ["Assumption: \"The roads may be flooded.\"", "Yes", "No", "Neither A nor B"],
+      "correct": 0
+    },
+    {
+      "category": "Distance and Direction",
+      "question": "If a train travels 60 miles in 1 hour, how far will it travel in 3 hours?",
+      "options": ["120 miles", "180 miles", "240 miles", "300 miles"],
+      "answer": "180 miles"
+    },
+    {
+      "category": "Distance and Direction",
+      "question": "If a car travels at a speed of 50 miles per hour for 2.5 hours, how far does it travel?",
+      "options": ["75 miles", "125 miles", "150 miles", "175 miles"],
+      "answer": "125 miles"
+    },
+    {
+      "category": "Distance and Direction",
+      "question": "If it's 5:00 PM in New York, and New Orleans is one hour behind New York, what time is it in New York when it's 1:00 AM in New Orleans?",
+      "options": ["4:00 PM", "1:00 AM", "2:00 AM", "2:00 PM"],
+      "answer": "2:00 AM"
+    },
+    {
+      "category": "Coded Relationships",
+      "question": "If “MOTHER” is written as “NTUFSJ,” how will you write “FATHER”?",
+      "answers": ["GUBGFS", "GUGFES", "GUGFHS", "GUGFIS"],
+      "correct": 0
+    },
+    {
+      "category": "Coded Relationships",
+      "question": "If “GREAT” is written as “HSBUF,” how would “WORLD” be coded?",
+      "answers": ["XPSEM", "YQTMF", "YQTMG", "XQSEK"],
+      "correct": 1
+    },
+    {
+      "category": "Coded Relationships",
+      "question": "If “CARE” is written as “DBSF,” how is “HELP” written?",
+      "answers": ["IFQO", "IQPN", "IQRM", "IQQN"],
+      "correct": 0
+    },
+    {
+      "category": "Analogies",
+      "question": "Dog is to Bark as Cat is to ___?",
+      "answers": ["Growl", "Meow", "Roar", "Hiss"],
+      "correct": 1
+    },
+    {
+      "category": "Analogies",
+      "question": "Sun is to Day as Moon is to ___?",
+      "answers": ["Night", "Sky", "Earth", "Star"],
+      "correct": 0
+    },
+    {
+      "category": "Analogies",
+      "question": "Book is to Reading as Fork is to ___?",
+      "answers": ["Eating", "Writing", "Cooking", "Digging"],
+      "correct": 0
+    },
+    {
+      "category": "Flowcharts",
+      "question": "A flowchart starts with a circle and ends with a rectangle. What does the circle represent?",
+      "answers": ["Decision", "Start", "End", "Process"],
+      "correct": 1
+    },
+    {
+      "category": "Flowcharts",
+      "question": "Which shape is used to represent decision points in flowcharts?",
+      "answers": ["Square", "Circle", "Diamond", "Rectangle"],
+      "correct": 2
+    },
+    {
+      "category": "Flowcharts",
+      "question": "In a flowchart, which symbol represents a process or action?",
+      "answers": ["Rectangle", "Circle", "Diamond", "Parallelogram"],
+      "correct": 0
+    },
+    {
+      "category": "Pattern Recognition in Figures",
+      "question": "Which shape completes the pattern: Circle, Square, Triangle, ___?",
+      "answers": ["Circle", "Square", "Triangle", "Rectangle"],
+      "correct": 0
+    },
+    {
+      "category": "Pattern Recognition in Figures",
+      "question": "What comes next in the pattern: 1, 4, 9, 16, ___?",
+      "answers": ["22", "25", "30", "24"],
+      "correct": 1
+    },
+    {
+      "category": "Pattern Recognition in Figures",
+      "question": "Identify the next shape in the sequence: Circle, Square, Triangle, ___?",
+      "answers": ["Hexagon", "Pentagon", "Circle", "Octagon"],
+      "correct": 1
+    },
+    {
+      "category": "Advanced Puzzles and Riddles",
+      "question": "A man gave a beggar 10 coins. The beggar gave him 7 coins back. How many coins does the beggar have now?",
+      "answers": ["10", "3", "7", "17"],
+      "correct": 1
+    },
+    {
+      "category": "Advanced Puzzles and Riddles",
+      "question": "If a clock takes 5 seconds to strike 5, how many seconds will it take to strike 10?",
+      "answers": ["10", "15", "20", "25"],
+      "correct": 1
+    },
+    {
+      "category": "Advanced Puzzles and Riddles",
+      "question": "I am not alive, but I grow; I don't have lungs, but I need air; I don't have a mouth, but water kills me. What am I?",
+      "answers": ["Fire", "Plant", "Cloud", "Sun"],
+      "correct": 0
+    },
+    {
+      "category": "Advanced Data Interpretation",
+      "question": "What is the average of the numbers 6, 8, 10, 12, 14?",
+      "answers": ["10", "12", "14", "8"],
+      "correct": 0
+    },
+    {
+      "category": "Advanced Data Interpretation",
+      "question": "If 50% of the items in a store are sold in the first month and 30% are sold in the second month, how many items are left if 200 items were initially present?",
+      "answers": ["80", "100", "120", "140"],
+      "correct": 2
+    },
+    {
+      "category": "Advanced Data Interpretation",
+      "question": "A pie chart shows that 30% of 1000 people like football, 20% like basketball, and 50% like cricket. How many people like cricket?",
+      "answers": ["200", "500", "300", "400"],
+      "correct": 1
+    },
+    {
+      "category": "Logical Deduction with Multiple Variables",
+      "question": "If A > B, B > C, and C > D, which of the following is true?",
+      "answers": ["A > D", "D > A", "C > A", "B > D"],
+      "correct": 0
+    },
+    {
+      "category": "Logical Deduction with Multiple Variables",
+      "question": "If 3x + 4y = 12 and x + y = 4, what is the value of x?",
+      "answers": ["1", "2", "3", "4"],
+      "correct": 1
+    },
+    {
+      "category": "Logical Deduction with Multiple Variables",
+      "question": "If the price of 5 apples is equal to 3 oranges, and the price of 2 oranges is 4 bananas, what is the relationship between apples and bananas?",
+      "answers": [
+        "1 apple = 2 bananas",
+        "1 apple = 3 bananas",
+        "1 apple = 5 bananas",
+        "1 apple = 4 bananas"
+      ],
+      "correct": 0
+    },
+    {
+      "category": "Decision Making and Problem Solving",
+      "question": "apples, the second contains oranges, and the third contains both apples and oranges. The labels on the boxes are wrong. How can you correctly label them by picking just one fruit from one box?",
+      "answers": [
+        "Pick from the box labeled \"Apples and Oranges\"",
+        "Pick from the box labeled \"Oranges\"",
+        "Pick from the box labeled \"Apples\"",
+        "None of the above"
+      ],
+      "correct": 0
+    },
+    {
+      "category": "Decision Making and Problem Solving",
+      "question": "A man is pushing a cart with 6 bags, each bag contains 5 apples. How many apples are in the cart?",
+      "answers": ["6", "5", "30", "10"],
+      "correct": 2
+    },
+    {
+      "category": "Decision Making and Problem Solving",
+      "question": "A man needs to cross a river with a goat, a wolf, and a cabbage. He can only take one at a time, but if left alone, the wolf will eat the goat, and the goat will eat the cabbage. How does he get all three across safely?",
+      "answers": [
+        "Take the goat first",
+        "Take the wolf first",
+        "Take the cabbage first",
+        "None of the above"
+      ],
+      "correct": 0
+    },
+    {
+      "category": "Mathematical Logic and Set Theory",
+      "question": "If A = {1, 2, 3, 4} and B = {3, 4, 5, 6}, what is A ∩ B?",
+      "answers": ["{1, 2}", "{3, 4}", "{5, 6}", "{1, 2, 5, 6}"],
+      "correct": 1
+    },
+    {
+      "category": "Mathematical Logic and Set Theory",
+      "question": "What is the union of sets A = {2, 4, 6} and B = {1, 2, 3}?",
+      "answers": ["{2, 3, 4, 6}", "{1, 2, 3, 4, 6}", "{1, 2, 3}", "{4, 6}"],
+      "correct": 1
+    },
+    {
+      "category": "Mathematical Logic and Set Theory",
+      "question": "If X = {1, 2, 3} and Y = {3, 4, 5}, what is the difference X - Y?",
+      "answers": ["{1, 2}", "{4, 5}", "{3}", "{1, 2, 4, 5}"],
+      "correct": 0
+    },
+    {
+      "category": "Advanced Blood Relations",
+      "question": "A woman is looking at a picture of someone. Her friend asks, \"Who are you looking at?\" The woman replies, \"Brothers and sisters, I have none. But the father of the person in the picture is my father's son.\" Who is in the picture?",
+      "answers": ["Her son", "Her brother", "Her husband", "Her father"],
+      "correct": 0
+    },
+    {
+      "category": "Advanced Blood Relations",
+      "question": "A man's wife's brother is my father's son. How am I related to the man?",
+      "answers": ["Son", "Brother", "Nephew", "Father"],
+      "correct": 2
+    },
+    {
+      "category": "Advanced Blood Relations",
+      "question": "A man is looking at a picture. His friend asks, \"Who are you looking at?\" The man replies, \"Brothers and sisters, I have none. But the mother of the person in the picture is my mother's daughter.\" Who is in the picture?",
+      "answers": ["His sister", "His daughter", "His wife", "His mother"],
+      "correct": 1
+    },
+    {
+      "category": "Circular Arrangement",
+      "question": "In a circular arrangement, if A is sitting to the right of B and C is sitting opposite to B, where is C sitting in relation to A?",
+      "answers": ["Left", "Right", "Opposite", "Next to"],
+      "correct": 2
+    },
+    {
+      "category": "Circular Arrangement",
+      "question": "How many ways can 6 people be arranged around a round table?",
+      "answers": ["720", "360", "120", "60"],
+      "correct": 0
+    },
+    {
+      "category": "Circular Arrangement",
+      "question": "If five people are sitting in a circle, and two people are always next to each other, how many seating arrangements are possible?",
+      "answers": ["24", "10", "12", "60"],
+      "correct": 2
+    },
+    {
+      "category": "Statement and Argument Analysis",
+      "question": "Statement: \"We should not invest in this business.\"",
+      "answers": [
+        "Argument: \"The market is unstable, and the business model is weak.\"",
+        "Is the argument valid?",
+        "Yes",
+        "No"
+      ],
+      "correct": 0
+    },
+    {
+      "category": "Statement and Argument Analysis",
+      "question": "Statement: \"The government should provide free healthcare.\"",
+      "answers": [
+        "Argument: \"Healthcare is a basic necessity, and people cannot afford it.\"",
+        "Is the argument valid?",
+        "Yes",
+        "No"
+      ],
+      "correct": 0
+    },
+    {
+      "category": "Statement and Argument Analysis",
+      "question": "Statement: \"The school should introduce online classes.\"",
+      "answers": [
+        "Argument: \"Online classes will make learning more accessible.\"",
+        "Is the argument valid?",
+        "Yes",
+        "No"
+      ],
+      "correct": 0
+    },
+    {
+      "category": "Advanced Syllogisms",
+      "question": "All dogs are animals. Some animals are pets. Are all pets dogs?",
+      "answers": ["Yes", "No", "Cannot be determined", "Some pets are dogs"],
+      "correct": 3
+    },
+    {
+      "category": "Advanced Syllogisms",
+      "question": "No birds are mammals. All animals are birds. Can an animal be a mammal?",
+      "answers": ["Yes", "No", "Some animals are mammals", "Cannot be determined"],
+      "correct": 1
+    },
+    {
+      "category": "Advanced Syllogisms",
+      "question": "Some fruits are apples. All apples are red. Are all fruits red?",
+      "answers": ["Yes", "No", "Cannot be determined", "Some fruits are not red"],
+      "correct": 1
+    },
+    {
+      "category": "Game Theory and Strategy Problems",
+      "question": "In a two-player game, Player 1 can choose A or B, and Player 2 can choose X or Y. If Player 1 chooses A, they win if Player 2 chooses X, and lose if Player 2 chooses Y. If Player 1 chooses B, they win if Player 2 chooses Y. What is the optimal strategy for Player 1?",
+      "answers": [
+        "Always choose A",
+        "Always choose B",
+        "Choose A or B based on Player 2's move",
+        "Choose A randomly"
+      ],
+      "correct": 2
+    },
+    {
+      "category": "Game Theory and Strategy Problems",
+      "question": "In a game where two players choose between two options each, if both players choose the same option, Player 1 wins. What is the best strategy for Player 1?",
+      "answers": [
+        "Always choose the same option",
+        "Randomly choose an option",
+        "Always choose the opposite option",
+        "Choose based on Player 2's last move"
+      ],
+      "correct": 1
+    },
+    {
+      "category": "Game Theory and Strategy Problems",
+      "question": "In a strategic game, Player 1's choices are 10, 20, and 30 points. Player 2's choices are 5, 15, and 25 points. If Player 1 chooses 30 and Player 2 chooses 25, what is the outcome?",
+      "answers": ["Player 1 wins", "Player 2 wins", "Draw", "None of the above"],
+      "correct": 0
+    }
+  ]
+}
