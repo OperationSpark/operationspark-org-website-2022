@@ -1,0 +1,2634 @@
+{
+  "questions": [
+    {
+      "id": "z49mt2p",
+      "text": "What is the next number in the sequence: 2, 4, 8, 16, ...?",
+      "correct": "tmuabfx",
+      "answers": [
+        {
+          "id": "vf059dd",
+          "isCorrect": false,
+          "text": "20"
+        },
+        {
+          "id": "cnoefqg",
+          "isCorrect": false,
+          "text": "24"
+        },
+        {
+          "id": "tmuabfx",
+          "isCorrect": true,
+          "text": "32"
+        },
+        {
+          "id": "L4z0wxf",
+          "isCorrect": false,
+          "text": "40"
+        }
+      ]
+    },
+    {
+      "id": "v00tenh",
+      "text": "If a rectangle has a length of 10 and a width of 5, what is its area?",
+      "correct": "j67wk0z",
+      "answers": [
+        {
+          "id": "Nqueqbr",
+          "isCorrect": false,
+          "text": "15"
+        },
+        {
+          "id": "Tow8mf5",
+          "isCorrect": false,
+          "text": "25"
+        },
+        {
+          "id": "j67wk0z",
+          "isCorrect": true,
+          "text": "50"
+        },
+        {
+          "id": "Nlvabov",
+          "isCorrect": false,
+          "text": "100"
+        }
+      ]
+    },
+    {
+      "id": "x2o9ybp",
+      "text": "What is the next number in the sequence: 2, 4, 8, 16, ___?",
+      "correct": "d5xvk29",
+      "answers": [
+        {
+          "id": "d5xvk29",
+          "isCorrect": true,
+          "text": "32"
+        },
+        {
+          "id": "Rlwhtfz",
+          "isCorrect": false,
+          "text": "24"
+        },
+        {
+          "id": "i0um3ah",
+          "isCorrect": false,
+          "text": "30"
+        },
+        {
+          "id": "Umqk1re",
+          "isCorrect": false,
+          "text": "64"
+        }
+      ]
+    },
+    {
+      "id": "N691beh",
+      "text": "What comes next in the sequence: 5, 10, 15, 20, ___?",
+      "correct": "qmw1roq",
+      "answers": [
+        {
+          "id": "qmw1roq",
+          "isCorrect": true,
+          "text": "25"
+        },
+        {
+          "id": "Q4br15g",
+          "isCorrect": false,
+          "text": "30"
+        },
+        {
+          "id": "Id2t1z3",
+          "isCorrect": false,
+          "text": "18"
+        },
+        {
+          "id": "yu4mpu0",
+          "isCorrect": false,
+          "text": "35"
+        }
+      ]
+    },
+    {
+      "id": "Jxymgnu",
+      "text": "What is the missing number in the series: 7, 14, 21, ___, 35?",
+      "correct": "m03wvvr",
+      "answers": [
+        {
+          "id": "m03wvvr",
+          "isCorrect": true,
+          "text": "28"
+        },
+        {
+          "id": "Heqyuw1",
+          "isCorrect": false,
+          "text": "30"
+        },
+        {
+          "id": "Vfpvxcj",
+          "isCorrect": false,
+          "text": "32"
+        },
+        {
+          "id": "fd5jlfa",
+          "isCorrect": false,
+          "text": "25"
+        }
+      ]
+    },
+    {
+      "id": "ss3kgsk",
+      "text": "What is the next letter in the series: A, C, E, G, ___?",
+      "correct": "c1ylmco",
+      "answers": [
+        {
+          "id": "c1ylmco",
+          "isCorrect": true,
+          "text": "I"
+        },
+        {
+          "id": "W9qlpfj",
+          "isCorrect": false,
+          "text": "H"
+        },
+        {
+          "id": "Frfswx6",
+          "isCorrect": false,
+          "text": "F"
+        },
+        {
+          "id": "w3kwyrt",
+          "isCorrect": false,
+          "text": "J"
+        }
+      ]
+    },
+    {
+      "id": "r8csvze",
+      "text": "Which letter is missing in the series: B, D, F, ___, J?",
+      "correct": "Szrrakr",
+      "answers": [
+        {
+          "id": "Szrrakr",
+          "isCorrect": true,
+          "text": "G"
+        },
+        {
+          "id": "coyip9s",
+          "isCorrect": false,
+          "text": "H"
+        },
+        {
+          "id": "fpz7rna",
+          "isCorrect": false,
+          "text": "I"
+        },
+        {
+          "id": "Io2gf2i",
+          "isCorrect": false,
+          "text": "K"
+        }
+      ]
+    },
+    {
+      "id": "hpx1ti9",
+      "text": "What is the 8th letter in the alphabet series: A, B, C, D, E, F, G, ___?",
+      "correct": "gdcsgdo",
+      "answers": [
+        {
+          "id": "gdcsgdo",
+          "isCorrect": true,
+          "text": "H"
+        },
+        {
+          "id": "Yk1u6rf",
+          "isCorrect": false,
+          "text": "I"
+        },
+        {
+          "id": "k7ld8wb",
+          "isCorrect": false,
+          "text": "J"
+        },
+        {
+          "id": "E41bus2",
+          "isCorrect": false,
+          "text": "K"
+        }
+      ]
+    },
+    {
+      "id": "tfz7j1e",
+      "text": "If you walk 10 meters north and then 10 meters south, what is your final position?",
+      "correct": "Bcvsbus",
+      "answers": [
+        {
+          "id": "hy65nha",
+          "isCorrect": false,
+          "text": "10 meters north"
+        },
+        {
+          "id": "mpmsul1",
+          "isCorrect": false,
+          "text": "10 meters south"
+        },
+        {
+          "id": "w9k3iaq",
+          "isCorrect": false,
+          "text": "20 meters from the starting point"
+        },
+        {
+          "id": "Bcvsbus",
+          "isCorrect": true,
+          "text": "You are at the same point"
+        }
+      ]
+    },
+    {
+      "id": "h1tc8sr",
+      "text": "A man walks 10 meters east, 10 meters north, and then 10 meters west. Where is he now?",
+      "correct": "Mpraf3w",
+      "answers": [
+        {
+          "id": "wqyf32a",
+          "isCorrect": false,
+          "text": "10 meters east of the start"
+        },
+        {
+          "id": "Ucykazn",
+          "isCorrect": false,
+          "text": "10 meters north of the start"
+        },
+        {
+          "id": "ockjvrn",
+          "isCorrect": false,
+          "text": "10 meters west of the start"
+        },
+        {
+          "id": "Mpraf3w",
+          "isCorrect": true,
+          "text": "At the starting point"
+        }
+      ]
+    },
+    {
+      "id": "z7psg8z",
+      "text": "If you start facing west and turn 90° to your right, which direction will you be facing?",
+      "correct": "w5ntxaq",
+      "answers": [
+        {
+          "id": "zj2pg4z",
+          "isCorrect": false,
+          "text": "North"
+        },
+        {
+          "id": "w5ntxaq",
+          "isCorrect": true,
+          "text": "South"
+        },
+        {
+          "id": "fzkd3pe",
+          "isCorrect": false,
+          "text": "East"
+        },
+        {
+          "id": "ls5dti2",
+          "isCorrect": false,
+          "text": "West"
+        }
+      ]
+    },
+    {
+      "id": "Pmk45mc",
+      "text": "All dogs are animals. Some animals are pets. Are all pets dogs?",
+      "correct": "Fnf04yb",
+      "answers": [
+        {
+          "id": "qpplzv0",
+          "isCorrect": false,
+          "text": "Yes"
+        },
+        {
+          "id": "rjuwdo4",
+          "isCorrect": false,
+          "text": "No"
+        },
+        {
+          "id": "Ep88p4r",
+          "isCorrect": false,
+          "text": "Cannot be determined"
+        },
+        {
+          "id": "Fnf04yb",
+          "isCorrect": true,
+          "text": "Some pets are dogs"
+        }
+      ]
+    },
+    {
+      "id": "Vxp2t49",
+      "text": "No birds are mammals. All animals are birds. Can an animal be a mammal?",
+      "correct": "ow2v0an",
+      "answers": [
+        {
+          "id": "Hoi5j8x",
+          "isCorrect": false,
+          "text": "Yes"
+        },
+        {
+          "id": "ow2v0an",
+          "isCorrect": true,
+          "text": "No"
+        },
+        {
+          "id": "pwbmnkg",
+          "isCorrect": false,
+          "text": "Some animals are mammals"
+        },
+        {
+          "id": "Woswsye",
+          "isCorrect": false,
+          "text": "Cannot be determined"
+        }
+      ]
+    },
+    {
+      "id": "Uv1yp9m",
+      "text": "Some fruits are apples. All apples are red. Are all fruits red?",
+      "correct": "Dg3z8k9",
+      "answers": [
+        {
+          "id": "Y178yn9",
+          "isCorrect": false,
+          "text": "Yes"
+        },
+        {
+          "id": "Dg3z8k9",
+          "isCorrect": true,
+          "text": "No"
+        },
+        {
+          "id": "b43f0kd",
+          "isCorrect": false,
+          "text": "Cannot be determined"
+        },
+        {
+          "id": "zevvuxa",
+          "isCorrect": false,
+          "text": "Some fruits are not red"
+        }
+      ]
+    },
+    {
+      "id": "lnvt579",
+      "text": "If set A represents men and set B represents women, what does the intersection of A and B represent?",
+      "correct": "Ykgz38r",
+      "answers": [
+        {
+          "id": "G22phg3",
+          "isCorrect": false,
+          "text": "Men and women"
+        },
+        {
+          "id": "Oorgodc",
+          "isCorrect": false,
+          "text": "Only men"
+        },
+        {
+          "id": "dj1fxdi",
+          "isCorrect": false,
+          "text": "Only women"
+        },
+        {
+          "id": "Ykgz38r",
+          "isCorrect": true,
+          "text": "No intersection"
+        }
+      ]
+    },
+    {
+      "id": "A8cbk82",
+      "text": "In a Venn diagram, if set A is fruits and set B is vegetables, what does the intersection represent?",
+      "correct": "Zhl5ig0",
+      "answers": [
+        {
+          "id": "Zhl5ig0",
+          "isCorrect": true,
+          "text": "Both fruits and vegetables"
+        },
+        {
+          "id": "o3ayl45",
+          "isCorrect": false,
+          "text": "Only fruits"
+        },
+        {
+          "id": "rxwnvtf",
+          "isCorrect": false,
+          "text": "Only vegetables"
+        },
+        {
+          "id": "u9g9ebz",
+          "isCorrect": false,
+          "text": "No intersection"
+        }
+      ]
+    },
+    {
+      "id": "v13m7cd",
+      "text": "If set A represents students who study math and set B represents students who study science, what does the union represent?",
+      "correct": "Iia25s8",
+      "answers": [
+        {
+          "id": "Trls8gw",
+          "isCorrect": false,
+          "text": "Students who study only math"
+        },
+        {
+          "id": "Yb23j75",
+          "isCorrect": false,
+          "text": "Students who study only science"
+        },
+        {
+          "id": "Iia25s8",
+          "isCorrect": true,
+          "text": "Students who study either math or science"
+        },
+        {
+          "id": "Bgrv1km",
+          "isCorrect": false,
+          "text": "Students who study both math and science"
+        }
+      ]
+    },
+    {
+      "id": "zxxgxuo",
+      "text": "A man's father is my uncle. How am I related to the man?",
+      "correct": "Ydjflai",
+      "answers": [
+        {
+          "id": "Vm27wft",
+          "isCorrect": false,
+          "text": "Brother"
+        },
+        {
+          "id": "kez4pex",
+          "isCorrect": false,
+          "text": "Father"
+        },
+        {
+          "id": "Ydjflai",
+          "isCorrect": true,
+          "text": "Nephew"
+        },
+        {
+          "id": "L6ni12t",
+          "isCorrect": false,
+          "text": "Son"
+        }
+      ]
+    },
+    {
+      "id": "Xqup9qe",
+      "text": "If A is the brother of B, and C is the father of B, what is C to A?",
+      "correct": "b2x93ok",
+      "answers": [
+        {
+          "id": "S8f42cb",
+          "isCorrect": false,
+          "text": "Brother"
+        },
+        {
+          "id": "b2x93ok",
+          "isCorrect": true,
+          "text": "Father"
+        },
+        {
+          "id": "X20e8lt",
+          "isCorrect": false,
+          "text": "Uncle"
+        },
+        {
+          "id": "jzwev3v",
+          "isCorrect": false,
+          "text": "None of the above"
+        }
+      ]
+    },
+    {
+      "id": "suyrve4",
+      "text": "P is the daughter of Q, who is the mother of R. How is R related to P?",
+      "correct": "gi1lj4e",
+      "answers": [
+        {
+          "id": "js8redu",
+          "isCorrect": false,
+          "text": "Sister"
+        },
+        {
+          "id": "nsav9re",
+          "isCorrect": false,
+          "text": "Brother"
+        },
+        {
+          "id": "wfv26ox",
+          "isCorrect": false,
+          "text": "Father"
+        },
+        {
+          "id": "gi1lj4e",
+          "isCorrect": true,
+          "text": "Brother or Sister"
+        }
+      ]
+    },
+    {
+      "id": "jyi3iv3",
+      "text": "Which of the following does not belong?",
+      "correct": "eeojyhg",
+      "answers": [
+        {
+          "id": "e483oxk",
+          "isCorrect": false,
+          "text": "Cat"
+        },
+        {
+          "id": "V7b026x",
+          "isCorrect": false,
+          "text": "Dog"
+        },
+        {
+          "id": "x3db6sh",
+          "isCorrect": false,
+          "text": "Cow"
+        },
+        {
+          "id": "eeojyhg",
+          "isCorrect": true,
+          "text": "Snake"
+        }
+      ]
+    },
+    {
+      "id": "Xpw9i56",
+      "text": "Choose the odd one out.",
+      "correct": "clppkim",
+      "answers": [
+        {
+          "id": "v3tmxjl",
+          "isCorrect": false,
+          "text": "Apple"
+        },
+        {
+          "id": "Xt6gfwu",
+          "isCorrect": false,
+          "text": "Banana"
+        },
+        {
+          "id": "clppkim",
+          "isCorrect": true,
+          "text": "Carrot"
+        },
+        {
+          "id": "Puwngi4",
+          "isCorrect": false,
+          "text": "Mango"
+        }
+      ]
+    },
+    {
+      "id": "ei27boj",
+      "text": "Find the odd one out.",
+      "correct": "M59gujz",
+      "answers": [
+        {
+          "id": "jsz7hd4",
+          "isCorrect": false,
+          "text": "Red"
+        },
+        {
+          "id": "Smb7gdo",
+          "isCorrect": false,
+          "text": "Green"
+        },
+        {
+          "id": "M59gujz",
+          "isCorrect": true,
+          "text": "Square"
+        },
+        {
+          "id": "Sg8474q",
+          "isCorrect": false,
+          "text": "Blue"
+        }
+      ]
+    },
+    {
+      "id": "v7h6437",
+      "text": "In a code language, if “GIRL” is written as “HJSM,” how would you write “BOY”?",
+      "correct": "U80z972",
+      "answers": [
+        {
+          "id": "U80z972",
+          "isCorrect": true,
+          "text": "CPZ"
+        },
+        {
+          "id": "Mmesl4s",
+          "isCorrect": false,
+          "text": "CPX"
+        },
+        {
+          "id": "Imqy0zs",
+          "isCorrect": false,
+          "text": "CNY"
+        },
+        {
+          "id": "fxvlbrs",
+          "isCorrect": false,
+          "text": "DNY"
+        }
+      ]
+    },
+    {
+      "id": "N3tjgvn",
+      "text": "If “PENCIL” is written as “QFODJM,” what is the code for “BOOK”?",
+      "correct": "Qjp385z",
+      "answers": [
+        {
+          "id": "Qjp385z",
+          "isCorrect": true,
+          "text": "CPPL"
+        },
+        {
+          "id": "Mex7eiq",
+          "isCorrect": false,
+          "text": "CPNL"
+        },
+        {
+          "id": "bi02voz",
+          "isCorrect": false,
+          "text": "CNOJ"
+        },
+        {
+          "id": "Fycyuoy",
+          "isCorrect": false,
+          "text": "CPOM"
+        }
+      ]
+    },
+    {
+      "id": "L360fbp",
+      "text": "If “BAT” is coded as “CBU,” what is the code for “CAT”?",
+      "correct": "xjcbvfg",
+      "answers": [
+        {
+          "id": "xjcbvfg",
+          "isCorrect": true,
+          "text": "DBU"
+        },
+        {
+          "id": "Wk7c0r9",
+          "isCorrect": false,
+          "text": "DBT"
+        },
+        {
+          "id": "v116m2y",
+          "isCorrect": false,
+          "text": "DCT"
+        },
+        {
+          "id": "Upkyzvg",
+          "isCorrect": false,
+          "text": "DCR"
+        }
+      ]
+    },
+    {
+      "id": "gnrei0j",
+      "text": "What is the next step in the series: Input: 6, 8, 10, ___?",
+      "correct": "t4b7nuz",
+      "answers": [
+        {
+          "id": "t4b7nuz",
+          "isCorrect": true,
+          "text": "12"
+        },
+        {
+          "id": "Y969d2y",
+          "isCorrect": false,
+          "text": "14"
+        },
+        {
+          "id": "z40hk88",
+          "isCorrect": false,
+          "text": "11"
+        },
+        {
+          "id": "I59ga1g",
+          "isCorrect": false,
+          "text": "13"
+        }
+      ]
+    },
+    {
+      "id": "R148l7l",
+      "text": "In a series of instructions, if the output is 3, 9, 18, what is the next number?",
+      "correct": "Z2r2esn",
+      "answers": [
+        {
+          "id": "Z2r2esn",
+          "isCorrect": true,
+          "text": "27"
+        },
+        {
+          "id": "H9aidr4",
+          "isCorrect": false,
+          "text": "24"
+        },
+        {
+          "id": "N01lvg7",
+          "isCorrect": false,
+          "text": "20"
+        },
+        {
+          "id": "Gz79uoi",
+          "isCorrect": false,
+          "text": "21"
+        }
+      ]
+    },
+    {
+      "id": "hagzcrd",
+      "text": "If the pattern is 1, 4, 9, 16, what is the next number?",
+      "correct": "Wj2eis6",
+      "answers": [
+        {
+          "id": "Wj2eis6",
+          "isCorrect": true,
+          "text": "25"
+        },
+        {
+          "id": "K8wprlv",
+          "isCorrect": false,
+          "text": "22"
+        },
+        {
+          "id": "Euwglm3",
+          "isCorrect": false,
+          "text": "30"
+        },
+        {
+          "id": "wm8xylp",
+          "isCorrect": false,
+          "text": "20"
+        }
+      ]
+    },
+    {
+      "id": "j5ao60o",
+      "text": "Statement: \"The train is late.\"",
+      "correct": "Ch0yly4",
+      "answers": [
+        {
+          "id": "Ch0yly4",
+          "isCorrect": true,
+          "text": "Assumption: \"Trains sometimes run late.\""
+        },
+        {
+          "id": "Sjgtafi",
+          "isCorrect": false,
+          "text": "Is the assumption valid?"
+        },
+        {
+          "id": "Q4511ht",
+          "isCorrect": false,
+          "text": "Yes"
+        },
+        {
+          "id": "Xmz5mjd",
+          "isCorrect": false,
+          "text": "No"
+        },
+        {
+          "id": "Qoe48xz",
+          "isCorrect": false,
+          "text": "Cannot be determined"
+        },
+        {
+          "id": "Aw3d4sf",
+          "isCorrect": false,
+          "text": "Both A and B"
+        }
+      ]
+    },
+    {
+      "id": "c68i6bf",
+      "text": "Statement: \"It's too cold to go outside.\"",
+      "correct": "eutg2hh",
+      "answers": [
+        {
+          "id": "eutg2hh",
+          "isCorrect": true,
+          "text": "Assumption: \"Cold weather makes people stay indoors.\""
+        },
+        {
+          "id": "thztnqj",
+          "isCorrect": false,
+          "text": "Yes"
+        },
+        {
+          "id": "Lxx0wne",
+          "isCorrect": false,
+          "text": "No"
+        },
+        {
+          "id": "kx2hom1",
+          "isCorrect": false,
+          "text": "Cannot be determined"
+        },
+        {
+          "id": "Whhlw0d",
+          "isCorrect": false,
+          "text": "Both A and B"
+        }
+      ]
+    },
+    {
+      "id": "Dc45qho",
+      "text": "Statement: \"This restaurant is very popular.\"",
+      "correct": "y8xwoyt",
+      "answers": [
+        {
+          "id": "y8xwoyt",
+          "isCorrect": true,
+          "text": "Assumption: \"The food is good.\""
+        },
+        {
+          "id": "N1pwvza",
+          "isCorrect": false,
+          "text": "Yes"
+        },
+        {
+          "id": "Sdn2ece",
+          "isCorrect": false,
+          "text": "No"
+        },
+        {
+          "id": "q7imdza",
+          "isCorrect": false,
+          "text": "Cannot be determined"
+        },
+        {
+          "id": "Sj2fxvn",
+          "isCorrect": false,
+          "text": "Both A and B"
+        }
+      ]
+    },
+    {
+      "id": "Mr7v6w7",
+      "text": "Is x > 5?",
+      "correct": "Vil1r2w",
+      "answers": [
+        {
+          "id": "y7xob2z",
+          "isCorrect": false,
+          "text": "x + 3 > 8"
+        },
+        {
+          "id": "azo56mh",
+          "isCorrect": false,
+          "text": "x - 2 > 3"
+        },
+        {
+          "id": "Vil1r2w",
+          "isCorrect": true,
+          "text": "Statement (1) alone is sufficient"
+        },
+        {
+          "id": "Ncouieo",
+          "isCorrect": false,
+          "text": "Statement (2) alone is sufficient"
+        },
+        {
+          "id": "O15tj1q",
+          "isCorrect": false,
+          "text": "Both statements together are sufficient"
+        },
+        {
+          "id": "f093sq2",
+          "isCorrect": false,
+          "text": "Neither statement is sufficient"
+        }
+      ]
+    },
+    {
+      "id": "J2h5oul",
+      "text": "What is the value of x?",
+      "correct": "soq7rty",
+      "answers": [
+        {
+          "id": "soq7rty",
+          "isCorrect": true,
+          "text": "x + 5 = 10"
+        },
+        {
+          "id": "r291tuu",
+          "isCorrect": false,
+          "text": "x = 7"
+        },
+        {
+          "id": "Vuj4cn6",
+          "isCorrect": false,
+          "text": "Statement (1) alone is sufficient"
+        },
+        {
+          "id": "Afs2jsr",
+          "isCorrect": false,
+          "text": "Statement (2) alone is sufficient"
+        },
+        {
+          "id": "fxphxwp",
+          "isCorrect": false,
+          "text": "Both statements together are sufficient"
+        },
+        {
+          "id": "Arpvryr",
+          "isCorrect": false,
+          "text": "Neither statement is sufficient"
+        }
+      ]
+    },
+    {
+      "id": "Hyezvsi",
+      "text": "Is the number divisible by 6?",
+      "correct": "zzzd0tx",
+      "answers": [
+        {
+          "id": "khp7zl8",
+          "isCorrect": false,
+          "text": "The number is even."
+        },
+        {
+          "id": "Qbevbkw",
+          "isCorrect": false,
+          "text": "The sum of the digits is divisible by 3."
+        },
+        {
+          "id": "zzzd0tx",
+          "isCorrect": true,
+          "text": "Statement (1) alone is sufficient"
+        },
+        {
+          "id": "Firwtrx",
+          "isCorrect": false,
+          "text": "Statement (2) alone is sufficient"
+        },
+        {
+          "id": "Igzmjhw",
+          "isCorrect": false,
+          "text": "Both statements together are sufficient"
+        },
+        {
+          "id": "Jw5xm80",
+          "isCorrect": false,
+          "text": "Neither statement is sufficient"
+        }
+      ]
+    },
+    {
+      "id": "ww4y918",
+      "text": "In how many ways can 5 people sit around a round table?",
+      "correct": "e34y2vp",
+      "answers": [
+        {
+          "id": "e34y2vp",
+          "isCorrect": true,
+          "text": "120"
+        },
+        {
+          "id": "b6wkvl0",
+          "isCorrect": false,
+          "text": "24"
+        },
+        {
+          "id": "svftv65",
+          "isCorrect": false,
+          "text": "60"
+        },
+        {
+          "id": "Cr0ftyh",
+          "isCorrect": false,
+          "text": "10"
+        }
+      ]
+    },
+    {
+      "id": "ow91elx",
+      "text": "If P, Q, R, and S are sitting in a row, how many ways can they be arranged if P must sit next to Q?",
+      "correct": "Eymjq2j",
+      "answers": [
+        {
+          "id": "qsg9cw1",
+          "isCorrect": false,
+          "text": "12"
+        },
+        {
+          "id": "Eymjq2j",
+          "isCorrect": true,
+          "text": "6"
+        },
+        {
+          "id": "Gv9khs8",
+          "isCorrect": false,
+          "text": "24"
+        },
+        {
+          "id": "W6ofv2x",
+          "isCorrect": false,
+          "text": "8"
+        }
+      ]
+    },
+    {
+      "id": "oqxgogn",
+      "text": "How many ways can 5 students be seated in 5 chairs?",
+      "correct": "Fv4v7qv",
+      "answers": [
+        {
+          "id": "ak3x2lz",
+          "isCorrect": false,
+          "text": "10"
+        },
+        {
+          "id": "Tym264q",
+          "isCorrect": false,
+          "text": "25"
+        },
+        {
+          "id": "Fv4v7qv",
+          "isCorrect": true,
+          "text": "120"
+        },
+        {
+          "id": "M1sdes3",
+          "isCorrect": false,
+          "text": "60"
+        }
+      ]
+    },
+    {
+      "id": "oldl83q",
+      "text": "\"All dogs bark.\"",
+      "correct": "Sz1ucvo",
+      "answers": [
+        {
+          "id": "nvq3i30",
+          "isCorrect": false,
+          "text": "Which of the following is a valid conclusion?"
+        },
+        {
+          "id": "K5vkkye",
+          "isCorrect": false,
+          "text": "Some dogs do not bark."
+        },
+        {
+          "id": "Sz1ucvo",
+          "isCorrect": true,
+          "text": "All dogs bark loudly."
+        },
+        {
+          "id": "yv5x2m2",
+          "isCorrect": false,
+          "text": "Every dog barks."
+        },
+        {
+          "id": "Aeo5y2s",
+          "isCorrect": false,
+          "text": "Some dogs bark."
+        }
+      ]
+    },
+    {
+      "id": "r9ep8zj",
+      "text": "\"Only if you work hard will you succeed.\"",
+      "correct": "Rktr9bc",
+      "answers": [
+        {
+          "id": "Okj835x",
+          "isCorrect": false,
+          "text": "Which of the following can be inferred?"
+        },
+        {
+          "id": "Rktr9bc",
+          "isCorrect": true,
+          "text": "Hard work guarantees success."
+        },
+        {
+          "id": "b3lsy8w",
+          "isCorrect": false,
+          "text": "Success comes only with hard work."
+        },
+        {
+          "id": "o8z4ked",
+          "isCorrect": false,
+          "text": "Hard work and success are unrelated."
+        },
+        {
+          "id": "Rybp8he",
+          "isCorrect": false,
+          "text": "Success can occur without hard work."
+        }
+      ]
+    },
+    {
+      "id": "Wcahu2m",
+      "text": "\"If it rains tomorrow, the match will be canceled.\"",
+      "correct": "Kiqarir",
+      "answers": [
+        {
+          "id": "hg1gaa4",
+          "isCorrect": false,
+          "text": "Which of the following is true?"
+        },
+        {
+          "id": "Am9e93y",
+          "isCorrect": false,
+          "text": "The match is canceled."
+        },
+        {
+          "id": "Zbweiup",
+          "isCorrect": false,
+          "text": "The match will not be canceled."
+        },
+        {
+          "id": "Kiqarir",
+          "isCorrect": true,
+          "text": "It rained yesterday."
+        },
+        {
+          "id": "M09v9o3",
+          "isCorrect": false,
+          "text": "It may rain tomorrow."
+        }
+      ]
+    },
+    {
+      "id": "Odb4799",
+      "text": "What is the next number in the sequence: 1, 4, 9, 16, ___?",
+      "correct": "Cjfp08j",
+      "answers": [
+        {
+          "id": "Cjfp08j",
+          "isCorrect": true,
+          "text": "25"
+        },
+        {
+          "id": "Dmupowx",
+          "isCorrect": false,
+          "text": "36"
+        },
+        {
+          "id": "x3452oa",
+          "isCorrect": false,
+          "text": "21"
+        },
+        {
+          "id": "Pf00f37",
+          "isCorrect": false,
+          "text": "30"
+        }
+      ]
+    },
+    {
+      "id": "Uo4yelt",
+      "text": "What comes next in the sequence: 2, 5, 10, 17, ___?",
+      "correct": "Igbb5ao",
+      "answers": [
+        {
+          "id": "Stfc8ub",
+          "isCorrect": false,
+          "text": "22"
+        },
+        {
+          "id": "Igbb5ao",
+          "isCorrect": true,
+          "text": "26"
+        },
+        {
+          "id": "oewu8s8",
+          "isCorrect": false,
+          "text": "29"
+        },
+        {
+          "id": "W2zsyoz",
+          "isCorrect": false,
+          "text": "32"
+        }
+      ]
+    },
+    {
+      "id": "Bo43okm",
+      "text": "Find the next number in the series: 3, 9, 27, 81, ___?",
+      "correct": "W2cptwg",
+      "answers": [
+        {
+          "id": "W2cptwg",
+          "isCorrect": true,
+          "text": "243"
+        },
+        {
+          "id": "Pz10kac",
+          "isCorrect": false,
+          "text": "300"
+        },
+        {
+          "id": "yidcgic",
+          "isCorrect": false,
+          "text": "3000"
+        },
+        {
+          "id": "Rakbhcg",
+          "isCorrect": false,
+          "text": "234"
+        }
+      ]
+    },
+    {
+      "id": "wuq1n4y",
+      "text": "What time will it be 45 minutes after 4:30?",
+      "correct": "e6boted",
+      "answers": [
+        {
+          "id": "e6boted",
+          "isCorrect": true,
+          "text": "5:15"
+        },
+        {
+          "id": "Ojflmih",
+          "isCorrect": false,
+          "text": "5:10"
+        },
+        {
+          "id": "Dhc8b4q",
+          "isCorrect": false,
+          "text": "5:00"
+        },
+        {
+          "id": "Axbqkwr",
+          "isCorrect": false,
+          "text": "5:45"
+        }
+      ]
+    },
+    {
+      "id": "Pc116gr",
+      "text": "If it is 3:30 PM now, what will be the time after 120 minutes?",
+      "correct": "P1ikvwf",
+      "answers": [
+        {
+          "id": "sdf32sw",
+          "isCorrect": false,
+          "text": "4:30"
+        },
+        {
+          "id": "P1ikvwf",
+          "isCorrect": true,
+          "text": "6:30"
+        },
+        {
+          "id": "Iyqi05o",
+          "isCorrect": false,
+          "text": "5:30"
+        },
+        {
+          "id": "Qza23fk",
+          "isCorrect": false,
+          "text": "7:30"
+        }
+      ]
+    },
+    {
+      "id": "s2wcdnv",
+      "text": "How many days are there in the month of February in a leap year?",
+      "correct": "luhvexf",
+      "answers": [
+        {
+          "id": "U95pvhw",
+          "isCorrect": false,
+          "text": "28"
+        },
+        {
+          "id": "luhvexf",
+          "isCorrect": true,
+          "text": "29"
+        },
+        {
+          "id": "N2lhj2a",
+          "isCorrect": false,
+          "text": "30"
+        },
+        {
+          "id": "vi5w306",
+          "isCorrect": false,
+          "text": "31"
+        }
+      ]
+    },
+    {
+      "id": "Fcmjzae",
+      "text": "Statement: \"He is always punctual.\"",
+      "correct": "q8av3oy",
+      "answers": [
+        {
+          "id": "q8av3oy",
+          "isCorrect": true,
+          "text": "Assumption: \"He never misses a meeting.\""
+        },
+        {
+          "id": "Idbaqrl",
+          "isCorrect": false,
+          "text": "Yes"
+        },
+        {
+          "id": "z460ojb",
+          "isCorrect": false,
+          "text": "No"
+        },
+        {
+          "id": "euiqumw",
+          "isCorrect": false,
+          "text": "Neither A nor B"
+        }
+      ]
+    },
+    {
+      "id": "Q72byt7",
+      "text": "Statement: \"This laptop is very fast.\"",
+      "correct": "oykncg6",
+      "answers": [
+        {
+          "id": "oykncg6",
+          "isCorrect": true,
+          "text": "Assumption: \"The laptop can handle heavy tasks.\""
+        },
+        {
+          "id": "Qnmi1il",
+          "isCorrect": false,
+          "text": "Yes"
+        },
+        {
+          "id": "z8sg9l8",
+          "isCorrect": false,
+          "text": "No"
+        },
+        {
+          "id": "lhpc1pd",
+          "isCorrect": false,
+          "text": "Neither A nor B"
+        }
+      ]
+    },
+    {
+      "id": "eu8fciu",
+      "text": "Statement: \"It's raining heavily.\"",
+      "correct": "Xjyyk99",
+      "answers": [
+        {
+          "id": "Xjyyk99",
+          "isCorrect": true,
+          "text": "Assumption: \"The roads may be flooded.\""
+        },
+        {
+          "id": "idfcvqd",
+          "isCorrect": false,
+          "text": "Yes"
+        },
+        {
+          "id": "n1kuf3v",
+          "isCorrect": false,
+          "text": "No"
+        },
+        {
+          "id": "Sltewx3",
+          "isCorrect": false,
+          "text": "Neither A nor B"
+        }
+      ]
+    },
+    {
+      "id": "Spi9sgc",
+      "text": "If a train travels 60 miles in 1 hour, how far will it travel in 3 hours?",
+      "correct": "Pbb7tup",
+      "answers": [
+        {
+          "id": "rkzden1",
+          "isCorrect": false,
+          "text": "120 miles"
+        },
+        {
+          "id": "Pbb7tup",
+          "isCorrect": true,
+          "text": "180 miles"
+        },
+        {
+          "id": "C770usx",
+          "isCorrect": false,
+          "text": "240 miles"
+        },
+        {
+          "id": "Eltsmo2",
+          "isCorrect": false,
+          "text": "300 miles"
+        }
+      ]
+    },
+    {
+      "id": "B8q010d",
+      "text": "If a car travels at a speed of 50 miles per hour for 2.5 hours, how far does it travel?",
+      "correct": "zelpq9r",
+      "answers": [
+        {
+          "id": "f02eqjr",
+          "isCorrect": false,
+          "text": "75 miles"
+        },
+        {
+          "id": "zelpq9r",
+          "isCorrect": true,
+          "text": "125 miles"
+        },
+        {
+          "id": "sw4dt3d",
+          "isCorrect": false,
+          "text": "150 miles"
+        },
+        {
+          "id": "Viozd0u",
+          "isCorrect": false,
+          "text": "175 miles"
+        }
+      ]
+    },
+    {
+      "id": "Psxtzzb",
+      "text": "If it's 5:00 PM in New York, and New Orleans is one hour behind New York, what time is it in New York when it's 1:00 AM in New Orleans?",
+      "correct": "r8t7ng5",
+      "answers": [
+        {
+          "id": "vnepqtk",
+          "isCorrect": false,
+          "text": "4:00 PM"
+        },
+        {
+          "id": "Eqynzrb",
+          "isCorrect": false,
+          "text": "1:00 AM"
+        },
+        {
+          "id": "r8t7ng5",
+          "isCorrect": true,
+          "text": "2:00 AM"
+        },
+        {
+          "id": "I8or9wf",
+          "isCorrect": false,
+          "text": "2:00 PM"
+        }
+      ]
+    },
+    {
+      "id": "nodmvmp",
+      "text": "If “MOTHER” is written as “NTUFSJ,” how will you write “FATHER”?",
+      "correct": "ihrrbqz",
+      "answers": [
+        {
+          "id": "ihrrbqz",
+          "isCorrect": true,
+          "text": "GUBGFS"
+        },
+        {
+          "id": "Cpjlw9o",
+          "isCorrect": false,
+          "text": "GUGFES"
+        },
+        {
+          "id": "Pxku33w",
+          "isCorrect": false,
+          "text": "GUGFHS"
+        },
+        {
+          "id": "f6ko6q0",
+          "isCorrect": false,
+          "text": "GUGFIS"
+        }
+      ]
+    },
+    {
+      "id": "F1fdpur",
+      "text": "If “GREAT” is written as “HSBUF,” how would “WORLD” be coded?",
+      "correct": "Blkghyf",
+      "answers": [
+        {
+          "id": "nzin7rt",
+          "isCorrect": false,
+          "text": "XPSEM"
+        },
+        {
+          "id": "Blkghyf",
+          "isCorrect": true,
+          "text": "YQTMF"
+        },
+        {
+          "id": "Bvyattr",
+          "isCorrect": false,
+          "text": "YQTMG"
+        },
+        {
+          "id": "jub1g83",
+          "isCorrect": false,
+          "text": "XQSEK"
+        }
+      ]
+    },
+    {
+      "id": "Xiwgdus",
+      "text": "If “CARE” is written as “DBSF,” how is “HELP” written?",
+      "correct": "M8p3mo8",
+      "answers": [
+        {
+          "id": "M8p3mo8",
+          "isCorrect": true,
+          "text": "IFQO"
+        },
+        {
+          "id": "Abamp63",
+          "isCorrect": false,
+          "text": "IQPN"
+        },
+        {
+          "id": "Wfd5g48",
+          "isCorrect": false,
+          "text": "IQRM"
+        },
+        {
+          "id": "Vh20rj3",
+          "isCorrect": false,
+          "text": "IQQN"
+        }
+      ]
+    },
+    {
+      "id": "F366zwv",
+      "text": "Dog is to Bark as Cat is to ___?",
+      "correct": "vc7y62r",
+      "answers": [
+        {
+          "id": "Nsbzwl0",
+          "isCorrect": false,
+          "text": "Growl"
+        },
+        {
+          "id": "vc7y62r",
+          "isCorrect": true,
+          "text": "Meow"
+        },
+        {
+          "id": "bmq2h6l",
+          "isCorrect": false,
+          "text": "Roar"
+        },
+        {
+          "id": "bdr1e63",
+          "isCorrect": false,
+          "text": "Hiss"
+        }
+      ]
+    },
+    {
+      "id": "Ubrmil7",
+      "text": "Sun is to Day as Moon is to ___?",
+      "correct": "X5gott8",
+      "answers": [
+        {
+          "id": "X5gott8",
+          "isCorrect": true,
+          "text": "Night"
+        },
+        {
+          "id": "Dc8cwgk",
+          "isCorrect": false,
+          "text": "Sky"
+        },
+        {
+          "id": "El65sc5",
+          "isCorrect": false,
+          "text": "Earth"
+        },
+        {
+          "id": "aw5ux61",
+          "isCorrect": false,
+          "text": "Star"
+        }
+      ]
+    },
+    {
+      "id": "g2x921a",
+      "text": "Book is to Reading as Fork is to ___?",
+      "correct": "Vflo8xe",
+      "answers": [
+        {
+          "id": "Vflo8xe",
+          "isCorrect": true,
+          "text": "Eating"
+        },
+        {
+          "id": "ly5v2gj",
+          "isCorrect": false,
+          "text": "Writing"
+        },
+        {
+          "id": "t4bf5bn",
+          "isCorrect": false,
+          "text": "Cooking"
+        },
+        {
+          "id": "ufko15o",
+          "isCorrect": false,
+          "text": "Digging"
+        }
+      ]
+    },
+    {
+      "id": "kdrhviz",
+      "text": "A flowchart starts with a circle and ends with a rectangle. What does the circle represent?",
+      "correct": "Octdu9t",
+      "answers": [
+        {
+          "id": "Iuxinoa",
+          "isCorrect": false,
+          "text": "Decision"
+        },
+        {
+          "id": "Octdu9t",
+          "isCorrect": true,
+          "text": "Start"
+        },
+        {
+          "id": "sckjvdr",
+          "isCorrect": false,
+          "text": "End"
+        },
+        {
+          "id": "n80zruu",
+          "isCorrect": false,
+          "text": "Process"
+        }
+      ]
+    },
+    {
+      "id": "I28ru6x",
+      "text": "Which shape is used to represent decision points in flowcharts?",
+      "correct": "U1qqaez",
+      "answers": [
+        {
+          "id": "zxz57ly",
+          "isCorrect": false,
+          "text": "Square"
+        },
+        {
+          "id": "sgaw7gd",
+          "isCorrect": false,
+          "text": "Circle"
+        },
+        {
+          "id": "U1qqaez",
+          "isCorrect": true,
+          "text": "Diamond"
+        },
+        {
+          "id": "Wqzsiki",
+          "isCorrect": false,
+          "text": "Rectangle"
+        }
+      ]
+    },
+    {
+      "id": "nwwpmce",
+      "text": "In a flowchart, which symbol represents a process or action?",
+      "correct": "ddgtom0",
+      "answers": [
+        {
+          "id": "ddgtom0",
+          "isCorrect": true,
+          "text": "Rectangle"
+        },
+        {
+          "id": "Riut7vb",
+          "isCorrect": false,
+          "text": "Circle"
+        },
+        {
+          "id": "d5b89gp",
+          "isCorrect": false,
+          "text": "Diamond"
+        },
+        {
+          "id": "S53cdrq",
+          "isCorrect": false,
+          "text": "Parallelogram"
+        }
+      ]
+    },
+    {
+      "id": "xb95e7x",
+      "text": "Which shape completes the pattern: Circle, Square, Triangle, ___?",
+      "correct": "C3r6rk4",
+      "answers": [
+        {
+          "id": "C3r6rk4",
+          "isCorrect": true,
+          "text": "Circle"
+        },
+        {
+          "id": "Wdrw4kh",
+          "isCorrect": false,
+          "text": "Square"
+        },
+        {
+          "id": "y6hl6op",
+          "isCorrect": false,
+          "text": "Triangle"
+        },
+        {
+          "id": "K6vmbhl",
+          "isCorrect": false,
+          "text": "Rectangle"
+        }
+      ]
+    },
+    {
+      "id": "syjovgk",
+      "text": "What comes next in the pattern: 1, 4, 9, 16, ___?",
+      "correct": "Cxudz7m",
+      "answers": [
+        {
+          "id": "t6w990g",
+          "isCorrect": false,
+          "text": "22"
+        },
+        {
+          "id": "Cxudz7m",
+          "isCorrect": true,
+          "text": "25"
+        },
+        {
+          "id": "Ob71h14",
+          "isCorrect": false,
+          "text": "30"
+        },
+        {
+          "id": "C9yddcf",
+          "isCorrect": false,
+          "text": "24"
+        }
+      ]
+    },
+    {
+      "id": "Jrdum34",
+      "text": "Identify the next shape in the sequence: Circle, Square, Triangle, ___?",
+      "correct": "lfndreb",
+      "answers": [
+        {
+          "id": "X7t4nja",
+          "isCorrect": false,
+          "text": "Hexagon"
+        },
+        {
+          "id": "lfndreb",
+          "isCorrect": true,
+          "text": "Pentagon"
+        },
+        {
+          "id": "Wsjypgn",
+          "isCorrect": false,
+          "text": "Circle"
+        },
+        {
+          "id": "hgpiakd",
+          "isCorrect": false,
+          "text": "Octagon"
+        }
+      ]
+    },
+    {
+      "id": "Fbaku97",
+      "text": "A man gave a beggar 10 coins. The beggar gave him 7 coins back. How many coins does the beggar have now?",
+      "correct": "nlvak7l",
+      "answers": [
+        {
+          "id": "yulaysr",
+          "isCorrect": false,
+          "text": "10"
+        },
+        {
+          "id": "nlvak7l",
+          "isCorrect": true,
+          "text": "3"
+        },
+        {
+          "id": "Pwr1szy",
+          "isCorrect": false,
+          "text": "7"
+        },
+        {
+          "id": "Rz4r2h6",
+          "isCorrect": false,
+          "text": "17"
+        }
+      ]
+    },
+    {
+      "id": "wdct0d5",
+      "text": "If a clock takes 5 seconds to strike 5, how many seconds will it take to strike 10?",
+      "correct": "Bmswjbe",
+      "answers": [
+        {
+          "id": "Zrc7c45",
+          "isCorrect": false,
+          "text": "10"
+        },
+        {
+          "id": "Bmswjbe",
+          "isCorrect": true,
+          "text": "15"
+        },
+        {
+          "id": "Pb80x7b",
+          "isCorrect": false,
+          "text": "20"
+        },
+        {
+          "id": "U1leo1l",
+          "isCorrect": false,
+          "text": "25"
+        }
+      ]
+    },
+    {
+      "id": "A3cws28",
+      "text": "I am not alive, but I grow; I don't have lungs, but I need air; I don't have a mouth, but water kills me. What am I?",
+      "correct": "n6jdq5p",
+      "answers": [
+        {
+          "id": "n6jdq5p",
+          "isCorrect": true,
+          "text": "Fire"
+        },
+        {
+          "id": "x5vm3t8",
+          "isCorrect": false,
+          "text": "Plant"
+        },
+        {
+          "id": "Pdrdtth",
+          "isCorrect": false,
+          "text": "Cloud"
+        },
+        {
+          "id": "Xs8c477",
+          "isCorrect": false,
+          "text": "Sun"
+        }
+      ]
+    },
+    {
+      "id": "F9r0u44",
+      "text": "What is the average of the numbers 6, 8, 10, 12, 14?",
+      "correct": "Z1la8h2",
+      "answers": [
+        {
+          "id": "Z1la8h2",
+          "isCorrect": true,
+          "text": "10"
+        },
+        {
+          "id": "X0ghchl",
+          "isCorrect": false,
+          "text": "12"
+        },
+        {
+          "id": "q12xgrr",
+          "isCorrect": false,
+          "text": "14"
+        },
+        {
+          "id": "g16emtl",
+          "isCorrect": false,
+          "text": "8"
+        }
+      ]
+    },
+    {
+      "id": "g3w87ew",
+      "text": "If 50% of the items in a store are sold in the first month and 30% are sold in the second month, how many items are left if 200 items were initially present?",
+      "correct": "evbhua0",
+      "answers": [
+        {
+          "id": "rjhyemh",
+          "isCorrect": false,
+          "text": "80"
+        },
+        {
+          "id": "r5lb51x",
+          "isCorrect": false,
+          "text": "100"
+        },
+        {
+          "id": "evbhua0",
+          "isCorrect": true,
+          "text": "120"
+        },
+        {
+          "id": "Wbdwu1z",
+          "isCorrect": false,
+          "text": "140"
+        }
+      ]
+    },
+    {
+      "id": "Cddv31y",
+      "text": "A pie chart shows that 30% of 1000 people like football, 20% like basketball, and 50% like cricket. How many people like cricket?",
+      "correct": "R7jb32u",
+      "answers": [
+        {
+          "id": "Cf9g93e",
+          "isCorrect": false,
+          "text": "200"
+        },
+        {
+          "id": "R7jb32u",
+          "isCorrect": true,
+          "text": "500"
+        },
+        {
+          "id": "Uz8pnjr",
+          "isCorrect": false,
+          "text": "300"
+        },
+        {
+          "id": "Jd6lsyb",
+          "isCorrect": false,
+          "text": "400"
+        }
+      ]
+    },
+    {
+      "id": "glztreq",
+      "text": "If A > B, B > C, and C > D, which of the following is true?",
+      "correct": "e5rmj0n",
+      "answers": [
+        {
+          "id": "e5rmj0n",
+          "isCorrect": true,
+          "text": "A > D"
+        },
+        {
+          "id": "k15v0el",
+          "isCorrect": false,
+          "text": "D > A"
+        },
+        {
+          "id": "Ut5fpth",
+          "isCorrect": false,
+          "text": "C > A"
+        },
+        {
+          "id": "Nd89m8j",
+          "isCorrect": false,
+          "text": "B > D"
+        }
+      ]
+    },
+    {
+      "id": "ymfqr1q",
+      "text": "If 3x + 4y = 12 and x + y = 4, what is the value of x?",
+      "correct": "cx7zqih",
+      "answers": [
+        {
+          "id": "Pm5q6m7",
+          "isCorrect": false,
+          "text": "1"
+        },
+        {
+          "id": "cx7zqih",
+          "isCorrect": true,
+          "text": "2"
+        },
+        {
+          "id": "Xazauae",
+          "isCorrect": false,
+          "text": "3"
+        },
+        {
+          "id": "ak5k4x8",
+          "isCorrect": false,
+          "text": "4"
+        }
+      ]
+    },
+    {
+      "id": "Y80lawk",
+      "text": "If the price of 5 apples is equal to 3 oranges, and the price of 2 oranges is 4 bananas, what is the relationship between apples and bananas?",
+      "correct": "usj06bc",
+      "answers": [
+        {
+          "id": "usj06bc",
+          "isCorrect": true,
+          "text": "1 apple = 2 bananas"
+        },
+        {
+          "id": "afu1fsi",
+          "isCorrect": false,
+          "text": "1 apple = 3 bananas"
+        },
+        {
+          "id": "edrweh5",
+          "isCorrect": false,
+          "text": "1 apple = 5 bananas"
+        },
+        {
+          "id": "Y2mu9j9",
+          "isCorrect": false,
+          "text": "1 apple = 4 bananas"
+        }
+      ]
+    },
+    {
+      "id": "ih3hwjg",
+      "text": "apples, the second contains oranges, and the third contains both apples and oranges. The labels on the boxes are wrong. How can you correctly label them by picking just one fruit from one box?",
+      "correct": "wriurfq",
+      "answers": [
+        {
+          "id": "wriurfq",
+          "isCorrect": true,
+          "text": "Pick from the box labeled \"Apples and Oranges\""
+        },
+        {
+          "id": "gok6dbd",
+          "isCorrect": false,
+          "text": "Pick from the box labeled \"Oranges\""
+        },
+        {
+          "id": "lwfz6yd",
+          "isCorrect": false,
+          "text": "Pick from the box labeled \"Apples\""
+        },
+        {
+          "id": "K01icve",
+          "isCorrect": false,
+          "text": "None of the above"
+        }
+      ]
+    },
+    {
+      "id": "Jtzlbkb",
+      "text": "A man is pushing a cart with 6 bags, each bag contains 5 apples. How many apples are in the cart?",
+      "correct": "zufx4b8",
+      "answers": [
+        {
+          "id": "mgdya9r",
+          "isCorrect": false,
+          "text": "6"
+        },
+        {
+          "id": "th44sa8",
+          "isCorrect": false,
+          "text": "5"
+        },
+        {
+          "id": "zufx4b8",
+          "isCorrect": true,
+          "text": "30"
+        },
+        {
+          "id": "ob7fvvu",
+          "isCorrect": false,
+          "text": "10"
+        }
+      ]
+    },
+    {
+      "id": "tmflu7o",
+      "text": "A man needs to cross a river with a goat, a wolf, and a cabbage. He can only take one at a time, but if left alone, the wolf will eat the goat, and the goat will eat the cabbage. How does he get all three across safely?",
+      "correct": "idyk1ki",
+      "answers": [
+        {
+          "id": "idyk1ki",
+          "isCorrect": true,
+          "text": "Take the goat first"
+        },
+        {
+          "id": "Blvvsdc",
+          "isCorrect": false,
+          "text": "Take the wolf first"
+        },
+        {
+          "id": "E4egu1t",
+          "isCorrect": false,
+          "text": "Take the cabbage first"
+        },
+        {
+          "id": "w3ow9y7",
+          "isCorrect": false,
+          "text": "None of the above"
+        }
+      ]
+    },
+    {
+      "id": "h50cp1p",
+      "text": "If A = {1, 2, 3, 4} and B = {3, 4, 5, 6}, what is A ∩ B?",
+      "correct": "tb5mhcg",
+      "answers": [
+        {
+          "id": "wgnrrjr",
+          "isCorrect": false,
+          "text": "{1, 2}"
+        },
+        {
+          "id": "tb5mhcg",
+          "isCorrect": true,
+          "text": "{3, 4}"
+        },
+        {
+          "id": "gmuyoql",
+          "isCorrect": false,
+          "text": "{5, 6}"
+        },
+        {
+          "id": "Qojn3tg",
+          "isCorrect": false,
+          "text": "{1, 2, 5, 6}"
+        }
+      ]
+    },
+    {
+      "id": "Mzaezzh",
+      "text": "What is the union of sets A = {2, 4, 6} and B = {1, 2, 3}?",
+      "correct": "Zsi8ps9",
+      "answers": [
+        {
+          "id": "Haitexy",
+          "isCorrect": false,
+          "text": "{2, 3, 4, 6}"
+        },
+        {
+          "id": "Zsi8ps9",
+          "isCorrect": true,
+          "text": "{1, 2, 3, 4, 6}"
+        },
+        {
+          "id": "o44n4lj",
+          "isCorrect": false,
+          "text": "{1, 2, 3}"
+        },
+        {
+          "id": "J7l5kds",
+          "isCorrect": false,
+          "text": "{4, 6}"
+        }
+      ]
+    },
+    {
+      "id": "v9cnkx3",
+      "text": "If X = {1, 2, 3} and Y = {3, 4, 5}, what is the difference X - Y?",
+      "correct": "Adond8s",
+      "answers": [
+        {
+          "id": "Adond8s",
+          "isCorrect": true,
+          "text": "{1, 2}"
+        },
+        {
+          "id": "b98ye4d",
+          "isCorrect": false,
+          "text": "{4, 5}"
+        },
+        {
+          "id": "Lm5j9uy",
+          "isCorrect": false,
+          "text": "{3}"
+        },
+        {
+          "id": "t74n33l",
+          "isCorrect": false,
+          "text": "{1, 2, 4, 5}"
+        }
+      ]
+    },
+    {
+      "id": "Nzwe0qf",
+      "text": "A woman is looking at a picture of someone. Her friend asks, \"Who are you looking at?\" The woman replies, \"Brothers and sisters, I have none. But the father of the person in the picture is my father's son.\" Who is in the picture?",
+      "correct": "W2b4z4j",
+      "answers": [
+        {
+          "id": "W2b4z4j",
+          "isCorrect": true,
+          "text": "Her son"
+        },
+        {
+          "id": "Qsas1dv",
+          "isCorrect": false,
+          "text": "Her brother"
+        },
+        {
+          "id": "l6yg9yr",
+          "isCorrect": false,
+          "text": "Her husband"
+        },
+        {
+          "id": "Rueqwo6",
+          "isCorrect": false,
+          "text": "Her father"
+        }
+      ]
+    },
+    {
+      "id": "bxn1ogi",
+      "text": "A man's wife's brother is my father's son. How am I related to the man?",
+      "correct": "p4fdkka",
+      "answers": [
+        {
+          "id": "tnprd6n",
+          "isCorrect": false,
+          "text": "Son"
+        },
+        {
+          "id": "Wojonhm",
+          "isCorrect": false,
+          "text": "Brother"
+        },
+        {
+          "id": "p4fdkka",
+          "isCorrect": true,
+          "text": "Nephew"
+        },
+        {
+          "id": "Oy1ow27",
+          "isCorrect": false,
+          "text": "Father"
+        }
+      ]
+    },
+    {
+      "id": "Tntoamr",
+      "text": "A man is looking at a picture. His friend asks, \"Who are you looking at?\" The man replies, \"Brothers and sisters, I have none. But the mother of the person in the picture is my mother's daughter.\" Who is in the picture?",
+      "correct": "qr184np",
+      "answers": [
+        {
+          "id": "Zrs3w06",
+          "isCorrect": false,
+          "text": "His sister"
+        },
+        {
+          "id": "qr184np",
+          "isCorrect": true,
+          "text": "His daughter"
+        },
+        {
+          "id": "yrfjstp",
+          "isCorrect": false,
+          "text": "His wife"
+        },
+        {
+          "id": "da3kyd8",
+          "isCorrect": false,
+          "text": "His mother"
+        }
+      ]
+    },
+    {
+      "id": "jvlv95t",
+      "text": "In a circular arrangement, if A is sitting to the right of B and C is sitting opposite to B, where is C sitting in relation to A?",
+      "correct": "Epqgehk",
+      "answers": [
+        {
+          "id": "evdfzz0",
+          "isCorrect": false,
+          "text": "Left"
+        },
+        {
+          "id": "Mfa3daq",
+          "isCorrect": false,
+          "text": "Right"
+        },
+        {
+          "id": "Epqgehk",
+          "isCorrect": true,
+          "text": "Opposite"
+        },
+        {
+          "id": "Wx2kz1k",
+          "isCorrect": false,
+          "text": "Next to"
+        }
+      ]
+    },
+    {
+      "id": "B9qvriy",
+      "text": "How many ways can 6 people be arranged around a round table?",
+      "correct": "Q4a2txh",
+      "answers": [
+        {
+          "id": "Q4a2txh",
+          "isCorrect": true,
+          "text": "720"
+        },
+        {
+          "id": "l8613m5",
+          "isCorrect": false,
+          "text": "360"
+        },
+        {
+          "id": "wm2niqg",
+          "isCorrect": false,
+          "text": "120"
+        },
+        {
+          "id": "Tep13xk",
+          "isCorrect": false,
+          "text": "60"
+        }
+      ]
+    },
+    {
+      "id": "Hbicrzu",
+      "text": "If five people are sitting in a circle, and two people are always next to each other, how many seating arrangements are possible?",
+      "correct": "D2y8bt1",
+      "answers": [
+        {
+          "id": "onjbcvt",
+          "isCorrect": false,
+          "text": "24"
+        },
+        {
+          "id": "l5gnwew",
+          "isCorrect": false,
+          "text": "10"
+        },
+        {
+          "id": "D2y8bt1",
+          "isCorrect": true,
+          "text": "12"
+        },
+        {
+          "id": "Z8b43dy",
+          "isCorrect": false,
+          "text": "60"
+        }
+      ]
+    },
+    {
+      "id": "Jsje1n0",
+      "text": "Statement: \"We should not invest in this business.\"",
+      "correct": "ogxjye9",
+      "answers": [
+        {
+          "id": "ogxjye9",
+          "isCorrect": true,
+          "text": "Argument: \"The market is unstable, and the business model is weak.\""
+        },
+        {
+          "id": "r0q3n6p",
+          "isCorrect": false,
+          "text": "Is the argument valid?"
+        },
+        {
+          "id": "wkryxxa",
+          "isCorrect": false,
+          "text": "Yes"
+        },
+        {
+          "id": "Ht4sk1o",
+          "isCorrect": false,
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "id": "xctfb37",
+      "text": "Statement: \"The government should provide free healthcare.\"",
+      "correct": "Qf90rwd",
+      "answers": [
+        {
+          "id": "Qf90rwd",
+          "isCorrect": true,
+          "text": "Argument: \"Healthcare is a basic necessity, and people cannot afford it.\""
+        },
+        {
+          "id": "qi85oo9",
+          "isCorrect": false,
+          "text": "Is the argument valid?"
+        },
+        {
+          "id": "wah1t9v",
+          "isCorrect": false,
+          "text": "Yes"
+        },
+        {
+          "id": "J1l3mup",
+          "isCorrect": false,
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "id": "Wwuovsc",
+      "text": "Statement: \"The school should introduce online classes.\"",
+      "correct": "H02ygze",
+      "answers": [
+        {
+          "id": "H02ygze",
+          "isCorrect": true,
+          "text": "Argument: \"Online classes will make learning more accessible.\""
+        },
+        {
+          "id": "Gx3bh1k",
+          "isCorrect": false,
+          "text": "Is the argument valid?"
+        },
+        {
+          "id": "he4ovwf",
+          "isCorrect": false,
+          "text": "Yes"
+        },
+        {
+          "id": "hkw6gg5",
+          "isCorrect": false,
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "id": "kl24k0l",
+      "text": "All dogs are animals. Some animals are pets. Are all pets dogs?",
+      "correct": "Nwzik9o",
+      "answers": [
+        {
+          "id": "i4vpmys",
+          "isCorrect": false,
+          "text": "Yes"
+        },
+        {
+          "id": "Py1g4am",
+          "isCorrect": false,
+          "text": "No"
+        },
+        {
+          "id": "I45eona",
+          "isCorrect": false,
+          "text": "Cannot be determined"
+        },
+        {
+          "id": "Nwzik9o",
+          "isCorrect": true,
+          "text": "Some pets are dogs"
+        }
+      ]
+    },
+    {
+      "id": "Ilexgge",
+      "text": "No birds are mammals. All animals are birds. Can an animal be a mammal?",
+      "correct": "df8g460",
+      "answers": [
+        {
+          "id": "f21mwcg",
+          "isCorrect": false,
+          "text": "Yes"
+        },
+        {
+          "id": "df8g460",
+          "isCorrect": true,
+          "text": "No"
+        },
+        {
+          "id": "Q0yj30o",
+          "isCorrect": false,
+          "text": "Some animals are mammals"
+        },
+        {
+          "id": "b7cmvo5",
+          "isCorrect": false,
+          "text": "Cannot be determined"
+        }
+      ]
+    },
+    {
+      "id": "stebxqn",
+      "text": "Some fruits are apples. All apples are red. Are all fruits red?",
+      "correct": "yyyzphf",
+      "answers": [
+        {
+          "id": "ee6ijd0",
+          "isCorrect": false,
+          "text": "Yes"
+        },
+        {
+          "id": "yyyzphf",
+          "isCorrect": true,
+          "text": "No"
+        },
+        {
+          "id": "If3vu97",
+          "isCorrect": false,
+          "text": "Cannot be determined"
+        },
+        {
+          "id": "aoy1n9o",
+          "isCorrect": false,
+          "text": "Some fruits are not red"
+        }
+      ]
+    },
+    {
+      "id": "Fa3atqf",
+      "text": "In a two-player game, Player 1 can choose A or B, and Player 2 can choose X or Y. If Player 1 chooses A, they win if Player 2 chooses X, and lose if Player 2 chooses Y. If Player 1 chooses B, they win if Player 2 chooses Y. What is the optimal strategy for Player 1?",
+      "correct": "bnkspzr",
+      "answers": [
+        {
+          "id": "zz1lsh8",
+          "isCorrect": false,
+          "text": "Always choose A"
+        },
+        {
+          "id": "Lsmauiv",
+          "isCorrect": false,
+          "text": "Always choose B"
+        },
+        {
+          "id": "bnkspzr",
+          "isCorrect": true,
+          "text": "Choose A or B based on Player 2's move"
+        },
+        {
+          "id": "a8435vi",
+          "isCorrect": false,
+          "text": "Choose A randomly"
+        }
+      ]
+    },
+    {
+      "id": "qp0cpua",
+      "text": "In a game where two players choose between two options each, if both players choose the same option, Player 1 wins. What is the best strategy for Player 1?",
+      "correct": "Lpju2td",
+      "answers": [
+        {
+          "id": "Dcaihwz",
+          "isCorrect": false,
+          "text": "Always choose the same option"
+        },
+        {
+          "id": "Lpju2td",
+          "isCorrect": true,
+          "text": "Randomly choose an option"
+        },
+        {
+          "id": "z55077m",
+          "isCorrect": false,
+          "text": "Always choose the opposite option"
+        },
+        {
+          "id": "raarw0q",
+          "isCorrect": false,
+          "text": "Choose based on Player 2's last move"
+        }
+      ]
+    },
+    {
+      "id": "fh2ju51",
+      "text": "In a strategic game, Player 1's choices are 10, 20, and 30 points. Player 2's choices are 5, 15, and 25 points. If Player 1 chooses 30 and Player 2 chooses 25, what is the outcome?",
+      "correct": "L9zudi2",
+      "answers": [
+        {
+          "id": "L9zudi2",
+          "isCorrect": true,
+          "text": "Player 1 wins"
+        },
+        {
+          "id": "Saastz3",
+          "isCorrect": false,
+          "text": "Player 2 wins"
+        },
+        {
+          "id": "E7e47z3",
+          "isCorrect": false,
+          "text": "Draw"
+        },
+        {
+          "id": "Bmo4hkp",
+          "isCorrect": false,
+          "text": "None of the above"
+        }
+      ]
+    }
+  ]
+}
