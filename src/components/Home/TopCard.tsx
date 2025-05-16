@@ -10,15 +10,34 @@ const TopCard = () => {
   /** Remove once page is created */
   const FEAT_COLLEGE_CREDIT = false;
   return (
-    <BgImg src='/images/display/classroom-2.webp'>
+    <BgImg
+      src='/images/display/showcase-5-8.png'
+      overlay={{ bg: 'rgba(0,0,0,1)' }}
+      minHeight='100vh'
+    >
       <ImgCardStyles>
         <Content className='top-card-content'>
           <div className='row-between'>
-            <div className='secondary header-content'>
-              <h2 className='dynamic-h2 text-shadow'>WE ARE CHANGING LIVES WITH</h2>
+            <div className='header-content'>
+              {/* <h2 className='dynamic-h2 text-shadow'>
+                Your Next Chapter Starts Here with our Coding Bootcamp for Beginners
+              </h2>
               <h1 className='dynamic-xl text-shadow'>
                 COMPUTER <br /> PROGRAMMING <br /> SKILLS
+              </h1> */}
+              {/* <h1 className='dynamic-xl text-shadow'>
+                Your Next Chapter Starts Here with our Coding Bootcamp for Beginners
+              </h1> */}
+
+              <h1 className='dynamic-h1 text-shadow' style={{ maxWidth: '600px' }}>
+                Your Next Chapter Starts Here with our Coding Bootcamp for Beginners
               </h1>
+
+              <a>average starting salary is $67K</a>
+
+              <button className='btn btn-secondary info-session-btn'>
+                Sign up for an info session
+              </button>
             </div>
             {FEAT_COLLEGE_CREDIT && (
               <div className='college-credit'>
@@ -49,6 +68,20 @@ export const ImgCardStyles = styled.div`
   }
   display: flex;
   position: relative;
+
+  .header-content {
+    display: flex;
+    flex-flow: column;
+    color: ${({ theme }) => theme.white};
+    gap: 3rem;
+    padding-bottom: 2rem;
+  }
+  .info-session-btn {
+    font-size: 1.5rem;
+    font-weight: 900;
+    width: fit-content;
+    padding: 1.5rem 1.5rem;
+  }
 
   .top-card-content {
     font-family: 'Ubuntu', sans-serif;

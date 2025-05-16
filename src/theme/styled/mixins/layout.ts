@@ -254,7 +254,8 @@ export const layoutCss = css`
       `;
     }};
 
-    &:hover {
+    &:hover,
+    &:focus-visible {
       background: ${({ theme }) => theme.rgb('bg', 1, theme.isLightMode ? 4 : 8)};
       transform: translateY(-2px) scale(1.05, 1.02);
 
@@ -306,7 +307,8 @@ export const layoutCss = css`
       `;
     }};
 
-    &:hover {
+    &:hover,
+    &:focus-visible {
       background: ${({ theme }) => theme.rgb('secondary', 1, theme.isLightMode ? 4 : 8)};
       transform: translateY(-2px) scale(1.05, 1.02);
 
