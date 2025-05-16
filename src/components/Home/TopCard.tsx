@@ -12,30 +12,24 @@ const TopCard = () => {
   return (
     <BgImg
       src='/images/display/showcase-5-8.png'
-      overlay={{ bg: 'rgba(0,0,0,1)' }}
-      minHeight='100vh'
+      overlay={{ bg: 'rgba(0,0,0,1)', opacity: 0.1 }}
+      height='fit-content'
+      minHeight='fit-content'
     >
       <ImgCardStyles>
         <Content className='top-card-content'>
           <div className='row-between'>
             <div className='header-content'>
-              {/* <h2 className='dynamic-h2 text-shadow'>
-                Your Next Chapter Starts Here with our Coding Bootcamp for Beginners
-              </h2>
-              <h1 className='dynamic-xl text-shadow'>
-                COMPUTER <br /> PROGRAMMING <br /> SKILLS
-              </h1> */}
-              {/* <h1 className='dynamic-xl text-shadow'>
-                Your Next Chapter Starts Here with our Coding Bootcamp for Beginners
-              </h1> */}
-
-              <h1 className='dynamic-h1 text-shadow' style={{ maxWidth: '600px' }}>
+              <h1 className='main-header-text'>
                 Your Next Chapter Starts Here with our Coding Bootcamp for Beginners
               </h1>
 
-              <a>average starting salary is $67K</a>
+              <p className='dynamic-txt main-header-subtext'>
+                get on the path to a tech career in an in-demand field with average salaries
+                starting at $67,000
+              </p>
 
-              <button className='btn btn-secondary info-session-btn'>
+              <button className='btn btn-primary info-session-btn'>
                 Sign up for an info session
               </button>
             </div>
@@ -68,19 +62,25 @@ export const ImgCardStyles = styled.div`
   }
   display: flex;
   position: relative;
-
+  .main-header-text {
+    font-size: 2.8rem;
+    font-weight: 700;
+    max-width: 600px;
+  }
+  .main-header-subtext {
+    font-size: 1.25rem;
+    font-weight: 500;
+    max-width: 500px;
+  }
   .header-content {
     display: flex;
     flex-flow: column;
     color: ${({ theme }) => theme.white};
-    gap: 3rem;
-    padding-bottom: 2rem;
+    gap: 2rem;
   }
   .info-session-btn {
-    font-size: 1.5rem;
-    font-weight: 900;
     width: fit-content;
-    padding: 1.5rem 1.5rem;
+    font-size: 0.8rem;
   }
 
   .top-card-content {
@@ -91,6 +91,8 @@ export const ImgCardStyles = styled.div`
     display: flex;
     flex-flow: column;
     justify-content: flex-end;
+    padding-top: ${({ theme }) => theme.navHeight + 36}px;
+    padding-right: 5rem;
 
     h1 {
       line-height: 1.25em;
