@@ -10,15 +10,28 @@ const TopCard = () => {
   /** Remove once page is created */
   const FEAT_COLLEGE_CREDIT = false;
   return (
-    <BgImg src='/images/display/classroom-2.webp'>
+    <BgImg
+      src='/images/display/showcase-5-8.png'
+      overlay={{ bg: 'rgba(0,0,0,1)', opacity: 0.1 }}
+      height='fit-content'
+      minHeight='fit-content'
+    >
       <ImgCardStyles>
         <Content className='top-card-content'>
           <div className='row-between'>
-            <div className='secondary header-content'>
-              <h2 className='dynamic-h2 text-shadow'>WE ARE CHANGING LIVES WITH</h2>
-              <h1 className='dynamic-xl text-shadow'>
-                COMPUTER <br /> PROGRAMMING <br /> SKILLS
+            <div className='header-content'>
+              <h1 className='main-header-text'>
+                Your Next Chapter Starts Here with our Coding Bootcamp for Beginners
               </h1>
+
+              <p className='dynamic-txt main-header-subtext'>
+                get on the path to a tech career in an in-demand field with average salaries
+                starting at $67,000
+              </p>
+
+              <button className='btn btn-primary info-session-btn'>
+                Sign up for an info session
+              </button>
             </div>
             {FEAT_COLLEGE_CREDIT && (
               <div className='college-credit'>
@@ -49,6 +62,26 @@ export const ImgCardStyles = styled.div`
   }
   display: flex;
   position: relative;
+  .main-header-text {
+    font-size: 2.8rem;
+    font-weight: 700;
+    max-width: 600px;
+  }
+  .main-header-subtext {
+    font-size: 1.25rem;
+    font-weight: 500;
+    max-width: 500px;
+  }
+  .header-content {
+    display: flex;
+    flex-flow: column;
+    color: ${({ theme }) => theme.white};
+    gap: 2rem;
+  }
+  .info-session-btn {
+    width: fit-content;
+    font-size: 0.8rem;
+  }
 
   .top-card-content {
     font-family: 'Ubuntu', sans-serif;
@@ -58,6 +91,8 @@ export const ImgCardStyles = styled.div`
     display: flex;
     flex-flow: column;
     justify-content: flex-end;
+    padding-top: ${({ theme }) => theme.navHeight + 36}px;
+    padding-right: 5rem;
 
     h1 {
       line-height: 1.25em;

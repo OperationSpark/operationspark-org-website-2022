@@ -17,9 +17,17 @@ interface BgImageProps {
   className?: string;
   children?: ReactNode | ReactNode[];
   overlay?: TImgOverlay;
+  minHeight?: string;
 }
 
-const BgImg = ({ src, height = '40rem', className, children, overlay }: BgImageProps) => {
+const BgImg = ({
+  src,
+  height = '40rem',
+  minHeight,
+  className,
+  children,
+  overlay,
+}: BgImageProps) => {
   const [inView, setInView] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -34,7 +42,7 @@ const BgImg = ({ src, height = '40rem', className, children, overlay }: BgImageP
   }, []);
 
   return (
-    <BgImgStyles style={{ height }} className={className} ref={ref} blur={overlay?.blur}>
+    <BgImgStyles style={{ height, minHeight }} className={className} ref={ref} blur={overlay?.blur}>
       {src && (
         <Image
           src={src}
