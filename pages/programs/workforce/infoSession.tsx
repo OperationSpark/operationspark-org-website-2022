@@ -355,8 +355,11 @@ const InfoSessionStyles = styled.div`
 
   @media screen and (max-width: 900px) {
     .free-info-session {
+      display: flex;
+      flex-flow: column-reverse;
       grid-template-rows: 1fr auto;
       grid-template-columns: 1fr;
+      padding-top: 0;
       .halle-img {
         display: none;
       }
@@ -367,7 +370,6 @@ const InfoSessionStyles = styled.div`
       }
 
       .info-session-right {
-        margin-top: 2rem;
         justify-content: center;
         .info-session-form {
           width: 100%;

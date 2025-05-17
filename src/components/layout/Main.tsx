@@ -25,4 +25,8 @@ export const MainStyles = styled.main.attrs(({ navHeight }: { navHeight: number 
   min-height: 100vh;
   height: 100%;
   transition: padding-top 250ms;
+
+  @media screen and (max-width: 900px) {
+    padding-top: ${({ theme }) => theme.navHeight - 24}px;
+  }
 `;
