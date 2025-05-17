@@ -429,6 +429,7 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
         <Button
           data-test-id='info-session-submit-button'
           className={form.hasErrors() ? 'info disabled' : 'info'}
+          id='info-session-submit-button'
           color='yellow'
           style={{
             marginTop: '1rem',
@@ -441,7 +442,10 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
           onClick={handleSubmit}
         >
           Register!
+          <span className='button-age-disclaimer'>For Adult Program (18+)</span>
         </Button>
+
+        <div className='button-age-disclaimer'></div>
 
         {isSubmitting ? (
           <div className='form-overlay'>
@@ -591,6 +595,18 @@ const WorkforceFormStyles = styled.div`
   }
   .sms-decline {
     color: ${({ theme }) => theme.red[0]};
+  }
+  #info-session-submit-button {
+    padding-bottom: 1rem;
+  }
+
+  .button-age-disclaimer {
+    font-size: 0.68rem;
+    position: absolute;
+    bottom: 0.25rem;
+    left: 0;
+    right: 0;
+    text-align: center;
   }
 `;
 
