@@ -71,13 +71,19 @@ const BonusBarStyles = styled(motion.div)`
   flex-flow: row nowrap;
   justify-content: flex-end;
   grid-gap: 0.25rem;
-  padding: 0 0.25rem;
+  padding: 0.25rem 0.5rem;
+
+  .info a {
+    padding: 0.5rem 0.75rem;
+    font-weight: 800;
+  }
+
   @media screen and (max-width: 900px) {
-    justify-content: space-around;
-    flex-flow: row wrap;
+    justify-content: center;
+    flex-flow: row nowrap !important;
     padding-bottom: 0.75rem;
+
     .info {
-      flex: 1;
       margin: 0;
       line-height: 1em;
       width: fit-content;
@@ -87,13 +93,13 @@ const BonusBarStyles = styled(motion.div)`
       align-items: center;
       text-align: center;
       a {
+        font-size: 0.9rem;
         display: flex;
         justify-content: center;
         align-items: center;
         text-align: center;
         width: 100%;
         height: 100%;
-        padding: 0.25rem 0.3rem;
       }
     }
   }

@@ -181,7 +181,19 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
     const zipChange = form.onSelectChange('userLocation');
     const zipCode = Number(currentValues.zipCode);
 
-    if (String(currentValues.zipCode)?.length !== 5) {
+    if (!zipCode || isNaN(zipCode)) {
+      zipChange({
+        option: {
+          name: 'Please select your state',
+          value: '',
+        },
+        isValid: true,
+      });
+
+      return;
+    }
+
+    if (currentValues.zipCode && String(currentValues.zipCode)?.length !== 5) {
       zipChange({
         option: {
           name: 'Please select your state',
@@ -189,10 +201,6 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
         },
         isValid: false,
       });
-      return;
-    }
-
-    if (isNaN(Number(zipCode))) {
       return;
     }
 
@@ -216,7 +224,7 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
 
     if (!sessionId) {
       setLocationMessage('');
-      locationTypeChange('', false);
+      locationTypeChange('', true);
       return;
     }
     if (sessionId === 'future') {
@@ -244,11 +252,10 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
   }, [currentValues.sessionDate, currentValues.attendingLocation, sessionDates]);
 
   useEffect(() => {
-    if (!referredBy) return;
     form.onSelectChange('referencedBy')({
       option: referredBy,
-      additionalInfo: referredBy.additionalInfo,
-      additionalInfoLabel: referredBy.additionalInfoLabel,
+      additionalInfo: referredBy?.additionalInfo ?? '',
+      additionalInfoLabel: referredBy?.additionalInfoLabel ?? '',
       isValid: true,
     });
 
@@ -258,33 +265,55 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
   return (
     <WorkforceFormStyles ref={mainRef}>
       <Form>
-        {workforceFormInputs.map((field, i) => (
-          <field.Element
-            key={field.name}
-            {...field}
-            value={form.get(field.name)}
-            onChange={form.onChange(field.name)}
-            isValid={form.isValid(field.name)}
-            isErr={form.isErr(field.name)}
-            testId={`info-session-input-${kebabCase(field.name)}`}
-            onEnter={selectNextInputOrSubmit}
-            animation={{
-              initial: { x: 100, opacity: 0 },
-              animate: { x: 0, opacity: 1 },
-              transition: { duration: 0.2, delay: 0.25 * i },
-            }}
-          />
-        ))}
+        {workforceFormInputs.map((fieldOrFields, i) =>
+          Array.isArray(fieldOrFields) ? (
+            <div className='flex-row gap-2 w-100' key={`field-group-${i}`}>
+              {fieldOrFields.map((field) => (
+                <field.Element
+                  key={field.name}
+                  {...field}
+                  value={form.get(field.name)}
+                  onChange={form.onChange(field.name)}
+                  isValid={form.isValid(field.name)}
+                  isErr={form.isErr(field.name)}
+                  testId={`info-session-input-${kebabCase(field.name)}`}
+                  onEnter={selectNextInputOrSubmit}
+                  animation={{
+                    initial: { x: 100, opacity: 0 },
+                    animate: { x: 0, opacity: 1 },
+                    transition: { duration: 0.2, delay: 0.25 * i },
+                  }}
+                />
+              ))}
+            </div>
+          ) : (
+            <fieldOrFields.Element
+              key={fieldOrFields.name}
+              {...fieldOrFields}
+              value={form.get(fieldOrFields.name)}
+              onChange={form.onChange(fieldOrFields.name)}
+              isValid={form.isValid(fieldOrFields.name)}
+              isErr={form.isErr(fieldOrFields.name)}
+              testId={`info-session-input-${kebabCase(fieldOrFields.name)}`}
+              onEnter={selectNextInputOrSubmit}
+              animation={{
+                initial: { x: 100, opacity: 0 },
+                animate: { x: 0, opacity: 1 },
+                transition: { duration: 0.2, delay: 0.25 * i },
+              }}
+            />
+          ),
+        )}
 
         <div className='user-location-row'>
           <Input.ZipCode
             label='Zip Code'
             name='zipCode'
             placeholder='70119'
-            required={true}
+            required={false}
             value={form.get('zipCode')}
-            onChange={form.onChange('zipCode')}
-            isValid={form.isValid('zipCode')}
+            onChange={(value) => form.onChange('zipCode')(value, true)}
+            isValid={true}
             isErr={form.isErr('zipCode')}
             onEnter={selectNextInputOrSubmit}
             testId={`info-session-input-zip-code`}
@@ -306,11 +335,16 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
           name='referencedBy'
           options={referencedByOptions}
           option={form.getSelect('referencedBy')}
-          isErr={form.isErr('referencedBy')}
-          isValid={form.isValid('referencedBy')}
+          isErr={false}
+          isValid={true}
           onEnter={selectNextInputOrSubmit}
-          onChange={form.onSelectChange('referencedBy')}
-          required
+          onChange={(args) =>
+            form.onSelectChange('referencedBy')({
+              ...args,
+              isValid: true,
+            })
+          }
+          required={false}
           delay={workforceFormInputs.length * 0.25}
           testId='info-session-input-referenced-by'
         />
@@ -429,6 +463,7 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
         <Button
           data-test-id='info-session-submit-button'
           className={form.hasErrors() ? 'info disabled' : 'info'}
+          id='info-session-submit-button'
           color='yellow'
           style={{
             marginTop: '1rem',
@@ -441,7 +476,10 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
           onClick={handleSubmit}
         >
           Register!
+          <span className='button-age-disclaimer'>For Adult Program (18+)</span>
         </Button>
+
+        <div className='button-age-disclaimer'></div>
 
         {isSubmitting ? (
           <div className='form-overlay'>
@@ -592,25 +630,39 @@ const WorkforceFormStyles = styled.div`
   .sms-decline {
     color: ${({ theme }) => theme.red[0]};
   }
+  #info-session-submit-button {
+    padding-bottom: 1rem;
+  }
+
+  .button-age-disclaimer {
+    font-size: 0.68rem;
+    position: absolute;
+    bottom: 0.25rem;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
 `;
 
 const workforceFormInputs = [
-  {
-    Element: Input.Text,
-    label: 'First Name',
-    name: 'firstName',
-    placeholder: 'Joe',
-    required: true,
-    autoCapitalize: true,
-  },
-  {
-    Element: Input.Text,
-    label: 'Last Name',
-    name: 'lastName',
-    placeholder: 'Smith',
-    required: true,
-    autoCapitalize: true,
-  },
+  [
+    {
+      Element: Input.Text,
+      label: 'First Name',
+      name: 'firstName',
+      placeholder: 'Joe',
+      required: true,
+      autoCapitalize: true,
+    },
+    {
+      Element: Input.Text,
+      label: 'Last Name',
+      name: 'lastName',
+      placeholder: 'Smith',
+      required: true,
+      autoCapitalize: true,
+    },
+  ],
   {
     Element: Input.Email,
     label: 'Email',
