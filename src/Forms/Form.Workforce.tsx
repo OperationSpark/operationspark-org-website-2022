@@ -181,7 +181,19 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
     const zipChange = form.onSelectChange('userLocation');
     const zipCode = Number(currentValues.zipCode);
 
-    if (String(currentValues.zipCode)?.length !== 5) {
+    if (!zipCode || isNaN(zipCode)) {
+      zipChange({
+        option: {
+          name: 'Please select your state',
+          value: '',
+        },
+        isValid: true,
+      });
+
+      return;
+    }
+
+    if (currentValues.zipCode && String(currentValues.zipCode)?.length !== 5) {
       zipChange({
         option: {
           name: 'Please select your state',
@@ -189,10 +201,6 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
         },
         isValid: false,
       });
-      return;
-    }
-
-    if (isNaN(Number(zipCode))) {
       return;
     }
 
@@ -216,7 +224,7 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
 
     if (!sessionId) {
       setLocationMessage('');
-      locationTypeChange('', false);
+      locationTypeChange('', true);
       return;
     }
     if (sessionId === 'future') {
@@ -244,11 +252,10 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
   }, [currentValues.sessionDate, currentValues.attendingLocation, sessionDates]);
 
   useEffect(() => {
-    if (!referredBy) return;
     form.onSelectChange('referencedBy')({
       option: referredBy,
-      additionalInfo: referredBy.additionalInfo,
-      additionalInfoLabel: referredBy.additionalInfoLabel,
+      additionalInfo: referredBy?.additionalInfo ?? '',
+      additionalInfoLabel: referredBy?.additionalInfoLabel ?? '',
       isValid: true,
     });
 
@@ -303,10 +310,10 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
             label='Zip Code'
             name='zipCode'
             placeholder='70119'
-            required={true}
+            required={false}
             value={form.get('zipCode')}
-            onChange={form.onChange('zipCode')}
-            isValid={form.isValid('zipCode')}
+            onChange={(value) => form.onChange('zipCode')(value, true)}
+            isValid={true}
             isErr={form.isErr('zipCode')}
             onEnter={selectNextInputOrSubmit}
             testId={`info-session-input-zip-code`}
@@ -328,11 +335,16 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
           name='referencedBy'
           options={referencedByOptions}
           option={form.getSelect('referencedBy')}
-          isErr={form.isErr('referencedBy')}
-          isValid={form.isValid('referencedBy')}
+          isErr={false}
+          isValid={true}
           onEnter={selectNextInputOrSubmit}
-          onChange={form.onSelectChange('referencedBy')}
-          required
+          onChange={(args) =>
+            form.onSelectChange('referencedBy')({
+              ...args,
+              isValid: true,
+            })
+          }
+          required={false}
           delay={workforceFormInputs.length * 0.25}
           testId='info-session-input-referenced-by'
         />
