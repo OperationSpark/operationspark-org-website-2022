@@ -258,23 +258,45 @@ const WorkforceForm = ({ sessionDates, referredBy }: WorkforceFormProps) => {
   return (
     <WorkforceFormStyles ref={mainRef}>
       <Form>
-        {workforceFormInputs.map((field, i) => (
-          <field.Element
-            key={field.name}
-            {...field}
-            value={form.get(field.name)}
-            onChange={form.onChange(field.name)}
-            isValid={form.isValid(field.name)}
-            isErr={form.isErr(field.name)}
-            testId={`info-session-input-${kebabCase(field.name)}`}
-            onEnter={selectNextInputOrSubmit}
-            animation={{
-              initial: { x: 100, opacity: 0 },
-              animate: { x: 0, opacity: 1 },
-              transition: { duration: 0.2, delay: 0.25 * i },
-            }}
-          />
-        ))}
+        {workforceFormInputs.map((fieldOrFields, i) =>
+          Array.isArray(fieldOrFields) ? (
+            <div className='flex-row gap-2 w-100' key={`field-group-${i}`}>
+              {fieldOrFields.map((field) => (
+                <field.Element
+                  key={field.name}
+                  {...field}
+                  value={form.get(field.name)}
+                  onChange={form.onChange(field.name)}
+                  isValid={form.isValid(field.name)}
+                  isErr={form.isErr(field.name)}
+                  testId={`info-session-input-${kebabCase(field.name)}`}
+                  onEnter={selectNextInputOrSubmit}
+                  animation={{
+                    initial: { x: 100, opacity: 0 },
+                    animate: { x: 0, opacity: 1 },
+                    transition: { duration: 0.2, delay: 0.25 * i },
+                  }}
+                />
+              ))}
+            </div>
+          ) : (
+            <fieldOrFields.Element
+              key={fieldOrFields.name}
+              {...fieldOrFields}
+              value={form.get(fieldOrFields.name)}
+              onChange={form.onChange(fieldOrFields.name)}
+              isValid={form.isValid(fieldOrFields.name)}
+              isErr={form.isErr(fieldOrFields.name)}
+              testId={`info-session-input-${kebabCase(fieldOrFields.name)}`}
+              onEnter={selectNextInputOrSubmit}
+              animation={{
+                initial: { x: 100, opacity: 0 },
+                animate: { x: 0, opacity: 1 },
+                transition: { duration: 0.2, delay: 0.25 * i },
+              }}
+            />
+          ),
+        )}
 
         <div className='user-location-row'>
           <Input.ZipCode
@@ -611,22 +633,24 @@ const WorkforceFormStyles = styled.div`
 `;
 
 const workforceFormInputs = [
-  {
-    Element: Input.Text,
-    label: 'First Name',
-    name: 'firstName',
-    placeholder: 'Joe',
-    required: true,
-    autoCapitalize: true,
-  },
-  {
-    Element: Input.Text,
-    label: 'Last Name',
-    name: 'lastName',
-    placeholder: 'Smith',
-    required: true,
-    autoCapitalize: true,
-  },
+  [
+    {
+      Element: Input.Text,
+      label: 'First Name',
+      name: 'firstName',
+      placeholder: 'Joe',
+      required: true,
+      autoCapitalize: true,
+    },
+    {
+      Element: Input.Text,
+      label: 'Last Name',
+      name: 'lastName',
+      placeholder: 'Smith',
+      required: true,
+      autoCapitalize: true,
+    },
+  ],
   {
     Element: Input.Email,
     label: 'Email',
