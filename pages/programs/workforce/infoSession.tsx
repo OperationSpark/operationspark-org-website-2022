@@ -113,17 +113,6 @@ const InfoSession: NextPage<InfoSessionProps> = ({ commonQuestions, logos }) => 
             </div>
             <div className='info-session-right'>
               <div className='info-session-form'>
-                <div className='info-highschool'>
-                  <b>HIGH SCHOOL INFORMATION</b>
-                  <br />
-                  Info sessions discuss <i style={{ fontWeight: 600 }}>Adult Workforce programs</i>.
-                  To sign up or get more information about our{' '}
-                  <i style={{ fontWeight: 600 }}>High School to High Wage program</i>,{' '}
-                  <Link href='/programs/highschool/requestInfo' className='anchor'>
-                    {'please complete this form.'}
-                  </Link>
-                </div>
-
                 <div>
                   <h3 className='dynamic-h3 form-title primary-secondary text-center next-session'>
                     Next information session:
@@ -142,6 +131,24 @@ const InfoSession: NextPage<InfoSessionProps> = ({ commonQuestions, logos }) => 
                 </h2>
 
                 <WorkforceForm sessionDates={sessionDates} referredBy={referredBy} />
+                <div className='flex-center' style={{ paddingTop: '1rem' }}>
+                  <Link href='/programs/highschool/requestInfo' className='anchor right-arr-left'>
+                    For high school go here
+                  </Link>
+                </div>
+                {/*
+
+                // TODO: Remove on next edit. I feel like Mayukh is going to want to add this back in.... maybe at the bottom though
+                <div className='info-highschool'>
+                  <b>HIGH SCHOOL INFORMATION</b>
+                  <br />
+                  Info sessions discuss <i style={{ fontWeight: 600 }}>Adult Workforce programs</i>.
+                  To sign up or get more information about our{' '}
+                  <i style={{ fontWeight: 600 }}>High School to High Wage program</i>,{' '}
+                  <Link href='/programs/highschool/requestInfo' className='anchor'>
+                    {'please complete this form.'}
+                  </Link>
+                </div> */}
               </div>
             </div>
           </Content>
