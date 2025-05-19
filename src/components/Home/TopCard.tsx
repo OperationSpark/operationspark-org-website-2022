@@ -12,7 +12,7 @@ const TopCard = () => {
   return (
     <BgImg
       src='/images/display/showcase-5-8.png'
-      overlay={{ bg: 'rgba(0,0,0,1)', opacity: 0.1 }}
+      overlay={{ bg: 'rgba(0,0,0,1)', opacity: 0.35 }}
       height='fit-content'
       minHeight='fit-content'
     >
