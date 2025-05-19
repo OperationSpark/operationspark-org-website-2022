@@ -25,8 +25,7 @@ const TopCard = () => {
               </h1>
 
               <p className='dynamic-txt main-header-subtext'>
-                get on the path to a tech career in an in-demand field with average salaries
-                starting at $67,000
+                Launch your tech career — earn an average starting salary of $67K
               </p>
 
               <button className='btn btn-primary info-session-btn'>
