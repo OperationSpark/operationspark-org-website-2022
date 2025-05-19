@@ -2,6 +2,7 @@ import { createGlobalStyle, css } from 'styled-components';
 
 import { anchor } from './mixins/anchor';
 import { circuitBoardBg } from './mixins/circuitBoardBg';
+import { backdropFilter } from './mixins/filters';
 import { layoutCss } from './mixins/layout';
 import pageCommonCss from './mixins/pageCommon';
 
@@ -32,6 +33,21 @@ const GlobalStyleCss = css`
   }
   body {
     overflow-x: hidden;
+    position: relative;
+    z-index: 1;
+    &::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-image: ${({ theme }) =>
+        theme.isLightMode
+          ? ' url(/images/svg/subtle-prism.svg)'
+          : 'url(/images/svg/subtle-prism-dark.svg)'};
+
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+    }
   }
 
   h1,
@@ -119,7 +135,7 @@ const GlobalStyleCss = css`
   p {
     font-family: 'Roboto', sans-serif;
     margin: 0;
-    line-height: 1.5;
+    line-height: 1.35;
     font-weight: 400;
   }
 
@@ -172,6 +188,14 @@ const GlobalStyleCss = css`
   }
   .source-code {
     font-family: 'Source Code Pro', monospace;
+  }
+
+  .basic-card {
+    ${backdropFilter({ blur: 4, color: 'bg', opacity: 0.25 })};
+    box-shadow: 0 0 0.5rem 0 inset ${({ theme }) => theme.rgb('primary.300', 0.5)};
+    padding: 1.5rem;
+    border-radius: 1rem;
+    margin: 1rem auto;
   }
 
   a {
@@ -277,6 +301,15 @@ const GlobalStyleCss = css`
     --toastify-z-index: 9999999;
   }
 
+  .header-content-card {
+    background: ${({ theme }) => (theme.isLightMode ? theme.alpha.fg50 : theme.alpha.bg50)};
+    width: fit-content;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 0.5rem;
+    backdrop-filter: blur(8px);
+    color: ${({ theme }) => theme.white};
+  }
   @media screen and (max-width: 768px) {
     .dynamic-txt {
       font-size: 1rem;

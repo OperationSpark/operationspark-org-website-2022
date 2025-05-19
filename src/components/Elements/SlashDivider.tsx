@@ -1,3 +1,4 @@
+import { backdropFilter } from '@this/src/theme/styled/mixins/filters';
 import { CSSProperties, ReactNode } from 'react';
 import styled, { DefaultTheme, keyframes } from 'styled-components';
 
@@ -16,7 +17,7 @@ export const SlashDivider = ({
 }) => {
   return (
     <SlashDividerStyles style={style} className={animate ? 'animate' : ''}>
-      {children}
+      <div className='_slash-divider'>{children}</div>
     </SlashDividerStyles>
   );
 };
@@ -37,31 +38,40 @@ const move = keyframes`
 `;
 
 const SlashDividerStyles = styled.div`
+  position: relative;
   width: 100%;
   height: 24px;
-  position: relative;
   border-bottom: 1px solid
     ${({ theme }) => (theme.isLightMode ? theme.primary[900] : theme.primary[700])};
   border-top: 1px solid
     ${({ theme }) => (theme.isLightMode ? theme.primary[900] : theme.primary[700])};
-  background-image: url(${({ theme }) => getImageUrl(theme)});
+
+  ${backdropFilter({ blur: 2, opacity: 0.1 })};
+
+  ._slash-divider {
+    width: 100%;
+    height: 100%;
+    background-image: url(${({ theme }) => getImageUrl(theme)});
+  }
 
   &.animate {
-    animation: 45s ${move} forwards linear infinite;
-    border-bottom: none;
-    border-top: none;
-    &::before {
-      position: absolute;
-      inset: 0;
-      content: '';
-      background: ${({ theme }) => `
-      linear-gradient(
-        0deg,
-        transparent -50%,
-        ${theme.purple.alpha[700][200]} 50%,
-        transparent 150%
-      )
-    `};
+    ._slash-divider {
+      animation: 45s ${move} forwards linear infinite;
+      border-bottom: none;
+      border-top: none;
+      &::before {
+        position: absolute;
+        inset: 0;
+        content: '';
+        background: ${({ theme }) => `
+          linear-gradient(
+            0deg,
+            transparent -50%,
+            ${theme.purple.alpha[700][200]} 50%,
+            transparent 150%
+          )
+        `};
+      }
     }
   }
 

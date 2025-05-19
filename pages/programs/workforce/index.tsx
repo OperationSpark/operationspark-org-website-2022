@@ -122,8 +122,10 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
         <BgImg src='/images/display/laptop-code.webp' height='35rem'>
           <Section className='programs-header'>
             <Content className='programs-header-content'>
-              <h1 className='dynamic-xl secondary'>{header.title}</h1>
-              <h2 className='dynamic-h3'>{header.description}</h2>
+              <div className='header-content-card'>
+                <h1 className='dynamic-xl secondary'>{header.title}</h1>
+                <h2 className='dynamic-h3'>{header.description}</h2>
+              </div>
             </Content>
           </Section>
         </BgImg>
@@ -133,15 +135,19 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
             style={{ paddingTop: '2rem', paddingBottom: '2rem' }}
             className='program-overview'
           >
-            <h2 className='dynamic-h2'>{overview.title}</h2>
-            {overview.description.map((desc) => (
-              <p className='dynamic-txt' key={desc} style={{ padding: '1rem 0' }}>
-                {desc}
-              </p>
-            ))}
-            <Link href='/cultureOfCode' className='anchor'>
-              {'Culture of Code'}
-            </Link>
+            <div className='basic-card'>
+              <h2 className='dynamic-h2'>{overview.title}</h2>
+              {overview.description.map((desc) => (
+                <p className='dynamic-txt' key={desc} style={{ padding: '1rem 0' }}>
+                  {desc}
+                </p>
+              ))}
+              <div className='flex-center'>
+                <Link href='/cultureOfCode' className='btn btn-secondary'>
+                  {'Check out our Culture of Code'}
+                </Link>
+              </div>
+            </div>
           </Content>
         </Section>
 
@@ -251,14 +257,8 @@ export const AdultProgramsStyles = styled.div`
       display: flex;
       flex-flow: column;
       justify-content: flex-end;
-
-      h1.dynamic-xl {
-        padding-bottom: 1rem;
-      }
-      h2.dynamic-h3 {
-        font-weight: 700;
-        color: ${({ theme }) => theme.white};
-      }
+      align-items: center;
+      text-align: center;
     }
   }
   .program-overview {

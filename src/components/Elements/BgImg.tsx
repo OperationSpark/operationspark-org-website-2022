@@ -3,6 +3,7 @@ import { ReactNode, useEffect, useRef, useState } from 'react';
 import styled, { DefaultTheme } from 'styled-components';
 
 import rgbDataURL from '@this/src/helpers/rgbDataURL';
+import { backdropFilter } from '@this/src/theme/styled/mixins/filters';
 
 type TImgOverlay = {
   bg?: string;
@@ -61,6 +62,8 @@ export default BgImg;
 const BgImgStyles = styled.div<TImgOverlay>`
   position: relative;
   display: flex;
+
+  ${backdropFilter({ blur: 2, opacity: 0.25 })}
 
   img {
     user-select: none;
