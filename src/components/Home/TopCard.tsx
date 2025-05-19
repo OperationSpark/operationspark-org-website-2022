@@ -28,7 +28,12 @@ const TopCard = () => {
                 Launch your tech career — earn an average starting salary of $67K
               </p>
 
-              <button className='button-9 info-session-btn'>get started</button>
+              <Link
+                href='/programs/workforce/infoSession'
+                className='button-9 info-session-btn flex-center'
+              >
+                get started
+              </Link>
             </div>
             {FEAT_COLLEGE_CREDIT && (
               <div className='college-credit'>
