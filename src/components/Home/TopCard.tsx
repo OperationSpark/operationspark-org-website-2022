@@ -60,24 +60,20 @@ export const ImgCardStyles = styled.div`
   display: flex;
   position: relative;
   .main-header-text {
-    font-size: 2.8rem;
+    font-size: 2rem;
+    font-size: calc(1.7rem + 1vw);
     font-weight: 700;
-    max-width: 600px;
+    max-width: 810px; // Width by request of Max
   }
   .main-header-subtext {
     font-size: 1.25rem;
     font-weight: 500;
-    max-width: 500px;
   }
   .header-content {
     display: flex;
     flex-flow: column;
     color: ${({ theme }) => theme.white};
     gap: 2rem;
-  }
-  .info-session-btn {
-    width: fit-content;
-    font-size: 0.8rem;
   }
 
   .top-card-content {
