@@ -25,7 +25,7 @@ const TopCard = () => {
               </h1>
 
               <p className='dynamic-txt main-header-subtext'>
-                Launch your tech career — earn an average starting salary of $67K
+                launch your tech career — earn an average starting salary of $67k
               </p>
 
               <Link
@@ -68,7 +68,7 @@ export const ImgCardStyles = styled.div`
     font-size: 2rem;
     font-size: calc(1.7rem + 1vw);
     font-weight: 700;
-    max-width: 810px; // Width by request of Max
+    max-width: 670px; // Width by request of Max
   }
   .main-header-subtext {
     font-size: 1.25rem;
