@@ -31,6 +31,7 @@ const TopCard = () => {
               <Link
                 href='/programs/workforce/infoSession'
                 className='button-9 info-session-btn flex-center'
+                style={{ maxWidth: '200px', paddingTop: '2rem', paddingBottom: '2rem' }}
               >
                 get started
               </Link>
