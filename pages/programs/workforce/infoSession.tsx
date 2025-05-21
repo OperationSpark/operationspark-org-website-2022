@@ -158,11 +158,8 @@ const InfoSession: NextPage<InfoSessionProps> = ({ commonQuestions, logos }) => 
         </Section>
         <Section>
           <Content className='great-companies'>
-            <h1 className='dynamic-h1 primary-secondary'>Our grads work at great companies!</h1>
-            <div className='stats'>
-              <h2 className='dynamic-h2'>100% Job Placement</h2>
-              <h2 className='dynamic-h2'>$62,000 average starting salary</h2>
-            </div>
+            <h1 className='dynamic-h1 primary-secondary'>Our grads work at great companies</h1>
+            <h2 className='dynamic-h2'>$67,000 average starting salary</h2>
           </Content>
         </Section>
         <Carousel logos={logos} style={{ marginTop: '3rem' }} />
@@ -322,19 +319,6 @@ const InfoSessionStyles = styled.div`
     display: none;
   }
 
-  .stats {
-    display: flex;
-    flex-flow: row nowrap;
-    .dynamic-h2 {
-      :last-child {
-        padding-left: 0.5rem;
-        ::before {
-          content: '| ';
-        }
-      }
-    }
-  }
-
   .question-answer {
     box-shadow: 0 0 4px ${({ theme }) => theme.primary[200]};
     border-radius: 0.25rem;
@@ -380,26 +364,9 @@ const InfoSessionStyles = styled.div`
       margin-top: 2rem;
       display: flex;
     }
-    .great-companies {
-      .stats {
-        display: flex;
-        flex-flow: column;
-      }
-    }
+
     .question-answer {
       width: 100%;
-    }
-    .stats {
-      display: flex;
-      flex-flow: row nowrap;
-      .dynamic-h2 {
-        :last-child {
-          padding-left: 0;
-          ::before {
-            content: '';
-          }
-        }
-      }
     }
   }
 `;
