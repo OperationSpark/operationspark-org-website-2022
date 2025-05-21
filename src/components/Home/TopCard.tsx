@@ -10,15 +10,31 @@ const TopCard = () => {
   /** Remove once page is created */
   const FEAT_COLLEGE_CREDIT = false;
   return (
-    <BgImg src='/images/display/classroom-2.webp'>
+    <BgImg
+      src='/images/display/showcase-5-8.png'
+      overlay={{ bg: 'rgba(0,0,0,1)', opacity: 0.35 }}
+      height='fit-content'
+      minHeight='fit-content'
+    >
       <ImgCardStyles>
         <Content className='top-card-content'>
           <div className='row-between'>
-            <div className='secondary header-content'>
-              <h2 className='dynamic-h2 text-shadow'>WE ARE CHANGING LIVES WITH</h2>
-              <h1 className='dynamic-xl text-shadow'>
-                COMPUTER <br /> PROGRAMMING <br /> SKILLS
+            <div className='header-content'>
+              <h1 className='main-header-text'>
+                Your Next Chapter Starts Here with our Coding Bootcamp for Beginners
               </h1>
+
+              <p className='dynamic-txt main-header-subtext'>
+                launch your tech career — earn an average starting salary of $67k
+              </p>
+
+              <Link
+                href='/programs/workforce/infoSession'
+                className='button-9 info-session-btn flex-center'
+                style={{ maxWidth: '200px', paddingTop: '2rem', paddingBottom: '2rem' }}
+              >
+                get started
+              </Link>
             </div>
             {FEAT_COLLEGE_CREDIT && (
               <div className='college-credit'>
@@ -49,6 +65,22 @@ export const ImgCardStyles = styled.div`
   }
   display: flex;
   position: relative;
+  .main-header-text {
+    font-size: 2rem;
+    font-size: calc(1.7rem + 1vw);
+    font-weight: 700;
+    max-width: 670px; // Width by request of Max
+  }
+  .main-header-subtext {
+    font-size: 1.25rem;
+    font-weight: 500;
+  }
+  .header-content {
+    display: flex;
+    flex-flow: column;
+    color: ${({ theme }) => theme.white};
+    gap: 2rem;
+  }
 
   .top-card-content {
     font-family: 'Ubuntu', sans-serif;
@@ -58,6 +90,8 @@ export const ImgCardStyles = styled.div`
     display: flex;
     flex-flow: column;
     justify-content: flex-end;
+    padding-top: ${({ theme }) => theme.navHeight + 36}px;
+    padding-right: 5rem;
 
     h1 {
       line-height: 1.25em;
