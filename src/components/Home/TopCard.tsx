@@ -25,7 +25,7 @@ const TopCard = () => {
               </h1>
 
               <p className='dynamic-txt main-header-subtext'>
-                launch your tech career — earn an average starting salary of $67k
+                Launch your tech career — earn an average starting salary of $67k
               </p>
 
               <Link
@@ -33,7 +33,7 @@ const TopCard = () => {
                 className='button-9 info-session-btn flex-center'
                 style={{ maxWidth: '200px', paddingTop: '2rem', paddingBottom: '2rem' }}
               >
-                get started
+                Get Started
               </Link>
             </div>
             {FEAT_COLLEGE_CREDIT && (
