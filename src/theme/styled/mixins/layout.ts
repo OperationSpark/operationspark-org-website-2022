@@ -254,7 +254,8 @@ export const layoutCss = css`
       `;
     }};
 
-    &:hover {
+    &:hover,
+    &:focus-visible {
       background: ${({ theme }) => theme.rgb('bg', 1, theme.isLightMode ? 4 : 8)};
       transform: translateY(-2px) scale(1.05, 1.02);
 
@@ -306,7 +307,8 @@ export const layoutCss = css`
       `;
     }};
 
-    &:hover {
+    &:hover,
+    &:focus-visible {
       background: ${({ theme }) => theme.rgb('secondary', 1, theme.isLightMode ? 4 : 8)};
       transform: translateY(-2px) scale(1.05, 1.02);
 
@@ -343,5 +345,101 @@ export const layoutCss = css`
       box-shadow: none;
       pointer-events: none;
     }
+  }
+
+  .btn.btn-primary {
+    background: ${({ theme }) => theme.rgb('primary', 1)};
+    color: ${({ theme }) => theme.rgb('white', 1)};
+
+    box-shadow: ${({ theme }) => {
+      const c1 = theme.rgb('primary', 0.5, -10);
+      const c2 = theme.rgb('primary', 0.25, -20);
+      return `
+      0 0 0.1rem 2px ${c1},
+      0 0 0.5rem 1px ${c2}
+      `;
+    }};
+
+    &:hover,
+    &:focus-visible {
+      background: ${({ theme }) => theme.rgb('primary', 1, theme.isLightMode ? 4 : 8)};
+      transform: translateY(-2px) scale(1.05, 1.02);
+      box-shadow: ${({ theme }) => {
+        const c1 = theme.rgb('primary', 0.5, -10);
+        const c2 = theme.rgb('primary', 0.25, -20);
+        return `
+        0 0 0.25rem 2px ${c1},
+        0 0 0.75rem 2px ${c2}
+        `;
+      }};
+    }
+
+    &:active {
+      transform: translateY(0px) scale(1, 1);
+      box-shadow: ${({ theme }) => {
+        const c1 = theme.rgb('primary', 0.5, -10);
+        const c2 = theme.rgb('primary', 0.25, -20);
+        return `
+        0 0 0.1rem 2px ${c1},
+        0 0 0.5rem 1px ${c2}
+        `;
+      }};
+    }
+
+    &:focus-visible {
+      outline: 2px solid ${({ theme }) => theme.rgb('primary', 1, -2)};
+      box-shadow: 0 0 0.1rem 2px ${({ theme }) => theme.rgb('primary', 0.5, -10)},
+        0 0 0.5rem 1px ${({ theme }) => theme.rgb('primary', 0.25, -20)};
+    }
+
+    &:disabled {
+      background: ${({ theme }) => theme.rgb('primary', 0.2, 2)};
+      color: ${({ theme }) => theme.rgb('fg', 0.5)};
+      box-shadow: none;
+      pointer-events: none;
+    }
+  }
+
+  /*
+    Non-matching button requested by Max
+    https://vercel.live/link/opspark-website-2022-git-214-update-home-e7890b-operation-spark.vercel.app?page=%2F%3FvercelThreadId%3D9_WGF
+  */
+  .button-9 {
+    appearance: button;
+    backface-visibility: hidden;
+    background-color: #405cf5;
+    border-radius: 6px;
+    border-width: 0;
+    box-shadow: rgba(50, 50, 93, 0.1) 0 0 0 1px inset, rgba(50, 50, 93, 0.1) 0 2px 5px 0,
+      rgba(0, 0, 0, 0.07) 0 1px 1px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    font-family: -apple-system, system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', Ubuntu, sans-serif;
+    font-size: 100%;
+    height: 44px;
+    line-height: 1.15;
+    margin: 12px 0 0;
+    outline: none;
+    overflow: hidden;
+    padding: 0 25px;
+    position: relative;
+    text-align: center;
+    text-transform: none;
+    transform: translateZ(0);
+    transition: all 0.2s, box-shadow 0.08s ease-in;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 100%;
+  }
+
+  .button-9:disabled {
+    cursor: default;
+  }
+
+  .button-9:focus {
+    box-shadow: rgba(50, 50, 93, 0.1) 0 0 0 1px inset, rgba(50, 50, 93, 0.2) 0 6px 15px 0,
+      rgba(0, 0, 0, 0.1) 0 2px 2px 0, rgba(50, 151, 211, 0.3) 0 0 0 4px;
   }
 `;
