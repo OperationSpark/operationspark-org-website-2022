@@ -204,7 +204,7 @@ const AdultPrograms: NextPage<AdultProgramsProps> = ({
               </a>
               <a
                 className='anchor resource-link'
-                href='https://drive.google.com/uc?export=download&id=1A8gLBRJIaPTtpGdu5jlH1P2aHvRRnLDf'
+                href='https://drive.google.com/uc?export=download&id=1Y_5_Xer7ZuBlo1o7Rw0fCVGdFNqjASAH'
                 download
               >
                 Course Catalog <DownloadIcon size={18} />
