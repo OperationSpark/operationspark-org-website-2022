@@ -7,7 +7,6 @@ import Carousel from '@this/components/Elements/Carousel';
 import {
   AlumSpotlight,
   GreatCompanies,
-  IgniteCareer,
   ProgramsForAll,
   TeamEffort,
   TopCard,
@@ -18,6 +17,7 @@ import { ILogo } from '@this/data/types/logos';
 import AtlantaPromo from '@this/src/components/Elements/AtlantaPromo';
 import PromoVideo from '@this/src/components/Home/PromoVideo';
 import ShowcasePromo from '@this/src/components/Home/ShowcasePromo';
+import { Content } from '@this/src/components/layout';
 import { useShowcase } from '@this/src/hooks/useShowcase';
 
 interface HomeProps extends IHome {
@@ -25,13 +25,7 @@ interface HomeProps extends IHome {
   showcase?: Showcase | null;
 }
 
-const Home: NextPage<HomeProps> = ({
-  logos,
-  igniteCareer,
-  greatCompanies,
-  programsForAll,
-  teamEffort,
-}) => {
+const Home: NextPage<HomeProps> = ({ logos, greatCompanies, programsForAll, teamEffort }) => {
   const { showcase, clearShowcase } = useShowcase();
 
   return (
@@ -40,10 +34,17 @@ const Home: NextPage<HomeProps> = ({
 
       <AtlantaPromo />
       <PromoVideo />
-      <IgniteCareer {...igniteCareer} />
+      <Content
+        style={{
+          paddingTop: '.75rem',
+          paddingBottom: '.75rem',
+        }}
+      >
+        <p>Our grads have been hired by:</p>
+      </Content>
+      <Carousel logos={logos} />
       <ProgramsForAll {...programsForAll} className='_progress' id='programs' />
       <GreatCompanies {...greatCompanies} />
-      <Carousel logos={logos} />
       <AlumSpotlight />
       <TeamEffort {...teamEffort} />
     </Main>
