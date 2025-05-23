@@ -31,9 +31,9 @@ export type FormDataSignup = {
   firstName: string;
   lastName: string;
   phone: string;
-  zipCode: string;
-  userLocation: SelectItem;
-  referencedBy: SelectItem;
+  zipCode?: string;
+  userLocation?: SelectItem;
+  referencedBy?: SelectItem;
   attendingLocation: AttendingLocation;
   smsOptIn: 'true' | 'false';
 };

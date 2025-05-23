@@ -20,7 +20,7 @@ const handleInfoSessionFormSubmit: ReqHandler<{}, FormDataSignup> = async (req: 
     const payload = formatSignupPayload(req.body);
     const sentryHeaders = extractSentryHeadersFromRequest(req);
 
-    const result = await runCloudFunction<ISessionSignup, SignupResult>({
+    const { data } = await runCloudFunction<ISessionSignup, SignupResult>({
       url: SIGNUP_API_ENDPOINT,
       body: payload,
       headers: {
@@ -29,7 +29,7 @@ const handleInfoSessionFormSubmit: ReqHandler<{}, FormDataSignup> = async (req: 
       },
     });
 
-    res.status(200).json(result.data);
+    res.status(200).json(data);
   } catch (error) {
     console.error('Could not POST to signup service', error);
     res.status(500).end();
