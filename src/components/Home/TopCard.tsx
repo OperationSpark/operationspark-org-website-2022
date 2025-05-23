@@ -24,16 +24,21 @@ const TopCard = () => {
                 Your Next Chapter Starts Here with our Coding Bootcamp for Beginners
               </h1>
 
-              <p className='dynamic-txt main-header-subtext'>
-                launch your tech career — earn an average starting salary of $67k
+              <p className='dynamic-txt main-header-subtext fit-content'>
+                Launch your tech career — earn an average starting salary of $67k
               </p>
 
               <Link
                 href='/programs/workforce/infoSession'
-                className='button-9 info-session-btn flex-center'
-                style={{ maxWidth: '200px', paddingTop: '2rem', paddingBottom: '2rem' }}
+                className='btn btn-secondary flex-center'
+                style={{
+                  width: '100%',
+                  maxWidth: '200px',
+                  paddingTop: '1rem',
+                  paddingBottom: '1rem',
+                }}
               >
-                get started
+                Get Started
               </Link>
             </div>
             {FEAT_COLLEGE_CREDIT && (
@@ -70,10 +75,18 @@ export const ImgCardStyles = styled.div`
     font-size: calc(1.7rem + 1vw);
     font-weight: 700;
     max-width: 670px; // Width by request of Max
+    background-color: ${({ theme }) => theme.rgb('black', 0.7, -3)};
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 2px 1px inset ${({ theme }) => theme.rgb('black', 0.7, 1)};
   }
   .main-header-subtext {
     font-size: 1.25rem;
     font-weight: 500;
+    background-color: ${({ theme }) => theme.rgb('black', 0.7, -3)};
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 2px 1px inset ${({ theme }) => theme.rgb('black', 0.7, 1)};
   }
   .header-content {
     display: flex;
